@@ -1,0 +1,145 @@
+{
+<<<<<<< HEAD
+  "_args": [
+    [
+      {
+        "raw": "angular-trix@^1.0.2",
+        "scope": null,
+        "escapedName": "angular-trix",
+        "name": "angular-trix",
+        "rawSpec": "^1.0.2",
+        "spec": ">=1.0.2 <2.0.0",
+        "type": "range"
+      },
+      "C:\\Users\\Erik\\xampp\\htdocs\\www.elearning.ph\\public\\assets"
+    ]
+  ],
+  "_from": "angular-trix@>=1.0.2 <2.0.0",
+  "_id": "angular-trix@1.0.2",
+  "_inCache": true,
+  "_location": "/angular-trix",
+  "_nodeVersion": "5.3.0",
+  "_npmUser": {
+    "name": "sachinchoolur",
+    "email": "sachi77n@gmail.com"
+  },
+  "_npmVersion": "3.3.12",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular-trix@^1.0.2",
+    "scope": null,
+    "escapedName": "angular-trix",
+    "name": "angular-trix",
+    "rawSpec": "^1.0.2",
+    "spec": ">=1.0.2 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+=======
+  "_from": "angular-trix",
+  "_id": "angular-trix@1.0.2",
+  "_inBundle": false,
+  "_integrity": "sha1-gZWarVqNGzsBQQI4+PNjW1/wQ8c=",
+  "_location": "/angular-trix",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angular-trix",
+    "name": "angular-trix",
+    "escapedName": "angular-trix",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-trix/-/angular-trix-1.0.2.tgz",
+  "_shasum": "81959aad5a8d1b3b01410238f8f3635b5ff043c7",
+<<<<<<< HEAD
+  "_shrinkwrap": null,
+  "_spec": "angular-trix@^1.0.2",
+  "_where": "C:\\Users\\Erik\\xampp\\htdocs\\www.elearning.ph\\public\\assets",
+=======
+  "_spec": "angular-trix",
+  "_where": "/home/rom/project/www.elearning.ph/public/assets",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "author": {
+    "name": "Sachin",
+    "email": "sachi77n@gmail.com",
+    "url": "https://github.com/sachinchoolur"
+  },
+  "bugs": {
+    "url": "https://github.com/sachinchoolur/angular-trix/issues",
+    "email": "sachi77n@gmail.com"
+  },
+<<<<<<< HEAD
+=======
+  "bundleDependencies": false,
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "dependencies": {
+    "angular": ">=1.2.0",
+    "trix": "latest"
+  },
+<<<<<<< HEAD
+=======
+  "deprecated": false,
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "description": "A rich wysiwyg text editor directive for angularjs.",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-qunit": "^0.5.1",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jshint-stylish": "^1.0.0",
+    "load-grunt-tasks": "^2.0.0",
+    "time-grunt": "^1.0.0"
+  },
+<<<<<<< HEAD
+  "directories": {},
+  "dist": {
+    "shasum": "81959aad5a8d1b3b01410238f8f3635b5ff043c7",
+    "tarball": "https://registry.npmjs.org/angular-trix/-/angular-trix-1.0.2.tgz"
+  },
+  "gitHead": "3eee4444e2b9b9505ae299d888c7e2363b1c9e3c",
+=======
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "homepage": "https://github.com/sachinchoolur/angular-trix",
+  "keywords": [
+    "angular-trix",
+    "wysiwyg-editor",
+    "text-editor",
+    "directive",
+    "angularjs"
+  ],
+  "license": "MIT",
+  "main": "dist/angular-trix.js",
+<<<<<<< HEAD
+  "maintainers": [
+    {
+      "name": "sachinchoolur",
+      "email": "sachi77n@gmail.com"
+    }
+  ],
+  "name": "angular-trix",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+=======
+  "name": "angular-trix",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sachinchoolur/angular-trix.git"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "version": "1.0.2"
+}

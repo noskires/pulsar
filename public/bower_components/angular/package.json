@@ -1,0 +1,133 @@
+{
+<<<<<<< HEAD
+  "_args": [
+    [
+      {
+        "raw": "angular@^1.6.6",
+        "scope": null,
+        "escapedName": "angular",
+        "name": "angular",
+        "rawSpec": "^1.6.6",
+        "spec": ">=1.6.6 <2.0.0",
+        "type": "range"
+      },
+      "C:\\Users\\Erik\\xampp\\htdocs\\www.elearning.ph\\public\\assets"
+    ]
+  ],
+  "_from": "angular@>=1.6.6 <2.0.0",
+  "_id": "angular@1.6.6",
+  "_inCache": true,
+  "_location": "/angular",
+  "_nodeVersion": "6.11.2",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/angular-1.6.6.tgz_1503067143519_0.9605906086508185"
+  },
+  "_npmUser": {
+    "name": "angularcore",
+    "email": "angular-core+npm@google.com"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular@^1.6.6",
+    "scope": null,
+    "escapedName": "angular",
+    "name": "angular",
+    "rawSpec": "^1.6.6",
+    "spec": ">=1.6.6 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/",
+    "/angular-trix",
+    "/angular-ui-router"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular/-/angular-1.6.6.tgz",
+  "_shasum": "fd5a3cfb437ce382d854ee01120797978527cb64",
+  "_shrinkwrap": null,
+  "_spec": "angular@^1.6.6",
+  "_where": "C:\\Users\\Erik\\xampp\\htdocs\\www.elearning.ph\\public\\assets",
+=======
+  "_from": "angular",
+  "_id": "angular@1.6.6",
+  "_inBundle": false,
+  "_integrity": "sha1-/Vo8+0N844LYVO4BEgeXl4Uny2Q=",
+  "_location": "/angular",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angular",
+    "name": "angular",
+    "escapedName": "angular",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular/-/angular-1.6.6.tgz",
+  "_shasum": "fd5a3cfb437ce382d854ee01120797978527cb64",
+  "_spec": "angular",
+  "_where": "/home/rom/project/www.elearning.ph/public/assets",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "author": {
+    "name": "Angular Core Team",
+    "email": "angular-core+npm@google.com"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular.js/issues"
+  },
+<<<<<<< HEAD
+  "dependencies": {},
+  "description": "HTML enhanced for web apps",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "fd5a3cfb437ce382d854ee01120797978527cb64",
+    "tarball": "https://registry.npmjs.org/angular/-/angular-1.6.6.tgz"
+  },
+  "gitHead": "928fe478bd68d049ff9863dc51814eac24d33b9a",
+=======
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "HTML enhanced for web apps",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "homepage": "http://angularjs.org",
+  "keywords": [
+    "angular",
+    "framework",
+    "browser",
+    "client-side"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+<<<<<<< HEAD
+  "maintainers": [
+    {
+      "name": "angularcore",
+      "email": "angular-core+npm@google.com"
+    },
+    {
+      "name": "petebd",
+      "email": "pete@bacondarwin.com"
+    }
+  ],
+  "name": "angular",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+=======
+  "name": "angular",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.6.6"
+}

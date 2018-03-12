@@ -11,11 +11,33 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome'); 
-});
+/*
+|--------------------------------------------------------------------------
+| Maintenance
+|--------------------------------------------------------------------------
+*/
 
-Route::get('sample','MailController@sample');
-Route::get('sendbasicemail','MailController@basic_email');
-Route::get('sendhtmlemail','MailController@html_email');
-Route::get('sendattachmentemail','MailController@attachment_email');
+Route::get('/','MaintenanceController@index'); 
+Route::get('/index','MaintenanceController@index'); 
+Route::get('/maintenance/operation','MaintenanceController@index'); 
+Route::get('/maintenance/list-operating','MaintenanceController@index'); 
+Route::get('/maintenance/list-monitoring','MaintenanceController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Assets
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/asset/create','AssetsController@index'); 
+
+
+/*
+|--------------------------------------------------------------------------
+| Assets Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/api/v1/assets','AssetsController@assets');
+Route::get('/api/v1/assets/asset-categories','AssetsController@asset_categories');
+Route::post('/api/v1/assets/save','AssetsController@save');

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Equipments | Pulsar Construction</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="../../bower_components/datatables.net/css/buttons.dataTables.min.css">
+  <!-- style -->
+  <link rel="stylesheet" href="../../dist/css/style.min.css">
+  <link rel="stylesheet" href="../../dist/css/skin-blue.min.css">
+  <style>
+    .example-modal .modal {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      right: auto;
+      left: auto;
+      display: block;
+      z-index: 1;
+    }
+    .example-modal .modal {
+      background: transparent !important;
+    }
+    .box-body {
+    overflow: auto;  
+    }
+  </style>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="index.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>P</b>C</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b></b>Pulsar Construction</span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 10 notifications</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-warning text-yellow"></i> Maintenance notifications
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-shopping-cart text-green"></i> Purchase order notifications
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-user text-red"></i> Employee notifications
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-warning text-yellow"></i> Maintenance notifications
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-calendar text-blue"></i> Calendar notifications
+                    </a>
+                  </li>                  
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+          <!-- Tasks: style can be found in dropdown.less -->
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">9</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 9 tasks</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Task 1
+                        <small class="pull-right">20%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">20% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Task 2
+                        <small class="pull-right">40%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">40% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Task 3
+                        <small class="pull-right">60%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                  <li><!-- Task item -->
+                    <a href="#">
+                      <h3>
+                        Task 4
+                        <small class="pull-right">80%</small>
+                      </h3>
+                      <div class="progress xs">
+                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
+                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">80% Complete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- end task item -->
+                </ul>
+              </li>
+              <li class="footer">
+                <a href="#">View all tasks</a>
+              </li>
+            </ul>
+          </li>
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">Mykee Caparas</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  Mykee Caparas - Administrator
+                  <small>Member since Nov. 2018</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar ">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Mykee Caparas</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Administrator</a>
+        </div>
+      </div>
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        
+        <li class="header">MAIN NAVIGATION</li>
+        <li><a href="../../index.html"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cogs"></i> <span>Maintenance</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-circle-o"></i> Daily Operating Report</a></li>
+            <li><a href="list-operating.html"><i class="fa fa-circle-o"></i> Operating Records</a></li>
+            <li><a href="list-monitoring.html"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-exclamation-triangle"></i> <span>Alerts</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              <small class="label pull-right bg-yellow">12</small>
+              <small class="label pull-right bg-red">15</small>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> Due for Maintenance</a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-green"></i> On-going Maintenance</a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Supply Levels</a></li>
+          </ul>
+        </li>   
+        <li>
+          <a href="#">
+            <i class="fa fa-calendar"></i> <span>Calendar</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-aqua">12</small>
+              <small class="label pull-right bg-blue">15</small>
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-tags"></i> <span>Job Orders</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-list-ul"></i> List of J.O.</a></li>
+            <li><a href="#"><i class="fa fa-pencil"></i> Create J.O.</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-file-text"></i> <span>Requesition/Issue Slip</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-list-ul"></i> List of R.S.</a></li>
+            <li><a href="#"><i class="fa fa-pencil"></i> Create R.S.</a></li>
+            <li><a href="#"><i class="fa fa-check"></i> Supply Withdrawal</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-shopping-basket"></i> <span>Purchase Order</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-list-ul"></i> List of P.O.</a></li>
+            <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li>
+          </ul>
+        </li>        
+        <li class="header">DATABASE</li>
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-tags"></i> <span>Assets</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="#"><i class="fa fa-list-ul"></i> List of Assets</a></li>
+            <li><a href="add-asset.html"><i class="fa fa-plus"></i> Add an Asset</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-briefcase"></i> <span>Supplies</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-list-ul"></i> List of Supplies</a></li>
+            <li><a href="#"><i class="fa fa-pencil"></i> Create Supply</a></li>
+            <li><a href="#"><i class="fa fa-plus"></i> Add Supply</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cube"></i> <span>Project Monitoring</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../../pages/project/list-projects.html"><i class="fa fa-list-ul"></i> List of Projects</a></li>
+            <li><a href="../../pages/project/add-projects.html"><i class="fa fa-plus"></i> Add a Project</a></li>
+          </ul>
+        </li>
+        <li><a href="pages/employee/list-employees.html"><i class="fa fa-user"></i> <span>Employee Manager</span></a></li>
+        <li class="header">TOOLS</li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-bar-chart"></i> <span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-paperclip"></i>Maintenance Reports</a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i>Asset Reports</a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i>Supplies Reports</a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i>J.O. Reports</a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i>R.S. Reports</a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i>P.O. Reports</a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i>Project Reports</a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i>Status Reports</a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i>Other Reports</a></li>
+          </ul>
+        </li>
+        <li><a href="#"><i class="fa fa-wrench"></i> <span>Setup</span></a></li>
+        <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help/Support</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1><span class="fa fa-bus"> </span> List of Assets</h1>
+      <ol class="breadcrumb">
+        <li><a href="../../index.html"><i class="fa fa-th"></i> Dashboard</a></li>
+        <li class="active">Maintenance</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="box">
+            <div class="box-body">
+              <table id="equipments" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Asset Tag</th>
+                  <th>Category</th>
+                  <th>Name</th>
+                  <th>Asset ID</th>
+                  <th>Model</th>
+                  <th>Brand</th>
+                  <th>Date Acquired</th>
+                  <th>Acquisition Cost</th>
+                  <th>Plate No.</th>
+                  <th>Engine No.</th>
+                  <th>Assigned to</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>CONE-03082018-DT1</b></a></td>
+                  <td>Construction Equipment</td>
+                  <td>Dump Truck</td>
+                  <td>DT1</td>
+                  <td>ISUZU</td>
+                  <td>CXZ19J-3005460</td>
+                  <td>03/08/2018</td>
+                  <td>1,200,000.00</td>
+                  <td>FGR-254</td>
+                  <td>10PC1-970126</td>
+                  <td>Jaime Beljica</td>
+                </tr> 
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+      </div>
+        <div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Asset Tag: CONE-03082018-DT1</h4>
+              </div>
+              <div class="modal-body">
+                <!-- Custom Tabs (Pulled to the right) -->
+                <div class="nav-tabs-custom">
+                  <ul class="nav nav-tabs pull-right">
+                    <li class="active"><a href="#tab_1-1" data-toggle="tab">Details</a></li>
+                    <li><a href="#tab_2-2" data-toggle="tab">History</a></li>
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Options <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Check out</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Repair</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lease</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lost / Missing</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Broken</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Donate</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sell</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Email</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Dispose</a></li>
+                      </ul>
+                    </li>
+                    <li class="pull-left header"><i class="fa fa-bus"></i> Dump Truck DT1</li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1-1">
+                      <div class="pull-left image col-xs-6">
+                        <img src="../../dist/img/dumptruck.jpg" height="230px" class="img-square">
+                      </div>
+                      <div class="col-xs-5">
+                        <b>Name:</b> Dumptruck<br>
+                        <b>Engine Serial:</b> 10PC1-970126 <br>
+                        <b>Model/Serial:</b> CXZ19J-3005460<br>
+                        <b>Plate No.:</b> FGR-254<br>
+                        <b>Make/Brand:</b> ISUZU<br>
+                        <b>ID:</b> DT-1<br>
+                        <b>Date Acquired:</b> 2/7/2012<br>
+                        <b>Location:</b> Quarry<br>
+                        <b>Driver:</b> Mykee Caparas<br>
+                        <b>Status:</b> Active
+                      </div>
+                                        
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_2-2">
+                      <b>How to use:</b><br>
+                      <b>TABLE HERE.</b><br>
+
+                      A wonderful serenity has taken possession of my entire soul,
+                      like these sweet mornings of spring which I enjoy with my whole heart.
+                      I am alone, and feel the charm of existence in this spot,
+                      which was created for the bliss of souls like mine. I am so happy,
+                      my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
+                      that I neglect my talents. I should be incapable of drawing a single stroke
+                      at the present moment; and yet I feel that I never was a greater artist than now.
+                      A wonderful serenity has taken possession of my entire soul,
+                      like these sweet mornings of spring which I enjoy with my whole heart.
+                      I am alone, and feel the charm of existence in this spot,
+                      which was created for the bliss of souls like mine. I am so happy,
+                      my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
+                      that I neglect my talents. I should be incapable of drawing a single stroke
+                      at the present moment; and yet I feel that I never was a greater artist than now.
+                    </div>
+                    <!-- /.tab-pane -->
+                  </div>
+                  <!-- /.tab-content -->
+                </div>
+                <!-- nav-tabs-custom -->
+              </div>
+              <div class="modal-footer">
+
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+    </section>
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs"><b>Version</b> 1.0</div>
+    <strong>Copyright &copy; <a target="_blank" href="http://bizlogiks.ph/">Bizlogiks-Business Solutions</a>.</strong> All rights
+    reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../../bower_components/datatables.net/js/dataTables.buttons.min.js"></script>
+<script src="../../bower_components/datatables.net/js/jszip.min.js"></script>
+<script src="../../bower_components/datatables.net/js/pdfmake.min.js"></script>
+<script src="../../bower_components/datatables.net/js/vfs_fonts.js"></script>
+<script src="../../bower_components/datatables.net/js/buttons.html5.min.js"></script>
+<script src="../../bower_components/datatables.net/js/buttons.print.min.js"></script>
+<!-- FastClick -->
+<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- App -->
+<script src="../../dist/js/app.min.js"></script>
+<!-- Sparkline -->
+<script src="../../bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Dashboard -->
+<script src="../../dist/js/pages/dashboard.js"></script>
+<!-- page script -->
+<script>
+$(document).ready(function() {
+    $('#equipments').DataTable( {
+      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        dom: 'Blfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5',
+            'print'
+        ]
+    } );
+} );
+</script>
+</body>
+</html>

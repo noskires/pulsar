@@ -1,0 +1,129 @@
+{
+<<<<<<< HEAD
+  "_args": [
+    [
+      {
+        "raw": "trix@0.9.2",
+        "scope": null,
+        "escapedName": "trix",
+        "name": "trix",
+        "rawSpec": "0.9.2",
+        "spec": "0.9.2",
+        "type": "version"
+      },
+      "C:\\Users\\Erik\\XAMPP\\htdocs\\www.elearning.ph\\public\\assets"
+    ]
+  ],
+  "_from": "trix@0.9.2",
+  "_id": "trix@0.9.2",
+  "_inCache": true,
+  "_location": "/trix",
+  "_nodeVersion": "4.1.1",
+  "_npmUser": {
+    "name": "javan",
+    "email": "javan@javan.us"
+  },
+  "_npmVersion": "2.14.4",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "trix@0.9.2",
+    "scope": null,
+    "escapedName": "trix",
+    "name": "trix",
+    "rawSpec": "0.9.2",
+    "spec": "0.9.2",
+    "type": "version"
+=======
+  "_from": "trix@0.9.2",
+  "_id": "trix@0.9.2",
+  "_inBundle": false,
+  "_integrity": "sha1-oNOatFjGD1uYU3iym46+HZihqdU=",
+  "_location": "/trix",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "trix@0.9.2",
+    "name": "trix",
+    "escapedName": "trix",
+    "rawSpec": "0.9.2",
+    "saveSpec": null,
+    "fetchSpec": "0.9.2"
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/trix/-/trix-0.9.2.tgz",
+  "_shasum": "a0d39ab458c60f5b985378b29b8ebe1d98a1a9d5",
+<<<<<<< HEAD
+  "_shrinkwrap": null,
+  "_spec": "trix@0.9.2",
+  "_where": "C:\\Users\\Erik\\XAMPP\\htdocs\\www.elearning.ph\\public\\assets",
+=======
+  "_spec": "trix@0.9.2",
+  "_where": "/home/rom/project/www.elearning.ph/public/assets",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "author": {
+    "name": "Basecamp, LLC"
+  },
+  "bugs": {
+    "url": "https://github.com/basecamp/trix/issues"
+  },
+<<<<<<< HEAD
+  "dependencies": {},
+  "description": "A rich text editor for everyday writing",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "a0d39ab458c60f5b985378b29b8ebe1d98a1a9d5",
+    "tarball": "https://registry.npmjs.org/trix/-/trix-0.9.2.tgz"
+  },
+=======
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A rich text editor for everyday writing",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "files": [
+    "dist/*.css",
+    "dist/*.js"
+  ],
+<<<<<<< HEAD
+  "gitHead": "ec7764716c551b167304ceed44622269e78b202d",
+=======
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "homepage": "http://trix-editor.org/",
+  "keywords": [
+    "rich text",
+    "wysiwyg",
+    "editor"
+  ],
+  "license": "MIT",
+  "main": "dist/trix.js",
+<<<<<<< HEAD
+  "maintainers": [
+    {
+      "name": "javan",
+      "email": "javan@javan.us"
+    },
+    {
+      "name": "sstephenson",
+      "email": "sstephenson@gmail.com"
+    }
+  ],
+  "name": "trix",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+=======
+  "name": "trix",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basecamp/trix.git"
+  },
+  "scripts": {
+    "test": "true"
+  },
+  "style": "dist/trix.css",
+  "version": "0.9.2"
+}
