@@ -19,16 +19,13 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="">
+        <form class="form-horizontal" id=""  >
           <div class="box-body">
+            
             <div class="form-group col-sm-12">
-              <label for="controlnumber" class="col-sm-2 control-label">Asset Tag</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="assetTag" ng-model="ac.assetsDetails.assetTag" placeholder="CONE-03082018-DT1" disabled></div>
-            </div>
-            <div class="form-group col-sm-12">
-              <label class="col-sm-2 control-label">Asset Category*</label>
+              <label class="col-sm-2 control-label">Asset Category* </label>
               <div class="col-sm-10">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.categoryCode">
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.categoryCode" ng-change="ac.assetTag(ac.assetsDetails)">
                 <option selected="selected" value="0">- - - Select Category - - -</option>
                 <option value="<%category.asset_code%>" ng-repeat="category in ac.asset_categories"><%category.asset_name +" ("+category.asset_code+")"%></option>
               </select>
@@ -36,13 +33,13 @@
             </div>
             <div class="form-group col-sm-12">  
               <label for="assetname" class="col-sm-2 control-label">Asset Name*</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="assetName" ng-model="ac.assetsDetails.assetName" placeholder="" required="" autofocus></div>
+              <div class="col-sm-4"><input type="text" class="form-control" id="assetName" ng-model="ac.assetsDetails.assetName" placeholder="" required="" ng-click="ac.assetTag(ac.assetsDetails)" autofocus ></div>
               <label for="assetID" class="col-sm-2 control-label">Asset ID*</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="assetID" ng-model="ac.assetsDetails.assetID" placeholder="" required=""></div>
+              <div class="col-sm-4"><input type="text" class="form-control" id="assetID" ng-model="ac.assetsDetails.assetID" placeholder="" required="" ng-keyup="ac.assetTag(ac.assetsDetails)"></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label">Description </label>
-              <div class="col-sm-10"><input type="text" class="form-control" id="description" ng-model="ac.assetsDetails.description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification"></div>
+              <div class="col-sm-10"><input type="text" class="form-control" id="description" ng-model="ac.assetsDetails.description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification" ng-click="ac.assetTag(ac.assetsDetails)"></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="modelnumber" class="col-sm-2 control-label">Model*</label>
@@ -55,32 +52,27 @@
               <div class="col-sm-4">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="date" class="form-control pull-right" id="dateAcquired" ng-model="ac.assetsDetails.dateAcquired">
+              <input type="text" class="form-control pull-right" id="datepicker" ng-model="ac.assetsDetails.dateAcquired" ng-click="ac.assetTag(ac.assetsDetails)">
             </div></div>
               <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost*</label>
               <div class="col-sm-4">
               <div class="input-group date">
               <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="text" class="form-control" id="acquisitionCost" ng-model="ac.assetsDetails.acquisitionCost" placeholder="" required="">
+              <input type="number" class="form-control" ng-click="ac.assetTag(ac.assetsDetails)" id="acquisitionCost" ng-model="ac.assetsDetails.acquisitionCost" placeholder="" required="">
             </div></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="platenumber" class="col-sm-2 control-label">Plate No.</label>
               <div class="col-sm-4"><input type="text" class="form-control" id="plateNumber" ng-model="ac.assetsDetails.plateNumber" placeholder="" required=""></div>
               <label for="enginenumber" class="col-sm-2 control-label">Engine No.</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="engineNumber" ng-model="ac.assetsDetails.engineNumber" placeholder="" required=""></div>
+              <div class="col-sm-4"><input type="text" class="form-control" id="engineNumber" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.engineNumber" placeholder="" required=""></div>
             </div>
             <div class="form-group col-sm-12">
             <label class="col-sm-2 control-label">Assign to</label>
               <div class="col-sm-4">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.assignTo">
-              <option selected="selected" value="0">- - - Select Employee - - -</option>
-              <option value="1">Driver 1</option>
-              <option value="2">Driver 2</option>
-              <option value="3">Driver 3</option>
-              <option value="4">Driver 4</option>
-              <option value="5">Driver 5</option>
-              <option value="6">Driver 6</option>
+              <select class="form-control select2" style="width: 100%;" required="" ng-change="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.assignTo">
+                <option selected="selected" value="0">- - - Select Employee - - -</option>
+                <option value="<%employee.employee_id%>" ng-repeat="employee in ac.employees"><%employee.fname+' '+employee.lname%></option>
               </select>
               </div>
             </div>
@@ -89,21 +81,18 @@
             <div class="form-group col-sm-12">
             <label class="col-sm-2 control-label">Funding Source</label>
               <div class="col-sm-4">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.fundSource">
-              <option selected="selected" value="0">- - - Select Fund - - -</option>
-              <option value="1">Fund 1</option>
-              <option value="2">Fund 2</option>
-              <option value="3">Fund 3</option>
+              <select class="form-control select2" style="width: 100%;" required="" ng-change="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.fundSource">
+                <option selected="selected" value="0">- - - Select Fund - - -</option>
+                <option value="1">Fund 1</option>
+                <option value="2">Fund 2</option>
+                <option value="3">Fund 3</option>
               </select>
               </div>
             <label class="col-sm-2 control-label">Cost Center</label>
               <div class="col-sm-4">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.costCenter">
-              <option selected="selected" value="0">- - - Select Cost Center - - -</option>
-              <option value="1">Maintenance Department</option>
-              <option value="2">Construction Department</option>
-              <option value="3">HR Department</option>
-              <option value="3">Administration</option>
+              <select class="form-control select2" style="width: 100%;" required="" ng-change="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.costCenter">
+                <option selected="selected" value="0">- - - Select Cost Center - - -</option>
+                <option value="<%org.cost_center_code%>" ng-repeat="org in ac.organizations"><% org.org_name%></option>
               </select>
               </div>
             </div>
@@ -113,25 +102,23 @@
               <div class="input-group date">
               <span class="input-group-addon" style="font-size: 20px;">₱</span>
               <input type="text" class="form-control" id="depreciableCost" placeholder="sales tax, freight, installation
-" required="" ng-model="ac.assetsDetails.depreciableCost">
+" required="" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.depreciableCost">
             </div></div>
               <label for="enginenumber" class="col-sm-2 control-label">Asset Life</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="assetlife" ng-model="ac.assetsDetails.assetLife" placeholder="In Months" required=""></div>
+              <div class="col-sm-4"><input type="text" class="form-control" id="assetlife" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.assetLife" placeholder="In Months" required=""></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="platenumber" class="col-sm-2 control-label">Salvage Value</label>
               <div class="col-sm-4">
               <div class="input-group date">
               <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="text" class="form-control" id="salvageValue" ng-model="ac.assetsDetails.salvageValue" placeholder="" required="">
+              <input type="text" class="form-control" id="salvageValue" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.salvageValue" placeholder="" required="">
             </div></div>
               <label for="enginenumber" class="col-sm-2 control-label">Method</label>
-              <div class="col-sm-4">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.method">
-              <option selected="selected" value="1">Straight Line</option>
-              <option value="2">Double Declining Balance</option>
-              <option value="3">150% Declining Balance</option>
-              <option value="3">Sum of the Year's Digits</option>
+              <div class="col-sm-4"><% methods%>
+              <select class="form-control select2" style="width: 100%;" required="" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.method">
+                <option selected="selected" value="0">- - - Select Cost Center - - -</option>
+                <option value="<%method.method_id%>" ng-repeat="method in ac.methods"><% method.name%></option>
               </select>
               </div>
             </div>

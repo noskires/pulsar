@@ -32,10 +32,35 @@
   }
 
   #box-monitoring  {width: 100%; border-spacing:0;border-color:#282828;border-style:2px solid black;border-width:2px;overflow-x:scroll;}
+
+  .box-body {
+    overflow: auto;  
+    }
 </style>
-@stop
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+@endsection
 
 @section('content')
+
+<!-- Assets -->
+
+<script type="text/ng-template" id="asset.create.view">
+  @include('asset.add_asset')
+</script>
+
+<script type="text/ng-template" id="asset.list.equipments.view">
+  @include('asset.list_equipments')
+</script>
+
+<!-- Assets -->
+
+<!-- Maintenance -->
+
 <script type="text/ng-template" id="main.view">
   @include('maintenance.dashboard')
 </script> 
@@ -52,11 +77,54 @@
   @include('maintenance.list_monitoring')
 </script>
 
+<!-- Maintenance -->
+
+<!-- Project -->
+
+<script type="text/ng-template" id="project.create.view">
+  @include('project.add_project')
+</script>
+
+<script type="text/ng-template" id="project.list.projects.view">
+  @include('project.list_projects')
+</script>
+
+<!-- Project -->
+
+<!-- JO -->
+
+<script type="text/ng-template" id="jo.create.view">
+  @include('job_order.add_jo')
+</script>
+
+<script type="text/ng-template" id="jo.list.view">
+  @include('job_order.list_jo')
+</script>
+
+<!-- JO -->
+
+<script type="text/ng-template" id="sample.state">
+  <div>
+
+	this is a sample state 
+
+	<a ui-sref=".child-state({id:14})" class="btn btn-primary">List</a>
+
+	<a ui-sref="sample-state({id:1})" class="btn btn-primary">List1</a>
+  </div>
+</script>
+
+<script type="text/ng-template" id="sample.state.child">
+  <div>
+	this is a sample state child here
+	<!-- <a ui-sref=".list" class="btn btn-primary">List</a> -->
+  </div>
+</script>
+
 @endsection
 
 @section('additionalScripts')
-<script src="{{URL::to('js/app/maintenance.js')}}"></script>
-
+<!-- Services -->
 <!-- Confirmation -->
 <script src="{{URL::to('bower_components/Bootstrap-Confirmation-master/bootstrap-confirmation.js')}}"></script> 
 <!-- Select2 -->
@@ -93,7 +161,10 @@ $('[data-toggle=confirmation]').confirmation({
   // other options
 });
 
-$(function () {
+$(document).ready(function () {
+	// $('#modal').modal('show');
+
+// alert('a')
     //Initialize Select2 Elements
     $('.select2').select2();
 
@@ -128,6 +199,9 @@ $(function () {
     )
 
     //Date picker
+    $('.datepicker').datepicker({
+      autoclose: true
+    })
     $('#datepicker').datepicker({
       autoclose: true
     })
@@ -138,29 +212,29 @@ $(function () {
       autoclose: true
     })
     //iCheck for checkbox and radio inputs
-    // $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-    //   checkboxClass: 'icheckbox_minimal-blue',
-    //   radioClass   : 'iradio_minimal-blue'
-    // })
-    // //Red color scheme for iCheck
-    // $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-    //   checkboxClass: 'icheckbox_minimal-red',
-    //   radioClass   : 'iradio_minimal-red'
-    // })
-    // //Flat red color scheme for iCheck
-    // $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-    //   checkboxClass: 'icheckbox_flat-green',
-    //   radioClass   : 'iradio_flat-green'
-    // })
-    // //Colorpicker
-    // $('.my-colorpicker1').colorpicker()
-    // //color picker with addon
-    // $('.my-colorpicker2').colorpicker()
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
 
-    // //Timepicker
-    // $('.timepicker').timepicker({
-    //   showInputs: false
-    // })
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    })
  })
 </script>
 @endsection

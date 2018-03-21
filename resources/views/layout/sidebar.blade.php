@@ -1,4 +1,5 @@
-<section class="sidebar ">
+
+<section class="sidebar" ng-controller="MainCtrl as mc">
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
@@ -33,10 +34,13 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a ui-sref="operation-view"><i class="fa fa-circle-o"></i> Daily Operating Report</a></li>
-        <li><a ui-sref="list-operating-view"><i class="fa fa-circle-o"></i> Operating Records</a></li>
-        <li><a ui-sref="list-monitoring-view"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li>
+      <!--   <li><a href="#" ng-click="mc.routeTo('/maintenance/operation')"><i class="fa fa-circle-o"></i> Daily Operating Report</a></li> -->
+      <li><a href="#" ui-sref="operation"><i class="fa fa-circle-o"></i> Daily Operating Report</a></li>
+      <li><a href="#" ui-sref="list-operating"><i class="fa fa-circle-o"></i> Operating Records</a></li>
+      <li><a href="#" ui-sref="list-monitoring"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li> 
+        <!-- <li><a ui-sref="list-monitoring-view"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li>  -->
       </ul>
+      
     </li>
     <li class="treeview">
       <a href="#">
@@ -70,8 +74,8 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-list-ul"></i> List of J.O.</a></li>
-        <li><a href="#"><i class="fa fa-pencil"></i> Create J.O.</a></li>
+        <li><a href="#" ui-sref="list-jo"><i class="fa fa-list-ul"></i> List of J.O.</a></li>
+        <li><a href="#" ui-sref="jo-create"><i class="fa fa-pencil"></i> Create J.O.</a></li>
       </ul>
     </li>
     <li class="treeview">
@@ -108,8 +112,10 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="pages/asset/list-equipments.html"><i class="fa fa-list-ul"></i> List of Assets</a></li>
-        <li><a href="#"><i class="fa fa-plus"></i> Add an Asset</a></li>
+      <!--   <li><a href="#" ng-click="mc.routeTo('/asset/list-equipments')"><i class="fa fa-list-ul"></i> List of Assets</a></li>
+        <li><a href="#" ng-click="mc.routeTo('/asset/create')"><i class="fa fa-plus"></i> Add an Asset</a></li>
+ -->        <li><a href="#" ui-sref="asset-list-equipments"><i class="fa fa-list-ul"></i> List of Assets</a></li>
+        <li><a href="#" ui-sref="asset-create"><i class="fa fa-plus"></i> Add an Asset</a></li>
       </ul>
     </li>
     <li class="treeview">
@@ -133,8 +139,8 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="../../pages/project/list-projects.html"><i class="fa fa-list-ul"></i> List of Projects</a></li>
-        <li><a href="../../pages/project/add-projects.html"><i class="fa fa-plus"></i> Add a Project</a></li>
+        <li><a href="#" ui-sref="list-jo"><i class="fa fa-list-ul"></i> List of Projects</a></li>
+        <li><a href="#" ui-sref="project-create"><i class="fa fa-plus"></i> Add a Project</a></li>
       </ul>
     </li>
     <li><a href="pages/employee/list-employees.html"><i class="fa fa-user"></i> <span>Employee Manager</span></a></li>

@@ -1,16 +1,20 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+
 use DB;
-use App\Assets;
-use App\Asset_categories;
+use Auth;
+use App\Asset;
+use App\Asset_category;
+use App\Employee;
+use App\Log;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class AssetsController extends Controller {
   	public function index(){
-    	return view('asset.index');
+    	return view('layout.index');
    	}
 
     public function asset_categories(){
@@ -22,30 +26,50 @@ class AssetsController extends Controller {
         ]);
     }
 
-    public function assets(){
-      	$asset = DB::table('Assets')->get();
+    public function assets(Request $request){
+
+        $data = array(
+            'tag'=>$request->input('tag'),
+        );
+
+      	$asset = DB::table('Assets as a')
+      			->select('*')
+      			-> leftjoin('Employees as e','e.employee_id','=','a.assign_to');
+
+      	if ($data['tag']){ 
+      		$asset = $asset->where('tag', $data['tag']);
+      	}
+
+      	$asset = $asset->get();
+
         return response()-> json([
             'status'=>200,
             'data'=>$asset,
-            'message'=>''
+            'message'=> ''
+        ]);
+    }
+
+    public function methods(){
+
+      	$methods = DB::table('methods')->get();
+
+        return response()-> json([
+            'status'=>200,
+            'data'=>$methods
+        ]);
+    }
+
+    public function asset_tag(Request $request)
+    {
+    	$assetTag = $request->input('categoryCode')."-".date('Ymd', strtotime($request->input('dateAcquired')))."-".$request->input('assetID');
+
+    	return response()-> json([
+            'status'=>200,
+            'data'=>$assetTag
         ]);
     }
 
     public function save(Request $request){
-        // $validator = Validator::make($request->all(),[
-        //     'title'=> 'required',
-        //     'description'=> 'required'
-        // ]);
-
-        // if ($validator-> fails()) {
-        //     return response()->json([
-        //         'status'=> 403,
-        //         'data'=>'',
-        //         'message'=>'Unable to save.'
-        //     ]);
-        // }
-
-        // $self = $request->session()->get('student_id');
         
         $data = array();
 
@@ -68,49 +92,55 @@ class AssetsController extends Controller {
        	$data['method'] = $request->input('method');
        
         $transaction = DB::transaction(function($data) use($data){
-            $asset = new Assets;
-            $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
-            $asset->name = $data['assetName'];
-            $asset->code = $data['assetID'];
-            $asset->model = $data['modelnumber'];
-            $asset->category = $data['categoryCode'];
-            $asset->description = $data['description'];
-            $asset->brand = $data['brand'];
-            $asset->date_aquired = $data['dateAcquired'];
-            $asset->acquisition_cost = $data['acquisitionCost'];
-            $asset->plate_no = $data['plateNumber'];
-            $asset->engine_no = $data['engineNumber'];
-            $asset->assign_to = $data['assignTo'];
-            $asset->fund_source = $data['fundSource'];
-            $asset->cost_center = $data['costCenter'];
-            $asset->depreciable_cost = $data['depreciableCost'];
-            $asset->salvage_value = $data['salvageValue'];
-            $asset->method = $data['method'];
+        	// try{
 
-            $asset->save();
+        		// $assetCheck = DB::table('Assets')->where('tag', $asset->tag)->first();
+	            $asset = new Asset;
+	            $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
+	            $asset->name = $data['assetName'];
+	            $asset->code = $data['assetID'];
+	            $asset->model = $data['modelnumber'];
+	            $asset->category = $data['categoryCode'];
+	            $asset->description = $data['description'];
+	            $asset->brand = $data['brand'];
+	            $asset->date_acquired = $data['dateAcquired'];
+	            $asset->acquisition_cost = $data['acquisitionCost'];
+	            $asset->plate_no = $data['plateNumber'];
+	            $asset->engine_no = $data['engineNumber'];
+	            $asset->assign_to = $data['assignTo'];
+	            $asset->fund_source = $data['fundSource'];
+	            $asset->cost_center = $data['costCenter'];
+	            $asset->depreciable_cost = $data['depreciableCost'];
+	            $asset->salvage_value = $data['salvageValue'];
+	            $asset->method_id = $data['method'];
+	            $asset->project_id = 1;
+	            $asset->save();
 
-            // $logsData = array(
-            //     'student_id'=>$data['student_id'],
-            //     'forum_id'=>$forum->forum_id,
-            //     'logs_type'=>'THREAD'
-            // );
-            // $this->logsForSocial($logsData);
-            
-            // // is posted 5
-            // $achForumDet = array(
-            //     'student_id'=>$data['student_id']
-            // );
-            
-            // $this->isPosted5Forum($achForumDet);
+	            $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();
+	            $assetCopy->asset_id;
 
-            return response()->json([
-                'status' => 200,
-                'data' => 'null',
-                'message' => 'Successfully saved.'
-            ]);
+	            $log = new Log;
+	            $log->log_code = $assetCopy->asset_id;
+	            $log->log_desc = "Added new asset";
+	            $log->user_id = Auth::user()->id;
+	            $log->save();
+
+	            return response()->json([
+	                'status' => 200,
+	                'data' => 'null',
+	                'message' => 'Successfully saved.'
+	            ]);
+      //       } 
+      //       catch (\Exception $e) 
+      //       {
+		    // 	return response()->json([
+	     //            'status' => 500,
+	     //            'data' => 'null',
+	     //            'message' => 'Error, please try again!'
+	     //        ]);
+		    // }
         });
 
         return $transaction;
-      
     }
 }

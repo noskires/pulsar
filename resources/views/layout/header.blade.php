@@ -1,4 +1,5 @@
-<header class="main-header" ng-controller="headerCtrl as hc">
+
+<header class="main-header" ng-controller="MainCtrl as mc">
 <!-- Logo -->
 <a href="index.html" class="logo">
 <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -140,7 +141,7 @@
     <li class="dropdown user user-menu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <img src="{{url::to('assets/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-        <span class="hidden-xs">Mykee Caparas <%hc.name%></span>
+        <span class="hidden-xs">{{Auth::user()->name}}</span>
       </a>
       <ul class="dropdown-menu">
         <!-- User image -->
@@ -159,7 +160,13 @@
             <a href="#" class="btn btn-default btn-flat">Profile</a>
           </div>
           <div class="pull-right">
-            <a href="#" ng-click="hc.routeTo('/logout')" class="btn btn-default btn-flat">Sign out</a>
+       
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();" ng-click="hc.routeTo('/logout')" class="btn btn-default btn-flat">Sign out</a>
           </div>
         </li>
       </ul>

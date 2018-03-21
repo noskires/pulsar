@@ -18,4 +18,17 @@
 
 <script src="{{URL::to('js/pulsarApp.js')}}"></script>
 
+<!-- Services -->
+<script src="{{URL::to('js/services/employees.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/assets.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/organizations.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/jobOrders.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/projects.srvcs.js')}}"></script> 
+
+<!-- Controllers -->
+<script src="{{URL::to('js/controller/assets.js')}}"></script> 
+<script src="{{URL::to('js/controller/maintenance.js')}}"></script>
+<script src="{{URL::to('js/controller/jobOrders.js')}}"></script> 
+<script src="{{URL::to('js/controller/projects.js')}}"></script> 
+
 @yield('additionalScripts')

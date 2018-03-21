@@ -25,8 +25,8 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div ui-view></div>
     @yield('content')
+    <div ui-view></div>
   </div>
   <!-- /.content-wrapper -->
 
