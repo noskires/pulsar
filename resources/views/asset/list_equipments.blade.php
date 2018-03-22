@@ -31,7 +31,7 @@
           <!-- ng-click="ac.assetInfo(asset.tag)" -->
           <!-- ui-sref="asset-equipments-view({tag:1212})" -->
         <tr ng-repeat="asset in ac.assets">
-          <td><a href="#" ui-sref=".asset({assetTag:asset.tag})" ng-click="ac.assetInfo(asset.tag)" data-toggle="modal2" data-target="#modal-default2"><b><%asset.tag%></b></a></td>
+          <td><a href="#" ui-sref=".asset({assetTag:asset.tag})"   data-toggle="modal2" data-target="#modal-default2"><b><%asset.tag%></b></a></td>
           <td><%asset.category%></td>
           <td><%asset.name%></td>
           <td><%asset.code%></td>
