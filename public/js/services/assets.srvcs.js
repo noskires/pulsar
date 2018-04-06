@@ -7,11 +7,11 @@
         AssetsSrvcs.$inject = ['$http'];
         function AssetsSrvcs($http) {
             return {
-            	assets: function(data, tag) {
+            	assets: function(data) {
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/assets?tag='+data.tag,
+                        url: '/api/v1/assets?tag='+data.tag+'&name='+data.name+'&category='+data.category,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

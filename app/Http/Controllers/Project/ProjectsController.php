@@ -7,6 +7,7 @@ use App\Employee;
 use App\Project;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ProjectsController extends Controller {
 
@@ -15,7 +16,25 @@ class ProjectsController extends Controller {
   }
 
   public function projects(){
-  	$projects = DB::table('Projects')->get();
+  	$projects = DB::table('Projects as p')
+        ->select(
+          'p.project_code',
+          'p.name',
+          'p.cost',
+          'p.cost',
+          'p.zip_code',
+          'p.date_started',
+          'p.date_completed',
+          'p.target_date',
+          'p.date_assigned',
+          'p.municipality_code',
+          'm.municipality_text',
+          'e.employee_id',
+          DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name')
+        )
+        -> leftjoin('employees as e','e.employee_id','=','p.project_engineer')
+        -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
+        ->get();
     return response()-> json([
       'status'=>200,
       'data'=>$projects,
@@ -25,10 +44,12 @@ class ProjectsController extends Controller {
 
   public function save(Request $request){
     
+  // return $request->all();
     $data = array();
     $data['projectName'] = $request->input('name');
     $data['cost'] = $request->input('cost');
-    $data['zipCode'] = $request->input('province'); 
+    $data['zipCode'] = ''; 
+    $data['municipality'] = $request->input('municipality'); 
     $data['dateStarted'] = date('Y-m-d', strtotime($request->input('dateStarted')));
     $data['dateStarted'] = date('Y-m-d', strtotime($request->input('dateStarted')));
     $data['dateCompleted'] = date('Y-m-d', strtotime($request->input('dateCompleted')));
@@ -36,44 +57,41 @@ class ProjectsController extends Controller {
     $data['dateAssigned'] = date('Y-m-d', strtotime($request->input('dateAssigned')));
    
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         $project = new Project;
+
+        $proCode = (str_pad(($project->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+        $project->project_code = "PRO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$proCode;
         $project->name = $data['projectName'];
-        $project->project_code = "code";
         $project->cost = $data['cost'];
         $project->zip_code = $data['zipCode']; 
+        $project->municipality_code = $data['municipality']; 
         $project->date_started = $data['dateStarted']; 
         $project->date_completed = $data['dateCompleted']; 
         $project->project_engineer = $data['projectEngineer']; 
         $project->date_assigned = $data['dateAssigned']; 
         $project->save();
 
-        // $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();
-        // $assetCopy->asset_id;
-
-        // $log = new Log;
-        // $log->log_code = $assetCopy->asset_id;
-        // $log->log_desc = "Added new asset";
-        // $log->user_id = Auth::user()->id;
-        // $log->save();
-
         return response()->json([
             'status' => 200,
             'data' => 'null',
             'message' => 'Successfully saved.'
         ]);
-      // } 
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      } 
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
   }
+
 }

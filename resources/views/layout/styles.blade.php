@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="{{URL::to('assets/dist/css/style.min.css')}}">
 <link rel="stylesheet" href="{{URL::to('assets/dist/css/skin-blue.min.css')}}">
 
+<!-- <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"> -->
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

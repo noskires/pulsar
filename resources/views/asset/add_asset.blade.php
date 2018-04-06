@@ -33,13 +33,13 @@
             </div>
             <div class="form-group col-sm-12">  
               <label for="assetname" class="col-sm-2 control-label">Asset Name*</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="assetName" ng-model="ac.assetsDetails.assetName" placeholder="" required="" ng-click="ac.assetTag(ac.assetsDetails)" autofocus ></div>
+              <div class="col-sm-4"><input type="text" class="form-control" id="assetName" ng-model="ac.assetsDetails.assetName" placeholder="" required="" autofocus ></div>
               <label for="assetID" class="col-sm-2 control-label">Asset ID*</label>
               <div class="col-sm-4"><input type="text" class="form-control" id="assetID" ng-model="ac.assetsDetails.assetID" placeholder="" required="" ng-keyup="ac.assetTag(ac.assetsDetails)"></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label">Description </label>
-              <div class="col-sm-10"><input type="text" class="form-control" id="description" ng-model="ac.assetsDetails.description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification" ng-click="ac.assetTag(ac.assetsDetails)"></div>
+              <div class="col-sm-10"><input type="text" class="form-control" id="description" ng-model="ac.assetsDetails.description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification"></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="modelnumber" class="col-sm-2 control-label">Model*</label>
@@ -52,20 +52,20 @@
               <div class="col-sm-4">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="datepicker" ng-model="ac.assetsDetails.dateAcquired" ng-click="ac.assetTag(ac.assetsDetails)">
+              <input type="text" class="form-control pull-right datepicker" ng-model="ac.assetsDetails.dateAcquired">
             </div></div>
               <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost*</label>
               <div class="col-sm-4">
               <div class="input-group date">
               <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="number" class="form-control" ng-click="ac.assetTag(ac.assetsDetails)" id="acquisitionCost" ng-model="ac.assetsDetails.acquisitionCost" placeholder="" required="">
+              <input type="number" class="form-control" id="acquisitionCost" ng-model="ac.assetsDetails.acquisitionCost" placeholder="" required="">
             </div></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="platenumber" class="col-sm-2 control-label">Plate No.</label>
               <div class="col-sm-4"><input type="text" class="form-control" id="plateNumber" ng-model="ac.assetsDetails.plateNumber" placeholder="" required=""></div>
               <label for="enginenumber" class="col-sm-2 control-label">Engine No.</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="engineNumber" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.engineNumber" placeholder="" required=""></div>
+              <div class="col-sm-4"><input type="text" class="form-control" id="engineNumber" ng-model="ac.assetsDetails.engineNumber" placeholder="" required=""></div>
             </div>
             <div class="form-group col-sm-12">
             <label class="col-sm-2 control-label">Assign to</label>
@@ -102,21 +102,21 @@
               <div class="input-group date">
               <span class="input-group-addon" style="font-size: 20px;">₱</span>
               <input type="text" class="form-control" id="depreciableCost" placeholder="sales tax, freight, installation
-" required="" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.depreciableCost">
+" required="" ng-model="ac.assetsDetails.depreciableCost">
             </div></div>
               <label for="enginenumber" class="col-sm-2 control-label">Asset Life</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="assetlife" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.assetLife" placeholder="In Months" required=""></div>
+              <div class="col-sm-4"><input type="text" class="form-control" id="assetlife" ng-model="ac.assetsDetails.assetLife" placeholder="In Months" required=""></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="platenumber" class="col-sm-2 control-label">Salvage Value</label>
               <div class="col-sm-4">
               <div class="input-group date">
               <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="text" class="form-control" id="salvageValue" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.salvageValue" placeholder="" required="">
+              <input type="text" class="form-control" id="salvageValue" ng-model="ac.assetsDetails.salvageValue" placeholder="" required="">
             </div></div>
               <label for="enginenumber" class="col-sm-2 control-label">Method</label>
               <div class="col-sm-4"><% methods%>
-              <select class="form-control select2" style="width: 100%;" required="" ng-click="ac.assetTag(ac.assetsDetails)" ng-model="ac.assetsDetails.method">
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.method">
                 <option selected="selected" value="0">- - - Select Cost Center - - -</option>
                 <option value="<%method.method_id%>" ng-repeat="method in ac.methods"><% method.name%></option>
               </select>
@@ -125,6 +125,15 @@
             <div class="form-group col-sm-12">
               <label for="assetimg" class="col-sm-2 control-label">Upload Image</label>
               <span class="btn btn-default btn-file col-sm-4">Select image<input type="file" id="assetimg"></span>
+            </div>
+            <div class="form-group col-sm-12">
+              <label for="controlnumber" class="col-sm-2 control-label">Project </label>
+              <div class="col-sm-10">
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.projectCode" >
+                <option selected="selected" value="0">- - - Select Project - - -</option>
+                <option value="<%project.project_code%>" ng-repeat="project in ac.projects"><%project.name%></option>
+              </select>
+            </div>
             </div>
             <div class="form-group col-sm-12">
               <div class="col-sm-8"></div>

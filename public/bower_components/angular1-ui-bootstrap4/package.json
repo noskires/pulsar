@@ -1,0 +1,161 @@
+{
+<<<<<<< HEAD
+  "_args": [
+    [
+      {
+        "raw": "angular1-ui-bootstrap4@^2.4.22",
+        "scope": null,
+        "escapedName": "angular1-ui-bootstrap4",
+        "name": "angular1-ui-bootstrap4",
+        "rawSpec": "^2.4.22",
+        "spec": ">=2.4.22 <3.0.0",
+        "type": "range"
+      },
+      "C:\\Users\\Erik\\xampp\\htdocs\\www.elearning.ph\\public\\assets"
+    ]
+  ],
+  "_from": "angular1-ui-bootstrap4@>=2.4.22 <3.0.0",
+  "_id": "angular1-ui-bootstrap4@2.4.22",
+  "_inCache": true,
+  "_location": "/angular1-ui-bootstrap4",
+  "_nodeVersion": "7.4.0",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/angular1-ui-bootstrap4-2.4.22.tgz_1488482968491_0.48334457026794553"
+  },
+  "_npmUser": {
+    "name": "agamnentzar",
+    "email": "agamnentzar@gmail.com"
+  },
+  "_npmVersion": "4.0.5",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular1-ui-bootstrap4@^2.4.22",
+    "scope": null,
+    "escapedName": "angular1-ui-bootstrap4",
+    "name": "angular1-ui-bootstrap4",
+    "rawSpec": "^2.4.22",
+    "spec": ">=2.4.22 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+=======
+  "_from": "angular1-ui-bootstrap4",
+  "_id": "angular1-ui-bootstrap4@2.4.22",
+  "_inBundle": false,
+  "_integrity": "sha1-N4aXQFyVe5b5R/QjIvNmYM0/yI0=",
+  "_location": "/angular1-ui-bootstrap4",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angular1-ui-bootstrap4",
+    "name": "angular1-ui-bootstrap4",
+    "escapedName": "angular1-ui-bootstrap4",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular1-ui-bootstrap4/-/angular1-ui-bootstrap4-2.4.22.tgz",
+  "_shasum": "378697405c957b96f947f42322f36660cd3fc88d",
+<<<<<<< HEAD
+  "_shrinkwrap": null,
+  "_spec": "angular1-ui-bootstrap4@^2.4.22",
+  "_where": "C:\\Users\\Erik\\xampp\\htdocs\\www.elearning.ph\\public\\assets",
+=======
+  "_spec": "angular1-ui-bootstrap4",
+  "_where": "/home/rom/project/www.elearning.ph/public/assets",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "author": {
+    "name": "https://github.com/angular-ui/bootstrap/graphs/contributors"
+  },
+  "bugs": {
+    "url": "https://github.com/angular-ui/bootstrap/issues"
+  },
+<<<<<<< HEAD
+  "dependencies": {},
+=======
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "description": "This is a fork of the [original repository](https://github.com/angular-ui/bootstrap) aiming to support Angular 1.x with Bootstrap 4",
+  "devDependencies": {
+    "angular": "1.5.8",
+    "angular-mocks": "1.5.8",
+    "angular-sanitize": "1.5.8",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-conventional-changelog": "^6.1.0",
+    "grunt-ddescribe-iit": "0.0.6",
+    "grunt-eslint": "^17.3.1",
+    "grunt-html2js": "^0.3.0",
+    "grunt-karma": "^0.12.0",
+    "jasmine-core": "^2.2.0",
+    "karma": "0.13.22",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-coverage": "^0.5.0",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-jasmine": "^0.3.5",
+    "load-grunt-tasks": "^3.3.0",
+    "lodash": "^4.1.0",
+    "marked": "^0.3.5",
+    "node-static": "^0.7.8",
+    "semver": "^5.0.1",
+    "shelljs": "^0.6.0"
+  },
+  "directories": {
+    "lib": "src/"
+  },
+<<<<<<< HEAD
+  "dist": {
+    "shasum": "378697405c957b96f947f42322f36660cd3fc88d",
+    "tarball": "https://registry.npmjs.org/angular1-ui-bootstrap4/-/angular1-ui-bootstrap4-2.4.22.tgz"
+  },
+=======
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "files": [
+    "index.js",
+    "dist/",
+    "src/",
+    "template/"
+  ],
+<<<<<<< HEAD
+  "gitHead": "42f3cc847a3964f90ae7163b2f8ca99b29dc9211",
+  "homepage": "http://angular-ui.github.io/bootstrap/",
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "agamnentzar",
+      "email": "agamnentzar@gmail.com"
+    }
+  ],
+  "name": "angular1-ui-bootstrap4",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+=======
+  "homepage": "http://angular-ui.github.io/bootstrap/",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angular1-ui-bootstrap4",
+>>>>>>> 4651c1bcfb423d7792fd07385245cdd9ef9be2d6
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular-ui/bootstrap.git"
+  },
+  "scripts": {
+    "demo": "grunt after-test && static dist -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
+    "test": "grunt"
+  },
+  "version": "2.4.22"
+}

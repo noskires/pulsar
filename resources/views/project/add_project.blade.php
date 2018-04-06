@@ -31,14 +31,20 @@
               <div class="col-sm-9"><input type="number" class="form-control" id="projectcost" ng-model="pc.projectDetails.cost" placeholder="" required=""></div>
             </div>
             <div class="form-group">
+            <label class="col-sm-3 control-label">Region</label>
+              <div class="col-sm-9">
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.region" ng-change="pc.selectRegion(pc.projectDetails.region)">
+                <option selected="selected" value="0">- - - Select Region - - -</option>
+                <option value="<%region.region_code%>" ng-repeat="region in pc.regions"><% region.region_text_short%></option>
+              </select>
+              </div>
+            </div>
+            <div class="form-group">
             <label class="col-sm-3 control-label">Province</label>
               <div class="col-sm-9">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.province">
-                <option selected="selected" value="1">Cagayan</option>
-                <option value="2">Isabela</option>
-                <option value="3">Vizcaya</option>
-                <option value="4">Batanes</option>
-                <option value="5">Quirino</option>
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.province" ng-change="pc.selectProvince(pc.projectDetails.province)">
+                <option selected="selected" value="0">- - - Select Province - - -</option>
+                <option value="<%province.province_code%>" ng-repeat="province in pc.provinces"><% province.province_text%></option>
               </select>
               </div>
             </div>
@@ -46,13 +52,8 @@
             <label class="col-sm-3 control-label">Municipality</label>
               <div class="col-sm-9">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.municipality">
-                <option selected="selected" value="1">Tuguegarao City</option>
-                <option value="2">Iguig</option>
-                <option value="3">Solana</option>
-                <option value="4">Enrile</option>
-                <option value="5">Peñablanca</option>
-                <option value="6">Gonzaga</option>
-                <option value="7">Sta. Ana</option>
+                <option selected="selected" value="0">- - - Select Municipalities - - -</option>
+                <option value="<%municipality.municipality_code%>" ng-repeat="municipality in pc.municipalities"><% municipality.municipality_text%></option>
               </select>
               </div>
             </div>

@@ -30,15 +30,50 @@ class AssetsController extends Controller {
 
         $data = array(
             'tag'=>$request->input('tag'),
+            'name'=>$request->input('name'),
+            'category'=>$request->input('category'),
         );
 
+
       	$asset = DB::table('Assets as a')
-      			->select('*')
-      			-> leftjoin('Employees as e','e.employee_id','=','a.assign_to');
+      			// ->select('*')
+            ->select(
+                DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
+                'a.asset_id',
+                'a.tag', 
+                'a.name',
+                'a.category',
+                'a.model',
+                'a.brand',
+                'a.date_acquired',
+                'a.acquisition_cost',
+                'a.plate_no',
+                'a.engine_no',
+                'a.assign_to',
+                'a.fund_source',
+                'a.cost_center',
+                'a.depreciable_cost',
+                'a.salvage_value',
+                'a.method_id',
+                'a.project_code',
+                'a.status',
+                'm.municipality_text'
+              )
+            ->leftjoin('Employees as e','e.employee_id','=','a.assign_to')
+            ->leftjoin('Projects as p','p.project_code','=','a.project_code')
+      			->leftjoin('municipalities as m','m.municipality_code','=','p.municipality_code');
 
       	if ($data['tag']){ 
-      		$asset = $asset->where('tag', $data['tag']);
+      		$asset = $asset->where('a.tag', $data['tag']);
       	}
+
+        if ($data['name']){ 
+          $asset = $asset->where('a.name', $data['name']);
+        }
+
+        if ($data['category']){ 
+          $asset = $asset->where('a.category', $data['category']);
+        }
 
       	$asset = $asset->get();
 
@@ -48,6 +83,33 @@ class AssetsController extends Controller {
             'message'=> ''
         ]);
     }
+
+    // public function assetsByName(Request $request){
+
+    //     $data = array(
+    //         'name'=>$request->input('name'),
+    //     );
+
+    //     $assets = DB::table('Assets as a')
+    //         // ->select('*')
+    //         ->select(
+    //             'a.asset_id',
+    //             'a.tag', 
+    //             'a.name',
+    //             'a.category');
+
+    //     if ($data['name']){ 
+    //       $assets = $assets->where('name', $data['name']);
+    //     }
+
+    //     $assets = $assets->get();
+
+    //     return response()-> json([
+    //         'status'=>200,
+    //         'data'=>$assets,
+    //         'message'=> ''
+    //     ]);
+    // }
 
     public function methods(){
 
@@ -89,12 +151,12 @@ class AssetsController extends Controller {
        	$data['costCenter'] = $request->input('costCenter');
        	$data['depreciableCost'] = $request->input('depreciableCost');
        	$data['salvageValue'] = $request->input('salvageValue');
-       	$data['method'] = $request->input('method');
+        $data['method'] = $request->input('method');
+       	$data['project_code'] = $request->input('projectCode');
        
         $transaction = DB::transaction(function($data) use($data){
-        	// try{
+        	try{
 
-        		// $assetCheck = DB::table('Assets')->where('tag', $asset->tag)->first();
 	            $asset = new Asset;
 	            $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
 	            $asset->name = $data['assetName'];
@@ -113,32 +175,33 @@ class AssetsController extends Controller {
 	            $asset->depreciable_cost = $data['depreciableCost'];
 	            $asset->salvage_value = $data['salvageValue'];
 	            $asset->method_id = $data['method'];
-	            $asset->project_id = 1;
+              $asset->project_code = $data['project_code'];
+	            $asset->status = "Active";
 	            $asset->save();
 
-	            $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();
-	            $assetCopy->asset_id;
+	            // $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();
+	            // $assetCopy->asset_id;
 
-	            $log = new Log;
-	            $log->log_code = $assetCopy->asset_id;
-	            $log->log_desc = "Added new asset";
-	            $log->user_id = Auth::user()->id;
-	            $log->save();
+	            // $log = new Log;
+	            // $log->log_code = $assetCopy->asset_id;
+	            // $log->log_desc = "Added new asset";
+	            // $log->user_id = Auth::user()->id;
+	            // $log->save();
 
 	            return response()->json([
 	                'status' => 200,
 	                'data' => 'null',
 	                'message' => 'Successfully saved.'
 	            ]);
-      //       } 
-      //       catch (\Exception $e) 
-      //       {
-		    // 	return response()->json([
-	     //            'status' => 500,
-	     //            'data' => 'null',
-	     //            'message' => 'Error, please try again!'
-	     //        ]);
-		    // }
+            } 
+            catch (\Exception $e) 
+            {
+		    	    return response()->json([
+	                'status' => 500,
+	                'data' => 'null',
+	                'message' => 'Error, please try again!'
+	            ]);
+		      }
         });
 
         return $transaction;

@@ -35,7 +35,11 @@
 
   .box-body {
     overflow: auto;  
-    }
+  }
+
+  .btn-app {margin-right: 6px !important;}
+  .counter {margin-right: 15px !important;}
+  .counter {text-align: center;}
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,6 +51,12 @@
 
 @section('content')
 
+<!-- Employees -->
+<script type="text/ng-template" id="employee.list.view">
+  @include('employee.list_employees')
+</script>
+<!-- Employees -->
+
 <!-- Assets -->
 
 <script type="text/ng-template" id="asset.create.view">
@@ -55,6 +65,10 @@
 
 <script type="text/ng-template" id="asset.list.equipments.view">
   @include('asset.list_equipments')
+</script>
+
+<script type="text/ng-template" id="asset.more.details.view">
+  @include('asset.view_asset')
 </script>
 
 <!-- Assets -->
@@ -67,6 +81,10 @@
 
 <script type="text/ng-template" id="operation.view">
   @include('maintenance.operation')
+</script>
+
+<script type="text/ng-template" id="operation.create.view">
+  @include('maintenance.add_operation')
 </script>
 
 <script type="text/ng-template" id="list.operating.view">
@@ -103,7 +121,25 @@
 
 <!-- JO -->
 
-<script type="text/ng-template" id="sample.state">
+<!-- RIS -->
+
+<script type="text/ng-template" id="ris.create.view">
+  @include('requisition.add_ris')
+</script>
+
+<!-- RIS -->
+
+<!-- Shared Modal -->
+
+<script type="text/ng-template" id="shared.modal">
+  @include('shared.modal')
+</script>
+
+<!-- Shared Modal -->
+
+
+
+<!-- <script type="text/ng-template" id="sample.state">
   <div>
 
 	this is a sample state 
@@ -115,16 +151,15 @@
 </script>
 
 <script type="text/ng-template" id="sample.state.child">
-  <div>
-	this is a sample state child here
+  <div> -->
+	<!-- this is a sample state child here -->
 	<!-- <a ui-sref=".list" class="btn btn-primary">List</a> -->
-  </div>
-</script>
+  <!-- </div>
+</script> -->
 
 @endsection
 
 @section('additionalScripts')
-<!-- Services -->
 <!-- Confirmation -->
 <script src="{{URL::to('bower_components/Bootstrap-Confirmation-master/bootstrap-confirmation.js')}}"></script> 
 <!-- Select2 -->
@@ -235,6 +270,7 @@ $(document).ready(function () {
     $('.timepicker').timepicker({
       showInputs: false
     })
+
  })
 </script>
 @endsection
