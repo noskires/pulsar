@@ -96,7 +96,7 @@
           <a class="btn btn-app">
             <i class="fa fa-external-link"></i> Assign
           </a>              
-          <a class="btn btn-app">
+          <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})">
             <i class="fa fa-wrench"></i> Repair
           </a>
           <a href="javascript: window.open('pdfasset.pdf');"  class="btn btn-app">

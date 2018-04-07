@@ -76,7 +76,6 @@ class RequisitionsController extends Controller {
     $data = array();
     $data['date_requested'] = date('Y-m-d', strtotime($request->input('date_requested')));
     $data['date_needed'] = date('Y-m-d', strtotime($request->input('date_needed')));
-    $data['request_purpose'] = $request->input('request_purpose');
     $data['description'] = $request->input('description');
     
     $transaction = DB::transaction(function($data) use($data){
@@ -89,10 +88,10 @@ class RequisitionsController extends Controller {
 
         $requisition->requisition_slip_code = "RS-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$risCode;
         $requisition->date_requested = $data['date_requested'];
-        $requisition->request_purpose = $data['request_purpose'];
         $requisition->date_needed = $data['date_needed'];
         $requisition->description = $data['description'];
-        $requisition->request_type = 1;
+        $requisition->request_type = "Asset";
+        $requisition->job_order_code = "Asset";
         // $requisition->asset_tag = $data['assetTag'];
         $requisition->save();
 

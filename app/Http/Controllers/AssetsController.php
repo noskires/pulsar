@@ -46,16 +46,11 @@ class AssetsController extends Controller {
                 'a.category',
                 'a.model',
                 'a.brand',
-                'a.date_acquired',
+                DB::raw('DATE_FORMAT(a.date_acquired, "%M %d, %Y") as date_acquired'),
                 'a.acquisition_cost',
                 'a.plate_no',
                 'a.engine_no',
                 'a.assign_to',
-                'a.fund_source',
-                'a.cost_center',
-                'a.depreciable_cost',
-                'a.salvage_value',
-                'a.method_id',
                 'a.project_code',
                 'a.status',
                 'm.municipality_text'
@@ -84,33 +79,6 @@ class AssetsController extends Controller {
             'message'=> ''
         ]);
     }
-
-    // public function assetsByName(Request $request){
-
-    //     $data = array(
-    //         'name'=>$request->input('name'),
-    //     );
-
-    //     $assets = DB::table('Assets as a')
-    //         // ->select('*')
-    //         ->select(
-    //             'a.asset_id',
-    //             'a.tag', 
-    //             'a.name',
-    //             'a.category');
-
-    //     if ($data['name']){ 
-    //       $assets = $assets->where('name', $data['name']);
-    //     }
-
-    //     $assets = $assets->get();
-
-    //     return response()-> json([
-    //         'status'=>200,
-    //         'data'=>$assets,
-    //         'message'=> ''
-    //     ]);
-    // }
 
     public function methods(){
 
@@ -147,13 +115,13 @@ class AssetsController extends Controller {
        	$data['dateAcquired'] = date('Y-m-d', strtotime($request->input('dateAcquired')));
        	$data['plateNumber'] = $request->input('plateNumber');
        	$data['engineNumber'] = $request->input('engineNumber');
-       	$data['assignTo'] = $request->input('assignTo');
-       	$data['fundSource'] = $request->input('fundSource');
-       	$data['costCenter'] = $request->input('costCenter');
-       	$data['depreciableCost'] = $request->input('depreciableCost');
-       	$data['salvageValue'] = $request->input('salvageValue');
-        $data['method'] = $request->input('method');
-       	$data['project_code'] = $request->input('projectCode');
+       	// $data['assignTo'] = $request->input('assignTo');
+       	// $data['fundSource'] = $request->input('fundSource');
+       	// $data['costCenter'] = $request->input('costCenter');
+       	// $data['depreciableCost'] = $request->input('depreciableCost');
+       	// $data['salvageValue'] = $request->input('salvageValue');
+        // $data['method'] = $request->input('method');
+       	// $data['project_code'] = $request->input('projectCode');
        
         $transaction = DB::transaction(function($data) use($data){
         	try{
@@ -170,13 +138,13 @@ class AssetsController extends Controller {
 	            $asset->acquisition_cost = $data['acquisitionCost'];
 	            $asset->plate_no = $data['plateNumber'];
 	            $asset->engine_no = $data['engineNumber'];
-	            $asset->assign_to = $data['assignTo'];
-	            $asset->fund_source = $data['fundSource'];
-	            $asset->cost_center = $data['costCenter'];
-	            $asset->depreciable_cost = $data['depreciableCost'];
-	            $asset->salvage_value = $data['salvageValue'];
-	            $asset->method_id = $data['method'];
-              $asset->project_code = $data['project_code'];
+	            // $asset->assign_to = $data['assignTo'];
+	            // $asset->fund_source = $data['fundSource'];
+	            // $asset->cost_center = $data['costCenter'];
+	            // $asset->depreciable_cost = $data['depreciableCost'];
+	            // $asset->salvage_value = $data['salvageValue'];
+	            // $asset->method_id = $data['method'];
+             //  $asset->project_code = $data['project_code'];
 	            $asset->status = "Active";
 	            $asset->save();
 

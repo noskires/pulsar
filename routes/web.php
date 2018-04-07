@@ -195,7 +195,7 @@ Route::get('/requisition-issue-slip/new','Requisition\RequisitionsController@ind
 | Requisition Apis
 |--------------------------------------------------------------------------
 */
-
+Route::get('/requisition-issue-slip/new/{jobOrderCode}','Requisition\RequisitionsController@index');
 Route::post('/api/v1/requisition-issue-slip/save','Requisition\RequisitionsController@save'); 
 
 /*

@@ -26,7 +26,7 @@ class JobOrdersController extends Controller {
             ->select(
                 'jo.job_order_code', 
                 'jo.job_order_date', 
-                'jo.request_purpose', 
+                // 'jo.request_purpose', 
                 'jo.date_started', 
                 'jo.date_completed', 
                 'jo.particulars',
@@ -46,14 +46,14 @@ class JobOrdersController extends Controller {
                 DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
                 'p.project_code',
                 'm.municipality_code',
-                'm.municipality_text',
-                'rp.request_purpose as request_purpose_text'
+                'm.municipality_text'
+                // 'rp.request_purpose as request_purpose_text'
               )
             -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
             -> leftjoin('Projects as p','p.project_code','=','a.project_code')
             -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
-            -> leftjoin('Employees as e','e.employee_id','=','a.assign_to')
-            -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
+            -> leftjoin('Employees as e','e.employee_id','=','a.assign_to');
+            // -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
 
     if ($data['joCode']){
       $job_orders = $job_orders->where('job_order_code', $data['joCode']);
@@ -72,8 +72,7 @@ class JobOrdersController extends Controller {
   public function save(Request $request){
     
     $data = array();
-    $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate')));
-    $data['purpose'] = $request->input('purpose');
+    $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate'))); 
     $data['assetTag'] = $request->input('tag');
     
     $transaction = DB::transaction(function($data) use($data){
@@ -85,8 +84,7 @@ class JobOrdersController extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         $jo->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
-        $jo->job_order_date = $data['orderDate'];
-        $jo->request_purpose = $data['purpose'];
+        $jo->job_order_date = $data['orderDate']; 
         $jo->asset_tag = $data['assetTag'];
         $jo->save();
 

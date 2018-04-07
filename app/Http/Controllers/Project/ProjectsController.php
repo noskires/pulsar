@@ -21,7 +21,7 @@ class ProjectsController extends Controller {
           'p.project_code',
           'p.name',
           'p.cost',
-          'p.cost',
+          'p.code',
           'p.zip_code',
           'p.date_started',
           'p.date_completed',
@@ -29,11 +29,11 @@ class ProjectsController extends Controller {
           'p.date_assigned',
           'p.municipality_code',
           'm.municipality_text',
-          'e.employee_id',
+          'p.project_engineer',
           DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name')
         )
+        ->leftjoin('Municipalities as m', 'p.municipality_code', '=', 'm.municipality_code')
         ->leftjoin('employees as e','e.employee_id','=','p.project_engineer')
-        ->leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
         ->get();
     return response()-> json([
       'status'=>200,
@@ -47,6 +47,7 @@ class ProjectsController extends Controller {
   // return $request->all();
     $data = array();
     $data['projectName'] = $request->input('name');
+    $data['code'] = $request->input('code');
     $data['cost'] = $request->input('cost');
     $data['zipCode'] = ''; 
     $data['municipality'] = $request->input('municipality'); 
@@ -67,6 +68,7 @@ class ProjectsController extends Controller {
         $project->project_code = "PRO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$proCode;
         $project->name = $data['projectName'];
         $project->cost = $data['cost'];
+        $project->code = $data['code'];
         $project->zip_code = $data['zipCode']; 
         $project->municipality_code = $data['municipality']; 
         $project->date_started = $data['dateStarted']; 

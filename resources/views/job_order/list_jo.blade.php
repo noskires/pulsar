@@ -15,8 +15,7 @@
         <thead>
         <tr>
           <th>Control No.</th>
-          <th>Job Order Date</th>
-          <th>Request Purpose</th>
+          <th>Job Order Date</th> 
           <th>Asset Name</th>
           <th>Asset Tag</th>
           <th>Location</th>
@@ -28,8 +27,7 @@
           <!-- data-toggle="modal" data-target="#modal-default" -->
         <tr ng-repeat="jobOrder in joc.jobOrders">
           <td><a href="#" ui-sref=".jo({joCode:jobOrder.job_order_code})" ng-click="joc.jobOrderInfo(jobOrder.job_order_code)"><b><%jobOrder.job_order_code%></b></a></td>
-          <td><%jobOrder.job_order_date%></td>
-          <td><%jobOrder.request_purpose_text%></td>
+          <td><%jobOrder.job_order_date%></td> 
           <td><%jobOrder.name%></td>
           <td><%jobOrder.tag%></td>
           <td><%jobOrder.municipality_text%></td>
@@ -63,6 +61,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Print</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ui-sref="requesition-create({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()">Create R.S.</a></li>
                   <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Close J.O. (Completed)</a></li>
                 </ul>
               </li>
@@ -85,23 +84,6 @@
           <div class="form-group">
             <label for="jodate" class="col-sm-4 control-label">Job Order Date</label>
             <div class="col-sm-8"><input type="text" class="form-control" id="jodate" disabled="" ng-model="vm.formData.jobOrder.job_order_date"></div>
-          </div>
-          <div class="form-group">
-            <label for="requestpurpose" class="col-sm-4 control-label">Request Purpose</label>
-            <div class="col-sm-8">
-            <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.request_purpose" >
-              <option ng-value="1">REPAIRS & MAINTENANCE-BUILDING CONSTRUCTION</option>
-              <option ng-value="2">REPAIRS & MAINTENANCE-BUILDING LEASEHOLD IMPROVEMENTS</option>
-              <option ng-value="3">REPAIRS & MAINTENANCE-COMMUNICATION EQUIPMENT</option>
-              <option ng-value="4">REPAIRS & MAINTENANCE-CONSTRUCTION EQUIPMENT</option>
-              <option ng-value="5">REPAIRS & MAINTENANCE-FURNITURE AND FIXTUREST</option>
-              <option ng-value="6">REPAIRS & MAINTENANCE-IT EQUIPMENT & SOFTWARES</option>
-              <option ng-value="7">REPAIRS & MAINTENANCE-MOTOR VEHICLE</option>
-              <option ng-value="8">REPAIRS & MAINTENANCE-OFFICE EQUIPMENT</option>
-            </select>
-
-
-            </div>
           </div>
           <div class="form-group">
             <label for="location" class="col-sm-4 control-label">Location</label>

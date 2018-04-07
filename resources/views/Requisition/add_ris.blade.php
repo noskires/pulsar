@@ -22,10 +22,10 @@
         <!-- form start -->
         <form class="form-horizontal" id="">
           <div class="box-body">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="controlnumber" class="col-sm-3 control-label">Control Number</label>
               <div class="col-sm-9"><input type="text" class="form-control" id="controlnumber" placeholder="RS-03102018-1" disabled></div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label class="col-sm-3 control-label">Request Date</label>
               <div class="col-sm-9">
@@ -42,7 +42,7 @@
               <input type="text" class="form-control pull-right" id="datepicker2" ng-model="rac.risDetails.date_needed">
             </div></div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="equipmentname" class="col-sm-3 control-label">Request Purpose</label>
               <div class="col-sm-9">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="rac.risDetails.request_purpose">
@@ -63,12 +63,12 @@
               <option value="4">Repairs and Maintenance-Communication Equipment</option>
               <option value="4">Motor Vehicle</option>
               </select></div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Description/Remarks</label>
               <div class="col-sm-9"><input type="text" class="form-control" id="equipmentplate" placeholder="" required="" ng-model="rac.risDetails.description"></div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Project ID</label>
               <div class="col-sm-9">
               <select class="form-control select2" style="width: 100%;" required="">
@@ -89,38 +89,17 @@
               <option value="3">ProjectName1</option>
               </select>
               </div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Asset Tag</label>
               <div class="col-sm-9">
-              <select class="form-control select2" style="width: 100%;" required="">
-              <option selected="selected" value="0">- - - Select Tag - - -</option>
-              <option value="1">CONE-03082018-DT1</option>
-              <option value="2">Asset002</option>
-              <option value="3">Asset003</option>
-              </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="equipmentplate" class="col-sm-3 control-label">Asset Name</label>
-              <div class="col-sm-9">
-              <select class="form-control select2" style="width: 100%;" required="">
-              <option selected="selected" value="0">- - - Select Asset Name - - -</option>
-              <option value="1">Dump Truck</option>
-              <option value="2">AssetName1</option>
-              <option value="3">AssetName1</option>
-              </select>
+                <input type="text" class="form-control" id="" placeholder="" value="<%rac.asset.name+ ' : '+rac.asset.tag%>" disabled>
               </div>
             </div>
             <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Requesting Employee</label>
               <div class="col-sm-9">
-              <select class="form-control select2" style="width: 100%;" required="">
-              <option selected="selected" value="0">- - - Employee Name - - -</option>
-              <option value="1">Jaime Beljica</option>
-              <option value="2">Employee 2</option>
-              <option value="3">Employee 3</option>
-              </select>
+                <input type="text" class="form-control" id="" placeholder="" value="<%rac.asset.employee_name%>" disabled>
               </div>
             </div>
             <div class="form-group">

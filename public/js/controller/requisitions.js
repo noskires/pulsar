@@ -6,52 +6,27 @@
         .factory('MainSrvcs',MainSrvcs)
         
     
-        RequisitionsAddCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
-        function RequisitionsAddCtrl($stateParams, RequisitionsSrvcs, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
+        RequisitionsAddCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function RequisitionsAddCtrl($stateParams, RequisitionsSrvcs, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
-            //employee services
-            // EmployeesSrvcs.employees({jobType:''}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.employees = response.data.data;
-            //         console.log(vm.employees)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
+            // alert($stateParams.jobOrderCode);
 
-            // //organizations services
-            // OrganizationsSrvcs.organizations().then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.organizations = response.data.data;
-            //         console.log(vm.organizations)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
+            JobOrdersSrvcs.jobOrders({joCode:$stateParams.jobOrderCode}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.jobOrders = response.data.data[0];
 
-            // AssetsSrvcs.asset_categories().then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.asset_categories = response.data.data;
-            //         console.log(vm.asset_categories)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
-            // AssetsSrvcs.asset_methods().then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.methods = response.data.data;
-            //         console.log(vm.methods)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
-            // ProjectsSrvcs.projects().then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.projects = response.data.data;
-            //         console.log(vm.projects)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
+                    AssetsSrvcs.assets({tag:vm.jobOrders.tag, name:'', category:''}).then (function (response) {
+                        if(response.data.status == 200)
+                        {
+                            vm.asset = response.data.data[0];
+                            console.log(vm.asset)
+                        }
+                    }, function (){ alert('Bad Request!!!') })
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             vm.newRequisitionSlip = function(data){
                 console.log(data);

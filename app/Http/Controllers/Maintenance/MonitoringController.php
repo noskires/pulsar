@@ -60,8 +60,6 @@ class OperationsController extends Controller {
 
    public function save(Request $request){
     
-    // return "erikon";
-    // return $request->all();
     $data = array();
     $data['operationDate'] = date('Y-m-d', strtotime($request->input('operationDate')));
     $data['assetName'] = $request->input('assetName');
@@ -102,7 +100,7 @@ class OperationsController extends Controller {
             'data' => 'null',
             'message' => 'Successfully saved.'
         ]);
-      } 
+      }
       catch (\Exception $e) 
       {
           return response()->json([

@@ -75,7 +75,6 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="#" ui-sref="list-jo"><i class="fa fa-list-ul"></i> List of J.O.</a></li>
-        <li><a href="#" ui-sref="jo-create"><i class="fa fa-pencil"></i> Create J.O.</a></li>
       </ul>
     </li>
     <li class="treeview">
@@ -86,8 +85,8 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#" ui-sref="requesition-create"><i class="fa fa-list-ul"></i> List of R.S.</a></li>
-        <li><a href="#"><i class="fa fa-pencil"></i> Create R.S.</a></li>
+        <li><a href="#"><i class="fa fa-list-ul"></i> List of R.S.</a></li>
+        <li><a href="#" ui-sref="requesition-create"><i class="fa fa-pencil"></i> Create R.S.</a></li>
         <li><a href="#"><i class="fa fa-check"></i> Supply Withdrawal</a></li>
       </ul>
     </li>

@@ -21,9 +21,9 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            if($stateParams.assetTag != "")
+            if($stateParams.assetTag!=null)
             {
-                AssetsSrvcs.assets({tag:tag, name:'', category:''}).then (function (response) {
+                AssetsSrvcs.assets({tag:$stateParams.assetTag, name:'', category:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.asset = response.data.data[0];
@@ -33,7 +33,7 @@
                             tag: vm.asset.tag,
                             name: vm.asset.name,
                             location: vm.asset.municipality_text,
-                            requestingEmployee: vm.asset.lname+", "+vm.asset.fname+" "+vm.asset.mname,
+                            requestingEmployee: vm.asset.employee_name,
                         };
 
                         console.log(vm.joDetails);

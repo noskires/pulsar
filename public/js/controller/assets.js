@@ -190,8 +190,9 @@
             if($stateParams.assetTag)
             {
                 // alert($stateParams.assetTag)
-                var tag = $stateParams.assetTag;
-                AssetsSrvcs.assets({tag:tag, name:'', category:''}).then (function (response) {
+                vm.tag = $stateParams.assetTag;
+                
+                AssetsSrvcs.assets({tag:vm.tag, name:'', category:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.asset = response.data.data[0];
@@ -200,7 +201,7 @@
                 }, function (){ alert('Bad Request!!!') })
 
 
-                MaintenanceSrvcs.assetsMonitoring({tag:tag}).then (function (response) {
+                MaintenanceSrvcs.assetsMonitoring({tag:vm.tag}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.assetsMonitoring = response.data.data[0];
@@ -208,7 +209,7 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
 
-                WarrantiesSrvcs.warranties({tag:tag}).then (function (response) {
+                WarrantiesSrvcs.warranties({tag:vm.tag}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.warranties = response.data.data;

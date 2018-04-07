@@ -39,7 +39,7 @@
           <td><%asset.model%></td>
           <td><%asset.brand%></td>
           <td><%asset.date_acquired%></td>
-          <td><%asset.acquisition_cost%></td>
+          <td><%asset.acquisition_cost | number:2%></td>
           <td><%asset.plate_no%></td>
           <td><%asset.engine_no%></td>
           <td><%%></td>

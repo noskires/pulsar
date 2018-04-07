@@ -101,7 +101,7 @@
                 controller: 'JobOrdersCtrl as joc'
             })
             .state('requesition-create', {
-                url: '/requisition-issue-slip/new',
+                url: '/requisition-issue-slip/new/:jobOrderCode',
                 controller: 'RequisitionsAddCtrl as rac',
                 templateUrl: 'ris.create.view'
             })

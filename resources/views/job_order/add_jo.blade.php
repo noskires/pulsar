@@ -27,22 +27,7 @@
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
               <input type="text" class="form-control pull-right datepicker" ng-model="joc.joDetails.orderDate">
             </div></div>
-            </div>
-            <div class="form-group">
-              <label for="requestpurpose" class="col-sm-3 control-label">Request Purpose</label>
-              <div class="col-sm-9">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="joc.joDetails.purpose">
-                <option selected="selected" value="0">- - select purpose - -</option>
-                <option value="1">REPAIRS & MAINTENANCE-BUILDING CONSTRUCTION</option>
-                <option value="2">REPAIRS & MAINTENANCE-BUILDING LEASEHOLD IMPROVEMENTS</option>
-                <option value="3">REPAIRS & MAINTENANCE-COMMUNICATION EQUIPMENT</option>
-                <option value="4">REPAIRS & MAINTENANCE-CONSTRUCTION EQUIPMENT</option>
-                <option value="5">REPAIRS & MAINTENANCE-FURNITURE AND FIXTUREST</option>
-                <option value="6">REPAIRS & MAINTENANCE-IT EQUIPMENT & SOFTWARES</option>
-                <option value="7">REPAIRS & MAINTENANCE-MOTOR VEHICLE</option>
-                <option value="8">REPAIRS & MAINTENANCE-OFFICE EQUIPMENT</option>
-              </select></div>
-            </div>
+            </div> 
             <div class="form-group">
               <label for="assetname" class="col-sm-3 control-label">Asset Name</label>
               <div class="col-sm-9">
@@ -80,5 +65,3 @@
   <!-- /.row -->
 </section>
 
-<input type="text" class="form-control" uib-datepicker-popup="<%joc.dateFormat%>" ng-model="joc.AvailableDate" name="availabledate" is-open="joc.availableDatePopup.opened" datepicker-options="joc.availableDateOptions" ng-required="true" close-text="Close" ng-click="joc.OpenAvailableDate()"
-                ng-change="joc.ChangeExpiryMinDate(AvailableDate)" placeholder="Available Date" />

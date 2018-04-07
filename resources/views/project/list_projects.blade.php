@@ -35,9 +35,9 @@
             <tbody>
             <tr ng-repeat="project in pc.projects">
               <td><a href="#" data-toggle="modal" data-target="#modal-default" ng-bind="project.project_code"> </b></a></td>
-              <td ng-bind="project.project_id"></td>
+              <td ng-bind="project.code"></td>
               <td ng-bind="project.name"></td>
-              <td ng-bind="project.cost"></td>
+              <td ng-bind="project.cost | number:2"></td>
               <td ng-bind="project.zip_code"></td>
               <td ng-bind="project.municipality_text"></td>
               <td ng-bind="project.zip_code"></td>
