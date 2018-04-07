@@ -58,60 +58,60 @@ class OperationsController extends Controller {
 
   }
 
-   // public function save(Request $request){
+   public function save(Request $request){
     
-   //  // return "erikon";
-   //  // return $request->all();
-   //  $data = array();
-   //  $data['operationDate'] = date('Y-m-d', strtotime($request->input('operationDate')));
-   //  $data['assetName'] = $request->input('assetName');
-   //  $data['assetTag'] = $request->input('assetTag');
-   //  $data['projectName'] = $request->input('projectName');
-   //  $data['projectCode'] = $request->input('projectCode');
-   //  $data['remarks'] = $request->input('remarks');
-   //  $data['operatingHours'] = $request->input('operatingHours');
-   //  $data['distanceTravelled'] = $request->input('distanceTravelled');
-   //  $data['dieselConsumption'] = $request->input('dieselConsumption');
-   //  $data['gasConsumption'] = $request->input('gasConsumption');
-   //  $data['oilConsumption'] = $request->input('oilConsumption');
-   //  $data['numberLoads'] = $request->input('numberLoads');
+    // return "erikon";
+    // return $request->all();
+    $data = array();
+    $data['operationDate'] = date('Y-m-d', strtotime($request->input('operationDate')));
+    $data['assetName'] = $request->input('assetName');
+    $data['assetTag'] = $request->input('assetTag');
+    $data['projectName'] = $request->input('projectName');
+    $data['projectCode'] = $request->input('projectCode');
+    $data['remarks'] = $request->input('remarks');
+    $data['operatingHours'] = $request->input('operatingHours');
+    $data['distanceTravelled'] = $request->input('distanceTravelled');
+    $data['dieselConsumption'] = $request->input('dieselConsumption');
+    $data['gasConsumption'] = $request->input('gasConsumption');
+    $data['oilConsumption'] = $request->input('oilConsumption');
+    $data['numberLoads'] = $request->input('numberLoads');
    
-   //  $transaction = DB::transaction(function($data) use($data){
-   //  // try{
+    $transaction = DB::transaction(function($data) use($data){
+    try{
 
-   //      $operation = new Operation;
+        $operation = new Operation;
 
-   //      $operationCode = (str_pad(($operation->where('operation_date', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-   //      ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+        $operationCode = (str_pad(($operation->where('operation_date', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-   //      $operation->operation_code = "OPN-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
-   //      $operation->operation_date = $data['operationDate']; 
-   //      $operation->asset_tag = $data['assetTag']; 
-   //      $operation->project_code = $data['projectCode']; 
-   //      $operation->remarks = $data['remarks']; 
-   //      $operation->operating_hours = $data['operatingHours']; 
-   //      $operation->distance_travelled = $data['distanceTravelled']; 
-   //      $operation->diesel_consumption = $data['dieselConsumption']; 
-   //      $operation->gas_consumption = $data['gasConsumption']; 
-   //      $operation->oil_consumption = $data['oilConsumption']; 
-   //      $operation->number_loads = $data['numberLoads']; 
-   //      $operation->save();
+        $operation->operation_code = "OPN-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
+        $operation->operation_date = $data['operationDate']; 
+        $operation->asset_tag = $data['assetTag']; 
+        $operation->project_code = $data['projectCode']; 
+        $operation->remarks = $data['remarks']; 
+        $operation->operating_hours = $data['operatingHours']; 
+        $operation->distance_travelled = $data['distanceTravelled']; 
+        $operation->diesel_consumption = $data['dieselConsumption']; 
+        $operation->gas_consumption = $data['gasConsumption']; 
+        $operation->oil_consumption = $data['oilConsumption']; 
+        $operation->number_loads = $data['numberLoads']; 
+        $operation->save();
 
-   //      return response()->json([
-   //          'status' => 200,
-   //          'data' => 'null',
-   //          'message' => 'Successfully saved.'
-   //      ]);
-   //  //   } 
-   //  //   catch (\Exception $e) 
-   //  //   {
-   //  //       return response()->json([
-   //  //         'status' => 500,
-   //  //         'data' => 'null',
-   //  //         'message' => 'Error, please try again!'
-   //  //     ]);
-   //  //   }
-   //  });
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+      } 
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
+    });
 
     return $transaction;
   }
