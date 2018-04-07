@@ -60,7 +60,7 @@
           </thead>
           <tbody>
           <tr ng-repeat="employee in ec.employees" >
-            <td><a href="#" ng-click="ec.employeeInfo(employee.employee_id)"><b><%employee.employee_id%></b></a></td>
+            <td><a href="#" ng-click="ec.employeeInfo(employee.employee_id)"><b><%employee.employee_code%></b></a></td>
             <td><%employee.lname%></td>
             <td><%employee.affix%></td>
             <td><%employee.fname%></td>
@@ -260,7 +260,7 @@
                   <div class="box-body">
                     <div class="form-group col-sm-12">
                       <label for="controlnumber" class="col-sm-3 control-label">Employee ID</label>
-                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_id" ng-model="vm.formData.employee_id"></div>
+                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_id" ng-model="vm.formData.employee_code"></div>
                     </div>
                     <div class="form-group col-sm-12">
                       <label for="controlnumber" class="col-sm-3 control-label">Last Name</label>

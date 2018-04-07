@@ -32,8 +32,8 @@ class ProjectsController extends Controller {
           'e.employee_id',
           DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name')
         )
-        -> leftjoin('employees as e','e.employee_id','=','p.project_engineer')
-        -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
+        ->leftjoin('employees as e','e.employee_id','=','p.project_engineer')
+        ->leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
         ->get();
     return response()-> json([
       'status'=>200,

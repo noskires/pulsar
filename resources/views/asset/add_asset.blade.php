@@ -64,7 +64,7 @@
             <div class="form-group col-sm-12">
               <label for="platenumber" class="col-sm-2 control-label">Plate No.</label>
               <div class="col-sm-4"><input type="text" class="form-control" id="plateNumber" ng-model="ac.assetsDetails.plateNumber" placeholder="" required=""></div>
-              <label for="enginenumber" class="col-sm-2 control-label">Engine No.</label>
+              <label for="enginenumber" class="col-sm-2 control-label">Engine/Serial No.</label>
               <div class="col-sm-4"><input type="text" class="form-control" id="engineNumber" ng-model="ac.assetsDetails.engineNumber" placeholder="" required=""></div>
             </div>
             <div class="form-group col-sm-12">

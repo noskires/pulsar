@@ -40,6 +40,10 @@
   .btn-app {margin-right: 6px !important;}
   .counter {margin-right: 15px !important;}
   .counter {text-align: center;}
+
+  .employees-modal .modal {background: transparent !important;}
+  thead {background-color: #3c8dbc; color: #fff;}
+  #employees {cursor: pointer;}
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -79,9 +83,6 @@
   @include('maintenance.dashboard')
 </script> 
 
-<script type="text/ng-template" id="operation.view">
-  @include('maintenance.operation')
-</script>
 
 <script type="text/ng-template" id="operation.create.view">
   @include('maintenance.add_operation')
@@ -188,6 +189,13 @@
 <script src="{{URL::to('bower_components/datatables.net/js/vfs_fonts.js')}}"></script> 
 <script src="{{URL::to('bower_components/datatables.net/js/buttons.html5.min.js')}}"></script> 
 <script src="{{URL::to('bower_components/datatables.net/js/buttons.print.min.js')}}"></script> 
+<script src="{{URL::to('bower_components/datatables.net/js/dataTables.colReorder.min.js')}}"></script> 
+<script src="{{URL::to('bower_components/datatables.net/js/buttons.colVis.min.js')}}"></script> 
+<script src="{{URL::to('bower_components/datatables.net/js/dataTables.select.min.js')}}"></script> 
+<script src="{{URL::to('bower_components/datatables.net/js/dataTables.checkboxes.min.js')}}"></script> 
+<script src="{{URL::to('bower_components/datatables.net/js/dataTables.fixedColumns.min.js')}}"></script> 
+
+
 
 <script type="text/javascript">
  

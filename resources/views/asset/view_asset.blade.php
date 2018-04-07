@@ -114,27 +114,27 @@
           <p> Total data per asset operation. </p>
           <div class="wrapper" style="color: #000;background-color: #e1e1e1;border-style: 1px #fff;">
               <div class="counter col_fourth col-sm-2">
-                <h2 class="timer count-title count-number" data-to="" data-speed="1500"> <%amdc.assetsMonitoring.total_operating_hours%></h2>
+                <h2 class="timer count-title count-number" data-to="" data-speed="1500"> <%amdc.assetsMonitoring.total_operating_hours | number:0%></h2>
                  <li class="fa fa-clock-o fa-1x"></li><p class="count-text ">Operating Hours</p>
               </div>
               <div class="counter col_fourth col-sm-2">
-                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_distance_travelled%></h2>
+                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_distance_travelled | number:0%></h2>
                 <li class="fa fa-road fa-1x"></li><p class="count-text ">Kilometers Traveled</p>
               </div>
               <div class="counter col_fourth col-sm-2">
-                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_diesel_consumption%></h2>
+                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_diesel_consumption | number:0%></h2>
                 <li class="fa fa-database fa-1x"></li><p class="count-text ">Diesel (L) Consumed</p>
               </div>
               <div class="counter col_fourth col-sm-2">
-                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_oil_consumption%></h2>
+                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_oil_consumption | number:0%></h2>
                 <li class="fa fa-bullseye fa-1x"></li><p class="count-text ">Oil (L) Consumed</p>
               </div>
               <div class="counter col_fourth col-sm-2">
-                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_gas_consumption%></h2>
+                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_gas_consumption | number:0%></h2>
                 <li class="fa fa-bullseye fa-1x"></li><p class="count-text ">Gas (L) Consumed</p>
               </div>
               <div class="counter col_fourth end col-sm-2">
-                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_number_loads%></h2>
+                <h2 class="timer count-title count-number" data-to="" data-speed="1500"><%amdc.assetsMonitoring.total_number_loads | number:0%></h2>
                 <li class="fa fa-truck fa-1x"></li><p class="count-text ">Loads (m3)</p>
               </div>
           </div>

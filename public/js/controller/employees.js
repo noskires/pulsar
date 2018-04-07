@@ -86,7 +86,7 @@
             }, function (){ alert('Bad Request!!!') })
 
             vm.submit = function(data){
-                // console.log(data);
+                console.log(data);
                 EmployeesSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);

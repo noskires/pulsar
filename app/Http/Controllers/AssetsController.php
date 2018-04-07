@@ -41,6 +41,7 @@ class AssetsController extends Controller {
                 DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
                 'a.asset_id',
                 'a.tag', 
+                'a.code', 
                 'a.name',
                 'a.category',
                 'a.model',

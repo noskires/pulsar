@@ -27,7 +27,7 @@ class ProvincesController extends Controller {
         $provinces = $provinces->where('region_code', $data['region_code']);
       }
 
-    	$provinces = $provinces->get();
+    	$provinces = $provinces->orderBy('province_text', 'asc')->get();
 
       return response()-> json([
           'status'=>200,

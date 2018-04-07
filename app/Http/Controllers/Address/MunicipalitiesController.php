@@ -27,7 +27,7 @@ class MunicipalitiesController extends Controller {
         $municipalities = $municipalities->where('province_code', $data['province_code']);
       }
       
-    	$municipalities = $municipalities->get();
+    	$municipalities = $municipalities->orderBy('municipality_text', 'asc')->get();
 
       return response()-> json([
           'status'=>200,

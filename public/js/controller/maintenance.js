@@ -15,7 +15,7 @@
             // alert('this is main controller')
             
             vm.newOperation =  function(data){
-                // console.log(data);
+                console.log(data);
                 MaintenanceSrvcs.saveOperation(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
