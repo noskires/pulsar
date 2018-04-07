@@ -1,0 +1,2435 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 07, 2018 at 06:44 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.0.24
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `pulsar`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assets`
+--
+
+CREATE TABLE `assets` (
+  `asset_id` int(11) NOT NULL,
+  `code` varchar(20) NOT NULL,
+  `tag` varchar(20) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `model` varchar(50) NOT NULL,
+  `brand` varchar(50) DEFAULT NULL,
+  `date_acquired` date NOT NULL,
+  `acquisition_cost` int(10) NOT NULL,
+  `plate_no` varchar(10) DEFAULT NULL,
+  `engine_no` varchar(30) DEFAULT NULL,
+  `assign_to` varchar(100) DEFAULT NULL,
+  `fund_source` int(10) DEFAULT NULL,
+  `cost_center` varchar(10) DEFAULT NULL,
+  `depreciable_cost` int(11) DEFAULT NULL,
+  `salvage_value` int(11) DEFAULT NULL,
+  `method_id` int(3) DEFAULT NULL,
+  `project_code` varchar(30) DEFAULT NULL,
+  `status` varchar(20) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assets`
+--
+
+INSERT INTO `assets` (`asset_id`, `code`, `tag`, `category`, `name`, `description`, `model`, `brand`, `date_acquired`, `acquisition_cost`, `plate_no`, `engine_no`, `assign_to`, `fund_source`, `cost_center`, `depreciable_cost`, `salvage_value`, `method_id`, `project_code`, `status`, `updated_at`, `created_at`) VALUES
+(14, 'DT-1', 'CONE-20120207-DT-1', 'CONE', 'DUMP TRUCK', '24 cubic meter', 'CXZ19J-3005460', 'ISUZU', '2012-02-07', 3000000, 'RGR-254', '10PC1-970126', '3', 1, 'CC0001', 12434, 121323, 1, 'PRO-20180406-0002', 'Active', '2018-04-07 22:09:30', '2018-04-07 22:09:30'),
+(15, 'DT-2', 'CONE-20130610-DT-2', 'CONE', 'DUMP TRUCK', '24 cubic meter', 'LZZ5ELSD8CN682769', 'SINOTRUCK', '2013-06-10', 4000000, 'UWI-130', 'WD61547120707019637', '2', 1, 'CC0001', 123, 2323, 1, 'PRO-20180406-0002', 'Active', '2018-04-07 22:13:25', '2018-04-07 22:13:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `asset_categories`
+--
+
+CREATE TABLE `asset_categories` (
+  `asset_category_id` int(11) NOT NULL,
+  `asset_code` varchar(10) NOT NULL,
+  `asset_category` varchar(20) NOT NULL,
+  `asset_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `asset_categories`
+--
+
+INSERT INTO `asset_categories` (`asset_category_id`, `asset_code`, `asset_category`, `asset_name`) VALUES
+(1, 'BC', 'Asset', 'Building Construction'),
+(2, 'BLI', 'Asset', 'Building Leasehold Improvements'),
+(3, 'COME', 'Asset', 'Communication Equipment'),
+(4, 'CONE', 'Asset', 'Construction Equipment'),
+(5, 'FF', 'Asset', 'Furniture and Fixtures'),
+(6, 'ITE', 'Asset', 'IT Equipment and Software'),
+(7, 'LB', 'Asset', 'Library Books'),
+(8, 'MV', 'Asset', 'Motor Vehicle'),
+(9, 'OE', 'Asset', 'Office Equipment'),
+(10, 'CS', 'Supplies', 'Construction Supplies'),
+(11, 'ITS', 'Supplies', 'IT Supplies'),
+(12, 'RMCOM', 'Supplies', 'Repairs and Maintenance-Communication Equipment'),
+(13, 'RMCON', 'Supplies', 'Repairs and Maintenance - Construction Equipment'),
+(14, 'RMITE', 'Supplies', 'Repairs and Maintenance - IT Equipment'),
+(15, 'RMOE', 'Supplies', 'Repairs and Maintenance-Office Equipment'),
+(16, 'ROS', 'Supplies', 'Regular Office Supplies');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `employee_id` int(11) NOT NULL,
+  `employee_code` varchar(20) NOT NULL,
+  `lname` varchar(30) NOT NULL,
+  `affix` varchar(5) DEFAULT NULL,
+  `fname` varchar(30) NOT NULL,
+  `mname` varchar(30) NOT NULL,
+  `position_code` varchar(50) NOT NULL,
+  `birthdate` date NOT NULL,
+  `email_account` varchar(50) NOT NULL,
+  `phone_number` varchar(14) NOT NULL,
+  `department` varchar(100) NOT NULL,
+  `division` varchar(100) NOT NULL,
+  `unit` varchar(100) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `employee_code`, `lname`, `affix`, `fname`, `mname`, `position_code`, `birthdate`, `email_account`, `phone_number`, `department`, `division`, `unit`, `created_at`, `updated_at`) VALUES
+(1, '', 'Supnet', '', 'Erikson', 'Bosi', 'POS-001', '0000-00-00', '', '0', '', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, '', 'Caparas', '', 'Mykee', 'Pogi', 'POS-001', '0000-00-00', '', '0', '', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, '', 'Bulan', '', 'Jay', 'Gwapings', 'POS-002', '0000-00-00', '', '0', '', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, '', 'Caps', '', 'Mykel Dordan', 'Simon', 'POS-002', '0000-00-00', '', '0', '', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, '001', 'kap', 's', 'asdf', 'rwer', 'POS-003', '2015-12-31', 'email', '111', '1', '1', '1', '2018-04-04 01:53:25', '2018-04-04 01:53:25'),
+(6, '001', 'Caparas', 'Jr', 'Mikel', 'Jorda', 'POS-001', '1970-01-01', 'email@gnauk.com', '1234567', '2', '2', '3', '2018-04-04 02:05:03', '2018-04-04 02:05:03'),
+(7, '12', 'Erikon', 'Srqw', 'Bo', 'Di', 'POS-001', '1970-01-01', 'ebsupnet@gerik.com', '890', '1', '1', '1', '2018-04-04 02:50:14', '2018-04-04 02:50:14'),
+(8, '009', 'Hey', 'a', 'Man', 'Ma', 'POS-002', '1970-01-01', 'rwer@gmail.com', '12', '1', '1', '1', '2018-04-06 23:29:14', '2018-04-06 23:29:14'),
+(9, '20412504', 'BULAN', 'asd', 'JAY', 'TAGAYUN', 'POS-001', '1970-01-01', 'jaytagayunbulan@gmail.com', '09173031837', '1', '1', '1', '2018-04-07 22:38:00', '2018-04-07 22:38:00'),
+(10, '12', 'asdf', 'adsf', 'asdf', 'sadf', 'POS-002', '2017-12-31', 'ebsupnet', '121', '1', '1', '1', '2018-04-07 22:56:56', '2018-04-07 22:56:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_orders`
+--
+
+CREATE TABLE `job_orders` (
+  `job_order_id` int(11) NOT NULL,
+  `job_order_code` varchar(30) NOT NULL,
+  `job_order_date` date NOT NULL,
+  `request_purpose` varchar(100) NOT NULL,
+  `asset_tag` varchar(30) NOT NULL,
+  `particulars` text,
+  `date_started` date DEFAULT NULL,
+  `date_completed` date DEFAULT NULL,
+  `work_duration` int(11) DEFAULT NULL,
+  `conducted_by` int(10) DEFAULT NULL,
+  `assessed_by` varchar(100) DEFAULT NULL,
+  `date_assessed` date DEFAULT NULL,
+  `approved_by` varchar(100) DEFAULT NULL,
+  `date_approved` date DEFAULT NULL,
+  `inspected_by` varchar(100) DEFAULT NULL,
+  `date_inspected` date DEFAULT NULL,
+  `tested_by` varchar(100) DEFAULT NULL,
+  `accepted_by` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `log_id` int(11) NOT NULL,
+  `log_code` varchar(20) NOT NULL,
+  `log_desc` varchar(100) NOT NULL,
+  `user_id` varchar(10) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `logs`
+--
+
+INSERT INTO `logs` (`log_id`, `log_code`, `log_desc`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, '1', 'Added new asset', '4', '2018-03-31 12:03:59', '2018-03-31 12:03:59'),
+(2, '2', 'Added new asset', '4', '2018-03-31 12:05:01', '2018-03-31 12:05:01'),
+(3, '3', 'Added new asset', '4', '2018-03-31 12:06:15', '2018-03-31 12:06:15'),
+(4, '4', 'Added new asset', '4', '2018-03-31 12:07:55', '2018-03-31 12:07:55'),
+(5, '5', 'Added new asset', '4', '2018-03-31 13:35:50', '2018-03-31 13:35:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `methods`
+--
+
+CREATE TABLE `methods` (
+  `method_id` int(3) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `methods`
+--
+
+INSERT INTO `methods` (`method_id`, `name`) VALUES
+(1, 'Double Declining Balance'),
+(2, '150% Declining Balance'),
+(3, 'Sum of the Year\'s Digits');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `municipalities`
+--
+
+CREATE TABLE `municipalities` (
+  `municipality_id` int(11) NOT NULL,
+  `province_code` varchar(4) NOT NULL,
+  `municipality_code` varchar(10) NOT NULL,
+  `municipality_text` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `municipalities`
+--
+
+INSERT INTO `municipalities` (`municipality_id`, `province_code`, `municipality_code`, `municipality_text`) VALUES
+(1, '1701', '1717010001', 'MANILA\r'),
+(2, '1701', '1717010002', 'CITY OF MAKATI\r'),
+(3, '1701', '1717010003', 'CITY OF MUNTINLUPA\r'),
+(4, '1701', '1717010004', 'CITY OF PARAÑAQUE\r'),
+(5, '1701', '1717010005', 'PASAY CITY\r'),
+(6, '1701', '1717010006', 'PATEROS\r'),
+(7, '1701', '1717010007', 'TAGUIG CITY\r'),
+(8, '1701', '1717010008', 'CITY OF MARIKINA\r'),
+(9, '1701', '1717010009', 'CITY OF PASIG\r'),
+(10, '1701', '1717010010', 'QUEZON CITY\r'),
+(11, '1701', '1717010011', 'CITY OF SAN JUAN\r'),
+(12, '1701', '1717010012', 'CITY OF MALABON\r'),
+(13, '1701', '1717010013', 'CITY OF NAVOTAS\r'),
+(14, '1701', '1717010014', 'CITY OF VALENZUELA\r'),
+(15, '1701', '1717010015', 'CITY OF LAS PIÑAS\r'),
+(16, '1701', '1717010016', 'CITY OF MANDALUYONG\r'),
+(17, '1701', '1717010017', 'CALOOCAN CITY\r'),
+(18, '1601', '1616010001', 'BOLINEY\r'),
+(19, '1601', '1616010002', 'BUCAY\r'),
+(20, '1601', '1616010003', 'BUCLOC\r'),
+(21, '1601', '1616010004', 'DAGUIOMAN\r'),
+(22, '1601', '1616010005', 'DANGLAS\r'),
+(23, '1601', '1616010006', 'DOLORES\r'),
+(24, '1601', '1616010007', 'LA PAZ\r'),
+(25, '1601', '1616010008', 'LACUB\r'),
+(26, '1601', '1616010009', 'LAGANGILANG\r'),
+(27, '1601', '1616010010', 'LAGAYAN\r'),
+(28, '1601', '1616010011', 'LANGIDEN\r'),
+(29, '1601', '1616010012', 'LICUAN-BAAY (LICUAN)\r'),
+(30, '1601', '1616010013', 'LUBA\r'),
+(31, '1601', '1616010014', 'MALIBCONG\r'),
+(32, '1601', '1616010015', 'MANABO\r'),
+(33, '1601', '1616010016', 'PEÑARRUBIA\r'),
+(34, '1601', '1616010017', 'PIDIGAN\r'),
+(35, '1601', '1616010018', 'PILAR\r'),
+(36, '1601', '1616010019', 'SALLAPADAN\r'),
+(37, '1601', '1616010020', 'SAN ISIDRO\r'),
+(38, '1601', '1616010021', 'SAN JUAN\r'),
+(39, '1601', '1616010022', 'SAN QUINTIN\r'),
+(40, '1601', '1616010023', 'TAYUM\r'),
+(41, '1601', '1616010024', 'TINEG\r'),
+(42, '1601', '1616010025', 'TUBO\r'),
+(43, '1601', '1616010026', 'VILLAVICIOSA\r'),
+(44, '1602', '1616020001', 'CONNER\r'),
+(45, '1602', '1616020002', 'FLORA\r'),
+(46, '1602', '1616020003', 'KABUGAO (Capital)\r'),
+(47, '1602', '1616020004', 'LUNA\r'),
+(48, '1602', '1616020005', 'PUDTOL\r'),
+(49, '1602', '1616020006', 'SANTA MARCELA\r'),
+(50, '1603', '1616030001', 'BAGUIO CITY\r'),
+(51, '1603', '1616030002', 'BAKUN\r'),
+(52, '1603', '1616030003', 'BOKOD\r'),
+(53, '1603', '1616030004', 'BUGUIAS\r'),
+(54, '1603', '1616030005', 'ITOGON\r'),
+(55, '1603', '1616030006', 'KABAYAN\r'),
+(56, '1603', '1616030007', 'KAPANGAN\r'),
+(57, '1603', '1616030008', 'KIBUNGAN\r'),
+(58, '1603', '1616030009', 'LA TRINIDAD (Capital)\r'),
+(59, '1603', '1616030010', 'MANKAYAN\r'),
+(60, '1603', '1616030011', 'SABLAN\r'),
+(61, '1603', '1616030012', 'TUBA\r'),
+(62, '1603', '1616030013', 'TUBLAY\r'),
+(63, '1604', '1616040001', 'HUNGDUAN\r'),
+(64, '1604', '1616040002', 'KIANGAN\r'),
+(65, '1604', '1616040003', 'LAGAWE (Capital)\r'),
+(66, '1604', '1616040004', 'LAMUT\r'),
+(67, '1604', '1616040005', 'MAYOYAO\r'),
+(68, '1604', '1616040006', 'ALFONSO LISTA (POTIA)\r'),
+(69, '1604', '1616040007', 'AGUINALDO\r'),
+(70, '1604', '1616040008', 'HINGYON\r'),
+(71, '1604', '1616040009', 'TINOC\r'),
+(72, '1604', '1616040010', 'ASIPULO\r'),
+(73, '1605', '1616050001', 'LUBUAGAN\r'),
+(74, '1605', '1616050002', 'PASIL\r'),
+(75, '1605', '1616050003', 'PINUKPUK\r'),
+(76, '1605', '1616050004', 'RIZAL (LIWAN)\r'),
+(77, '1605', '1616050005', 'CITY OF TABUK (Capital)\r'),
+(78, '1605', '1616050006', 'TANUDAN\r'),
+(79, '1605', '1616050007', 'TINGLAYAN\r'),
+(80, '1606', '1616060001', 'BAUKO\r'),
+(81, '1606', '1616060002', 'BESAO\r'),
+(82, '1606', '1616060003', 'BONTOC (Capital)\r'),
+(83, '1606', '1616060004', 'NATONIN\r'),
+(84, '1606', '1616060005', 'PARACELIS\r'),
+(85, '1606', '1616060006', 'SABANGAN\r'),
+(86, '1606', '1616060007', 'SADANGA\r'),
+(87, '1606', '1616060008', 'SAGADA\r'),
+(88, '1606', '1616060009', 'TADIAN\r'),
+(89, '1601', '1616010001', 'BANGUED (Capital)\r'),
+(90, '1602', '1616020001', 'CALANASAN (BAYAG)\r'),
+(91, '1603', '1616030001', 'ATOK\r'),
+(92, '1604', '1616040001', 'BANAUE\r'),
+(93, '1605', '1616050001', 'BALBALAN\r'),
+(94, '1606', '1616060001', 'BARLIG\r'),
+(95, '0101', '0101010001', 'BACARRA\r'),
+(96, '0101', '0101010002', 'BADOC\r'),
+(97, '0101', '0101010003', 'BANGUI\r'),
+(98, '0101', '0101010004', 'CITY OF BATAC\r'),
+(99, '0101', '0101010005', 'BURGOS\r'),
+(100, '0101', '0101010006', 'CARASI\r'),
+(101, '0101', '0101010007', 'CURRIMAO\r'),
+(102, '0101', '0101010008', 'DINGRAS\r'),
+(103, '0101', '0101010009', 'DUMALNEG\r'),
+(104, '0101', '0101010010', 'BANNA (ESPIRITU)\r'),
+(105, '0101', '0101010011', 'LAOAG CITY (Capital)\r'),
+(106, '0101', '0101010012', 'MARCOS\r'),
+(107, '0101', '0101010013', 'NUEVA ERA\r'),
+(108, '0101', '0101010014', 'PAGUDPUD\r'),
+(109, '0101', '0101010015', 'PAOAY\r'),
+(110, '0101', '0101010016', 'PASUQUIN\r'),
+(111, '0101', '0101010017', 'PIDDIG\r'),
+(112, '0101', '0101010018', 'PINILI\r'),
+(113, '0101', '0101010019', 'SAN NICOLAS\r'),
+(114, '0101', '0101010020', 'SARRAT\r'),
+(115, '0101', '0101010021', 'SOLSONA\r'),
+(116, '0101', '0101010022', 'VINTAR\r'),
+(117, '0102', '0101020001', 'BANAYOYO\r'),
+(118, '0102', '0101020002', 'BANTAY\r'),
+(119, '0102', '0101020003', 'BURGOS\r'),
+(120, '0102', '0101020004', 'CABUGAO\r'),
+(121, '0102', '0101020005', 'CITY OF CANDON\r'),
+(122, '0102', '0101020006', 'CAOAYAN\r'),
+(123, '0102', '0101020007', 'CERVANTES\r'),
+(124, '0102', '0101020008', 'GALIMUYOD\r'),
+(125, '0102', '0101020009', 'GREGORIO DEL PILAR (CONCEPCION)\r'),
+(126, '0102', '0101020010', 'LIDLIDDA\r'),
+(127, '0102', '0101020011', 'MAGSINGAL\r'),
+(128, '0102', '0101020012', 'NAGBUKEL\r'),
+(129, '0102', '0101020013', 'NARVACAN\r'),
+(130, '0102', '0101020014', 'QUIRINO (ANGKAKI)\r'),
+(131, '0102', '0101020015', 'SALCEDO (BAUGEN)\r'),
+(132, '0102', '0101020016', 'SAN EMILIO\r'),
+(133, '0102', '0101020017', 'SAN ESTEBAN\r'),
+(134, '0102', '0101020018', 'SAN ILDEFONSO\r'),
+(135, '0102', '0101020019', 'SAN JUAN (LAPOG)\r'),
+(136, '0102', '0101020020', 'SAN VICENTE\r'),
+(137, '0102', '0101020021', 'SANTA\r'),
+(138, '0102', '0101020022', 'SANTA CATALINA\r'),
+(139, '0102', '0101020023', 'SANTA CRUZ\r'),
+(140, '0102', '0101020024', 'SANTA LUCIA\r'),
+(141, '0102', '0101020025', 'SANTA MARIA\r'),
+(142, '0102', '0101020026', 'SANTIAGO\r'),
+(143, '0102', '0101020027', 'SANTO DOMINGO\r'),
+(144, '0102', '0101020028', 'SIGAY\r'),
+(145, '0102', '0101020029', 'SINAIT\r'),
+(146, '0102', '0101020030', 'SUGPON\r'),
+(147, '0102', '0101020031', 'SUYO\r'),
+(148, '0102', '0101020032', 'TAGUDIN\r'),
+(149, '0102', '0101020033', 'CITY OF VIGAN (Capital)\r'),
+(150, '0103', '0101030001', 'ARINGAY\r'),
+(151, '0103', '0101030002', 'BACNOTAN\r'),
+(152, '0103', '0101030003', 'BAGULIN\r'),
+(153, '0103', '0101030004', 'BALAOAN\r'),
+(154, '0103', '0101030005', 'BANGAR\r'),
+(155, '0103', '0101030006', 'BAUANG\r'),
+(156, '0103', '0101030007', 'BURGOS\r'),
+(157, '0103', '0101030008', 'CABA\r'),
+(158, '0103', '0101030009', 'LUNA\r'),
+(159, '0103', '0101030010', 'NAGUILIAN\r'),
+(160, '0103', '0101030011', 'PUGO\r'),
+(161, '0103', '0101030012', 'ROSARIO\r'),
+(162, '0103', '0101030013', 'CITY OF SAN FERNANDO (Capital)\r'),
+(163, '0103', '0101030014', 'SAN GABRIEL\r'),
+(164, '0103', '0101030015', 'SAN JUAN\r'),
+(165, '0103', '0101030016', 'SANTO TOMAS\r'),
+(166, '0103', '0101030017', 'SANTOL\r'),
+(167, '0103', '0101030018', 'SUDIPEN\r'),
+(168, '0103', '0101030019', 'TUBAO\r'),
+(169, '0104', '0101040001', 'AGUILAR\r'),
+(170, '0104', '0101040002', 'CITY OF ALAMINOS\r'),
+(171, '0104', '0101040003', 'ALCALA\r'),
+(172, '0104', '0101040004', 'ANDA\r'),
+(173, '0104', '0101040005', 'ASINGAN\r'),
+(174, '0104', '0101040006', 'BALUNGAO\r'),
+(175, '0104', '0101040007', 'BANI\r'),
+(176, '0104', '0101040008', 'BASISTA\r'),
+(177, '0104', '0101040009', 'BAUTISTA\r'),
+(178, '0104', '0101040010', 'BAYAMBANG\r'),
+(179, '0104', '0101040011', 'BINALONAN\r'),
+(180, '0104', '0101040012', 'BINMALEY\r'),
+(181, '0104', '0101040013', 'BOLINAO\r'),
+(182, '0104', '0101040014', 'BUGALLON\r'),
+(183, '0104', '0101040015', 'BURGOS\r'),
+(184, '0104', '0101040016', 'CALASIAO\r'),
+(185, '0104', '0101040017', 'DAGUPAN CITY\r'),
+(186, '0104', '0101040018', 'DASOL\r'),
+(187, '0104', '0101040019', 'INFANTA\r'),
+(188, '0104', '0101040020', 'LABRADOR\r'),
+(189, '0104', '0101040021', 'LINGAYEN (Capital)\r'),
+(190, '0104', '0101040022', 'MABINI\r'),
+(191, '0104', '0101040023', 'MALASIQUI\r'),
+(192, '0104', '0101040024', 'MANAOAG\r'),
+(193, '0104', '0101040025', 'MANGALDAN\r'),
+(194, '0104', '0101040026', 'MANGATAREM\r'),
+(195, '0104', '0101040027', 'MAPANDAN\r'),
+(196, '0104', '0101040028', 'NATIVIDAD\r'),
+(197, '0104', '0101040029', 'POZORRUBIO\r'),
+(198, '0104', '0101040030', 'ROSALES\r'),
+(199, '0104', '0101040031', 'SAN CARLOS CITY\r'),
+(200, '0104', '0101040032', 'SAN FABIAN\r'),
+(201, '0104', '0101040033', 'SAN JACINTO\r'),
+(202, '0104', '0101040034', 'SAN MANUEL\r'),
+(203, '0104', '0101040035', 'SAN NICOLAS\r'),
+(204, '0104', '0101040036', 'SAN QUINTIN\r'),
+(205, '0104', '0101040037', 'SANTA BARBARA\r'),
+(206, '0104', '0101040038', 'SANTA MARIA\r'),
+(207, '0104', '0101040039', 'SANTO TOMAS\r'),
+(208, '0104', '0101040040', 'SISON\r'),
+(209, '0104', '0101040041', 'SUAL\r'),
+(210, '0104', '0101040042', 'TAYUG\r'),
+(211, '0104', '0101040043', 'UMINGAN\r'),
+(212, '0104', '0101040044', 'URBIZTONDO\r'),
+(213, '0104', '0101040045', 'CITY OF URDANETA\r'),
+(214, '0104', '0101040046', 'VILLASIS\r'),
+(215, '0104', '0101040047', 'LAOAC\r'),
+(216, '0101', '0101010001', 'ADAMS\r'),
+(217, '0102', '0101020001', 'ALILEM\r'),
+(218, '0103', '0101030001', 'AGOO\r'),
+(219, '0104', '0101040001', 'AGNO\r'),
+(220, '0201', '0202010001', 'ITBAYAT\r'),
+(221, '0201', '0202010002', 'IVANA\r'),
+(222, '0201', '0202010003', 'MAHATAO\r'),
+(223, '0201', '0202010004', 'SABTANG\r'),
+(224, '0201', '0202010005', 'UYUGAN\r'),
+(225, '0202', '0202020001', 'ALCALA\r'),
+(226, '0202', '0202020002', 'ALLACAPAN\r'),
+(227, '0202', '0202020003', 'AMULUNG\r'),
+(228, '0202', '0202020004', 'APARRI\r'),
+(229, '0202', '0202020005', 'BAGGAO\r'),
+(230, '0202', '0202020006', 'BALLESTEROS\r'),
+(231, '0202', '0202020007', 'BUGUEY\r'),
+(232, '0202', '0202020008', 'CALAYAN\r'),
+(233, '0202', '0202020009', 'CAMALANIUGAN\r'),
+(234, '0202', '0202020010', 'CLAVERIA\r'),
+(235, '0202', '0202020011', 'ENRILE\r'),
+(236, '0202', '0202020012', 'GATTARAN\r'),
+(237, '0202', '0202020013', 'GONZAGA\r'),
+(238, '0202', '0202020014', 'IGUIG\r'),
+(239, '0202', '0202020015', 'LAL-LO\r'),
+(240, '0202', '0202020016', 'LASAM\r'),
+(241, '0202', '0202020017', 'PAMPLONA\r'),
+(242, '0202', '0202020018', 'PEÑABLANCA\r'),
+(243, '0202', '0202020019', 'PIAT\r'),
+(244, '0202', '0202020020', 'RIZAL\r'),
+(245, '0202', '0202020021', 'SANCHEZ-MIRA\r'),
+(246, '0202', '0202020022', 'SANTA ANA\r'),
+(247, '0202', '0202020023', 'SANTA PRAXEDES\r'),
+(248, '0202', '0202020024', 'SANTA TERESITA\r'),
+(249, '0202', '0202020025', 'SANTO NIÑO (FAIRE)\r'),
+(250, '0202', '0202020026', 'SOLANA\r'),
+(251, '0202', '0202020027', 'TUAO\r'),
+(252, '0202', '0202020028', 'TUGUEGARAO CITY (Capital)\r'),
+(253, '0203', '0202030001', 'ANGADANAN\r'),
+(254, '0203', '0202030002', 'AURORA\r'),
+(255, '0203', '0202030003', 'BENITO SOLIVEN\r'),
+(256, '0203', '0202030004', 'BURGOS\r'),
+(257, '0203', '0202030005', 'CABAGAN\r'),
+(258, '0203', '0202030006', 'CABATUAN\r'),
+(259, '0203', '0202030007', 'CITY OF CAUAYAN\r'),
+(260, '0203', '0202030008', 'CORDON\r'),
+(261, '0203', '0202030009', 'DINAPIGUE\r'),
+(262, '0203', '0202030010', 'DIVILACAN\r'),
+(263, '0203', '0202030011', 'ECHAGUE\r'),
+(264, '0203', '0202030012', 'GAMU\r'),
+(265, '0203', '0202030013', 'ILAGAN (Capital)\r'),
+(266, '0203', '0202030014', 'JONES\r'),
+(267, '0203', '0202030015', 'LUNA\r'),
+(268, '0203', '0202030016', 'MACONACON\r'),
+(269, '0203', '0202030017', 'DELFIN ALBANO (MAGSAYSAY)\r'),
+(270, '0203', '0202030018', 'MALLIG\r'),
+(271, '0203', '0202030019', 'NAGUILIAN\r'),
+(272, '0203', '0202030020', 'PALANAN\r'),
+(273, '0203', '0202030021', 'QUEZON\r'),
+(274, '0203', '0202030022', 'QUIRINO\r'),
+(275, '0203', '0202030023', 'RAMON\r'),
+(276, '0203', '0202030024', 'REINA MERCEDES\r'),
+(277, '0203', '0202030025', 'ROXAS\r'),
+(278, '0203', '0202030026', 'SAN AGUSTIN\r'),
+(279, '0203', '0202030027', 'SAN GUILLERMO\r'),
+(280, '0203', '0202030028', 'SAN ISIDRO\r'),
+(281, '0203', '0202030029', 'SAN MANUEL\r'),
+(282, '0203', '0202030030', 'SAN MARIANO\r'),
+(283, '0203', '0202030031', 'SAN MATEO\r'),
+(284, '0203', '0202030032', 'SAN PABLO\r'),
+(285, '0203', '0202030033', 'SANTA MARIA\r'),
+(286, '0203', '0202030034', 'CITY OF SANTIAGO\r'),
+(287, '0203', '0202030035', 'SANTO TOMAS\r'),
+(288, '0203', '0202030036', 'TUMAUINI\r'),
+(289, '0204', '0202040001', 'ARITAO\r'),
+(290, '0204', '0202040002', 'BAGABAG\r'),
+(291, '0204', '0202040003', 'BAMBANG\r'),
+(292, '0204', '0202040004', 'BAYOMBONG (Capital)\r'),
+(293, '0204', '0202040005', 'DIADI\r'),
+(294, '0204', '0202040006', 'DUPAX DEL NORTE\r'),
+(295, '0204', '0202040007', 'DUPAX DEL SUR\r'),
+(296, '0204', '0202040008', 'KASIBU\r'),
+(297, '0204', '0202040009', 'KAYAPA\r'),
+(298, '0204', '0202040010', 'QUEZON\r'),
+(299, '0204', '0202040011', 'SANTA FE\r'),
+(300, '0204', '0202040012', 'SOLANO\r'),
+(301, '0204', '0202040013', 'VILLAVERDE\r'),
+(302, '0204', '0202040014', 'ALFONSO CASTANEDA\r'),
+(303, '0205', '0202050001', 'CABARROGUIS (Capital)\r'),
+(304, '0205', '0202050002', 'DIFFUN\r'),
+(305, '0205', '0202050003', 'MADDELA\r'),
+(306, '0205', '0202050004', 'SAGUDAY\r'),
+(307, '0205', '0202050005', 'NAGTIPUNAN\r'),
+(308, '0201', '0202010001', 'BASCO (Capital)\r'),
+(309, '0202', '0202020001', 'ABULUG\r'),
+(310, '0203', '0202030001', 'ALICIA\r'),
+(311, '0204', '0202040001', 'AMBAGUIO\r'),
+(312, '0205', '0202050001', 'AGLIPAY\r'),
+(313, '0301', '0303010001', 'CASIGURAN\r'),
+(314, '0301', '0303010002', 'DILASAG\r'),
+(315, '0301', '0303010003', 'DINALUNGAN\r'),
+(316, '0301', '0303010004', 'DINGALAN\r'),
+(317, '0301', '0303010005', 'DIPACULAO\r'),
+(318, '0301', '0303010006', 'MARIA AURORA\r'),
+(319, '0301', '0303010007', 'SAN LUIS\r'),
+(320, '0302', '0303020001', 'BAGAC\r'),
+(321, '0302', '0303020002', 'CITY OF BALANGA (Capital)\r'),
+(322, '0302', '0303020003', 'DINALUPIHAN\r'),
+(323, '0302', '0303020004', 'HERMOSA\r'),
+(324, '0302', '0303020005', 'LIMAY\r'),
+(325, '0302', '0303020006', 'MARIVELES\r'),
+(326, '0302', '0303020007', 'MORONG\r'),
+(327, '0302', '0303020008', 'ORANI\r'),
+(328, '0302', '0303020009', 'ORION\r'),
+(329, '0302', '0303020010', 'PILAR\r'),
+(330, '0302', '0303020011', 'SAMAL\r'),
+(331, '0303', '0303030001', 'BALAGTAS (BIGAA)\r'),
+(332, '0303', '0303030002', 'BALIUAG\r'),
+(333, '0303', '0303030003', 'BOCAUE\r'),
+(334, '0303', '0303030004', 'BULACAN\r'),
+(335, '0303', '0303030005', 'BUSTOS\r'),
+(336, '0303', '0303030006', 'CALUMPIT\r'),
+(337, '0303', '0303030007', 'GUIGUINTO\r'),
+(338, '0303', '0303030008', 'HAGONOY\r'),
+(339, '0303', '0303030009', 'CITY OF MALOLOS (Capital)\r'),
+(340, '0303', '0303030010', 'MARILAO\r'),
+(341, '0303', '0303030011', 'CITY OF MEYCAUAYAN\r'),
+(342, '0303', '0303030012', 'NORZAGARAY\r'),
+(343, '0303', '0303030013', 'OBANDO\r'),
+(344, '0303', '0303030014', 'PANDI\r'),
+(345, '0303', '0303030015', 'PAOMBONG\r'),
+(346, '0303', '0303030016', 'PLARIDEL\r'),
+(347, '0303', '0303030017', 'PULILAN\r'),
+(348, '0303', '0303030018', 'SAN ILDEFONSO\r'),
+(349, '0303', '0303030019', 'CITY OF SAN JOSE DEL MONTE\r'),
+(350, '0303', '0303030020', 'SAN MIGUEL\r'),
+(351, '0303', '0303030021', 'SAN RAFAEL\r'),
+(352, '0303', '0303030022', 'SANTA MARIA\r'),
+(353, '0303', '0303030023', 'DOÑA REMEDIOS TRINIDAD\r'),
+(354, '0304', '0303040001', 'BONGABON\r'),
+(355, '0304', '0303040002', 'CABANATUAN CITY\r'),
+(356, '0304', '0303040003', 'CABIAO\r'),
+(357, '0304', '0303040004', 'CARRANGLAN\r'),
+(358, '0304', '0303040005', 'CUYAPO\r'),
+(359, '0304', '0303040006', 'GABALDON (BITULOK & SABANI)\r'),
+(360, '0304', '0303040007', 'CITY OF GAPAN\r'),
+(361, '0304', '0303040008', 'GENERAL MAMERTO NATIVIDAD\r'),
+(362, '0304', '0303040009', 'GENERAL TINIO (PAPAYA)\r'),
+(363, '0304', '0303040010', 'GUIMBA\r'),
+(364, '0304', '0303040011', 'JAEN\r'),
+(365, '0304', '0303040012', 'LAUR\r'),
+(366, '0304', '0303040013', 'LICAB\r'),
+(367, '0304', '0303040014', 'LLANERA\r'),
+(368, '0304', '0303040015', 'LUPAO\r'),
+(369, '0304', '0303040016', 'SCIENCE CITY OF MUÑOZ\r'),
+(370, '0304', '0303040017', 'NAMPICUAN\r'),
+(371, '0304', '0303040018', 'PALAYAN CITY (Capital)\r'),
+(372, '0304', '0303040019', 'PANTABANGAN\r'),
+(373, '0304', '0303040020', 'PEÑARANDA\r'),
+(374, '0304', '0303040021', 'QUEZON\r'),
+(375, '0304', '0303040022', 'RIZAL\r'),
+(376, '0304', '0303040023', 'SAN ANTONIO\r'),
+(377, '0304', '0303040024', 'SAN ISIDRO\r'),
+(378, '0304', '0303040025', 'SAN JOSE CITY\r'),
+(379, '0304', '0303040026', 'SAN LEONARDO\r'),
+(380, '0304', '0303040027', 'SANTA ROSA\r'),
+(381, '0304', '0303040028', 'SANTO DOMINGO\r'),
+(382, '0304', '0303040029', 'TALAVERA\r'),
+(383, '0304', '0303040030', 'TALUGTUG\r'),
+(384, '0304', '0303040031', 'ZARAGOZA\r'),
+(385, '0305', '0303050001', 'APALIT\r'),
+(386, '0305', '0303050002', 'ARAYAT\r'),
+(387, '0305', '0303050003', 'BACOLOR\r'),
+(388, '0305', '0303050004', 'CANDABA\r'),
+(389, '0305', '0303050005', 'FLORIDABLANCA\r'),
+(390, '0305', '0303050006', 'GUAGUA\r'),
+(391, '0305', '0303050007', 'LUBAO\r'),
+(392, '0305', '0303050008', 'MABALACAT\r'),
+(393, '0305', '0303050009', 'MACABEBE\r'),
+(394, '0305', '0303050010', 'MAGALANG\r'),
+(395, '0305', '0303050011', 'MASANTOL\r'),
+(396, '0305', '0303050012', 'MEXICO\r'),
+(397, '0305', '0303050013', 'MINALIN\r'),
+(398, '0305', '0303050014', 'PORAC\r'),
+(399, '0305', '0303050015', 'CITY OF SAN FERNANDO (Capital)\r'),
+(400, '0305', '0303050016', 'SAN LUIS\r'),
+(401, '0305', '0303050017', 'SAN SIMON\r'),
+(402, '0305', '0303050018', 'SANTA ANA\r'),
+(403, '0305', '0303050019', 'SANTA RITA\r'),
+(404, '0305', '0303050020', 'SANTO TOMAS\r'),
+(405, '0305', '0303050021', 'SASMUAN (Sexmoan)\r'),
+(406, '0306', '0303060001', 'BAMBAN\r'),
+(407, '0306', '0303060002', 'CAMILING\r'),
+(408, '0306', '0303060003', 'CAPAS\r'),
+(409, '0306', '0303060004', 'CONCEPCION\r'),
+(410, '0306', '0303060005', 'GERONA\r'),
+(411, '0306', '0303060006', 'LA PAZ\r'),
+(412, '0306', '0303060007', 'MAYANTOC\r'),
+(413, '0306', '0303060008', 'MONCADA\r'),
+(414, '0306', '0303060009', 'PANIQUI\r'),
+(415, '0306', '0303060010', 'PURA\r'),
+(416, '0306', '0303060011', 'RAMOS\r'),
+(417, '0306', '0303060012', 'SAN CLEMENTE\r'),
+(418, '0306', '0303060013', 'SAN MANUEL\r'),
+(419, '0306', '0303060014', 'SANTA IGNACIA\r'),
+(420, '0306', '0303060015', 'CITY OF TARLAC (Capital)\r'),
+(421, '0306', '0303060016', 'VICTORIA\r'),
+(422, '0306', '0303060017', 'SAN JOSE\r'),
+(423, '0307', '0303070001', 'CABANGAN\r'),
+(424, '0307', '0303070002', 'CANDELARIA\r'),
+(425, '0307', '0303070003', 'CASTILLEJOS\r'),
+(426, '0307', '0303070004', 'IBA (Capital)\r'),
+(427, '0307', '0303070005', 'MASINLOC\r'),
+(428, '0307', '0303070006', 'OLONGAPO CITY\r'),
+(429, '0307', '0303070007', 'PALAUIG\r'),
+(430, '0307', '0303070008', 'SAN ANTONIO\r'),
+(431, '0307', '0303070009', 'SAN FELIPE\r'),
+(432, '0307', '0303070010', 'SAN MARCELINO\r'),
+(433, '0307', '0303070011', 'SAN NARCISO\r'),
+(434, '0307', '0303070012', 'SANTA CRUZ\r'),
+(435, '0307', '0303070013', 'SUBIC\r'),
+(436, '0301', '0303010001', 'BALER (Capital)\r'),
+(437, '0302', '0303020001', 'ABUCAY\r'),
+(438, '0303', '0303030001', 'ANGAT\r'),
+(439, '0304', '0303040001', 'ALIAGA\r'),
+(440, '0305', '0303050001', 'ANGELES CITY\r'),
+(441, '0306', '0303060001', 'ANAO\r'),
+(442, '0307', '0303070001', 'BOTOLAN\r'),
+(443, '0401', '0404010001', 'ALITAGTAG\r'),
+(444, '0401', '0404010002', 'BALAYAN\r'),
+(445, '0401', '0404010003', 'BALETE\r'),
+(446, '0401', '0404010004', 'BATANGAS CITY (Capital)\r'),
+(447, '0401', '0404010005', 'BAUAN\r'),
+(448, '0401', '0404010006', 'CALACA\r'),
+(449, '0401', '0404010007', 'CALATAGAN\r'),
+(450, '0401', '0404010008', 'CUENCA\r'),
+(451, '0401', '0404010009', 'IBAAN\r'),
+(452, '0401', '0404010010', 'LAUREL\r'),
+(453, '0401', '0404010011', 'LEMERY\r'),
+(454, '0401', '0404010012', 'LIAN\r'),
+(455, '0401', '0404010013', 'LIPA CITY\r'),
+(456, '0401', '0404010014', 'LOBO\r'),
+(457, '0401', '0404010015', 'MABINI\r'),
+(458, '0401', '0404010016', 'MALVAR\r'),
+(459, '0401', '0404010017', 'MATAASNAKAHOY\r'),
+(460, '0401', '0404010018', 'NASUGBU\r'),
+(461, '0401', '0404010019', 'PADRE GARCIA\r'),
+(462, '0401', '0404010020', 'ROSARIO\r'),
+(463, '0401', '0404010021', 'SAN JOSE\r'),
+(464, '0401', '0404010022', 'SAN JUAN\r'),
+(465, '0401', '0404010023', 'SAN LUIS\r'),
+(466, '0401', '0404010024', 'SAN NICOLAS\r'),
+(467, '0401', '0404010025', 'SAN PASCUAL\r'),
+(468, '0401', '0404010026', 'SANTA TERESITA\r'),
+(469, '0401', '0404010027', 'SANTO TOMAS\r'),
+(470, '0401', '0404010028', 'TAAL\r'),
+(471, '0401', '0404010029', 'TALISAY\r'),
+(472, '0401', '0404010030', 'CITY OF TANAUAN\r'),
+(473, '0401', '0404010031', 'TAYSAN\r'),
+(474, '0401', '0404010032', 'TINGLOY\r'),
+(475, '0401', '0404010033', 'TUY\r'),
+(476, '0402', '0404020001', 'AMADEO\r'),
+(477, '0402', '0404020002', 'BACOOR\r'),
+(478, '0402', '0404020003', 'CARMONA\r'),
+(479, '0402', '0404020004', 'CAVITE CITY\r'),
+(480, '0402', '0404020005', 'CITY OF DASMARIÑAS\r'),
+(481, '0402', '0404020006', 'GENERAL EMILIO AGUINALDO\r'),
+(482, '0402', '0404020007', 'GENERAL TRIAS\r'),
+(483, '0402', '0404020008', 'IMUS\r'),
+(484, '0402', '0404020009', 'INDANG\r'),
+(485, '0402', '0404020010', 'KAWIT\r'),
+(486, '0402', '0404020011', 'MAGALLANES\r'),
+(487, '0402', '0404020012', 'MARAGONDON\r'),
+(488, '0402', '0404020013', 'MENDEZ (MENDEZ-NUÑEZ)\r'),
+(489, '0402', '0404020014', 'NAIC\r'),
+(490, '0402', '0404020015', 'NOVELETA\r'),
+(491, '0402', '0404020016', 'ROSARIO\r'),
+(492, '0402', '0404020017', 'SILANG\r'),
+(493, '0402', '0404020018', 'TAGAYTAY CITY\r'),
+(494, '0402', '0404020019', 'TANZA\r'),
+(495, '0402', '0404020020', 'TERNATE\r'),
+(496, '0402', '0404020021', 'TRECE MARTIRES CITY (Capital)\r'),
+(497, '0402', '0404020022', 'GEN. MARIANO ALVAREZ\r'),
+(498, '0403', '0404030001', 'BAY\r'),
+(499, '0403', '0404030002', 'CITY OF BIÑAN\r'),
+(500, '0403', '0404030003', 'CABUYAO\r'),
+(501, '0403', '0404030004', 'CITY OF CALAMBA\r'),
+(502, '0403', '0404030005', 'CALAUAN\r'),
+(503, '0403', '0404030006', 'CAVINTI\r'),
+(504, '0403', '0404030007', 'FAMY\r'),
+(505, '0403', '0404030008', 'KALAYAAN\r'),
+(506, '0403', '0404030009', 'LILIW\r'),
+(507, '0403', '0404030010', 'LOS BAÑOS\r'),
+(508, '0403', '0404030011', 'LUISIANA\r'),
+(509, '0403', '0404030012', 'LUMBAN\r'),
+(510, '0403', '0404030013', 'MABITAC\r'),
+(511, '0403', '0404030014', 'MAGDALENA\r'),
+(512, '0403', '0404030015', 'MAJAYJAY\r'),
+(513, '0403', '0404030016', 'NAGCARLAN\r'),
+(514, '0403', '0404030017', 'PAETE\r'),
+(515, '0403', '0404030018', 'PAGSANJAN\r'),
+(516, '0403', '0404030019', 'PAKIL\r'),
+(517, '0403', '0404030020', 'PANGIL\r'),
+(518, '0403', '0404030021', 'PILA\r'),
+(519, '0403', '0404030022', 'RIZAL\r'),
+(520, '0403', '0404030023', 'SAN PABLO CITY\r'),
+(521, '0403', '0404030024', 'SAN PEDRO\r'),
+(522, '0403', '0404030025', 'SANTA CRUZ (Capital)\r'),
+(523, '0403', '0404030026', 'SANTA MARIA\r'),
+(524, '0403', '0404030027', 'CITY OF SANTA ROSA\r'),
+(525, '0403', '0404030028', 'SINILOAN\r'),
+(526, '0403', '0404030029', 'VICTORIA\r'),
+(527, '0404', '0404040001', 'ALABAT\r'),
+(528, '0404', '0404040002', 'ATIMONAN\r'),
+(529, '0404', '0404040003', 'BUENAVISTA\r'),
+(530, '0404', '0404040004', 'BURDEOS\r'),
+(531, '0404', '0404040005', 'CALAUAG\r'),
+(532, '0404', '0404040006', 'CANDELARIA\r'),
+(533, '0404', '0404040007', 'CATANAUAN\r'),
+(534, '0404', '0404040008', 'DOLORES\r'),
+(535, '0404', '0404040009', 'GENERAL LUNA\r'),
+(536, '0404', '0404040010', 'GENERAL NAKAR\r'),
+(537, '0404', '0404040011', 'GUINAYANGAN\r'),
+(538, '0404', '0404040012', 'GUMACA\r'),
+(539, '0404', '0404040013', 'INFANTA\r'),
+(540, '0404', '0404040014', 'JOMALIG\r'),
+(541, '0404', '0404040015', 'LOPEZ\r'),
+(542, '0404', '0404040016', 'LUCBAN\r'),
+(543, '0404', '0404040017', 'LUCENA CITY (Capital)\r'),
+(544, '0404', '0404040018', 'MACALELON\r'),
+(545, '0404', '0404040019', 'MAUBAN\r'),
+(546, '0404', '0404040020', 'MULANAY\r'),
+(547, '0404', '0404040021', 'PADRE BURGOS\r'),
+(548, '0404', '0404040022', 'PAGBILAO\r'),
+(549, '0404', '0404040023', 'PANUKULAN\r'),
+(550, '0404', '0404040024', 'PATNANUNGAN\r'),
+(551, '0404', '0404040025', 'PEREZ\r'),
+(552, '0404', '0404040026', 'PITOGO\r'),
+(553, '0404', '0404040027', 'PLARIDEL\r'),
+(554, '0404', '0404040028', 'POLILLO\r'),
+(555, '0404', '0404040029', 'QUEZON\r'),
+(556, '0404', '0404040030', 'REAL\r'),
+(557, '0404', '0404040031', 'SAMPALOC\r'),
+(558, '0404', '0404040032', 'SAN ANDRES\r'),
+(559, '0404', '0404040033', 'SAN ANTONIO\r'),
+(560, '0404', '0404040034', 'SAN FRANCISCO (AURORA)\r'),
+(561, '0404', '0404040035', 'SAN NARCISO\r'),
+(562, '0404', '0404040036', 'SARIAYA\r'),
+(563, '0404', '0404040037', 'TAGKAWAYAN\r'),
+(564, '0404', '0404040038', 'CITY OF TAYABAS\r'),
+(565, '0404', '0404040039', 'TIAONG\r'),
+(566, '0404', '0404040040', 'UNISAN\r'),
+(567, '0405', '0404050001', 'CITY OF ANTIPOLO\r'),
+(568, '0405', '0404050002', 'BARAS\r'),
+(569, '0405', '0404050003', 'BINANGONAN\r'),
+(570, '0405', '0404050004', 'CAINTA\r'),
+(571, '0405', '0404050005', 'CARDONA\r'),
+(572, '0405', '0404050006', 'JALA-JALA\r'),
+(573, '0405', '0404050007', 'RODRIGUEZ (MONTALBAN)\r'),
+(574, '0405', '0404050008', 'MORONG\r'),
+(575, '0405', '0404050009', 'PILILLA\r'),
+(576, '0405', '0404050010', 'SAN MATEO\r'),
+(577, '0405', '0404050011', 'TANAY\r'),
+(578, '0405', '0404050012', 'TAYTAY\r'),
+(579, '0405', '0404050013', 'TERESA\r'),
+(580, '0401', '0404010001', 'AGONCILLO\r'),
+(581, '0402', '0404020001', 'ALFONSO\r'),
+(582, '0403', '0404030001', 'ALAMINOS\r'),
+(583, '0404', '0404040001', 'AGDANGAN\r'),
+(584, '0405', '0404050001', 'ANGONO\r'),
+(585, '0501', '0505010001', 'BUENAVISTA\r'),
+(586, '0501', '0505010002', 'GASAN\r'),
+(587, '0501', '0505010003', 'MOGPOG\r'),
+(588, '0501', '0505010004', 'SANTA CRUZ\r'),
+(589, '0501', '0505010005', 'TORRIJOS\r'),
+(590, '0502', '0505020001', 'CALINTAAN\r'),
+(591, '0502', '0505020002', 'LOOC\r'),
+(592, '0502', '0505020003', 'LUBANG\r'),
+(593, '0502', '0505020004', 'MAGSAYSAY\r'),
+(594, '0502', '0505020005', 'MAMBURAO (Capital)\r'),
+(595, '0502', '0505020006', 'PALUAN\r'),
+(596, '0502', '0505020007', 'RIZAL\r'),
+(597, '0502', '0505020008', 'SABLAYAN\r'),
+(598, '0502', '0505020009', 'SAN JOSE\r'),
+(599, '0502', '0505020010', 'SANTA CRUZ\r'),
+(600, '0503', '0505030001', 'BANSUD\r'),
+(601, '0503', '0505030002', 'BONGABONG\r'),
+(602, '0503', '0505030003', 'BULALACAO (SAN PEDRO)\r'),
+(603, '0503', '0505030004', 'CITY OF CALAPAN (Capital)\r'),
+(604, '0503', '0505030005', 'GLORIA\r'),
+(605, '0503', '0505030006', 'MANSALAY\r'),
+(606, '0503', '0505030007', 'NAUJAN\r'),
+(607, '0503', '0505030008', 'PINAMALAYAN\r'),
+(608, '0503', '0505030009', 'POLA\r'),
+(609, '0503', '0505030010', 'PUERTO GALERA\r'),
+(610, '0503', '0505030011', 'ROXAS\r'),
+(611, '0503', '0505030012', 'SAN TEODORO\r'),
+(612, '0503', '0505030013', 'SOCORRO\r'),
+(613, '0503', '0505030014', 'VICTORIA\r'),
+(614, '0504', '0505040001', 'AGUTAYA\r'),
+(615, '0504', '0505040002', 'ARACELI\r'),
+(616, '0504', '0505040003', 'BALABAC\r'),
+(617, '0504', '0505040004', 'BATARAZA\r'),
+(618, '0504', '0505040005', 'BUSUANGA\r'),
+(619, '0504', '0505040006', 'CAGAYANCILLO\r'),
+(620, '0504', '0505040007', 'CORON\r'),
+(621, '0504', '0505040008', 'CUYO\r'),
+(622, '0504', '0505040009', 'DUMARAN\r'),
+(623, '0504', '0505040010', 'EL NIDO (BACUIT)\r'),
+(624, '0504', '0505040011', 'LINAPACAN\r'),
+(625, '0504', '0505040012', 'MAGSAYSAY\r'),
+(626, '0504', '0505040013', 'NARRA\r'),
+(627, '0504', '0505040014', 'PUERTO PRINCESA CITY (Capital)\r'),
+(628, '0504', '0505040015', 'QUEZON\r'),
+(629, '0504', '0505040016', 'ROXAS\r'),
+(630, '0504', '0505040017', 'SAN VICENTE\r'),
+(631, '0504', '0505040018', 'TAYTAY\r'),
+(632, '0504', '0505040019', 'KALAYAAN\r'),
+(633, '0504', '0505040020', 'CULION\r'),
+(634, '0504', '0505040021', 'RIZAL (MARCOS)\r'),
+(635, '0504', '0505040022', 'SOFRONIO ESPAÑOLA\r'),
+(636, '0505', '0505050001', 'BANTON\r'),
+(637, '0505', '0505050002', 'CAJIDIOCAN\r'),
+(638, '0505', '0505050003', 'CALATRAVA\r'),
+(639, '0505', '0505050004', 'CONCEPCION\r'),
+(640, '0505', '0505050005', 'CORCUERA\r'),
+(641, '0505', '0505050006', 'LOOC\r'),
+(642, '0505', '0505050007', 'MAGDIWANG\r'),
+(643, '0505', '0505050008', 'ODIONGAN\r'),
+(644, '0505', '0505050009', 'ROMBLON (Capital)\r'),
+(645, '0505', '0505050010', 'SAN AGUSTIN\r'),
+(646, '0505', '0505050011', 'SAN ANDRES\r'),
+(647, '0505', '0505050012', 'SAN FERNANDO\r'),
+(648, '0505', '0505050013', 'SAN JOSE\r'),
+(649, '0505', '0505050014', 'SANTA FE\r'),
+(650, '0505', '0505050015', 'FERROL\r'),
+(651, '0505', '0505050016', 'SANTA MARIA (IMELDA)\r'),
+(652, '0501', '0505010001', 'BOAC (Capital)\r'),
+(653, '0502', '0505020001', 'ABRA DE ILOG\r'),
+(654, '0503', '0505030001', 'BACO\r'),
+(655, '0504', '0505040001', 'ABORLAN\r'),
+(656, '0505', '0505050001', 'ALCANTARA\r'),
+(657, '0701', '0707010001', 'CAMALIG\r'),
+(658, '0701', '0707010002', 'DARAGA (LOCSIN)\r'),
+(659, '0701', '0707010003', 'GUINOBATAN\r'),
+(660, '0701', '0707010004', 'JOVELLAR\r'),
+(661, '0701', '0707010005', 'LEGAZPI CITY (Capital)\r'),
+(662, '0701', '0707010006', 'LIBON\r'),
+(663, '0701', '0707010007', 'CITY OF LIGAO\r'),
+(664, '0701', '0707010008', 'MALILIPOT\r'),
+(665, '0701', '0707010009', 'MALINAO\r'),
+(666, '0701', '0707010010', 'MANITO\r'),
+(667, '0701', '0707010011', 'OAS\r'),
+(668, '0701', '0707010012', 'PIO DURAN\r'),
+(669, '0701', '0707010013', 'POLANGUI\r'),
+(670, '0701', '0707010014', 'RAPU-RAPU\r'),
+(671, '0701', '0707010015', 'SANTO DOMINGO (LIBOG)\r'),
+(672, '0701', '0707010016', 'CITY OF TABACO\r'),
+(673, '0701', '0707010017', 'TIWI\r'),
+(674, '0702', '0707020001', 'CAPALONGA\r'),
+(675, '0702', '0707020002', 'DAET (Capital)\r'),
+(676, '0702', '0707020003', 'SAN LORENZO RUIZ (IMELDA)\r'),
+(677, '0702', '0707020004', 'JOSE PANGANIBAN\r'),
+(678, '0702', '0707020005', 'LABO\r'),
+(679, '0702', '0707020006', 'MERCEDES\r'),
+(680, '0702', '0707020007', 'PARACALE\r'),
+(681, '0702', '0707020008', 'SAN VICENTE\r'),
+(682, '0702', '0707020009', 'SANTA ELENA\r'),
+(683, '0702', '0707020010', 'TALISAY\r'),
+(684, '0702', '0707020011', 'VINZONS\r'),
+(685, '0703', '0707030001', 'BALATAN\r'),
+(686, '0703', '0707030002', 'BATO\r'),
+(687, '0703', '0707030003', 'BOMBON\r'),
+(688, '0703', '0707030004', 'BUHI\r'),
+(689, '0703', '0707030005', 'BULA\r'),
+(690, '0703', '0707030006', 'CABUSAO\r'),
+(691, '0703', '0707030007', 'CALABANGA\r'),
+(692, '0703', '0707030008', 'CAMALIGAN\r'),
+(693, '0703', '0707030009', 'CANAMAN\r'),
+(694, '0703', '0707030010', 'CARAMOAN\r'),
+(695, '0703', '0707030011', 'DEL GALLEGO\r'),
+(696, '0703', '0707030012', 'GAINZA\r'),
+(697, '0703', '0707030013', 'GARCHITORENA\r'),
+(698, '0703', '0707030014', 'GOA\r'),
+(699, '0703', '0707030015', 'IRIGA CITY\r'),
+(700, '0703', '0707030016', 'LAGONOY\r'),
+(701, '0703', '0707030017', 'LIBMANAN\r'),
+(702, '0703', '0707030018', 'LUPI\r'),
+(703, '0703', '0707030019', 'MAGARAO\r'),
+(704, '0703', '0707030020', 'MILAOR\r'),
+(705, '0703', '0707030021', 'MINALABAC\r'),
+(706, '0703', '0707030022', 'NABUA\r'),
+(707, '0703', '0707030023', 'NAGA CITY\r'),
+(708, '0703', '0707030024', 'OCAMPO\r'),
+(709, '0703', '0707030025', 'PAMPLONA\r'),
+(710, '0703', '0707030026', 'PASACAO\r'),
+(711, '0703', '0707030027', 'PILI (Capital)\r'),
+(712, '0703', '0707030028', 'PRESENTACION (PARUBCAN)\r'),
+(713, '0703', '0707030029', 'RAGAY\r'),
+(714, '0703', '0707030030', 'SAGÑAY\r'),
+(715, '0703', '0707030031', 'SAN FERNANDO\r'),
+(716, '0703', '0707030032', 'SAN JOSE\r'),
+(717, '0703', '0707030033', 'SIPOCOT\r'),
+(718, '0703', '0707030034', 'SIRUMA\r'),
+(719, '0703', '0707030035', 'TIGAON\r'),
+(720, '0703', '0707030036', 'TINAMBAC\r'),
+(721, '0704', '0707040001', 'BARAS\r'),
+(722, '0704', '0707040002', 'BATO\r'),
+(723, '0704', '0707040003', 'CARAMORAN\r'),
+(724, '0704', '0707040004', 'GIGMOTO\r'),
+(725, '0704', '0707040005', 'PANDAN\r'),
+(726, '0704', '0707040006', 'PANGANIBAN (PAYO)\r'),
+(727, '0704', '0707040007', 'SAN ANDRES (CALOLBON)\r'),
+(728, '0704', '0707040008', 'SAN MIGUEL\r'),
+(729, '0704', '0707040009', 'VIGA\r'),
+(730, '0704', '0707040010', 'VIRAC (Capital)\r'),
+(731, '0705', '0707050001', 'BALENO\r'),
+(732, '0705', '0707050002', 'BALUD\r'),
+(733, '0705', '0707050003', 'BATUAN\r'),
+(734, '0705', '0707050004', 'CATAINGAN\r'),
+(735, '0705', '0707050005', 'CAWAYAN\r'),
+(736, '0705', '0707050006', 'CLAVERIA\r'),
+(737, '0705', '0707050007', 'DIMASALANG\r'),
+(738, '0705', '0707050008', 'ESPERANZA\r'),
+(739, '0705', '0707050009', 'MANDAON\r'),
+(740, '0705', '0707050010', 'CITY OF MASBATE (Capital)\r'),
+(741, '0705', '0707050011', 'MILAGROS\r'),
+(742, '0705', '0707050012', 'MOBO\r'),
+(743, '0705', '0707050013', 'MONREAL\r'),
+(744, '0705', '0707050014', 'PALANAS\r'),
+(745, '0705', '0707050015', 'PIO V. CORPUZ (LIMBUHAN)\r'),
+(746, '0705', '0707050016', 'PLACER\r'),
+(747, '0705', '0707050017', 'SAN FERNANDO\r'),
+(748, '0705', '0707050018', 'SAN JACINTO\r'),
+(749, '0705', '0707050019', 'SAN PASCUAL\r'),
+(750, '0705', '0707050020', 'USON\r'),
+(751, '0706', '0707060001', 'BULAN\r'),
+(752, '0706', '0707060002', 'BULUSAN\r'),
+(753, '0706', '0707060003', 'CASIGURAN\r'),
+(754, '0706', '0707060004', 'CASTILLA\r'),
+(755, '0706', '0707060005', 'DONSOL\r'),
+(756, '0706', '0707060006', 'GUBAT\r'),
+(757, '0706', '0707060007', 'IROSIN\r'),
+(758, '0706', '0707060008', 'JUBAN\r'),
+(759, '0706', '0707060009', 'MAGALLANES\r'),
+(760, '0706', '0707060010', 'MATNOG\r'),
+(761, '0706', '0707060011', 'PILAR\r'),
+(762, '0706', '0707060012', 'PRIETO DIAZ\r'),
+(763, '0706', '0707060013', 'SANTA MAGDALENA\r'),
+(764, '0706', '0707060014', 'CITY OF SORSOGON (Capital)\r'),
+(765, '0701', '0707010001', 'BACACAY\r'),
+(766, '0702', '0707020001', 'BASUD\r'),
+(767, '0703', '0707030001', 'BAAO\r'),
+(768, '0704', '0707040001', 'BAGAMANOC\r'),
+(769, '0705', '0707050001', 'AROROY\r'),
+(770, '0706', '0707060001', 'BARCELONA\r'),
+(771, '0801', '0808010001', 'BALETE\r'),
+(772, '0801', '0808010002', 'BANGA\r'),
+(773, '0801', '0808010003', 'BATAN\r'),
+(774, '0801', '0808010004', 'BURUANGA\r'),
+(775, '0801', '0808010005', 'IBAJAY\r'),
+(776, '0801', '0808010006', 'KALIBO (Capital)\r'),
+(777, '0801', '0808010007', 'LEZO\r'),
+(778, '0801', '0808010008', 'LIBACAO\r'),
+(779, '0801', '0808010009', 'MADALAG\r'),
+(780, '0801', '0808010010', 'MAKATO\r'),
+(781, '0801', '0808010011', 'MALAY\r'),
+(782, '0801', '0808010012', 'MALINAO\r'),
+(783, '0801', '0808010013', 'NABAS\r'),
+(784, '0801', '0808010014', 'NEW WASHINGTON\r'),
+(785, '0801', '0808010015', 'NUMANCIA\r'),
+(786, '0801', '0808010016', 'TANGALAN\r'),
+(787, '0802', '0808020001', 'BARBAZA\r'),
+(788, '0802', '0808020002', 'BELISON\r'),
+(789, '0802', '0808020003', 'BUGASONG\r'),
+(790, '0802', '0808020004', 'CALUYA\r'),
+(791, '0802', '0808020005', 'CULASI\r'),
+(792, '0802', '0808020006', 'TOBIAS FORNIER (DAO)\r'),
+(793, '0802', '0808020007', 'HAMTIC\r'),
+(794, '0802', '0808020008', 'LAUA-AN\r'),
+(795, '0802', '0808020009', 'LIBERTAD\r'),
+(796, '0802', '0808020010', 'PANDAN\r'),
+(797, '0802', '0808020011', 'PATNONGON\r'),
+(798, '0802', '0808020012', 'SAN JOSE (Capital)\r'),
+(799, '0802', '0808020013', 'SAN REMIGIO\r'),
+(800, '0802', '0808020014', 'SEBASTE\r'),
+(801, '0802', '0808020015', 'SIBALOM\r'),
+(802, '0802', '0808020016', 'TIBIAO\r'),
+(803, '0802', '0808020017', 'VALDERRAMA\r'),
+(804, '0803', '0808030001', 'DAO\r'),
+(805, '0803', '0808030002', 'DUMALAG\r'),
+(806, '0803', '0808030003', 'DUMARAO\r'),
+(807, '0803', '0808030004', 'IVISAN\r'),
+(808, '0803', '0808030005', 'JAMINDAN\r'),
+(809, '0803', '0808030006', 'MA-AYON\r'),
+(810, '0803', '0808030007', 'MAMBUSAO\r'),
+(811, '0803', '0808030008', 'PANAY\r'),
+(812, '0803', '0808030009', 'PANITAN\r'),
+(813, '0803', '0808030010', 'PILAR\r'),
+(814, '0803', '0808030011', 'PONTEVEDRA\r'),
+(815, '0803', '0808030012', 'PRESIDENT ROXAS\r'),
+(816, '0803', '0808030013', 'ROXAS CITY (Capital)\r'),
+(817, '0803', '0808030014', 'SAPI-AN\r'),
+(818, '0803', '0808030015', 'SIGMA\r'),
+(819, '0803', '0808030016', 'TAPAZ\r'),
+(820, '0804', '0808040001', 'JORDAN (Capital)\r'),
+(821, '0804', '0808040002', 'NUEVA VALENCIA\r'),
+(822, '0804', '0808040003', 'SAN LORENZO\r'),
+(823, '0804', '0808040004', 'SIBUNAG\r'),
+(824, '0805', '0808050001', 'ALIMODIAN\r'),
+(825, '0805', '0808050002', 'ANILAO\r'),
+(826, '0805', '0808050003', 'BADIANGAN\r'),
+(827, '0805', '0808050004', 'BALASAN\r'),
+(828, '0805', '0808050005', 'BANATE\r'),
+(829, '0805', '0808050006', 'BAROTAC NUEVO\r'),
+(830, '0805', '0808050007', 'BAROTAC VIEJO\r'),
+(831, '0805', '0808050008', 'BATAD\r'),
+(832, '0805', '0808050009', 'BINGAWAN\r'),
+(833, '0805', '0808050010', 'CABATUAN\r'),
+(834, '0805', '0808050011', 'CALINOG\r'),
+(835, '0805', '0808050012', 'CARLES\r'),
+(836, '0805', '0808050013', 'CONCEPCION\r'),
+(837, '0805', '0808050014', 'DINGLE\r'),
+(838, '0805', '0808050015', 'DUEÑAS\r'),
+(839, '0805', '0808050016', 'DUMANGAS\r'),
+(840, '0805', '0808050017', 'ESTANCIA\r'),
+(841, '0805', '0808050018', 'GUIMBAL\r'),
+(842, '0805', '0808050019', 'IGBARAS\r'),
+(843, '0805', '0808050020', 'ILOILO CITY (Capital)\r'),
+(844, '0805', '0808050021', 'JANIUAY\r'),
+(845, '0805', '0808050022', 'LAMBUNAO\r'),
+(846, '0805', '0808050023', 'LEGANES\r'),
+(847, '0805', '0808050024', 'LEMERY\r'),
+(848, '0805', '0808050025', 'LEON\r'),
+(849, '0805', '0808050026', 'MAASIN\r'),
+(850, '0805', '0808050027', 'MIAGAO\r'),
+(851, '0805', '0808050028', 'MINA\r'),
+(852, '0805', '0808050029', 'NEW LUCENA\r'),
+(853, '0805', '0808050030', 'OTON\r'),
+(854, '0805', '0808050031', 'CITY OF PASSI\r'),
+(855, '0805', '0808050032', 'PAVIA\r'),
+(856, '0805', '0808050033', 'POTOTAN\r'),
+(857, '0805', '0808050034', 'SAN DIONISIO\r'),
+(858, '0805', '0808050035', 'SAN ENRIQUE\r'),
+(859, '0805', '0808050036', 'SAN JOAQUIN\r'),
+(860, '0805', '0808050037', 'SAN MIGUEL\r'),
+(861, '0805', '0808050038', 'SAN RAFAEL\r'),
+(862, '0805', '0808050039', 'SANTA BARBARA\r'),
+(863, '0805', '0808050040', 'SARA\r'),
+(864, '0805', '0808050041', 'TIGBAUAN\r'),
+(865, '0805', '0808050042', 'TUBUNGAN\r'),
+(866, '0805', '0808050043', 'ZARRAGA\r'),
+(867, '0806', '0808060001', 'BAGO CITY\r'),
+(868, '0806', '0808060002', 'BINALBAGAN\r'),
+(869, '0806', '0808060003', 'CADIZ CITY\r'),
+(870, '0806', '0808060004', 'CALATRAVA\r'),
+(871, '0806', '0808060005', 'CANDONI\r'),
+(872, '0806', '0808060006', 'CAUAYAN\r'),
+(873, '0806', '0808060007', 'ENRIQUE B. MAGALONA (SARAVIA)\r'),
+(874, '0806', '0808060008', 'CITY OF ESCALANTE\r'),
+(875, '0806', '0808060009', 'CITY OF HIMAMAYLAN\r'),
+(876, '0806', '0808060010', 'HINIGARAN\r'),
+(877, '0806', '0808060011', 'HINOBA-AN (ASIA)\r'),
+(878, '0806', '0808060012', 'ILOG\r'),
+(879, '0806', '0808060013', 'ISABELA\r'),
+(880, '0806', '0808060014', 'CITY OF KABANKALAN\r'),
+(881, '0806', '0808060015', 'LA CARLOTA CITY\r'),
+(882, '0806', '0808060016', 'LA CASTELLANA\r'),
+(883, '0806', '0808060017', 'MANAPLA\r'),
+(884, '0806', '0808060018', 'MOISES PADILLA (MAGALLON)\r'),
+(885, '0806', '0808060019', 'MURCIA\r'),
+(886, '0806', '0808060020', 'PONTEVEDRA\r'),
+(887, '0806', '0808060021', 'PULUPANDAN\r'),
+(888, '0806', '0808060022', 'SAGAY CITY\r'),
+(889, '0806', '0808060023', 'SAN CARLOS CITY\r'),
+(890, '0806', '0808060024', 'SAN ENRIQUE\r'),
+(891, '0806', '0808060025', 'SILAY CITY\r'),
+(892, '0806', '0808060026', 'CITY OF SIPALAY\r'),
+(893, '0806', '0808060027', 'CITY OF TALISAY\r'),
+(894, '0806', '0808060028', 'TOBOSO\r'),
+(895, '0806', '0808060029', 'VALLADOLID\r'),
+(896, '0806', '0808060030', 'CITY OF VICTORIAS\r'),
+(897, '0806', '0808060031', 'SALVADOR BENEDICTO\r'),
+(898, '0801', '0808010001', 'ALTAVAS\r'),
+(899, '0802', '0808020001', 'ANINI-Y\r'),
+(900, '0803', '0808030001', 'CUARTERO\r'),
+(901, '0804', '0808040001', 'BUENAVISTA\r'),
+(902, '0805', '0808050001', 'AJUY\r'),
+(903, '0806', '0808060001', 'BACOLOD CITY (Capital)\r'),
+(904, '0901', '0909010001', 'ALICIA\r'),
+(905, '0901', '0909010002', 'ANDA\r'),
+(906, '0901', '0909010003', 'ANTEQUERA\r'),
+(907, '0901', '0909010004', 'BACLAYON\r'),
+(908, '0901', '0909010005', 'BALILIHAN\r'),
+(909, '0901', '0909010006', 'BATUAN\r'),
+(910, '0901', '0909010007', 'BILAR\r'),
+(911, '0901', '0909010008', 'BUENAVISTA\r'),
+(912, '0901', '0909010009', 'CALAPE\r'),
+(913, '0901', '0909010010', 'CANDIJAY\r'),
+(914, '0901', '0909010011', 'CARMEN\r'),
+(915, '0901', '0909010012', 'CATIGBIAN\r'),
+(916, '0901', '0909010013', 'CLARIN\r'),
+(917, '0901', '0909010014', 'CORELLA\r'),
+(918, '0901', '0909010015', 'CORTES\r'),
+(919, '0901', '0909010016', 'DAGOHOY\r'),
+(920, '0901', '0909010017', 'DANAO\r'),
+(921, '0901', '0909010018', 'DAUIS\r'),
+(922, '0901', '0909010019', 'DIMIAO\r'),
+(923, '0901', '0909010020', 'DUERO\r'),
+(924, '0901', '0909010021', 'GARCIA HERNANDEZ\r'),
+(925, '0901', '0909010022', 'GUINDULMAN\r'),
+(926, '0901', '0909010023', 'INABANGA\r'),
+(927, '0901', '0909010024', 'JAGNA\r'),
+(928, '0901', '0909010025', 'GETAFE\r'),
+(929, '0901', '0909010026', 'LILA\r'),
+(930, '0901', '0909010027', 'LOAY\r'),
+(931, '0901', '0909010028', 'LOBOC\r'),
+(932, '0901', '0909010029', 'LOON\r'),
+(933, '0901', '0909010030', 'MABINI\r'),
+(934, '0901', '0909010031', 'MARIBOJOC\r'),
+(935, '0901', '0909010032', 'PANGLAO\r'),
+(936, '0901', '0909010033', 'PILAR\r'),
+(937, '0901', '0909010034', 'PRES. CARLOS P. GARCIA (PITOGO)\r'),
+(938, '0901', '0909010035', 'SAGBAYAN (BORJA)\r'),
+(939, '0901', '0909010036', 'SAN ISIDRO\r'),
+(940, '0901', '0909010037', 'SAN MIGUEL\r'),
+(941, '0901', '0909010038', 'SEVILLA\r'),
+(942, '0901', '0909010039', 'SIERRA BULLONES\r'),
+(943, '0901', '0909010040', 'SIKATUNA\r'),
+(944, '0901', '0909010041', 'TAGBILARAN CITY (Capital)\r'),
+(945, '0901', '0909010042', 'TALIBON\r'),
+(946, '0901', '0909010043', 'TRINIDAD\r'),
+(947, '0901', '0909010044', 'TUBIGON\r'),
+(948, '0901', '0909010045', 'UBAY\r'),
+(949, '0901', '0909010046', 'VALENCIA\r'),
+(950, '0901', '0909010047', 'BIEN UNIDO\r'),
+(951, '0902', '0909020001', 'ALCOY\r'),
+(952, '0902', '0909020002', 'ALEGRIA\r'),
+(953, '0902', '0909020003', 'ALOGUINSAN\r'),
+(954, '0902', '0909020004', 'ARGAO\r'),
+(955, '0902', '0909020005', 'ASTURIAS\r'),
+(956, '0902', '0909020006', 'BADIAN\r'),
+(957, '0902', '0909020007', 'BALAMBAN\r'),
+(958, '0902', '0909020008', 'BANTAYAN\r'),
+(959, '0902', '0909020009', 'BARILI\r'),
+(960, '0902', '0909020010', 'CITY OF BOGO\r'),
+(961, '0902', '0909020011', 'BOLJOON\r'),
+(962, '0902', '0909020012', 'BORBON\r'),
+(963, '0902', '0909020013', 'CITY OF CARCAR\r'),
+(964, '0902', '0909020014', 'CARMEN\r'),
+(965, '0902', '0909020015', 'CATMON\r'),
+(966, '0902', '0909020016', 'CEBU CITY (Capital)\r'),
+(967, '0902', '0909020017', 'COMPOSTELA\r'),
+(968, '0902', '0909020018', 'CONSOLACION\r'),
+(969, '0902', '0909020019', 'CORDOBA\r'),
+(970, '0902', '0909020020', 'DAANBANTAYAN\r'),
+(971, '0902', '0909020021', 'DALAGUETE\r'),
+(972, '0902', '0909020022', 'DANAO CITY\r'),
+(973, '0902', '0909020023', 'DUMANJUG\r'),
+(974, '0902', '0909020024', 'GINATILAN\r'),
+(975, '0902', '0909020025', 'LAPU-LAPU CITY (OPON)\r'),
+(976, '0902', '0909020026', 'LILOAN\r'),
+(977, '0902', '0909020027', 'MADRIDEJOS\r'),
+(978, '0902', '0909020028', 'MALABUYOC\r'),
+(979, '0902', '0909020029', 'MANDAUE CITY\r'),
+(980, '0902', '0909020030', 'MEDELLIN\r'),
+(981, '0902', '0909020031', 'MINGLANILLA\r'),
+(982, '0902', '0909020032', 'MOALBOAL\r'),
+(983, '0902', '0909020033', 'CITY OF NAGA\r'),
+(984, '0902', '0909020034', 'OSLOB\r'),
+(985, '0902', '0909020035', 'PILAR\r'),
+(986, '0902', '0909020036', 'PINAMUNGAHAN\r'),
+(987, '0902', '0909020037', 'PORO\r'),
+(988, '0902', '0909020038', 'RONDA\r'),
+(989, '0902', '0909020039', 'SAMBOAN\r'),
+(990, '0902', '0909020040', 'SAN FERNANDO\r'),
+(991, '0902', '0909020041', 'SAN FRANCISCO\r'),
+(992, '0902', '0909020042', 'SAN REMIGIO\r'),
+(993, '0902', '0909020043', 'SANTA FE\r'),
+(994, '0902', '0909020044', 'SANTANDER\r'),
+(995, '0902', '0909020045', 'SIBONGA\r'),
+(996, '0902', '0909020046', 'SOGOD\r'),
+(997, '0902', '0909020047', 'TABOGON\r'),
+(998, '0902', '0909020048', 'TABUELAN\r'),
+(999, '0902', '0909020049', 'CITY OF TALISAY\r'),
+(1000, '0902', '0909020050', 'TOLEDO CITY\r'),
+(1001, '0902', '0909020051', 'TUBURAN\r'),
+(1002, '0902', '0909020052', 'TUDELA\r'),
+(1003, '0903', '0909030001', 'AYUNGON\r'),
+(1004, '0903', '0909030002', 'BACONG\r'),
+(1005, '0903', '0909030003', 'BAIS CITY\r'),
+(1006, '0903', '0909030004', 'BASAY\r'),
+(1007, '0903', '0909030005', 'CITY OF BAYAWAN (TULONG)\r'),
+(1008, '0903', '0909030006', 'BINDOY (PAYABON)\r'),
+(1009, '0903', '0909030007', 'CANLAON CITY\r'),
+(1010, '0903', '0909030008', 'DAUIN\r'),
+(1011, '0903', '0909030009', 'DUMAGUETE CITY (Capital)\r'),
+(1012, '0903', '0909030010', 'CITY OF GUIHULNGAN\r'),
+(1013, '0903', '0909030011', 'JIMALALUD\r'),
+(1014, '0903', '0909030012', 'LA LIBERTAD\r'),
+(1015, '0903', '0909030013', 'MABINAY\r'),
+(1016, '0903', '0909030014', 'MANJUYOD\r'),
+(1017, '0903', '0909030015', 'PAMPLONA\r'),
+(1018, '0903', '0909030016', 'SAN JOSE\r'),
+(1019, '0903', '0909030017', 'SANTA CATALINA\r'),
+(1020, '0903', '0909030018', 'SIATON\r'),
+(1021, '0903', '0909030019', 'SIBULAN\r'),
+(1022, '0903', '0909030020', 'CITY OF TANJAY\r'),
+(1023, '0903', '0909030021', 'TAYASAN\r'),
+(1024, '0903', '0909030022', 'VALENCIA (LUZURRIAGA)\r'),
+(1025, '0903', '0909030023', 'VALLEHERMOSO\r'),
+(1026, '0903', '0909030024', 'ZAMBOANGUITA\r'),
+(1027, '0904', '0909040001', 'LARENA\r'),
+(1028, '0904', '0909040002', 'LAZI\r'),
+(1029, '0904', '0909040003', 'MARIA\r'),
+(1030, '0904', '0909040004', 'SAN JUAN\r'),
+(1031, '0904', '0909040005', 'SIQUIJOR (Capital)\r'),
+(1032, '0901', '0909010001', 'ALBURQUERQUE\r'),
+(1033, '0902', '0909020001', 'ALCANTARA\r'),
+(1034, '0903', '0909030001', 'AMLAN (AYUQUITAN)\r'),
+(1035, '0904', '0909040001', 'ENRIQUE VILLANUEVA\r'),
+(1036, '1001', '1010010001', 'BILIRAN\r'),
+(1037, '1001', '1010010002', 'CABUCGAYAN\r'),
+(1038, '1001', '1010010003', 'CAIBIRAN\r'),
+(1039, '1001', '1010010004', 'CULABA\r'),
+(1040, '1001', '1010010005', 'KAWAYAN\r'),
+(1041, '1001', '1010010006', 'MARIPIPI\r'),
+(1042, '1001', '1010010007', 'NAVAL (Capital)\r'),
+(1043, '1002', '1010020001', 'BALANGIGA\r'),
+(1044, '1002', '1010020002', 'BALANGKAYAN\r'),
+(1045, '1002', '1010020003', 'CITY OF BORONGAN (Capital)\r'),
+(1046, '1002', '1010020004', 'CAN-AVID\r'),
+(1047, '1002', '1010020005', 'DOLORES\r'),
+(1048, '1002', '1010020006', 'GENERAL MACARTHUR\r'),
+(1049, '1002', '1010020007', 'GIPORLOS\r'),
+(1050, '1002', '1010020008', 'GUIUAN\r'),
+(1051, '1002', '1010020009', 'HERNANI\r'),
+(1052, '1002', '1010020010', 'JIPAPAD\r'),
+(1053, '1002', '1010020011', 'LAWAAN\r'),
+(1054, '1002', '1010020012', 'LLORENTE\r'),
+(1055, '1002', '1010020013', 'MASLOG\r'),
+(1056, '1002', '1010020014', 'MAYDOLONG\r'),
+(1057, '1002', '1010020015', 'MERCEDES\r'),
+(1058, '1002', '1010020016', 'ORAS\r'),
+(1059, '1002', '1010020017', 'QUINAPONDAN\r'),
+(1060, '1002', '1010020018', 'SALCEDO\r'),
+(1061, '1002', '1010020019', 'SAN JULIAN\r'),
+(1062, '1002', '1010020020', 'SAN POLICARPO\r'),
+(1063, '1002', '1010020021', 'SULAT\r'),
+(1064, '1002', '1010020022', 'TAFT\r'),
+(1065, '1003', '1010030001', 'ALANGALANG\r'),
+(1066, '1003', '1010030002', 'ALBUERA\r'),
+(1067, '1003', '1010030003', 'BABATNGON\r'),
+(1068, '1003', '1010030004', 'BARUGO\r'),
+(1069, '1003', '1010030005', 'BATO\r'),
+(1070, '1003', '1010030006', 'CITY OF BAYBAY\r'),
+(1071, '1003', '1010030007', 'BURAUEN\r'),
+(1072, '1003', '1010030008', 'CALUBIAN\r'),
+(1073, '1003', '1010030009', 'CAPOOCAN\r'),
+(1074, '1003', '1010030010', 'CARIGARA\r'),
+(1075, '1003', '1010030011', 'DAGAMI\r'),
+(1076, '1003', '1010030012', 'DULAG\r'),
+(1077, '1003', '1010030013', 'HILONGOS\r'),
+(1078, '1003', '1010030014', 'HINDANG\r'),
+(1079, '1003', '1010030015', 'INOPACAN\r'),
+(1080, '1003', '1010030016', 'ISABEL\r'),
+(1081, '1003', '1010030017', 'JARO\r'),
+(1082, '1003', '1010030018', 'JAVIER (BUGHO)\r'),
+(1083, '1003', '1010030019', 'JULITA\r'),
+(1084, '1003', '1010030020', 'KANANGA\r'),
+(1085, '1003', '1010030021', 'LA PAZ\r'),
+(1086, '1003', '1010030022', 'LEYTE\r'),
+(1087, '1003', '1010030023', 'MACARTHUR\r'),
+(1088, '1003', '1010030024', 'MAHAPLAG\r'),
+(1089, '1003', '1010030025', 'MATAG-OB\r'),
+(1090, '1003', '1010030026', 'MATALOM\r'),
+(1091, '1003', '1010030027', 'MAYORGA\r'),
+(1092, '1003', '1010030028', 'MERIDA\r'),
+(1093, '1003', '1010030029', 'ORMOC CITY\r'),
+(1094, '1003', '1010030030', 'PALO\r'),
+(1095, '1003', '1010030031', 'PALOMPON\r'),
+(1096, '1003', '1010030032', 'PASTRANA\r'),
+(1097, '1003', '1010030033', 'SAN ISIDRO\r'),
+(1098, '1003', '1010030034', 'SAN MIGUEL\r'),
+(1099, '1003', '1010030035', 'SANTA FE\r'),
+(1100, '1003', '1010030036', 'TABANGO\r'),
+(1101, '1003', '1010030037', 'TABONTABON\r'),
+(1102, '1003', '1010030038', 'TACLOBAN CITY (Capital)\r'),
+(1103, '1003', '1010030039', 'TANAUAN\r'),
+(1104, '1003', '1010030040', 'TOLOSA\r'),
+(1105, '1003', '1010030041', 'TUNGA\r'),
+(1106, '1003', '1010030042', 'VILLABA\r'),
+(1107, '1004', '1010040001', 'BIRI\r'),
+(1108, '1004', '1010040002', 'BOBON\r'),
+(1109, '1004', '1010040003', 'CAPUL\r'),
+(1110, '1004', '1010040004', 'CATARMAN (Capital)\r'),
+(1111, '1004', '1010040005', 'CATUBIG\r'),
+(1112, '1004', '1010040006', 'GAMAY\r'),
+(1113, '1004', '1010040007', 'LAOANG\r'),
+(1114, '1004', '1010040008', 'LAPINIG\r'),
+(1115, '1004', '1010040009', 'LAS NAVAS\r'),
+(1116, '1004', '1010040010', 'LAVEZARES\r'),
+(1117, '1004', '1010040011', 'MAPANAS\r'),
+(1118, '1004', '1010040012', 'MONDRAGON\r'),
+(1119, '1004', '1010040013', 'PALAPAG\r'),
+(1120, '1004', '1010040014', 'PAMBUJAN\r'),
+(1121, '1004', '1010040015', 'ROSARIO\r'),
+(1122, '1004', '1010040016', 'SAN ANTONIO\r'),
+(1123, '1004', '1010040017', 'SAN ISIDRO\r'),
+(1124, '1004', '1010040018', 'SAN JOSE\r'),
+(1125, '1004', '1010040019', 'SAN ROQUE\r'),
+(1126, '1004', '1010040020', 'SAN VICENTE\r'),
+(1127, '1004', '1010040021', 'SILVINO LOBOS\r'),
+(1128, '1004', '1010040022', 'VICTORIA\r'),
+(1129, '1004', '1010040023', 'LOPE DE VEGA\r'),
+(1130, '1005', '1010050001', 'BASEY\r'),
+(1131, '1005', '1010050002', 'CALBAYOG CITY\r'),
+(1132, '1005', '1010050003', 'CALBIGA\r'),
+(1133, '1005', '1010050004', 'CITY OF CATBALOGAN (Capital)\r'),
+(1134, '1005', '1010050005', 'DARAM\r'),
+(1135, '1005', '1010050006', 'GANDARA\r'),
+(1136, '1005', '1010050007', 'HINABANGAN\r'),
+(1137, '1005', '1010050008', 'JIABONG\r'),
+(1138, '1005', '1010050009', 'MARABUT\r'),
+(1139, '1005', '1010050010', 'MATUGUINAO\r'),
+(1140, '1005', '1010050011', 'MOTIONG\r'),
+(1141, '1005', '1010050012', 'PINABACDAO\r'),
+(1142, '1005', '1010050013', 'SAN JOSE DE BUAN\r'),
+(1143, '1005', '1010050014', 'SAN SEBASTIAN\r'),
+(1144, '1005', '1010050015', 'SANTA MARGARITA\r'),
+(1145, '1005', '1010050016', 'SANTA RITA\r'),
+(1146, '1005', '1010050017', 'SANTO NIÑO\r'),
+(1147, '1005', '1010050018', 'TALALORA\r'),
+(1148, '1005', '1010050019', 'TARANGNAN\r'),
+(1149, '1005', '1010050020', 'VILLAREAL\r'),
+(1150, '1005', '1010050021', 'PARANAS (WRIGHT)\r'),
+(1151, '1005', '1010050022', 'ZUMARRAGA\r'),
+(1152, '1005', '1010050023', 'TAGAPUL-AN\r'),
+(1153, '1005', '1010050024', 'SAN JORGE\r'),
+(1154, '1005', '1010050025', 'PAGSANGHAN\r'),
+(1155, '1006', '1010060001', 'BONTOC\r'),
+(1156, '1006', '1010060002', 'HINUNANGAN\r'),
+(1157, '1006', '1010060003', 'HINUNDAYAN\r'),
+(1158, '1006', '1010060004', 'LIBAGON\r'),
+(1159, '1006', '1010060005', 'LILOAN\r'),
+(1160, '1006', '1010060006', 'CITY OF MAASIN (Capital)\r'),
+(1161, '1006', '1010060007', 'MACROHON\r'),
+(1162, '1006', '1010060008', 'MALITBOG\r'),
+(1163, '1006', '1010060009', 'PADRE BURGOS\r'),
+(1164, '1006', '1010060010', 'PINTUYAN\r'),
+(1165, '1006', '1010060011', 'SAINT BERNARD\r'),
+(1166, '1006', '1010060012', 'SAN FRANCISCO\r'),
+(1167, '1006', '1010060013', 'SAN JUAN (CABALIAN)\r'),
+(1168, '1006', '1010060014', 'SAN RICARDO\r'),
+(1169, '1006', '1010060015', 'SILAGO\r'),
+(1170, '1006', '1010060016', 'SOGOD\r'),
+(1171, '1006', '1010060017', 'TOMAS OPPUS\r'),
+(1172, '1006', '1010060018', 'LIMASAWA\r'),
+(1173, '1001', '1010010001', 'ALMERIA\r'),
+(1174, '1002', '1010020001', 'ARTECHE\r'),
+(1175, '1003', '1010030001', 'ABUYOG\r'),
+(1176, '1004', '1010040001', 'ALLEN\r'),
+(1177, '1005', '1010050001', 'ALMAGRO\r'),
+(1178, '1006', '1010060001', 'ANAHAWAN\r'),
+(1179, '0601', '0606010001', 'DIPOLOG CITY (Capital)\r'),
+(1180, '0601', '0606010002', 'KATIPUNAN\r'),
+(1181, '0601', '0606010003', 'LA LIBERTAD\r');
+INSERT INTO `municipalities` (`municipality_id`, `province_code`, `municipality_code`, `municipality_text`) VALUES
+(1182, '0601', '0606010004', 'LABASON\r'),
+(1183, '0601', '0606010005', 'LILOY\r'),
+(1184, '0601', '0606010006', 'MANUKAN\r'),
+(1185, '0601', '0606010007', 'MUTIA\r'),
+(1186, '0601', '0606010008', 'PIÑAN (NEW PIÑAN)\r'),
+(1187, '0601', '0606010009', 'POLANCO\r'),
+(1188, '0601', '0606010010', 'PRES. MANUEL A. ROXAS\r'),
+(1189, '0601', '0606010011', 'RIZAL\r'),
+(1190, '0601', '0606010012', 'SALUG\r'),
+(1191, '0601', '0606010013', 'SERGIO OSMEÑA SR.\r'),
+(1192, '0601', '0606010014', 'SIAYAN\r'),
+(1193, '0601', '0606010015', 'SIBUCO\r'),
+(1194, '0601', '0606010016', 'SIBUTAD\r'),
+(1195, '0601', '0606010017', 'SINDANGAN\r'),
+(1196, '0601', '0606010018', 'SIOCON\r'),
+(1197, '0601', '0606010019', 'SIRAWAI\r'),
+(1198, '0601', '0606010020', 'TAMPILISAN\r'),
+(1199, '0601', '0606010021', 'JOSE DALMAN (PONOT)\r'),
+(1200, '0601', '0606010022', 'GUTALAC\r'),
+(1201, '0601', '0606010023', 'BALIGUIAN\r'),
+(1202, '0601', '0606010024', 'GODOD\r'),
+(1203, '0601', '0606010025', 'BACUNGAN (Leon T. Postigo)\r'),
+(1204, '0601', '0606010026', 'KALAWIT\r'),
+(1205, '0602', '0606020001', 'BAYOG\r'),
+(1206, '0602', '0606020002', 'DIMATALING\r'),
+(1207, '0602', '0606020003', 'DINAS\r'),
+(1208, '0602', '0606020004', 'DUMALINAO\r'),
+(1209, '0602', '0606020005', 'DUMINGAG\r'),
+(1210, '0602', '0606020006', 'KUMALARANG\r'),
+(1211, '0602', '0606020007', 'LABANGAN\r'),
+(1212, '0602', '0606020008', 'LAPUYAN\r'),
+(1213, '0602', '0606020009', 'MAHAYAG\r'),
+(1214, '0602', '0606020010', 'MARGOSATUBIG\r'),
+(1215, '0602', '0606020011', 'MIDSALIP\r'),
+(1216, '0602', '0606020012', 'MOLAVE\r'),
+(1217, '0602', '0606020013', 'PAGADIAN CITY (Capital)\r'),
+(1218, '0602', '0606020014', 'RAMON MAGSAYSAY (LIARGO)\r'),
+(1219, '0602', '0606020015', 'SAN MIGUEL\r'),
+(1220, '0602', '0606020016', 'SAN PABLO\r'),
+(1221, '0602', '0606020017', 'TABINA\r'),
+(1222, '0602', '0606020018', 'TAMBULIG\r'),
+(1223, '0602', '0606020019', 'TUKURAN\r'),
+(1224, '0602', '0606020020', 'ZAMBOANGA CITY\r'),
+(1225, '0602', '0606020021', 'LAKEWOOD\r'),
+(1226, '0602', '0606020022', 'JOSEFINA\r'),
+(1227, '0602', '0606020023', 'PITOGO\r'),
+(1228, '0602', '0606020024', 'SOMINOT (DON MARIANO MARCOS)\r'),
+(1229, '0602', '0606020025', 'VINCENZO A. SAGUN\r'),
+(1230, '0602', '0606020026', 'GUIPOS\r'),
+(1231, '0602', '0606020027', 'TIGBAO\r'),
+(1232, '0603', '0606030001', 'BUUG\r'),
+(1233, '0603', '0606030002', 'DIPLAHAN\r'),
+(1234, '0603', '0606030003', 'IMELDA\r'),
+(1235, '0603', '0606030004', 'IPIL (Capital)\r'),
+(1236, '0603', '0606030005', 'KABASALAN\r'),
+(1237, '0603', '0606030006', 'MABUHAY\r'),
+(1238, '0603', '0606030007', 'MALANGAS\r'),
+(1239, '0603', '0606030008', 'NAGA\r'),
+(1240, '0603', '0606030009', 'OLUTANGA\r'),
+(1241, '0603', '0606030010', 'PAYAO\r'),
+(1242, '0603', '0606030011', 'ROSELLER LIM\r'),
+(1243, '0603', '0606030012', 'SIAY\r'),
+(1244, '0603', '0606030013', 'TALUSAN\r'),
+(1245, '0603', '0606030014', 'TITAY\r'),
+(1246, '0603', '0606030015', 'TUNGAWAN\r'),
+(1247, '0604', '0606040001', 'CITY OF ISABELA (Capital)\r'),
+(1248, '0601', '0606010001', 'DAPITAN CITY\r'),
+(1249, '0602', '0606020001', 'AURORA\r'),
+(1250, '0603', '0606030001', 'ALICIA\r'),
+(1251, '1101', '1111010001', 'DAMULOG\r'),
+(1252, '1101', '1111010002', 'DANGCAGAN\r'),
+(1253, '1101', '1111010003', 'DON CARLOS\r'),
+(1254, '1101', '1111010004', 'IMPASUG-ONG\r'),
+(1255, '1101', '1111010005', 'KADINGILAN\r'),
+(1256, '1101', '1111010006', 'KALILANGAN\r'),
+(1257, '1101', '1111010007', 'KIBAWE\r'),
+(1258, '1101', '1111010008', 'KITAOTAO\r'),
+(1259, '1101', '1111010009', 'LANTAPAN\r'),
+(1260, '1101', '1111010010', 'LIBONA\r'),
+(1261, '1101', '1111010011', 'CITY OF MALAYBALAY (Capital)\r'),
+(1262, '1101', '1111010012', 'MALITBOG\r'),
+(1263, '1101', '1111010013', 'MANOLO FORTICH\r'),
+(1264, '1101', '1111010014', 'MARAMAG\r'),
+(1265, '1101', '1111010015', 'PANGANTUCAN\r'),
+(1266, '1101', '1111010016', 'QUEZON\r'),
+(1267, '1101', '1111010017', 'SAN FERNANDO\r'),
+(1268, '1101', '1111010018', 'SUMILAO\r'),
+(1269, '1101', '1111010019', 'TALAKAG\r'),
+(1270, '1101', '1111010020', 'CITY OF VALENCIA\r'),
+(1271, '1101', '1111010021', 'CABANGLASAN\r'),
+(1272, '1102', '1111020001', 'GUINSILIBAN\r'),
+(1273, '1102', '1111020002', 'MAHINOG\r'),
+(1274, '1102', '1111020003', 'MAMBAJAO (Capital)\r'),
+(1275, '1102', '1111020004', 'SAGAY\r'),
+(1276, '1103', '1111030001', 'BALOI\r'),
+(1277, '1103', '1111030002', 'BAROY\r'),
+(1278, '1103', '1111030003', 'ILIGAN CITY\r'),
+(1279, '1103', '1111030004', 'KAPATAGAN\r'),
+(1280, '1103', '1111030005', 'SULTAN NAGA DIMAPORO (KAROMATAN)\r'),
+(1281, '1103', '1111030006', 'KAUSWAGAN\r'),
+(1282, '1103', '1111030007', 'KOLAMBUGAN\r'),
+(1283, '1103', '1111030008', 'LALA\r'),
+(1284, '1103', '1111030009', 'LINAMON\r'),
+(1285, '1103', '1111030010', 'MAGSAYSAY\r'),
+(1286, '1103', '1111030011', 'MAIGO\r'),
+(1287, '1103', '1111030012', 'MATUNGAO\r'),
+(1288, '1103', '1111030013', 'MUNAI\r'),
+(1289, '1103', '1111030014', 'NUNUNGAN\r'),
+(1290, '1103', '1111030015', 'PANTAO RAGAT\r'),
+(1291, '1103', '1111030016', 'POONA PIAGAPO\r'),
+(1292, '1103', '1111030017', 'SALVADOR\r'),
+(1293, '1103', '1111030018', 'SAPAD\r'),
+(1294, '1103', '1111030019', 'TAGOLOAN\r'),
+(1295, '1103', '1111030020', 'TANGCAL\r'),
+(1296, '1103', '1111030021', 'TUBOD (Capital)\r'),
+(1297, '1103', '1111030022', 'PANTAR\r'),
+(1298, '1104', '1111040001', 'BALIANGAO\r'),
+(1299, '1104', '1111040002', 'BONIFACIO\r'),
+(1300, '1104', '1111040003', 'CALAMBA\r'),
+(1301, '1104', '1111040004', 'CLARIN\r'),
+(1302, '1104', '1111040005', 'CONCEPCION\r'),
+(1303, '1104', '1111040006', 'JIMENEZ\r'),
+(1304, '1104', '1111040007', 'LOPEZ JAENA\r'),
+(1305, '1104', '1111040008', 'OROQUIETA CITY (Capital)\r'),
+(1306, '1104', '1111040009', 'OZAMIS CITY\r'),
+(1307, '1104', '1111040010', 'PANAON\r'),
+(1308, '1104', '1111040011', 'PLARIDEL\r'),
+(1309, '1104', '1111040012', 'SAPANG DALAGA\r'),
+(1310, '1104', '1111040013', 'SINACABAN\r'),
+(1311, '1104', '1111040014', 'TANGUB CITY\r'),
+(1312, '1104', '1111040015', 'TUDELA\r'),
+(1313, '1104', '1111040016', 'DON VICTORIANO CHIONGBIAN  (DON MARIANO MARCOS)\r'),
+(1314, '1105', '1111050001', 'BALINGASAG\r'),
+(1315, '1105', '1111050002', 'BALINGOAN\r'),
+(1316, '1105', '1111050003', 'BINUANGAN\r'),
+(1317, '1105', '1111050004', 'CAGAYAN DE ORO CITY (Capital)\r'),
+(1318, '1105', '1111050005', 'CLAVERIA\r'),
+(1319, '1105', '1111050006', 'CITY OF EL SALVADOR\r'),
+(1320, '1105', '1111050007', 'GINGOOG CITY\r'),
+(1321, '1105', '1111050008', 'GITAGUM\r'),
+(1322, '1105', '1111050009', 'INITAO\r'),
+(1323, '1105', '1111050010', 'JASAAN\r'),
+(1324, '1105', '1111050011', 'KINOGUITAN\r'),
+(1325, '1105', '1111050012', 'LAGONGLONG\r'),
+(1326, '1105', '1111050013', 'LAGUINDINGAN\r'),
+(1327, '1105', '1111050014', 'LIBERTAD\r'),
+(1328, '1105', '1111050015', 'LUGAIT\r'),
+(1329, '1105', '1111050016', 'MAGSAYSAY (LINUGOS)\r'),
+(1330, '1105', '1111050017', 'MANTICAO\r'),
+(1331, '1105', '1111050018', 'MEDINA\r'),
+(1332, '1105', '1111050019', 'NAAWAN\r'),
+(1333, '1105', '1111050020', 'OPOL\r'),
+(1334, '1105', '1111050021', 'SALAY\r'),
+(1335, '1105', '1111050022', 'SUGBONGCOGON\r'),
+(1336, '1105', '1111050023', 'TAGOLOAN\r'),
+(1337, '1105', '1111050024', 'TALISAYAN\r'),
+(1338, '1105', '1111050025', 'VILLANUEVA\r'),
+(1339, '1101', '1111010001', 'BAUNGON\r'),
+(1340, '1102', '1111020001', 'CATARMAN\r'),
+(1341, '1103', '1111030001', 'BACOLOD\r'),
+(1342, '1104', '1111040001', 'ALORAN\r'),
+(1343, '1105', '1111050001', 'ALUBIJID\r'),
+(1344, '1201', '1212010001', 'LAAK (SAN VICENTE)\r'),
+(1345, '1201', '1212010002', 'MABINI (DOÑA ALICIA)\r'),
+(1346, '1201', '1212010003', 'MACO\r'),
+(1347, '1201', '1212010004', 'MARAGUSAN (SAN MARIANO)\r'),
+(1348, '1201', '1212010005', 'MAWAB\r'),
+(1349, '1201', '1212010006', 'MONKAYO\r'),
+(1350, '1201', '1212010007', 'MONTEVISTA\r'),
+(1351, '1201', '1212010008', 'NABUNTURAN (Capital)\r'),
+(1352, '1201', '1212010009', 'NEW BATAAN\r'),
+(1353, '1201', '1212010010', 'PANTUKAN\r'),
+(1354, '1202', '1212020001', 'CARMEN\r'),
+(1355, '1202', '1212020002', 'KAPALONG\r'),
+(1356, '1202', '1212020003', 'NEW CORELLA\r'),
+(1357, '1202', '1212020004', 'CITY OF PANABO\r'),
+(1358, '1202', '1212020005', 'ISLAND GARDEN CITY OF SAMAL\r'),
+(1359, '1202', '1212020006', 'SANTO TOMAS\r'),
+(1360, '1202', '1212020007', 'CITY OF TAGUM (Capital)\r'),
+(1361, '1202', '1212020008', 'TALAINGOD\r'),
+(1362, '1202', '1212020009', 'BRAULIO E. DUJALI\r'),
+(1363, '1202', '1212020010', 'SAN ISIDRO\r'),
+(1364, '1203', '1212030001', 'DAVAO CITY\r'),
+(1365, '1203', '1212030002', 'CITY OF DIGOS (Capital)\r'),
+(1366, '1203', '1212030003', 'HAGONOY\r'),
+(1367, '1203', '1212030004', 'JOSE ABAD SANTOS (TRINIDAD)\r'),
+(1368, '1203', '1212030005', 'KIBLAWAN\r'),
+(1369, '1203', '1212030006', 'MAGSAYSAY\r'),
+(1370, '1203', '1212030007', 'MALALAG\r'),
+(1371, '1203', '1212030008', 'MALITA\r'),
+(1372, '1203', '1212030009', 'MATANAO\r'),
+(1373, '1203', '1212030010', 'PADADA\r'),
+(1374, '1203', '1212030011', 'SANTA CRUZ\r'),
+(1375, '1203', '1212030012', 'SANTA MARIA\r'),
+(1376, '1203', '1212030013', 'SULOP\r'),
+(1377, '1203', '1212030014', 'SARANGANI\r'),
+(1378, '1203', '1212030015', 'DON MARCELINO\r'),
+(1379, '1204', '1212040001', 'BANAYBANAY\r'),
+(1380, '1204', '1212040002', 'BOSTON\r'),
+(1381, '1204', '1212040003', 'CARAGA\r'),
+(1382, '1204', '1212040004', 'CATEEL\r'),
+(1383, '1204', '1212040005', 'GOVERNOR GENEROSO\r'),
+(1384, '1204', '1212040006', 'LUPON\r'),
+(1385, '1204', '1212040007', 'MANAY\r'),
+(1386, '1204', '1212040008', 'CITY OF MATI (Capital)\r'),
+(1387, '1204', '1212040009', 'SAN ISIDRO\r'),
+(1388, '1204', '1212040010', 'TARRAGONA\r'),
+(1389, '1201', '1212010001', 'COMPOSTELA\r'),
+(1390, '1202', '1212020001', 'ASUNCION (SAUG)\r'),
+(1391, '1203', '1212030001', 'BANSALAN\r'),
+(1392, '1204', '1212040001', 'BAGANGA\r'),
+(1393, '1301', '1313010001', 'CARMEN\r'),
+(1394, '1301', '1313010002', 'KABACAN\r'),
+(1395, '1301', '1313010003', 'CITY OF KIDAPAWAN (Capital)\r'),
+(1396, '1301', '1313010004', 'LIBUNGAN\r'),
+(1397, '1301', '1313010005', 'MAGPET\r'),
+(1398, '1301', '1313010006', 'MAKILALA\r'),
+(1399, '1301', '1313010007', 'MATALAM\r'),
+(1400, '1301', '1313010008', 'MIDSAYAP\r'),
+(1401, '1301', '1313010009', 'PIGKAWAYAN\r'),
+(1402, '1301', '1313010010', 'PIKIT\r'),
+(1403, '1301', '1313010011', 'PRESIDENT ROXAS\r'),
+(1404, '1301', '1313010012', 'TULUNAN\r'),
+(1405, '1301', '1313010013', 'ANTIPAS\r'),
+(1406, '1301', '1313010014', 'BANISILAN\r'),
+(1407, '1301', '1313010015', 'ALEOSAN\r'),
+(1408, '1301', '1313010016', 'ARAKAN\r'),
+(1409, '1302', '1313020001', 'GLAN\r'),
+(1410, '1302', '1313020002', 'KIAMBA\r'),
+(1411, '1302', '1313020003', 'MAASIM\r'),
+(1412, '1302', '1313020004', 'MAITUM\r'),
+(1413, '1302', '1313020005', 'MALAPATAN\r'),
+(1414, '1302', '1313020006', 'MALUNGON\r'),
+(1415, '1303', '1313030001', 'GENERAL SANTOS CITY (DADIANGAS)\r'),
+(1416, '1303', '1313030002', 'CITY OF KORONADAL (Capital)\r'),
+(1417, '1303', '1313030003', 'NORALA\r'),
+(1418, '1303', '1313030004', 'POLOMOLOK\r'),
+(1419, '1303', '1313030005', 'SURALLAH\r'),
+(1420, '1303', '1313030006', 'TAMPAKAN\r'),
+(1421, '1303', '1313030007', 'TANTANGAN\r'),
+(1422, '1303', '1313030008', 'TUPI\r'),
+(1423, '1303', '1313030009', 'SANTO NIÑO\r'),
+(1424, '1303', '1313030010', 'LAKE SEBU\r'),
+(1425, '1304', '1313040001', 'COLUMBIO\r'),
+(1426, '1304', '1313040002', 'ESPERANZA\r'),
+(1427, '1304', '1313040003', 'ISULAN (Capital)\r'),
+(1428, '1304', '1313040004', 'KALAMANSIG\r'),
+(1429, '1304', '1313040005', 'LEBAK\r'),
+(1430, '1304', '1313040006', 'LUTAYAN\r'),
+(1431, '1304', '1313040007', 'LAMBAYONG (MARIANO MARCOS)\r'),
+(1432, '1304', '1313040008', 'PALIMBANG\r'),
+(1433, '1304', '1313040009', 'PRESIDENT QUIRINO\r'),
+(1434, '1304', '1313040010', 'CITY OF TACURONG\r'),
+(1435, '1304', '1313040011', 'SEN. NINOY AQUINO\r'),
+(1436, '1301', '1313010001', 'ALAMADA\r'),
+(1437, '1305', '1313050001', 'COTABATO CITY\r'),
+(1438, '1302', '1313020001', 'ALABEL (Capital)\r'),
+(1439, '1303', '1313030001', 'BANGA\r'),
+(1440, '1304', '1313040001', 'BAGUMBAYAN\r'),
+(1441, '1401', '1414010001', 'BUTUAN CITY (Capital)\r'),
+(1442, '1401', '1414010002', 'CITY OF CABADBARAN\r'),
+(1443, '1401', '1414010003', 'CARMEN\r'),
+(1444, '1401', '1414010004', 'JABONGA\r'),
+(1445, '1401', '1414010005', 'KITCHARAO\r'),
+(1446, '1401', '1414010006', 'LAS NIEVES\r'),
+(1447, '1401', '1414010007', 'MAGALLANES\r'),
+(1448, '1401', '1414010008', 'NASIPIT\r'),
+(1449, '1401', '1414010009', 'SANTIAGO\r'),
+(1450, '1401', '1414010010', 'TUBAY\r'),
+(1451, '1401', '1414010011', 'REMEDIOS T. ROMUALDEZ\r'),
+(1452, '1402', '1414020001', 'BUNAWAN\r'),
+(1453, '1402', '1414020002', 'ESPERANZA\r'),
+(1454, '1402', '1414020003', 'LA PAZ\r'),
+(1455, '1402', '1414020004', 'LORETO\r'),
+(1456, '1402', '1414020005', 'PROSPERIDAD (Capital)\r'),
+(1457, '1402', '1414020006', 'ROSARIO\r'),
+(1458, '1402', '1414020007', 'SAN FRANCISCO\r'),
+(1459, '1402', '1414020008', 'SAN LUIS\r'),
+(1460, '1402', '1414020009', 'SANTA JOSEFA\r'),
+(1461, '1402', '1414020010', 'TALACOGON\r'),
+(1462, '1402', '1414020011', 'TRENTO\r'),
+(1463, '1402', '1414020012', 'VERUELA\r'),
+(1464, '1402', '1414020013', 'SIBAGAT\r'),
+(1465, '1403', '1414030001', 'CAGDIANAO\r'),
+(1466, '1403', '1414030002', 'DINAGAT\r'),
+(1467, '1403', '1414030003', 'LIBJO (ALBOR)\r'),
+(1468, '1403', '1414030004', 'LORETO\r'),
+(1469, '1403', '1414030005', 'SAN JOSE (Capital)\r'),
+(1470, '1403', '1414030006', 'TUBAJON\r'),
+(1471, '1404', '1414040001', 'BACUAG\r'),
+(1472, '1404', '1414040002', 'BURGOS\r'),
+(1473, '1404', '1414040003', 'CLAVER\r'),
+(1474, '1404', '1414040004', 'DAPA\r'),
+(1475, '1404', '1414040005', 'DEL CARMEN\r'),
+(1476, '1404', '1414040006', 'GENERAL LUNA\r'),
+(1477, '1404', '1414040007', 'GIGAQUIT\r'),
+(1478, '1404', '1414040008', 'MAINIT\r'),
+(1479, '1404', '1414040009', 'MALIMONO\r'),
+(1480, '1404', '1414040010', 'PILAR\r'),
+(1481, '1404', '1414040011', 'PLACER\r'),
+(1482, '1404', '1414040012', 'SAN BENITO\r'),
+(1483, '1404', '1414040013', 'SAN FRANCISCO (ANAO-AON)\r'),
+(1484, '1404', '1414040014', 'SAN ISIDRO\r'),
+(1485, '1404', '1414040015', 'SANTA MONICA (SAPAO)\r'),
+(1486, '1404', '1414040016', 'SISON\r'),
+(1487, '1404', '1414040017', 'SOCORRO\r'),
+(1488, '1404', '1414040018', 'SURIGAO CITY (Capital)\r'),
+(1489, '1404', '1414040019', 'TAGANA-AN\r'),
+(1490, '1404', '1414040020', 'TUBOD\r'),
+(1491, '1405', '1414050001', 'BAYABAS\r'),
+(1492, '1405', '1414050002', 'CITY OF BISLIG\r'),
+(1493, '1405', '1414050003', 'CAGWAIT\r'),
+(1494, '1405', '1414050004', 'CANTILAN\r'),
+(1495, '1405', '1414050005', 'CARMEN\r'),
+(1496, '1405', '1414050006', 'CARRASCAL\r'),
+(1497, '1405', '1414050007', 'CORTES\r'),
+(1498, '1405', '1414050008', 'HINATUAN\r'),
+(1499, '1405', '1414050009', 'LANUZA\r'),
+(1500, '1405', '1414050010', 'LIANGA\r'),
+(1501, '1405', '1414050011', 'LINGIG\r'),
+(1502, '1405', '1414050012', 'MADRID\r'),
+(1503, '1405', '1414050013', 'MARIHATAG\r'),
+(1504, '1405', '1414050014', 'SAN AGUSTIN\r'),
+(1505, '1405', '1414050015', 'SAN MIGUEL\r'),
+(1506, '1405', '1414050016', 'TAGBINA\r'),
+(1507, '1405', '1414050017', 'TAGO\r'),
+(1508, '1405', '1414050018', 'CITY OF TANDAG (Capital)\r'),
+(1509, '1401', '1414010001', 'BUENAVISTA\r'),
+(1510, '1402', '1414020001', 'CITY OF BAYUGAN\r'),
+(1511, '1403', '1414030001', 'BASILISA (RIZAL)\r'),
+(1512, '1404', '1414040001', 'ALEGRIA\r'),
+(1513, '1405', '1414050001', 'BAROBO\r'),
+(1514, '1501', '1515010001', 'LANTAWAN\r'),
+(1515, '1501', '1515010002', 'MALUSO\r'),
+(1516, '1501', '1515010003', 'SUMISIP\r'),
+(1517, '1501', '1515010004', 'TIPO-TIPO\r'),
+(1518, '1501', '1515010005', 'TUBURAN\r'),
+(1519, '1501', '1515010006', 'AKBAR\r'),
+(1520, '1501', '1515010007', 'AL-BARKA\r'),
+(1521, '1501', '1515010008', 'HADJI MOHAMMAD AJUL\r'),
+(1522, '1501', '1515010009', 'UNGKAYA PUKAN\r'),
+(1523, '1501', '1515010010', 'HADJI MUHTAMAD\r'),
+(1524, '1501', '1515010011', 'TABUAN-LASA\r'),
+(1525, '1502', '1515020001', 'BALABAGAN\r'),
+(1526, '1502', '1515020002', 'BALINDONG (WATU)\r'),
+(1527, '1502', '1515020003', 'BAYANG\r'),
+(1528, '1502', '1515020004', 'BINIDAYAN\r'),
+(1529, '1502', '1515020005', 'BUBONG\r'),
+(1530, '1502', '1515020006', 'BUTIG\r'),
+(1531, '1502', '1515020007', 'GANASSI\r'),
+(1532, '1502', '1515020008', 'KAPAI\r'),
+(1533, '1502', '1515020009', 'LUMBA-BAYABAO (MAGUING)\r'),
+(1534, '1502', '1515020010', 'LUMBATAN\r'),
+(1535, '1502', '1515020011', 'MADALUM\r'),
+(1536, '1502', '1515020012', 'MADAMBA\r'),
+(1537, '1502', '1515020013', 'MALABANG\r'),
+(1538, '1502', '1515020014', 'MARANTAO\r'),
+(1539, '1502', '1515020015', 'MARAWI CITY (Capital)\r'),
+(1540, '1502', '1515020016', 'MASIU\r'),
+(1541, '1502', '1515020017', 'MULONDO\r'),
+(1542, '1502', '1515020018', 'PAGAYAWAN (TATARIKAN)\r'),
+(1543, '1502', '1515020019', 'PIAGAPO\r'),
+(1544, '1502', '1515020020', 'POONA BAYABAO (GATA)\r'),
+(1545, '1502', '1515020021', 'PUALAS\r'),
+(1546, '1502', '1515020022', 'DITSAAN-RAMAIN\r'),
+(1547, '1502', '1515020023', 'SAGUIARAN\r'),
+(1548, '1502', '1515020024', 'TAMPARAN\r'),
+(1549, '1502', '1515020025', 'TARAKA\r'),
+(1550, '1502', '1515020026', 'TUBARAN\r'),
+(1551, '1502', '1515020027', 'TUGAYA\r'),
+(1552, '1502', '1515020028', 'WAO\r'),
+(1553, '1502', '1515020029', 'MAROGONG\r'),
+(1554, '1502', '1515020030', 'CALANOGAS\r'),
+(1555, '1502', '1515020031', 'BUADIPOSO-BUNTONG\r'),
+(1556, '1502', '1515020032', 'MAGUING\r'),
+(1557, '1502', '1515020033', 'PICONG (SULTAN GUMANDER)\r'),
+(1558, '1502', '1515020034', 'LUMBAYANAGUE\r'),
+(1559, '1502', '1515020035', 'BUMBARAN\r'),
+(1560, '1502', '1515020036', 'TAGOLOAN II\r'),
+(1561, '1502', '1515020037', 'KAPATAGAN\r'),
+(1562, '1502', '1515020038', 'SULTAN DUMALONDONG\r'),
+(1563, '1502', '1515020039', 'LUMBACA-UNAYAN\r'),
+(1564, '1503', '1515030001', 'BULDON\r'),
+(1565, '1503', '1515030002', 'BULUAN\r'),
+(1566, '1503', '1515030003', 'DATU PAGLAS\r'),
+(1567, '1503', '1515030004', 'DATU PIANG\r'),
+(1568, '1503', '1515030005', 'DATU ODIN SINSUAT (DINAIG)\r'),
+(1569, '1503', '1515030006', 'SHARIFF AGUAK (MAGANOY) (Capital)\r'),
+(1570, '1503', '1515030007', 'MATANOG\r'),
+(1571, '1503', '1515030008', 'PAGALUNGAN\r'),
+(1572, '1503', '1515030009', 'PARANG\r'),
+(1573, '1503', '1515030010', 'SULTAN KUDARAT (NULING)\r'),
+(1574, '1503', '1515030011', 'SULTAN SA BARONGIS (LAMBAYONG)\r'),
+(1575, '1503', '1515030012', 'KABUNTALAN (TUMBAO)\r'),
+(1576, '1503', '1515030013', 'UPI\r'),
+(1577, '1503', '1515030014', 'TALAYAN\r'),
+(1578, '1503', '1515030015', 'SOUTH UPI\r'),
+(1579, '1503', '1515030016', 'BARIRA\r'),
+(1580, '1503', '1515030017', 'GEN. S. K. PENDATUN\r'),
+(1581, '1503', '1515030018', 'MAMASAPANO\r'),
+(1582, '1503', '1515030019', 'TALITAY\r'),
+(1583, '1503', '1515030020', 'PAGAGAWAN\r'),
+(1584, '1503', '1515030021', 'PAGLAT\r'),
+(1585, '1503', '1515030022', 'SULTAN MASTURA\r'),
+(1586, '1503', '1515030023', 'GUINDULUNGAN\r'),
+(1587, '1503', '1515030024', 'DATU SAUDI-AMPATUAN\r'),
+(1588, '1503', '1515030025', 'DATU UNSAY\r'),
+(1589, '1503', '1515030026', 'DATU ABDULLAH SANGKI\r'),
+(1590, '1503', '1515030027', 'RAJAH BUAYAN\r'),
+(1591, '1503', '1515030028', 'DATU BLAH T. SINSUAT\r'),
+(1592, '1503', '1515030029', 'DATU ANGGAL MIDTIMBANG\r'),
+(1593, '1503', '1515030030', 'MANGUDADATU\r'),
+(1594, '1503', '1515030031', 'PANDAG\r'),
+(1595, '1503', '1515030032', 'NORTHERN KABUNTALAN\r'),
+(1596, '1503', '1515030033', 'DATU HOFFER AMPATUAN\r'),
+(1597, '1503', '1515030034', 'DATU SALIBO\r'),
+(1598, '1503', '1515030035', 'SHARIFF SAYDONA MUSTAPHA\r'),
+(1599, '1504', '1515040001', 'JOLO (Capital)\r'),
+(1600, '1504', '1515040002', 'KALINGALAN CALUANG\r'),
+(1601, '1504', '1515040003', 'LUUK\r'),
+(1602, '1504', '1515040004', 'MAIMBUNG\r'),
+(1603, '1504', '1515040005', 'HADJI PANGLIMA TAHIL (MARUNGGAS)\r'),
+(1604, '1504', '1515040006', 'OLD PANAMAO\r'),
+(1605, '1504', '1515040007', 'PANGUTARAN\r'),
+(1606, '1504', '1515040008', 'PARANG\r'),
+(1607, '1504', '1515040009', 'PATA\r'),
+(1608, '1504', '1515040010', 'PATIKUL\r'),
+(1609, '1504', '1515040011', 'SIASI\r'),
+(1610, '1504', '1515040012', 'TALIPAO\r'),
+(1611, '1504', '1515040013', 'TAPUL\r'),
+(1612, '1504', '1515040014', 'TONGKIL\r'),
+(1613, '1504', '1515040015', 'PANGLIMA ESTINO (NEW PANAMAO)\r'),
+(1614, '1504', '1515040016', 'LUGUS\r'),
+(1615, '1504', '1515040017', 'PANDAMI\r'),
+(1616, '1504', '1515040018', 'OMAR\r'),
+(1617, '1505', '1515050001', 'BONGAO (Capital)\r'),
+(1618, '1505', '1515050002', 'MAPUN (CAGAYAN DE TAWI-TAWI)\r'),
+(1619, '1505', '1515050003', 'SIMUNUL\r'),
+(1620, '1505', '1515050004', 'SITANGKAI\r'),
+(1621, '1505', '1515050005', 'SOUTH UBIAN\r'),
+(1622, '1505', '1515050006', 'TANDUBAS\r'),
+(1623, '1505', '1515050007', 'TURTLE ISLANDS\r'),
+(1624, '1505', '1515050008', 'LANGUYAN\r'),
+(1625, '1505', '1515050009', 'SAPA-SAPA\r'),
+(1626, '1505', '1515050010', 'SIBUTU\r'),
+(1627, '1501', '1515010001', 'CITY OF LAMITAN\r'),
+(1628, '1502', '1515020001', 'BACOLOD-KALAWI (BACOLOD GRANDE)\r'),
+(1629, '1503', '1515030001', 'AMPATUAN\r'),
+(1630, '1504', '1515040001', 'INDANAN\r'),
+(1631, '1505', '1515050001', 'PANGLIMA SUGALA (BALIMBING) (Capital)\r');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `operations`
+--
+
+CREATE TABLE `operations` (
+  `operation_id` int(11) NOT NULL,
+  `operation_code` varchar(30) NOT NULL,
+  `operation_date` date NOT NULL,
+  `asset_tag` varchar(30) NOT NULL,
+  `project_code` varchar(30) NOT NULL,
+  `remarks` varchar(1000) NOT NULL,
+  `operating_hours` int(11) NOT NULL,
+  `distance_travelled` int(11) NOT NULL,
+  `diesel_consumption` int(11) NOT NULL,
+  `gas_consumption` int(11) NOT NULL,
+  `oil_consumption` int(11) NOT NULL,
+  `number_loads` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `organizations`
+--
+
+CREATE TABLE `organizations` (
+  `org_id` int(11) NOT NULL,
+  `org_code` varchar(10) NOT NULL,
+  `org_name` varchar(100) NOT NULL,
+  `cost_center_code` varchar(10) NOT NULL,
+  `cost_center_name` varchar(50) NOT NULL,
+  `parent_org` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `organizations`
+--
+
+INSERT INTO `organizations` (`org_id`, `org_code`, `org_name`, `cost_center_code`, `cost_center_name`, `parent_org`) VALUES
+(1, '0000000001', 'Maintenance Department', 'CC0001', 'Cost Center 0001', '0000000000'),
+(2, '0000000002', 'Construction Department', 'CC0002', 'Cost Center 0002', '0000000000'),
+(3, '0000000003', 'HR Department', 'CC0003', 'Cost Center 0003', '0000000000'),
+(4, '0000000004', 'Administration', 'CC0004', 'Cost Center 0004', '0000000000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `positions`
+--
+
+CREATE TABLE `positions` (
+  `position_id` int(11) NOT NULL,
+  `position_code` varchar(30) NOT NULL,
+  `position_text` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `positions`
+--
+
+INSERT INTO `positions` (`position_id`, `position_code`, `position_text`) VALUES
+(1, 'POS-001', 'Driver'),
+(2, 'POS-002', 'Project Engineer'),
+(3, 'POS-003', 'Clerk');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `project_id` int(11) NOT NULL,
+  `project_code` varchar(30) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `cost` int(11) NOT NULL,
+  `zip_code` varchar(5) NOT NULL,
+  `municipality_code` varchar(10) NOT NULL,
+  `date_started` date NOT NULL,
+  `date_completed` date NOT NULL,
+  `target_date` date DEFAULT NULL,
+  `project_engineer` varchar(11) NOT NULL,
+  `date_assigned` date NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`project_id`, `project_code`, `name`, `cost`, `zip_code`, `municipality_code`, `date_started`, `date_completed`, `target_date`, `project_engineer`, `date_assigned`, `created_at`, `updated_at`) VALUES
+(1, 'PRO-20180408-0001', 'AYAGA ROAD UPGRADING', 5000000, '', '0202020001', '2018-04-07', '1970-01-01', NULL, '3', '2018-04-07', '2018-04-08 00:34:05', '2018-04-08 00:34:05'),
+(2, 'PRO-20180408-0002', 'AQUIB', 4000000, '', '0101020013', '2017-12-12', '1970-01-01', NULL, '4', '2017-12-12', '2018-04-08 00:37:51', '2018-04-08 00:37:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provinces`
+--
+
+CREATE TABLE `provinces` (
+  `province_id` int(11) NOT NULL,
+  `region_code` varchar(2) NOT NULL,
+  `province_code` varchar(4) NOT NULL,
+  `province_text` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `provinces`
+--
+
+INSERT INTO `provinces` (`province_id`, `region_code`, `province_code`, `province_text`) VALUES
+(1, '17', '1701', 'METRO MANILA\r'),
+(2, '16', '1601', 'ABRA\r'),
+(3, '16', '1602', 'APAYAO\r'),
+(4, '16', '1603', 'BENGUET\r'),
+(5, '16', '1604', 'IFUGAO\r'),
+(6, '16', '1605', 'KALINGA\r'),
+(7, '16', '1606', 'MOUNTAIN PROVINCE\r'),
+(8, '01', '0101', 'ILOCOS NORTE\r'),
+(9, '01', '0102', 'ILOCOS SUR\r'),
+(10, '01', '0103', 'LA UNION\r'),
+(11, '01', '0104', 'PANGASINAN\r'),
+(12, '02', '0201', 'BATANES\r'),
+(13, '02', '0202', 'CAGAYAN\r'),
+(14, '02', '0203', 'ISABELA\r'),
+(15, '02', '0204', 'NUEVA VIZCAYA\r'),
+(16, '02', '0205', 'QUIRINO\r'),
+(17, '03', '0301', 'AURORA\r'),
+(18, '03', '0302', 'BATAAN\r'),
+(19, '03', '0303', 'BULACAN\r'),
+(20, '03', '0304', 'NUEVA ECIJA\r'),
+(21, '03', '0305', 'PAMPANGA\r'),
+(22, '03', '0306', 'TARLAC\r'),
+(23, '03', '0307', 'ZAMBALES\r'),
+(24, '04', '0401', 'BATANGAS\r'),
+(25, '04', '0402', 'CAVITE\r'),
+(26, '04', '0403', 'LAGUNA\r'),
+(27, '04', '0404', 'QUEZON\r'),
+(28, '04', '0405', 'RIZAL\r'),
+(29, '05', '0501', 'MARINDUQUE\r'),
+(30, '05', '0502', 'OCCIDENTAL MINDORO\r'),
+(31, '05', '0503', 'ORIENTAL MINDORO\r'),
+(32, '05', '0504', 'PALAWAN\r'),
+(33, '05', '0505', 'ROMBLON\r'),
+(34, '07', '0701', 'ALBAY\r'),
+(35, '07', '0702', 'CAMARINES NORTE\r'),
+(36, '07', '0703', 'CAMARINES SUR\r'),
+(37, '07', '0704', 'CATANDUANES\r'),
+(38, '07', '0705', 'MASBATE\r'),
+(39, '07', '0706', 'SORSOGON\r'),
+(40, '08', '0801', 'AKLAN\r'),
+(41, '08', '0802', 'ANTIQUE\r'),
+(42, '08', '0803', 'CAPIZ\r'),
+(43, '08', '0804', 'GUIMARAS\r'),
+(44, '08', '0805', 'ILOILO\r'),
+(45, '08', '0806', 'NEGROS OCCIDENTAL\r'),
+(46, '09', '0901', 'BOHOL\r'),
+(47, '09', '0902', 'CEBU\r'),
+(48, '09', '0903', 'NEGROS ORIENTAL\r'),
+(49, '09', '0904', 'SIQUIJOR\r'),
+(50, '10', '1001', 'BILIRAN\r'),
+(51, '10', '1002', 'EASTERN SAMAR\r'),
+(52, '10', '1003', 'LEYTE\r'),
+(53, '10', '1004', 'NORTHERN SAMAR\r'),
+(54, '10', '1005', 'SAMAR (WESTERN SAMAR)\r'),
+(55, '10', '1006', 'SOUTHERN LEYTE\r'),
+(56, '06', '0601', 'ZAMBOANGA DEL NORTE\r'),
+(57, '06', '0602', 'ZAMBOANGA DEL SUR\r'),
+(58, '06', '0603', 'ZAMBOANGA SIBUGAY\r'),
+(59, '06', '0604', 'CITY OF ISABELA (Not a Province)\r'),
+(60, '11', '1101', 'BUKIDNON\r'),
+(61, '11', '1102', 'CAMIGUIN\r'),
+(62, '11', '1103', 'LANAO DEL NORTE\r'),
+(63, '11', '1104', 'MISAMIS OCCIDENTAL\r'),
+(64, '11', '1105', 'MISAMIS ORIENTAL\r'),
+(65, '12', '1201', 'COMPOSTELA VALLEY\r'),
+(66, '12', '1202', 'DAVAO DEL NORTE\r'),
+(67, '12', '1203', 'DAVAO DEL SUR\r'),
+(68, '12', '1204', 'DAVAO ORIENTAL\r'),
+(69, '13', '1301', 'COTABATO (NORTH COTABATO)\r'),
+(70, '13', '1302', 'SARANGANI\r'),
+(71, '13', '1303', 'SOUTH COTABATO\r'),
+(72, '13', '1304', 'SULTAN KUDARAT\r'),
+(73, '13', '1305', 'COTABATO CITY (Not a Province)\r'),
+(74, '14', '1401', 'AGUSAN DEL NORTE\r'),
+(75, '14', '1402', 'AGUSAN DEL SUR\r'),
+(76, '14', '1403', 'DINAGAT ISLANDS\r'),
+(77, '14', '1404', 'SURIGAO DEL NORTE\r'),
+(78, '14', '1405', 'SURIGAO DEL SUR\r'),
+(79, '15', '1501', 'BASILAN\r'),
+(80, '15', '1502', 'LANAO DEL SUR\r'),
+(81, '15', '1503', 'MAGUINDANAO\r'),
+(82, '15', '1504', 'SULU\r'),
+(83, '15', '1505', 'TAWI-TAWI\r');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `regions`
+--
+
+CREATE TABLE `regions` (
+  `region_id` int(11) NOT NULL,
+  `region_code` varchar(2) NOT NULL,
+  `region_text_short` varchar(100) NOT NULL,
+  `region_text_long` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `regions`
+--
+
+INSERT INTO `regions` (`region_id`, `region_code`, `region_text_short`, `region_text_long`) VALUES
+(1, '01', 'REGION I', 'Ilocos Region\r'),
+(2, '02', 'REGION II', 'Cagayan Valley\r'),
+(3, '03', 'REGION III', 'Central Luzon\r'),
+(4, '04', 'REGION IV-A', 'CALABARZON\r'),
+(5, '05', 'REGION IV-B', 'MIMAROPA\r'),
+(6, '06', 'REGION IX', 'Zamboanga Peninsula\r'),
+(7, '07', 'REGION V', 'Bicol Region\r'),
+(8, '08', 'REGION VI', 'Western Visayas\r'),
+(9, '09', 'REGION VII', 'Central Visayas\r'),
+(10, '10', 'REGION VIII', 'Eastern Visayas\r'),
+(11, '11', 'REGION X', 'Northern Mindanao\r'),
+(12, '12', 'REGION XI', 'Davao Region\r'),
+(13, '13', 'REGION XII', 'Soccsksargen\r'),
+(14, '14', 'REGION XIII', 'Caraga\r'),
+(15, '15', 'ARMM', 'Autonomous Region in Muslim Mindanao\r'),
+(16, '16', 'CAR', 'Cordillera Administrative Region\r'),
+(17, '17', 'NCR', 'National Capital Region\r');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_purpose`
+--
+
+CREATE TABLE `request_purpose` (
+  `request_purpose_id` int(11) NOT NULL,
+  `request_purpose_code` varchar(11) NOT NULL,
+  `request_purpose` varchar(150) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `request_purpose`
+--
+
+INSERT INTO `request_purpose` (`request_purpose_id`, `request_purpose_code`, `request_purpose`, `created_at`, `updated_at`) VALUES
+(1, '', 'REPAIRS & MAINTENANCE-BUILDING CONSTRUCTION', '2018-04-02', '2018-04-02'),
+(2, '', 'REPAIRS & MAINTENANCE-BUILDING LEASEHOLD IMPROVEMENTS', '0000-00-00', '0000-00-00'),
+(3, '', 'REPAIRS & MAINTENANCE-COMMUNICATION EQUIPMENT', '0000-00-00', '0000-00-00'),
+(4, '', 'REPAIRS & MAINTENANCE-CONSTRUCTION EQUIPMENT', '0000-00-00', '0000-00-00'),
+(5, '', 'REPAIRS & MAINTENANCE-FURNITURE AND FIXTUREST', '0000-00-00', '0000-00-00'),
+(6, '', 'REPAIRS & MAINTENANCE-IT EQUIPMENT & SOFTWARES', '0000-00-00', '0000-00-00'),
+(7, '', 'REPAIRS & MAINTENANCE-MOTOR VEHICLE', '0000-00-00', '0000-00-00'),
+(8, '', 'REPAIRS & MAINTENANCE-OFFICE EQUIPMENT', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requisition_slips`
+--
+
+CREATE TABLE `requisition_slips` (
+  `requisition_slip_id` int(11) NOT NULL,
+  `requisition_slip_code` varchar(30) NOT NULL,
+  `request_purpose` varchar(100) NOT NULL,
+  `date_requested` date NOT NULL,
+  `date_needed` date NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `request_type` int(11) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `requisition_slips`
+--
+
+INSERT INTO `requisition_slips` (`requisition_slip_id`, `requisition_slip_code`, `request_purpose`, `date_requested`, `date_needed`, `description`, `request_type`, `created_at`, `updated_at`) VALUES
+(1, 'RS-20180403-0001', '1', '2018-04-18', '2018-04-18', '', 1, '2018-04-03', '2018-04-03'),
+(2, 'RS-20180404-0001', '1', '2018-04-04', '2018-04-03', '', 1, '2018-04-04', '2018-04-04'),
+(3, 'RS-20180404-0002', '1', '2018-04-04', '2018-04-03', '', 1, '2018-04-04', '2018-04-04'),
+(4, 'RS-20180404-0003', '1', '2018-04-03', '2018-05-01', 'asdfasdf', 1, '2018-04-04', '2018-04-04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `admin`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'User', 0, 'user@gmail.com', '$2y$10$IlZ6oK8mOa5TCAq1p1MF4.46rVrtadCmWyZa2zX.F9DmSIFNO80XC', 'Lo5f4XqmkNxdYhwlaMDAzI4CfQd9lHVyL62uONvwz1S6iCVOSOHXFRAvaToU', '2018-03-16 09:25:41', '2018-03-16 09:25:41'),
+(2, 'Admin', 1, 'administrator@gmail.com', '$2y$10$IlZ6oK8mOa5TCAq1p1MF4.46rVrtadCmWyZa2zX.F9DmSIFNO80XC', 'SMerHSll03VzbKIVLwaEUf8T4csKJjLwEIq5XmDeKl2aLEm8vgPa4FZcqLL2', '2018-03-16 09:25:41', '2018-03-16 09:25:41'),
+(4, 'Erik Supnet', 0, 'ebsupnet@bizlogiks.ph', '$2y$10$M9nvn65LBLJruEkEr7hb8e8Q31MklVUx/IEx8fJ6nHeaNOED2z1K2', 'shS2EC0SSk71LlXSWU0mX5NdDmZTx56jMRpVVusT2EbBxHtvucMX1N3kqv6G', '2018-03-19 02:55:47', '2018-03-19 02:55:47'),
+(5, 'Jay Bulan', 0, 'jtbulan@bizlogiks.ph', '$2y$10$B5fzLM0CPFd/82TMnCN03.hUzJph3xSclWUwksjHgU72O3wV.iq6G', 'i0TOSPSBA45Ksl7KmK8gIeGYfRWknl07rhQEvvIWU4QgntmQ2un2GRTzsgHj', '2018-03-19 02:58:24', '2018-03-19 02:58:24'),
+(6, 'Mykee Caparas', 0, 'mjcaparas@bizlogiks.ph', '$2y$10$j6jCDbYsoC5pM/lnJKjIaOsBvo1zbPkGYVVNKftd491EJgEgaxjVS', 'lBYFk2arL3UpeQy4nWaZ0OWzLCw4K51FprBsM1OCRYNMFaoen0XyDPv69T4b', '2018-03-19 02:59:33', '2018-03-19 02:59:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warranties`
+--
+
+CREATE TABLE `warranties` (
+  `warranty_id` int(11) NOT NULL,
+  `warranty_code` varchar(30) NOT NULL,
+  `asset_tag` varchar(30) NOT NULL,
+  `expiry_date` date NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `assets`
+--
+ALTER TABLE `assets`
+  ADD PRIMARY KEY (`asset_id`);
+
+--
+-- Indexes for table `asset_categories`
+--
+ALTER TABLE `asset_categories`
+  ADD PRIMARY KEY (`asset_category_id`);
+
+--
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`employee_id`);
+
+--
+-- Indexes for table `job_orders`
+--
+ALTER TABLE `job_orders`
+  ADD PRIMARY KEY (`job_order_id`);
+
+--
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`log_id`);
+
+--
+-- Indexes for table `methods`
+--
+ALTER TABLE `methods`
+  ADD PRIMARY KEY (`method_id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `municipalities`
+--
+ALTER TABLE `municipalities`
+  ADD PRIMARY KEY (`municipality_id`);
+
+--
+-- Indexes for table `operations`
+--
+ALTER TABLE `operations`
+  ADD PRIMARY KEY (`operation_id`);
+
+--
+-- Indexes for table `organizations`
+--
+ALTER TABLE `organizations`
+  ADD PRIMARY KEY (`org_id`);
+
+--
+-- Indexes for table `positions`
+--
+ALTER TABLE `positions`
+  ADD PRIMARY KEY (`position_id`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`project_id`);
+
+--
+-- Indexes for table `provinces`
+--
+ALTER TABLE `provinces`
+  ADD PRIMARY KEY (`province_id`);
+
+--
+-- Indexes for table `regions`
+--
+ALTER TABLE `regions`
+  ADD PRIMARY KEY (`region_id`);
+
+--
+-- Indexes for table `request_purpose`
+--
+ALTER TABLE `request_purpose`
+  ADD PRIMARY KEY (`request_purpose_id`);
+
+--
+-- Indexes for table `requisition_slips`
+--
+ALTER TABLE `requisition_slips`
+  ADD PRIMARY KEY (`requisition_slip_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `warranties`
+--
+ALTER TABLE `warranties`
+  ADD PRIMARY KEY (`warranty_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `assets`
+--
+ALTER TABLE `assets`
+  MODIFY `asset_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `asset_categories`
+--
+ALTER TABLE `asset_categories`
+  MODIFY `asset_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `job_orders`
+--
+ALTER TABLE `job_orders`
+  MODIFY `job_order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `methods`
+--
+ALTER TABLE `methods`
+  MODIFY `method_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `operations`
+--
+ALTER TABLE `operations`
+  MODIFY `operation_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `organizations`
+--
+ALTER TABLE `organizations`
+  MODIFY `org_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `positions`
+--
+ALTER TABLE `positions`
+  MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `provinces`
+--
+ALTER TABLE `provinces`
+  MODIFY `province_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT for table `regions`
+--
+ALTER TABLE `regions`
+  MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `request_purpose`
+--
+ALTER TABLE `request_purpose`
+  MODIFY `request_purpose_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `requisition_slips`
+--
+ALTER TABLE `requisition_slips`
+  MODIFY `requisition_slip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `warranties`
+--
+ALTER TABLE `warranties`
+  MODIFY `warranty_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
