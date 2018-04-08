@@ -70,16 +70,17 @@ class RequisitionsController extends Controller {
 
   }
 
-  public function save(Request $request){
+  public function save_asset(Request $request){
     
     // return $request->all();
     $data = array();
     $data['date_requested'] = date('Y-m-d', strtotime($request->input('date_requested')));
     $data['date_needed'] = date('Y-m-d', strtotime($request->input('date_needed')));
     $data['description'] = $request->input('description');
+    $data['jobOrderCode'] = $request->input('jobOrderCode');
     
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         $requisition = new Requisition;
 
@@ -91,25 +92,71 @@ class RequisitionsController extends Controller {
         $requisition->date_needed = $data['date_needed'];
         $requisition->description = $data['description'];
         $requisition->request_type = "Asset";
-        $requisition->job_order_code = "Asset";
+        $requisition->job_order_code = $data['jobOrderCode'];
         // $requisition->asset_tag = $data['assetTag'];
         $requisition->save();
 
-        // return response()->json([
-        //     'status' => 200,
-        //     'data' => 'null',
-        //     'message' => 'Successfully saved.'
-        // ]);
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
 
-    //   }
-    //   catch (\Exception $e) 
-    //   {
-    //       return response()->json([
-    //         'status' => 500,
-    //         'data' => 'null',
-    //         'message' => 'Error, please try again!'
-    //     ]);
-    //   }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
+    });
+
+    return $transaction;
+  }
+
+  public function save_project(Request $request){
+    
+    // return $request->all();
+    $data = array();
+    $data['date_requested'] = date('Y-m-d', strtotime($request->input('date_requested')));
+    $data['date_needed'] = date('Y-m-d', strtotime($request->input('date_needed')));
+    $data['description'] = $request->input('description');
+    $data['projectCode'] = $request->input('projectCode');
+    
+    $transaction = DB::transaction(function($data) use($data){
+    try{
+
+        $requisition = new Requisition;
+
+        $risCode = (str_pad(($requisition->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+        $requisition->requisition_slip_code = "RS-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$risCode;
+        $requisition->date_requested = $data['date_requested'];
+        $requisition->date_needed = $data['date_needed'];
+        $requisition->description = $data['description'];
+        $requisition->request_type = "Asset";
+        $requisition->job_order_code = $data['projectCode'];
+        // $requisition->asset_tag = $data['assetTag'];
+        $requisition->save();
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

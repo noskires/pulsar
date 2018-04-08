@@ -124,8 +124,12 @@
 
 <!-- RIS -->
 
-<script type="text/ng-template" id="ris.create.view">
-  @include('requisition.add_ris')
+<script type="text/ng-template" id="ris.create.asset.view">
+  @include('requisition.add_asset_ris')
+</script>
+
+<script type="text/ng-template" id="ris.create.project.view">
+  @include('requisition.add_project_ris')
 </script>
 
 <!-- RIS -->

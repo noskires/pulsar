@@ -3,13 +3,43 @@
     angular
         .module('pulsarApp')
         .controller('ProjectsCtrl', ProjectsCtrl) 
+        .controller('ProjectsModalInstanceCtrl', ProjectsModalInstanceCtrl) 
 
-        ProjectsCtrl.$inject = ['ProjectsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', '$window'];
-        function ProjectsCtrl(ProjectsSrvcs, EmployeesSrvcs, AddressesSrvcs, $window){
+        ProjectsCtrl.$inject = ['$stateParams', 'ProjectsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', '$window', '$uibModal'];
+        function ProjectsCtrl($stateParams, ProjectsSrvcs, EmployeesSrvcs, AddressesSrvcs, $window, $uibModal){
             var vm = this;
             var data = {}; 
 
-            ProjectsSrvcs.projects().then (function (response) {
+
+            if($stateParams.projectCode)
+            {
+                vm.projectCode = $stateParams.projectCode;
+
+                ProjectsSrvcs.projects({projectCode:vm.projectCode}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.project = response.data.data[0];
+                        console.log(vm.project)
+                        
+                        var modalInstance = $uibModal.open({
+                            controller:'ProjectsModalInstanceCtrl',
+                            templateUrl:'projectInfo.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'Project Controller',
+                                    message:response.data.message,
+                                    project: vm.project
+                                };
+                              }
+                            }
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.projects = response.data.data;
@@ -86,6 +116,21 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            vm.routeTo = function(route){
+                $window.location.href = route;
+            };
+        }
+
+        ProjectsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData'];
+        function ProjectsModalInstanceCtrl ($uibModalInstance, formData) {
+
+            var vm = this;
+            vm.formData = formData.project;
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+            
             vm.routeTo = function(route){
                 $window.location.href = route;
             };

@@ -119,6 +119,7 @@ Route::get('/api/v1/organizations','OrganizationsController@organizations');
 
 Route::get('/project/new','Project\ProjectsController@index');
 Route::get('/projects/list','Project\ProjectsController@index');
+Route::get('/projects/list/{projectCode}','Project\ProjectsController@index');
 
 /*
 |--------------------------------------------------------------------------
@@ -195,8 +196,10 @@ Route::get('/requisition-issue-slip/new','Requisition\RequisitionsController@ind
 | Requisition Apis
 |--------------------------------------------------------------------------
 */
-Route::get('/requisition-issue-slip/new/{jobOrderCode}','Requisition\RequisitionsController@index');
-Route::post('/api/v1/requisition-issue-slip/save','Requisition\RequisitionsController@save'); 
+Route::get('/requisition-issue-slip/asset/new/{jobOrderCode}','Requisition\RequisitionsController@index');
+Route::get('/requisition-issue-slip/project/new/{jobOrderCode}','Requisition\RequisitionsController@index');
+Route::post('/api/v1/requisition-issue-slip/asset/save','Requisition\RequisitionsController@save_asset'); 
+Route::post('/api/v1/requisition-issue-slip/project/save','Requisition\RequisitionsController@save_project'); 
 
 /*
 |--------------------------------------------------------------------------

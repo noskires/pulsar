@@ -85,6 +85,11 @@
                 controller: 'ProjectsCtrl as pc',
                 templateUrl: 'project.list.projects.view'
             })
+            .state('list-projectsCopy', {
+                url: '/projects/list/:projectCode',
+                controller: 'ProjectsCtrl as pc',
+                templateUrl: 'project.list.projects.view'
+            })
             //Projects//
             .state('jo-create', {
                 url: '/job-order/new/:assetTag',
@@ -100,10 +105,15 @@
                 url: '/:joCode',
                 controller: 'JobOrdersCtrl as joc'
             })
-            .state('requesition-create', {
-                url: '/requisition-issue-slip/new/:jobOrderCode',
-                controller: 'RequisitionsAddCtrl as rac',
-                templateUrl: 'ris.create.view'
+            .state('requesition-asset-create', {
+                url: '/requisition-issue-slip/asset/new/:jobOrderCode',
+                controller: 'RequisitionAssetCtrl as rac',
+                templateUrl: 'ris.create.asset.view'
+            })
+            .state('requesition-project-create', {
+                url: '/requisition-issue-slip/project/new/:projectCode',
+                controller: 'RequisitionProjectCtrl as rpc',
+                templateUrl: 'ris.create.project.view'
             })
             .state('list-employees', {
                 url: '/employee/list',

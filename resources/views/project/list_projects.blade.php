@@ -34,7 +34,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="project in pc.projects">
-              <td><a href="#" data-toggle="modal" data-target="#modal-default" ng-bind="project.project_code"> </b></a></td>
+              <td><a href="#" ui-sref="list-projectsCopy({projectCode:project.project_code})" ng-bind="project.project_code"> </b></a></td>
               <td ng-bind="project.code"></td>
               <td ng-bind="project.name"></td>
               <td ng-bind="project.cost | number:2"></td>
@@ -52,7 +52,9 @@
         <!-- /.box-body -->
   </div>
   <!-- MODAL CONTENTS -->
-    <div class="modal fade" id="modal-default">
+
+  <script type="text/ng-template" id="projectInfo.modal">
+    <div>
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -71,12 +73,13 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="requesition-project-create({projectCode:vm.formData.project_code})" ng-click="vm.ok()" href="#">Create R.S.</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mark as Finished</a></li>
                     <li role="presentation" class="divider"></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Print</a></li>
                   </ul>
                 </li>
-                <li class="pull-left header"><i class="fa fa-cube"></i> 5310001</li>
+                <li class="pull-left header"><i class="fa fa-cube"></i> <%vm.formData.name+' : '+vm.formData.project_code%></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1-1">
@@ -107,5 +110,5 @@
       <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
+  </script>
 </section>

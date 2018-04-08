@@ -61,7 +61,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Print</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ui-sref="requesition-create({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()">Create R.S.</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ui-sref="requesition-asset-create({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()">Create R.S.</a></li>
                   <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Close J.O. (Completed)</a></li>
                 </ul>
               </li>

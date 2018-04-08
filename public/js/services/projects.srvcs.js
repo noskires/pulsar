@@ -7,11 +7,11 @@
         ProjectsSrvcs.$inject = ['$http'];
         function ProjectsSrvcs($http) {
             return {
-            	projects: function() {
+            	projects: function(data) {
                     return $http({
                         method: 'GET',
-                        // data: data,
-                        url: '/api/v1/projects',
+                        data: data,
+                        url: '/api/v1/projects?projectCode='+data.projectCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

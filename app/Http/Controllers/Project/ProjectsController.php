@@ -15,7 +15,12 @@ class ProjectsController extends Controller {
     return view('layout.index');
   }
 
-  public function projects(){
+  public function projects(Request $request){
+
+    $data = array(
+      'projectCode'=>$request->input('projectCode'),
+    );
+
   	$projects = DB::table('Projects as p')
         ->select(
           'p.project_code',
@@ -33,8 +38,14 @@ class ProjectsController extends Controller {
           DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name')
         )
         ->leftjoin('Municipalities as m', 'p.municipality_code', '=', 'm.municipality_code')
-        ->leftjoin('employees as e','e.employee_id','=','p.project_engineer')
-        ->get();
+        ->leftjoin('employees as e','e.employee_id','=','p.project_engineer');
+
+    if ($data['projectCode']){
+      $projects = $projects->where('project_code', $data['projectCode']);
+    }
+
+    $projects = $projects->get();
+
     return response()-> json([
       'status'=>200,
       'data'=>$projects,
