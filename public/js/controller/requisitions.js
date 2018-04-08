@@ -85,7 +85,7 @@
 
 
             vm.newRequisitionSlip = function(data){
-                data['projectCode'] = $stateParams.projectCode;
+                // data['projectCode'] = $stateParams.projectCode;
                 console.log(data);
                 alert($stateParams.projectCode)
 

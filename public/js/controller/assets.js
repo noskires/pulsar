@@ -96,7 +96,7 @@
         function AssetsAddCtrl($stateParams, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-alert('a');
+
             //employee services
             EmployeesSrvcs.employees({jobType:''}).then (function (response) {
                 if(response.data.status == 200)
