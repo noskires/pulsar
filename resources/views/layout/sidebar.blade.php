@@ -85,8 +85,7 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-list-ul"></i> List of R.S.</a></li>
-        <li><a href="#" ui-sref="requesition-create"><i class="fa fa-pencil"></i> Create R.S.</a></li>
+        <li><a href="#" ui-sref="list-requesition"><i class="fa fa-list-ul"></i> List of R.S.</a></li>
         <li><a href="#"><i class="fa fa-check"></i> Supply Withdrawal</a></li>
       </ul>
     </li>
@@ -139,7 +138,7 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="#"><i class="fa fa-list-ul"></i> List of Receipts</a></li>
-        <li><a href="#"><i class="fa fa-pencil"></i> Create Receipt</a></li> 
+        <li><a href="#" ui-sref="receipt-create"><i class="fa fa-pencil"></i> Create Receipt</a></li> 
       </ul>
     </li>
     <li class="treeview">

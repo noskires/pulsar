@@ -2,25 +2,28 @@
     'use strict';
     angular
         .module('pulsarApp')
-        // .controller('RequisitionsAddCtrl', RequisitionsAddCtrl)
+        .controller('RequisitionCtrl', RequisitionCtrl)
         .controller('RequisitionProjectCtrl', RequisitionProjectCtrl)
         .controller('RequisitionAssetCtrl', RequisitionAssetCtrl)
-        .factory('MainSrvcs',MainSrvcs)
-        
-    
-        // RequisitionsAddCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        // function RequisitionsAddCtrl($stateParams, RequisitionsSrvcs, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, JobOrdersSrvcs, $window, $uibModal){
-        //     var vm = this;
-        //     var data = {};
 
-            
+        RequisitionCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function RequisitionCtrl($stateParams, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+            var vm = this;
+            var data = {};
 
-        //     vm.routeTo = function(route){
-        //         $window.location.href = route;
-        //     };
- 
+            RequisitionsSrvcs.requisitions({requisitionCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.requisitions = response.data.data;
+                    console.log(vm.requisitions)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
-        // }
+            vm.routeTo = function(route){
+                $window.location.href = route;
+            }; 
+
+        }
 
         RequisitionAssetCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
         function RequisitionAssetCtrl($stateParams, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
@@ -101,9 +104,4 @@
             }; 
         }
 
-        MainSrvcs.$inject = ['$http'];
-        function MainSrvcs($http) {
-            return {
-            };
-        }
 })();

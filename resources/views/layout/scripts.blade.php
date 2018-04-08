@@ -35,6 +35,7 @@
 <script src="{{URL::to('js/services/projects.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/addresses.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/requisitions.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/receipts.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/warranties.srvcs.js')}}"></script> 
 
 <!-- Controllers -->
@@ -45,5 +46,6 @@
 <script src="{{URL::to('js/controller/projects.js')}}"></script> 
 <script src="{{URL::to('js/controller/addresses.js')}}"></script> 
 <script src="{{URL::to('js/controller/requisitions.js')}}"></script> 
+<script src="{{URL::to('js/controller/receipts.js')}}"></script> 
 
 @yield('additionalScripts')

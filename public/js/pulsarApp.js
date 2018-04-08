@@ -115,10 +115,20 @@
                 controller: 'RequisitionProjectCtrl as rpc',
                 templateUrl: 'ris.create.project.view'
             })
+            .state('list-requesition', {
+                url: '/requisition/list',
+                controller: 'RequisitionCtrl as rc',
+                templateUrl: 'ris.list.view'
+            })
             .state('list-employees', {
                 url: '/employee/list',
                 controller: 'EmployeesCtrl as ec',
                 templateUrl: 'employee.list.view'
+            })
+            .state('receipt-create', {
+                url: '/receipt/new',
+                controller: 'ReceiptsCtrl as rc',
+                templateUrl: 'receipt.list.view'
             })
             //sample//
             // .state('sample-state', {

@@ -81,7 +81,7 @@ class EmployeesController extends Controller {
     $data['unit'] = $request->input('unit');
     
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         $employee = new Employee;
 
@@ -108,15 +108,15 @@ class EmployeesController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

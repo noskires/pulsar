@@ -182,8 +182,9 @@ Route::get('/api/v1/job-orders','JobOrder\JobOrdersController@job_orders');
 |--------------------------------------------------------------------------
 */
 
+Route::get('/requisition/list','Requisition\RequisitionsController@index');
 Route::get('/requisition-issue-slip/new','Requisition\RequisitionsController@index');
-// Route::get('/job-order/list','JobOrder\JobOrdersController@index');
+Route::get('/api/v1/requisitions','Requisition\RequisitionsController@requisitions');
 
 /*
 |--------------------------------------------------------------------------
@@ -204,6 +205,22 @@ Route::post('/api/v1/requisition-issue-slip/project/save','Requisition\Requisiti
 /*
 |--------------------------------------------------------------------------
 | Requisition Apis
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Receipts Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/receipt/new','Receipt\ReceiptsController@index');
+Route::get('/api/v1/receipts','Receipt\ReceiptsController@receipts');
+
+Route::post('/api/v1/receipt/save','Receipt\ReceiptsController@save'); 
+/*
+|--------------------------------------------------------------------------
+| Receipts Apis
 |--------------------------------------------------------------------------
 */
 

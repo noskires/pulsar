@@ -123,16 +123,27 @@
 <!-- JO -->
 
 <!-- RIS -->
+<script type="text/ng-template" id="ris.create.project.view">
+  @include('requisition.add_project_ris')
+</script>
 
 <script type="text/ng-template" id="ris.create.asset.view">
   @include('requisition.add_asset_ris')
 </script>
 
-<script type="text/ng-template" id="ris.create.project.view">
-  @include('requisition.add_project_ris')
+<script type="text/ng-template" id="ris.list.view">
+  @include('requisition.list_requisitions')
 </script>
 
 <!-- RIS -->
+
+<!-- Receipts -->
+
+<script type="text/ng-template" id="receipt.list.view">
+  @include('receipt.add_receipt')
+</script>
+
+<!-- Receipts -->
 
 <!-- Shared Modal -->
 

@@ -17,6 +17,28 @@ class RequisitionsController extends Controller {
     return view('layout.index');
   }
 
+  public function requisitions(Request $request){
+
+    $data = array(
+      'requisitionCode'=>$request->input('requisitionCode'),
+    );
+
+    $requisitions = DB::table('requisition_slips as jo');
+
+    if ($data['requisitionCode']){
+      $requisitions = $requisitions->where('requisition_slip_code', $data['requisitionCode']);
+    }
+
+    $requisitions = $requisitions->get();
+
+    return response()-> json([
+      'status'=>200,
+      'data'=>$requisitions,
+      'message'=>''
+    ])->setEncodingOptions(JSON_NUMERIC_CHECK);
+
+  }
+
   public function job_orders(Request $request){
 
     $data = array(
@@ -224,15 +246,4 @@ class RequisitionsController extends Controller {
 
     return $transaction;
   }
-
-  // public function sampleDate()
-  // {
-  //   // echo Carbon::now('Asia/Manila');
-  //   $jo = new JobOrder;
-  //   // echo  $jo->get()->count();
-
-  //   // echo date('Ymd', strtotime(Carbon::now('Asia/Manila')));
-  //   echo  $count = (str_pad(($jo->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')->get()->count() + 1), 4, "0", STR_PAD_LEFT));
-  // }
-
 }
