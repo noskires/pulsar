@@ -96,7 +96,7 @@
         function AssetsAddCtrl($stateParams, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-
+alert('a');
             //employee services
             EmployeesSrvcs.employees({jobType:''}).then (function (response) {
                 if(response.data.status == 200)
@@ -131,7 +131,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            ProjectsSrvcs.projects().then (function (response) {
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.projects = response.data.data;
@@ -191,7 +191,7 @@
             {
                 // alert($stateParams.assetTag)
                 vm.tag = $stateParams.assetTag;
-                
+
                 AssetsSrvcs.assets({tag:vm.tag, name:'', category:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
