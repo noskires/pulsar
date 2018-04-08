@@ -37,7 +37,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            ProjectsSrvcs.projects().then (function (response) {
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.projects = response.data.data;

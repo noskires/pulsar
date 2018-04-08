@@ -27,8 +27,6 @@
             var vm = this;
             var data = {};
 
-            alert('requisition asset controller')
-
             JobOrdersSrvcs.jobOrders({joCode:$stateParams.jobOrderCode}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -72,8 +70,6 @@
             var vm = this;
             var data = {};
 
-            alert('project code = '+$stateParams.projectCode)
-
             ProjectsSrvcs.projects({projectCode:$stateParams.projectCode}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -91,7 +87,7 @@
                 RequisitionsSrvcs.saveProject(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        // vm.routeTo('job-order/list/'+$stateParams.jobOrderCode);
+                        vm.routeTo('projects/list');
                     }
                     else {
                         alert(response.data.message);
