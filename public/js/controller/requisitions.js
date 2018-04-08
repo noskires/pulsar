@@ -85,10 +85,9 @@
 
 
             vm.newRequisitionSlip = function(data){
-                // data['projectCode'] = $stateParams.projectCode;
                 console.log(data);
-                alert($stateParams.projectCode)
 
+                data['projectCode'] = $stateParams.projectCode;
                 RequisitionsSrvcs.saveProject(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);

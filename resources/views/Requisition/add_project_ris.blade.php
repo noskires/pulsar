@@ -31,7 +31,7 @@
               <div class="col-sm-9">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="datepicker" ng-model="rac.risDetails.date_requested">
+              <input type="text" class="form-control pull-right" id="datepicker" ng-model="rpc.risDetails.date_requested">
             </div></div>
             </div>
             <div class="form-group">
@@ -39,12 +39,12 @@
               <div class="col-sm-9">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="datepicker2" ng-model="rac.risDetails.date_needed">
+              <input type="text" class="form-control pull-right" id="datepicker2" ng-model="rpc.risDetails.date_needed">
             </div></div>
             </div>
             <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Description/Remarks</label>
-              <div class="col-sm-9"><input type="text" class="form-control" id="equipmentplate" placeholder="" required="" ng-model="rac.risDetails.description"></div>
+              <div class="col-sm-9"><input type="text" class="form-control" id="equipmentplate" placeholder="" required="" ng-model="rpc.risDetails.description"></div>
             </div>
             <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Project</label>

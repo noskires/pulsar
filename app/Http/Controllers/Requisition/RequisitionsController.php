@@ -92,8 +92,7 @@ class RequisitionsController extends Controller {
         $requisition->date_needed = $data['date_needed'];
         $requisition->description = $data['description'];
         $requisition->request_type = "Asset";
-        $requisition->job_order_code = $data['jobOrderCode'];
-        // $requisition->asset_tag = $data['assetTag'];
+        $requisition->reference_code = $data['jobOrderCode'];
         $requisition->save();
 
         return response()->json([
@@ -137,9 +136,8 @@ class RequisitionsController extends Controller {
         $requisition->date_requested = $data['date_requested'];
         $requisition->date_needed = $data['date_needed'];
         $requisition->description = $data['description'];
-        $requisition->request_type = "Asset";
-        $requisition->job_order_code = $data['projectCode'];
-        // $requisition->asset_tag = $data['assetTag'];
+        $requisition->request_type = "Project";
+        $requisition->reference_code = $data['projectCode'];
         $requisition->save();
 
         return response()->json([
