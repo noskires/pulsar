@@ -19,8 +19,8 @@
 
 Auth::routes();
 Route::post('/auth', ['uses'=>'LoginController@login', 'as'=>'auth']); 
-Route::get('/home','HomeController@index');
 
+Route::get('/home','HomeController@index');
 Route::group(['middleware'=>'auth'], function(){
 
 /*
@@ -42,9 +42,10 @@ Route::get('/maintenance/list-monitoring','MaintenanceController@index');
 |--------------------------------------------------------------------------
 */
 
-Route::get('/api/v1/operations','Maintenance\OperationsController@operations'); 
 Route::post('/api/v1/operation/save','Maintenance\OperationsController@save');
 Route::post('/api/v1/operation/update','Maintenance\OperationsController@update');
+
+Route::get('/api/v1/operations','Maintenance\OperationsController@operations'); 
 Route::get('/api/v1/operations/assets-monitoring','Maintenance\OperationsController@assets_monitoring');
 
 /*
@@ -58,27 +59,19 @@ Route::get('/asset/list-equipments','AssetsController@index');
 Route::get('/asset/list-equipments/{asset_code}','AssetsController@index'); 
 Route::get('/asset/more-details/{asset_code}','AssetsController@index'); 
 
-// Route::get('/asset/sample_state_url','AssetsController@index'); 
-// Route::get('/asset/sample_state_url/{id}','AssetsController@index'); 
-
 /*
 |--------------------------------------------------------------------------
 | Assets Apis
 |--------------------------------------------------------------------------
 */
 
-Route::get('/api/v1/assets','AssetsController@assets'); 
-Route::get('/api/v1/assets-by-name','AssetsController@assetsByName'); 
 Route::post('/api/v1/assets/save','AssetsController@save');
 Route::post('/api/v1/assets/asset-tag','AssetsController@asset_tag');
+
+Route::get('/api/v1/assets','AssetsController@assets'); 
+Route::get('/api/v1/assets-by-name','AssetsController@assetsByName'); 
 Route::get('/api/v1/assets/asset-categories','AssetsController@asset_categories');
 Route::get('/api/v1/assets/methods','AssetsController@methods');
-
-/*
-|--------------------------------------------------------------------------
-| Employees Apis
-|--------------------------------------------------------------------------
-*/
 
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +81,6 @@ Route::get('/api/v1/assets/methods','AssetsController@methods');
 
 Route::post('/api/v1/warranty/save','WarrantiesController@save');
 Route::get('/api/v1/warranties','WarrantiesController@warranties'); 
-// Route::post('/api/v1/warranty/update','WarrantiesController@update');
 
 /*
 |--------------------------------------------------------------------------
@@ -96,10 +88,10 @@ Route::get('/api/v1/warranties','WarrantiesController@warranties');
 |--------------------------------------------------------------------------
 */
 
-Route::get('/employee/list','EmployeesController@index');
-
 Route::post('/api/v1/employees/save','EmployeesController@save');
 Route::post('/api/v1/employee/update','EmployeesController@update');
+
+Route::get('/employee/list','EmployeesController@index');
 Route::get('/api/v1/employees','EmployeesController@employees');
 Route::get('/api/v1/employees2','EmployeesController@employees2');
 
@@ -123,24 +115,13 @@ Route::get('/projects/list/{projectCode}','Project\ProjectsController@index');
 
 /*
 |--------------------------------------------------------------------------
-| Projects
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
 | Project Apis
 |--------------------------------------------------------------------------
 */
 
 Route::post('/api/v1/projects/save','Project\ProjectsController@save');
-Route::get('/api/v1/projects','Project\ProjectsController@projects');
 
-/*
-|--------------------------------------------------------------------------
-| Project Apis
-|--------------------------------------------------------------------------
-*/
+Route::get('/api/v1/projects','Project\ProjectsController@projects');
 
 /*
 |--------------------------------------------------------------------------
@@ -155,26 +136,14 @@ Route::get('/job-order/new/{assetTag}','JobOrder\JobOrdersController@index');
 
 /*
 |--------------------------------------------------------------------------
-| Job Order
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
 | Job Order Apis
 |--------------------------------------------------------------------------
 */
 
 Route::post('/api/v1/job-order/save','JobOrder\JobOrdersController@save');
 Route::post('/api/v1/job-order/update','JobOrder\JobOrdersController@update');
-Route::get('/api/v1/job-orders','JobOrder\JobOrdersController@job_orders');
-// Route::get('/api/v1/sampleDate','JobOrder\JobOrdersController@sampleDate');
 
-/*
-|--------------------------------------------------------------------------
-| Job Order Apis
-|--------------------------------------------------------------------------
-*/
+Route::get('/api/v1/job-orders','JobOrder\JobOrdersController@job_orders');
 
 /*
 |--------------------------------------------------------------------------
@@ -188,42 +157,55 @@ Route::get('/api/v1/requisitions','Requisition\RequisitionsController@requisitio
 
 /*
 |--------------------------------------------------------------------------
-| Requisition
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
 | Requisition Apis
 |--------------------------------------------------------------------------
 */
-Route::get('/requisition-issue-slip/asset/new/{jobOrderCode}','Requisition\RequisitionsController@index');
-Route::get('/requisition-issue-slip/project/new/{jobOrderCode}','Requisition\RequisitionsController@index');
+
 Route::post('/api/v1/requisition-issue-slip/asset/save','Requisition\RequisitionsController@save_asset'); 
 Route::post('/api/v1/requisition-issue-slip/project/save','Requisition\RequisitionsController@save_project'); 
 
-/*
-|--------------------------------------------------------------------------
-| Requisition Apis
-|--------------------------------------------------------------------------
-*/
+Route::get('/requisition-issue-slip/asset/new/{jobOrderCode}','Requisition\RequisitionsController@index');
+Route::get('/requisition-issue-slip/project/new/{jobOrderCode}','Requisition\RequisitionsController@index');
 
 /*
 |--------------------------------------------------------------------------
-| Receipts Apis
+| Receipts
 |--------------------------------------------------------------------------
 */
 
 Route::get('/receipt/new','Receipt\ReceiptsController@index');
-Route::get('/api/v1/receipts','Receipt\ReceiptsController@receipts');
+Route::get('/receipt/list','Receipt\ReceiptsController@index');
+Route::get('/receipt/list/{receiptCode}','Receipt\ReceiptsController@index');
 
-Route::post('/api/v1/receipt/save','Receipt\ReceiptsController@save'); 
 /*
 |--------------------------------------------------------------------------
 | Receipts Apis
 |--------------------------------------------------------------------------
 */
 
+Route::post('/api/v1/receipt/save','Receipt\ReceiptsController@save'); 
+Route::post('/api/v1/receipt-items/save','Receipt\ReceiptsController@save_receipt_items'); 
+Route::get('/api/v1/receipts','Receipt\ReceiptsController@receipts');
+Route::get('/api/v1/receipt-items','Receipt\ReceiptsController@receiptItems');
+
+/*
+|--------------------------------------------------------------------------
+| Supplies
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/supply/new','Supply\SuppliesController@index');
+Route::get('/supply/list','Supply\SuppliesController@index');
+Route::get('/supply/list/{supplyCode}','Supply\SuppliesController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Supplies Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/supply/save','Supply\SuppliesController@save'); 
+Route::get('/api/v1/supplies','Supply\SuppliesController@receipts');
 
 /*
 |--------------------------------------------------------------------------
@@ -231,13 +213,6 @@ Route::post('/api/v1/receipt/save','Receipt\ReceiptsController@save');
 |--------------------------------------------------------------------------
 */
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Address
-|--------------------------------------------------------------------------
-*/
 
 /*
 |--------------------------------------------------------------------------
@@ -251,22 +226,11 @@ Route::get('/api/v1/municipalities','Address\MunicipalitiesController@municipali
 
 /*
 |--------------------------------------------------------------------------
-| Address Apis
-|--------------------------------------------------------------------------
-*/
-
-/*
-|--------------------------------------------------------------------------
 | Positions Apis
 |--------------------------------------------------------------------------
 */
 
 Route::get('/api/v1/positions','Employee\PositionsController@positions');
 
-/*
-|--------------------------------------------------------------------------
-| Positions Apis
-|--------------------------------------------------------------------------
-*/
 
 });

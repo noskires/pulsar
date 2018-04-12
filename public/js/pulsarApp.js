@@ -128,22 +128,36 @@
             .state('receipt-create', {
                 url: '/receipt/new',
                 controller: 'ReceiptsCtrl as rc',
+                templateUrl: 'receipt.create.view'
+            })
+            .state('list-receipt', {
+                url: '/receipt/list',
+                controller: 'ReceiptsCtrl as rc',
                 templateUrl: 'receipt.list.view'
             })
-            //sample//
-            // .state('sample-state', {
-            //     url: '/asset/sample_state_url',
-            //     // controller: 'JobOrdersCtrl as joc',
-            //     templateUrl: 'sample.state'
-            // })
-            // //sample//
-            // .state('sample-state.child-state', {
-            //     url: '/:id',
-            //     // controller: 'JobOrdersCtrl as joc',
-            //     templateUrl: 'sample.state.child'
-            // })
+            .state('list-receiptCopy', {
+                url: '/receipt/list/:receiptCode',
+                controller: 'ReceiptsCtrl as rc',
+                templateUrl: 'receipt.list.view'
+            })
+            .state('supply-create', {
+                url: '/supply/new',
+                controller: 'SuppliesCtrl as sc',
+                templateUrl: 'supply.create.view'
+            })
+            .state('list-supply', {
+                url: '/supply/list',
+                controller: 'SuppliesCtrl as sc',
+                templateUrl: 'supply.list.view'
+            })
+            .state('list-supplyCopy', {
+                url: '/supply/list/:supplyCode',
+                controller: 'SuppliesCtrl as rc',
+                templateUrl: 'supply.list.view'
+            })
 
             $urlRouterProvider.otherwise('/index');
+
         }
 
         MainCtrl.$inject = ['$window','$http'];

@@ -139,11 +139,27 @@
 
 <!-- Receipts -->
 
-<script type="text/ng-template" id="receipt.list.view">
+<script type="text/ng-template" id="receipt.create.view">
   @include('receipt.add_receipt')
 </script>
 
+<script type="text/ng-template" id="receipt.list.view">
+  @include('receipt.list_receipts')
+</script>
+
 <!-- Receipts -->
+
+<!-- Supplies -->
+
+<script type="text/ng-template" id="supply.create.view">
+  @include('supply.add_supply')
+</script>
+
+<script type="text/ng-template" id="supply.list.view">
+  @include('supply.list_supplies')
+</script>
+
+<!-- Supplies -->
 
 <!-- Shared Modal -->
 

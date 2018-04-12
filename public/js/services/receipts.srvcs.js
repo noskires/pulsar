@@ -31,6 +31,22 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                receiptItems: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/receipt-items?receiptCode='+data.receiptCode+'&receiptItemCode='+data.receiptItemCode,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                saveReceiptItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/receipt-items/save',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
             };
         }
 })();
