@@ -146,6 +146,8 @@
                             'supply_total':''
                         }];
 
+                        vm.supplyGrandTotal = 0;
+
                         ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
