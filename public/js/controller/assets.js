@@ -115,7 +115,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetsSrvcs.asset_categories().then (function (response) {
+            AssetsSrvcs.asset_categories({assetCategory:'Asset'}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.asset_categories = response.data.data;

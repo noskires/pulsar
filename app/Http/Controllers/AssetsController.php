@@ -17,8 +17,20 @@ class AssetsController extends Controller {
     	return view('layout.index');
    	}
 
-    public function asset_categories(){
-      	$asset_categories = DB::table('Asset_categories as ac')->where('asset_category','=','Asset')->get();
+    public function asset_categories(Request $request){
+
+        $data = array(
+            'assetCategory'=>$request->input('assetCategory')
+        );
+
+      	$asset_categories = DB::table('Asset_categories as ac');
+
+        if ($data['assetCategory']){ 
+          $asset_categories = $asset_categories->where('asset_category', $data['assetCategory']);
+        }
+
+        $asset_categories = $asset_categories->get();
+
         return response()-> json([
             'status'=>200,
             'data'=>$asset_categories,

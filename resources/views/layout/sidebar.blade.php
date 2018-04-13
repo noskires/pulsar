@@ -124,7 +124,7 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-list-ul"></i> List of Supplies</a></li>
+        <li><a href="#" ui-sref="list-supply"><i class="fa fa-list-ul"></i> List of Supplies</a></li>
         <li><a href="#" ui-sref="supply-create"><i class="fa fa-pencil"></i> Create Supply</a></li>
         <li><a href="#"><i class="fa fa-plus"></i> Add Supply</a></li>
       </ul>

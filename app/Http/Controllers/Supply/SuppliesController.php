@@ -20,7 +20,9 @@ public function index(){
       'supplyCode'=>$request->input('supplyCode'),
     );
 
-  	$supplies = DB::table('supplies');
+  	$supplies = DB::table('supplies as s')
+            ->leftjoin('stock_units as su','su.stock_unit_id','=','s.stock_unit')
+            ->leftjoin('asset_categories as ag','ag.asset_code','=','s.category_code');
 
     if ($data['supplyCode']){
       $supplies = $supplies->where('supply_code', $data['supplyCode']);
@@ -57,6 +59,7 @@ public function index(){
         $supply->supply_name = $data['supplyName'];
         $supply->description = $data['description'];
         $supply->category_code = $data['category'];
+        $supply->quantity = 0;
         $supply->stock_unit = $data['stockUnit'];
         $supply->re_order_level = $data['reOrderLevel'];
         $supply->save();

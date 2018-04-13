@@ -25,19 +25,8 @@
               <label class="col-sm-2 control-label">Category*</label>
               <div class="col-sm-10">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="sc.supplyDetails.category">
-              <option selected="selected" value="0">- - select supply category - -</option>
-                <option value="1">CONSTRUCTION SUPPLY</option>
-                <option value="2">IT SUPPLIES</option>
-                <option value="3">REGULAR OFFICE SUPPLY</option>
-                <option value="4">REPAIRS & MAINTENANCE-COMMUNICATION EQUIPMENT</option>
-                <option value="5">REPAIRS & MAINTENANCE-FURNITURE AND FIXTURES</option>
-                <option value="6">REPAIRS & MAINTENANCE-IT EQUIPMENT & SOFTWARE</option>
-                <option value="7">REPAIRS & MAINTENANCE-BUILDING LEASEHOLD IMPROVEMENTS</option>
-                <option value="8">REPAIRS & MAINTENANCE-BUILDING CONSTRUCTION</option>
-                <option value="9">REPAIRS & MAINTENANCE-OFFICE EQUIPMENT</option>
-                <option value="10">REPAIRS & MAINTENANCE-CONSTRUCTION EQUIPMENT</option>
-                <option value="11">REPAIRS & MAINTENANCE-OFFICE EQUIPMENT</option>
-                <option value="12">REPAIRS & MAINTENANCE-MOTOR VEHICLE</option>
+                <option selected="selected" value="0">- - select supply category - -</option>
+                <option ng-value="assetCategory.asset_code" ng-repeat="assetCategory in sc.assetCategories"><%assetCategory.asset_name%></option>
               </select></div>
             </div>
             <div class="form-group col-sm-12">

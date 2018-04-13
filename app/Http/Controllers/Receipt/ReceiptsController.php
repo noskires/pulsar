@@ -91,6 +91,7 @@ class ReceiptsController extends Controller {
     $data = array(
       'receiptCode'=>$request->input('receiptCode'),
       'receiptItemCode'=>$request->input('receiptItemCode'),
+      'receiptItemSupplyCode'=>$request->input('receiptItemSupplyCode'),
     );
 
     $receiptItems = DB::table('receipt_items');
@@ -102,6 +103,10 @@ class ReceiptsController extends Controller {
 
     if ($data['receiptItemCode']){
       $receiptItems = $receiptItems->where('receipt_item_code', $data['receiptItemCode']);
+    }
+
+    if ($data['receiptItemSupplyCode']){
+      $receiptItems = $receiptItems->where('receipt_item_supply_code', $data['receiptItemSupplyCode']);
     }
 
     $receiptItems = $receiptItems->get();
@@ -118,7 +123,7 @@ class ReceiptsController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         for($i = 0; $i < count($data); $i++) {
           $c            = new ReceiptItem;
@@ -135,6 +140,19 @@ class ReceiptsController extends Controller {
           $c->receipt_item_stock_unit  = $data[$i]['supply_unit'];
           $c->receipt_item_total  = $data[$i]['supply_total'];
           $c->save(); // fixed typo
+
+          $supply = DB::table('supplies')
+          ->select('quantity')
+          ->where('supply_code', $data[$i]['supply_name'])
+          ->first();
+
+          $totalQuantity = $supply->quantity + $data[$i]['supply_qty'];
+
+          DB::table('supplies')
+          ->where('supply_code', $data[$i]['supply_name'])
+            ->update([
+              'quantity' => $totalQuantity
+            ]);
         }
 
         return response()->json([
@@ -143,15 +161,15 @@ class ReceiptsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

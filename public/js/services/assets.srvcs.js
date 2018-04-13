@@ -19,7 +19,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/assets/asset-categories',
+                        url: '/api/v1/assets/asset-categories?assetCategory='+data.assetCategory,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

@@ -16,38 +16,46 @@
                 vm.supplyCode = $stateParams.supplyCode;
                 // alert(vm.receiptCode);
 
-                // ReceiptSrvcs.receipts({supplyCode:vm.supplyCode}).then (function (response) {
-                //     if(response.data.status == 200)
-                //     {
-                //         vm.receipt = response.data.data[0];
-                //         console.log(vm.receipt)
+                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.supply = response.data.data[0];
+                        console.log(vm.supply)
 
-                //         var modalInstance = $uibModal.open({
-                //             controller:'SuppliesModalInstanceCtrl',
-                //             templateUrl:'receiptInfo.modal',
-                //             controllerAs: 'vm',
-                //             resolve :{
-                //               formData: function () {
-                //                 return {
-                //                     title:'Receipt Controller',
-                //                     message:response.data.message,
-                //                     receipt: vm.receipt
-                //                 };
-                //               }
-                //             }
-                //         });
-                //     }
-                // }, function (){ alert('Bad Request!!!') })
+                        var modalInstance = $uibModal.open({
+                            controller:'SuppliesModalInstanceCtrl',
+                            templateUrl:'supplyInfo.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'Supply Controller',
+                                    message:response.data.message,
+                                    supply: vm.supply
+                                };
+                              }
+                            }
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
 
             }
 
-            // SuppliesSrvcs.supplies({receiptCode:''}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.supplies = response.data.data;
-            //         console.log(vm.supplies)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
+            SuppliesSrvcs.supplies({supplyCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.supplies = response.data.data;
+                    console.log(vm.supplies)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            AssetsSrvcs.asset_categories({assetCategory:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.assetCategories = response.data.data;
+                    console.log(vm.assetCategories)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             vm.newSupply = function(data){
                 SuppliesSrvcs.save(data).then(function(response){
@@ -67,11 +75,19 @@
             }; 
         }
 
-        SuppliesModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData'];
-        function SuppliesModalInstanceCtrl ($uibModalInstance, formData) {
+        SuppliesModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs'];
+        function SuppliesModalInstanceCtrl ($uibModalInstance, formData, ReceiptSrvcs) {
 
             var vm = this;
-            vm.formData = formData.receipt;
+            vm.formData = formData.supply;
+            console.log(vm.formData)
+            ReceiptSrvcs.receiptItems({receiptCode:'', receiptItemCode:'', receiptItemSupplyCode:vm.formData.supply_code}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.receiptItems = response.data.data;
+                    console.log(vm.receiptItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             vm.ok = function() {
                 $uibModalInstance.close();

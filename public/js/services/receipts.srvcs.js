@@ -35,7 +35,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/receipt-items?receiptCode='+data.receiptCode+'&receiptItemCode='+data.receiptItemCode,
+                        url: '/api/v1/receipt-items?receiptCode='+data.receiptCode+'&receiptItemCode='+data.receiptItemCode+'&receiptItemSupplyCode='+data.receiptItemSupplyCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

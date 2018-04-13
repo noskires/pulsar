@@ -205,7 +205,7 @@ Route::get('/supply/list/{supplyCode}','Supply\SuppliesController@index');
 */
 
 Route::post('/api/v1/supply/save','Supply\SuppliesController@save'); 
-Route::get('/api/v1/supplies','Supply\SuppliesController@receipts');
+Route::get('/api/v1/supplies','Supply\SuppliesController@supplies');
 
 /*
 |--------------------------------------------------------------------------

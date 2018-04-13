@@ -13,7 +13,6 @@
 
             if($stateParams.receiptCode)
             {
-
                 vm.receiptCode = $stateParams.receiptCode;
                 // alert(vm.receiptCode);
 
@@ -39,7 +38,6 @@
                         });
                     }
                 }, function (){ alert('Bad Request!!!') })
-
             }
 
             ReceiptSrvcs.receipts({receiptCode:''}).then (function (response) {
@@ -64,14 +62,13 @@
                 });
             };
 
-
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 
         }
 
-        ReceiptsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs'];
-        function ReceiptsModalInstanceCtrl ($uibModalInstance, formData, ReceiptSrvcs) {
+        ReceiptsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs', 'SuppliesSrvcs'];
+        function ReceiptsModalInstanceCtrl ($uibModalInstance, formData, ReceiptSrvcs, SuppliesSrvcs) {
 
             var vm = this;
             vm.formData = formData.receipt;
@@ -87,11 +84,19 @@
                 'supply_total':''
             }];
 
-            ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:''}).then (function (response) {
+            ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.receiptItems = response.data.data;
                     console.log(vm.receiptItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            SuppliesSrvcs.supplies({supplyCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.supplies = response.data.data;
+                    console.log(vm.supplies)
                 }
             }, function (){ alert('Bad Request!!!') })
 
@@ -148,7 +153,7 @@
 
                         vm.supplyGrandTotal = 0;
 
-                        ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:''}).then (function (response) {
+                        ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.receiptItems = response.data.data;

@@ -152,7 +152,7 @@
             })
             .state('list-supplyCopy', {
                 url: '/supply/list/:supplyCode',
-                controller: 'SuppliesCtrl as rc',
+                controller: 'SuppliesCtrl as sc',
                 templateUrl: 'supply.list.view'
             })
 
