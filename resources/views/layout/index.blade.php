@@ -175,6 +175,10 @@
   @include('organization.add_unit')
 </script>
 
+<script type="text/ng-template" id="organization.create.office.view">
+  @include('organization.office')
+</script>
+
 <!-- Organization -->
 
 <!-- Shared Modal -->

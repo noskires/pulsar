@@ -22,6 +22,7 @@
               <th>Control No.</th>
               <th>Project ID</th>
               <th>Project Name</th>
+              <th>Project Description</th>
               <th>Project Cost</th>
               <th>Address</th>
               <th>Municipality</th>
@@ -37,6 +38,7 @@
               <td><a href="#" ui-sref="list-projectsCopy({projectCode:project.project_code})" ng-bind="project.project_code"> </b></a></td>
               <td ng-bind="project.code"></td>
               <td ng-bind="project.name"></td>
+              <td ng-bind="project.description"></td>
               <td ng-bind="project.cost | number:2"></td>
               <td ng-bind="project.zip_code"></td>
               <td ng-bind="project.municipality_text"></td>

@@ -31,6 +31,10 @@
               <div class="col-sm-9"><input type="text" class="form-control" id="projectcost" ng-model="pc.projectDetails.code" placeholder="" required=""></div>
             </div>
             <div class="form-group">
+              <label for="projectcost" class="col-sm-3 control-label">Description</label>
+              <div class="col-sm-9"><input type="text" class="form-control" id="projectdescription" ng-model="pc.projectDetails.description" placeholder="" required=""></div>
+            </div>
+            <div class="form-group">
               <label for="projectcost" class="col-sm-3 control-label">Project Cost</label>
               <div class="col-sm-9"><input type="number" class="form-control" id="projectcost" ng-model="pc.projectDetails.cost" placeholder="" required=""></div>
             </div>

@@ -170,6 +170,11 @@
                 controller: 'UnitsCtrl as uc',
                 templateUrl: 'organization.create.unit.view'
             })
+            .state('org-office-create', {
+                url: '/organization',
+                controller: 'OfficeCtrl as uc',
+                templateUrl: 'organization.create.office.view'
+            })
 
             $urlRouterProvider.otherwise('/index');
 

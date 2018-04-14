@@ -25,6 +25,7 @@ class ProjectsController extends Controller {
         ->select(
           'p.project_code',
           'p.name',
+          'p.description',
           'p.cost',
           'p.code',
           'p.zip_code',
@@ -58,6 +59,7 @@ class ProjectsController extends Controller {
   // return $request->all();
     $data = array();
     $data['projectName'] = $request->input('name');
+    $data['description'] = $request->input('description');
     $data['code'] = $request->input('code');
     $data['cost'] = $request->input('cost');
     $data['zipCode'] = ''; 
@@ -78,6 +80,7 @@ class ProjectsController extends Controller {
 
         $project->project_code = "PRO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$proCode;
         $project->name = $data['projectName'];
+        $project->description = $data['description'];
         $project->cost = $data['cost'];
         $project->code = $data['code'];
         $project->zip_code = $data['zipCode']; 

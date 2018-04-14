@@ -102,6 +102,7 @@ Route::get('/api/v1/employees2','EmployeesController@employees2');
 |--------------------------------------------------------------------------
 */
 
+Route::get('/organization','Organization\DepartmentsController@index'); 
 Route::get('/organization/department/new','Organization\DepartmentsController@index'); 
 Route::get('/organization/division/new','Organization\DepartmentsController@index'); 
 Route::get('/organization/unit/new','Organization\DepartmentsController@index'); 
