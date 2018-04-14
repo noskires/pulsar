@@ -15,23 +15,23 @@
           <thead>
           <tr>
             <th>Control No.</th>
-            <th>Purchase Order</th>
             <th>Receipt Type</th>
             <th>Receipt No.</th>
             <th>Receipt Date</th>
             <th>Amount</th>
             <th>Supplier</th>
+            <th>Purchase Order</th>
           </tr>
           </thead>
           <tbody>
           <tr ng-repeat="receipt in rc.receipts">
             <td><a href="#" ui-sref="list-receiptCopy({receiptCode:receipt.receipt_code})"><b><%receipt.receipt_code%></b></a></td>
-            <td><%receipt.purchase_order_code%></td>
             <td><%receipt.receipt_type%></td>
             <td><%receipt.receipt_number%></td>
             <td><%receipt.receipt_date%></td>
-            <td><%receipt.amount%></td>
+            <td><%receipt.amount | number:2%></td>
             <td><%receipt.supplier_code%></td>
+            <td><%receipt.purchase_order_code%></td>
           </tr> 
           </tbody>
         </table>
