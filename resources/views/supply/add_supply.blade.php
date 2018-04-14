@@ -42,13 +42,7 @@
               <div class="col-sm-4">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="sc.supplyDetails.stockUnit">
               <option selected="selected" value="0">- - select stock unit - -</option>
-                <option value="1">BOX</option>
-                <option value="2">CAN</option>
-                <option value="3">ROLL</option>
-                <option value="4">UNIT</option>
-                <option value="5">PIECE</option>
-                <option value="6">DOZEN</option>
-                <option value="7">REAM</option>
+                <option ng-value="stockUnit.stock_unit_code" ng-repeat="stockUnit in sc.stockUnits"><%stockUnit.stock_unit_name%></option>
               </select></div>
             </div>
             <div class="form-group col-sm-12">

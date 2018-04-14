@@ -38,11 +38,13 @@
 <script src="{{URL::to('js/services/receipts.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/warranties.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/supplies.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/stockUnit.srvcs.js')}}"></script> 
 
 <!-- Controllers -->
 <script src="{{URL::to('js/controller/employees.js')}}"></script> 
 <script src="{{URL::to('js/controller/assets.js')}}"></script> 
 <script src="{{URL::to('js/controller/maintenance.js')}}"></script>
+<script src="{{URL::to('js/controller/organizations.js')}}"></script>
 <script src="{{URL::to('js/controller/jobOrders.js')}}"></script> 
 <script src="{{URL::to('js/controller/projects.js')}}"></script> 
 <script src="{{URL::to('js/controller/addresses.js')}}"></script> 

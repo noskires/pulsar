@@ -38,6 +38,7 @@
       <li><a href="#" ui-sref="operation-create"><i class="fa fa-circle-o"></i> Daily Operating Report</a></li>
       <li><a href="#" ui-sref="list-operating"><i class="fa fa-circle-o"></i> Operating Records</a></li>
       <li><a href="#" ui-sref="list-monitoring"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li> 
+      <li><a href="#" ui-sref="list-jo"><i class="fa fa-list-ul"></i> List of J.O.</a></li>
         <!-- <li><a ui-sref="list-monitoring-view"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li>  -->
       </ul>
       
@@ -65,17 +66,6 @@
           <small class="label pull-right bg-blue">15</small>
         </span>
       </a>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-tags"></i> <span>Job Orders</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="#" ui-sref="list-jo"><i class="fa fa-list-ul"></i> List of J.O.</a></li>
-      </ul>
     </li>
     <li class="treeview">
       <a href="#">
@@ -124,9 +114,8 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#" ui-sref="list-supply"><i class="fa fa-list-ul"></i> List of Supplies</a></li>
-        <li><a href="#" ui-sref="supply-create"><i class="fa fa-pencil"></i> Create Supply</a></li>
-        <li><a href="#"><i class="fa fa-plus"></i> Add Supply</a></li>
+        <li><a href="#" ui-sref="list-supply"><i class="fa fa-list-ul"></i> List of Supplies</a></li> 
+        <li><a href="#" ui-sref="supply-create"><i class="fa fa-plus"></i> Add Supply</a></li>
       </ul>
     </li>
     <li class="treeview">
@@ -139,6 +128,19 @@
       <ul class="treeview-menu">
         <li><a href="#" ui-sref="list-receipt"><i class="fa fa-list-ul"></i> List of Receipts</a></li>
         <li><a href="#" ui-sref="receipt-create"><i class="fa fa-pencil"></i> Create Receipt</a></li> 
+      </ul>
+    </li>
+    <li class="treeview">
+      <a href="#">
+        <i class="fa fa-cube"></i> <span>Organizations</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="#" ui-sref="org-deparment-create"><i class="fa fa-pencil"></i> Create Department </a></li>
+        <li><a href="#" ui-sref="org-division-create"><i class="fa fa-pencil"></i> Create Division </a></li>
+        <li><a href="#" ui-sref="org-unit-create"><i class="fa fa-pencil"></i> Create Unit </a></li>
       </ul>
     </li>
     <li class="treeview">

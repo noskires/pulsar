@@ -5,8 +5,8 @@
         .controller('SuppliesCtrl', SuppliesCtrl)
         .controller('SuppliesModalInstanceCtrl', SuppliesModalInstanceCtrl)
 
-        SuppliesCtrl.$inject = ['$stateParams', 'SuppliesSrvcs', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function SuppliesCtrl($stateParams, SuppliesSrvcs, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        SuppliesCtrl.$inject = ['$stateParams', 'SuppliesSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function SuppliesCtrl($stateParams, SuppliesSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -41,6 +41,14 @@
 
             }
 
+            StockUnitsSrvcs.stockUnits({stockUnitCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.stockUnits = response.data.data;
+                    console.log(vm.stockUnits)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
             SuppliesSrvcs.supplies({supplyCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -56,6 +64,8 @@
                     console.log(vm.assetCategories)
                 }
             }, function (){ alert('Bad Request!!!') })
+
+
 
             vm.newSupply = function(data){
                 SuppliesSrvcs.save(data).then(function(response){

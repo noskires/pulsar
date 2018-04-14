@@ -35,10 +35,10 @@
               <div class="col-sm-4">
               <select class="form-control select2" required="" ng-model="rc.receiptDetails.receiptType">
               <option selected="selected" value="0">- - select type - -</option>
-              <option value="1">Delivery Receipt (DR)</option>
-              <option value="2">Official Receipt (OR)</option>
-              <option value="2">Return Receipt (RR)</option>
-              <option value="2">Purchase Order (PO)</option>
+              <option value="DR">Delivery Receipt (DR)</option>
+              <option value="OR">Official Receipt (OR)</option>
+              <option value="RR">Return Receipt (RR)</option>
+              <option value="PO">Purchase Order (PO)</option>
               </select>
               </div>
             </div>

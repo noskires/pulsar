@@ -95,13 +95,42 @@ Route::get('/employee/list','EmployeesController@index');
 Route::get('/api/v1/employees','EmployeesController@employees');
 Route::get('/api/v1/employees2','EmployeesController@employees2');
 
+
+/*
+|--------------------------------------------------------------------------
+| Organizations
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/organization/department/new','Organization\DepartmentsController@index'); 
+Route::get('/organization/division/new','Organization\DepartmentsController@index'); 
+Route::get('/organization/unit/new','Organization\DepartmentsController@index'); 
+
 /*
 |--------------------------------------------------------------------------
 | Organizations Apis
 |--------------------------------------------------------------------------
 */
 
-Route::get('/api/v1/organizations','OrganizationsController@organizations');
+//department
+Route::post('/api/v1/organization/department/save','Organization\DepartmentsController@save');
+Route::post('/api/v1/organization/department/update','Organization\DepartmentsController@update');
+
+Route::get('/api/v1/organization/departments','Organization\DepartmentsController@departments');
+
+//division
+Route::post('/api/v1/organization/division/save','Organization\DivisionsController@save');
+Route::post('/api/v1/organization/division/update','Organization\DivisionsController@update');
+
+//unit
+Route::post('/api/v1/organization/unit/save','Organization\UnitsController@save');
+Route::post('/api/v1/organization/unit/update','Organization\UnitsController@update');
+
+Route::get('/api/v1/organization/departments','Organization\DepartmentsController@departments');
+
+//mother org
+Route::get('/api/v1/organizations','Organization\OrganizationsController@organizations');
+// Route::get('/api/v1/organization/departments','Organization\DepartmentsController@departments');
 
 /*
 |--------------------------------------------------------------------------
@@ -206,6 +235,14 @@ Route::get('/supply/list/{supplyCode}','Supply\SuppliesController@index');
 
 Route::post('/api/v1/supply/save','Supply\SuppliesController@save'); 
 Route::get('/api/v1/supplies','Supply\SuppliesController@supplies');
+
+/*
+|--------------------------------------------------------------------------
+| Supplies Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/api/v1/stock-units','Supply\StockUnitsController@stock_units');
 
 /*
 |--------------------------------------------------------------------------

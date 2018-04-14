@@ -94,19 +94,33 @@ class ReceiptsController extends Controller {
       'receiptItemSupplyCode'=>$request->input('receiptItemSupplyCode'),
     );
 
-    $receiptItems = DB::table('receipt_items');
+    $receiptItems = DB::table('receipt_items as ri')
+              ->select(
+                'ri.receipt_code', 
+                'ri.receipt_item_code',
+                'ri.receipt_item_supply_code',
+                'ri.receipt_item_description', 
+                'ri.receipt_item_quantity',
+                'ri.receipt_item_stock_unit',
+                'ri.receipt_item_total',
+                'r.receipt_type',
+                'r.supplier_code',
+                'rt.receipt_type_name'
+              )
+            ->leftjoin('receipts as r','r.receipt_code','=','ri.receipt_code')
+            ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
 
 
     if ($data['receiptCode']){
-      $receiptItems = $receiptItems->where('receipt_code', $data['receiptCode']);
+      $receiptItems = $receiptItems->where('ri.receipt_code', $data['receiptCode']);
     }
 
     if ($data['receiptItemCode']){
-      $receiptItems = $receiptItems->where('receipt_item_code', $data['receiptItemCode']);
+      $receiptItems = $receiptItems->where('ri.receipt_item_code', $data['receiptItemCode']);
     }
 
     if ($data['receiptItemSupplyCode']){
-      $receiptItems = $receiptItems->where('receipt_item_supply_code', $data['receiptItemSupplyCode']);
+      $receiptItems = $receiptItems->where('ri.receipt_item_supply_code', $data['receiptItemSupplyCode']);
     }
 
     $receiptItems = $receiptItems->get();

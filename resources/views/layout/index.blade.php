@@ -161,6 +161,22 @@
 
 <!-- Supplies -->
 
+<!-- Organization -->
+
+<script type="text/ng-template" id="organization.create.department.view">
+  @include('organization.add_department')
+</script>
+
+<script type="text/ng-template" id="organization.create.division.view">
+  @include('organization.add_division')
+</script>
+
+<script type="text/ng-template" id="organization.create.unit.view">
+  @include('organization.add_unit')
+</script>
+
+<!-- Organization -->
+
 <!-- Shared Modal -->
 
 <script type="text/ng-template" id="shared.modal">

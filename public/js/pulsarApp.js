@@ -155,6 +155,21 @@
                 controller: 'SuppliesCtrl as sc',
                 templateUrl: 'supply.list.view'
             })
+            .state('org-deparment-create', {
+                url: '/organization/department/new',
+                controller: 'OrganizationsCtrl as oc',
+                templateUrl: 'organization.create.department.view'
+            })
+            .state('org-division-create', {
+                url: '/organization/division/new',
+                controller: 'DivisionsCtrl as dc',
+                templateUrl: 'organization.create.division.view'
+            })
+            .state('org-unit-create', {
+                url: '/organization/unit/new',
+                controller: 'UnitsCtrl as uc',
+                templateUrl: 'organization.create.unit.view'
+            })
 
             $urlRouterProvider.otherwise('/index');
 

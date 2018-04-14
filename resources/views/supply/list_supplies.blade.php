@@ -50,44 +50,45 @@
       </div>
       <div class="modal-body">
         <p>View supply item details.</p>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="panel panel-default">
-                    <div class="panel-body">
-                      <form>
-                        <table class="table table-bordered" class="tbl_list_rcpt">
-                          <thead>
-                            <tr>
-                              <th>Receipt No.</th>
-                              <th>Receipt Type</th>
-                              <th>Supplier Name</th>
-                              <th>Supply Qty</th>
-                              <th>Stock Unit</th>
-                              <th>Total Amount</th>
-                            </tr> 
-                          </thead>
-                          <tbody>
-                            <tr ng-repeat="receiptItem in vm.receiptItems">
-                              <td><%receiptItem.receipt_code%></td>
-                              <td>?></td> 
-                              <td>?</td>
-                              <td ng-init="vm.supplyTotalQuantity = vm.supplyTotalQuantity + receiptItem.receipt_item_quantity"><%receiptItem.receipt_item_quantity%></td>
-                              <td><%receiptItem.receipt_item_stock_unit%></td>
-                              <td><%receiptItem.receipt_item_total%></td>
-                            </tr>
-                            <tr>
-                              <td colspan="3" align="right"><b>TOTAL QUANTITY</b></td>
-                              <td colspan="2"><b><%vm.supplyTotalQuantity%></b></td>
-                              <td></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </form>
-                    </div>
-                  </div>
-                </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <form>
+                  <table class="table table-bordered" class="tbl_list_rcpt">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Receipt No.</th>
+                        <th>Receipt Type</th>
+                        <th>Supplier Name</th>
+                        <th>Supply Qty</th>
+                        <th>Stock Unit</th>
+                        <th>Total Amount</th>
+                      </tr> 
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="receiptItem in vm.receiptItems">
+                        <td><%$index+1%></td>
+                        <td><%receiptItem.receipt_code%></td>
+                        <td><%receiptItem.receipt_type_name%></td>
+                        <td><%receiptItem.supplier_code%></td>
+                        <td ng-init="vm.supplyTotalQuantity = vm.supplyTotalQuantity + receiptItem.receipt_item_quantity"><%receiptItem.receipt_item_quantity%></td>
+                        <td><%receiptItem.receipt_item_stock_unit%></td>
+                        <td><%receiptItem.receipt_item_total%></td>
+                      </tr>
+                      <tr>
+                        <td colspan="4" align="right"><b>TOTAL QUANTITY</b></td>
+                        <td colspan="2"><b><%vm.supplyTotalQuantity%></b></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
               </div>
-
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
