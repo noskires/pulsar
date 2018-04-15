@@ -21,7 +21,7 @@ public function index(){
     );
 
   	$supplies = DB::table('supplies as s')
-            ->leftjoin('stock_units as su','su.stock_unit_id','=','s.stock_unit')
+            ->leftjoin('stock_units as su','su.stock_unit_code','=','s.stock_unit')
             ->leftjoin('asset_categories as ag','ag.asset_code','=','s.category_code');
 
     if ($data['supplyCode']){

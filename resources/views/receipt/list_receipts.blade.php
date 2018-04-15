@@ -41,7 +41,7 @@
 </section>
 <!-- MODAL POPUP -->
 <script type="text/ng-template" id="receiptInfo.modal">
-  <div>
+  <div style="width:1000px;">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
