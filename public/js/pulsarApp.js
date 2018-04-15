@@ -171,8 +171,8 @@
                 templateUrl: 'organization.create.unit.view'
             })
             .state('org-office-create', {
-                url: '/organization',
-                controller: 'OfficeCtrl as uc',
+                url: '/organizations',
+                controller: 'OfficesCtrl as oc',
                 templateUrl: 'organization.create.office.view'
             })
 

@@ -17,10 +17,10 @@
         <div class="panel panel-default">
           <div class="panel-body">
 <!-- NEW DEPARTMENT -->
-            <form id="from-department" class="form-inline" role="form">
+            <form id="from-department" class="form-inline" role="form" ng-model="oc.officeDetails">
               <div class="form-group">
                 <label style="margin-right:15px;" for="dept-name">Department Name:</label>
-                <input type="text" class="form-control" id="dept-name" size="125" required="">
+                <input type="text" class="form-control" id="dept-name" size="125" required="" ng-model="oc.officeDetails.name">
               </div><!-- form group -->
                 <div class="form-group col-sm-12">
                   <hr style="border-color:#e1e1e1;border-width:1px 0;">
@@ -29,20 +29,16 @@
                 <div class="form-group col-sm-12">
                   <label class="col-sm-1 control-label">Region</label>
                   <div class="col-sm-4">
-                  <select class="form-control select2" style="width: 100%;" required="">
-                  <option selected="selected" value="1">Region II</option>
-                  <option value="2">Region I</option>
-                  <option value="3">Region III</option>
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.officeDetails.region" ng-change="oc.selectRegion(oc.officeDetails.region)">
+                    <option selected="selected" value="0">- - - Select Region - - -</option>
+                    <option value="<%region.region_code%>" ng-repeat="region in oc.regions"><% region.region_text_short%></option>
                   </select>
                   </div>
                   <label class="col-sm-1 control-label">Province</label>
                   <div class="col-sm-3">
-                  <select class="form-control select2" style="width: 100%;" required="">
-                  <option selected="selected" value="1">Cagayan</option>
-                  <option value="2">Isabela</option>
-                  <option value="3">Vizcaya</option>
-                  <option value="4">Batanes</option>
-                  <option value="5">Quirino</option>
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.officeDetails.province" ng-change="oc.selectProvince(oc.officeDetails.province)">
+                    <option selected="selected" value="0">- - - Select Province - - -</option>
+                    <option value="<%province.province_code%>" ng-repeat="province in oc.provinces"><% province.province_text%></option>
                   </select>
                   </div>
                   <div class="col-sm-1"><input type="text" class="form-control" id="dept-zipcode" placeholder="Zip Code" disabled required=""></div>
@@ -50,35 +46,26 @@
                 <div class="form-group col-sm-12">
                   <label class="col-sm-1 control-label">Municipality</label>
                   <div class="col-sm-4">
-                  <select class="form-control select2" style="width: 100%;" required="">
-                  <option selected="selected" value="1">Tuguegarao City</option>
-                  <option value="2">Iguig</option>
-                  <option value="3">Solana</option>
-                  <option value="4">Enrile</option>
-                  <option value="5">Peñablanca</option>
-                  <option value="6">Gonzaga</option>
-                  <option value="7">Sta. Ana</option>
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.officeDetails.municipality">
+                    <option selected="selected" value="0">- - - Select Municipality - - -</option>
+                    <option value="<%municipality.municipality_code%>" ng-repeat="municipality in oc.municipalities"><% municipality.municipality_text%></option>
                   </select>
                   </div>
                   <label class="col-sm-1 control-label">Barangay</label>
                   <div class="col-sm-3">
-                  <select class="form-control select2" style="width: 100%;" required="">
-                  <option selected="selected" value="1">Ugac Norte</option>
-                  <option value="2">Caritan</option>
-                  <option value="3">Pallua</option>
-                  </select>
+                    <input type="text" class="form-control" id="" required="" ng-model="oc.officeDetails.barangay">
                   </div>
                 </div>
                 <div class="form-group col-sm-12">
-                  <label for="zipcode" class="col-sm-1 control-label">St/Bldg/Unit</label>
-                  <div class="col-sm-4"><input type="text" class="form-control" id="dept-street" style="width: 100%;" required=""></div>
+                  <!-- <label for="zipcode" class="col-sm-1 control-label">St/Bldg/Unit</label> -->
+                  <div class="col-sm-4"><!-- <input type="text" class="form-control" id="dept-street" required=""> --></div>
                   <div class="col-sm-1"> </div>
                   <div class="col-sm-3">
                   <hr style="border-color:#e1e1e1;border-width:1px 0;">
                   <button class="btn btn-large btn-success btn-block" data-toggle="confirmation"
                   data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
                   data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-                  data-title="Confirm data entry." data-content="Are you sure?"> CONFIRMATION
+                  data-title="Confirm data entry." data-content="Are you sure?" ng-click="oc.newDepartment(oc.officeDetails)"> CONFIRMATION
                   </button>
                 </div>
                 </div>
@@ -90,19 +77,18 @@
       <div id="add-division" class="collapse division">
         <div class="panel panel-default">
           <div class="panel-body">
-            <form id="from-division" class="form-inline" role="form">
+            <form id="from-division" class="form-inline" role="form" ng-model="oc.divisionDetails">
               <div class="form-group">
                 <div class="col-sm-4">
                 <label style="margin-right:15px;" for="dept-name">Department Name:</label>
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="">Select Department</option>
-                <option value="1">Pulsar</option>
-                <option value="2">JJE Construction</option>
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.divisionDetails.departmentCode">
+                  <option selected="selected" value="0">- - - Select Department - - -</option>
+                  <option value="<%department.org_code%>" ng-repeat="department in oc.orgDepartments"><% department.department_name%></option>
                 </select>
                 </div>
                 <div class="col-sm-8">
                 <label style="margin-right:15px;" for="division-name">Division Name:</label> <br>
-                <input type="text" class="form-control" id="division-name" size="92" required="">
+                <input type="text" class="form-control" id="division-name" size="92" required="" ng-model="oc.divisionDetails.name">
                 </div>
               </div>
               <div class="form-group col-sm-12">
@@ -110,61 +96,48 @@
                 <h4>Division Address:</h4><br>
               </div>
               <div class="form-group col-sm-12">
-                <label class="col-sm-1 control-label">Region</label>
-                <div class="col-sm-4">
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="1">Region II</option>
-                <option value="2">Region I</option>
-                <option value="3">Region III</option>
-                </select>
+                  <label class="col-sm-1 control-label">Region</label>
+                  <div class="col-sm-4">
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.divisionDetails.region" ng-change="oc.selectRegion(oc.divisionDetails.region)">
+                    <option selected="selected" value="0">- - - Select Region - - -</option>
+                    <option value="<%region.region_code%>" ng-repeat="region in oc.regions"><% region.region_text_short%></option>
+                  </select>
+                  </div>
+                  <label class="col-sm-1 control-label">Province</label>
+                  <div class="col-sm-3">
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.divisionDetails.province" ng-change="oc.selectProvince(oc.divisionDetails.province)">
+                    <option selected="selected" value="0">- - - Select Province - - -</option>
+                    <option value="<%province.province_code%>" ng-repeat="province in oc.provinces"><% province.province_text%></option>
+                  </select>
+                  </div>
+                  <div class="col-sm-1"><input type="text" class="form-control" id="dept-zipcode" placeholder="Zip Code" disabled required=""></div>
                 </div>
-                <label class="col-sm-1 control-label">Province</label>
-                <div class="col-sm-3">
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="1">Cagayan</option>
-                <option value="2">Isabela</option>
-                <option value="3">Vizcaya</option>
-                <option value="4">Batanes</option>
-                <option value="5">Quirino</option>
-                </select>
+                <div class="form-group col-sm-12">
+                  <label class="col-sm-1 control-label">Municipality</label>
+                  <div class="col-sm-4">
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.divisionDetails.municipality">
+                    <option selected="selected" value="0">- - - Select Municipality - - -</option>
+                    <option value="<%municipality.municipality_code%>" ng-repeat="municipality in oc.municipalities"><% municipality.municipality_text%></option>
+                  </select>
+                  </div>
+                  <label class="col-sm-1 control-label">Barangay</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" id="" required="" ng-model="oc.divisionDetails.barangay">
+                  </div>
                 </div>
-                <div class="col-sm-1"><input type="text" class="form-control" id="division-zipcode" placeholder="Zip Code" disabled required=""></div>
-              </div>
-              <div class="form-group col-sm-12">
-                <label class="col-sm-1 control-label">Municipality</label>
-                <div class="col-sm-4">
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="1">Tuguegarao City</option>
-                <option value="2">Iguig</option>
-                <option value="3">Solana</option>
-                <option value="4">Enrile</option>
-                <option value="5">Peñablanca</option>
-                <option value="6">Gonzaga</option>
-                <option value="7">Sta. Ana</option>
-                </select>
+                <div class="form-group col-sm-12">
+                  <!-- <label for="zipcode" class="col-sm-1 control-label">St/Bldg/Unit</label> -->
+                  <div class="col-sm-4"><!-- <input type="text" class="form-control" id="dept-street" required=""> --></div>
+                  <div class="col-sm-1"> </div>
+                  <div class="col-sm-3">
+                  <hr style="border-color:#e1e1e1;border-width:1px 0;">
+                  <button class="btn btn-large btn-success btn-block" data-toggle="confirmation"
+                  data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+                  data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+                  data-title="Confirm data entry." data-content="Are you sure?" ng-click="oc.newDivision(oc.divisionDetails)"> CONFIRMATION
+                  </button>
                 </div>
-                <label class="col-sm-1 control-label">Barangay</label>
-                <div class="col-sm-3">
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="1">Ugac Norte</option>
-                <option value="2">Caritan</option>
-                <option value="3">Pallua</option>
-                </select>
                 </div>
-              </div>
-              <div class="form-group col-sm-12">
-                <label for="zipcode" class="col-sm-1 control-label">St/Bldg/Unit</label>
-                <div class="col-sm-4"><input type="text" class="form-control" id="division-street" style="width: 100%;" required=""></div>
-                <div class="col-sm-1"> </div>
-                <div class="col-sm-3">
-                <hr style="border-color:#e1e1e1;border-width:1px 0;">
-                <button class="btn btn-large btn-success btn-block" data-toggle="confirmation"
-                data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
-                data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-                data-title="Confirm data entry." data-content="Are you sure?"> CONFIRMATION
-                </button>
-              </div>
-              </div>
             </form>
           </div>
         </div>
@@ -177,23 +150,23 @@
               <div class="form-group">
                 <div class="col-sm-4">
                 <label style="margin-right:15px;" for="dept-name">Department Name:</label>
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="">Select Department</option>
-                <option value="1">Pulsar</option>
-                <option value="2">JJE Construction</option>
+                
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.departmentCode" ng-change="oc.selectDepartment(oc.unitDetails.departmentCode)">
+                  <option selected="selected" value="0">- - - Select Department - - -</option>
+                  <option value="<%department.org_code%>" ng-repeat="department in oc.orgDepartments" ><% department.department_name%></option>
                 </select>
                 </div>
                 <div class="col-sm-4">
                 <label style="margin-right:15px;" for="division-name">Division Name:</label> <br>
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="">Select Division</option>
-                <option value="1">Engineering</option>
-                <option value="2">General Services</option>
+                
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.divisionCode" ng-change="oc.selectDivision(oc.unitDetails.divisionCode)">
+                  <option selected="selected" value="0">- - - Select Division - - -</option>
+                  <option value="<%division.org_code%>" ng-repeat="division in oc.divisions"><% division.division_name%></option>
                 </select>
                 </div>
                 <div class="col-sm-4">
                 <label style="margin-right:15px;" for="division-name">Unit Name:</label> <br>
-                <input type="text" class="form-control" id="division-name" size="51" required="">
+                <input type="text" class="form-control" id="division-name" size="51" required="" ng-model="oc.unitDetails.name">
                 </div>
               </div>
               <div class="form-group col-sm-12">
@@ -201,61 +174,48 @@
                 <h4>Unit Address:</h4><br>
               </div>
               <div class="form-group col-sm-12">
-                <label class="col-sm-1 control-label">Region</label>
-                <div class="col-sm-4">
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="1">Region II</option>
-                <option value="2">Region I</option>
-                <option value="3">Region III</option>
-                </select>
+                  <label class="col-sm-1 control-label">Region</label>
+                  <div class="col-sm-4">
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.region" ng-change="oc.selectRegion(oc.unitDetails.region)">
+                    <option selected="selected" value="0">- - - Select Region - - -</option>
+                    <option value="<%region.region_code%>" ng-repeat="region in oc.regions"><% region.region_text_short%></option>
+                  </select>
+                  </div>
+                  <label class="col-sm-1 control-label">Province</label>
+                  <div class="col-sm-3">
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.province" ng-change="oc.selectProvince(oc.unitDetails.province)">
+                    <option selected="selected" value="0">- - - Select Province - - -</option>
+                    <option value="<%province.province_code%>" ng-repeat="province in oc.provinces"><% province.province_text%></option>
+                  </select>
+                  </div>
+                  <div class="col-sm-1"><input type="text" class="form-control" id="dept-zipcode" placeholder="Zip Code" disabled required=""></div>
                 </div>
-                <label class="col-sm-1 control-label">Province</label>
-                <div class="col-sm-3">
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="1">Cagayan</option>
-                <option value="2">Isabela</option>
-                <option value="3">Vizcaya</option>
-                <option value="4">Batanes</option>
-                <option value="5">Quirino</option>
-                </select>
+                <div class="form-group col-sm-12">
+                  <label class="col-sm-1 control-label">Municipality</label>
+                  <div class="col-sm-4">
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.municipality">
+                    <option selected="selected" value="0">- - - Select Municipality - - -</option>
+                    <option value="<%municipality.municipality_code%>" ng-repeat="municipality in oc.municipalities"><% municipality.municipality_text%></option>
+                  </select>
+                  </div>
+                  <label class="col-sm-1 control-label">Barangay</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" id="" required="" ng-model="oc.unitDetails.barangay">
+                  </div>
                 </div>
-                <div class="col-sm-1"><input type="text" class="form-control" id="unit-zipcode" placeholder="Zip Code" disabled required=""></div>
-              </div>
-              <div class="form-group col-sm-12">
-                <label class="col-sm-1 control-label">Municipality</label>
-                <div class="col-sm-4">
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="1">Tuguegarao City</option>
-                <option value="2">Iguig</option>
-                <option value="3">Solana</option>
-                <option value="4">Enrile</option>
-                <option value="5">Peñablanca</option>
-                <option value="6">Gonzaga</option>
-                <option value="7">Sta. Ana</option>
-                </select>
+                <div class="form-group col-sm-12">
+                  <!-- <label for="zipcode" class="col-sm-1 control-label">St/Bldg/Unit</label> -->
+                  <div class="col-sm-4"><!-- <input type="text" class="form-control" id="dept-street" required=""> --></div>
+                  <div class="col-sm-1"> </div>
+                  <div class="col-sm-3">
+                  <hr style="border-color:#e1e1e1;border-width:1px 0;">
+                  <button class="btn btn-large btn-success btn-block" data-toggle="confirmation"
+                  data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+                  data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+                  data-title="Confirm data entry." data-content="Are you sure?" ng-click="oc.newUnit(oc.unitDetails)"> CONFIRMATION
+                  </button>
                 </div>
-                <label class="col-sm-1 control-label">Barangay</label>
-                <div class="col-sm-3">
-                <select class="form-control select2" style="width: 100%;" required="">
-                <option selected="selected" value="1">Ugac Norte</option>
-                <option value="2">Caritan</option>
-                <option value="3">Pallua</option>
-                </select>
                 </div>
-              </div>
-              <div class="form-group col-sm-12">
-                <label for="zipcode" class="col-sm-1 control-label">St/Bldg/Unit</label>
-                <div class="col-sm-4"><input type="text" class="form-control" id="unit-street" style="width: 100%;" required=""></div>
-                <div class="col-sm-1"> </div>
-                <div class="col-sm-3">
-                <hr style="border-color:#e1e1e1;border-width:1px 0;">
-                <button class="btn btn-large btn-success btn-block" data-toggle="confirmation"
-                data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
-                data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-                data-title="Confirm data entry." data-content="Are you sure?"> CONFIRMATION
-                </button>
-              </div>
-              </div>
             </form>
           </div>
         </div>
@@ -278,7 +238,7 @@
 <h4><b>Units Table</b></h4>
       <div class="box box-primary">
         <div class="box-body">
-          <table id="employees" class="table table-bordered table-hover" width="100%">
+          <table id="" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
               <th>Department</th>
@@ -288,17 +248,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>Pulsar</td>
-              <td>Engineering</td>
-              <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>Construction</b></a></td>
-              <td>Centro, Penablanca, Cagayan</td>
-            </tr>
-            <tr>
-              <td>Pulsar</td>
-              <td>General Services</td>
-              <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>Accounting</b></a></td>
-              <td>123, Cabbo, Penablanca, Cagayan</td>
+            <tr ng-repeat="unit in oc.orgUnits">
+              <td><%unit.department_name%></td>
+              <td><%unit.division_name%></td>
+              <td><a href="#"><b><%unit.unit_name%></b></a></td>
+              <td><%unit.office_address%></td>
             </tr>
             </tbody>
           </table>
@@ -306,10 +260,10 @@
       </div>
     </div>
     <div class="col-md-6"> 
-<h4><b>Divisions Table</b></h4>
+    <h4><b>Divisions Table</b></h4>
       <div class="box box-primary">
         <div class="box-body">
-          <table id="employees" class="table table-bordered table-hover" width="100%">
+          <table id="" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
               <th>Department</th>
@@ -318,15 +272,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>Pulsar</td>
-              <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>Engineering</b></a></td>
-              <td>Centro, Penablanca, Cagayan</td>
-            </tr>
-            <tr>
-              <td>Pulsar</td>
-              <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>Accounting</b></a></td>
-              <td>123, Cabbo, Penablanca, Cagayan</td>
+            <tr ng-repeat="division in oc.orgDivisions">
+              <td><%division.department_name%></td>
+              <td><a href="#"><b><%division.division_name%></b></a></td>
+              <td><%division.office_address%></td>
             </tr>
             </tbody>
           </table>
@@ -337,7 +286,7 @@
 <h4><b>Departments Table</b></h4>
       <div class="box box-primary">
         <div class="box-body">
-          <table id="employees" class="table table-bordered table-hover" width="100%">
+          <table id="" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
               <th>Department</th>
@@ -345,13 +294,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>Pulsar</b></a></td>
-              <td>123, Cabbo, Penablanca, Cagayan</td>
-            </tr>
-            <tr>
-              <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>JJE Construction</b></a></td>
-              <td>444, guig, Cagayan</td>
+            <tr ng-repeat="department in oc.orgDepartments">
+              <td><a href="#"><b><%department.department_name%></b></a></td>
+              <td><%department.office_address%></td>
             </tr>
             </tbody>
           </table>

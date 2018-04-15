@@ -57,6 +57,7 @@ class OrganizationsController extends Controller {
     $data['name'] = $request->input('name'); 
     $data['municipality'] = $request->input('municipality');
     $data['nextOrgCode'] = $request->input('nextOrgCode');
+    $data['barangay'] = $request->input('barangay');
     
     $transaction = DB::transaction(function($data) use($data){
     // try{

@@ -14,26 +14,44 @@ class DepartmentsController extends Controller {
     return view('layout.index');
   }
 
-  // public function departments(Request $request){
+  public function departments(Request $request){
 
-  //   $data = array(
-  //     'departmentCode'=>$request->input('departmentCode'),
-  //   );
+    $data = array(
+      'orgCode'=>$request->input('orgCode'),
+    );
 
-  // 	$departments = DB::table('departments');
+    $units = DB::table('organizations as department')
+    ->select(
+                'department.org_code',
+                'department.org_name as department_name', 
+                'department.next_org_code', 
+                'department.municipality_code', 
+                'm.municipality_text',
+                'department.barangay', 
+                'm.province_code',
+                'p.province_text',
+                'p.region_code',
+                'r.region_text_long',
+                DB::raw('concat(department.barangay,", ",m.municipality_text,", ", p.province_text,", ", r.region_text_long) as office_address'), 
+                'department.org_name as department_name'
+            )
+    ->where('department.org_type', 'Department')
+    -> leftjoin('municipalities as m','m.municipality_code','=','department.municipality_code')
+    -> leftjoin('provinces as p','p.province_code','=','m.province_code')
+    -> leftjoin('regions as r','r.region_code','=','p.region_code');
 
-  //   if ($data['departmentCode']){
-  //     $departments = $departments->where('department_code', $data['departmentCode']);
-  //   }
+    if ($data['orgCode']){
+      $units = $units->where('department.org_code', $data['orgCode']);
+    }
 
-  //   $departments = $departments->get();
+    $units = $units->get();
 
-  //   return response()-> json([
-  //       'status'=>200,
-  //       'data'=>$departments,
-  //       'message'=>''
-  //   ]);
-  // }
+    return response()->json([
+        'status'=>200,
+        'data'=>$units,
+        'message'=>''
+    ]);
+  }
 
   public function save(Request $request){
     
@@ -41,9 +59,10 @@ class DepartmentsController extends Controller {
     // return $request->all();
     $data['name'] = $request->input('name'); 
     $data['municipality'] = $request->input('municipality');
+    $data['barangay'] = $request->input('barangay');
     
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         $organization = new Organization;
         $depCode = str_pad($organization->where('org_type', 'Department')->get()->count() + 1, 8, "0", STR_PAD_LEFT);
@@ -52,6 +71,7 @@ class DepartmentsController extends Controller {
         $organization->org_name = $data['name']; 
         $organization->org_type = "Department"; 
         $organization->municipality_code = $data['municipality'];
+        $organization->barangay = $data['barangay'];
         $organization->save();
 
         return response()->json([
@@ -60,15 +80,15 @@ class DepartmentsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

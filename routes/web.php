@@ -102,7 +102,7 @@ Route::get('/api/v1/employees2','EmployeesController@employees2');
 |--------------------------------------------------------------------------
 */
 
-Route::get('/organization','Organization\DepartmentsController@index'); 
+Route::get('/organizations','Organization\DepartmentsController@index'); 
 Route::get('/organization/department/new','Organization\DepartmentsController@index'); 
 Route::get('/organization/division/new','Organization\DepartmentsController@index'); 
 Route::get('/organization/unit/new','Organization\DepartmentsController@index'); 
@@ -122,12 +122,13 @@ Route::get('/api/v1/organization/departments','Organization\DepartmentsControlle
 //division
 Route::post('/api/v1/organization/division/save','Organization\DivisionsController@save');
 Route::post('/api/v1/organization/division/update','Organization\DivisionsController@update');
+Route::get('/api/v1/organization/divisions','Organization\DivisionsController@divisions');
 
 //unit
 Route::post('/api/v1/organization/unit/save','Organization\UnitsController@save');
 Route::post('/api/v1/organization/unit/update','Organization\UnitsController@update');
+Route::get('/api/v1/organization/units','Organization\UnitsController@units');
 
-Route::get('/api/v1/organization/departments','Organization\DepartmentsController@departments');
 
 //mother org
 Route::get('/api/v1/organizations','Organization\OrganizationsController@organizations');

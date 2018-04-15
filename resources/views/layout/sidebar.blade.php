@@ -138,9 +138,9 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#" ui-sref="org-deparment-create"><i class="fa fa-pencil"></i> Create Department </a></li>
+        <!-- <li><a href="#" ui-sref="org-deparment-create"><i class="fa fa-pencil"></i> Create Department </a></li>
         <li><a href="#" ui-sref="org-division-create"><i class="fa fa-pencil"></i> Create Division </a></li>
-        <li><a href="#" ui-sref="org-unit-create"><i class="fa fa-pencil"></i> Create Unit </a></li>
+        <li><a href="#" ui-sref="org-unit-create"><i class="fa fa-pencil"></i> Create Unit </a></li> -->
         <li><a href="#" ui-sref="org-office-create"><i class="fa fa-pencil"></i> Office </a></li>
       </ul>
     </li>

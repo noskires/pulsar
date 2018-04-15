@@ -15,14 +15,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
-                // departments: function(data) {
-                //     return $http({
-                //         method: 'GET',
-                //         data: data,
-                //         url: '/api/v1/organization/departments?departmentCode='+data.departmentCode,
-                //         headers: {'Content-Type': 'application/json'}
-                //     })
-                // },
+                departments: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/organization/departments?departmentCode='+data.orgCode+'&nextOrgCode='+data.nextOrgCode+'&orgType='+data.orgType+'&startDate='+data.startDate+'&endDate'+data.endDate,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 saveDepartment: function(data) {
                     return $http({
                         method: 'POST',
@@ -39,14 +39,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
-                // division: function(data) {
-                //     return $http({
-                //         method: 'GET',
-                //         data: data,
-                //         url: '/api/v1/organization/division?divisionCode='+data.divisionCode,
-                //         headers: {'Content-Type': 'application/json'}
-                //     })
-                // },
+                divisions: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/organization/divisions?divisionCode='+data.orgCode+'&nextOrgCode='+data.nextOrgCode+'&orgType='+data.orgType+'&startDate='+data.startDate+'&endDate'+data.endDate,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 saveDivision: function(data) {
                     return $http({
                         method: 'POST',
@@ -63,14 +63,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
-                // unit: function(data) {
-                //     return $http({
-                //         method: 'GET',
-                //         data: data,
-                //         url: '/api/v1/organization/unit?unitCode='+data.unitCode,
-                //         headers: {'Content-Type': 'application/json'}
-                //     })
-                // },
+                units: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/organization/units?unitCode='+data.orgCode+'&nextOrgCode='+data.nextOrgCode+'&orgType='+data.orgType+'&startDate='+data.startDate+'&endDate'+data.endDate,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 saveUnit: function(data) {
                     return $http({
                         method: 'POST',
