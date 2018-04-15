@@ -41,8 +41,8 @@
 </section>
 <!-- MODAL POPUP -->
 <script type="text/ng-template" id="receiptInfo.modal">
-  <div style="width:1000px;">
-    <div class="modal-dialog">
+  <div>
+    <div class="modal-dialog" style="width:1000px;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" ui-sref="list-receipt" ng-click="vm.ok()">
