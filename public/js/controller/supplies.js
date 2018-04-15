@@ -57,7 +57,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetsSrvcs.asset_categories({assetCategory:''}).then (function (response) {
+            AssetsSrvcs.asset_categories({assetCategory:'Supplies'}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assetCategories = response.data.data;

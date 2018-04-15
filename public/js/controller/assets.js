@@ -107,7 +107,7 @@
             }, function (){ alert('Bad Request!!!') })
 
             //organizations services
-            OrganizationsSrvcs.organizations().then (function (response) {
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.organizations = response.data.data;
@@ -115,7 +115,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetsSrvcs.asset_categories({assetCategory:'Asset'}).then (function (response) {
+            AssetsSrvcs.asset_categories({assetCategory:'Assets'}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.asset_categories = response.data.data;

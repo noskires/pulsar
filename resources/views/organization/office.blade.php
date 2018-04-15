@@ -249,10 +249,10 @@
             </thead>
             <tbody>
             <tr ng-repeat="unit in oc.orgUnits">
-              <td><%unit.department_name%></td>
-              <td><%unit.division_name%></td>
-              <td><a href="#"><b><%unit.unit_name%></b></a></td>
-              <td><%unit.office_address%></td>
+              <td><%unit.department_name | uppercase%></td>
+              <td><%unit.division_name | uppercase%></td>
+              <td><a href="#"><b><%unit.unit_name | uppercase%></b></a></td>
+              <td><%unit.office_address | uppercase%></td>
             </tr>
             </tbody>
           </table>
@@ -273,9 +273,9 @@
             </thead>
             <tbody>
             <tr ng-repeat="division in oc.orgDivisions">
-              <td><%division.department_name%></td>
-              <td><a href="#"><b><%division.division_name%></b></a></td>
-              <td><%division.office_address%></td>
+              <td><%division.department_name | uppercase%></td>
+              <td><a href="#"><b><%division.division_name | uppercase%></b></a></td>
+              <td><%division.office_address | uppercase%></td>
             </tr>
             </tbody>
           </table>
@@ -295,8 +295,8 @@
             </thead>
             <tbody>
             <tr ng-repeat="department in oc.orgDepartments">
-              <td><a href="#"><b><%department.department_name%></b></a></td>
-              <td><%department.office_address%></td>
+              <td><a href="#"><b><%department.department_name | uppercase%></b></a></td>
+              <td><%department.office_address | uppercase%></td>
             </tr>
             </tbody>
           </table>
