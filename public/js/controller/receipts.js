@@ -108,6 +108,25 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            vm.selectSupply = function(index, supplyCode){
+
+                SuppliesSrvcs.supplies({supplyCode:supplyCode}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.receiptItemSupply = response.data.data[0];
+                        console.log(vm.receiptItemSupply)
+
+                        angular.forEach(vm.personalDetails, function(v, k){
+                            if(index == k)
+                            {
+                                v.supply_desc = vm.receiptItemSupply.description; 
+                                v.supply_unit = vm.receiptItemSupply.stock_unit_name;
+                            }
+                        })
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
             vm.addNew = function(){
                 vm.personalDetails.push({ 
                 'receipt_code':vm.formData.receipt_code,
