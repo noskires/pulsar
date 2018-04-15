@@ -15,6 +15,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                receiptTypes: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/receipt-types',
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 save: function(data) {
                     return $http({
                         method: 'POST',

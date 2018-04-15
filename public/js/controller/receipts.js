@@ -48,6 +48,14 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            ReceiptSrvcs.receiptTypes().then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.receiptTypes = response.data.data;
+                    console.log(vm.receiptTypes)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
             vm.newReceipt = function(data){
                 // console.log(data);
                 ReceiptSrvcs.save(data).then(function(response){

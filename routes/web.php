@@ -218,6 +218,7 @@ Route::post('/api/v1/receipt/save','Receipt\ReceiptsController@save');
 Route::post('/api/v1/receipt-items/save','Receipt\ReceiptsController@save_receipt_items'); 
 Route::get('/api/v1/receipts','Receipt\ReceiptsController@receipts');
 Route::get('/api/v1/receipt-items','Receipt\ReceiptsController@receiptItems');
+Route::get('/api/v1/receipt-types','Receipt\ReceiptsController@receipt_types');
 
 /*
 |--------------------------------------------------------------------------

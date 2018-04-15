@@ -35,10 +35,7 @@
               <div class="col-sm-4">
               <select class="form-control select2" required="" ng-model="rc.receiptDetails.receiptType">
               <option selected="selected" value="0">- - select type - -</option>
-              <option value="DR">Delivery Receipt (DR)</option>
-              <option value="OR">Official Receipt (OR)</option>
-              <option value="RR">Return Receipt (RR)</option>
-              <option value="PO">Purchase Order (PO)</option>
+              <option ng-value="receiptType.receipt_type_code" ng-repeat="receiptType in rc.receiptTypes"><%receiptType.receipt_type_name +" ("+ receiptType.receipt_type_code+")"%> </option>
               </select>
               </div>
             </div>

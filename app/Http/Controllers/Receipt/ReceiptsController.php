@@ -38,6 +38,28 @@ class ReceiptsController extends Controller {
     ]);
   }
 
+  public function receipt_types(Request $request){
+
+    // $data = array(
+    //   'receiptCode'=>$request->input('receiptCode'),
+    // );
+
+    $receiptTypes = DB::table('receipt_types');
+
+
+    // if ($data['receiptCode']){
+    //   $receipts = $receipts->where('receipt_code', $data['receiptCode']);
+    // }
+
+    $receiptTypes = $receiptTypes->get();
+
+    return response()-> json([
+      'status'=>200,
+      'data'=>$receiptTypes,
+      'message'=>''
+    ]);
+  }
+
   public function save(Request $request){
     // return $request->all();
     $data = array();
