@@ -121,6 +121,7 @@ class ReceiptsController extends Controller {
                 'ri.receipt_code', 
                 'ri.receipt_item_code',
                 'ri.receipt_item_supply_code',
+                's.supply_name',
                 'ri.receipt_item_description', 
                 'ri.receipt_item_quantity',
                 'ri.receipt_item_stock_unit',
@@ -130,6 +131,7 @@ class ReceiptsController extends Controller {
                 'rt.receipt_type_name'
               )
             ->leftjoin('receipts as r','r.receipt_code','=','ri.receipt_code')
+            ->leftjoin('supplies as s','s.supply_code','=','ri.receipt_item_supply_code')
             ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
 
 

@@ -115,7 +115,7 @@
                       </thead>
                       <tbody>
                         <tr ng-repeat="receiptItem in vm.receiptItems">
-                          <td><%receiptItem.receipt_item_supply_code%></td>
+                          <td><%receiptItem.supply_name%></td>
                           <td><%receiptItem.receipt_item_description%></td>
                           <td><%receiptItem.receipt_item_quantity%></td>
                           <td><%receiptItem.receipt_item_stock_unit%></td>
