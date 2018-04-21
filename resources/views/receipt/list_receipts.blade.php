@@ -109,8 +109,9 @@
                         <tr>
                           <th>Supply Name</th>
                           <th width="25%">Description</th>
-                          <th width="9%">Supply(Qty)</th>
                           <th width="9%">Stock Unit</th>
+                          <th width="9%">Quantity</th>
+                          <th width="9%">Cost</th>
                           <th width="7%">Total</th>
                           <th width="11%">Options</th>
                         </tr> 
@@ -119,8 +120,9 @@
                         <tr ng-repeat="receiptItem in vm.receiptItems">
                           <td><%receiptItem.supply_name%></td>
                           <td><%receiptItem.receipt_item_description%></td>
-                          <td><%receiptItem.receipt_item_quantity%></td>
                           <td><%receiptItem.receipt_item_stock_unit%></td>
+                          <td><%receiptItem.receipt_item_quantity%></td>
+                          <td><%receiptItem.receipt_item_cost%></td>
                           <td ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + receiptItem.receipt_item_total"><%receiptItem.receipt_item_total | number:2%></td>
                           <td><a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
                               <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a></td>

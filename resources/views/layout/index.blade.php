@@ -61,10 +61,6 @@
 
 @section('content')
 
-<script type="text/ng-template" id="angular.datatables.view">
-  @include('angular-datatables.angular_data')
-</script>
-
 <!-- Employees -->
 <script type="text/ng-template" id="employee.list.view">
   @include('employee.list_employees')
