@@ -80,9 +80,9 @@
                           </td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_desc" disabled required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_unit" disabled required/></td>
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_qty" required/></td>
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_cost" required/></td>
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_total" required/></td>
+                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(parentIndex, personalDetail.supply_qty, personalDetail.supply_cost)" required/></td>
+                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(parentIndex, personalDetail.supply_qty, personalDetail.supply_cost)" required/></td>
+                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_total" ng-init="personalDetail.supply_total = vm.supply_qty[parentIndex]" required/></td>
                         </tr>
                       </tbody>
                     </table>
@@ -122,14 +122,13 @@
                           <td><%receiptItem.receipt_item_description%></td>
                           <td><%receiptItem.receipt_item_stock_unit%></td>
                           <td><%receiptItem.receipt_item_quantity%></td>
-                          <td><%receiptItem.receipt_item_cost%></td>
+                          <td><%receiptItem.receipt_item_cost | number:2%></td>
                           <td ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + receiptItem.receipt_item_total"><%receiptItem.receipt_item_total | number:2%></td>
                           <td><a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
                               <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a></td>
                         </tr>
                         <tr>
-                          
-                          <td colspan="4" align="right"><b>GRAND TOTAL</b></td>
+                          <td colspan="5" align="right"><b>GRAND TOTAL</b></td>
                           <td colspan="1"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
                           <td></td>
                         </tr>

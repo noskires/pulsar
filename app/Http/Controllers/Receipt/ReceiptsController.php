@@ -126,6 +126,7 @@ class ReceiptsController extends Controller {
                 's.supply_name',
                 'ri.receipt_item_description', 
                 'ri.receipt_item_quantity',
+                'ri.receipt_item_cost',
                 'ri.receipt_item_stock_unit',
                 'ri.receipt_item_total',
                 'r.receipt_type',
@@ -177,6 +178,7 @@ class ReceiptsController extends Controller {
           $c->receipt_item_supply_code     = $data[$i]['supply_name'];
           $c->receipt_item_description      = $data[$i]['supply_desc'];
           $c->receipt_item_quantity = $data[$i]['supply_qty'];
+          $c->receipt_item_cost = $data[$i]['supply_cost'];
           $c->receipt_item_stock_unit  = $data[$i]['supply_unit'];
           $c->receipt_item_total  = $data[$i]['supply_total'];
           $c->save(); // fixed typo

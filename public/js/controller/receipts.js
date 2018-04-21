@@ -87,9 +87,9 @@
                 'receipt_code':vm.formData.receipt_code,
                 'supply_name':'',
                 'supply_desc':'',
-                'supply_qty':'',
+                'supply_qty':0,
+                'supply_cost':0,
                 'supply_unit':'',
-                'supply_cost':'',
                 'supply_reorderlvl':'',
                 'supply_total':''
             }];
@@ -129,14 +129,23 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+            vm.computeTotalPerSupply = function(index, supply_qty, supply_cost){
+                angular.forEach(vm.personalDetails, function(v, k){
+                    if(index == k)
+                    {
+                        v.supply_total = supply_qty*supply_cost;
+                    }
+                })
+            }
+
             vm.addNew = function(){
                 vm.personalDetails.push({ 
                 'receipt_code':vm.formData.receipt_code,
                 'supply_name':"",
                 'supply_desc':"",
-                'supply_qty':"",
+                'supply_qty':0,
+                'supply_cost':0,
                 'supply_unit':"",
-                'supply_cost':'',
                 'supply_reorderlvl':"",
                 'total':""
                 });
@@ -176,8 +185,8 @@
                             'supply_name':'',
                             'supply_desc':'',
                             'supply_qty':'',
-                            'supply_unit':'',
-                            'supply_cost':'',
+                            'supply_unit':0,
+                            'supply_cost':0,
                             'supply_reorderlvl':'',
                             'supply_total':''
                         }];
