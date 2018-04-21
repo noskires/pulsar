@@ -22,10 +22,6 @@
         <form class="form-horizontal" id="" ng-model="rc.receiptDetails">
           <div class="box-body">
             <div class="form-group col-sm-12">
-              <label for="controlnumber" class="col-sm-2 control-label">Control No. </label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="rcpt-controlnumber" placeholder="RCPT-03242018-1" disabled></div>
-            </div>
-            <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label">Purchase Order* </label>
               <div class="col-sm-4"><input type="text" class="form-control" id="rcpt-ponumber" placeholder="PO-03102018-1--- autocomplete" ng-model="rc.receiptDetails.purchaseOrderCode"></div>
             </div>
@@ -61,6 +57,10 @@
               <label for="controlnumber" class="col-sm-2 control-label">Supplier Name* </label>
               <div class="col-sm-10"><input type="text" class="form-control" id="rcpt-supplier" placeholder="ERIK CEMENT--- autocomplete" required="" ng-model="rc.receiptDetails.supplierCode"></div>
             </div> 
+            <div class="form-group col-sm-12">
+              <label for="rcpt-remarks" class="col-sm-2 control-label">Remarks</label>
+              <div class="col-sm-10"><textarea class="col-sm-12 form-control" id="rcpt-remarks" rows="2" ng-model="rc.receiptDetails.remarks"></textarea></div>
+            </div>
         </div>
         <!-- /.box-body -->
           <div class="box-footer">

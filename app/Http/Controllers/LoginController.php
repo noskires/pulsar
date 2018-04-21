@@ -36,6 +36,5 @@ class LoginController extends Controller {
       return redirect('login')->with('status', 'Login failed; Invalid email or password');
     }
   }
-
   // public function user()
 }

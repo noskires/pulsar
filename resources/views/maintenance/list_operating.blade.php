@@ -33,7 +33,7 @@
   </div>
       <div class="box box-primary">
             <div class="box-body">
-              <table id="employees" class="table table-bordered table-hover" width="100%">
+              <table datatable="ng" class="table table-bordered table-hover" width="100%">
                 <thead>
                 <tr>
                   <th>Control Number</th>

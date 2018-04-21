@@ -11,7 +11,7 @@
 <section class="content">
   <div class="box">
     <div class="box-body">
-      <table id="equipments" class="table table-bordered table-hover">
+      <table datatable="ng" class="table table-bordered table-hover" width="100%">
         <thead>
         <tr>
           <th>Asset Tag</th>

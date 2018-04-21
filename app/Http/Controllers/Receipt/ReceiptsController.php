@@ -70,6 +70,7 @@ class ReceiptsController extends Controller {
     $data['receiptNumber'] = $request->input('receiptNumber');
     $data['receiptType'] = $request->input('receiptType');
     $data['supplierCode'] = $request->input('supplierCode');
+    $data['remarks'] = $request->input('remarks');
 
     $transaction = DB::transaction(function($data) use($data){
     try{
@@ -86,6 +87,7 @@ class ReceiptsController extends Controller {
         $receipt->receipt_number = $data['receiptNumber'];
         $receipt->receipt_type = $data['receiptType'];
         $receipt->supplier_Code = $data['supplierCode'];
+        $receipt->remarks = $data['remarks'];
         $receipt->save();
 
         return response()->json([

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Project;
 use Illuminate\Http\Request;
 
 use DB;
+use App\Organization;
 use App\Employee;
 use App\Project;
 use App\Http\Requests;
@@ -69,9 +70,28 @@ class ProjectsController extends Controller {
     $data['dateCompleted'] = date('Y-m-d', strtotime($request->input('dateCompleted')));
     $data['projectEngineer'] = $request->input('projectEngineer'); 
     $data['dateAssigned'] = date('Y-m-d', strtotime($request->input('dateAssigned')));
+    $data['division'] = $request->input('division');
+    $data['barangay'] = $request->input('barangay');
    
     $transaction = DB::transaction(function($data) use($data){
     try{
+
+        $organization = new Organization;
+        $depCode = str_pad($organization->where('org_type', 'Unit')->get()->count() + 1, 8, "0", STR_PAD_LEFT);
+        $organization->org_code = "52".$depCode; 
+        $organization->next_org_code = $data['division']; 
+        $organization->org_name = $data['projectName']; 
+        $organization->org_type = "Unit"; 
+        $organization->municipality_code = $data['municipality'];
+        $organization->barangay = $data['barangay'];
+        $organization->save();
+
+
+        $unit_code = DB::table('organizations')
+                    ->select('org_code')
+                    ->where('org_type', 'Unit')
+                    ->where('org_name', $data['projectName'])
+                    ->first();
 
         $project = new Project;
 
@@ -79,6 +99,7 @@ class ProjectsController extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         $project->project_code = "PRO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$proCode;
+        $project->org_code = $unit_code->org_code;
         $project->name = $data['projectName'];
         $project->description = $data['description'];
         $project->cost = $data['cost'];

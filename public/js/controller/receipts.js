@@ -34,7 +34,8 @@
                                     receipt: vm.receipt
                                 };
                               }
-                            }
+                            },
+                            size: 'xlg'
                         });
                     }
                 }, function (){ alert('Bad Request!!!') })
@@ -88,6 +89,7 @@
                 'supply_desc':'',
                 'supply_qty':'',
                 'supply_unit':'',
+                'supply_cost':'',
                 'supply_reorderlvl':'',
                 'supply_total':''
             }];
@@ -134,6 +136,7 @@
                 'supply_desc':"",
                 'supply_qty':"",
                 'supply_unit':"",
+                'supply_cost':'',
                 'supply_reorderlvl':"",
                 'total':""
                 });
@@ -174,6 +177,7 @@
                             'supply_desc':'',
                             'supply_qty':'',
                             'supply_unit':'',
+                            'supply_cost':'',
                             'supply_reorderlvl':'',
                             'supply_total':''
                         }];

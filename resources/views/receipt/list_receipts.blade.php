@@ -11,7 +11,7 @@
 <section class="content">
 <div class="box">
       <div class="box-body">
-        <table id="tbl_rs" class="table table-bordered table-hover" width="100%">
+        <table datatable="ng" class="table table-bordered table-hover" width="100%">
           <thead>
           <tr>
             <th>Control No.</th>
@@ -42,7 +42,7 @@
 <!-- MODAL POPUP -->
 <script type="text/ng-template" id="receiptInfo.modal">
   <div>
-    <div class="modal-dialog" style="width:1000px;">
+    <div class="modal-dialog" style="width:100%;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" ui-sref="list-receipt" ng-click="vm.ok()">
@@ -63,8 +63,9 @@
                           <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th> 
                           <th>Supply Name</th>
                           <th width="25%">Description</th>
-                          <th width="9%">Supply(Qty)</th>
                           <th width="9%">Stock Unit</th>
+                          <th width="9%">Quantity</th>
+                          <th width="9%">Cost</th>
                           <th width="11%">Total</th>
                         </tr>
                       </thead>
@@ -78,8 +79,9 @@
                             </select>
                           </td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_desc" disabled required/></td>
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_qty" required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_unit" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_qty" required/></td>
+                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_cost" required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_total" required/></td>
                         </tr>
                       </tbody>

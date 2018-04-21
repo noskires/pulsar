@@ -23,6 +23,10 @@ Route::post('/auth', ['uses'=>'LoginController@login', 'as'=>'auth']);
 Route::get('/home','HomeController@index');
 Route::group(['middleware'=>'auth'], function(){
 
+//testing angular table
+Route::get('/angular-datatables','MaintenanceController@index'); 
+Route::get('/angular-datatables/new','MaintenanceController@index'); 
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance
@@ -92,7 +96,9 @@ Route::post('/api/v1/employees/save','EmployeesController@save');
 Route::post('/api/v1/employee/update','EmployeesController@update');
 
 Route::get('/employee/list','EmployeesController@index');
+Route::get('/employee/new','EmployeesController@index');
 Route::get('/api/v1/employees','EmployeesController@employees');
+Route::get('/api/v1/employees2','EmployeesController@employees2');
 Route::get('/api/v1/employees2','EmployeesController@employees2');
 
 

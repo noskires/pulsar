@@ -2,7 +2,7 @@
     'use strict';
     angular
         // .module('pulsarApp',[])
-        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap'])
+        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons'])
         .config(Config)
         .controller('MainCtrl', MainCtrl)
 
@@ -120,11 +120,15 @@
                 controller: 'RequisitionCtrl as rc',
                 templateUrl: 'ris.list.view'
             })
+
+            
+
             .state('list-employees', {
                 url: '/employee/list',
                 controller: 'EmployeesCtrl as ec',
                 templateUrl: 'employee.list.view'
             })
+
             .state('receipt-create', {
                 url: '/receipt/new',
                 controller: 'ReceiptsCtrl as rc',
@@ -174,6 +178,18 @@
                 url: '/organizations',
                 controller: 'OfficesCtrl as oc',
                 templateUrl: 'organization.create.office.view'
+            })
+
+            .state('angular-data-tables', {
+                url: '/angular-datatables',
+                controller: 'DTCtrl as dtc',
+                templateUrl: 'angular.datatables.view'
+            })
+
+            .state('create-employee', {
+                url: '/angular-datatables/new',
+                controller: 'EmployeesCtrl as ec',
+                templateUrl: 'employee.list.view'
             })
 
             $urlRouterProvider.otherwise('/index');

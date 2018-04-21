@@ -16,7 +16,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table id="projects" class="table table-bordered table-hover">
+          <table datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
               <th>Control No.</th>

@@ -14,6 +14,16 @@
 <script type="text/javascript" src="{{URL::to('bower_components/angular-ui-router/release/angular-ui-router.min.js')}}"></script>
 <!-- Sanitize -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-sanitize/angular-sanitize.min.js')}}"></script>
+
+<!-- angular-datatables -->
+<script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/angular-datatables.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.min.js')}}"></script>
+
+<script src="{{URL::to('bower_components/datatables.net/js/buttons.html5.min.js')}}"></script> 
+<script src="{{URL::to('bower_components/datatables.net/js/buttons.print.min.js')}}"></script> 
+
+
 <!-- Pulsar App -->
 
 <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script> -->
@@ -41,6 +51,8 @@
 <script src="{{URL::to('js/services/stockUnit.srvcs.js')}}"></script> 
 
 <!-- Controllers -->
+<script src="{{URL::to('js/controller/dataTablesCtrl.js')}}"></script> 
+
 <script src="{{URL::to('js/controller/employees.js')}}"></script> 
 <script src="{{URL::to('js/controller/assets.js')}}"></script> 
 <script src="{{URL::to('js/controller/maintenance.js')}}"></script>

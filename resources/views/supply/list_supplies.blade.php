@@ -11,7 +11,7 @@
 <section class="content">
 <div class="box">
     <div class="box-body">
-      <table id="tbl_rs" class="table table-bordered table-hover" width="100%">
+      <table datatable="ng"  class="table table-bordered table-hover" width="100%">
         <thead>
         <tr>
           <th>Control Number</th>
@@ -55,17 +55,15 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <form>
-                  <table class="table table-bordered" class="tbl_list_rcpt">
-                    <thead>
-                      <tr>
+                  <table datatable="ng" class="table table-bordered table-hover" width="100%">
+                    <thead> 
                         <th>No.</th>
                         <th>Receipt No.</th>
                         <th>Receipt Type</th>
                         <th>Supplier Name</th>
                         <th>Supply Qty</th>
                         <th>Stock Unit</th>
-                        <th>Total Amount</th>
-                      </tr> 
+                        <th>Total Amount</th> 
                     </thead>
                     <tbody>
                       <tr ng-repeat="receiptItem in vm.receiptItems">

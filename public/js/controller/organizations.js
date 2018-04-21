@@ -207,12 +207,12 @@
             vm.selectDepartment =  function(departmentCode){
                 console.log(departmentCode);
                 OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:departmentCode, orgType:'Division', startDate:'', endDate:''}).then (function (response) {
-                if(response.data.status == 200)
-                {
-                    vm.divisions = response.data.data;
-                    console.log(vm.divisions)
-                }
-            }, function (){ alert('Bad Request!!!') })
+                    if(response.data.status == 200)
+                    {
+                        vm.divisions = response.data.data;
+                        console.log(vm.divisions)
+                    }
+                }, function (){ alert('Bad Request!!!') })
             }
 
             vm.selectRegion =  function(region_code){

@@ -5,11 +5,10 @@
         .controller('ProjectsCtrl', ProjectsCtrl) 
         .controller('ProjectsModalInstanceCtrl', ProjectsModalInstanceCtrl) 
 
-        ProjectsCtrl.$inject = ['$stateParams', 'ProjectsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', '$window', '$uibModal'];
-        function ProjectsCtrl($stateParams, ProjectsSrvcs, EmployeesSrvcs, AddressesSrvcs, $window, $uibModal){
+        ProjectsCtrl.$inject = ['$stateParams', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', '$window', '$uibModal'];
+        function ProjectsCtrl($stateParams, OrganizationsSrvcs, ProjectsSrvcs, EmployeesSrvcs, AddressesSrvcs, $window, $uibModal){
             var vm = this;
             var data = {}; 
-
 
             if($stateParams.projectCode)
             {
@@ -47,8 +46,27 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'Department', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.departments = response.data.data;
+                    console.log(vm.departments)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.selectDepartment =  function(departmentCode){
+                console.log(departmentCode);
+                OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:departmentCode, orgType:'Division', startDate:'', endDate:''}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.divisions = response.data.data;
+                        console.log(vm.divisions)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
             vm.newProject =  function(data){
-                // console.log(data);
+                console.log(data);
                 ProjectsSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
@@ -58,7 +76,7 @@
                         alert(response.data.message);
                         // vm.routeTo('asset/create');
                     }
-                console.log(response.data);
+                    console.log(response.data);
                 });
             }
 

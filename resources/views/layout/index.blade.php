@@ -17,6 +17,8 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="{{URL::to('bower_components/select2/dist/css/select2.min.css')}}">
 <style>
+
+
   .example-modal .modal {
     position: relative;
     top: auto;
@@ -44,6 +46,10 @@
   .employees-modal .modal {background: transparent !important;}
   thead {background-color: #3c8dbc; color: #fff;}
   #employees {cursor: pointer;}
+
+  .modal-xlg{
+    width:1200px;
+  }
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,6 +60,10 @@
 @endsection
 
 @section('content')
+
+<script type="text/ng-template" id="angular.datatables.view">
+  @include('angular-datatables.angular_data')
+</script>
 
 <!-- Employees -->
 <script type="text/ng-template" id="employee.list.view">
@@ -238,8 +248,7 @@
 <script src="{{URL::to('bower_components/datatables.net/js/jszip.min.js')}}"></script> 
 <script src="{{URL::to('bower_components/datatables.net/js/pdfmake.min.js')}}"></script> 
 <script src="{{URL::to('bower_components/datatables.net/js/vfs_fonts.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/buttons.html5.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/buttons.print.min.js')}}"></script> 
+
 <script src="{{URL::to('bower_components/datatables.net/js/dataTables.colReorder.min.js')}}"></script> 
 <script src="{{URL::to('bower_components/datatables.net/js/buttons.colVis.min.js')}}"></script> 
 <script src="{{URL::to('bower_components/datatables.net/js/dataTables.select.min.js')}}"></script> 
