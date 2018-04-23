@@ -57,13 +57,13 @@
             //     }
             // }, function (){ alert('Bad Request!!!') })
 
-            // ReceiptSrvcs.receiptTypes().then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.receiptTypes = response.data.data;
-            //         console.log(vm.receiptTypes)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
+            VouchersSrvcs.vouchers({voucherCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.vouchers = response.data.data;
+                    console.log(vm.vouchers)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             vm.selectPayeeType = function(payeeType){
                 // alert(payeeType)
@@ -118,7 +118,7 @@
                 VouchersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        // vm.routeTo('receipt/new');
+                        vm.routeTo('voucher/list');
                     }
                     else {
                         alert(response.data.message);

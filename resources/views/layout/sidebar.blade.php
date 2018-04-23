@@ -99,8 +99,8 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="../voucher/list-voucher.html"><i class="fa fa-list-ul"></i> List of Vouchers</a></li>
-        <li class="active"><a href="#" ui-sref="voucher-create"><i class="fa fa-plus"></i> Create a Voucher</a></li>
+        <li><a href="#" ui-sref="list-voucher"><i class="fa fa-list-ul"></i> List of Vouchers</a></li>
+        <li><a href="#" ui-sref="voucher-create"><i class="fa fa-plus"></i> Create a Voucher</a></li>
       </ul>
     </li>    
     <li class="header">DATABASE</li>

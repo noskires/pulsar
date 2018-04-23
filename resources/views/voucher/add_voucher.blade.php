@@ -22,10 +22,6 @@
         <!-- form start -->
         <form class="form-horizontal" id="" ng-model="vc.voucherDetails">
           <div class="box-body">
-           <!--  <div class="form-group col-sm-12">
-              <label for="controlnumber" class="col-sm-3 control-label">Control Number</label>
-              <div class="col-sm-9"><input type="text" class="form-control" id="dv-controlnumber" placeholder="DV-03122018-1" disabled></div>
-            </div> -->
             <div class="form-group col-sm-12">
               <label for="dv-number" class="col-sm-3 control-label">DV No.</label>
               <div class="col-sm-9"><input type="text" class="form-control" id="dv-number" required="" ng-model="vc.voucherDetails.dvno"></div>

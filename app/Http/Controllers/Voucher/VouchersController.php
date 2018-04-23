@@ -19,13 +19,61 @@ class VouchersController extends Controller {
 			'voucherCode'=>$request->input('voucherCode'),
 		);
 
-		$vouchers = DB::table('vouchers');
+		$vouchers = DB::table('vouchers as v')
+				->select(
+                'v.voucher_code',
+                'v.payee_type', 
+                'v.payee', 
+                'v.particulars',
+                'v.description',
+                'v.vat_payee',
+                'v.other_taxes',
+                'v.tax_1',
+                'v.tax_2',
+                'v.amount',
+                'v.check_number',
+                DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
+                'v.bank_code'
+              )
+            ->leftjoin('Employees as e','e.employee_id','=','v.payee');
 
 		if ($data['voucherCode']){
 			$vouchers = $vouchers->where('voucher_code', $data['voucherCode']);
 		}
 
 		$vouchers = $vouchers->get();
+
+
+		foreach ($vouchers as $key => $voucher) {
+			if($voucher->payee_type=="EMPLOYEE")
+			{
+				$employee = DB::table('employees as e')
+							->select(DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'))
+							->where('employee_id', $voucher->payee)->first();
+
+				$voucher->payee_text = $employee->employee_name;
+			}
+			elseif($voucher->payee_type=="SUPPLIER")
+			{
+				$supplier = DB::table('suppliers as s')
+							->select('s.supplier_name')
+							->where('s.supplier_code', $voucher->payee)->first();
+
+				$voucher->payee_text = $supplier->supplier_name;
+			}
+			elseif($voucher->payee_type=="BANK")
+			{
+				$bank = DB::table('banks as b')
+							->select('b.bank_name')
+							->where('b.bank_code', $voucher->payee)->first();
+
+				$voucher->payee_text = $bank->bank_name;
+			}
+			else
+			{
+				$voucher->payee_text = "";
+			}
+		}
 
 		return response()-> json([
 			'status'=>200,
@@ -68,7 +116,7 @@ class VouchersController extends Controller {
 				// $voucher->other_taxes = $data['otherTaxes'];
 				// $voucher->tax_1 = $data['tax1'];
 				// $voucher->tax_2 = $data['tax2'];
-				// $voucher->amount = $data['amount'];
+				$voucher->amount = 0;
 				// $voucher->check_number = $data['checkNumber'];
 				// $voucher->check_date = $data['checkDate'];
 				// $voucher->bank_code = $data['bankCode'];

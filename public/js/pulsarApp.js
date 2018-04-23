@@ -182,6 +182,11 @@
                 controller: 'VouchersCtrl as vc',
                 templateUrl: 'voucher.create.view'
             })
+            .state('list-voucher', {
+                url: '/voucher/list',
+                controller: 'VouchersCtrl as vc',
+                templateUrl: 'voucher.list.view'
+            })
 
             //for testing only
             .state('angular-data-tables', {

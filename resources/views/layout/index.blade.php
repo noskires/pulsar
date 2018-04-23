@@ -194,6 +194,10 @@
   @include('voucher.add_voucher')
 </script>
 
+<script type="text/ng-template" id="voucher.list.view">
+  @include('voucher.list_voucher')
+</script>
+
 
 <!-- Voucher -->
 
