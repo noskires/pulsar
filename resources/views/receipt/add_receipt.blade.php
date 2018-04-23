@@ -58,6 +58,43 @@
               <div class="col-sm-10"><input type="text" class="form-control" id="rcpt-supplier" placeholder="ERIK CEMENT--- autocomplete" required="" ng-model="rc.receiptDetails.supplierCode"></div>
             </div> 
             <div class="form-group col-sm-12">
+              <label for="payeetype" class="col-sm-2 control-label">Payee Type</label>
+              <div class="radio col-sm-8">
+               <!--  <label><input type="radio" ng-model="rc.voucherDetails.payeeType" name="optionsRadios" id="optionsRadios1" value="SUPPLIER" ng-click="rc.selectPayeeType(rc.voucherDetails.payeeType)" ng-init="rc.voucherDetails.payeeType=='SUPPLIER'">SUPPLIER</label>
+                &nbsp;
+                <label><input type="radio" ng-model="rc.voucherDetails.payeeType" name="optionsRadios" id="optionsRadios2" value="BANK" ng-click="rc.selectPayeeType(rc.voucherDetails.payeeType)">BANK</label>
+                &nbsp;
+                <label><input type="radio" ng-model="rc.voucherDetails.payeeType" name="optionsRadios" id="optionsRadios3" value="EMPLOYEE" ng-click="rc.selectPayeeType(rc.voucherDetails.payeeType)">EMPLOYEE</label> -->
+
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="rc.receiptDetails.payeeType" ng-change="rc.selectPayeeType(rc.receiptDetails.payeeType)" ng-init="rc.receiptDetails.payeeType=rc.payeeType">
+                  <option selected="selected" value="0">- - select type - -</option>
+                  <option value="EMPLOYEE">EMPLOYEE</option>
+                  <option value="SUPPLIER">SUPPLIER</option>
+                  <option value="BANK">BANK</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="form-group col-sm-12">
+              <label for="controlnumber" class="col-sm-2 control-label">Payee Name</label>
+                <div class="col-sm-4">
+                  <!-- <select class="form-control select2" required="">
+                  <option selected="selected" value="" required="">- - select payee - -</option>
+                  <option value="1">Supplier 1</option>
+                  <option value="2">Supplier 2</option>
+                  <option value="3">Supplier 3</option>
+                  </select> -->
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="rc.receiptDetails.payee">
+                    <option selected="selected" value="0">- - select payee - -</option>
+                    <option ng-if="rc.payeeType=='EMPLOYEE'" value="<%employee.employee_id%>" ng-repeat="employee in rc.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>
+
+                    <option ng-if="rc.payeeType=='SUPPLIER'" value="<%supplier.supplier_code%>" ng-repeat="supplier in rc.suppliers"> <%supplier.supplier_name%> </option>
+
+                    <option ng-if="rc.payeeType=='BANK'" value="<%bank.bank_code%>" ng-repeat="bank in rc.banks"> <%bank.bank_name%> </option>
+                  </select> 
+              </div>
+            </div>
+            <div class="form-group col-sm-12">
               <label for="rcpt-remarks" class="col-sm-2 control-label">Remarks</label>
               <div class="col-sm-10"><textarea class="col-sm-12 form-control" id="rcpt-remarks" rows="2" ng-model="rc.receiptDetails.remarks"></textarea></div>
             </div>

@@ -41,7 +41,7 @@
 </div>
   <div class="box box-primary">
         <div class="box-body">
-          <table id="vouchers" class="table table-bordered table-hover" width="100%">
+          <table id="vouchers" datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
               <th>Control No.</th>

@@ -50,8 +50,14 @@ class VouchersController extends Controller {
 				$employee = DB::table('employees as e')
 							->select(DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'))
 							->where('employee_id', $voucher->payee)->first();
-
-				$voucher->payee_text = $employee->employee_name;
+				if($employee)
+				{
+					$voucher->payee_text = $employee->employee_name;
+				}
+				else
+				{
+					$voucher->payee_text = null;
+				}
 			}
 			elseif($voucher->payee_type=="SUPPLIER")
 			{
@@ -59,7 +65,14 @@ class VouchersController extends Controller {
 							->select('s.supplier_name')
 							->where('s.supplier_code', $voucher->payee)->first();
 
-				$voucher->payee_text = $supplier->supplier_name;
+				if($supplier)
+				{
+					$voucher->payee_text = $supplier->supplier_name;
+				}
+				else
+				{
+					$voucher->payee_text = null;
+				}
 			}
 			elseif($voucher->payee_type=="BANK")
 			{
@@ -67,11 +80,18 @@ class VouchersController extends Controller {
 							->select('b.bank_name')
 							->where('b.bank_code', $voucher->payee)->first();
 
-				$voucher->payee_text = $bank->bank_name;
+				if($bank)
+				{
+					$voucher->payee_text = $bank->bank_name;
+				}
+				else
+				{
+					$voucher->payee_text = null;
+				}
 			}
 			else
 			{
-				$voucher->payee_text = "";
+				$voucher->payee_text = null;
 			}
 		}
 
