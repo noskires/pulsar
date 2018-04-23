@@ -22,7 +22,8 @@ class ReceiptsController extends Controller {
       'receiptCode'=>$request->input('receiptCode'),
     );
 
-  	$receipts = DB::table('receipts');
+  	$receipts = DB::table('receipts as r')
+               ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
 
 
     if ($data['receiptCode']){

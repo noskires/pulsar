@@ -26,7 +26,7 @@
           <tbody>
           <tr ng-repeat="receipt in rc.receipts">
             <td><a href="#" ui-sref="list-receiptCopy({receiptCode:receipt.receipt_code})"><b><%receipt.receipt_code%></b></a></td>
-            <td><%receipt.receipt_type%></td>
+            <td><%receipt.receipt_type_name%></td>
             <td><%receipt.receipt_number%></td>
             <td><%receipt.receipt_date%></td>
             <td><%receipt.amount | number:2%></td>
