@@ -228,6 +228,66 @@ Route::get('/api/v1/receipt-types','Receipt\ReceiptsController@receipt_types');
 
 /*
 |--------------------------------------------------------------------------
+| Vouchers
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/voucher/new','Voucher\VouchersController@index');
+Route::get('/voucher/list','Voucher\VouchersController@index');
+Route::get('/voucher/list/{voucherCode}','Voucher\VouchersController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Vouchers Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/voucher/save','Voucher\VouchersController@save');
+Route::post('/api/v1/voucher/update','Voucher\VouchersController@update');
+
+
+/*
+|--------------------------------------------------------------------------
+| Banks
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/bank/new','Bank\BanksController@index');
+Route::get('/bank/list','Bank\BanksController@index');
+Route::get('/bank/list/{bankCode}','Bank\BanksController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Banks Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/bank/save','Bank\BanksController@save');
+Route::post('/api/v1/bank/update','Bank\BanksController@update');
+Route::get('/api/v1/banks','Bank\BanksController@banks');
+
+/*
+|--------------------------------------------------------------------------
+| Supplier
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/supplier/new','Supplier\SuppliersController@index');
+Route::get('/supplier/list','Supplier\SuppliersController@index');
+Route::get('/supplier/list/{supplierCode}','Supplier\SuppliersController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Supplier Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/supplier/save','Supplier\SuppliersController@save');
+Route::post('/api/v1/supplier/update','Supplier\SuppliersController@update');
+Route::get('/api/v1/suppliers','Supplier\SuppliersController@suppliers');
+
+/*
+|--------------------------------------------------------------------------
 | Supplies
 |--------------------------------------------------------------------------
 */

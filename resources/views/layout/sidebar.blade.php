@@ -90,7 +90,19 @@
         <li><a href="#"><i class="fa fa-list-ul"></i> List of P.O.</a></li>
         <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li>
       </ul>
-    </li>        
+    </li>       
+     <li class="treeview">
+      <a href="#">
+        <i class="fa fa-credit-card"></i> <span> Vouchers</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="../voucher/list-voucher.html"><i class="fa fa-list-ul"></i> List of Vouchers</a></li>
+        <li class="active"><a href="#" ui-sref="voucher-create"><i class="fa fa-plus"></i> Create a Voucher</a></li>
+      </ul>
+    </li>    
     <li class="header">DATABASE</li>
     <li class="treeview">
       <a href="#">

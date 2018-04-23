@@ -10,6 +10,14 @@
             var vm = this;
             var data = {}; 
 
+            vm.open1 = function() {
+                vm.popup1.opened = true;
+            };
+
+            vm.popup1 = {
+                opened: false
+            };
+
             if($stateParams.projectCode)
             {
                 vm.projectCode = $stateParams.projectCode;

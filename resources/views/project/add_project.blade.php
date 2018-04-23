@@ -149,8 +149,19 @@
               <div class="col-sm-4">
                 <div class="input-group date">
                   <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" ng-model="pc.projectDetails.dateCompleted" id="datepicker2">
+                  <input type="text" class="form-control pull-right" ng-model="pc.projectDetails.dateCompleted" uib-datepicker-popup="dd-MMMM-yyyy">
+
+
                 </div>
+
+               <!--  <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+
+                 <p class="input-group">
+                  <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" datepicker-options="dateOptions" alt-input-formats="altInputFormats" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p> -->
               </div>
             </div>
 

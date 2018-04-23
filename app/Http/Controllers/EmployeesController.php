@@ -19,6 +19,7 @@ class EmployeesController extends Controller {
         );
 
       	$employees = DB::table('Employees as e')
+                    // ->select(DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'))
                     ->leftjoin('positions as p','p.position_code','=','e.position_code');
 
       	if ($data['jobType']){ 

@@ -121,8 +121,6 @@
                 templateUrl: 'ris.list.view'
             })
 
-            
-
             .state('list-employees', {
                 url: '/employee/list',
                 controller: 'EmployeesCtrl as ec',
@@ -179,7 +177,13 @@
                 controller: 'OfficesCtrl as oc',
                 templateUrl: 'organization.create.office.view'
             })
+            .state('voucher-create', {
+                url: '/voucher/new',
+                controller: 'VouchersCtrl as vc',
+                templateUrl: 'voucher.create.view'
+            })
 
+            //for testing only
             .state('angular-data-tables', {
                 url: '/angular-datatables',
                 controller: 'DTCtrl as dtc',
@@ -191,6 +195,7 @@
                 controller: 'EmployeesCtrl as ec',
                 templateUrl: 'employee.list.view'
             })
+            //for testing only
 
             $urlRouterProvider.otherwise('/index');
 

@@ -187,6 +187,16 @@
 
 <!-- Organization -->
 
+
+<!-- Voucher -->
+
+<script type="text/ng-template" id="voucher.create.view">
+  @include('voucher.add_voucher')
+</script>
+
+
+<!-- Voucher -->
+
 <!-- Shared Modal -->
 
 <script type="text/ng-template" id="shared.modal">
