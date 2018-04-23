@@ -19,8 +19,8 @@
             <th>Receipt No.</th>
             <th>Receipt Date</th>
             <th>Amount</th>
-            <th>Supplier</th>
-            <th>Purchase Order</th>
+            <th>Payee Type</th>
+            <th>Payee Name</th>
           </tr>
           </thead>
           <tbody>
@@ -30,8 +30,8 @@
             <td><%receipt.receipt_number%></td>
             <td><%receipt.receipt_date%></td>
             <td><%receipt.amount | number:2%></td>
-            <td><%receipt.supplier_code%></td>
-            <td><%receipt.purchase_order_code%></td>
+            <td><%receipt.payee_type%></td>
+            <td><%receipt.payee_text%></td>
           </tr> 
           </tbody>
         </table>

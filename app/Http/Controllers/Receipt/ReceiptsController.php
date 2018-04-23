@@ -31,6 +31,57 @@ class ReceiptsController extends Controller {
 
     $receipts = $receipts->get();
 
+    foreach ($receipts as $key => $receipt) {
+      if($receipt->payee_type=="EMPLOYEE")
+      {
+        $employee = DB::table('employees as e')
+              ->select(DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'))
+              ->where('employee_id', $receipt->payee)->first();
+        if($employee)
+        {
+          $receipt->payee_text = $employee->employee_name;
+        }
+        else
+        {
+          $receipt->payee_text = null;
+        }
+      }
+      elseif($receipt->payee_type=="SUPPLIER")
+      {
+        $supplier = DB::table('suppliers as s')
+              ->select('s.supplier_name')
+              ->where('s.supplier_code', $receipt->payee)->first();
+
+        if($supplier)
+        {
+          $receipt->payee_text = $supplier->supplier_name;
+        }
+        else
+        {
+          $receipt->payee_text = null;
+        }
+      }
+      elseif($receipt->payee_type=="BANK")
+      {
+        $bank = DB::table('banks as b')
+              ->select('b.bank_name')
+              ->where('b.bank_code', $receipt->payee)->first();
+
+        if($bank)
+        {
+          $receipt->payee_text = $bank->bank_name;
+        }
+        else
+        {
+          $receipt->payee_text = null;
+        }
+      }
+      else
+      {
+        $receipt->payee_text = null;
+      }
+    }
+
     return response()-> json([
       'status'=>200,
       'data'=>$receipts,
@@ -69,8 +120,9 @@ class ReceiptsController extends Controller {
     $data['purchaseOrderCode'] = $request->input('purchaseOrderCode');
     $data['receiptNumber'] = $request->input('receiptNumber');
     $data['receiptType'] = $request->input('receiptType');
-    $data['supplierCode'] = $request->input('supplierCode');
     $data['remarks'] = $request->input('remarks');
+    $data['payeeType'] = $request->input('payeeType');
+    $data['payee'] = $request->input('payee');
 
     $transaction = DB::transaction(function($data) use($data){
     try{
@@ -86,8 +138,9 @@ class ReceiptsController extends Controller {
         $receipt->purchase_order_code = $data['purchaseOrderCode'];
         $receipt->receipt_number = $data['receiptNumber'];
         $receipt->receipt_type = $data['receiptType'];
-        $receipt->supplier_Code = $data['supplierCode'];
         $receipt->remarks = $data['remarks'];
+        $receipt->payee_type = $data['payeeType'];
+        $receipt->payee = $data['payee'];
         $receipt->save();
 
         return response()->json([
@@ -130,7 +183,6 @@ class ReceiptsController extends Controller {
                 'ri.receipt_item_stock_unit',
                 'ri.receipt_item_total',
                 'r.receipt_type',
-                'r.supplier_code',
                 'rt.receipt_type_name'
               )
             ->leftjoin('receipts as r','r.receipt_code','=','ri.receipt_code')

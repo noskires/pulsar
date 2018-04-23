@@ -54,10 +54,6 @@
             </div></div>
             </div>
             <div class="form-group col-sm-12">
-              <label for="controlnumber" class="col-sm-2 control-label">Supplier Name* </label>
-              <div class="col-sm-10"><input type="text" class="form-control" id="rcpt-supplier" placeholder="ERIK CEMENT--- autocomplete" required="" ng-model="rc.receiptDetails.supplierCode"></div>
-            </div> 
-            <div class="form-group col-sm-12">
               <label for="payeetype" class="col-sm-2 control-label">Payee Type</label>
               <div class="radio col-sm-8">
                <!--  <label><input type="radio" ng-model="rc.voucherDetails.payeeType" name="optionsRadios" id="optionsRadios1" value="SUPPLIER" ng-click="rc.selectPayeeType(rc.voucherDetails.payeeType)" ng-init="rc.voucherDetails.payeeType=='SUPPLIER'">SUPPLIER</label>
@@ -78,12 +74,6 @@
             <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label">Payee Name</label>
                 <div class="col-sm-4">
-                  <!-- <select class="form-control select2" required="">
-                  <option selected="selected" value="" required="">- - select payee - -</option>
-                  <option value="1">Supplier 1</option>
-                  <option value="2">Supplier 2</option>
-                  <option value="3">Supplier 3</option>
-                  </select> -->
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="rc.receiptDetails.payee">
                     <option selected="selected" value="0">- - select payee - -</option>
                     <option ng-if="rc.payeeType=='EMPLOYEE'" value="<%employee.employee_id%>" ng-repeat="employee in rc.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>

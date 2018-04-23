@@ -6,12 +6,22 @@
         // .controller('ReceiptItemsCtrl', ReceiptItemsCtrl)
         .controller('ReceiptsModalInstanceCtrl', ReceiptsModalInstanceCtrl)
 
-        ReceiptsCtrl.$inject = ['$stateParams', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function ReceiptsCtrl($stateParams, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        ReceiptsCtrl.$inject = ['$stateParams', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function ReceiptsCtrl($stateParams, ReceiptSrvcs, RequisitionsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-            vm.payeeType = "SUPPLIER";
             
+            vm.payeeType = "SUPPLIER";
+            SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
+                if (response.data.status == 200) {
+                    vm.suppliers = response.data.data;
+                }
+                else {
+                    alert(response.data.message);
+                }
+                console.log(response.data);
+            });
+
             if($stateParams.receiptCode)
             {
                 vm.receiptCode = $stateParams.receiptCode;
@@ -73,50 +83,50 @@
             };
 
             vm.selectPayeeType = function(payeeType){
-                alert(payeeType)
+                // alert(payeeType)
                 // console.log(data);
                 vm.payeeType = payeeType;
 
-                // if(payeeType=="EMPLOYEE")
-                // {          
-                //     EmployeesSrvcs.employees({jobType:''}).then(function(response){
-                //         if (response.data.status == 200) {
-                //             vm.employees = response.data.data;
-                //         }
-                //         else {
-                //             alert(response.data.message);
-                //         }
-                //         console.log(response.data);
-                //     });
-                // }
-                // else if(payeeType=="SUPPLIER")
-                // {          
-                //     SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
-                //         if (response.data.status == 200) {
-                //             vm.suppliers = response.data.data;
-                //         }
-                //         else {
-                //             alert(response.data.message);
-                //         }
-                //         console.log(response.data);
-                //     });
-                // }
-                // else if(payeeType=="BANK")
-                // {
-                //     BanksSrvcs.banks({bankCode:''}).then(function(response){
-                //         if (response.data.status == 200) {
-                //             vm.banks = response.data.data;
-                //         }
-                //         else {
-                //             alert(response.data.message);
-                //         }
-                //         console.log(response.data);
-                //     });
-                // }
-                // else
-                // {
-                //     alert("Please select Payee Type!")
-                // }
+                if(payeeType=="EMPLOYEE")
+                {          
+                    EmployeesSrvcs.employees({jobType:''}).then(function(response){
+                        if (response.data.status == 200) {
+                            vm.employees = response.data.data;
+                        }
+                        else {
+                            alert(response.data.message);
+                        }
+                        console.log(response.data);
+                    });
+                }
+                else if(payeeType=="SUPPLIER")
+                {          
+                    SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
+                        if (response.data.status == 200) {
+                            vm.suppliers = response.data.data;
+                        }
+                        else {
+                            alert(response.data.message);
+                        }
+                        console.log(response.data);
+                    });
+                }
+                else if(payeeType=="BANK")
+                {
+                    BanksSrvcs.banks({bankCode:''}).then(function(response){
+                        if (response.data.status == 200) {
+                            vm.banks = response.data.data;
+                        }
+                        else {
+                            alert(response.data.message);
+                        }
+                        console.log(response.data);
+                    });
+                }
+                else
+                {
+                    alert("Please select Payee Type!")
+                }
 
             };
 
