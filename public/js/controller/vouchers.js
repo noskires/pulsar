@@ -3,12 +3,44 @@
     angular
         .module('pulsarApp')
         .controller('VouchersCtrl', VouchersCtrl)
+        .controller('VouchersModalInstanceCtrl', VouchersModalInstanceCtrl)
 
         VouchersCtrl.$inject = ['$stateParams', 'VouchersSrvcs', 'ParticularsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
         function VouchersCtrl($stateParams, VouchersSrvcs, ParticularsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
             vm.payeeType = "SUPPLIER";
+
+            if($stateParams.voucherCode)
+            {
+
+                vm.voucherCode = $stateParams.voucherCode;
+                // alert(vm.receiptCode);
+                VouchersSrvcs.vouchers({voucherCode:vm.voucherCode }).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.voucher = response.data.data[0];
+                        console.log(vm.voucher)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'VouchersModalInstanceCtrl',
+                            templateUrl:'voucherInfo.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'Voucher Controller',
+                                    message:response.data.message,
+                                    voucher: vm.voucher
+                                };
+                              }
+                            },
+                            size: 'lg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+
+            }
 
             SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
                 if (response.data.status == 200) {
@@ -27,7 +59,7 @@
                     console.log(vm.particulars)
                 }
             }, function (){ alert('Bad Request!!!') })
-            
+
             VouchersSrvcs.vouchers({voucherCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -35,6 +67,8 @@
                     console.log(vm.vouchers)
                 }
             }, function (){ alert('Bad Request!!!') })
+
+            
 
             vm.selectPayeeType = function(payeeType){
                 // alert(payeeType)
@@ -101,6 +135,98 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 
+        }
+
+
+        VouchersModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs', 'VouchersSrvcs', 'BanksSrvcs'];
+        function VouchersModalInstanceCtrl ($uibModalInstance, formData, ReceiptSrvcs, VouchersSrvcs, BanksSrvcs) {
+
+            var vm = this;
+            vm.formData = formData.voucher;
+            console.log(vm.formData)
+
+            vm.voucherItemDetails = [];
+
+            VouchersSrvcs.voucherItems({voucherCode:vm.formData.voucher_code, voucherItemCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.voucherItems = response.data.data;
+                    console.log(vm.voucherItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ReceiptSrvcs.receipts({receiptCode:'', payeeType:vm.formData.payee_type, payee:vm.formData.payee}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.receipts = response.data.data;
+                    console.log(vm.receipts)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            BanksSrvcs.banks({bankCode:''}).then(function(response){
+                if (response.data.status == 200) {
+                    vm.banks = response.data.data;
+                    console.log(vm.banks)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.newItem = function(receiptDetails, active)
+            {
+                receiptDetails['voucher_code'] = vm.formData.voucher_code;
+                if (active)
+                {
+
+                    vm.voucherItemDetails.push(receiptDetails);
+                }
+                else
+                {
+                    vm.voucherItemDetails.splice(vm.voucherItemDetails.indexOf(receiptDetails), 1);
+                }
+
+            }
+
+            vm.newVoucherItem = function(data)
+            {
+                console.log(data);
+                VouchersSrvcs.saveVoucherItems(data).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        vm.voucherItemDetails = [];
+
+                        vm.voucherItemGrandTotal = 0;
+
+                        VouchersSrvcs.voucherItems({voucherCode:vm.formData.voucher_code, voucherItemCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.voucherItems = response.data.data;
+                                console.log(vm.voucherItems)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.updateVoucher = function(data)
+            {
+                data['voucherCode'] = vm.formData.voucher_code;
+                console.log(data)
+                VouchersSrvcs.update(data).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                    }
+                    console.log(response.data)
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+            
+            vm.routeTo = function(route){
+                $window.location.href = route;
+            };
         }
 
 })();

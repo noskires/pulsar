@@ -2,7 +2,7 @@
     'use strict';
     angular
         // .module('pulsarApp',[])
-        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons'])
+        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap'])
         .config(Config)
         .controller('MainCtrl', MainCtrl)
 
@@ -184,6 +184,11 @@
             })
             .state('list-voucher', {
                 url: '/voucher/list',
+                controller: 'VouchersCtrl as vc',
+                templateUrl: 'voucher.list.view'
+            })
+            .state('list-voucherCopy', {
+                url: '/voucher/list/:voucherCode',
                 controller: 'VouchersCtrl as vc',
                 templateUrl: 'voucher.list.view'
             })

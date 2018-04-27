@@ -31,6 +31,22 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                voucherItems: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/voucher-items?voucherCode='+data.voucherCode+'&voucherItemCode='+data.voucherItemCode,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                saveVoucherItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/voucher-items/save',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
             };
         }
 })();

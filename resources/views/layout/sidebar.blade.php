@@ -142,20 +142,7 @@
         <li><a href="#" ui-sref="receipt-create"><i class="fa fa-pencil"></i> Create Receipt</a></li> 
       </ul>
     </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-cube"></i> <span>Office</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <!-- <li><a href="#" ui-sref="org-deparment-create"><i class="fa fa-pencil"></i> Create Department </a></li>
-        <li><a href="#" ui-sref="org-division-create"><i class="fa fa-pencil"></i> Create Division </a></li>
-        <li><a href="#" ui-sref="org-unit-create"><i class="fa fa-pencil"></i> Create Unit </a></li> -->
-        <li><a href="#" ui-sref="org-office-create"><i class="fa fa-pencil"></i> Office </a></li>
-      </ul>
-    </li>
+    <li class="treeview"><a href="#" ui-sref="org-office-create"><i class="fa fa-building"></i> Office </a></li>
     <li class="treeview">
       <a href="#">
         <i class="fa fa-cube"></i> <span>Project Monitoring</span>

@@ -41,12 +41,12 @@
 <!-- MODAL POPUP -->
 <script type="text/ng-template" id="supplyInfo.modal">
 <div>
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width:100%;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="vm.ok()" ui-sref="list-supply">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><li class="fa fa-briefcase"></li> Supply ID: <b><%vm.formData.supply_code%></b></h4>
+        <h4 class="modal-title"><li class="fa fa-briefcase"></li> Supply ID: <b><%vm.formData.supply_code%> ( <%vm.formData.supply_name%> )</b></h4>
       </div>
       <div class="modal-body">
         <p>View supply item details.</p>
@@ -75,11 +75,6 @@
                         <td><%receiptItem.receipt_item_stock_unit%></td>
                         <td><%receiptItem.receipt_item_total%></td>
                       </tr>
-                      <tr>
-                        <td colspan="4" align="right"><b>TOTAL QUANTITY</b></td>
-                        <td colspan="2"><b><%vm.supplyTotalQuantity%></b></td>
-                        <td></td>
-                      </tr>
                     </tbody>
                   </table>
                 </form>
@@ -87,11 +82,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
     <!-- /.modal-content -->

@@ -39,6 +39,7 @@
   </div>
 </div>
 </div>
+
   <div class="box box-primary">
         <div class="box-body">
           <table id="vouchers" datatable="ng" class="table table-bordered table-hover" width="100%">
@@ -59,7 +60,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="voucher in vc.vouchers">
-              <td><a href="#" data-toggle="modal" data-target="#modal-default" title="Click for details"><b><%voucher.voucher_code%></b></a></td>
+              <td><a href="#"  ui-sref="list-voucherCopy({voucherCode:voucher.voucher_code})" title="Click for details"><b><%voucher.voucher_code%></b></a></td>
               <td></td>
               <td><%voucher.payee_type%></td>
               <td><%voucher.payee_text%></td>
@@ -77,3 +78,115 @@
         <!-- /.box-body -->
   </div>
 </section>
+
+<script type="text/ng-template" id="voucherInfo.modal">
+  <div>
+    <div class="modal-dialog" style="width:100%">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="vm.ok()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-credit-card"></li> DV No: <b><%vm.formData.voucher_code%></b>&nbsp;&nbsp;&nbsp;
+            (<%vm.formData.payee_type%> : <%vm.formData.payee_text%>)</h4>
+        </div>
+        <div class="modal-body">
+          <p>Please select particular unpaid receipt/s for the voucher.</p>
+            <form class="form-horizontal" id="" ng-model="vm.voucherItemDetails">
+              <table datatable="ng"  class="table table-bordered table-hover" width="100%">
+                <thead class="rcpt_dv">
+                <tr> 
+                  <th>Select</th>
+                  <th>Control No.</th>
+                  <th>Receipt Type</th>
+                  <th>Receipt No.</th>
+                  <th>Receipt Date</th>
+                  <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="receipt in vm.receipts"> 
+                  <td> <input type="checkbox" ng-model="active" ng-change="vm.newItem(receipt, active)"/> </td>
+                  <td><b><%receipt.receipt_code%></b></td>
+                  <td><%receipt.receipt_type_name%></td>
+                  <td><%receipt.receipt_number%></td>
+                  <td><%receipt.receipt_date%></td>
+                  <td align="right"><%receipt.amount | number:2%></td>
+                </tr> 
+                </tbody>
+              </table>
+              <button type="button" id="add-row" class="btn btn-sm btn-flat btn-success" ng-click="vm.newVoucherItem(vm.voucherItemDetails)">Add selected receipt</button><br>
+            </form>
+              <hr>
+              <p>Selected unpaid receipt/s for the voucher.</p>
+              <table id="tbl_rcpt_dv_view" class="table table-bordered table-hover" width="100%">
+                <thead class="thead_rcpt_dv_view">
+                <tr>
+                  <th>Control No.</th>
+                  <th>Receipt Type</th>
+                  <th>Receipt No.</th>
+                  <th>Receipt Date</th>
+                  <th>Amount</th>
+                  <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="voucherItem in vm.voucherItems">
+                  <td><b><%voucherItem.receipt_code%></b></td>
+                  <td><%voucherItem.receipt_type_name%></td>
+                  <td><%voucherItem.receipt_number%></td>
+                  <td><%voucherItem.receipt_date%></td>
+                  <td align="right" ng-init="vm.voucherItemGrandTotal = vm.voucherItemGrandTotal + voucherItem.amount"><%voucherItem.amount | number:2%></td>
+                  <td>
+                    <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
+                    <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4" align="right"><b>TOTAL VOUCHER AMOUNT</b></td>
+                  <td align="right"><b><%vm.voucherItemGrandTotal | number:2%></b></td>
+                  <td></td>
+                </tr>  
+                </tbody>
+              </table>
+        
+        <p>Please provide check details to complete the voucher.</p>
+        <form class="form-horizontal" id="" ng-model="vm.formData">
+        <div class="form-group">
+          <div class="col-sm-4">
+          <div class="input-group checknum">
+          <span class="input-group-addon" style="font-size: 15px;">Check #</span>
+          <input type="number" class="form-control" id="rcpt-number" placeholder="" required="" ng-model="vm.formData.check_number">
+        </div></div>
+        <div class="col-sm-4">
+          <div class="input-group checkdate">
+          <span class="input-group-addon" style="font-size: 15px;">Check Date</span>
+          <input type="text" class="form-control pull-right" id="datepicker_check" ng-model="vm.formData.check_date">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="input-group checkbank">
+          <span class="input-group-addon" style="font-size: 15px;">Bank</span>
+          <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.bank_code">
+            <option selected="selected" value="">Select Bank</option>
+              <option value="<%bank.bank_code%>" ng-repeat="bank in vm.banks"> <%bank.bank_name%> </option>
+          </select>
+          </div>
+        </div>
+        </div> 
+      </form>
+        <br>
+        </div>
+
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
+          <button type="button" class="btn btn-primary" ng-click="vm.updateVoucher(vm.formData)">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->  
+</script>

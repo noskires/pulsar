@@ -27,7 +27,7 @@
                 vm.receiptCode = $stateParams.receiptCode;
                 // alert(vm.receiptCode);
 
-                ReceiptSrvcs.receipts({receiptCode:vm.receiptCode}).then (function (response) {
+                ReceiptSrvcs.receipts({receiptCode:vm.receiptCode, payeeType:'', payee:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receipt = response.data.data[0];
@@ -52,7 +52,7 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            ReceiptSrvcs.receipts({receiptCode:''}).then (function (response) {
+            ReceiptSrvcs.receipts({receiptCode:'', payeeType:'', payee:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.receipts = response.data.data;

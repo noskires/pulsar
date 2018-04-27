@@ -20,7 +20,10 @@ class ReceiptsController extends Controller {
 
     $data = array(
       'receiptCode'=>$request->input('receiptCode'),
+      'payeeType'=>$request->input('payeeType'),
+      'payee'=>$request->input('payee')
     );
+
 
   	$receipts = DB::table('receipts as r')
                ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
@@ -28,6 +31,14 @@ class ReceiptsController extends Controller {
 
     if ($data['receiptCode']){
       $receipts = $receipts->where('receipt_code', $data['receiptCode']);
+    }
+
+    if ($data['payeeType']){
+      $receipts = $receipts->where('payee_type', $data['payeeType']);
+    }
+
+    if ($data['payee']){
+      $receipts = $receipts->where('payee', $data['payee']);
     }
 
     $receipts = $receipts->get();

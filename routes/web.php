@@ -242,9 +242,11 @@ Route::get('/voucher/list/{voucherCode}','Voucher\VouchersController@index');
 */
 
 Route::post('/api/v1/voucher/save','Voucher\VouchersController@save');
+Route::post('/api/v1/voucher-items/save','Voucher\VouchersController@save_voucher_items'); 
 Route::post('/api/v1/voucher/update','Voucher\VouchersController@update');
-Route::get('/api/v1/vouchers','Voucher\VouchersController@vouchers');
 
+Route::get('/api/v1/vouchers','Voucher\VouchersController@vouchers');
+Route::get('/api/v1/voucher-items','Voucher\VouchersController@voucher_items');
 
 /*
 |--------------------------------------------------------------------------

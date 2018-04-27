@@ -12,7 +12,6 @@
 
             if($stateParams.supplyCode)
             {
-
                 vm.supplyCode = $stateParams.supplyCode;
                 // alert(vm.receiptCode);
 
@@ -34,7 +33,8 @@
                                     supply: vm.supply
                                 };
                               }
-                            }
+                            },
+                            size: 'xlg'
                         });
                     }
                 }, function (){ alert('Bad Request!!!') })

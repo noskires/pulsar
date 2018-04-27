@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers\Voucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 use DB;
 use App\Voucher;
+use App\VoucherItem;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -21,21 +23,21 @@ class VouchersController extends Controller {
 
 		$vouchers = DB::table('vouchers as v')
 				->select(
-                'v.voucher_code',
-                'v.payee_type', 
-                'v.payee', 
-                'v.particulars',
-                'v.description',
-                'v.vat_payee',
-                'v.other_taxes',
-                'v.tax_1',
-                'v.tax_2',
-                'v.amount',
-                'v.check_number',
-                'p.description',
-                DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
-                'v.bank_code'
-              )
+	                'v.voucher_code',
+	                'v.payee_type', 
+	                'v.payee', 
+	                'v.particulars',
+	                'v.description',
+	                'v.vat_payee',
+	                'v.other_taxes',
+	                'v.tax_1',
+	                'v.tax_2',
+	                'v.amount',
+	                'v.check_number',
+	                'p.description',
+	                DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
+	                'v.bank_code'
+              	)
             ->leftjoin('Employees as e','e.employee_id','=','v.payee')
             ->leftjoin('Particulars as p','p.particular_code','=','v.particulars');
 
@@ -163,4 +165,128 @@ class VouchersController extends Controller {
 
 		return $transaction;
 	}
+
+	public function update(Request $request){
+
+    $data = array();
+    $data['voucherCode'] = $request->input('voucherCode');
+    $data['checkNumber'] = $request->input('check_number');
+    $data['checkDate'] = date('Y-m-d', strtotime($request->input('check_date')));
+    $data['bankCode'] = $request->input('bank_code');
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+      
+		DB::table('vouchers')
+            ->where('voucher_code', $data['voucherCode'])
+            ->update([
+              'check_number' => $data['checkNumber'],
+              'check_date' => $data['checkDate'],
+              'bank_code' => $data['bankCode']
+            ]);
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+
+	public function voucher_items(Request $request){
+
+    $data = array(
+      'voucherCode'=>$request->input('voucherCode'),
+      'voucherItemCode'=>$request->input('voucherItemCode'),
+      'receiptCode'=>$request->input('receiptCode'),
+    );
+
+    $voucherItems = DB::table('voucher_items as vi')
+              ->select(
+                'vi.receipt_code', 
+                'vi.voucher_code', 
+                'vi.voucher_item_code',
+                'r.receipt_number',
+                'r.receipt_date',
+                'r.amount',
+                'rt.receipt_type_name'
+              )
+              ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')
+              ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
+
+
+    if ($data['voucherCode']){
+      $voucherItems = $voucherItems->where('vi.voucher_code', $data['voucherCode']);
+    }
+
+    if ($data['voucherItemCode']){
+      $voucherItems = $voucherItems->where('vi.voucher_item_code', $data['voucherItemCode']);
+    }
+
+    if ($data['receiptCode']){
+      $voucherItems = $voucherItems->where('vi.receipt_code', $data['receiptCode']);
+    }
+
+    $voucherItems = $voucherItems->get();
+
+    return response()-> json([
+      'status'=>200,
+      'data'=>$voucherItems,
+      'message'=>''
+    ]);
+  }
+
+	public function save_voucher_items(Request $request){
+
+    $data = Input::post();
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+        for($i = 0; $i < count($data); $i++) {
+
+          $vc            = new VoucherItem;
+
+          $voucherItemCode = (str_pad(($vc->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+          ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+          $vc->voucher_item_code = "DVITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$voucherItemCode;
+
+          $vc->voucher_code     = $data[$i]['voucher_code'];
+          $vc->receipt_code     = $data[$i]['receipt_code'];
+          $vc->save(); // fixed typo
+
+        }
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
 }

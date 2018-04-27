@@ -23,8 +23,12 @@
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.min.js')}}"></script>
 
-<script src="{{URL::to('bower_components/datatables.net/js/buttons.html5.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/buttons.print.min.js')}}"></script> 
+<!-- <script src="{{URL::to('bower_components/datatables.net/js/buttons.html5.min.js')}}"></script> 
+<script src="{{URL::to('bower_components/datatables.net/js/buttons.print.min.js')}}"></script>  -->
+
+
+<script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>  -->
+<script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>  -->
 
 
 <!-- Pulsar App -->

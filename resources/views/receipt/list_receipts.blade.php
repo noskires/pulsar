@@ -10,33 +10,33 @@
 <!-- Main content -->
 <section class="content">
 <div class="box">
-      <div class="box-body">
-        <table datatable="ng" class="table table-bordered table-hover" width="100%">
-          <thead>
-          <tr>
-            <th>Control No.</th>
-            <th>Receipt Type</th>
-            <th>Receipt No.</th>
-            <th>Receipt Date</th>
-            <th>Amount</th>
-            <th>Payee Type</th>
-            <th>Payee Name</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr ng-repeat="receipt in rc.receipts">
-            <td><a href="#" ui-sref="list-receiptCopy({receiptCode:receipt.receipt_code})"><b><%receipt.receipt_code%></b></a></td>
-            <td><%receipt.receipt_type_name%></td>
-            <td><%receipt.receipt_number%></td>
-            <td><%receipt.receipt_date%></td>
-            <td><%receipt.amount | number:2%></td>
-            <td><%receipt.payee_type%></td>
-            <td><%receipt.payee_text%></td>
-          </tr> 
-          </tbody>
-        </table>
-      </div>
-      <!-- /.box-body -->
+  <div class="box-body">
+    <table datatable="ng" class="table table-bordered table-hover" width="100%">
+      <thead>
+      <tr>
+        <th>Control No.</th>
+        <th>Receipt Type</th>
+        <th>Receipt No.</th>
+        <th>Receipt Date</th>
+        <th>Amount</th>
+        <th>Payee Type</th>
+        <th>Payee Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="receipt in rc.receipts">
+        <td><a href="#" ui-sref="list-receiptCopy({receiptCode:receipt.receipt_code})"><b><%receipt.receipt_code%></b></a></td>
+        <td><%receipt.receipt_type_name%></td>
+        <td><%receipt.receipt_number%></td>
+        <td><%receipt.receipt_date%></td>
+        <td><%receipt.amount | number:2%></td>
+        <td><%receipt.payee_type%></td>
+        <td><%receipt.payee_text%></td>
+      </tr> 
+      </tbody>
+    </table>
+  </div>
+  <!-- /.box-body -->
 </div>
 </section>
 <!-- MODAL POPUP -->
