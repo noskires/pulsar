@@ -66,10 +66,10 @@
               <td><%voucher.payee_text%></td>
               <td><%voucher.description%></td>
               <td><%voucher.description%></td>
-              <td><%voucher.amount | number:2%></td>
+              <td align="right"><%voucher.amount | number:2%></td>
               <td><%voucher.check_number%></td>
               <td><%voucher.check_date%></td>
-              <td><%voucher.bank%></td>
+              <td><%voucher.bank_name%></td>
             </tr>
 
             </tbody>

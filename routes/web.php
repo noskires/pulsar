@@ -248,6 +248,8 @@ Route::post('/api/v1/voucher/update','Voucher\VouchersController@update');
 Route::get('/api/v1/vouchers','Voucher\VouchersController@vouchers');
 Route::get('/api/v1/voucher-items','Voucher\VouchersController@voucher_items');
 
+Route::get('/api/v1/sample-voucher','Voucher\VouchersController@sample');
+
 /*
 |--------------------------------------------------------------------------
 | Particulars

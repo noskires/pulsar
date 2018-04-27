@@ -36,9 +36,11 @@ class VouchersController extends Controller {
 	                'v.check_number',
 	                'p.description',
 	                DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
-	                'v.bank_code'
+	                'v.bank_code',
+	                'b.bank_name'
               	)
             ->leftjoin('Employees as e','e.employee_id','=','v.payee')
+            ->leftjoin('Banks as b','b.bank_code','=','v.bank_code')
             ->leftjoin('Particulars as p','p.particular_code','=','v.particulars');
 
 		if ($data['voucherCode']){
@@ -176,13 +178,26 @@ class VouchersController extends Controller {
 
     $transaction = DB::transaction(function($data) use($data){
     // try{
-      
+      	
+    	$voucher = DB::table('vouchers as v')
+          ->select(
+          	DB::raw("COALESCE(SUM(r.amount), 0) as total_amount")
+          )
+          ->where('v.voucher_code', $data['voucherCode'])
+          ->leftjoin('voucher_items as vi','vi.voucher_code','=','v.voucher_code')
+          ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')
+          ->first();
+
+
+          $totalReceiptAmount = $voucher->total_amount;
+
 		DB::table('vouchers')
             ->where('voucher_code', $data['voucherCode'])
             ->update([
               'check_number' => $data['checkNumber'],
               'check_date' => $data['checkDate'],
-              'bank_code' => $data['bankCode']
+              'bank_code' => $data['bankCode'],
+              'amount' => $totalReceiptAmount
             ]);
 
         return response()->json([
@@ -289,4 +304,17 @@ class VouchersController extends Controller {
 
     return $transaction;
   }
+
+  // public function sample(){
+  // 	$voucher = DB::table('vouchers as v')
+  //         ->select(
+  //         	DB::raw("COALESCE(SUM(r.amount), 0) as total_amount")
+  //         )
+  //         ->where('v.voucher_code', 'DV-20180428-0002')
+  //         ->leftjoin('voucher_items as vi','vi.voucher_code','=','v.voucher_code')
+  //         ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')->first();
+  //         // ->first();
+
+  //         return $voucher->total_amount;
+  // }
 }
