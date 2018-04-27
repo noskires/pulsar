@@ -32,10 +32,12 @@ class VouchersController extends Controller {
                 'v.tax_2',
                 'v.amount',
                 'v.check_number',
+                'p.description',
                 DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
                 'v.bank_code'
               )
-            ->leftjoin('Employees as e','e.employee_id','=','v.payee');
+            ->leftjoin('Employees as e','e.employee_id','=','v.payee')
+            ->leftjoin('Particulars as p','p.particular_code','=','v.particulars');
 
 		if ($data['voucherCode']){
 			$vouchers = $vouchers->where('voucher_code', $data['voucherCode']);

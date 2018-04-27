@@ -15,6 +15,9 @@
 <!-- Sanitize -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-sanitize/angular-sanitize.min.js')}}"></script>
 
+<!-- Auto Complete -->
+<script type="text/javascript" src="{{URL::to('bower_components/angular-auto-complete/angular-auto-complete.js')}}"></script>
+
 <!-- angular-datatables -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/angular-datatables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js')}}"></script>
@@ -53,6 +56,7 @@
 <script src="{{URL::to('js/services/banks.srvcs.js')}}"></script> 
 
 <script src="{{URL::to('js/services/stockUnit.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/particulars.srvcs.js')}}"></script> 
 
 <!-- Controllers -->
 <script src="{{URL::to('js/controller/dataTablesCtrl.js')}}"></script> 

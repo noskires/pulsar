@@ -23,10 +23,6 @@
         <form class="form-horizontal" id="" ng-model="vc.voucherDetails">
           <div class="box-body">
             <div class="form-group col-sm-12">
-              <label for="dv-number" class="col-sm-3 control-label">DV No.</label>
-              <div class="col-sm-9"><input type="text" class="form-control" id="dv-number" required="" ng-model="vc.voucherDetails.dvno"></div>
-            </div>
-            <div class="form-group col-sm-12">
               <label for="dv-payee-type" class="col-sm-3 control-label">Payee Type</label>
               <div class="col-sm-9">
 
@@ -54,68 +50,18 @@
             </div>
             <div class="form-group col-sm-12">
               <label for="dv-particulars" class="col-sm-3 control-label">Particulars</label>
-              <div class="col-sm-9"><input type="text" class="form-control" id="dv-particulars" placeholder="for Supplier, show list of Statement of Accounts and Select One (1) SOA only to be paid" required="" ng-model="vc.voucherDetails.particulars"></div>
+              <div class="col-sm-9">
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.particulars">
+                  <option selected="selected" value="0">- - select payee - -</option>
+                  <option value="<%particular.particular_code%>" ng-repeat="particular in vc.particulars"> <%particular.description%> </option>
+                </select>
+              </div>
             </div>
             <div class="form-group col-sm-12">
               <label for="dv-desc" class="col-sm-3 control-label">Description/Remarks</label>
               <div class="col-sm-9"><textarea class="col-sm-9 form-control" id="dv-desc" rows="2" ng-model="vc.voucherDetails.description"></textarea></div>
             </div>
-            <!-- <div class="form-group col-sm-12">
-              <label for="dv-amount" class="col-sm-3 control-label">VAT Payee</label>
-              <div class="col-sm-3">
-              <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-width="60%" ng-model="vc.voucherDetails.vatPayee">
-              </div>
-              <label for="dv-amount" class="col-sm-2 control-label">Amount</label>
-              <div class="col-sm-4">
-              <div class="input-group">
-              <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="number" class="form-control" id="dv-amount" required="" ng-model="vc.voucherDetails.amount">
-            </div></div>
-              
-            </div>
-            <div class="form-group col-sm-12">
-              <label for="dv-othertax1" class="col-sm-3 control-label">Other Taxes</label>
-              <div class="col-sm-3">
-              <div class="input-group">
-              <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="number" class="form-control" id="dv-othertax1" ng-model="vc.voucherDetails.otherTaxes">
-            </div></div>
-            <label for="dv-amount" class="col-sm-2 control-label">Check No.</label>
-              <div class="col-sm-4">
-              <input type="number" class="form-control" id="check-number" required="" ng-model="vc.voucherDetails.checkNumber">
-            </div>
-            </div>
-            <div class="form-group col-sm-12">
-            <label for="dv-othertax2" class="col-sm-3 control-label">Tax 1</label>
-              <div class="col-sm-3">
-              <div class="input-group">
-              <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="number" class="form-control" id="dv-othertax2" ng-model="vc.voucherDetails.tax1">
-            </div></div>
-              <label class="col-sm-2 control-label">Check Date</label>
-              <div class="col-sm-4">
-              <div class="input-group date">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="datepicker" ng-model="vc.voucherDetails.checkDate">
-            </div></div>
-            </div>
-            <div class="form-group col-sm-12">
-            <label for="dv-othertax3" class="col-sm-3 control-label">Tax 2</label>
-              <div class="col-sm-3">
-              <div class="input-group">
-              <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="number" class="form-control" id="dv-othertax3" ng-model="vc.voucherDetails.tax2">
-            </div></div>
-            <label for="dv-payee-name" class="col-sm-2 control-label">Bank</label>
-              <div class="col-sm-3">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.bankCode">
-                <option selected="selected" value="0">- - select bank - -</option>
-                <option value="BANk001">Bank 1</option>
-                <option value="BANk002">Bank 2</option>
-                <option value="BANk003">Bank 3</option>
-              </select>
-              </div>
-            </div> -->
+
           </div>
           <!-- /.box-body -->
           <div class="box-footer">

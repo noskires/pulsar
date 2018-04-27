@@ -11,7 +11,7 @@
 <section class="content">
   <div class="box">
         <div class="box-body">
-          <table id="tbl_rs" class="table table-bordered table-hover" width="100%">
+          <table datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
               <th>Control No.</th>

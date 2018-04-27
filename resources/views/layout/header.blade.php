@@ -149,8 +149,8 @@
           <img src="{{url::to('assets/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
           <p>
-            Mykee Caparas - Administrator
-            <small>Member since Nov. 2018</small>
+            {{Auth::user()->name}}
+            <!-- <small>Member since Nov. 2018</small> -->
           </p>
         </li>
         <!-- Menu Body -->

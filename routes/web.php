@@ -179,7 +179,6 @@ Route::get('/job-order/new/{assetTag}','JobOrder\JobOrdersController@index');
 
 Route::post('/api/v1/job-order/save','JobOrder\JobOrdersController@save');
 Route::post('/api/v1/job-order/update','JobOrder\JobOrdersController@update');
-
 Route::get('/api/v1/job-orders','JobOrder\JobOrdersController@job_orders');
 
 /*
@@ -246,6 +245,26 @@ Route::post('/api/v1/voucher/save','Voucher\VouchersController@save');
 Route::post('/api/v1/voucher/update','Voucher\VouchersController@update');
 Route::get('/api/v1/vouchers','Voucher\VouchersController@vouchers');
 
+
+/*
+|--------------------------------------------------------------------------
+| Particulars
+|--------------------------------------------------------------------------
+*/
+
+// Route::get('/voucher/new','Voucher\VouchersController@index');
+// Route::get('/voucher/list','Voucher\VouchersController@index');
+// Route::get('/voucher/list/{voucherCode}','Voucher\VouchersController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Particulars Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/particular/save','Voucher\ParticularsController@save');
+Route::post('/api/v1/particular/update','Voucher\ParticularsController@update');
+Route::get('/api/v1/particulars','Voucher\ParticularsController@particulars');
 
 /*
 |--------------------------------------------------------------------------

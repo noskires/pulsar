@@ -63,7 +63,7 @@
               <td></td>
               <td><%voucher.payee_type%></td>
               <td><%voucher.payee_text%></td>
-              <td><%voucher.particulars%></td>
+              <td><%voucher.description%></td>
               <td><%voucher.description%></td>
               <td><%voucher.amount | number:2%></td>
               <td><%voucher.check_number%></td>
