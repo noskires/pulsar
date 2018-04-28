@@ -21,24 +21,49 @@ class ReceiptsController extends Controller {
     $data = array(
       'receiptCode'=>$request->input('receiptCode'),
       'payeeType'=>$request->input('payeeType'),
-      'payee'=>$request->input('payee')
+      'payee'=>$request->input('payee'),
+      // 'showBy'=>$request->input('showBy')
+      'voucherCode'=>$request->input('voucherCode')
     );
 
 
   	$receipts = DB::table('receipts as r')
-               ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
+              ->select(
+                'r.receipt_code', 
+                'r.purchase_order_code',
+                'r.receipt_type',
+                'r.receipt_number',
+                'r.amount', 
+                'r.receipt_date',
+                'r.payee_type',
+                'r.payee',
+                'r.remarks',
+                'rt.receipt_type_name',
+                'vi.voucher_code'
+              )
+               ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
+               ->leftjoin('voucher_items as vi','vi.receipt_code','=','r.receipt_code');
+     
 
 
     if ($data['receiptCode']){
-      $receipts = $receipts->where('receipt_code', $data['receiptCode']);
+      $receipts = $receipts->where('r.receipt_code', $data['receiptCode']);
     }
 
     if ($data['payeeType']){
-      $receipts = $receipts->where('payee_type', $data['payeeType']);
+      $receipts = $receipts->where('r.payee_type', $data['payeeType']);
     }
 
     if ($data['payee']){
-      $receipts = $receipts->where('payee', $data['payee']);
+      $receipts = $receipts->where('r.payee', $data['payee']);
+    }
+
+    // if ($data['showBy'] == "Filtered"){
+    //   $receipts = $receipts->whereNull('vi.voucher_code');
+    // }
+
+    if ($data['voucherCode']){
+      $receipts = $receipts->whereNull('vi.voucher_code');
     }
 
     $receipts = $receipts->get();
