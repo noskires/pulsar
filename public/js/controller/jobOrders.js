@@ -42,9 +42,8 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            vm.jobOrderInfo = function(joCode){
-                // alert($stateParams.assetTag);
-                JobOrdersSrvcs.jobOrders({joCode:joCode,joStatus:''}).then (function (response) {
+            if($stateParams.joCode){
+                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode,joStatus:''}).then (function (response) {
 
                     if(response.data.status == 200)
                     {
@@ -63,7 +62,8 @@
                                     jobOrder: response.data.data[0]
                                 };
                               }
-                            }
+                            },
+                            size: 'lg'
                         });
                     }
                 }, function (){ alert('Bad Request!!!') })
@@ -159,13 +159,13 @@
                 }, function (){ alert('Bad Request!!!') });
             }
 
-            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
-                if(response.data.status == 200)
-                {
-                    vm.employees = response.data.data;
-                    console.log(vm.employees)
-                }
-            }, function (){ alert('Bad Request!!!') })
+            // EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.employees = response.data.data;
+            //         console.log(vm.employees)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
 
             vm.routeTo = function(route){
                 $window.location.href = route;

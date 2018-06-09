@@ -65,11 +65,14 @@ class AssetsController extends Controller {
                 'a.assign_to',
                 'a.project_code',
                 'a.status',
+                'sc.asset_category',
+                'sc.asset_name',
                 'm.municipality_text'
               )
             ->leftjoin('Employees as e','e.employee_id','=','a.assign_to')
             ->leftjoin('Projects as p','p.project_code','=','a.project_code')
-      			->leftjoin('municipalities as m','m.municipality_code','=','p.municipality_code');
+            ->leftjoin('municipalities as m','m.municipality_code','=','p.municipality_code')
+      			->leftjoin('asset_categories as sc','sc.asset_code','=','a.category');
 
       	if ($data['tag']){ 
       		$asset = $asset->where('a.tag', $data['tag']);
@@ -82,6 +85,10 @@ class AssetsController extends Controller {
         if ($data['category']){ 
           $asset = $asset->where('a.category', $data['category']);
         }
+
+        // if ($data['type']){ 
+          // $asset = $asset->where('sc.asset_category', 'Assets');
+        // }
 
       	$asset = $asset->get();
 

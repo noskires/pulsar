@@ -101,10 +101,15 @@
                 controller: 'JobOrdersCtrl as joc',
                 templateUrl: 'jo.list.view'
             })
-            .state('list-jo.jo', {
-                url: '/:joCode',
-                controller: 'JobOrdersCtrl as joc'
+            .state('list-joCopy', {
+                url: '/job-order/list/:joCode',
+                controller: 'JobOrdersCtrl as joc',
+                templateUrl: 'jo.list.view'
             })
+            // .state('list-jo.jo', {
+            //     url: '/:joCode',
+            //     controller: 'JobOrdersCtrl as joc'
+            // })
             .state('requesition-asset-create', {
                 url: '/requisition-issue-slip/asset/new/:jobOrderCode',
                 controller: 'RequisitionAssetCtrl as rac',

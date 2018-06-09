@@ -40,6 +40,8 @@
 </div>
 </section>
 <!-- MODAL POPUP -->
+
+
 <script type="text/ng-template" id="receiptInfo.modal">
   <div>
     <div class="modal-dialog" style="width:100%;">

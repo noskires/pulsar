@@ -35,7 +35,8 @@
                                     asset: response.data.data[0]
                                 };
                               }
-                            }
+                            },
+                            // size: 'lg'
                         });
                     }
                 }, function (){ alert('Bad Request!!!') })

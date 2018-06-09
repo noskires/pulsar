@@ -26,7 +26,7 @@
         <tbody>
           <!-- data-toggle="modal" data-target="#modal-default" -->
         <tr ng-repeat="jobOrder in joc.jobOrders">
-          <td><a href="#" ui-sref=".jo({joCode:jobOrder.job_order_code})" ng-click="joc.jobOrderInfo(jobOrder.job_order_code)"><b><%jobOrder.job_order_code%></b></a></td>
+          <td><a href="#" ui-sref="list-joCopy({joCode:jobOrder.job_order_code})" ng-click="joc.jobOrderInfo(jobOrder.job_order_code)"><b><%jobOrder.job_order_code%></b></a></td>
           <td><%jobOrder.job_order_date%></td> 
           <td><%jobOrder.name%></td>
           <td><%jobOrder.tag%></td>
@@ -41,9 +41,12 @@
   </div>
     <!-- /.modal -->
 
+
+
 <script type="text/ng-template" id="jobOrderInfo.modal">
+<div>
 <form class="form-horizontal" id="" ng-model="vm.formData.jobOrder">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog" style="width:100%;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.ok()" ui-sref="list-jo">
@@ -65,7 +68,7 @@
                   <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Close J.O. (Completed)</a></li>
                 </ul>
               </li>
-              <li class="pull-left header"><i class="fa fa-bus"></i> Dump Truck: <b><%vm.formData.jobOrder.asset_tag%></b></li>
+              <li class="pull-left header"><i class="fa fa-bus"></i> <%vm.formData.jobOrder.name%> : <%vm.formData.jobOrder.tag%><b><%vm.formData.jobOrder.asset_tag%></b></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1-1">
@@ -202,7 +205,7 @@
     </div>  <!-- content -->
   </div> <!--  dialog -->
 </form>
-
+</div>
 </script>
 
 </section>
