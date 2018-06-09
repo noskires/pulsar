@@ -10,11 +10,11 @@
             var vm = this;
             var data = {}; 
             var tag = "";
-            
+
             // alert($stateParams.assetTag);
             // alert($stateParams.joCode)
             
-            JobOrdersSrvcs.jobOrders({joCode:''}).then (function (response) {
+            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.jobOrders = response.data.data;
@@ -44,7 +44,7 @@
 
             vm.jobOrderInfo = function(joCode){
                 // alert($stateParams.assetTag);
-                JobOrdersSrvcs.jobOrders({joCode:joCode}).then (function (response) {
+                JobOrdersSrvcs.jobOrders({joCode:joCode,joStatus:''}).then (function (response) {
 
                     if(response.data.status == 200)
                     {

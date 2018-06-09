@@ -20,6 +20,7 @@ class JobOrdersController extends Controller {
 
     $data = array(
       'joCode'=>$request->input('joCode'),
+      'joStatus'=>$request->input('joStatus'),
     );
 
     $job_orders = DB::table('job_orders as jo')
@@ -59,6 +60,10 @@ class JobOrdersController extends Controller {
       $job_orders = $job_orders->where('job_order_code', $data['joCode']);
     }
 
+    if ($data['joStatus']==1){
+      $job_orders = $job_orders->whereNull('jo.date_completed');
+    }
+
     $job_orders = $job_orders->get();
 
     return response()-> json([
@@ -85,6 +90,7 @@ class JobOrdersController extends Controller {
 
         $jo->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
         $jo->job_order_date = $data['orderDate']; 
+        $jo->date_started = $data['orderDate'];
         $jo->asset_tag = $data['assetTag'];
         $jo->save();
 
@@ -114,7 +120,7 @@ class JobOrdersController extends Controller {
     // echo "erikson";
     $data = array();
     // $data['purpose'] = $request->input('asset_tag');
-    $data['purpose'] = $request->input('request_purpose');
+    // $data['purpose'] = $request->input('request_purpose');
     $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate')));
     $data['date_started'] = date('Y-m-d', strtotime($request->input('date_started')));
     $data['date_completed'] = date('Y-m-d', strtotime($request->input('date_completed')));
@@ -132,7 +138,7 @@ class JobOrdersController extends Controller {
     $data['tested_by'] = $request->input('tested_by');
 
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
           DB::table('job_orders')
             ->where('job_order_code', $data['job_order_code'])
@@ -149,7 +155,7 @@ class JobOrdersController extends Controller {
               'date_inspected' => $data['date_inspected'],
               'inspected_by' => $data['inspected_by'],
               'conducted_by' => $data['conducted_by'],
-              'request_purpose' => $data['purpose'],
+              // 'request_purpose' => $data['purpose'],
               'tested_by' => $data['tested_by']
             ]);
 
@@ -159,15 +165,15 @@ class JobOrdersController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;
