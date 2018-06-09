@@ -135,8 +135,8 @@
             }; 
         }
 
-        ReceiptsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs', 'SuppliesSrvcs'];
-        function ReceiptsModalInstanceCtrl ($uibModalInstance, formData, ReceiptSrvcs, SuppliesSrvcs) {
+        ReceiptsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
+        function ReceiptsModalInstanceCtrl ($uibModalInstance, formData, ReceiptSrvcs, SuppliesSrvcs, $window) {
 
             var vm = this;
             vm.formData = formData.receipt;
@@ -261,6 +261,10 @@
                         }, function (){ alert('Bad Request!!!') })
                     }
                 }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.addItems = function(){
+                vm.routeTo('receipt/list');
             }
 
             vm.ok = function() {

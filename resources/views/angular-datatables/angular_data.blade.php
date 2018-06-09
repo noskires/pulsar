@@ -1,3 +1,5 @@
+
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
 <h1><span class="fa fa-user"> </span> Manage Employees</h1>
@@ -29,7 +31,7 @@
           <button type="button" class="btn btn-default"><li class="fa fa-refresh"></li> Filter Display</button>
           </div>
           <div class="col-sm-4"> 
-          <button type="button" class="btn btn-primary" ng-click="ec.addNewEmployee()"><li class="fa fa-plus"></li> Add New Employee</button>
+          <button type="button" class="btn btn-primary" ui-sref="create-employee" ng-click="dtc.addNewEmployee()"><li class="fa fa-plus"></li> Add New Employee</button>
           </div>  
         </div>
       </div>
@@ -42,51 +44,53 @@
       <div class="box-body">
         <table datatable="ng" class="table table-bordered table-hover" width="100%">
           <thead>
-          <tr>
-            <th>Employee ID</th>
-            <th>Last Name</th>
-            <th>Suffix</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Job Title</th>
-            <th>Birthdate</th>
-            <th>Email Account</th>
-            <th>Phone No.</th>
-            <th>Department</th>
-            <th>Division</th>
-            <th>Unit</th>
-          </tr>
+	          <tr>
+	          	<th>#</th>
+	            <th>Employee ID</th>
+	            <th>Last Name</th>
+	            <th>Suffix</th>
+	            <th>First Name</th>
+	            <th>Middle Name</th>
+	            <th>Job Title</th>
+	            <th>Birthdate</th>
+	            <th>Email Account</th>
+	            <th>Phone No.</th>
+	            <th>Department</th>
+	            <th>Division</th>
+	            <th>Unit</th>
+	          </tr>
           </thead>
           <tbody>
-          <tr ng-repeat="employee in ec.employees" >
-            <td><a href="#" ng-click="ec.employeeInfo(employee.employee_id)"><b><%employee.employee_code%></b></a></td>
-            <td><%employee.lname%></td>
-            <td><%employee.affix%></td>
-            <td><%employee.fname%></td>
-            <td><%employee.mname%></td>
-            <td><%employee.position_text%></td>
-            <td><%employee.birthdate%></td>
-            <td><%employee.email_account%></td>
-            <td><%employee.phone_number%></td>
-            <td><%employee.department%></td>
-            <td><%employee.division%></td>
-            <td><%employee.unit%></td>
-          </tr>
+	          <tr ng-repeat="employee in dtc.employees">
+	          	<td><%$index+1%></td>
+	            <td><a href="#" ng-click="dtc.employeeInfo(employee.employee_id)"><b><%employee.employee_code%></b></a></td>
+	            <td><%employee.lname%></td>
+	            <td><%employee.affix%></td>
+	            <td><%employee.fname%></td>
+	            <td><%employee.mname%></td>
+	            <td><%employee.position_text%></td>
+	            <td><%employee.birthdate%></td>
+	            <td><%employee.email_account%></td>
+	            <td><%employee.phone_number%></td>
+	            <td><%employee.department%></td>
+	            <td><%employee.division%></td>
+	            <td><%employee.unit%></td>
+	          </tr>
           </tbody>
         </table>
       </div>
       <!-- /.box-body -->
 </div>
 </section>
-
-
 <!-- MODAL CONTENTS -->
 <script type="text/ng-template" id="employeeNewTpl.modal">
 <div>
   <div class="modal-dialog">
+  	<!-- form start -->
+                <form class="form-horizontal" id="" ng-model="dtc.employeeDetails">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" ng-click="vm.ok()">
+        <button type="button" class="close" ng-click="dtc.ok()">
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Add New Employee Information</h4>
       </div>
@@ -111,8 +115,7 @@
           </ul> -->
           <div class="tab-content">
             <div class="tab-pane active" id="tab_1-1">
-              <!-- form start -->
-                <form class="form-horizontal" id="" ng-model="vm.employeeDetails">
+              
                   <div class="box-body">
                     <div class="form-group col-sm-12">
                       <label for="controlnumber" class="col-sm-3 control-label">Employee ID</label>
@@ -139,7 +142,7 @@
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.position_code">
                         <option selected="selected" value="0">- - select job title - -</option>
-                        <option ng-value="position.position_code" ng-repeat="position in vm.positions"><%position.position_text%></option>
+                        <option ng-value="position.position_code" ng-repeat="position in dtc.positions"><%position.position_text%></option>
                       </select></div>
                     </div>
                     <div class="form-group col-sm-12">
@@ -191,7 +194,7 @@
                     </div>
                   </div>
                   <!-- /.box-body -->
-                </form>
+                
             </div>
             <!-- /.tab-pane -->
 
@@ -212,10 +215,12 @@
         <!-- nav-tabs-custom -->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" ng-click="vm.ok()">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="vm.submit(vm.employeeDetails)">Save changes</button>
+        <button type="button" class="btn btn-default pull-left" ng-click="dtc.ok()">Close</button>
+        <button type="button" class="btn btn-primary" ui-sref="angular-data-tables" ng-click="dtc.submit(vm.employeeDetails);dtc.ok()">Save changesasdf</button>
       </div>
+
     </div>
+    </form>
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->

@@ -1,12 +1,14 @@
 <?php
 namespace App\Http\Controllers\Requisition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 use DB;
 use App\Employee;
 use App\Project;
 use App\JobOrder;
 use App\Requisition;
+use App\RequisitionSlipItem;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -34,6 +36,53 @@ class RequisitionsController extends Controller {
     return response()-> json([
       'status'=>200,
       'data'=>$requisitions,
+      'message'=>''
+    ])->setEncodingOptions(JSON_NUMERIC_CHECK);
+
+  }
+
+  public function requisitionSlipItems(Request $request){
+
+    $data = array(
+      'requisitionCode'=>$request->input('requisitionCode'),
+      'requisitionSlipItemCode'=>$request->input('requisitionSlipItemCode'),
+      'supplyCode'=>$request->input('supplyCode'),
+    );
+
+    // return $data['requisitionCode'];
+    $requisitionSlipItems = DB::table('requisition_slips_items as rsi')
+           ->select(
+                'rsi.requisition_slip_code', 
+                'rsi.requisition_slip_item_code',
+                'rsi.supply_code',
+                's.supply_name',
+                'rsi.item_description', 
+                'rsi.item_quantity',
+                'rsi.item_cost',
+                'rsi.item_stock_unit',
+                'rsi.item_total'
+              )
+
+    ->leftjoin('supplies as s','s.supply_code','=','rsi.supply_code');
+
+
+    if ($data['requisitionCode']){
+      $requisitionSlipItems = $requisitionSlipItems->where('requisition_slip_code', $data['requisitionCode']);
+    }
+
+    if ($data['requisitionSlipItemCode']){
+      $requisitionSlipItems = $requisitionSlipItems->where('requisition_slip_item_code', $data['requisitionSlipItemCode']);
+    }
+
+    if ($data['supplyCode']){
+      $requisitionSlipItems = $requisitionSlipItems->where('supply_code', $data['supplyCode']);
+    }
+
+    $requisitionSlipItems = $requisitionSlipItems->get();
+
+    return response()-> json([
+      'status'=>200,
+      'data'=>$requisitionSlipItems,
       'message'=>''
     ])->setEncodingOptions(JSON_NUMERIC_CHECK);
 
@@ -242,6 +291,64 @@ class RequisitionsController extends Controller {
             'message' => 'Error, please try again!'
         ]);
       }
+    });
+
+    return $transaction;
+  }
+
+  public function save_requisition_slip_items(Request $request){
+    // return $request->all();
+    $data = Input::post();
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+        for($i = 0; $i < count($data); $i++) {
+          $requisitionSlipItem            = new RequisitionSlipItem;
+
+          $requisitionSlipItemCode = (str_pad(($requisitionSlipItem->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+          ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+          $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$requisitionSlipItemCode;
+
+          $requisitionSlipItem->requisition_slip_code     = $data[$i]['requisition_slip_code'];
+          $requisitionSlipItem->supply_code     = $data[$i]['supply_name'];
+          $requisitionSlipItem->item_description      = $data[$i]['supply_desc'];
+          $requisitionSlipItem->item_quantity = $data[$i]['supply_qty'];
+          $requisitionSlipItem->item_cost = $data[$i]['supply_cost'];
+          $requisitionSlipItem->item_stock_unit  = $data[$i]['supply_unit'];
+          $requisitionSlipItem->item_total  = $data[$i]['supply_total'];
+          $requisitionSlipItem->save(); // fixed typo
+
+          $supply = DB::table('supplies')
+          ->select('quantity')
+          ->where('supply_code', $data[$i]['supply_name'])
+          ->first();
+
+          $totalQuantity = $supply->quantity - $data[$i]['supply_qty'];
+
+          DB::table('supplies')
+          ->where('supply_code', $data[$i]['supply_name'])
+            ->update([
+              'quantity' => $totalQuantity
+            ]);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

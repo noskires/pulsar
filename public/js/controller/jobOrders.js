@@ -10,6 +10,7 @@
             var vm = this;
             var data = {}; 
             var tag = "";
+            
             // alert($stateParams.assetTag);
             // alert($stateParams.joCode)
             

@@ -20,12 +20,15 @@
 Auth::routes();
 Route::post('/auth', ['uses'=>'LoginController@login', 'as'=>'auth']); 
 
-Route::get('/home','HomeController@index');
+// Route::get('/home','HomeController@index');
+
+Route::get('/info','LoginController@phpinfo');
+
 Route::group(['middleware'=>'auth'], function(){
 
 //testing angular table
-Route::get('/angular-datatables','MaintenanceController@index'); 
-Route::get('/angular-datatables/new','MaintenanceController@index'); 
+// Route::get('/angular-datatables','MaintenanceController@index'); 
+// Route::get('/angular-datatables/new','MaintenanceController@index'); 
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +36,7 @@ Route::get('/angular-datatables/new','MaintenanceController@index');
 |--------------------------------------------------------------------------
 */
 
-Route::get('/','MaintenanceController@index');
+Route::get('','MaintenanceController@index');
 Route::get('/index','MaintenanceController@index'); 
 Route::get('/maintenance/new','MaintenanceController@index'); 
 Route::get('/maintenance/operation','MaintenanceController@index'); 
@@ -187,9 +190,13 @@ Route::get('/api/v1/job-orders','JobOrder\JobOrdersController@job_orders');
 |--------------------------------------------------------------------------
 */
 
+Route::post('/api/v1/requisition-slip-items/save','Requisition\RequisitionsController@save_requisition_slip_items'); 
+Route::get('/api/v1/requisition-slip-items','Requisition\RequisitionsController@requisitionSlipItems');
+
 Route::get('/requisition/list','Requisition\RequisitionsController@index');
+Route::get('/requisition/list/{requisitionCode}','Requisition\RequisitionsController@index');
 Route::get('/requisition-issue-slip/new','Requisition\RequisitionsController@index');
-Route::get('/api/v1/requisitions','Requisition\RequisitionsController@requisitions');
+Route::get('/api/v1/requisitions','Requisition\RequisitionsController@requisitions'); 
 
 /*
 |--------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('additionalStyles')
-<link rel="stylesheet" href="{{URL::to('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}">
 <!-- datatables -->
 <link rel="stylesheet" href="{{URL::to('bower_components/datatables.net/css/buttons.dataTables.min.css')}}">
 <!-- daterange picker -->

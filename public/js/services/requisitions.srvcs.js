@@ -15,6 +15,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                RequisitionSlipItems: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/requisition-slip-items?requisitionCode='+data.requisitionCode+'&requisitionSlipItemCode='+data.requisitionSlipItemCode+'&supplyCode='+data.supplyCode,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 jobOrders: function(data) {
                     return $http({
                         method: 'POST',
@@ -38,7 +46,15 @@
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
-                }
+                },
+                SaveRequisitionSlipItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/requisition-slip-items/save',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
             };
         }
 })();

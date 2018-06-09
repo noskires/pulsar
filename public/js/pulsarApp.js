@@ -120,6 +120,11 @@
                 controller: 'RequisitionCtrl as rc',
                 templateUrl: 'ris.list.view'
             })
+            .state('list-requesitionCopy', {
+                url: '/requisition/list/:requisitionSlipCode',
+                controller: 'RequisitionCtrl as rc',
+                templateUrl: 'ris.list.view'
+            })
 
             .state('list-employees', {
                 url: '/employee/list',

@@ -10,6 +10,10 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller {
 
+  public function phpinfo(){
+    phpinfo();
+  }
+
   public function login(Request $request){
     // dd($request->all());
     if(Auth::attempt([

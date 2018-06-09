@@ -26,10 +26,8 @@
 <!-- <script src="{{URL::to('bower_components/datatables.net/js/buttons.html5.min.js')}}"></script> 
 <script src="{{URL::to('bower_components/datatables.net/js/buttons.print.min.js')}}"></script>  -->
 
-
-<script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>  -->
-<script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>  -->
-
+<script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>  
+<!-- <script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>   -->
 
 <!-- Pulsar App -->
 
@@ -61,7 +59,6 @@
 
 <script src="{{URL::to('js/services/stockUnit.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/particulars.srvcs.js')}}"></script> 
-
 <!-- Controllers -->
 <script src="{{URL::to('js/controller/dataTablesCtrl.js')}}"></script> 
 
