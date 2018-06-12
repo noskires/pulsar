@@ -50,11 +50,10 @@ class WarrantiesController extends Controller {
 
         $warranty = new Warranty;
 
-    //     $joCode = (str_pad(($jo->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-    //     ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+        $warrantyCode = (str_pad(($warranty->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        // $warranty->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
-        $warranty->warranty_code = '001';
+        $warranty->warranty_code = "WRNTY-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$warrantyCode; 
         $warranty->asset_tag = $data['asset_tag'];
         $warranty->description = $data['description'];
         $warranty->expiry_date = $data['expiry_date'];

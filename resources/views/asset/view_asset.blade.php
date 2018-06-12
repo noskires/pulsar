@@ -190,7 +190,7 @@
               <div class="tab-pane active" id="tab_6-6">
                 <h4><b>Asset Warranty:</b><button type="button" class="btn btn-xs btn-primary pull-right" ng-click="amdc.addNewWarranty()">
                 <li class="fa fa-plus"></li> Add New</button></h4> 
-                <table id="warranty" class="table" width="100%">
+                <table datatable="ng" id="warranty" class="table" width="100%">
                 <thead>
                 <tr>
                   <th>Status</th>
@@ -207,14 +207,7 @@
                   <td></td>
                   <td><%warranty.description%></td>
                   <td><a href="#" data-toggle="modal" data-target="#modal-warranty"><code class="text-green">EDIT</code></a></td>
-                </tr>
-                <tr>
-                  <td>Active</td>
-                  <td>12/12/2019</td>
-                  <td>36 months</td>
-                  <td>3 year warranty for dumptruck</td>
-                  <td><a href="#" data-toggle="modal" data-target="#modal-warranty"><code class="text-green">EDIT</code></a></td>
-                </tr>
+                </tr> 
                 </tbody>
               </table>
               </div>

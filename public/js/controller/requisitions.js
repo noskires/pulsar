@@ -55,7 +55,7 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 
-
+            
         }
 
         RequisitionAssetCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];

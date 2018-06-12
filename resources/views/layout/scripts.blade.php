@@ -56,6 +56,7 @@
 <script src="{{URL::to('js/services/vouchers.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/suppliers.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/banks.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/insurance.srvcs.js')}}"></script> 
 
 <script src="{{URL::to('js/services/stockUnit.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/particulars.srvcs.js')}}"></script> 
@@ -73,5 +74,7 @@
 <script src="{{URL::to('js/controller/receipts.js')}}"></script> 
 <script src="{{URL::to('js/controller/supplies.js')}}"></script> 
 <script src="{{URL::to('js/controller/vouchers.js')}}"></script> 
+<script src="{{URL::to('js/controller/banks.js')}}"></script> 
+<script src="{{URL::to('js/controller/insurance.js')}}"></script> 
 
 @yield('additionalScripts')

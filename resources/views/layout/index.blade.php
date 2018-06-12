@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="{{URL::to('bower_components/select2/dist/css/select2.min.css')}}">
 <style>
 
-
   .example-modal .modal {
     position: relative;
     top: auto;
@@ -33,7 +32,9 @@
     background: transparent !important;
   }
 
-  #box-monitoring  {width: 100%; border-spacing:0;border-color:#282828;border-style:2px solid black;border-width:2px;overflow-x:scroll;}
+  #box-monitoring  {
+    width: 100%; border-spacing:0;border-color:#282828;border-style:2px solid black;border-width:2px;overflow-x:scroll;
+  }
 
   .box-body {
     overflow: auto;  
@@ -66,7 +67,6 @@
 <script type="text/ng-template" id="employee.list.view">
   @include('employee.list_employees')
 </script>
-<!-- Employees -->
 
 <!-- Assets -->
 
@@ -81,8 +81,6 @@
 <script type="text/ng-template" id="asset.more.details.view">
   @include('asset.view_asset')
 </script>
-
-<!-- Assets -->
 
 <!-- Maintenance -->
 
@@ -103,8 +101,6 @@
   @include('maintenance.list_monitoring')
 </script>
 
-<!-- Maintenance -->
-
 <!-- Project -->
 
 <script type="text/ng-template" id="project.create.view">
@@ -115,8 +111,6 @@
   @include('project.list_projects')
 </script>
 
-<!-- Project -->
-
 <!-- JO -->
 
 <script type="text/ng-template" id="jo.create.view">
@@ -126,8 +120,6 @@
 <script type="text/ng-template" id="jo.list.view">
   @include('job_order.list_jo')
 </script>
-
-<!-- JO -->
 
 <!-- RIS -->
 <script type="text/ng-template" id="ris.create.project.view">
@@ -142,8 +134,6 @@
   @include('requisition.list_requisitions')
 </script>
 
-<!-- RIS -->
-
 <!-- Receipts -->
 
 <script type="text/ng-template" id="receipt.create.view">
@@ -154,8 +144,6 @@
   @include('receipt.list_receipts')
 </script>
 
-<!-- Receipts -->
-
 <!-- Supplies -->
 
 <script type="text/ng-template" id="supply.create.view">
@@ -165,8 +153,6 @@
 <script type="text/ng-template" id="supply.list.view">
   @include('supply.list_supplies')
 </script>
-
-<!-- Supplies -->
 
 <!-- Organization -->
 
@@ -186,9 +172,6 @@
   @include('organization.office')
 </script>
 
-<!-- Organization -->
-
-
 <!-- Voucher -->
 
 <script type="text/ng-template" id="voucher.create.view">
@@ -200,7 +183,17 @@
 </script>
 
 
-<!-- Voucher -->
+<!-- Banks -->
+ 
+<script type="text/ng-template" id="banks.list.view">
+  @include('bank.list_banks')
+</script>
+
+<!-- Insurance -->
+ 
+<script type="text/ng-template" id="insurance.list.view">
+  @include('insurance.list_insurance')
+</script>
 
 <!-- Shared Modal -->
 
@@ -209,26 +202,6 @@
 </script>
 
 <!-- Shared Modal -->
-
-
-
-<!-- <script type="text/ng-template" id="sample.state">
-  <div>
-
-	this is a sample state 
-
-	<a ui-sref=".child-state({id:14})" class="btn btn-primary">List</a>
-
-	<a ui-sref="sample-state({id:1})" class="btn btn-primary">List1</a>
-  </div>
-</script>
-
-<script type="text/ng-template" id="sample.state.child">
-  <div> -->
-	<!-- this is a sample state child here -->
-	<!-- <a ui-sref=".list" class="btn btn-primary">List</a> -->
-  <!-- </div>
-</script> -->
 
 @endsection
 

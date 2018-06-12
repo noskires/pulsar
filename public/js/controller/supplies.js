@@ -38,7 +38,6 @@
                         });
                     }
                 }, function (){ alert('Bad Request!!!') })
-
             }
 
             StockUnitsSrvcs.stockUnits({stockUnitCode:''}).then (function (response) {

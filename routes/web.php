@@ -299,6 +299,26 @@ Route::get('/api/v1/banks','Bank\BanksController@banks');
 
 /*
 |--------------------------------------------------------------------------
+| Insurance
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/insurance/new','Insurance\InsuranceController@index');
+Route::get('/insurance/list','Insurance\InsuranceController@index');
+Route::get('/insurance/list/{insuranceCode}','Insurance\InsuranceController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Insurance Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/insurance/save','Insurance\InsuranceController@save');
+Route::post('/api/v1/insurance/update','Insurance\InsuranceController@update');
+Route::get('/api/v1/insurance','Insurance\InsuranceController@insurance');
+
+/*
+|--------------------------------------------------------------------------
 | Supplier
 |--------------------------------------------------------------------------
 */

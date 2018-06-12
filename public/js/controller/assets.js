@@ -255,6 +255,13 @@
                     {
                         alert(response.data.message);
                         vm.routeTo('asset/more-details/'+$stateParams.assetTag);
+                        // WarrantiesSrvcs.warranties({tag:vm.tag}).then (function (response) {
+                        //     if(response.data.status == 200)
+                        //     {
+                        //         vm.warranties = response.data.data;
+                        //         console.log(vm.warranties)
+                        //     }
+                        // }, function (){ alert('Bad Request!!!') })
                     }
                     else {
                         alert(response.data.message);

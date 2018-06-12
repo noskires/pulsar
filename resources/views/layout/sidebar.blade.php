@@ -177,6 +177,22 @@
       </ul>
     </li>
     <li><a href="#"><i class="fa fa-wrench"></i> <span>Setup</span></a></li>
+    <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cloud"></i> <span>Advanced</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#" ui-sref="list-banks"><i class="fa fa-bank"></i>Bank</a></li>
+            <li><a href="#" ui-sref="list-insurance"><i class="fa fa-shield"></i>Insurance</a></li>
+            <li><a href="#"><i class="fa fa-money"></i>Funding</a></li>
+            <li><a href="#"><i class="fa fa-user"></i>Users</a></li>
+            <li><a href="#"><i class="fa fa-users"></i>User's Group</a></li>
+            <li><a href="pages/advanced/offices.html"><i class="fa fa-building"></i>Offices</a></li>
+          </ul>
+        </li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help/Support</span></a></li>
   </ul>
 </section>

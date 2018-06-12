@@ -52,7 +52,7 @@
           <h4 class="modal-title"><li class="fa fa-file-o"></li> Receipt Control No: <b><%vm.formData.receipt_code%></b></h4>
         </div>
         <div class="modal-body">
-          <p>Add supply items under a receipt number.</p>
+          <p>Add supply items under a receipt number. Amount = <%vm.formData.amount%></p>
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="row">
             <div class="col-md-12">

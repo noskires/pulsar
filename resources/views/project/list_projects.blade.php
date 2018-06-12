@@ -11,47 +11,47 @@
 <!-- Main content -->
 <section class="content">
   <div class="box">
-        <div class="box-header">
-          <h4 class="box-title">Complete list of Active Projects</h4>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <table datatable="ng" class="table table-bordered table-hover" width="100%">
-            <thead>
-            <tr>
-              <th>Control No.</th>
-              <th>Project ID</th>
-              <th>Project Name</th>
-              <th>Project Description</th>
-              <th>Project Cost</th>
-              <th>Address</th>
-              <th>Municipality</th>
-              <th>Zip Code</th>
-              <th>Date Started</th>
-              <th>Date Completed</th>
-              <th>Project Engineer</th>
-              <th>Date Assigned</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="project in pc.projects">
-              <td><a href="#" ui-sref="list-projectsCopy({projectCode:project.project_code})" ng-bind="project.project_code"> </b></a></td>
-              <td ng-bind="project.code"></td>
-              <td ng-bind="project.name"></td>
-              <td ng-bind="project.description"></td>
-              <td ng-bind="project.cost | number:2"></td>
-              <td ng-bind="project.zip_code"></td>
-              <td ng-bind="project.municipality_text"></td>
-              <td ng-bind="project.zip_code"></td>
-              <td ng-bind="project.date_started"</td>
-              <td ng-bind="project.date_completed"</td>
-              <td ng-bind="project.employee_name"</td>
-              <td ng-bind="project.date_assigned"</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- /.box-body -->
+    <div class="box-header">
+      <h4 class="box-title">Complete list of Active Projects</h4>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <table datatable="ng" class="table table-bordered table-hover" width="100%">
+        <thead>
+        <tr>
+          <th>Control No.</th>
+          <th>Project ID</th>
+          <th>Project Name</th>
+          <th>Project Description</th>
+          <th>Project Cost</th>
+          <th>Address</th>
+          <th>Municipality</th>
+          <th>Zip Code</th>
+          <th>Date Started</th>
+          <th>Date Completed</th>
+          <th>Project Engineer</th>
+          <th>Date Assigned</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="project in pc.projects">
+          <td><a href="#" ui-sref="list-projectsCopy({projectCode:project.project_code})" ng-bind="project.project_code"> </b></a></td>
+          <td ng-bind="project.code"></td>
+          <td ng-bind="project.name"></td>
+          <td ng-bind="project.description"></td>
+          <td ng-bind="project.cost | number:2"></td>
+          <td ng-bind="project.zip_code"></td>
+          <td ng-bind="project.municipality_text"></td>
+          <td ng-bind="project.zip_code"></td>
+          <td ng-bind="project.date_started"</td>
+          <td ng-bind="project.date_completed"</td>
+          <td ng-bind="project.employee_name"</td>
+          <td ng-bind="project.date_assigned"</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
   </div>
   <!-- MODAL CONTENTS -->
 

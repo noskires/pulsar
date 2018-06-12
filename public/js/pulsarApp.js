@@ -202,6 +202,26 @@
                 controller: 'VouchersCtrl as vc',
                 templateUrl: 'voucher.list.view'
             })
+            .state('list-banks', {
+                url: '/bank/list',
+                controller: 'BanksCtrl as bc',
+                templateUrl: 'banks.list.view'
+            })
+            .state('list-banksCopy', {
+                url: '/bank/list/:bankCode',
+                controller: 'BanksCtrl as bc',
+                templateUrl: 'banks.list.view'
+            })
+            .state('list-insurance', {
+                url: '/insurance/list',
+                controller: 'InsuranceCtrl as ic',
+                templateUrl: 'insurance.list.view'
+            })
+            .state('list-insuranceCopy', {
+                url: '/insurance/list/:insuranceCode',
+                controller: 'InsuranceCtrl as ic',
+                templateUrl: 'insurance.list.view'
+            })
 
             //for testing only
             .state('angular-data-tables', {
