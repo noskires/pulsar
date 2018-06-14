@@ -47,30 +47,6 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            // StockUnitsSrvcs.stockUnits({stockUnitCode:''}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.stockUnits = response.data.data;
-            //         console.log(vm.stockUnits)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
-            // SuppliesSrvcs.supplies({supplyCode:''}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.supplies = response.data.data;
-            //         console.log(vm.supplies)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
-            // AssetsSrvcs.asset_categories({assetCategory:'Supplies'}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.assetCategories = response.data.data;
-            //         console.log(vm.assetCategories)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
             vm.newBank = function(data){
                 BanksSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
@@ -83,6 +59,10 @@
                     }
                     console.log(response.data);
                 });
+            };
+
+            vm.toggle = function () {
+                vm.state = !vm.state;
             };
 
             vm.ok = function(){

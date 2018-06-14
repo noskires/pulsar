@@ -229,6 +229,7 @@ Route::get('/receipt/list/{receiptCode}','Receipt\ReceiptsController@index');
 Route::post('/api/v1/receipt/save','Receipt\ReceiptsController@save'); 
 Route::post('/api/v1/receipt-items/save','Receipt\ReceiptsController@save_receipt_items'); 
 Route::get('/api/v1/receipts','Receipt\ReceiptsController@receipts');
+
 Route::get('/api/v1/receipt-items','Receipt\ReceiptsController@receiptItems');
 Route::get('/api/v1/receipt-types','Receipt\ReceiptsController@receipt_types');
 
@@ -314,8 +315,13 @@ Route::get('/insurance/list/{insuranceCode}','Insurance\InsuranceController@inde
 */
 
 Route::post('/api/v1/insurance/save','Insurance\InsuranceController@save');
+Route::post('/api/v1/insurance-items/save','Insurance\InsuranceController@save_insurance_items'); 
+Route::post('/api/v1/insurance-items/remove','Insurance\InsuranceController@remove_insurance_items'); 
+
 Route::post('/api/v1/insurance/update','Insurance\InsuranceController@update');
 Route::get('/api/v1/insurance','Insurance\InsuranceController@insurance');
+
+Route::get('/api/v1/insurance-items','Insurance\InsuranceController@insuranceItems');
 
 /*
 |--------------------------------------------------------------------------

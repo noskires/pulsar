@@ -7,6 +7,7 @@ use DB;
 use App\Voucher;
 use App\Bank;
 use App\Insurance;
+use App\InsuranceItem;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -117,4 +118,125 @@ class InsuranceController extends Controller {
 
 		return $transaction;
 	}
+
+	public function insuranceItems(Request $request){
+
+	    $data = array(
+	      'insuranceCode'=>$request->input('insuranceCode'),
+	      'insuranceItemCode'=>$request->input('insuranceItemCode'),
+	      'assetCode'=>$request->input('assetCode'),
+	      'insuranceItemStatus'=>$request->input('insuranceItemStatus'),
+	    );
+
+	    $insuranceItems = DB::table('assets as a')
+	              // ->select(
+	              //   'ii.insurance_item_code',
+	              //   'ii.insurance_code',
+	              //   'ii.asset_code'
+	              // )
+	            ->leftjoin('insurance_items as ii','ii.asset_code','=','a.tag')
+	            ->leftjoin('insurance as i','i.insurance_code','=','ii.insurance_code');
+
+	    if ($data['insuranceCode']){
+	      $insuranceItems = $insuranceItems->where('ii.insurance_code', $data['insuranceCode']);
+	    }
+
+	    if ($data['insuranceItemCode']){
+	      $insuranceItems = $insuranceItems->where('ii.insurance_item_code', $data['insuranceItemCode']);
+	    }
+
+	    if ($data['assetCode']){
+	      $insuranceItems = $insuranceItems->where('ii.asset_code', $data['assetCode']);
+	    }
+
+	    if ($data['insuranceItemStatus']==1){
+	      $insuranceItems = $insuranceItems->whereNotNull('ii.insurance_item_code');
+	    }
+
+	    if ($data['insuranceItemStatus']==2){
+	      $insuranceItems = $insuranceItems->whereNull('ii.insurance_item_code');
+	    }
+
+	    $insuranceItems = $insuranceItems->get();
+
+	    return response()-> json([
+	      'status'=>200,
+	      'data'=>$insuranceItems,
+	      'message'=>''
+	    ]);
+
+	}
+
+	public function save_insurance_items(Request $request){
+
+	    $data = Input::post();
+
+	    $transaction = DB::transaction(function($data) use($data){
+	    try{
+
+	        // for($i = 0; $i < count($data); $i++) {
+			$insurance            = new InsuranceItem;
+
+			$insuranceItemCode = (str_pad(($insurance->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+			->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+			$insurance->insurance_item_code = "INSUITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$insuranceItemCode;
+			$insurance->insurance_code = $data['insurance_code'];
+			$insurance->asset_code     = $data['asset_code'];
+			$insurance->save(); // fixed typo
+
+	        // }
+
+	        return response()->json([
+	            'status' => 200,
+	            'data' => 'null',
+	            'message' => 'Successfully saved.'
+	        ]);
+
+	      }
+	      catch (\Exception $e) 
+	      {
+	          return response()->json([
+	            'status' => 500,
+	            'data' => 'null',
+	            'message' => 'Error, please try again!'
+	        ]);
+	      }
+	    });
+
+   	 	return $transaction;
+  	}
+
+  	public function remove_insurance_items(Request $request){
+
+	    $data = Input::post();
+
+	    $transaction = DB::transaction(function($data) use($data){
+	    try{
+
+	        // for($i = 0; $i < count($data); $i++) {
+			$insurance            = new InsuranceItem;
+
+			DB::table('insurance_items')->where('insurance_item_code', $data['insurance_item_code'])->delete();
+
+	        // }
+
+	        return response()->json([
+	            'status' => 200,
+	            'data' => 'null',
+	            'message' => 'Successfully deleted.'
+	        ]);
+
+	      }
+	      catch (\Exception $e) 
+	      {
+	          return response()->json([
+	            'status' => 500,
+	            'data' => 'null',
+	            'message' => 'Error, please try again!'
+	        ]);
+	      }
+	    });
+
+   	 	return $transaction;
+  	}
 }

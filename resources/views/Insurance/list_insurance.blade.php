@@ -159,7 +159,7 @@
           <table id="tbl-linked-assets" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
-              <th></th>
+              <th>a</th>
               <th>Asset Tag</th>
               <th>ID</th>
               <th>Category</th>
@@ -169,29 +169,28 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT99</b></a></td>
-              <td>DT99</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
+            <tr ng-repeat="associatedAsset in vm.associatedAssets">
+              <td>
+                <button type="button" class="btn btn-danger pull-left fa fa-trash-o" ng-click="vm.removeInsuranceItems(associatedAsset.insurance_item_code)"></button>
+
+              </td>
+              <td><a href="#"><b><%associatedAsset.tag%></b></a></td>
+              <td><%associatedAsset.code%></td>
+              <td><%associatedAsset.category%></td>
+              <td><%associatedAsset.name%></td>
+              <td><%associatedAsset.model%></td>
+              <td><%associatedAsset.brand%></td>
             </tr>
             </tbody>
           </table>
-          <button class="btn btn-sm btn-danger pull-left" data-toggle="confirmation"
-          data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
-          data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-          data-title="Confirm data change." data-content="Are you sure?" style="width: 13%;"> <li class="fa fa-unlink"></li> Remove Associated Asset
-        </button>
+          
 <br><hr>
       <h3><li class="fa fa-link"></li> Associate New Assets</h3>
       <p>Select assets that are connected to your insurance policy. To associate assets, check boxes next to all of the assets for the insurance policy and select <strong>Associate Assets</strong>.</p>
-          <table id="tbl-assets" class="table table-bordered table-hover" width="100%">
+          <table id="tbl-assets" class="table table-bordered table-hover" width="100%" >
             <thead>
             <tr>
-              <th></th>
+              <th>a</th>
               <th>Asset Tag</th>
               <th>ID</th>
               <th>Category</th>
@@ -201,78 +200,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT1</b></a></td>
-              <td>DT1</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
-            </tr><tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT1</b></a></td>
-              <td>DT2</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
-            </tr><tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT1</b></a></td>
-              <td>DT7</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
-            </tr><tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT1</b></a></td>
-              <td>DT8</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
-            </tr><tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT1</b></a></td>
-              <td>DT9</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
-            </tr><tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT1</b></a></td>
-              <td>DT10</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
-            </tr><tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT1</b></a></td>
-              <td>DT11</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
-            </tr><tr>
-              <td></td>
-              <td><a href="#"><b>CONE-03082018-DT1</b></a></td>
-              <td>DT12</td>
-              <td>Construction Equipment</td>
-              <td>Dump Truck</td>
-              <td>CXZ19J-3005460</td>
-              <td>ISUZU</td>
-            </tr> 
+            <tr ng-repeat="availableAsset in vm.availableAssets">
+              <td>
+                <button class="pull-left btn btn-primary fa fa-plus addnew" ng-click="vm.addInsuranceItems(availableAsset.tag)"></button>
+              </td>
+              <td><a href="#"><b><%availableAsset.tag%></b></a></td>
+              <td><%availableAsset.code%></td>
+              <td><%availableAsset.category%></td>
+              <td><%availableAsset.name%></td>
+              <td><%availableAsset.model%></td>
+              <td><%availableAsset.brand%></td>
+            </tr>
             </tbody>
           </table>
-          <button class="btn btn-sm btn-warning pull-left" data-toggle="confirmation"
-          data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
-          data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-          data-title="Confirm data change." data-content="Are you sure?" style="width: 13%;"> <li class="fa fa-link"></li> Associate Assets
-        </button>
+           
     </div>   
 <br>
     <div class="modal-footer">

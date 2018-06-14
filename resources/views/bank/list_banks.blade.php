@@ -13,7 +13,7 @@
 <section class="content">
   <div class="row">
     <div class="col-md-12"> 
-      <div id="add-bank" class="collapse department">
+      <div class="department" ng-show="bc.state">
         <div class="panel panel-default">
           <div class="panel-body">
           <!-- NEW BANK -->
@@ -110,8 +110,9 @@
         </div>
       </div>
       <!-- BUTTONS -->
-      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#add-bank">
-        <span class="glyphicon glyphicon-plus"></span> New Bank
+      <button type="button" class="btn btn-primary" ng-click="bc.toggle()">
+        <div ng-if="!bc.state"><span class="glyphicon glyphicon-plus"></span> New Bank </div>
+        <div ng-if="bc.state"> Cancel </div>
       </button>
 
     </div>
@@ -121,7 +122,7 @@
     <div class="col-md-12"> 
       <div class="box box-primary">
         <div class="box-body">
-          <table id="employees" class="table table-bordered table-hover" width="100%" datatable="ng">
+          <table id="employees" class="table table-bordered table-hover" width="100%" >
             <thead>
             <tr>
               <th>Name of Bank</th>

@@ -72,11 +72,12 @@
             }; 
         }
 
-        InsuranceModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'BanksSrvcs', 'formData', 'ReceiptSrvcs'];
-        function InsuranceModalInstanceCtrl ($stateParams, $uibModalInstance, BanksSrvcs, formData, ReceiptSrvcs) {
-            alert('insurance model')
+        InsuranceModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'InsuranceSrvcs', 'BanksSrvcs', 'formData', 'ReceiptSrvcs'];
+        function InsuranceModalInstanceCtrl ($stateParams, $uibModalInstance, InsuranceSrvcs, BanksSrvcs, formData, ReceiptSrvcs) {
+            // alert('insurance model')
             var vm = this;
             vm.formData = formData.insurance; 
+            // alert($stateParams.insuranceCode)
 
             vm.updateBank = function(data){
                 BanksSrvcs.update(data).then (function (response) {
@@ -85,6 +86,78 @@
                         alert(response.data.message);
                     }
                     vm.ok();
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            InsuranceSrvcs.insuranceItems({insuranceCode:$stateParams.insuranceCode, insuranceItemCode:'',assetCode:'', insuranceItemStatus:1}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.associatedAssets = response.data.data;
+                    console.log(vm.associatedAssets)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:'', insuranceItemStatus:2}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.availableAssets = response.data.data;
+                    console.log(vm.availableAssets)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.addInsuranceItems = function(assetTag){
+                // alert(assetTag)
+
+                // data = {insuranceCode:$stateParams.insuranceCode, assetTag:assetTag};
+
+                InsuranceSrvcs.saveInsuranceItems({insurance_code:$stateParams.insuranceCode, asset_code:assetTag}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+
+                        InsuranceSrvcs.insuranceItems({insuranceCode:$stateParams.insuranceCode, insuranceItemCode:'',assetCode:'', insuranceItemStatus:1}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.associatedAssets = response.data.data;
+                                console.log(vm.associatedAssets)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                        InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:'', insuranceItemStatus:2}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.availableAssets = response.data.data;
+                                console.log(vm.availableAssets)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.removeInsuranceItems = function(insuranceItemCode){
+
+                InsuranceSrvcs.removeInsuranceItems({insurance_item_code:insuranceItemCode}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+
+                        InsuranceSrvcs.insuranceItems({insuranceCode:$stateParams.insuranceCode, insuranceItemCode:'',assetCode:'', insuranceItemStatus:1}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.associatedAssets = response.data.data;
+                                console.log(vm.associatedAssets)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                        InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:'', insuranceItemStatus:2}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.availableAssets = response.data.data;
+                                console.log(vm.availableAssets)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                    }
+                    // console.log(response.data)
                 }, function (){ alert('Bad Request!!!') })
             }
 
