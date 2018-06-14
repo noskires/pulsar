@@ -96,6 +96,7 @@ class InsuranceController extends Controller {
 					'description' => $data['description'],
 					'policy_number' => $data['policy_number'],
 					'date_issued' => $data['date_issued'],
+					'insurance_coverage' => $data['insurance_coverage'],
 					'expiration_date' => $data['expiration_date'],
 					'applicable_premium' => $data['applicable_premium'],
 					'insurance_agent' => $data['insurance_agent'],

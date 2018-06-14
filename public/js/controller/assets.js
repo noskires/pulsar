@@ -183,10 +183,11 @@
             };
         }
 
-        AssetMoreDetailsCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'MaintenanceSrvcs', 'WarrantiesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
-        function AssetMoreDetailsCtrl($stateParams, AssetsSrvcs, MaintenanceSrvcs, WarrantiesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
+        AssetMoreDetailsCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'MaintenanceSrvcs', 'WarrantiesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'InsuranceSrvcs', '$window', '$uibModal'];
+        function AssetMoreDetailsCtrl($stateParams, AssetsSrvcs, MaintenanceSrvcs, WarrantiesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, InsuranceSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
+
 
             if($stateParams.assetTag)
             {
