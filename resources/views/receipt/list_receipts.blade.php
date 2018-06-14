@@ -156,3 +156,41 @@
   <!-- /.modal -->
 </script>
 
+<script type="text/ng-template" id="receiptInfo2.modal">
+<div class="">
+  <div class="modal-dialog" style="width:100%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="vm.ok()">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-file-o"></li> Receipt Control No: <b><%vm.formData.receipt_code%></b></h4>
+      </div>
+      <div class="modal-body">
+        <p><b>Remarks:</b> <%vm.formData.remarks%></p>
+
+        <!-- Custom Tabs (Pulled to the right) -->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <label>Receipt Type:&nbsp;</label><%vm.formData.receipt_type_name%><br>
+                      <label>Receipt No:&nbsp;</label><%vm.formData.receipt_number%><br>
+                      <label>Receipt Date:&nbsp;</label><%vm.formData.receipt_date%><br>
+                      <label>Amount:&nbsp;</label><%vm.formData.amount | number:2%><br>
+                      <label>Payee Type:&nbsp;</label><%vm.formData.payee_type%><br>
+                      <label>Payee Name:&nbsp;</label><%vm.formData.payee_text%><br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="vm.ok()">Close</button>
+        <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+</script>

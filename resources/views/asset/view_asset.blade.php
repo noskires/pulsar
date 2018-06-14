@@ -84,97 +84,124 @@
           </div>
         <div>
 <!-- ////// ASSET EVENTS -->
-          <div class="nav-tabs-custom">
+ <div class="nav-tabs-custom">
             <ul class="nav nav-tabs pull-right tab-head">
-              <li><a href="#tab_5-5" data-toggle="tab">History</a></li>
-              <li><a href="#tab_4-4" data-toggle="tab">Audit</a></li>
-              <li><a href="#tab_2-2" data-toggle="tab">Events</a></li>
-              <li class="active"><a href="#tab_3-3" data-toggle="tab">Depreciation</a></li>
+              <li><a href="#tab_5-5" data-toggle="tab">Maintenance History</a></li>
+              <li><a href="#tab_4-4" data-toggle="tab">Status</a></li>
+              <li class="active"><a href="#tab_2-2" data-toggle="tab">Events</a></li>
               <li class="pull-left header"><h4><i class="fa fa-flag"></i> Attributes</li></h4>
             </ul>
             <div class="tab-content">
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2-2">
+              <div class="tab-pane active" id="tab_2-2">
                 <h4><b>Asset Events</b></h4>
                 <table class="table" width="100%">
                 <tbody>
                 <tr>
-                  <td><code class="text-success">Assignment</code> Date 01/16/2017 </td>
-                  <td><li class="fa fa-mail-forward"></li> Assign</td>
+                  <td><code class="text-success">Assignment</code> Date 02/16/2018 </td>
+                  <td>ARE#000123</td>
                   <td>Assigned to John Juan</td>
                   <td>Notes Event notes here</td>
                   <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
                 </tr>
                 <tr>
                   <td><code class="text-success">Assignment</code> Date 01/16/2017 </td>
-                  <td><li class="fa fa-mail-forward"></li> Assign</td>
-                  <td>Assigned to John Juan</td>
+                  <td>ARE#000246</td>
+                  <td>Assigned to John Erik</td>
                   <td>Notes Event notes here</td>
                   <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
                 </tr>
                 </tbody>
               </table>
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane active" id="tab_3-3">
-                <h4><b>Asset Depreciation:</b><button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#modal-depreciation">
-                <li class="fa fa-plus"></li> Manage</button></h4> 
-                <table id="depreciation" class="table" width="100%">
-                <thead>
-                <tr>
-                  <th>Date Acquired</th>
-                  <th>Depreciable Cost</th>
-                  <th>Salvage Value</th>
-                  <th>Asset Life (months)</th>
-                  <th>Depr. Method</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>02/07/2012</td>
-                  <td>₱500,000.00</td>
-                  <td>₱300,000.00</td>
-                  <td>120 months</td>
-                  <td>Straight Line</td>
-                </tr>
-                </tbody>
-              </table>
- 
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_4-4">
-                <h4><b>Asset Audit:</b></h4>
+                <h4><b>Asset Status:</b></h4>
                 <table class="table" width="100%">
                 <thead>
                 <tr>
-                  <th>Audit Name</th>
-                  <th>Last Audit</th>
+                  <th>Status</th>
                   <th>Date</th>
-                  <th>Location</th>
-                  <th>Notes</th>
+                  <th>Remarks</th>
                   <th><li class="fa fa-edit"></li></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                  <td>Internal Audit</td>
-                  <td>Jay Bulan</td>
+                  <td><small class="label bg-orange">Repair</small></td>
                   <td>02/16/2018</td>
-                  <td>Operations</td>
-                  <td>Completed</td>
+                  <td>Dumptruck under repair</td>
                   <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
                 </tr>
                 <tr>
-                  <td>External Audit</td>
-                  <td>Erikson Supnet</td>
+                  <td><small class="label bg-blue">Lease</small></td>
                   <td>04/01/2018</td>
-                  <td>Operations</td>
-                  <td>Completed</td>
+                  <td>Construction lease for Dumptruck</td>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
+                </tr>
+                <tr>
+                  <td><small class="label bg-gray">Donate</small></td>
+                  <td>02/16/2018</td>
+                  <td>Dumptruck under repair</td>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
+                </tr>
+                <tr>
+                  <td><small class="label bg-yellow">Sell</small></td>
+                  <td>04/01/2018</td>
+                  <td>Dumptruck sold</td>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
+                </tr>
+                <tr>
+                  <td><small class="label bg-black">Dispose</small></td>
+                  <td>04/01/2018</td>
+                  <td>Dumptruck Disposed</td>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
+                </tr>
+                <tr>
+                  <td><small class="label bg-red">Lost/Missing</small></td>
+                  <td>04/01/2018</td>
+                  <td>Lost Dumptruck</td>
                   <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
                 </tr>
                 </tbody>
               </table>
-              </div>            
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_5-5">
+                <h4><b>Maintenance History</b></h4>
+                <table class="table" width="100%">
+                <thead>
+                <tr>
+                  <th>Control#</th>
+                  <th>JO Date</th>
+                  <th>Date Started</th>
+                  <th>Date Finished</th>
+                  <th>Conducted By</th>
+                  <th><li class="fa fa-edit"></li></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>JO-03122018-1</td>
+                  <td>03/12/2018</td>
+                  <td>03/15/2018</td>
+                  <td>03/16/2018</td>
+                  <td>Jungle Repair</td>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
+                </tr>
+                <tr>
+                  <td>JO-03122018-2</td>
+                  <td>03/12/2018</td>
+                  <td>03/15/2018</td>
+                  <td>03/16/2018</td>
+                  <td>Jungle Repair</td>
+                  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
+                </tr>
+
+                </tbody>
+              </table>
+              </div>
+              <!-- /.tab-pane -->          
             </div>
           </div>
 <!-- ////// END ASSET ATTRIBUTES -->
@@ -227,12 +254,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Insurance Description</td>
-                  <td>BPI</td>
-                  <td>Jerik Erikson</td>
-                  <td>12/12/2015</td>
-                  <td>12/12/2020</td>
+                <tr ng-repeat="insurance in amdc.insurance">
+                  <td><%insurance.description%></td>
+                  <td><%insurance.insurance_co%></td>
+                  <td><%insurance.insurance_agent%></td>
+                  <td><%insurance.date_issued%></td>
+                  <td><%insurance.expiration_date%></td>
                   <td><a href="#" data-toggle="modal" data-target="#modal-warranty"><code class="text-green">EDIT</code></a></td>
                 </tr>
                 </tbody>

@@ -11,6 +11,8 @@
             var vm = this;
             var data = {};
             
+            // alert($stateParams.receiptCode)
+
             vm.payeeType = "SUPPLIER";
             SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
                 if (response.data.status == 200) {
@@ -33,21 +35,41 @@
                         vm.receipt = response.data.data[0];
                         console.log(vm.receipt)
 
-                        var modalInstance = $uibModal.open({
-                            controller:'ReceiptsModalInstanceCtrl',
-                            templateUrl:'receiptInfo.modal',
-                            controllerAs: 'vm',
-                            resolve :{
-                              formData: function () {
-                                return {
-                                    title:'Receipt Controller',
-                                    message:response.data.message,
-                                    receipt: vm.receipt
-                                };
-                              }
-                            },
-                            size: 'xlg'
-                        });
+                        if(vm.receipt.payee_type != "SUPPLIER")
+                        { 
+                            var modalInstance = $uibModal.open({
+                                controller:'ReceiptsModalInstanceCtrl',
+                                templateUrl:'receiptInfo2.modal',
+                                controllerAs: 'vm',
+                                resolve :{
+                                  formData: function () {
+                                    return {
+                                        title:'Receipt Controller',
+                                        message:response.data.message,
+                                        receipt: vm.receipt
+                                    };
+                                  }
+                                }
+                            });
+                        }
+                        else
+                        {
+                            var modalInstance = $uibModal.open({
+                                controller:'ReceiptsModalInstanceCtrl',
+                                templateUrl:'receiptInfo.modal',
+                                controllerAs: 'vm',
+                                resolve :{
+                                  formData: function () {
+                                    return {
+                                        title:'Receipt Controller',
+                                        message:response.data.message,
+                                        receipt: vm.receipt
+                                    };
+                                  }
+                                },
+                                size: 'xlg'
+                            });
+                        }
                     }
                 }, function (){ alert('Bad Request!!!') })
             }

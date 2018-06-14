@@ -220,6 +220,14 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+            InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:$stateParams.assetTag, insuranceItemStatus:1}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.insurance = response.data.data;
+                    console.log(vm.insurance)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
             vm.addNewWarranty = function(){ 
                 var modalInstance = $uibModal.open({
                     controller:'AssetsWarrantyModalInstanceCtrl',
