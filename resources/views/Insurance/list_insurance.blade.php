@@ -12,9 +12,10 @@
 
 <!-- Main content -->
 <section class="content">
+
   <div class="row">
     <div class="col-md-12"> 
-      <div id="add-bank" class="collapse department">
+      <div class="" ng-show="ic.state">
         <div class="panel panel-default">
           <div class="panel-body">
 <!-- NEW INSURANCE -->
@@ -81,16 +82,20 @@
               <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
               data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
               data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-              data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;" ng-click="ic.newInsurance(ic.insuranceDetails)"> CONFIRMATION
-            </button></div></div>
+              data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="ic.newInsurance(ic.insuranceDetails);ic.toggle()"> CONFIRMATION
+              </button>
+              <button type="button" class="btn btn-primary pull-right" ng-click="ic.toggle()"> 
+                <div ng-if="ic.state"> Cancel </div>
+              </button>
+            </div></div>
           </div>
         </form>
           </div>
         </div>
       </div>
 <!-- BUTTONS -->
-      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#add-bank">
-          <span class="glyphicon glyphicon-plus"></span> New Insurance
+      <button type="button" class="btn btn-primary" ng-click="ic.toggle()" ng-if="!ic.state">
+          <div ><span class="glyphicon glyphicon-plus"></span> New Insurance </div>
       </button>
     </div>
   </div><br>  
@@ -99,7 +104,7 @@
     <div class="col-md-12"> 
       <div class="box box-primary">
         <div class="box-body">
-          <table id="tbl-insurance" class="table table-bordered table-hover" width="100%">
+          <table id="tbl-insurance" class="table table-bordered table-hover" width="100%" datatable="ng">
             <thead>
             <tr>
               <th>Status</th>
@@ -132,34 +137,25 @@
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" class="close" ng-click="vm.ok()" ui-sref="list-insurance">
         <span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title"><li class="fa fa-shield"></li> <b>Insurance Policy Juan</b> (Policy #: 999-999-9999)</h4><br>
-      <div class="col-sm-12">
-        <div class="row col-sm-5">
-          <h5><b>Applicable Premium:</b><br>Premium detailsPremium detailsPremium detailsPremium detailsPremium. </h5>
-        </div>
-        <div class="row col-sm-2">
-          <h5><b>Insurance Agent:</b><br>Agent Juan</h5>
-        </div>
-        <div class="row col-sm-2">
-          <h5><b>Email:</b><br>email@email.com</h5>
-        </div>
-        <div class="row col-sm-2">
-          <h5><b>Mobile #:</b><br>0912345678</h5>
-        </div>
-        <div class="row col-sm-2">
-          <h5><b>Telephone #:</b><br>123-1234</h5>
-        </div>
+      <h4 class="modal-title"><li class="fa fa-shield"></li> <b><%vm.formData.insurance_co%></b> (Policy #: <%vm.formData.policy_number%>)</h4>
       </div>
-    </div>
     <div class="modal-body">
+                <!-- Custom Tabs (Pulled to the right) -->
+                <div class="nav-tabs-custom">
+                  <ul class="nav nav-tabs pull-right">
+                    <li class="active"><a href="#tab_1-1" data-toggle="tab">Associate Assets</a></li>
+                    <li><a href="#tab_2-2" data-toggle="tab">Insurance Details</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1-1">
       <h3>Associated Assets</h3>
       <p>Following assets are covered by this insurance policy:</p>
-          <table id="tbl-linked-assets" class="table table-bordered table-hover" width="100%">
+          <table id="tbl-linked-assets" class="table table-bordered table-hover" width="100%" datatable="ng"> 
             <thead>
             <tr>
-              <th>a</th>
+              <th> </th>
               <th>Asset Tag</th>
               <th>ID</th>
               <th>Category</th>
@@ -170,8 +166,8 @@
             </thead>
             <tbody>
             <tr ng-repeat="associatedAsset in vm.associatedAssets">
-              <td>
-                <button type="button" class="btn btn-danger pull-left fa fa-trash-o" ng-click="vm.removeInsuranceItems(associatedAsset.insurance_item_code)"></button>
+              <td align="center">
+                <button type="button" class="btn btn-danger btn-xs fa fa-minus" ng-click="vm.removeInsuranceItems(associatedAsset.insurance_item_code)"></button>
 
               </td>
               <td><a href="#"><b><%associatedAsset.tag%></b></a></td>
@@ -187,10 +183,10 @@
 <br><hr>
       <h3><li class="fa fa-link"></li> Associate New Assets</h3>
       <p>Select assets that are connected to your insurance policy. To associate assets, check boxes next to all of the assets for the insurance policy and select <strong>Associate Assets</strong>.</p>
-          <table id="tbl-assets" class="table table-bordered table-hover" width="100%" >
+          <table id="tbl-assets" class="table table-bordered table-hover" width="100%" datatable="ng">
             <thead>
             <tr>
-              <th>a</th>
+              <th> </th>
               <th>Asset Tag</th>
               <th>ID</th>
               <th>Category</th>
@@ -201,8 +197,8 @@
             </thead>
             <tbody>
             <tr ng-repeat="availableAsset in vm.availableAssets">
-              <td>
-                <button class="pull-left btn btn-primary fa fa-plus addnew" ng-click="vm.addInsuranceItems(availableAsset.tag)"></button>
+              <td align="center">
+                <button class="btn btn-primary btn-xs fa fa-plus" ng-click="vm.addInsuranceItems(availableAsset.tag)"></button>
               </td>
               <td><a href="#"><b><%availableAsset.tag%></b></a></td>
               <td><%availableAsset.code%></td>
@@ -213,17 +209,84 @@
             </tr>
             </tbody>
           </table>
-           
-    </div>   
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_2-2">
+                      <!-- form start -->
+                      <!-- EDIT INSURANCE -->
+
+                          <div class="box-body">
+                            <div class="form-group col-sm-12">
+                              <label for="controlnumber" class="col-sm-2 control-label">Control Number</label>
+                              <div class="col-sm-4"><input type="text" class="form-control" id="controlnumber" placeholder="INSU-04082018-1" disabled ng-model="vm.formData.insurance_code"></div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                              <label for="controlnumber" class="col-sm-2 control-label">Insurance Co.</label>
+                              <div class="col-sm-10"><input type="text" class="form-control" id="insu_co" autofocus="" ng-model="vm.formData.insurance_co">
+                              </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                              <label for="controlnumber" class="col-sm-2 control-label">Description</label>
+                              <div class="col-sm-10"><textarea class="form-control" id="insu_desc" rows="2" ng-model="vm.formData.description"></textarea> </div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                              <label for="controlnumber" class="col-sm-2 control-label">Policy Number</label>
+                              <div class="col-sm-4"><input type="text" class="form-control" id="insu_num" ng-model="vm.formData.policy_number"></div>
+                              <label for="controlnumber" class="col-sm-2 control-label">Insurance Coverage</label>
+                              <div class="col-sm-4"><input type="text" class="form-control" id="insu_cov" ng-model="vm.formData.insurance_coverage"></div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                              <label class="col-sm-2 control-label">Date Issued</label>
+                              <div class="col-sm-4">
+                              <div class="input-group date">
+                              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                              <input type="text" class="form-control pull-right" id="insu_dateissue" ng-model="vm.formData.date_issued">
+                            </div></div>
+
+                              <label class="col-sm-2 control-label">Expiration Date</label>
+                              <div class="col-sm-4">
+                              <div class="input-group date">
+                              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                              <input type="text" class="form-control pull-right" id="insu_dateexpire" ng-model="vm.formData.expiration_date">
+                            </div></div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                              <label for="controlnumber" class="col-sm-2 control-label">Applicable Premium</label>
+                              <div class="col-sm-10"><input type="text" class="form-control" id="insu_desc" ng-model="vm.formData.applicable_premium"></div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                              <label for="controlnumber" class="col-sm-2 control-label">Insurance Agent</label>
+                              <div class="col-sm-4"><input type="text" class="form-control" id="insu_desc" ng-model="vm.formData.insurance_agent"></div>
+                              <label for="controlnumber" class="col-sm-2 control-label">Email Address</label>
+                              <div class="col-sm-4"><input type="text" class="form-control" id="insu_desc" ng-model="vm.formData.email"></div>
+                            </div>
+                            <div class="form-group col-sm-12">
+                              <label for="controlnumber" class="col-sm-2 control-label">Mobile #</label>
+                              <div class="col-sm-4"><input type="text" class="form-control" id="insu_desc" ng-model="vm.formData.mobile_number"></div>
+                              <label for="controlnumber" class="col-sm-2 control-label">Telephone #</label>
+                              <div class="col-sm-4"><input type="text" class="form-control" id="insu_desc" ng-model="vm.formData.telephone_number"></div>
+                            </div>
+                           </div> 
+                          <!-- /.box-body -->
+                        </form>
+                        <button class="btn btn-large btn-primary pull-right" data-toggle="confirmation"
+                        data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+                        data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+                        data-title="Confirm data change." data-content="Are you sure?" style="width: 12%;" ng-click="vm.updateInsurance(vm.formData)" ui-sref="list-insurance"> Save Changes
+                      </button>
+                    </div>
+                    <!-- /.tab-pane -->
+                  </div>
+                  <!-- /.tab-content -->
+                </div>
+
+
+        </div>  
 <br>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-default pull-left" ui-sref="list-insurance">Close</button>
       <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
-      <button class="btn btn-large btn-primary pull-right" data-toggle="confirmation"
-        data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
-        data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-        data-title="Confirm data change." data-content="Are you sure?" style="width: 12%;"> Save Changes
-      </button>
+      
     </div>
   </div>
   <!-- /.modal-content -->

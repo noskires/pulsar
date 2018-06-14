@@ -315,6 +315,7 @@ Route::get('/insurance/list/{insuranceCode}','Insurance\InsuranceController@inde
 */
 
 Route::post('/api/v1/insurance/save','Insurance\InsuranceController@save');
+Route::post('/api/v1/insurance/update','Insurance\InsuranceController@update');
 Route::post('/api/v1/insurance-items/save','Insurance\InsuranceController@save_insurance_items'); 
 Route::post('/api/v1/insurance-items/remove','Insurance\InsuranceController@remove_insurance_items'); 
 

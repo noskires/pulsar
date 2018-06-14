@@ -89,13 +89,17 @@ class InsuranceController extends Controller {
 
 		$transaction = DB::transaction(function($data) use($data){
 		try{
-				DB::table('banks')
-				->where('bank_code', $data['bank_code'])
+				DB::table('insurance')
+				->where('insurance_code', $data['insurance_code'])
 				->update([
-					'bank_name' => $data['bank_name'],
-					'branch' => $data['branch'],
-					'manager' => $data['manager'],
-					'manager_email' => $data['manager_email'],
+					'insurance_co' => $data['insurance_co'],
+					'description' => $data['description'],
+					'policy_number' => $data['policy_number'],
+					'date_issued' => $data['date_issued'],
+					'expiration_date' => $data['expiration_date'],
+					'applicable_premium' => $data['applicable_premium'],
+					'insurance_agent' => $data['insurance_agent'],
+					'email' => $data['email'],
 					'mobile_number' => $data['mobile_number'],
 					'telephone_number' => $data['telephone_number']
 				]);
