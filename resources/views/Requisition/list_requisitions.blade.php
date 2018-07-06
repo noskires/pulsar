@@ -43,142 +43,7 @@
         </div>
         <!-- /.box-body -->
   </div>
-  <!-- MODAL POPUP -->
-    <div class="modal fade" id="modal-default">
-      <div class="modal-dialog modal-lg" style="width: 1000px;">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Requisition Control No: <b>RS-03102018-1</b></h4>
-          </div>
-          <div class="modal-body">
-            <p>Add requested supply items to specific Requisition Slip</p>
-            <!-- Custom Tabs (Pulled to the right) -->
-            <div class="nav-tabs-custom">
-              <ul class="nav nav-tabs pull-right">
-                <li class="active"><a href="#tab_1-1" data-toggle="tab">Details</a></li>
-                <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    Options <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Print</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Close RS (Withdrawal)</a></li>
-                  </ul>
-                </li>
-                <li class="pull-left header"><i class="fa fa-file-text"></i> STR Ramon Proj</li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane active" id="tab_1-1">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="panel panel-default">
-                        <div class="panel-body">
-                          <form ng-submit="addNew()">
-                            <table class="table table-striped table-bordered" class="tbl_rs_supply">
-                              <thead>
-                                <tr>
-                                  <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th> -->
-                                  <th>Supply Name</th>
-                                  <th width="15%">Supply Unit</th>
-                                  <th width="9%">Request(Qty)</th>
-                                  <th width="9%">Stock(Qty)</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr ng-repeat="personalDetail in personalDetails">
-                                  <!-- <td><input type="checkbox" ng-model="personalDetail.selected"/></td> -->
-                                  <td><select class="form-control select2" ng-model="personalDetail.suply_name" style="width:100%;" required/>
-                                    <option selected="selected">Select Suply</option>
-                                    <option>Dump Truck tires 3.0</option>
-                                    <option>Tire Interior</option>
-                                    </select></td>
-                                  <td><input type="text" class="form-control" ng-model="personalDetail.suply_unit" required/></td>
-                                  <td><input type="text" class="form-control" ng-model="personalDetail.request_qty" required/></td>
-                                  <td><input type="text" class="form-control" ng-model="personalDetail.suply_qty" disabled="" /></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary addnew pull-right" value="Add New" style="margin-right: 10px;">
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="panel panel-default">
-                        <div class="panel-body">
-                          <form ng-submit="addNew()">
-                            <table class="table table-bordered" class="tbl_rs_supply">
-                              <thead>
-                                <tr>
-                             <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th> -->
-                                  <th>Supply Name</th>
-                                  <th width="15%">Supply Unit</th>
-                                  <th width="9%">Request(Qty)</th>
-                                  <th width="9%">Stock(Qty)</th>
-                                  <th width="13%">Options</th>
-                                </tr> 
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <!-- <td><input type="checkbox" ng-model="personalDetail.selected"/></td> -->
-                                  <td>Tires for Dump Truck 3.5in</td>
-                                  <td>Piece</td>
-                                  <td>2</td>
-                                  <td>4</td>
-                                  <td><a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
-                                      <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a></td>
-                                </tr>
-                                <tr>
-                                  <!-- <td><input type="checkbox" ng-model="personalDetail.selected"/></td> -->
-                                  <td>Tires for Dump Truck 3.5in</td>
-                                  <td>Piece</td>
-                                  <td>2</td>
-                                  <td>4</td>
-                                  <td><a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
-                                      <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a></td>
-                                </tr>
-                                <tr>
-                                  <!-- <td><input type="checkbox" ng-model="personalDetail.selected"/></td> -->
-                                  <td>Tires for Dump Truck 3.5in</td>
-                                  <td>Piece</td>
-                                  <td>2</td>
-                                  <td>4</td>
-                                  <td><a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
-                                      <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-     
-                </div>
-                <!-- /.tab-pane -->
-              </div>
-              <!-- /.tab-content -->
-            </div>
-            <!-- nav-tabs-custom -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+ 
 
 </section>
 
@@ -288,11 +153,63 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <form ng-model="vm.withdrawalDetails">
+                      <h4><b>**Withdrawal Information</b></h4><br>
+                      <div class="form-group col-sm-12">
+                        <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
+                        <div class="col-sm-4">
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.withdrawalDetails.receivedBy">   
+                              <option selected="selected" value="0">- - - Select Employee - - -</option>
+                              <option ng-value="employee.id" ng-repeat="employee in vm.employees">
+                                <% employee.fname + ' '+employee.lname%>
+                              </option>
+                          </select>
+                        </div>
+                        <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
+                        <div class="col-sm-4">
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.withdrawalDetails.inspectedBy">   
+                              <option selected="selected" value="0">- - - Select Employee - - -</option>
+                              <option ng-value="employee.id" ng-repeat="employee in vm.employees">
+                                <% employee.fname + ' '+employee.lname%>
+                              </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-2 control-label">Date Received</label>
+                        <div class="col-sm-4">
+                        <div class="input-group date">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" class="form-control pull-right" id="" ng-model="vm.withdrawalDetails.dateReceived">
+                      </div></div>
+
+                        <label class="col-sm-2 control-label">Date Inspected</label>
+                        <div class="col-sm-4">
+                        <div class="input-group date">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" class="form-control pull-right" id="" ng-model="vm.withdrawalDetails.dateInspected">
+                      </div></div>
+                      </div>
+                          <div class="form-group">
+                            <div class="form-group">
+                              <input type="button" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.withdrawalDetails)">
+                          </div>
+                          </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
-          <button type="button" class="btn btn-primary" ng-click="vm.addItems()">Save changes</button>
+          <!-- <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button> -->
+          
         </div>
       </div>
       <!-- /.modal-content -->

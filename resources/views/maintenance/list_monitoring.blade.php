@@ -28,14 +28,13 @@
             <tr ng-repeat="asset in lmc.assetsMonitoring">
               <td><a href="#" data-toggle="modal" data-target="#modal-default"><b><%asset.tag%> </b></a></td>
               <td><%asset.asset_name%></td>
-              <td><%asset.total_operating_hours%></td>
-              <td><%asset.total_distance_travelled%></td>
-              <td><%asset.total_diesel_consumption%></td>
-              <td><%asset.total_gas_consumption%></td>
-              <td><%asset.total_oil_consumption%></td>
-              <td><%asset.total_number_loads%></td>
+              <td align="right"><%asset.total_operating_hours | number:2%></td>
+              <td align="right"><%asset.total_distance_travelled | number:2%></td>
+              <td align="right"><%asset.total_diesel_consumption | number:2%></td>
+              <td align="right"><%asset.total_gas_consumption | number:2%></td>
+              <td align="right"><%asset.total_oil_consumption | number:2%></td>
+              <td align="right"><%asset.total_number_loads | number:2%></td>
             </tr>
-
             </tbody>
           </table>
         </div>

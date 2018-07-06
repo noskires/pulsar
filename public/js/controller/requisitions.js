@@ -7,8 +7,8 @@
         .controller('RequisitionAssetCtrl', RequisitionAssetCtrl)
         .controller('RequisitionSlipModalInstanceCtrl', RequisitionSlipModalInstanceCtrl)
 
-        RequisitionCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function RequisitionCtrl($stateParams, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        RequisitionCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function RequisitionCtrl($stateParams, RequisitionsSrvcs, EmployeesSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -52,10 +52,18 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            // EmployeesSrvcs.employees({jobType:'POS-002'}).then (function (response) {
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.employees = response.data.data;
+            //         console.log(vm.employees)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
+
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 
-            
+
         }
 
         RequisitionAssetCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
@@ -137,8 +145,8 @@
             }; 
         }
 
-        RequisitionSlipModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
-        function RequisitionSlipModalInstanceCtrl ($uibModalInstance, formData, RequisitionsSrvcs, ReceiptSrvcs, SuppliesSrvcs, $window) {
+        RequisitionSlipModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
+        function RequisitionSlipModalInstanceCtrl ($uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, $window) {
 
             var vm = this;
             vm.formData = formData.requisition;
@@ -170,6 +178,19 @@
                     console.log(vm.supplies)
                 }
             }, function (){ alert('Bad Request!!!') })
+
+            EmployeesSrvcs.employees({jobType:'POS-002'}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.withdrawal = function(data){
+                // alert('widtral')
+                console.log(data)
+            }
 
             vm.selectSupply = function(index, supplyCode){
 

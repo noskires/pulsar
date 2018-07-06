@@ -41,7 +41,6 @@
 </section>
 <!-- MODAL POPUP -->
 
-
 <script type="text/ng-template" id="receiptInfo.modal">
   <div>
     <div class="modal-dialog" style="width:100%;">
@@ -75,10 +74,11 @@
                         <tr ng-repeat="personalDetail in vm.personalDetails" >
                           <td><input type="checkbox" ng-model="personalDetail.selected"/></td> 
                           <td>
-                            <select class="form-control select2" style="width: 100%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
+                            <select class="form-control select2" style="width: 60%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
                               <option selected="selected" value="0">- - select supply - -</option>
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
+                            <button type="button" class="btn btn-primary btn-xs fa fa-plus addsupplyname" ui-sref="supply-create" ng-click="vm.ok()"></button>
                           </td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_desc" disabled required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_unit" disabled required/></td>
@@ -100,7 +100,6 @@
               </div>
             </div>
           </div>
-
           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">

@@ -2,12 +2,29 @@
     'use strict';
     angular
         // .module('pulsarApp',[])
-        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap'])
+        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber'])
         .config(Config)
         .controller('MainCtrl', MainCtrl)
+        .directive("datepicker", function() {
+            return {
+              restrict: "A",
+                  require: "ngModel",
+                  link: function(scope, elem, attrs, ngModelCtrl) {
+                    elem.on("changeDate", updateModel);
+                    function updateModel(event) {
+                      ngModelCtrl.$setViewValue(event.date);
+                    }
+                    elem.datepicker({
+                      autoclose: true
+                    });
+                  }
+            };
+        })
 
-        Config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$interpolateProvider']
-        function Config($stateProvider, $urlRouterProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $interpolateProvider){
+
+
+        Config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$interpolateProvider', 'dynamicNumberStrategyProvider']
+        function Config($stateProvider, $urlRouterProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $interpolateProvider, dynamicNumberStrategyProvider){
             console.log("App here!");
             $interpolateProvider.startSymbol('<%');
             $interpolateProvider.endSymbol('%>');
@@ -19,6 +36,16 @@
                 // controller: 'OperationCtrl as oc',
                 templateUrl: 'main.view'
             };
+
+            dynamicNumberStrategyProvider.addStrategy('price', {
+                numInt: 7,
+                numFract: 2,
+                numSep: '.',
+                numPos: true,
+                numNeg: true,
+                numRound: 'round',
+                numThousand: true
+            });
             
             $stateProvider
             .state('main-view', main)

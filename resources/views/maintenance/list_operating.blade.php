@@ -60,12 +60,12 @@
                   <td><%operation.project_name%></td>
                   <td><%operation.project_code%></td>
                   <td><%operation.remarks%></td>
-                  <td><%operation.operating_hours%></td>
-                  <td><%operation.distance_travelled%></td>
-                  <td><%operation.diesel_consumption%></td>
-                  <td><%operation.gas_consumption%></td>
-                  <td><%operation.oil_consumption%></td>
-                  <td><%operation.number_loads%></td>
+                  <td align="right"><%operation.operating_hours | number:2%></td>
+                  <td align="right"><%operation.distance_travelled | number:2%></td>
+                  <td align="right"><%operation.diesel_consumption | number:2%></td>
+                  <td align="right"><%operation.gas_consumption | number:2%></td>
+                  <td align="right"><%operation.oil_consumption | number:2%></td>
+                  <td align="right"><%operation.number_loads | number:2%></td>
                 </tr>
                 </tbody>
               </table>

@@ -18,6 +18,9 @@
 <!-- Auto Complete -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-auto-complete/angular-auto-complete.js')}}"></script>
 
+<!-- Angular-dynamic-number -->
+<script type="text/javascript" src="{{URL::to('bower_components/angular-dynamic-number/release/dynamic-number.min.js')}}"></script>
+
 <!-- angular-datatables -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/angular-datatables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js')}}"></script>

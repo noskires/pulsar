@@ -1,0 +1,106 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "angular-dynamic-number",
+        "scope": null,
+        "escapedName": "angular-dynamic-number",
+        "name": "angular-dynamic-number",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\Erik\\myJasonPackage"
+    ]
+  ],
+  "_from": "angular-dynamic-number@latest",
+  "_id": "angular-dynamic-number@2.5.1",
+  "_inCache": true,
+  "_location": "/angular-dynamic-number",
+  "_nodeVersion": "6.3.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/angular-dynamic-number-2.5.1.tgz_1499885861228_0.5486774356104434"
+  },
+  "_npmUser": {
+    "name": "krzysztofsztompka",
+    "email": "sztompka.krzysztof@gmail.com"
+  },
+  "_npmVersion": "4.2.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular-dynamic-number",
+    "scope": null,
+    "escapedName": "angular-dynamic-number",
+    "name": "angular-dynamic-number",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-dynamic-number/-/angular-dynamic-number-2.5.1.tgz",
+  "_shasum": "ae2fee9a489f41b26cc682c1a60a06210c70f6ee",
+  "_shrinkwrap": null,
+  "_spec": "angular-dynamic-number",
+  "_where": "C:\\Users\\Erik\\myJasonPackage",
+  "author": {
+    "name": "Krzysztof Sztompka",
+    "email": "sztompka.krzysztof@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/uhlryk/angular-dynamic-number/issues"
+  },
+  "dependencies": {},
+  "description": "Highly customizable angular directive for numbers",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.10",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "^0.3.6"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "ae2fee9a489f41b26cc682c1a60a06210c70f6ee",
+    "tarball": "https://registry.npmjs.org/angular-dynamic-number/-/angular-dynamic-number-2.5.1.tgz"
+  },
+  "gitHead": "cf1ed38ebec9548e47ecdff17be2b41375c4a860",
+  "homepage": "https://github.com/uhlryk/angular-dynamic-number",
+  "keywords": [
+    "angular",
+    "directive",
+    "number",
+    "format",
+    "comma",
+    "dot",
+    "number separator",
+    "thousand separator",
+    "decimal separator"
+  ],
+  "license": "MIT",
+  "main": "release/dynamic-number.js",
+  "maintainers": [
+    {
+      "name": "krzysztofsztompka",
+      "email": "sztompka.krzysztof@gmail.com"
+    }
+  ],
+  "name": "angular-dynamic-number",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uhlryk/angular-dynamic-number.git"
+  },
+  "scripts": {
+    "build": "gulp script",
+    "test": "gulp test"
+  },
+  "version": "2.5.1"
+}
