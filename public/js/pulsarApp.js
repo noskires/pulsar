@@ -15,7 +15,8 @@
                       ngModelCtrl.$setViewValue(event.date);
                     }
                     elem.datepicker({
-                      autoclose: true
+                      autoclose: true,
+                      endDate: '+0d'
                     });
                   }
             };
