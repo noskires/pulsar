@@ -10,7 +10,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
-  <div class="col-sm-12">
+    <div class="col-sm-12">
   <div class="box">
     <!-- form start -->
       <form role="form">
@@ -40,11 +40,6 @@
 </div>
 </div>
 
-
-
-<div id="create-voucher" class="collapse"><br>
-
-
   <div class="box box-primary">
         <div class="box-body">
           <table id="vouchers" datatable="ng" class="table table-bordered table-hover" width="100%">
@@ -60,7 +55,6 @@
               <th>Check No</th>
               <th>Check Date</th>
               <th>Bank</th>
-
             </tr>
             </thead>
             <tbody>

@@ -183,11 +183,14 @@
             };
         }
 
-        AssetMoreDetailsCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'MaintenanceSrvcs', 'WarrantiesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'InsuranceSrvcs', '$window', '$uibModal'];
-        function AssetMoreDetailsCtrl($stateParams, AssetsSrvcs, MaintenanceSrvcs, WarrantiesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, InsuranceSrvcs, $window, $uibModal){
+        AssetMoreDetailsCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'MaintenanceSrvcs', 'WarrantiesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'InsuranceSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function AssetMoreDetailsCtrl($stateParams, AssetsSrvcs, MaintenanceSrvcs, WarrantiesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, InsuranceSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
+            vm.messageAlert = function(message){
+                alert(message);
+            }
 
             if($stateParams.assetTag)
             {
@@ -219,6 +222,14 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
+
+            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:'', assetTag:$stateParams.assetTag}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.jobOrders = response.data.data;
+                    console.log(vm.jobOrders)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:$stateParams.assetTag, insuranceItemStatus:1}).then (function (response) {
                 if(response.data.status == 200)

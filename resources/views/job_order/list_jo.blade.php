@@ -106,7 +106,7 @@
             <div class="col-sm-8">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right" id="datestarted" ng-model="vm.formData.jobOrder.date_started">
+            <input type="text" class="form-control pull-right" id="datestarted" ng-model="vm.formData.jobOrder.date_started" datepicker autocomplete="off" readonly="readonly">
           </div></div>
           </div>
           <div class="form-group">
@@ -114,7 +114,7 @@
             <div class="col-sm-8">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right" id="datecompleted" ng-model="vm.formData.jobOrder.date_completed">
+            <input type="text" class="form-control pull-right" id="datecompleted" ng-model="vm.formData.jobOrder.date_completed" datepicker autocomplete="off" readonly="readonly">
           </div></div>
           </div>
           <div class="form-group">
@@ -142,7 +142,7 @@
             <div class="col-sm-8">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right" id="datepicker2" ng-model="vm.formData.jobOrder.date_assessed">
+            <input type="text" class="form-control pull-right" id="datepicker2" ng-model="vm.formData.jobOrder.date_assessed" datepicker autocomplete="off" readonly="readonly">
           </div></div>
           </div>
           <div class="form-group">
@@ -159,7 +159,7 @@
             <div class="col-sm-8">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right" id="datepicker2" ng-model="vm.formData.jobOrder.date_approved">
+            <input type="text" class="form-control pull-right" id="datepicker2" ng-model="vm.formData.jobOrder.date_approved" datepicker autocomplete="off" readonly="readonly">
           </div></div>
           </div>
           <div class="form-group">
@@ -175,7 +175,7 @@
             <div class="col-sm-8">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right datepicker" id="dateinspected" ng-model="vm.formData.jobOrder.date_inspected">
+            <input type="text" class="form-control pull-right datepicker" id="dateinspected" ng-model="vm.formData.jobOrder.date_inspected" datepicker autocomplete="off" readonly="readonly">
           </div></div>
           </div>
           <div class="form-group">

@@ -14,7 +14,7 @@
             // alert($stateParams.assetTag);
             // alert($stateParams.joCode)
             
-            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1}).then (function (response) {
+            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetTag:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.jobOrders = response.data.data;
@@ -43,7 +43,7 @@
             }
 
             if($stateParams.joCode){
-                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode,joStatus:''}).then (function (response) {
+                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode,joStatus:'', assetTag:''}).then (function (response) {
 
                     if(response.data.status == 200)
                     {
@@ -70,7 +70,8 @@
             }
 
             vm.newJobOrder =  function(data){
-                console.log(data);
+
+                // console.log(data);
                 JobOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
@@ -79,9 +80,10 @@
                     else {
                         alert(response.data.message);
                         // vm.routeTo('asset/create');
+                        console.log(response.data);
                     }
-                    console.log(response.data);
-                });
+                    // console.log(response.data);
+                }, function (){ console.log(response.data); alert('Bad Request!!!') });
             }
 
             // EmployeesSrvcs.employees({jobType:''}).then (function (response) {

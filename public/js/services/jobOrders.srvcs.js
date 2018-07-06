@@ -7,11 +7,11 @@
         JobOrdersSrvcs.$inject = ['$http'];
         function JobOrdersSrvcs($http) {
             return {
-            	jobOrders: function(data, joCode) {
+            	jobOrders: function(data) {
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/job-orders?joCode='+data.joCode+'&joStatus='+data.joStatus,
+                        url: '/api/v1/job-orders?joCode='+data.joCode+'&joStatus='+data.joStatus+'&assetTag='+data.assetTag,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

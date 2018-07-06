@@ -21,6 +21,7 @@ class JobOrdersController extends Controller {
     $data = array(
       'joCode'=>$request->input('joCode'),
       'joStatus'=>$request->input('joStatus'),
+      'assetTag'=>$request->input('assetTag'),
     );
 
     $job_orders = DB::table('job_orders as jo')
@@ -41,6 +42,12 @@ class JobOrdersController extends Controller {
                 'jo.date_inspected', 
                 'jo.tested_by', 
                 'jo.accepted_by', 
+                'jo.operating_hours', 
+                'jo.distance_travelled', 
+                'jo.diesel_consumption', 
+                'jo.gas_consumption', 
+                'jo.oil_consumption', 
+                'jo.number_loads', 
                 'a.tag', 
                 'a.name',
                 'e.employee_id', 
@@ -64,6 +71,10 @@ class JobOrdersController extends Controller {
       $job_orders = $job_orders->whereNull('jo.date_completed');
     }
 
+    if ($data['assetTag']){
+      $job_orders = $job_orders->where('a.tag', $data['assetTag']);
+    }
+
     $job_orders = $job_orders->get();
 
     return response()-> json([
@@ -81,10 +92,28 @@ class JobOrdersController extends Controller {
     $data['assetTag'] = $request->input('tag');
     
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
+        $asset = DB::table('assets as a')
+            ->select( 
+                      'a.tag',
+                      'a.name as asset_name', 
+                      DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
+                      DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
+                      DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
+                      DB::raw("COALESCE(SUM(o.gas_consumption), 0) as total_gas_consumption"),
+                      DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
+                      DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
+                    )
+            ->leftjoin('operations as o','o.asset_tag','=','a.tag')
+            ->leftjoin('Projects as p','p.project_code','=','o.project_code')
+            ->groupBy('a.tag', 'a.name')
+            ->where('a.tag', $data['assetTag'])
+            ->first();
+
+
+        // return $asset;
         $jo = new JobOrder;
-
         $joCode = (str_pad(($jo->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
@@ -92,6 +121,13 @@ class JobOrdersController extends Controller {
         $jo->job_order_date = $data['orderDate']; 
         $jo->date_started = $data['orderDate'];
         $jo->asset_tag = $data['assetTag'];
+        $jo->operating_hours = $asset->total_operating_hours;
+        $jo->distance_travelled = $asset->total_distance_travelled;
+        $jo->diesel_consumption = $asset->total_diesel_consumption;
+        $jo->gas_consumption = $asset->total_gas_consumption;
+        $jo->oil_consumption = $asset->total_oil_consumption;
+        $jo->number_loads = $asset->total_number_loads;
+
         $jo->save();
 
         return response()->json([
@@ -100,24 +136,22 @@ class JobOrdersController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;
   }
 
   public function update(Request $request){
-    
-    // return $request->all();
-    // echo "erikson";
+  
     $data = array();
     // $data['purpose'] = $request->input('asset_tag');
     // $data['purpose'] = $request->input('request_purpose');
@@ -139,6 +173,9 @@ class JobOrdersController extends Controller {
 
     $transaction = DB::transaction(function($data) use($data){
     // try{
+
+
+
 
           DB::table('job_orders')
             ->where('job_order_code', $data['job_order_code'])

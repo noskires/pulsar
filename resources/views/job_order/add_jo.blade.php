@@ -25,7 +25,7 @@
               <div class="col-sm-9">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right datepicker" ng-model="joc.joDetails.orderDate">
+              <input type="text" class="form-control pull-right datepicker" ng-model="joc.joDetails.orderDate" datepicker autocomplete="off" readonly="readonly">
             </div></div>
             </div> 
             <div class="form-group">

@@ -13,7 +13,6 @@
 
             if($stateParams.voucherCode)
             {
-
                 vm.voucherCode = $stateParams.voucherCode;
                 // alert(vm.receiptCode);
                 VouchersSrvcs.vouchers({voucherCode:vm.voucherCode }).then (function (response) {

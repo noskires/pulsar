@@ -175,29 +175,32 @@
                   <th>Control#</th>
                   <th>JO Date</th>
                   <th>Date Started</th>
-                  <th>Date Finished</th>
+                  <th>Date Completed</th>
                   <th>Conducted By</th>
-                  <th><li class="fa fa-edit"></li></th>
+                  <th>Operating Hours</th>
+                  <th>Distance Travelled</th>
+                  <th>Diesel Consumption</th>
+                  <th>Gas Consumption</th>
+                  <th>Oil Consumption</th>
+                  <th>Loads</th>
+                  <!-- <th><li class="fa fa-edit"></li></th> -->
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>JO-03122018-1</td>
-                  <td>03/12/2018</td>
-                  <td>03/15/2018</td>
-                  <td>03/16/2018</td>
-                  <td>Jungle Repair</td>
-                  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
+                <tr ng-repeat="jobOrder in amdc.jobOrders">
+                  <td><%jobOrder.job_order_code%></td>
+                  <td><%jobOrder.job_order_date%></td>
+                  <td><%jobOrder.date_started%></td>
+                  <td><%jobOrder.date_completed%></td>
+                  <td><%jobOrder.conducted_by%></td>
+                  <td><%jobOrder.operating_hours | number:0%></td>
+                  <td><%jobOrder.distance_travelled | number:0%></td>
+                  <td><%jobOrder.diesel_consumption | number:0%></td>
+                  <td><%jobOrder.gas_consumption | number:0%></td>
+                  <td><%jobOrder.oil_consumption | number:0%></td>
+                  <td><%jobOrder.number_loads | number:0%></td>
+                 <!--  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td> -->
                 </tr>
-                <tr>
-                  <td>JO-03122018-2</td>
-                  <td>03/12/2018</td>
-                  <td>03/15/2018</td>
-                  <td>03/16/2018</td>
-                  <td>Jungle Repair</td>
-                  <td><a href="#" data-toggle="modal" data-target="#modal-event"><code class="text-green">EDIT</code></a></td>
-                </tr>
-
                 </tbody>
               </table>
               </div>
@@ -221,6 +224,7 @@
                 <thead>
                 <tr>
                   <th>Status</th>
+                  <th>Effective Date</th>
                   <th>Expiration Date</th>
                   <th>Length</th>
                   <th>Description</th>
@@ -230,7 +234,8 @@
                 <tbody>
                 <tr ng-repeat="warranty in amdc.warranties">
                   <td>Active</td>
-                  <td><%warranty.expiry_date%></td>
+                  <td><%warranty.effective_date%></td>
+                  <td><%warranty.end_date%></td>
                   <td></td>
                   <td><%warranty.description%></td>
                   <td><a href="#" data-toggle="modal" data-target="#modal-warranty"><code class="text-green">EDIT</code></a></td>
@@ -240,8 +245,8 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_7-7">
-                <h4><b>Asset Insurance:</b><button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#modal-insurance">
-                <li class="fa fa-link"></li> Link Insurance</button></h4> 
+                <h4><b>Asset Insurance:</b><!-- <button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#modal-insurance">
+                <li class="fa fa-link"></li> Link Insurance</button> --></h4> 
                 <table class="table" width="100%">
                 <thead>
                 <tr>
@@ -334,10 +339,15 @@
               </a>
               <a class="btn btn-app">
                 <i class="fa fa-external-link"></i> Assign
-              </a>              
-              <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})">
+              </a>
+
+              <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})" ng-if="amdc.asset.employee_name">
+                <i class="fa fa-wrench"></i> Repair
+              </a>                       
+              <a class="btn btn-app" ng-click="amdc.messageAlert('Please assign an employee first!')" ng-if="!amdc.asset.employee_name">
                 <i class="fa fa-wrench"></i> Repair
               </a>
+
               <a href="javascript: window.open('pdfasset.pdf');"  class="btn btn-app">
                 <i class="fa fa-print"></i> Print
               </a>
@@ -596,16 +606,27 @@
         <form class="form-horizontal" id="" ng-model="amdc.warrantyDetails">
           <div class="modal-body"><br>
             <div class="form-group">
+              <label class="col-sm-3 control-label">Effective Date</label>
+              <div class="col-sm-8">
+                <div class="input-group date">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="text" class="form-control pull-right" id="warranty_effective_date" required="" ng-model="amdc.warrantyDetails.effectiveDate" datepicker2 autocomplete="off" readonly="readonly">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label for="controlnumber" class="col-sm-3 control-label">Length (Months)</label>
               <div class="col-sm-8"><input type="text" class="form-control" id="warranty_months" required="" ng-model="amdc.warrantyDetails.monthLength"></div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label">Expiration Date</label>
               <div class="col-sm-8">
-              <div class="input-group date">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="warranty_expiration" required="" ng-model="amdc.warrantyDetails.expiryDate">
-            </div></div>
+                <div class="input-group date">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="text" class="form-control pull-right" id="warranty_expiration" required="" ng-model="amdc.warrantyDetails.expiryDate" datepicker2 autocomplete="off" readonly="readonly">
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <label for="rs-desc" class="col-sm-3 control-label">Description/Remarks</label>

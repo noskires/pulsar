@@ -16,11 +16,33 @@
                     }
                     elem.datepicker({
                       autoclose: true,
-                      endDate: '+0d'
+                      endDate: '+0d',
+                      // defaultDate: new Date()
+                        format: "yyyy-mm-dd",
+                        immediateUpdates: true,
+                        todayBtn: true,
+                        // todayHighlight: true
+                    }).datepicker("setDate", "0");
+                  }
+            };
+        })
+
+        .directive("datepicker2", function() {
+            return {
+              restrict: "A",
+                  require: "ngModel",
+                  link: function(scope, elem, attrs, ngModelCtrl) {
+                    elem.on("changeDate", updateModel);
+                    function updateModel(event) {
+                      ngModelCtrl.$setViewValue(event.date);
+                    }
+                    elem.datepicker({
+                      autoclose: true
                     });
                   }
             };
         })
+
 
 
 
