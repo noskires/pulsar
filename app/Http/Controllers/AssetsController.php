@@ -46,7 +46,6 @@ class AssetsController extends Controller {
             'category'=>$request->input('category'),
         );
 
-
       	$asset = DB::table('Assets as a')
       			// ->select('*')
             ->select(
@@ -62,6 +61,7 @@ class AssetsController extends Controller {
                 'a.acquisition_cost',
                 'a.plate_no',
                 'a.engine_no',
+                'a.chassis_no',
                 'a.assign_to',
                 'a.project_code',
                 'a.status',
@@ -133,7 +133,8 @@ class AssetsController extends Controller {
        	$data['acquisitionCost'] = $request->input('acquisitionCost');
        	$data['dateAcquired'] = date('Y-m-d', strtotime($request->input('dateAcquired')));
        	$data['plateNumber'] = $request->input('plateNumber');
-       	$data['engineNumber'] = $request->input('engineNumber');
+        $data['engineNumber'] = $request->input('engineNumber');
+       	$data['chassisNumber'] = $request->input('chassisNumber');
        	// $data['assignTo'] = $request->input('assignTo');
        	// $data['fundSource'] = $request->input('fundSource');
        	// $data['costCenter'] = $request->input('costCenter');
@@ -143,7 +144,7 @@ class AssetsController extends Controller {
        	// $data['project_code'] = $request->input('projectCode');
        
         $transaction = DB::transaction(function($data) use($data){
-        	try{
+        	// try{
 
 	            $asset = new Asset;
 	            $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
@@ -156,7 +157,8 @@ class AssetsController extends Controller {
 	            $asset->date_acquired = $data['dateAcquired'];
 	            $asset->acquisition_cost = $data['acquisitionCost'];
 	            $asset->plate_no = $data['plateNumber'];
-	            $asset->engine_no = $data['engineNumber'];
+              $asset->engine_no = $data['engineNumber'];
+	            $asset->chassis_no = $data['chassisNumber'];
 	            // $asset->assign_to = $data['assignTo'];
 	            // $asset->fund_source = $data['fundSource'];
 	            // $asset->cost_center = $data['costCenter'];
@@ -181,15 +183,15 @@ class AssetsController extends Controller {
 	                'data' => 'null',
 	                'message' => 'Successfully saved.'
 	            ]);
-            } 
-            catch (\Exception $e) 
-            {
-		    	    return response()->json([
-	                'status' => 500,
-	                'data' => 'null',
-	                'message' => 'Error, please try again!'
-	            ]);
-		      }
+          //   } 
+          //   catch (\Exception $e) 
+          //   {
+		    	   //  return response()->json([
+	         //        'status' => 500,
+	         //        'data' => 'null',
+	         //        'message' => 'Error, please try again!'
+	         //    ]);
+		        // }
         });
 
         return $transaction;

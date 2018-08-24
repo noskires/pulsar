@@ -24,6 +24,7 @@
           <th>Acquisition Cost</th>
           <th>Plate No.</th>
           <th>Engine No.</th>
+          <th>Chassis No.</th>
           <th>Assigned to</th>
         </tr>
         </thead>
@@ -42,6 +43,7 @@
           <td><%asset.acquisition_cost | number:2%></td>
           <td><%asset.plate_no%></td>
           <td><%asset.engine_no%></td>
+          <td><%asset.chassis_no%></td>
           <td><%%></td>
         </tr>
         </tbody>

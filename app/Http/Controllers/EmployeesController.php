@@ -168,7 +168,6 @@ class EmployeesController extends Controller {
         ]);
       }
     });
-
     return $transaction;
   }
 
