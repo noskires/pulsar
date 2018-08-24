@@ -19,7 +19,8 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/employees2?employee_id='+data.employee_id,
+                        url: '/api/v1/employees2?employee_code='+data.employee_code,
+                        // url: '/api/v1/employees2?employee_id='+data.employee_id,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

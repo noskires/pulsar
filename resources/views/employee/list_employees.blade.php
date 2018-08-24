@@ -59,7 +59,7 @@ Content Header (Page header) -->
           </thead>
           <tbody>
           <tr ng-repeat="employee in ec.employees" >
-            <td><a href="#" ng-click="ec.employeeInfo(employee.employee_id)"><b><%employee.employee_code%></b></a></td>
+            <td><a href="#" ng-click="ec.employeeInfo(employee.employee_code)"><b><%employee.employee_code%></b></a></td>
             <td><%employee.lname%></td>
             <td><%employee.affix%></td>
             <td><%employee.fname%></td>
@@ -131,7 +131,7 @@ Content Header (Page header) -->
                       <div class="col-sm-9">
                       <div class="input-group date">
                       <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                      <input type="text" class="form-control pull-right" id="datepicker-bday" ng-model="vm.employeeDetails.bday">
+                      <input type="text" class="form-control pull-right" datepicker ng-model="vm.employeeDetails.bday">
                     </div></div>
                     </div>
                     <div class="form-group col-sm-12">
@@ -234,10 +234,10 @@ Content Header (Page header) -->
               <!-- form start -->
                 <form class="form-horizontal" id="">
                   <div class="box-body">
-                    <div class="form-group col-sm-12">
+                    <!-- <div class="form-group col-sm-12">
                       <label for="controlnumber" class="col-sm-3 control-label">Employee ID</label>
                       <div class="col-sm-9"><input type="text" class="form-control" id="emp_id" ng-model="vm.formData.employee_code"></div>
-                    </div>
+                    </div> -->
                     <div class="form-group col-sm-12">
                       <label for="controlnumber" class="col-sm-3 control-label">Last Name</label>
                       <div class="col-sm-9"><input type="text" class="form-control" id="emp_lname" ng-model="vm.formData.lname"></div>
@@ -257,18 +257,17 @@ Content Header (Page header) -->
                     <div class="form-group col-sm-12">
                       <label class="col-sm-3 control-label">Job Title</label>
                       <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.position_code">
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.position_code">
                         <option selected="selected" value="0">- - select job title - -</option>
-                        <option ng-value="position.position_code" ng-repeat="position in vm.positions" ng-init="vm.formData.position_code"><%position.position_text%></option>
-                      </select></div>
-                      <%vm.formData.position_code%>
+                        <option ng-value="position.position_code" ng-repeat="position in vm.positions"><%position.position_text%></option>
+                      </select></div> 
                     </div>
                     <div class="form-group col-sm-12">
                       <label class="col-sm-3 control-label">Birth Date</label>
                       <div class="col-sm-9">
                       <div class="input-group date">
                       <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                      <input type="text" class="form-control pull-right" id="datepicker-bday" ng-model="vm.formData.birthdate">
+                      <input type="text" class="form-control pull-right" datepicker ng-model="vm.formData.birthdate">
                     </div></div>
                     </div>
                     <div class="form-group col-sm-12">
@@ -279,37 +278,32 @@ Content Header (Page header) -->
                       <label for="controlnumber" class="col-sm-3 control-label">Phone No.</label>
                       <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.phone_number"></div>
                     </div>
+
                     <div class="form-group col-sm-12">
                       <label class="col-sm-3 control-label">Department</label>
                       <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.department">
-                        <option selected="selected" value="0">- - select department - -</option>
-                        <option value="1">PULSAR CONSTRUCTION</option>
-                        <option value="2">DEPTARTMENT 1</option>
-                        <option value="3">DEPTARTMENT 2</option>
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.department_code" ng-change="vm.selectDepartment(vm.formData.department_code)">
+                        <option selected="selected" value="0">- - Select Department - -</option>
+                        <option ng-value="department.org_code" ng-repeat="department in vm.departments"><%department.department_name%></option>
                       </select></div>
                     </div>
                     <div class="form-group col-sm-12">
                       <label class="col-sm-3 control-label">Division</label>
                       <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.division">
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.division_code" ng-change="vm.selectDivision(vm.formData.division_code)">
                         <option selected="selected" value="0">- - select division - -</option>
-                        <option value="1">CONSTRUCTION</option>
-                        <option value="2">OPERATIONS</option>
-                        <option value="3">ACCOUNTING</option>
-                        <option value="3">ENGINEERING</option>
+                        <option ng-value="division.org_code" ng-repeat="division in vm.divisions"><%division.division_name%></option>
                       </select></div>
                     </div>
                     <div class="form-group col-sm-12">
                       <label class="col-sm-3 control-label">Unit</label>
                       <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.unit">
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.unit_code">
                         <option selected="selected" value="0">- - select unit - -</option>
-                        <option value="1">MAINTENANCE</option>
-                        <option value="2">UNIT 2</option>
-                        <option value="3">UNIT 3</option>
+                        <option ng-value="unit.org_code" ng-repeat="unit in vm.units"><%unit.unit_name%></option>
                       </select></div>
                     </div>
+
                   </div>
                   <!-- /.box-body -->
                 </form>

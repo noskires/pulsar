@@ -34,9 +34,9 @@
                 });
             }
 
-            vm.employeeInfo = function(employee_id){
+            vm.employeeInfo = function(employee_code){
                 // alert(employee_id)
-                EmployeesSrvcs.employees2({employee_id:employee_id}).then (function (response) {
+                EmployeesSrvcs.employees2({employee_code:employee_code}).then (function (response) {
 
                     if(response.data.status == 200)
                     {
@@ -151,11 +151,12 @@
             };
 
             vm.updateEmployee =  function(data){
-                // console.log(data);
+                console.log(data);
                 EmployeesSrvcs.update(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
                         vm.routeTo('employee/list');
+                        // console.log(response.data);
                     }
                 }, function (){ alert('Bad Request!!!') });
             }

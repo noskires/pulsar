@@ -64,13 +64,42 @@ class EmployeesController extends Controller {
 
       $data = array(
             'employee_id'=>$request->input('employee_id'),
+            'employee_code'=>$request->input('employee_code'),
         );
 
-        $employees = DB::table('Employees');
+        $employees = DB::table('Employees as e')
+                    ->select(
+                      'e.employee_code',
+                      'e.lname',
+                      'e.affix', 
+                      'e.fname', 
+                      'e.mname',
+                      'e.birthdate',
+                      'e.email_account',
+                      'e.phone_number',
+                      'e.position_code',
+                      'p.position_text',
+                      'e.department AS department_code',
+                      'dep.org_name AS department',
+                      'e.division AS division_code',
+                      'div.org_name AS division',
+                      'e.unit AS unit_code',
+                      'unit.org_name AS unit'
+                    )
+                    ->leftjoin('positions as p','p.position_code','=','e.position_code')
+                    ->leftjoin('organizations as dep','dep.org_code','=','e.department')
+                    ->leftjoin('organizations as div','div.org_code','=','e.division')
+                    ->leftjoin('organizations as unit','unit.org_code','=','e.unit');
 
         if ($data['employee_id']){ 
           $employees = $employees->where('employee_id', $data['employee_id']);
         }
+
+
+        if ($data['employee_code']){ 
+          $employees = $employees->where('employee_code', $data['employee_code']);
+        }
+
 
         $employees = $employees->orderBy('lname', 'asc')
                     ->orderBy('affix', 'asc')
@@ -147,7 +176,7 @@ class EmployeesController extends Controller {
   public function update(Request $request){
 
     $data = array();
-    $data['emp_id'] = $request->input('employee_id');
+    $data['emp_code'] = $request->input('employee_code');
     $data['lname'] = $request->input('lname');
     $data['suffix'] = $request->input('affix');
     $data['fname'] = $request->input('fname');
@@ -156,15 +185,15 @@ class EmployeesController extends Controller {
     $data['position_code'] = $request->input('position_code');
     $data['email'] = $request->input('email_account');
     $data['phone_no'] = $request->input('phone_number');
-    $data['department'] = $request->input('department');
-    $data['division'] = $request->input('division');
-    $data['unit'] = $request->input('unit');
+    $data['department'] = $request->input('department_code');
+    $data['division'] = $request->input('division_code');
+    $data['unit'] = $request->input('unit_code');
 
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
       
           DB::table('employees')
-            ->where('employee_id', $data['emp_id'])
+            ->where('employee_code', $data['emp_code'])
             ->update([
               'lname' => $data['lname'],
               'affix' => $data['suffix'],
@@ -185,15 +214,15 @@ class EmployeesController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;
