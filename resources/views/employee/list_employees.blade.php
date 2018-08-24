@@ -1,4 +1,4 @@
-<!-- Content Header (Page header) -->
+Content Header (Page header) -->
 <section class="content-header">
 <h1><span class="fa fa-user"> </span> Manage Employees</h1>
 <ol class="breadcrumb">
@@ -93,31 +93,15 @@
       <div class="modal-body">
         <!-- Custom Tabs (Pulled to the right) -->
         <div class="nav-tabs-custom">
-         <!--  <ul class="nav nav-tabs pull-right">
-            <li class="active"><a href="#tab_1-1" data-toggle="tab">Details</a></li>
-            <li><a href="#tab_2-2" data-toggle="tab">History</a></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                Options <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mark as Finished</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Print</a></li>
-              </ul>
-            </li>
-            <li class="pull-left header"><i class="fa fa-user"></i> MICHAEL PADILLA CAPARAS</li>
-          </ul> -->
           <div class="tab-content">
             <div class="tab-pane active" id="tab_1-1">
               <!-- form start -->
                 <form class="form-horizontal" id="" ng-model="vm.employeeDetails">
                   <div class="box-body">
-                    <div class="form-group col-sm-12">
+                    <!-- <div class="form-group col-sm-12">
                       <label for="controlnumber" class="col-sm-3 control-label">Employee ID</label>
                       <div class="col-sm-9"><input type="text" class="form-control" id="emp_id" ng-model="vm.employeeDetails.emp_id"></div>
-                    </div>
+                    </div> -->
                     <div class="form-group col-sm-12">
                       <label for="controlnumber" class="col-sm-3 control-label">Last Name</label>
                       <div class="col-sm-9"><input type="text" class="form-control" id="emp_lname" ng-model="vm.employeeDetails.lname"></div>
@@ -161,22 +145,17 @@
                     <div class="form-group col-sm-12">
                       <label class="col-sm-3 control-label">Department</label>
                       <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.department">
-                        <option selected="selected" value="0">- - select department - -</option>
-                        <option value="1">PULSAR CONSTRUCTION</option>
-                        <option value="2">DEPTARTMENT 1</option>
-                        <option value="3">DEPTARTMENT 2</option>
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.department" ng-change="vm.selectDepartment(vm.employeeDetails.department)">
+                        <option selected="selected" value="0">- - Select Department - -</option>
+                        <option ng-value="department.org_code" ng-repeat="department in vm.departments"><%department.department_name%></option>
                       </select></div>
                     </div>
                     <div class="form-group col-sm-12">
                       <label class="col-sm-3 control-label">Division</label>
                       <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.division">
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.division" ng-change="vm.selectDivision(vm.employeeDetails.division)">
                         <option selected="selected" value="0">- - select division - -</option>
-                        <option value="1">CONSTRUCTION</option>
-                        <option value="2">OPERATIONS</option>
-                        <option value="3">ACCOUNTING</option>
-                        <option value="3">ENGINEERING</option>
+                        <option ng-value="division.org_code" ng-repeat="division in vm.divisions"><%division.division_name%></option>
                       </select></div>
                     </div>
                     <div class="form-group col-sm-12">
@@ -184,9 +163,7 @@
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.unit">
                         <option selected="selected" value="0">- - select unit - -</option>
-                        <option value="1">MAINTENANCE</option>
-                        <option value="2">UNIT 2</option>
-                        <option value="3">UNIT 3</option>
+                        <option ng-value="unit.org_code" ng-repeat="unit in vm.units"><%unit.unit_name%></option>
                       </select></div>
                     </div>
                   </div>
@@ -365,4 +342,4 @@
   <!-- /.modal-dialog -->
 </div>
 </script>
-<!-- /.modal -->
+<!-- /.modal

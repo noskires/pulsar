@@ -19,8 +19,28 @@ class EmployeesController extends Controller {
         );
 
       	$employees = DB::table('Employees as e')
-                    // ->select(DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'))
-                    ->leftjoin('positions as p','p.position_code','=','e.position_code');
+                    ->select(
+                      'e.employee_code',
+                      'e.lname',
+                      'e.affix', 
+                      'e.fname', 
+                      'e.mname',
+                      'e.birthdate',
+                      'e.email_account',
+                      'e.phone_number',
+                      'e.position_code',
+                      'p.position_text',
+                      'e.department AS department_code',
+                      'dep.org_name AS department',
+                      'e.division AS division_code',
+                      'div.org_name AS division',
+                      'e.unit AS unit_code',
+                      'unit.org_name AS unit'
+                    )
+                    ->leftjoin('positions as p','p.position_code','=','e.position_code')
+                    ->leftjoin('organizations as dep','dep.org_code','=','e.department')
+                    ->leftjoin('organizations as div','div.org_code','=','e.division')
+                    ->leftjoin('organizations as unit','unit.org_code','=','e.unit');
 
       	if ($data['jobType']){ 
       		$employees = $employees->where('e.position_code', $data['jobType']);
@@ -86,10 +106,10 @@ class EmployeesController extends Controller {
 
         $employee = new Employee;
 
-        // $employeeCode = (str_pad(($employee->get()->count() + 1), 6, "0", STR_PAD_LEFT)); 
-        // $employee->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
+        $employeeCode = (str_pad(($employee->get()->count() + 1), 6, "0", STR_PAD_LEFT)); 
+        $employee->employee_code = "816".$employeeCode;
 
-        $employee->employee_code = $data['emp_id'];
+        // $employee->employee_code = $data['emp_id'];
         $employee->lname = $data['lname'];
         $employee->affix = $data['suffix'];
         $employee->fname = $data['fname'];

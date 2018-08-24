@@ -63,8 +63,8 @@
         }
 
 
-        EmployeesModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'EmployeesSrvcs', '$window'];
-        function EmployeesModalInstanceCtrl ($uibModalInstance, formData, EmployeesSrvcs, $window) {
+        EmployeesModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'EmployeesSrvcs', 'OrganizationsSrvcs', '$window'];
+        function EmployeesModalInstanceCtrl ($uibModalInstance, formData, EmployeesSrvcs, OrganizationsSrvcs, $window) {
 
             var vm = this;
             vm.formData = formData.employee;
@@ -76,6 +76,56 @@
             vm.close = function() {
                 $uibModalInstance.close();
             };
+
+            OrganizationsSrvcs.departments({orgCode:'', nextOrgCode:'', orgType:'Department', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.departments = response.data.data;
+                    console.log(vm.departments)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            OrganizationsSrvcs.divisions({orgCode:'', nextOrgCode:'', orgType:'Division', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.divisions = response.data.data;
+                    console.log(vm.divisions)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            OrganizationsSrvcs.units({orgCode:'', nextOrgCode:'', orgType:'Unit', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.units = response.data.data;
+                    console.log(vm.units)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+ 
+
+            vm.selectDepartment =  function(departmentCode){
+                console.log(departmentCode);
+           
+                OrganizationsSrvcs.divisions({orgCode:'', nextOrgCode:departmentCode, orgType:'Division', startDate:'', endDate:''}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.divisions = response.data.data;
+                        console.log(vm.divisions)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.selectDivision =  function(divisionCode){
+                console.log(divisionCode);
+           
+                OrganizationsSrvcs.units({orgCode:'', nextOrgCode:divisionCode, orgType:'Unit', startDate:'', endDate:''}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.units = response.data.data;
+                        console.log(vm.units)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
 
             EmployeesSrvcs.positions({positionCode:''}).then (function (response) {
                 if(response.data.status == 200)

@@ -20,6 +20,8 @@ class UnitsController extends Controller {
 
     $data = array(
       'orgCode'=>$request->input('orgCode'),
+      'nextOrgCode'=>$request->input('nextOrgCode'),
+      'orgType'=>$request->input('orgType'),
     );
 
   	$units = DB::table('organizations as unit')
@@ -47,6 +49,14 @@ class UnitsController extends Controller {
 
     if ($data['orgCode']){
       $units = $units->where('unit.org_code', $data['orgCode']);
+    }
+
+    if ($data['nextOrgCode']){
+      $units = $units->where('unit.next_org_code', $data['nextOrgCode']);
+    }
+
+    if ($data['orgType']){
+      $units = $units->where('unit.org_type', $data['orgType']);
     }
 
     $units = $units->get();
