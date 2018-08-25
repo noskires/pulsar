@@ -76,7 +76,7 @@
                 {
                     vm.jobOrders = response.data.data[0];
 
-                    AssetsSrvcs.assets({tag:vm.jobOrders.tag, name:'', category:''}).then (function (response) {
+                    AssetsSrvcs.assets({tag:vm.jobOrders.tag, name:'', category:'', areCode:'', isAll:false}).then (function (response) {
                         if(response.data.status == 200)
                         {
                             vm.asset = response.data.data[0];

@@ -273,6 +273,18 @@
                 templateUrl: 'insurance.list.view'
             })
 
+            .state('list-ares', {
+                url: '/are/list',
+                controller: 'AreCtrl as ac',
+                templateUrl: 'ares.list.view'
+            })
+            .state('list-aresCopy', {
+                url: '/are/list/:areCode',
+                controller: 'AreCtrl as ac',
+                templateUrl: 'ares.list.view'
+            })
+
+
             //for testing only
             .state('angular-data-tables', {
                 url: '/angular-datatables',

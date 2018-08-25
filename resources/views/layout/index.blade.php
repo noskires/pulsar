@@ -82,6 +82,12 @@
   @include('asset.view_asset')
 </script>
 
+<!-- AREs -->
+ 
+<script type="text/ng-template" id="ares.list.view">
+  @include('are.list_are')
+</script>
+
 <!-- Maintenance -->
 
 <script type="text/ng-template" id="main.view">
@@ -181,7 +187,6 @@
 <script type="text/ng-template" id="voucher.list.view">
   @include('voucher.list_voucher')
 </script>
-
 
 <!-- Banks -->
  

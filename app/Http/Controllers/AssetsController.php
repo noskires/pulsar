@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Asset;
+use App\AssetEvent;
 use App\Asset_category;
 use App\Employee;
 use App\Log;
@@ -44,15 +45,18 @@ class AssetsController extends Controller {
             'tag'=>$request->input('tag'),
             'name'=>$request->input('name'),
             'category'=>$request->input('category'),
+            'areCode'=>$request->input('areCode'),
+            'isAll'=>$request->input('isAll'),
         );
 
       	$asset = DB::table('Assets as a')
       			// ->select('*')
             ->select(
-                DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
+                DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name'),
                 'a.asset_id',
                 'a.tag', 
                 'a.code', 
+                'a.are_code', 
                 'a.name',
                 'a.category',
                 'a.model',
@@ -69,10 +73,12 @@ class AssetsController extends Controller {
                 'sc.asset_name',
                 'm.municipality_text'
               )
-            ->leftjoin('Employees as e','e.employee_id','=','a.assign_to')
+            // ->leftjoin('Employees as e','e.employee_code','=','a.assign_to')
             ->leftjoin('Projects as p','p.project_code','=','a.project_code')
             ->leftjoin('municipalities as m','m.municipality_code','=','p.municipality_code')
-      			->leftjoin('asset_categories as sc','sc.asset_code','=','a.category');
+            ->leftjoin('asset_categories as sc','sc.asset_code','=','a.category')
+            ->leftjoin('ares as are','are.are_code','=','a.are_code')
+      			->leftjoin('Employees as e','e.employee_code','=','are.employee_code');
 
       	if ($data['tag']){ 
       		$asset = $asset->where('a.tag', $data['tag']);
@@ -86,6 +92,17 @@ class AssetsController extends Controller {
           $asset = $asset->where('a.category', $data['category']);
         }
 
+        if($data['isAll']==0)
+        {
+          if ($data['areCode']){ 
+            $asset = $asset->where('a.are_code', $data['areCode']);
+          }
+
+          if (!$data['areCode']){ 
+            $asset = $asset->whereNull('a.are_code');
+          }
+        }
+
         // if ($data['type']){ 
           // $asset = $asset->where('sc.asset_category', 'Assets');
         // }
@@ -96,6 +113,51 @@ class AssetsController extends Controller {
             'status'=>200,
             'data'=>$asset,
             'message'=> ''
+        ]);
+    }
+
+    public function asset_events(Request $request){
+
+        $data = array(
+            'tag'=>$request->input('tag'),
+            'name'=>$request->input('name'),
+            'category'=>$request->input('category'),
+            'areCode'=>$request->input('areCode'),
+            'assetEventCode'=>$request->input('assetEventCode'),
+        );
+
+        $asset_events = DB::table('asset_events as ae');
+
+        if ($data['assetEventCode']){ 
+          $asset_events = $asset_events->where('asset_event_code', $data['assetEventCode']);
+        }
+
+        if ($data['tag']){ 
+          $asset = $asset_events->where('ae.asset_tag', $data['tag']);
+        }
+
+        // if ($data['name']){ 
+        //   $asset = $asset->where('a.name', $data['name']);
+        // }
+
+        // if ($data['category']){ 
+        //   $asset = $asset->where('a.category', $data['category']);
+        // }
+
+        // if ($data['areCode']){ 
+        //   $asset = $asset->where('a.are_code', $data['areCode']);
+        // }
+
+        // if (!$data['areCode']){ 
+        //   $asset = $asset->whereNull('a.are_code');
+        // }
+
+        $asset_events = $asset_events->get();
+
+        return response()-> json([
+            'status'=>200,
+            'data'=>$asset_events,
+            'message'=>''
         ]);
     }
 
@@ -196,4 +258,140 @@ class AssetsController extends Controller {
 
         return $transaction;
     }
+
+
+    public function update(Request $request){
+
+      $data = array();
+
+      $data['tag'] = $request->input('tag');
+      $data['areCode'] = $request->input('areCode');
+      // $data['assetName'] = $request->input('assetName');
+      // $data['assetID'] = $request->input('assetID');
+      // $data['modelnumber'] = $request->input('modelnumber');
+      // $data['categoryCode'] = $request->input('categoryCode');
+      // $data['description'] = $request->input('description');
+      // $data['brand'] = $request->input('brand');
+      // $data['dateAquired'] = $request->input('dateAquired');
+      // $data['acquisitionCost'] = $request->input('acquisitionCost');
+      // $data['dateAcquired'] = date('Y-m-d', strtotime($request->input('dateAcquired')));
+      // $data['plateNumber'] = $request->input('plateNumber');
+      // $data['engineNumber'] = $request->input('engineNumber');
+      // $data['chassisNumber'] = $request->input('chassisNumber');
+
+      $transaction = DB::transaction(function($data) use($data){
+    // try{
+      
+          DB::table('assets')
+            ->where('tag', $data['tag'])
+            ->update([
+              'are_code' => $data['areCode'],
+            ]);
+
+          $assetEvent = new AssetEvent;
+          $assetEvent->asset_event_code = 1111;
+          $assetEvent->event_date = "2018-01-01";
+          $assetEvent->asset_tag = $data['tag'];
+          $assetEvent->status = "Assigned";
+          $assetEvent->remarks = "Assigned";
+          $assetEvent->save();
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+
+
+  // public function saveAssetEvent(Request $request){
+        
+  //       $data = array();
+
+  //       $data['assetName'] = $request->input('assetName');
+  //       $data['assetID'] = $request->input('assetID');
+  //       $data['modelnumber'] = $request->input('modelnumber');
+  //       $data['categoryCode'] = $request->input('categoryCode');
+  //       $data['description'] = $request->input('description');
+  //       $data['brand'] = $request->input('brand');
+  //       $data['dateAquired'] = $request->input('dateAquired');
+  //       $data['acquisitionCost'] = $request->input('acquisitionCost');
+  //       $data['dateAcquired'] = date('Y-m-d', strtotime($request->input('dateAcquired')));
+  //       $data['plateNumber'] = $request->input('plateNumber');
+  //       $data['engineNumber'] = $request->input('engineNumber');
+  //       $data['chassisNumber'] = $request->input('chassisNumber');
+  //       // $data['assignTo'] = $request->input('assignTo');
+  //       // $data['fundSource'] = $request->input('fundSource');
+  //       // $data['costCenter'] = $request->input('costCenter');
+  //       // $data['depreciableCost'] = $request->input('depreciableCost');
+  //       // $data['salvageValue'] = $request->input('salvageValue');
+  //       // $data['method'] = $request->input('method');
+  //       // $data['project_code'] = $request->input('projectCode');
+       
+  //       $transaction = DB::transaction(function($data) use($data){
+  //         // try{
+
+  //             $asset = new Asset;
+  //             $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
+  //             $asset->name = $data['assetName'];
+  //             $asset->code = $data['assetID'];
+  //             $asset->model = $data['modelnumber'];
+  //             $asset->category = $data['categoryCode'];
+  //             $asset->description = $data['description'];
+  //             $asset->brand = $data['brand'];
+  //             $asset->date_acquired = $data['dateAcquired'];
+  //             $asset->acquisition_cost = $data['acquisitionCost'];
+  //             $asset->plate_no = $data['plateNumber'];
+  //             $asset->engine_no = $data['engineNumber'];
+  //             $asset->chassis_no = $data['chassisNumber'];
+  //             // $asset->assign_to = $data['assignTo'];
+  //             // $asset->fund_source = $data['fundSource'];
+  //             // $asset->cost_center = $data['costCenter'];
+  //             // $asset->depreciable_cost = $data['depreciableCost'];
+  //             // $asset->salvage_value = $data['salvageValue'];
+  //             // $asset->method_id = $data['method'];
+  //            //  $asset->project_code = $data['project_code'];
+  //             $asset->status = "Active";
+  //             $asset->save();
+
+  //             // $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();
+  //             // $assetCopy->asset_id;
+
+  //             // $log = new Log;
+  //             // $log->log_code = $assetCopy->asset_id;
+  //             // $log->log_desc = "Added new asset";
+  //             // $log->user_id = Auth::user()->id;
+  //             // $log->save();
+
+  //             return response()->json([
+  //                 'status' => 200,
+  //                 'data' => 'null',
+  //                 'message' => 'Successfully saved.'
+  //             ]);
+  //         //   } 
+  //         //   catch (\Exception $e) 
+  //         //   {
+  //            //  return response()->json([
+  //          //        'status' => 500,
+  //          //        'data' => 'null',
+  //          //        'message' => 'Error, please try again!'
+  //          //    ]);
+  //           // }
+  //       });
+
+  //       return $transaction;
+  //   }
 }

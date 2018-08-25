@@ -29,7 +29,7 @@
                 });
             }
 
-            AssetsSrvcs.assets({tag:'', name:'', category:'CONE'}).then (function (response) {
+            AssetsSrvcs.assets({tag:'', name:'', category:'CONE', areCode:'', isAll:false}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assets = response.data.data;

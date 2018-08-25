@@ -66,6 +66,8 @@ Route::get('/asset/list-equipments','AssetsController@index');
 Route::get('/asset/list-equipments/{asset_code}','AssetsController@index'); 
 Route::get('/asset/more-details/{asset_code}','AssetsController@index'); 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Assets Apis
@@ -73,9 +75,13 @@ Route::get('/asset/more-details/{asset_code}','AssetsController@index');
 */
 
 Route::post('/api/v1/assets/save','AssetsController@save');
+Route::post('/api/v1/assets/saveAssetEvent','AssetsController@saveAssetEvent');
+Route::post('/api/v1/assets/update','AssetsController@update');
 Route::post('/api/v1/assets/asset-tag','AssetsController@asset_tag');
 
 Route::get('/api/v1/assets','AssetsController@assets'); 
+Route::get('/api/v1/assetEvents','AssetsController@asset_events'); 
+
 Route::get('/api/v1/assets-by-name','AssetsController@assetsByName'); 
 Route::get('/api/v1/assets/asset-categories','AssetsController@asset_categories');
 Route::get('/api/v1/assets/methods','AssetsController@methods');
@@ -322,6 +328,32 @@ Route::post('/api/v1/insurance/update','Insurance\InsuranceController@update');
 Route::get('/api/v1/insurance','Insurance\InsuranceController@insurance');
 
 Route::get('/api/v1/insurance-items','Insurance\InsuranceController@insuranceItems');
+
+/*
+|--------------------------------------------------------------------------
+| AREs
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/are/new','Are\AresController@index');
+Route::get('/are/list','Are\AresController@index');
+Route::get('/are/list/{areCode}','Are\AresController@index');
+
+/*
+|--------------------------------------------------------------------------
+| AREs Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/are/save','Are\AresController@save');
+Route::post('/api/v1/are/update','Are\AresController@update');
+
+// Route::post('/api/v1/insurance-items/save','Insurance\InsuranceController@save_insurance_items'); 
+// Route::post('/api/v1/insurance-items/remove','Insurance\InsuranceController@remove_insurance_items'); 
+// Route::post('/api/v1/insurance/update','Insurance\InsuranceController@update');
+// Route::get('/api/v1/insurance','Insurance\InsuranceController@insurance');
+
+Route::get('/api/v1/are','Are\AresController@ares');
 
 /*
 |--------------------------------------------------------------------------

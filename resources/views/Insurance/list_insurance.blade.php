@@ -168,7 +168,6 @@
             <tr ng-repeat="associatedAsset in vm.associatedAssets">
               <td align="center">
                 <button type="button" class="btn btn-danger btn-xs fa fa-minus" ng-click="vm.removeInsuranceItems(associatedAsset.insurance_item_code)"></button>
-
               </td>
               <td><a href="#"><b><%associatedAsset.tag%></b></a></td>
               <td><%associatedAsset.code%></td>

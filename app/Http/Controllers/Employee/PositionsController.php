@@ -23,7 +23,7 @@ class PositionsController extends Controller {
         }
 
         $positions = $positions->get();
-
+        
         return response()-> json([
             'status'=>200,
             'data'=>$positions,

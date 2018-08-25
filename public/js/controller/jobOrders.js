@@ -24,7 +24,7 @@
 
             if($stateParams.assetTag!=null)
             {
-                AssetsSrvcs.assets({tag:$stateParams.assetTag, name:'', category:''}).then (function (response) {
+                AssetsSrvcs.assets({tag:$stateParams.assetTag, name:'', category:'', areCode:'', isAll:1}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.asset = response.data.data[0];

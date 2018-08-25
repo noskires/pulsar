@@ -18,7 +18,7 @@
            if($stateParams.assetTag)
             {
                 var tag = $stateParams.assetTag;
-                AssetsSrvcs.assets({tag:tag, name:'', category:''}).then (function (response) {
+                AssetsSrvcs.assets({tag:tag, name:'', category:'', areCode:'', isAll:1}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.asset = response.data.data[0];
@@ -42,7 +42,7 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            AssetsSrvcs.assets({tag:'', name:'', category:''}).then (function (response) {
+            AssetsSrvcs.assets({tag:'', name:'', category:'', areCode:'', isAll:1}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assets = response.data.data;
@@ -197,7 +197,7 @@
                 // alert($stateParams.assetTag)
                 vm.tag = $stateParams.assetTag;
 
-                AssetsSrvcs.assets({tag:vm.tag, name:'', category:''}).then (function (response) {
+                AssetsSrvcs.assets({tag:vm.tag, name:'', category:'', areCode:'', isAll:1}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.asset = response.data.data[0];
@@ -205,6 +205,13 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
 
+                AssetsSrvcs.assetEvents({tag:vm.tag, name:'', category:'', areCode:'', isAll:1, assetEventCode:''}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.assetEvents = response.data.data[0];
+                        console.log(vm.assetEvents)
+                    }
+                }, function (){ alert('Bad Request!!!') })
 
                 MaintenanceSrvcs.assetsMonitoring({tag:vm.tag}).then (function (response) {
                     if(response.data.status == 200)
