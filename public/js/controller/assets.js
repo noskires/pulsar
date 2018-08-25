@@ -93,8 +93,8 @@
 
         }
 
-        AssetsAddCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
-        function AssetsAddCtrl($stateParams, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
+        AssetsAddCtrl.$inject = ['$state', '$stateParams', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
+        function AssetsAddCtrl($state, $stateParams, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -144,7 +144,8 @@
                 AssetsSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('asset/new');
+                        // vm.routeTo('asset/new');
+                        $state.go('asset-list-equipments');
                     }
                     else {
                         alert(response.data.message);

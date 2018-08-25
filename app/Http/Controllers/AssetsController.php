@@ -66,7 +66,6 @@ class AssetsController extends Controller {
                 'a.plate_no',
                 'a.engine_no',
                 'a.chassis_no',
-                'a.assign_to',
                 'a.project_code',
                 'a.status',
                 'sc.asset_category',

@@ -28,10 +28,7 @@
           <th>Assigned to</th>
         </tr>
         </thead>
-        <tbody> 
-          <!-- ng-click="ac.assetInfo(asset.tag)" -->
-          <!-- ui-sref="asset-equipments-view({tag:1212})" -->
-          <!-- ui-sref="jo-create({assetTag:asset.tag})" -->
+        <tbody>
         <tr ng-repeat="asset in ac.assets">
           <td><a href="#" ui-sref="asset-list-equipmentsCopy({assetTag:asset.tag})"><b><%asset.tag%></b></a></td>
           <td><%asset.category%></td>
@@ -44,7 +41,7 @@
           <td><%asset.plate_no%></td>
           <td><%asset.engine_no%></td>
           <td><%asset.chassis_no%></td>
-          <td><%%></td>
+          <td><%asset.employee_name%></td>
         </tr>
         </tbody>
       </table>

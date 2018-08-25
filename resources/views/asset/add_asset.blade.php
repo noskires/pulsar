@@ -52,7 +52,7 @@
               <div class="col-sm-4">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right datepicker" ng-model="ac.assetsDetails.dateAcquired">
+              <input type="text" class="form-control pull-right datepicker" datepicker ng-model="ac.assetsDetails.dateAcquired">
             </div></div>
               <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost*</label>
               <div class="col-sm-4">
