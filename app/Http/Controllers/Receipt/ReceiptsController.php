@@ -72,8 +72,10 @@ class ReceiptsController extends Controller {
       if($receipt->payee_type=="EMPLOYEE")
       {
         $employee = DB::table('employees as e')
-              ->select(DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'))
-              ->where('employee_id', $receipt->payee)->first();
+              ->select(
+                DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name')
+              )
+              ->where('employee_code', $receipt->payee)->first();
         if($employee)
         {
           $receipt->payee_text = $employee->employee_name;
@@ -285,6 +287,53 @@ class ReceiptsController extends Controller {
               'quantity' => $totalQuantity
             ]);
         }
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
+    });
+
+    return $transaction;
+  }
+
+  public function delete_receipt_items(Request $request){
+
+    // $data = Input::post();
+    $data = array(
+      'receiptItemCode'=>$request->input('receiptItemCode'),
+      'receiptItemQuantity'=>$request->input('receiptItemQuantity'),
+      'supplyCode'=>$request->input('supplyCode'),
+    );
+
+    $transaction = DB::transaction(function($data) use($data){
+    try{
+
+        DB::table('receipt_items')->where('receipt_item_code', $data['receiptItemCode'])->delete();
+
+        $supply = DB::table('supplies')
+          ->select('quantity')
+          ->where('supply_code', $data['supplyCode'])
+          ->first();
+
+          $totalQuantity = $supply->quantity - $data['receiptItemQuantity'];
+
+          DB::table('supplies')
+          ->where('supply_code', $data['supplyCode'])
+            ->update([
+              'quantity' => $totalQuantity
+            ]);
 
         return response()->json([
             'status' => 200,

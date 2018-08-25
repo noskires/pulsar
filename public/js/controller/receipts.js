@@ -6,8 +6,8 @@
         // .controller('ReceiptItemsCtrl', ReceiptItemsCtrl)
         .controller('ReceiptsModalInstanceCtrl', ReceiptsModalInstanceCtrl)
 
-        ReceiptsCtrl.$inject = ['$stateParams', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function ReceiptsCtrl($stateParams, ReceiptSrvcs, RequisitionsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        ReceiptsCtrl.$inject = ['$state', '$stateParams', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function ReceiptsCtrl($state, $stateParams, ReceiptSrvcs, RequisitionsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
             
@@ -91,11 +91,11 @@
             }, function (){ alert('Bad Request!!!') })
 
             vm.newReceipt = function(data){
-                // console.log(data);
+                console.log(data);
                 ReceiptSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('receipt/new');
+                        $state.go('list-receipt');
                     }
                     else {
                         alert(response.data.message);
@@ -103,6 +103,8 @@
                     console.log(response.data);
                 });
             };
+
+            
 
             vm.selectPayeeType = function(payeeType){
                 // alert(payeeType)
@@ -241,6 +243,21 @@
                     }
                 }); 
                 vm.personalDetails = newDataList;
+            };
+
+            vm.removeSupplyBtn = function(receiptItemCode, receiptItemQuantity, supplyCode){
+                alert(supplyCode)
+                ReceiptSrvcs.deleteReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode}).then (function (response) {
+                    console.log(response.data.data)
+                    alert(response.data.message)
+                    ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:''}).then (function (response) {
+                        if(response.data.status == 200)
+                        {
+                            vm.receiptItems = response.data.data;
+                            console.log(vm.receiptItems)
+                        }
+                    }, function (){ alert('Bad Request!!!') })
+                }, function (){ alert('Bad Request!!!') })
             };
 
             vm.checkAll = function () {

@@ -112,10 +112,9 @@
         </span>
       </a>
       <ul class="treeview-menu">
-      <!--   <li><a href="#" ng-click="mc.routeTo('/asset/list-equipments')"><i class="fa fa-list-ul"></i> List of Assets</a></li>
-        <li><a href="#" ng-click="mc.routeTo('/asset/create')"><i class="fa fa-plus"></i> Add an Asset</a></li>
- -->        <li><a href="#" ui-sref="asset-list-equipments"><i class="fa fa-list-ul"></i> List of Assets</a></li>
+        <li><a href="#" ui-sref="asset-list-equipments"><i class="fa fa-list-ul"></i> List of Assets</a></li>
         <li><a href="#" ui-sref="asset-create"><i class="fa fa-plus"></i> Add an Asset</a></li>
+        <li><a href="#" ui-sref="list-ares"><i class="fa fa-file-text-o"></i> ARE </a></li>
       </ul>
     </li>
     <li class="treeview">

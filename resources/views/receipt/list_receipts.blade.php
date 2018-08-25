@@ -51,7 +51,7 @@
           <h4 class="modal-title"><li class="fa fa-file-o"></li> Receipt Control No: <b><%vm.formData.receipt_code%></b></h4>
         </div>
         <div class="modal-body">
-          <p>Add supply items under a receipt number. Amount = <%vm.formData.amount%></p>
+          <p>Add supply items under a receipt number.</p>
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="row">
             <div class="col-md-12">
@@ -114,7 +114,7 @@
                           <th width="9%">Quantity</th>
                           <th width="9%">Cost</th>
                           <th width="7%">Total</th>
-                          <th width="11%">Options</th>
+                          <th ng-if="!vm.formData.voucher_code" width="11%"> </th>
                         </tr> 
                       </thead>
                       <tbody>
@@ -125,13 +125,14 @@
                           <td><%receiptItem.receipt_item_quantity%></td>
                           <td><%receiptItem.receipt_item_cost | number:2%></td>
                           <td ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + receiptItem.receipt_item_total"><%receiptItem.receipt_item_total | number:2%></td>
-                          <td><a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
-                              <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a></td>
+                          <td ng-if="!vm.formData.voucher_code">
+                            <a href="#" ng-click="vm.removeSupplyBtn(receiptItem.receipt_item_code, receiptItem.receipt_item_quantity, receiptItem.receipt_item_supply_code)"><code class="text-red">REMOVE</code></a>
+                          </td>
                         </tr>
                         <tr>
                           <td colspan="5" align="right"><b>GRAND TOTAL</b></td>
                           <td colspan="1"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
-                          <td></td>
+                          <td ng-if="!vm.formData.voucher_code"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -145,7 +146,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
-          <button type="button" class="btn btn-primary" ng-click="vm.addItems()">Save changes</button>
+          <!-- <button type="button" class="btn btn-primary" ng-click="vm.addItems()">Save changes</button> -->
         </div>
       </div>
       <!-- /.modal-content -->

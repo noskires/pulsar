@@ -42,7 +42,7 @@
               <div class="col-sm-4">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="rcpt-date" required="" ng-model="rc.receiptDetails.receiptDate">
+              <input type="text" class="form-control pull-right" datepicker required="" ng-model="rc.receiptDetails.receiptDate">
             </div>
             </div></div>
             <div class="form-group col-sm-12">
@@ -76,7 +76,7 @@
                 <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="rc.receiptDetails.payee">
                     <option selected="selected" value="0">- - select payee - -</option>
-                    <option ng-if="rc.payeeType=='EMPLOYEE'" value="<%employee.employee_id%>" ng-repeat="employee in rc.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>
+                    <option ng-if="rc.payeeType=='EMPLOYEE'" value="<%employee.employee_code%>" ng-repeat="employee in rc.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>
 
                     <option ng-if="rc.payeeType=='SUPPLIER'" value="<%supplier.supplier_code%>" ng-repeat="supplier in rc.suppliers"> <%supplier.supplier_name%> </option>
 
