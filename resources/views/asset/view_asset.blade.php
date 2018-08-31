@@ -170,7 +170,7 @@
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_5-5">
                 <h4><b>Maintenance History</b></h4>
-                <table class="table" width="100%">
+                <table class="table" width="100%" datatable="ng">
                 <thead>
                 <tr>
                   <th>Control#</th>

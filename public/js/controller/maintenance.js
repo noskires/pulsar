@@ -6,8 +6,8 @@
         .controller('ListOperatingCtrl', ListOperatingCtrl)
         .controller('ListMonitoringCtrl', ListMonitoringCtrl)
         
-        OperationCtrl.$inject = ['MaintenanceSrvcs', 'AssetsSrvcs', 'ProjectsSrvcs', '$window'];
-        function OperationCtrl(MaintenanceSrvcs, AssetsSrvcs, ProjectsSrvcs, $window){
+        OperationCtrl.$inject = ['$state', 'MaintenanceSrvcs', 'AssetsSrvcs', 'ProjectsSrvcs', '$window'];
+        function OperationCtrl($state, MaintenanceSrvcs, AssetsSrvcs, ProjectsSrvcs, $window){
  
             var vm = this;
             var data = {};
@@ -19,7 +19,8 @@
                 MaintenanceSrvcs.saveOperation(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('maintenance/new');
+                        // vm.routeTo('maintenance/new');
+                        $state.go('list-operating');
                     }
                     else {
                         alert(response.data.message);
