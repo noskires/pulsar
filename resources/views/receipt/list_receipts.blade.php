@@ -51,7 +51,7 @@
           <h4 class="modal-title"><li class="fa fa-file-o"></li> Receipt Control No: <b><%vm.formData.receipt_code%></b></h4>
         </div>
         <div class="modal-body">
-          <p>Add supply items under a receipt number.</p>
+          <p>Add supply items under a receipt number. <%vm.formData.amount%> </p>
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="row">
             <div class="col-md-12">
@@ -123,7 +123,7 @@
                           <td><%receiptItem.receipt_item_description%></td>
                           <td><%receiptItem.receipt_item_stock_unit%></td>
                           <td><%receiptItem.receipt_item_quantity%></td>
-                          <td><%receiptItem.receipt_item_cost | number:2%></td>
+                          <td align="right"><%receiptItem.receipt_item_cost | number:2%></td>
                           <td ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + receiptItem.receipt_item_total"><%receiptItem.receipt_item_total | number:2%></td>
                           <td ng-if="!vm.formData.voucher_code">
                             <a href="#" ng-click="vm.removeSupplyBtn(receiptItem.receipt_item_code, receiptItem.receipt_item_quantity, receiptItem.receipt_item_supply_code)"><code class="text-red">REMOVE</code></a>

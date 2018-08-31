@@ -70,7 +70,10 @@
             <div class="form-group col-sm-12">
               <label for="platenumber" class="col-sm-2 control-label">Chassis No.</label>
               <div class="col-sm-4"><input type="text" class="form-control" id="chassisNumber" ng-model="ac.assetsDetails.chassisNumber" placeholder="" required=""></div>
+              <label for="enginenumber" class="col-sm-2 control-label">Warranty Date</label>
+              <div class="col-sm-4"><input type="text" class="form-control" id="warrantyDate" ng-model="ac.assetsDetails.warrantyDate" placeholder="" datepicker2 required="" readonly="false"></div>
             </div>
+
             <div class="form-group col-sm-12">
               <div class="col-sm-8"></div>
               <div class="pull-right col-sm-2">

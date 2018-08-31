@@ -74,6 +74,7 @@
                     <b>Plate No:</b> <%amdc.asset.plate_no%><br>
                     <b>Engine No:</b> <%amdc.asset.engine_no%> <br>
                     <b>Location:</b> <%amdc.asset.municipality_text%> <br>
+                    <b>Warranty:</b> <%amdc.asset.warranty_date%> <br>
                     <b>Assigned to:</b> <a href="#"><%amdc.asset.employee_name%></a><br>
                     <b>Status:</b> <small class="label bg-green"><%amdc.asset.status%></small>
                   </div>

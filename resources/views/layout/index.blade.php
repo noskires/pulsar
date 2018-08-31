@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('additionalStyles')
-<link rel="stylesheet" href="{{URL::to('bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}">
+<!-- <link rel="stylesheet" href="{{URL::to('bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}">
 <!-- datatables -->
 <link rel="stylesheet" href="{{URL::to('bower_components/datatables.net/css/buttons.dataTables.min.css')}}">
 <!-- daterange picker -->
@@ -15,7 +15,7 @@
 <!-- Bootstrap time Picker -->
 <link rel="stylesheet" href="{{URL::to('assets/plugins/timepicker/bootstrap-timepicker.min.css')}}">
 <!-- Select2 -->
-<link rel="stylesheet" href="{{URL::to('bower_components/select2/dist/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('bower_components/select2/dist/css/select2.min.css')}}"> -->
 <style>
 
   .example-modal .modal {

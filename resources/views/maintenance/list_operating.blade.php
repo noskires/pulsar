@@ -9,28 +9,26 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-sm-4">
-      <div class="box">
-        <!-- form start -->
-          <form role="form">
-            <div class="box-body">
-              <div class="form-group">
-                <div class="col-sm-7"> 
-                <button type="button" class="btn btn-default" id="daterange-btn">
-                  <span><i class="fa fa-calendar"></i> Date range picker </span> <i class="fa fa-caret-down"></i>
-                </button>
-                </div>
-                <div class="col-sm-3"> 
-                <button type="button" class="btn btn-default"><li class="fa fa-refresh"></li> Filter Display</button>
-                </div>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </form>
-      </div>
-    </div>
-  </div>
+          <div class="box"> 
+              <form role="form">
+                <div class="box-body">
+                  <div class="form-group">
+                    <div class="col-sm-7"> 
+                    <button type="button" class="btn btn-default" id="daterange-btn">
+                      <span><i class="fa fa-calendar"></i> Date range picker </span> <i class="fa fa-caret-down"></i>
+                    </button>
+                    </div>
+                    <div class="col-sm-3"> 
+                    <button type="button" class="btn btn-default"><li class="fa fa-refresh"></li> Filter Display</button>
+                    </div>
+                  </div>
+                </div> 
+              </form>
+          </div>
+        </div>
+      </div> -->
       <div class="box box-primary">
             <div class="box-body">
               <table datatable="ng" class="table table-bordered table-hover" width="100%">

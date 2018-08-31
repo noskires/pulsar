@@ -25,6 +25,7 @@
           <th>Plate No.</th>
           <th>Engine No.</th>
           <th>Chassis No.</th>
+          <th>Warranty</th>
           <th>Assigned to</th>
         </tr>
         </thead>
@@ -41,6 +42,7 @@
           <td><%asset.plate_no%></td>
           <td><%asset.engine_no%></td>
           <td><%asset.chassis_no%></td>
+          <td><%asset.warranty_date%></td>
           <td><%asset.employee_name%></td>
         </tr>
         </tbody>

@@ -50,8 +50,8 @@ class JobOrdersController extends Controller {
                 'jo.number_loads', 
                 'a.tag', 
                 'a.name',
-                'e.employee_id', 
-                DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
+                // 'e.employee_id', 
+                // DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
                 'p.project_code',
                 'm.municipality_code',
                 'm.municipality_text'
@@ -59,8 +59,8 @@ class JobOrdersController extends Controller {
               )
             -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
             -> leftjoin('Projects as p','p.project_code','=','a.project_code')
-            -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
-            -> leftjoin('Employees as e','e.employee_id','=','a.assign_to');
+            -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code');
+            // -> leftjoin('Employees as e','e.employee_id','=','a.assign_to');
             // -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
 
     if ($data['joCode']){

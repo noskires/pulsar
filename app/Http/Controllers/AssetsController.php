@@ -66,6 +66,7 @@ class AssetsController extends Controller {
                 'a.plate_no',
                 'a.engine_no',
                 'a.chassis_no',
+                DB::raw('DATE_FORMAT(a.warranty_date, "%M %d, %Y") as warranty_date'),
                 'a.project_code',
                 'a.status',
                 'sc.asset_category',
@@ -195,7 +196,9 @@ class AssetsController extends Controller {
        	$data['dateAcquired'] = date('Y-m-d', strtotime($request->input('dateAcquired')));
        	$data['plateNumber'] = $request->input('plateNumber');
         $data['engineNumber'] = $request->input('engineNumber');
-       	$data['chassisNumber'] = $request->input('chassisNumber');
+        $data['chassisNumber'] = $request->input('chassisNumber');
+       	$data['warrantyDate'] = date('Y-m-d', strtotime($request->input('warrantyDate'))); 
+
        	// $data['assignTo'] = $request->input('assignTo');
        	// $data['fundSource'] = $request->input('fundSource');
        	// $data['costCenter'] = $request->input('costCenter');
@@ -219,7 +222,8 @@ class AssetsController extends Controller {
 	            $asset->acquisition_cost = $data['acquisitionCost'];
 	            $asset->plate_no = $data['plateNumber'];
               $asset->engine_no = $data['engineNumber'];
-	            $asset->chassis_no = $data['chassisNumber'];
+              $asset->chassis_no = $data['chassisNumber'];
+	            $asset->warranty_date = $data['warrantyDate'];
 	            // $asset->assign_to = $data['assignTo'];
 	            // $asset->fund_source = $data['fundSource'];
 	            // $asset->cost_center = $data['costCenter'];
