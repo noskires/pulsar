@@ -30,12 +30,23 @@
                 });
             }
 
-            AssetsSrvcs.assets({tag:'', name:'', category:'CONE', areCode:'', isAll:false}).then (function (response) {
+            vm.assetsDetails = {
+                tag:'', 
+                name:'', 
+                category:'CONE', 
+                areCode:'', 
+                status: ['Active'],
+                isAll:1
+            }
+
+            AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assets = response.data.data;
                     console.log(vm.assets)
                 }
+
+                console.log(response.data)
             }, function (){ alert('Bad Request!!!') })
 
             ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
@@ -58,7 +69,7 @@
             
             MaintenanceSrvcs.operations({operationCode:''}).then (function (response) {
                 if(response.data.status == 200)
-                {
+                { 
                     vm.operations = response.data.data;
                     console.log(vm.operations)
                 }

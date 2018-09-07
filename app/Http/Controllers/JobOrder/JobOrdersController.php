@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Employee;
 use App\Project;
+use App\AssetEvent;
 use App\JobOrder;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -25,43 +26,43 @@ class JobOrdersController extends Controller {
     );
 
     $job_orders = DB::table('job_orders as jo')
-            ->select(
-                'jo.job_order_code', 
-                'jo.job_order_date', 
-                // 'jo.request_purpose', 
-                'jo.date_started', 
-                'jo.date_completed', 
-                'jo.particulars',
-                DB::raw('datediff(jo.date_completed, jo.date_started) as work_duration'),
-                'jo.conducted_by', 
-                'jo.assessed_by', 
-                'jo.date_assessed', 
-                'jo.approved_by', 
-                'jo.date_approved', 
-                'jo.inspected_by', 
-                'jo.date_inspected', 
-                'jo.tested_by', 
-                'jo.accepted_by', 
-                'jo.operating_hours', 
-                'jo.distance_travelled', 
-                'jo.diesel_consumption', 
-                'jo.gas_consumption', 
-                'jo.oil_consumption', 
-                'jo.number_loads', 
-                'a.tag', 
-                'a.name',
-                // 'e.employee_id', 
-                // DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
-                'p.project_code',
-                'm.municipality_code',
-                'm.municipality_text'
-                // 'rp.request_purpose as request_purpose_text'
-              )
-            -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
-            -> leftjoin('Projects as p','p.project_code','=','a.project_code')
-            -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code');
-            // -> leftjoin('Employees as e','e.employee_id','=','a.assign_to');
-            // -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
+      ->select(
+          'jo.job_order_code', 
+          'jo.job_order_date', 
+          // 'jo.request_purpose', 
+          'jo.date_started', 
+          'jo.date_completed', 
+          'jo.particulars',
+          DB::raw('datediff(jo.date_completed, jo.date_started) as work_duration'),
+          'jo.conducted_by', 
+          'jo.assessed_by', 
+          'jo.date_assessed', 
+          'jo.approved_by', 
+          'jo.date_approved', 
+          'jo.inspected_by', 
+          'jo.date_inspected', 
+          'jo.tested_by', 
+          'jo.accepted_by', 
+          'jo.operating_hours', 
+          'jo.distance_travelled', 
+          'jo.diesel_consumption', 
+          'jo.gas_consumption', 
+          'jo.oil_consumption', 
+          'jo.number_loads', 
+          'a.tag', 
+          'a.name',
+          // 'e.employee_id', 
+          // DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
+          'p.project_code',
+          'm.municipality_code',
+          'm.municipality_text'
+          // 'rp.request_purpose as request_purpose_text'
+        )
+      -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
+      -> leftjoin('Projects as p','p.project_code','=','a.project_code')
+      -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code');
+      // -> leftjoin('Employees as e','e.employee_id','=','a.assign_to');
+      // -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
 
     if ($data['joCode']){
       $job_orders = $job_orders->where('job_order_code', $data['joCode']);
@@ -130,6 +131,28 @@ class JobOrdersController extends Controller {
 
         $jo->save();
 
+        //add repair event
+        $assetEvent = new AssetEvent;
+        // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
+        $assetEvent->asset_event_code = 1212;
+        $assetEvent->status = "MAINTENANCE";
+        $assetEvent->asset_tag = $data['assetTag'];
+        $assetEvent->event_date = $data['orderDate'];
+        $assetEvent->remarks = "Under Maintenance";
+        $assetEvent->save();
+
+        DB::table('assets')
+            ->where('tag', $data['assetTag'])
+            ->update([
+              'status' => 'MAINTENANCE'
+            ]);
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
         return response()->json([
             'status' => 200,
             'data' => 'null',
@@ -170,12 +193,48 @@ class JobOrdersController extends Controller {
     $data['inspected_by'] = $request->input('inspected_by');
     $data['accepted_by'] = $request->input('accepted_by');
     $data['tested_by'] = $request->input('tested_by');
+    $data['asset_tag'] = $request->input('tag');
 
     $transaction = DB::transaction(function($data) use($data){
     // try{
 
+          if($data['date_completed']=='1970-01-01'){
+            $data['date_completed'] = null;
+          }
+          else
+          {
+            //add repair event
+            $assetEvent = new AssetEvent;
+            // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
+            $assetEvent->asset_event_code = 1212;
+            $assetEvent->status = "ACTIVE";
+            $assetEvent->asset_tag = $data['asset_tag'];
+            $assetEvent->event_date = $data['date_completed'];
+            $assetEvent->remarks = "Active";
+            $assetEvent->save();
 
+            DB::table('assets')
+            ->where('tag', $data['asset_tag'])
+            ->update([
+              'status' => 'ACTIVE'
+            ]);
+          }
 
+          if($data['date_started']=='1970-01-01'){
+            $data['date_started'] = null;
+          }
+
+          if($data['date_approved']=='1970-01-01'){
+            $data['date_approved'] = null;
+          }
+
+          if($data['date_assessed']=='1970-01-01'){
+            $data['date_assessed'] = null;
+          }
+
+          if($data['date_inspected']=='1970-01-01'){
+            $data['date_inspected'] = null;
+          }
 
           DB::table('job_orders')
             ->where('job_order_code', $data['job_order_code'])

@@ -5,8 +5,8 @@
         .controller('JobOrdersCtrl', JobOrdersCtrl) 
         .controller('JobOrderModalInstanceCtrl',JobOrderModalInstanceCtrl)
 
-        JobOrdersCtrl.$inject = ['JobOrdersSrvcs', 'AssetsSrvcs', 'EmployeesSrvcs', '$window', '$stateParams', '$uibModal'];
-        function JobOrdersCtrl(JobOrdersSrvcs, AssetsSrvcs, EmployeesSrvcs, $window, $stateParams, $uibModal){
+        JobOrdersCtrl.$inject = ['$state', 'JobOrdersSrvcs', 'AssetsSrvcs', 'EmployeesSrvcs', '$window', '$stateParams', '$uibModal'];
+        function JobOrdersCtrl($state, JobOrdersSrvcs, AssetsSrvcs, EmployeesSrvcs, $window, $stateParams, $uibModal){
             var vm = this;
             var data = {}; 
             var tag = "";
@@ -24,7 +24,17 @@
 
             if($stateParams.assetTag!=null)
             {
-                AssetsSrvcs.assets({tag:$stateParams.assetTag, name:'', category:'', areCode:'', isAll:1}).then (function (response) {
+
+                vm.assetsDetails = {
+                    tag:$stateParams.assetTag, 
+                    name:'', 
+                    category:'', 
+                    areCode:'', 
+                    status:'',
+                    isAll:1
+                }
+                
+                AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.asset = response.data.data[0];
@@ -75,7 +85,8 @@
                 JobOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('asset/list-equipments');
+                        // vm.routeTo('asset/list-equipments');
+                        $state.go('asset-list-equipments');
                     }
                     else {
                         alert(response.data.message);

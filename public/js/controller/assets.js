@@ -18,7 +18,16 @@
            if($stateParams.assetTag)
             {
                 var tag = $stateParams.assetTag;
-                AssetsSrvcs.assets({tag:tag, name:'', category:'', areCode:'', isAll:1}).then (function (response) {
+
+                vm.assetsDetails = {
+                    tag:tag, 
+                    name:'', 
+                    category:'', 
+                    areCode:'', 
+                    status:'',
+                    isAll:1
+                }
+                AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.asset = response.data.data[0];
@@ -42,7 +51,15 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            AssetsSrvcs.assets({tag:'', name:'', category:'', areCode:'', isAll:1}).then (function (response) {
+            vm.assetsDetails = {
+                tag:'', 
+                name:'', 
+                category:'', 
+                areCode:'', 
+                status:'',
+                isAll:1
+            }
+            AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
                 if(response.data.status == 200)
                 {
                     vm.assets = response.data.data;
@@ -199,7 +216,15 @@
                 // alert($stateParams.assetTag)
                 vm.tag = $stateParams.assetTag;
 
-                AssetsSrvcs.assets({tag:vm.tag, name:'', category:'', areCode:'', isAll:1}).then (function (response) {
+                vm.assetsDetails = {
+                    tag:vm.tag, 
+                    name:'', 
+                    category:'', 
+                    areCode:'', 
+                    status:'',
+                    isAll:1
+                }
+                AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.asset = response.data.data[0];

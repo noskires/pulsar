@@ -46,8 +46,12 @@ class AssetsController extends Controller {
             'name'=>$request->input('name'),
             'category'=>$request->input('category'),
             'areCode'=>$request->input('areCode'),
+            'status'=>$request->input('status'),
             'isAll'=>$request->input('isAll'),
         );
+
+
+        // return $data['status'];
 
       	$asset = DB::table('Assets as a')
       			// ->select('*')
@@ -101,6 +105,10 @@ class AssetsController extends Controller {
           if (!$data['areCode']){ 
             $asset = $asset->whereNull('a.are_code');
           }
+        }
+
+        if ($data['status']){ 
+          $asset = $asset->whereIn('a.status', explode(',', $data['status']));
         }
 
         // if ($data['type']){ 
@@ -340,6 +348,12 @@ class AssetsController extends Controller {
               $assetEvent->event_date = $data['event_date'];
               $assetEvent->remarks = $data['remarks'];
               $assetEvent->save();
+
+              DB::table('assets')
+              ->where('tag', $data['asset_tag'])
+              ->update([
+                'status' => $data['status']
+              ]);
 
               return response()->json([
                   'status' => 200,

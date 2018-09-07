@@ -264,10 +264,31 @@
           <a class="btn btn-app" data-toggle="modal" data-target="#modal-image"> 
             <i class="fa fa-image"></i> Photo
           </a>            
-          <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})" ng-if="amdc.asset.employee_name">
+          <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})" ng-if="amdc.asset.employee_name && amdc.asset.status=='ACTIVE'">
                 <i class="fa fa-wrench"></i> Repair
           </a>                       
-          <a class="btn btn-app" ng-click="amdc.messageAlert('Please assign an employee first!')" ng-if="!amdc.asset.employee_name">
+          <a class="btn btn-app" ng-click="amdc.messageAlert('Please assign an employee first!')" ng-if="!amdc.asset.employee_name && amdc.asset.status=='ACTIVE'">
+            <i class="fa fa-wrench"></i> Repair
+          </a> 
+          <a class="btn btn-app" ng-click="amdc.messageAlert('Equipment is currently under maintenance!')" ng-if="amdc.asset.status=='MAINTENANCE'">
+            <i class="fa fa-wrench"></i> Repair
+          </a>
+          <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: DONATED')" ng-if="amdc.asset.status=='DONATE'">
+            <i class="fa fa-wrench"></i> Repair
+          </a>
+          <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: LEASE')" ng-if="amdc.asset.status=='LEASE'">
+            <i class="fa fa-wrench"></i> Repair
+          </a>
+          <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: SELL')" ng-if="amdc.asset.status=='SELL'">
+            <i class="fa fa-wrench"></i> Repair
+          </a>
+          <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: DISPOSE')" ng-if="amdc.asset.status=='DISPOSE'">
+            <i class="fa fa-wrench"></i> Repair
+          </a>
+          <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: LOST')" ng-if="amdc.asset.status=='LOST/MISSING'">
+            <i class="fa fa-wrench"></i> Repair
+          </a>
+          <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: ')" ng-if="amdc.asset.status=='LOST'">
             <i class="fa fa-wrench"></i> Repair
           </a>
           <a href="javascript: window.open('pdfasset.pdf');"  class="btn btn-app">
@@ -493,11 +514,11 @@
               <div class="col-sm-8">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="assetEventDetails.status">
               <option>Select Asset Event</option>
-              <option value="Lease">Lease</option>
-              <option value="Donate">Donate</option>
-              <option value="Sell">Sell</option>
-              <option value="Dispose">Dispose</option>
-              <option value="Lost/Missing">Lost/Missing</option>
+              <option value="LEASE">Lease</option>
+              <option value="DONATE">Donate</option>
+              <option value="SELL">Sell</option>
+              <option value="DISPOSE">Dispose</option>
+              <option value="LOST/MISSING">Lost/Missing</option>
               </select>
               </div>              
             </div>
