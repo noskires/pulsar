@@ -239,7 +239,7 @@ class AssetsController extends Controller {
 	            // $asset->salvage_value = $data['salvageValue'];
 	            // $asset->method_id = $data['method'];
              //  $asset->project_code = $data['project_code'];
-	            $asset->status = "Active";
+	            $asset->status = "ACTIVE";
 	            $asset->save();
 
 	            // $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();

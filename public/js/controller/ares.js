@@ -101,7 +101,15 @@
 
             vm.areCode = $stateParams.areCode;
 
-            AssetsSrvcs.assets({tag:'', name:'', category:'', areCode:$stateParams.areCode, isAll:0}).then (function (response) {
+            vm.assetsDetails = {
+                tag:'', 
+                name:'', 
+                category:'', 
+                areCode:$stateParams.areCode, 
+                status:'',
+                isAll:0
+            }
+            AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
                 if(response.data.status == 200)
                 {
                     vm.assignedAssets = response.data.data;
@@ -109,7 +117,15 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetsSrvcs.assets({tag:'', name:'', category:'', areCode:'', isAll:0}).then (function (response) {
+            vm.assetsDetails = {
+                tag:'', 
+                name:'', 
+                category:'', 
+                areCode:'', 
+                status:'',
+                isAll:0
+            }
+            AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
                 if(response.data.status == 200)
                 {
                     vm.availableAssets = response.data.data;
@@ -121,8 +137,16 @@
             vm.assignAssetBtn =  function(assetTag){
                 // alert(assetTag)
                 AssetsSrvcs.update({tag:assetTag, areCode:$stateParams.areCode}).then (function (response) {
-                     
-                    AssetsSrvcs.assets({tag:'', name:'', category:'', areCode:$stateParams.areCode, isAll:0}).then (function (response) {
+                    
+                    vm.assetsDetails = {
+                        tag:'', 
+                        name:'', 
+                        category:'', 
+                        areCode:$stateParams.areCode,
+                        status:'',
+                        isAll:0
+                    }
+                    AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
                         if(response.data.status == 200)
                         {
                             vm.assignedAssets = response.data.data;
@@ -130,7 +154,15 @@
                         }
                     }, function (){ alert('Bad Request!!!') })
 
-                    AssetsSrvcs.assets({tag:'', name:'', category:'', areCode:'', isAll:0}).then (function (response) {
+                    vm.assetsDetails = {
+                        tag:'', 
+                        name:'', 
+                        category:'', 
+                        areCode:'',
+                        status:'',
+                        isAll:0
+                    }
+                    AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
                         if(response.data.status == 200)
                         {
                             vm.availableAssets = response.data.data;
