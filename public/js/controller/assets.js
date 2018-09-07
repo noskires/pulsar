@@ -144,7 +144,6 @@
                 AssetsSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        // vm.routeTo('asset/new');
                         $state.go('asset-list-equipments');
                     }
                     else {
@@ -193,6 +192,8 @@
                 alert(message);
             }
 
+
+
             if($stateParams.assetTag)
             {
                 // alert($stateParams.assetTag)
@@ -209,7 +210,7 @@
                 AssetsSrvcs.assetEvents({tag:vm.tag, name:'', category:'', areCode:'', isAll:1, assetEventCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
-                        vm.assetEvents = response.data.data[0];
+                        vm.assetEvents = response.data.data;
                         console.log(vm.assetEvents)
                     }
                 }, function (){ alert('Bad Request!!!') })
@@ -259,6 +260,21 @@
                         };
                       }
                     }
+                });
+            }
+
+            vm.addAssetEventBtn = function(data) {
+                data['asset_tag'] = vm.tag;
+                console.log(data)
+                AssetsSrvcs.saveAssetEvent(data).then(function(response){
+                    if (response.data.status == 200) {
+                        alert(response.data.message);
+                        // $state.go('asset-list-equipments');
+                    }
+                    else {
+                        alert(response.data.message);
+                    }
+                    console.log(response.data);
                 });
             }
         }

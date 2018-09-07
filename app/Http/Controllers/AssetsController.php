@@ -320,81 +320,43 @@ class AssetsController extends Controller {
   }
 
 
-  // public function saveAssetEvent(Request $request){
+  public function saveAssetEvent(Request $request){
         
-  //       $data = array();
+        $data = array();
 
-  //       $data['assetName'] = $request->input('assetName');
-  //       $data['assetID'] = $request->input('assetID');
-  //       $data['modelnumber'] = $request->input('modelnumber');
-  //       $data['categoryCode'] = $request->input('categoryCode');
-  //       $data['description'] = $request->input('description');
-  //       $data['brand'] = $request->input('brand');
-  //       $data['dateAquired'] = $request->input('dateAquired');
-  //       $data['acquisitionCost'] = $request->input('acquisitionCost');
-  //       $data['dateAcquired'] = date('Y-m-d', strtotime($request->input('dateAcquired')));
-  //       $data['plateNumber'] = $request->input('plateNumber');
-  //       $data['engineNumber'] = $request->input('engineNumber');
-  //       $data['chassisNumber'] = $request->input('chassisNumber');
-  //       // $data['assignTo'] = $request->input('assignTo');
-  //       // $data['fundSource'] = $request->input('fundSource');
-  //       // $data['costCenter'] = $request->input('costCenter');
-  //       // $data['depreciableCost'] = $request->input('depreciableCost');
-  //       // $data['salvageValue'] = $request->input('salvageValue');
-  //       // $data['method'] = $request->input('method');
-  //       // $data['project_code'] = $request->input('projectCode');
+        $data['status'] = $request->input('status');
+        $data['event_date'] = date('Y-m-d', strtotime($request->input('event_date')));
+        $data['remarks'] = $request->input('remarks');
+        $data['asset_tag'] = $request->input('asset_tag');
        
-  //       $transaction = DB::transaction(function($data) use($data){
-  //         // try{
+        $transaction = DB::transaction(function($data) use($data){
+          // try{
 
-  //             $asset = new Asset;
-  //             $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
-  //             $asset->name = $data['assetName'];
-  //             $asset->code = $data['assetID'];
-  //             $asset->model = $data['modelnumber'];
-  //             $asset->category = $data['categoryCode'];
-  //             $asset->description = $data['description'];
-  //             $asset->brand = $data['brand'];
-  //             $asset->date_acquired = $data['dateAcquired'];
-  //             $asset->acquisition_cost = $data['acquisitionCost'];
-  //             $asset->plate_no = $data['plateNumber'];
-  //             $asset->engine_no = $data['engineNumber'];
-  //             $asset->chassis_no = $data['chassisNumber'];
-  //             // $asset->assign_to = $data['assignTo'];
-  //             // $asset->fund_source = $data['fundSource'];
-  //             // $asset->cost_center = $data['costCenter'];
-  //             // $asset->depreciable_cost = $data['depreciableCost'];
-  //             // $asset->salvage_value = $data['salvageValue'];
-  //             // $asset->method_id = $data['method'];
-  //            //  $asset->project_code = $data['project_code'];
-  //             $asset->status = "Active";
-  //             $asset->save();
+              $assetEvent = new AssetEvent;
+              // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
+              $assetEvent->asset_event_code = 1212;
+              $assetEvent->status = $data['status'];
+              $assetEvent->asset_tag = $data['asset_tag'];
+              $assetEvent->event_date = $data['event_date'];
+              $assetEvent->remarks = $data['remarks'];
+              $assetEvent->save();
 
-  //             // $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();
-  //             // $assetCopy->asset_id;
+              return response()->json([
+                  'status' => 200,
+                  'data' => 'null',
+                  'message' => 'Successfully saved.'
+              ]);
+          //   } 
+          //   catch (\Exception $e) 
+          //   {
+             //  return response()->json([
+           //        'status' => 500,
+           //        'data' => 'null',
+           //        'message' => 'Error, please try again!'
+           //    ]);
+            // }
+        });
 
-  //             // $log = new Log;
-  //             // $log->log_code = $assetCopy->asset_id;
-  //             // $log->log_desc = "Added new asset";
-  //             // $log->user_id = Auth::user()->id;
-  //             // $log->save();
-
-  //             return response()->json([
-  //                 'status' => 200,
-  //                 'data' => 'null',
-  //                 'message' => 'Successfully saved.'
-  //             ]);
-  //         //   } 
-  //         //   catch (\Exception $e) 
-  //         //   {
-  //            //  return response()->json([
-  //          //        'status' => 500,
-  //          //        'data' => 'null',
-  //          //        'message' => 'Error, please try again!'
-  //          //    ]);
-  //           // }
-  //       });
-
-  //       return $transaction;
-  //   }
+        return $transaction;
+    }
 }
