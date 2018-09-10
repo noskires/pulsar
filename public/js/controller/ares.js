@@ -162,7 +162,7 @@
                         status:'',
                         isAll:0
                     }
-                    AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
+                    AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
                         if(response.data.status == 200)
                         {
                             vm.availableAssets = response.data.data;
