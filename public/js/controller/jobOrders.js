@@ -33,7 +33,7 @@
                     status:'',
                     isAll:1
                 }
-                
+
                 AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
@@ -86,7 +86,7 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
                         // vm.routeTo('asset/list-equipments');
-                        $state.go('asset-list-equipments');
+                        $state.go('asset-more-details', { assetTag:$stateParams.assetTag});
                     }
                     else {
                         alert(response.data.message);

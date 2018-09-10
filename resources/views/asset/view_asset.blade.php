@@ -153,7 +153,7 @@
               </thead>
               <tbody>
               <tr ng-repeat="jobOrder in amdc.jobOrders">
-                <td><%jobOrder.job_order_code%></td>
+                <td><a href="#" ui-sref="list-joCopy({joCode:jobOrder.job_order_code})"><b><%jobOrder.job_order_code%></b></a></td>
                 <td><%jobOrder.job_order_date%></td>
                 <td><%jobOrder.date_started%></td>
                 <td><%jobOrder.date_completed%></td>
@@ -264,7 +264,9 @@
           <a class="btn btn-app" data-toggle="modal" data-target="#modal-image"> 
             <i class="fa fa-image"></i> Photo
           </a>            
-          <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})" ng-if="amdc.asset.employee_name && amdc.asset.status=='ACTIVE' ||  amdc.asset.status=='Active'">
+          <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})" ng-if="amdc.asset.employee_name && amdc.asset.status=='ACTIVE' || 
+
+           amdc.asset.status=='Active'">
                 <i class="fa fa-wrench"></i> Repair
           </a>                       
           <a class="btn btn-app" ng-click="amdc.messageAlert('Please assign an employee first!')" ng-if="!amdc.asset.employee_name && amdc.asset.status=='ACTIVE'">
