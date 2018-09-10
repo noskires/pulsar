@@ -55,13 +55,16 @@ class JobOrdersController extends Controller {
           // DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
           'p.project_code',
           'm.municipality_code',
-          'm.municipality_text'
+          'm.municipality_text',
+          'are.are_code',
+          DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name')
           // 'rp.request_purpose as request_purpose_text'
         )
       -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
       -> leftjoin('Projects as p','p.project_code','=','a.project_code')
-      -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code');
-      // -> leftjoin('Employees as e','e.employee_id','=','a.assign_to');
+      -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
+      -> leftjoin('ares as are','are.are_code','=','a.are_code')
+      -> leftjoin('employees as e','e.employee_code','=','are.employee_code');
       // -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
 
     if ($data['joCode']){
