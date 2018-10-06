@@ -16,7 +16,7 @@
       <div class="col-xs-12" style="border-bottom: 2px solid black;">
         <h2 class="page-header">
           <i class="fa fa-tags"></i> ASSET PROFILE<br>
-          <small>Asset Tag: {{$asset->tag}}</small>
+          <span style="font-size: 15px;font-weight: bold;">Asset Tag: {{$asset->tag}}</span>
         </h2>
       </div>
       <!-- /.col -->
@@ -61,7 +61,7 @@
 			              </tr>
 			              <tr>
 			                <td>Acquisition Cost:</td>
-			                <td>{{$asset->acquisition_cost}}</td>
+			                <td>{{number_format($asset->acquisition_cost, 2)}}</td>
 			              </tr>
 			              <tr>
 			                <td>Plate No:</td>
@@ -93,8 +93,10 @@
 			              </tr>
 			            </table>
 			        </td>
-	                <td valign="top" align="center"><img src="assets/dist/img/dumptruck_1024x768.jpg" style='width:200px;'> <br>
-	                <img src="assets/dist/img/qrcode.png" style='width:200px;'></td>
+	                <td align="center">
+	                	<img src="assets/dist/img/dumptruck_1024x768.jpg" style='width:190px;'> <br>
+	                	<img src="assets/dist/img/qrcode.png" style='width:150px;'>
+	            	</td>
           		</tr>
           	</table>
             
@@ -107,25 +109,25 @@
 <!-- MONITORING -->    
     <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
-        <h4 style="padding-bottom: 6px;"><b>CURRENT OPERATING RECORD</b></h4>
+        <h4><b>CURRENT OPERATING RECORD</b></h4>
           <table border="0" width="100%" style="font-size:12px;">
             <tr>
               <td style="border-top: 1px solid #e1e1e1;">Operating Hours</td>
-              <td style="border-top: 1px solid #e1e1e1;"> {{$asset_monitoring->total_operating_hours}} </td>
+              <td style="border-top: 1px solid #e1e1e1; padding-right:20px;" align="right"> {{number_format($asset_monitoring->total_operating_hours, 2)}} </td>
               <td style="border-top: 1px solid #e1e1e1;">Diesel (L) Consumed</td>
-              <td style="border-top: 1px solid #e1e1e1;"> {{$asset_monitoring->total_diesel_consumption}} </td>
+              <td style="border-top: 1px solid #e1e1e1; padding-right:20px;" align="right"> {{number_format($asset_monitoring->total_diesel_consumption, 2)}} </td>
             </tr>
             <tr>
               <td style="border-top: 1px solid #e1e1e1;">Kilometers Traveled</td>
-              <td style="border-top: 1px solid #e1e1e1;"> {{$asset_monitoring->total_distance_travelled}} </td>
+              <td style="border-top: 1px solid #e1e1e1; padding-right:20px;" align="right"> {{number_format($asset_monitoring->total_distance_travelled, 2)}} </td>
               <td style="border-top: 1px solid #e1e1e1;">Gas (L) Consumed</td>
-              <td style="border-top: 1px solid #e1e1e1;"> {{$asset_monitoring->total_gas_consumption}} </td>
+              <td style="border-top: 1px solid #e1e1e1; padding-right:20px;" align="right"> {{number_format($asset_monitoring->total_gas_consumption, 2)}} </td>
             </tr>
             <tr>
               <td style="border-top: 1px solid #e1e1e1;">Loads (m3)</td>
-              <td style="border-top: 1px solid #e1e1e1;"> {{$asset_monitoring->total_number_loads}} </td>
+              <td style="border-top: 1px solid #e1e1e1; padding-right:20px;" align="right"> {{number_format($asset_monitoring->total_number_loads, 2)}} </td>
               <td style="border-top: 1px solid #e1e1e1;">Oil (L) Consumed</td>
-              <td style="border-top: 1px solid #e1e1e1;"> {{$asset_monitoring->total_oil_consumption}} </td>
+              <td style="border-top: 1px solid #e1e1e1; padding-right:20px;" align="right"> {{number_format($asset_monitoring->total_oil_consumption, 2)}} </td>
             </tr>
           </table> <br>
       </div>
@@ -156,6 +158,11 @@
             <td style="border-top: 1px solid #e1e1e1;"> {{$insurance->expiration_date}}</td>
           </tr>
           @endforeach
+          @if(count($insurance)==0)
+           <tr>
+            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="5"> NO RECORDS </td>
+          </tr>
+          @endif
           </tbody>
         </table> <br>
       </div>
@@ -185,15 +192,20 @@
             <td style="border-top: 1px solid #e1e1e1;">{{$jo->date_started}}</td>
             <td style="border-top: 1px solid #e1e1e1;">{{$jo->date_completed}}</td>
             <td style="border-top: 1px solid #e1e1e1;">{{$jo->conducted_by}}</td>
-            <td style="border-top: 1px solid #e1e1e1;" id="operatingdetails">Operating Hours: 123 <br>
-                Kilometers Traveled: 123 <br>
-                Diesel (L) Consumed: 123 <br>
-                Gas (L) Consumed: 123 <br>
-                Oil (L) Consumed: 123 <br>
-                Loads (m3): 123 <br>
+            <td style="border-top: 1px solid #e1e1e1;" id="operatingdetails">Operating Hours: {{$jo->operating_hours}} <br>
+                Kilometers Traveled: {{number_format($jo->distance_travelled, 2)}} <br>
+                Diesel (L) Consumed: {{number_format($jo->diesel_consumption, 2)}} <br>
+                Gas (L) Consumed: {{number_format($jo->gas_consumption, 2)}} <br>
+                Oil (L) Consumed: {{number_format($jo->oil_consumption, 2)}} <br>
+                Loads (m3): {{number_format($jo->number_loads, 2)}} <br>
             </td>
           </tr>
           @endforeach
+          @if(count($jos)==0)
+          <tr>
+            <td style="border-top: 1px solid #e1e1e1;" colspan="7" align="center"> NO RECORDS </td>
+          </tr>
+          @endif
           </tbody>
         </table> <br>
       </div>
@@ -220,6 +232,11 @@
             <td style="border-top: 1px solid #e1e1e1;">{{$event->remarks}}</td>
           </tr>
            @endforeach
+	       @if(count($events)==0)
+	       <tr>
+            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="3"> NO RECORDS </td>
+          </tr>
+          @endif
           </tbody>
         </table> 
       </div> <br>

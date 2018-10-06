@@ -410,6 +410,10 @@
               <span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title"><li class="fa fa-upload"></li> Upload new Document</h4>
           </div>
+
+
+
+
           <form class="form-horizontal" id="">
           <div class="modal-body"><br>
             <div class="form-group">
@@ -426,7 +430,11 @@
               <label for="controlnumber" class="col-sm-3 control-label">Description </label>
               <div class="col-sm-8"><input type="text" class="form-control" id="asset_docdesc" required=""></div>
             </div>
+
+
           </div>
+
+
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Upload</button>
@@ -448,6 +456,17 @@
               <span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title"><li class="fa fa-image"></li> Upload new Image</h4>
           </div>
+
+          <div  class="form-group">
+            upload file:
+            <form action="{{ URL::to('upload') }}" method="post" enctype="multipart/form-data">
+              <label>Select image to upload:</label>
+                <input type="file" name="file" id="file">
+                <input type="submit" value="Upload" name="submit">
+              <input type="hidden" value="{{ csrf_token() }}" name="_token">
+            </form>
+          </div>
+          
           <form class="form-horizontal" id="">
           <div class="modal-body"><br>
             <div class="form-group">

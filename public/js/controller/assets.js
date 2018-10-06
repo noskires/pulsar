@@ -235,9 +235,6 @@
             var vm = this;
             var data = {};
 
-            alert('more details')
-
-
             vm.messageAlert = function(message){
                 alert(message);
             }
@@ -344,8 +341,6 @@
 
 
             vm.printAssetDetails = function(tag){
-                // alert('print here = ' + tag);
-                // vm.routeToOpen('export/'+tag);
                 vm.url = 'export/'+tag;
             }
 

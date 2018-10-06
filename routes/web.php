@@ -34,6 +34,9 @@ Route::group(['middleware'=>'auth'], function(){
 Route::get('/pdf', 'PdfController@index');
 Route::get('/export/{assetTag}', 'PdfController@export');
 
+
+Route::post('upload', 'UploadController@upload');
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance
