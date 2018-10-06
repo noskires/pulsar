@@ -7,6 +7,7 @@
         .controller('AssetMoreDetailsCtrl', AssetMoreDetailsCtrl) 
         .controller('AssetsModalInstanceCtrl', AssetsModalInstanceCtrl)
         .controller('AssetsWarrantyModalInstanceCtrl', AssetsWarrantyModalInstanceCtrl)
+        .controller('AssetsEditModalInstanceCtrl', AssetsEditModalInstanceCtrl)
  		
  		AssetsCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
         function AssetsCtrl($stateParams, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
@@ -16,7 +17,7 @@
            // alert($stateParams.assetTag);
 
            if($stateParams.assetTag)
-            {
+            {   
                 var tag = $stateParams.assetTag;
 
                 vm.assetsDetails = {
@@ -27,6 +28,7 @@
                     status:'',
                     isAll:1
                 }
+
                 AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
@@ -59,6 +61,7 @@
                 status:'',
                 isAll:1
             }
+
             AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
                 if(response.data.status == 200)
                 {
@@ -66,6 +69,33 @@
                     console.log(vm.assets)
                 }
             }, function (){ alert('Bad Request!!!') })
+
+            // vm.assetInfo = function(assetTag){
+            //     // alert(employee_id)
+            //     EmployeesSrvcs.employees2({employee_code:employee_code}).then (function (response) {
+
+            //         if(response.data.status == 200)
+            //         {
+            //             vm.employee = response.data.data[0];
+            //             console.log(vm.employee)
+
+            //             var modalInstance = $uibModal.open({
+            //                 controller:'EmployeesModalInstanceCtrl',
+            //                 templateUrl:'employeeEditTpl.modal',
+            //                 controllerAs: 'vm',
+            //                 resolve :{
+            //                   formData: function () {
+            //                     return {
+            //                         title:'Employee Controller',
+            //                         message:response.data.message,
+            //                         employee: vm.employee
+            //                     };
+            //                   }
+            //                 }
+            //             });
+            //         }
+            //     }, function (){ alert('Bad Request!!!') })
+            // }
 
             //check this line
 
@@ -205,11 +235,50 @@
             var vm = this;
             var data = {};
 
+            alert('more details')
+
+
             vm.messageAlert = function(message){
                 alert(message);
             }
 
+            vm.editAsset = function(argument) {
 
+                
+
+                var tag = $stateParams.assetTag;
+
+                vm.assetsDetails = {
+                    tag:tag, 
+                    name:'', 
+                    category:'', 
+                    areCode:'', 
+                    status:'',
+                    isAll:1
+                }
+
+                AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.asset = response.data.data[0];
+                        console.log(vm.asset)
+                        var modalInstance = $uibModal.open({
+                            controller:'AssetsEditModalInstanceCtrl',
+                            templateUrl:'assetEditTpl.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                                formData: function () {
+                                    return {
+                                        title:'Assets Edit Controller',
+                                        message:response.data.message,
+                                        asset: response.data.data[0]
+                                    };
+                                }
+                            }
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
 
             if($stateParams.assetTag)
             {
@@ -273,6 +342,13 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+
+            vm.printAssetDetails = function(tag){
+                // alert('print here = ' + tag);
+                // vm.routeToOpen('export/'+tag);
+                vm.url = 'export/'+tag;
+            }
+
             vm.addNewWarranty = function(){ 
                 var modalInstance = $uibModal.open({
                     controller:'AssetsWarrantyModalInstanceCtrl',
@@ -301,6 +377,24 @@
                     }
                     console.log(response.data);
                 });
+            }
+
+
+            vm.routeTo = function(route){
+                $window.location.href = route;
+            };
+
+            vm.routeToOpen = function(route){
+                $window.open = route;
+            };
+        }
+
+        AssetsEditModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'WarrantiesSrvcs', 'formData', '$window'];
+        function AssetsEditModalInstanceCtrl ($stateParams, $uibModalInstance, WarrantiesSrvcs, formData, $window) {
+            var vm = this;
+            console.log(vm.formData = formData.asset)
+            vm.updateAsset = function(data){
+                console.log(data)
             }
         }
 

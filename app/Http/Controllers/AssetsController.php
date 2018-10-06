@@ -328,6 +328,21 @@ class AssetsController extends Controller {
   }
 
 
+  // $data['tag'] = $request->input('tag');
+  // $data['are_code'] = $request->input('are_code');
+  // $data['assetName'] = $request->input('asset_name');
+  // $data['assetID'] = $request->input('asset_iD');
+  // $data['modelnumber'] = $request->input('model');
+  // $data['categoryCode'] = $request->input('category_ode');
+  // // $data['description'] = $request->input('description');
+  // $data['brand'] = $request->input('brand');
+  // $data['acquisition_cost'] = $request->input('acquisition_cost');
+  // $data['date_acquired'] = date('Y-m-d', strtotime($request->input('date_acquired')));
+  // $data['plate_no'] = $request->input('plate_no');
+  // $data['engine_no'] = $request->input('engine_no');
+  // $data['chassis_no'] = $request->input('chassis_no');
+
+
   public function saveAssetEvent(Request $request){
         
         $data = array();

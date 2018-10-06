@@ -102,37 +102,14 @@
                 <td>Date <%assetEvent.event_date%></td>
                 <td><%assetEvent.remarks%></td>
               </tr>
-              <!-- <tr>
-                <td><code class="text-success bg-blue">LEASE</code></td>
-                <td>Date 02/16/2018</td>
-                <td>Description/Remarks</td>
-              </tr>
-              <tr>
-                <td><code class="text-success bg-gray">DONATE</code></td>
-                <td>Date 02/16/2018</td>
-                <td>Description/Remarks</td>
-              </tr>
-              <tr>
-                <td><code class="text-success bg-yellow">SELL</code></td>
-                <td>Date 02/16/2018</td>
-                <td>Description/Remarks</td>
-              </tr>
-              <tr>
-                <td><code class="text-success bg-black">DISPOSE</code></td>
-                <td>Date 02/16/2018</td>
-                <td>Description/Remarks</td>
-              </tr>
-              <tr>
-                <td><code class="text-success bg-red">LOST/MISSING</code></td>
-                <td>Date 02/16/2018</td>
-                <td>Description/Remarks</td>
-              </tr> -->
               </tbody>
             </table>
           </div>
           <!-- /.tab-pane -->
 
           <div class="active tab-pane" id="tab_2-2">
+            
+            <a href="#" ng-click="amdc.printAssetDetails()"> Print Asset Details </a>
             <h4><b>Maintenance History</b></h4>
             <table class="table" width="100%" datatable="ng">
               <thead>
@@ -258,7 +235,7 @@
       <div class="box"> 
 
         <div class="box-body">
-          <a class="btn btn-app" data-toggle="modal" data-target="#modal-edit">
+          <a class="btn btn-app" data-toggle="modal" ng-click="amdc.editAsset()">
             <i class="fa fa-edit"></i> Edit
           </a>
           <a class="btn btn-app" data-toggle="modal" data-target="#modal-image"> 
@@ -293,7 +270,7 @@
           <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: ')" ng-if="amdc.asset.status=='LOST'">
             <i class="fa fa-wrench"></i> Repair
           </a>
-          <a href="javascript: window.open('pdfasset.pdf');"  class="btn btn-app">
+          <a ng-click="amdc.printAssetDetails(amdc.tag)" target="_blank" ng-href="<%amdc.url%>"  class="btn btn-app">
             <i class="fa fa-print"></i> Print
           </a>
           <a href="#"  class="btn btn-app" data-toggle="modal" data-target="#modal-actions">
@@ -550,91 +527,101 @@
     <!-- /.modal -->
 
 <!-- MODAL-EDIT HERE HERE -->
-    <div class="modal fade" id="modal-edit">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><li class="fa fa-edit"></li> Edit Basic Details of Asset</h4>
-          </div>
-          <form class="form-horizontal" id="">
-          <div class="box-body">
-            <div class="form-group col-sm-12">
-              <label for="controlnumber" class="col-sm-2 control-label">Asset Tag</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="assettag" placeholder="CONE-03082018-DT1" disabled></div>
-            </div>
-
-            <div class="form-group col-sm-12">  
-              <label for="assetname" class="col-sm-2 control-label">Asset Name</label>
-              <div class="col-sm-10"><input type="text" class="form-control" id="assetname" placeholder="" required="" autofocus></div>
-            </div>
-
-            <div class="form-group col-sm-12">
-              <label for="controlnumber" class="col-sm-2 control-label">Description</label>
-              <div class="col-sm-10"><input type="text" class="form-control" id="description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification"></div>
-            </div>
-
-            <div class="form-group col-sm-12">
-              <label for="modelnumber" class="col-sm-2 control-label">Model</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="modelnumber" placeholder="" required=""></div>
-              <label for="brandname" class="col-sm-2 control-label">Make/Brand</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="brandname" placeholder=""></div>
-            </div>
-
-            <div class="form-group col-sm-12">
-              <label class="col-sm-2 control-label">Owner Company</label>
-              <div class="col-sm-4">
-              <select class="form-control select2" style="width: 100%;" required="">
-              <option selected="selected" value="1">PULSAR CONSTRUCTION</option>
-              <option value="1">JJE CONSTRUCTION</option>
-              </select>
+<script type="text/ng-template" id="assetEditTpl.modal">
+    
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><li class="fa fa-edit"></li> Edit Basic Details of Asset</h4>
               </div>
-              <label class="col-sm-2 control-label">Date Acquired</label>
-              <div class="col-sm-4">
-              <div class="input-group date">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="dateacquired">
-              </div></div>  
-            </div>
+              <form class="form-horizontal" id="">
+              <div class="box-body">
+                <div class="form-group col-sm-12">
+                  <label for="controlnumber" class="col-sm-2 control-label">Asset Category</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="assettag" placeholder="CONSTRUCTION EQUIPMENT" disabled ng-model="vm.formData.asset_name"></div>
+                </div>
 
-            <div class="form-group col-sm-12">
-              <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost</label>
-              <div class="col-sm-4">
-              <div class="input-group date">
-              <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="text" class="form-control" id="acquisitioncost" placeholder="" required="">
-              </div></div>
-              <label for="platenumber" class="col-sm-2 control-label">Plate No.</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="platenumber" placeholder="" required=""></div>
-            </div>
+                <div class="form-group col-sm-12">  
+                  <label for="assetname" class="col-sm-2 control-label">Asset Name</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="assetname" placeholder="DUMPTRUCK" required="" disabled ng-model="vm.formData.name"></div>
+                </div>
 
-            <div class="form-group col-sm-12">
-              <label for="enginenumber" class="col-sm-2 control-label">Engine No.</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="enginenumber" placeholder="" required=""></div>
-              <label class="col-sm-2 control-label">Warranty Date</label>
-              <div class="col-sm-4">
-              <div class="input-group date">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="datewarranty">
-              </div></div>
-            </div>
+                <div class="form-group col-sm-12">
+                  <label for="controlnumber" class="col-sm-2 control-label">Asset ID</label>
+                  <div class="col-sm-4"><input type="text" class="form-control" id="assettag" placeholder="CONE-03082018-DT1" disabled ng-model="vm.formData.tag"></div>
+                </div>               
 
-            <div class="form-group col-sm-12">           
-            <div class="col-sm-8"></div>
-            <div class="col-sm-4"><br>
-            <button class="btn btn-large btn-primary btn-block" data-toggle="confirmation"
-            data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
-            data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-            data-title="Confirm data update." data-content="Are you sure?"> UPDATE
-            </button></div></div>
-          <!-- /.box-body -->
-        </form>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+                <div class="form-group col-sm-12">
+                  <label for="controlnumber" class="col-sm-2 control-label">Description</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification"></div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="modelnumber" class="col-sm-2 control-label">Model</label>
+                  <div class="col-sm-4"><input type="text" class="form-control" id="modelnumber" placeholder="" required=""ng-model="vm.formData.model"></div>
+                  <label for="brandname" class="col-sm-2 control-label">Brand</label>
+                  <div class="col-sm-4"><input type="text" class="form-control" id="brandname" placeholder="" ng-model="vm.formData.brand"></div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <!-- <label class="col-sm-2 control-label">Owner Company</label>
+                  <div class="col-sm-4">
+                  <select class="form-control select2" style="width: 100%;" required="">
+                  <option selected="selected" value="1">PULSAR CONSTRUCTION</option>
+                  <option value="1">JJE CONSTRUCTION</option>
+                  </select>
+                  </div> -->
+
+                  <label class="col-sm-2 control-label">Date Acquired</label>
+                  <div class="col-sm-4">
+                  <div class="input-group date">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="text" class="form-control pull-right" id="dateacquired" ng-model="vm.formData.date_acquired">
+                  </div></div>
+                  <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost</label>
+                  <div class="col-sm-4">
+                  <div class="input-group date">
+                  <span class="input-group-addon" style="font-size: 20px;">₱</span>
+                  <input type="text" class="form-control" id="acquisitioncost" placeholder="" required="" ng-model="vm.formData.acquisition_cost">
+                  </div></div>  
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="platenumber" class="col-sm-2 control-label">Plate No.</label>
+                  <div class="col-sm-4"><input type="text" class="form-control" id="platenumber" placeholder="" required="" ng-model="vm.formData.plate_no"></div>
+                  <label for="enginenumber" class="col-sm-2 control-label">Engine/Serial No.</label>
+                  <div class="col-sm-4"><input type="text" class="form-control" id="enginenumber" placeholder="" required="" ng-model="vm.formData.engine_no"></div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="platenumber" class="col-sm-2 control-label">Chassis No.</label>
+                  <div class="col-sm-4"><input type="text" class="form-control" id="chassisnumber" placeholder="" required="" ng-model="vm.formData.chassis_no"></div>
+                  <label class="col-sm-2 control-label">Warranty Date</label>
+                  <div class="col-sm-4">
+                  <div class="input-group date">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="text" class="form-control pull-right" id="datewarranty" datepicker ng-model="vm.formData.waarranty_date">
+                  </div></div>
+                </div>
+
+                <div class="form-group col-sm-12">           
+                <div class="col-sm-8"></div>
+                <div class="col-sm-4"><br>
+                <button class="btn btn-large btn-primary btn-block" data-toggle="confirmation"
+                data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+                data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+                data-title="Confirm data update." data-content="Are you sure?" ng-click="vm.updateAsset(vm.formData)"> UPDATE
+                </button></div></div>
+              <!-- /.box-body -->
+            </form>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+    
+
+      </script>
+<!-- /.modal -->
 
 </section>

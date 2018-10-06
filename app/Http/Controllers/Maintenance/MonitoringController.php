@@ -10,7 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
-class OperationsController extends Controller {
+class OperationsController1 extends Controller {
    public function index(){
       return view('layout.index');
    }

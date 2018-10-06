@@ -42,6 +42,11 @@
 
 <script type="text/javascript" src="{{URL::to('bower_components/ui-bootstrap-tpls-2.3.0.js')}}"></script>
 
+
+<!-- PDF -->
+<script src="{{URL::to('bower_components/pdfmake/build/pdfmake.min.js')}}"></script> 
+<script src="{{URL::to('bower_components/pdfmake/build/vfs_fonts.js')}}"></script>
+
 <script src="{{URL::to('js/pulsarApp.js')}}"></script>
 
 <!-- Services -->

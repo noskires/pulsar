@@ -30,6 +30,10 @@ Route::group(['middleware'=>'auth'], function(){
 // Route::get('/angular-datatables','MaintenanceController@index'); 
 // Route::get('/angular-datatables/new','MaintenanceController@index'); 
 
+
+Route::get('/pdf', 'PdfController@index');
+Route::get('/export/{assetTag}', 'PdfController@export');
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance
