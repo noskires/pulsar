@@ -27,76 +27,77 @@
       <div class="col-md-12">
         <h4> <b>ASSET DETAILS</b> </h4>
           <div>
-            <table border="1" width="100%" style="font-size:13px;">
-              <tr>
-              <th width="20%"></th>
-              <th width="45%"></th>
-              <th width="35%" rowspan="16" valign="top">
-              	<img src="assets/dist/img/dumptruck_1024x768.jpg" style='width:250px;'> <br>
-                <center> <img src="assets/dist/img/qrcode.png" style='width:250px;'> </center>
-              </th>
-            </tr>
-              <tr>
-                <td>Category:</td>
-                <td>{{$asset->category}}</td>
-              </tr>
-              <tr>
-                <td>Name:</td>
-                <td>{{$asset->asset_name}}</td>
-              </tr>
-              <tr>
-                <td>Description:</td>
-                <td>{{$asset->description}}</td>
-              </tr>
-              <tr>
-                <td>Asset ID:</td>
-                <td>{{$asset->code}}</td>
-              </tr>
-              <tr>
-                <td>Model:</td>
-                <td>{{$asset->model}}</td>
-              </tr>
-              <tr>
-                <td>Brand:</td>
-                <td>{{$asset->brand}}</td>
-              </tr>
-              <tr>
-                <td>Date Acquired:</td>
-                <td>{{$asset->date_acquired}}</td>
-              </tr>
-              <tr>
-                <td>Acquisition Cost:</td>
-                <td>{{$asset->acquisition_cost}}</td>
-              </tr>
-              <tr>
-                <td>Plate No:</td>
-                <td>{{$asset->plate_no}}</td>
-              </tr>
-              <tr>
-                <td>Engine/Serial No:</td>
-                <td>{{$asset->engine_no}}</td>
-              </tr>
-              <tr>
-                <td>Chassis No:</td>
-                <td>{{$asset->chassis_no}}</td>
-              </tr>
-              <tr>
-                <td>Warranty Date:</td>
-                <td>{{$asset->warranty_date}}</td>
-              </tr>
-              <tr>
-                <td>Location:</td>
-                <td>{{$asset->model}}</td>
-              </tr>
-              <tr>
-                <td>Assigned to:</td>
-                <td>{{$asset->employee_name}}</td>
-              </tr>
-              <tr>
-                <td>Status:</td>
-                <td>{{$asset->status}}</td>
-              </tr>
-            </table>
+          	<table width="100%" >
+          		<tr>
+          			<td width="70%">
+          				<table width="100%" style="font-size:12px;">
+			              <tr>
+			                <td width="30%">Category:</td>
+			                <td>{{$asset->category}}</td>
+			             </tr>
+			              <tr>
+			                <td>Name:</td>
+			                <td>{{$asset->asset_name}}</td>
+			              </tr>
+			              <tr>
+			                <td>Description:</td>
+			                <td>{{$asset->description}}</td>
+			              </tr>
+			              <tr>
+			                <td>Asset ID:</td>
+			                <td>{{$asset->code}}</td>
+			              </tr>
+			              <tr>
+			                <td>Model:</td>
+			                <td>{{$asset->model}}</td>
+			              </tr>
+			              <tr>
+			                <td>Brand:</td>
+			                <td>{{$asset->brand}}</td>
+			              </tr>
+			              <tr>
+			                <td>Date Acquired:</td>
+			                <td>{{$asset->date_acquired}}</td>
+			              </tr>
+			              <tr>
+			                <td>Acquisition Cost:</td>
+			                <td>{{$asset->acquisition_cost}}</td>
+			              </tr>
+			              <tr>
+			                <td>Plate No:</td>
+			                <td>{{$asset->plate_no}}</td>
+			              </tr>
+			              <tr>
+			                <td>Engine/Serial No:</td>
+			                <td>{{$asset->engine_no}}</td>
+			              </tr>
+			              <tr>
+			                <td>Chassis No:</td>
+			                <td>{{$asset->chassis_no}}</td>
+			              </tr>
+			              <tr>
+			                <td>Warranty Date:</td>
+			                <td>{{$asset->warranty_date}}</td>
+			              </tr>
+			              <tr>
+			                <td>Location:</td>
+			                <td>{{$asset->model}}</td>
+			              </tr>
+			              <tr>
+			                <td>Assigned to:</td>
+			                <td>{{$asset->employee_name}}</td>
+			              </tr>
+			              <tr>
+			                <td>Status:</td>
+			                <td>{{$asset->status}}</td>
+			              </tr>
+			            </table>
+			        </td>
+	                <td valign="top" align="center"><img src="assets/dist/img/dumptruck_1024x768.jpg" style='width:200px;'> <br>
+	                <img src="assets/dist/img/qrcode.png" style='width:200px;'></td>
+          		</tr>
+          	</table>
+            
             <br>
           </div>
       </div>
@@ -107,7 +108,7 @@
     <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4 style="padding-bottom: 6px;"><b>CURRENT OPERATING RECORD</b></h4>
-          <table border="0" width="100%" style="font-size:13px;">
+          <table border="0" width="100%" style="font-size:12px;">
             <tr>
               <td style="border-top: 1px solid #e1e1e1;">Operating Hours</td>
               <td style="border-top: 1px solid #e1e1e1;"> {{$asset_monitoring->total_operating_hours}} </td>
@@ -135,7 +136,7 @@
     <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>INSURANCE</b></h4> 
-          <table border="0" width="100%" style="font-size:13px;">
+          <table border="0" width="100%" style="font-size:12px;">
           <thead>
           <tr>
             <th align="left">Insurance Co.</th>
@@ -165,7 +166,7 @@
     <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>MAINTENANCE HISTORY</b></h4> 
-        <table border="0" width="100%" style="font-size:13px;">
+        <table border="0" width="100%" style="font-size:12px;">
           <thead>
           <tr align="left">
             <th>Control#</th>
@@ -203,7 +204,7 @@
     <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>EVENTS</b></h4> 
-        <table width="100%" style="font-size:13px;">
+        <table width="100%" style="font-size:12px;">
           <thead>
           <tr align="left">
             <th>Status</th>
