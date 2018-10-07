@@ -43,6 +43,18 @@
             };
         })
 
+        // this is the important bit:
+        .directive('datepickerPopup', function (){
+          return {
+            restrict: 'EAC',
+            require: 'ngModel',
+            link: function(scope, element, attr, controller) {
+              //remove the default formatter from the input directive to prevent conflict
+              controller.$formatters.shift();
+            }
+          }
+        });
+
         Config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$interpolateProvider', 'dynamicNumberStrategyProvider']
         function Config($stateProvider, $urlRouterProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $interpolateProvider, dynamicNumberStrategyProvider){
             console.log("App here!");
