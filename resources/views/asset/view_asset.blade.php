@@ -491,9 +491,8 @@
             <div class="col-sm-4">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right" id="datewarranty" ng-model="vm.formData.warranty_date" autocomplete="off" />
-           
-
+            <input type="text" class="form-control pull-right" id="datewarranty" ng-model="vm.formData.warranty_date" autocomplete="on" />
+          
             </div></div>
           </div>
 
