@@ -15,7 +15,10 @@
 <!-- Bootstrap time Picker -->
 <link rel="stylesheet" href="{{URL::to('assets/plugins/timepicker/bootstrap-timepicker.min.css')}}">
 <!-- Select2 -->
-<link rel="stylesheet" href="{{URL::to('bower_components/select2/dist/css/select2.min.css')}}"> -->
+<link rel="stylesheet" href="{{URL::to('bower_components/select2/dist/css/select2.min.css')}}">
+
+
+
 <style>
 
   .example-modal .modal {
@@ -50,6 +53,31 @@
 
   .modal-xlg{
     width:1200px;
+  }
+
+  @font-face {font-family: Source Sans Pro; src: url(/assets/dist/fonts/SourceSansPro-Regular.ttf);}
+
+  /*Gallery*/
+  .imageGallery1 {
+    overflow: hidden; margin: 10px;}
+  .imageGallery1 > a {
+    float: left; width: 30%; padding: 1px; margin-left: 10px; box-sizing: border-box; position: relative;}
+  .imageGallery1 > a > img {
+  display: block; width: 100%; }
+
+
+  .gallery img {
+    height: 100%;
+  }
+
+  .gallery a {
+      width: 240px;
+      height: 180px;
+      display: inline-block;
+      overflow: hidden;
+      margin: 4px 6px;
+      box-shadow: 0 0 4px -1px #000;
+      border:5px solid green;
   }
   
 </style>
@@ -207,6 +235,12 @@
 </script>
 
 <!-- Shared Modal -->
+
+
+<script type="text/ng-template" id="asset.more.details.view4">
+  @include('asset.view_asset4')
+</script>
+
 
 @endsection
 

@@ -24,11 +24,12 @@ class PdfController extends Controller {
     $data['some_data'] = array('you', 'are', 'the', 'one');
     $data['assetTag'] = $assetTag;
 
-    $data['asset']      = $this->asset($assetTag);
-    $data['asset_monitoring']      = $this->asset_monitoring($assetTag);
-    $data['jos']        = $this->jo($assetTag);
-    $data['events']     = $this->events($assetTag);
-    $data['insurance']  = $this->insurance($assetTag);
+    $data['asset']            = $this->asset($assetTag);
+    $data['asset_photo']      = $this->asset_photo($assetTag);
+    $data['asset_monitoring'] = $this->asset_monitoring($assetTag);
+    $data['jos']              = $this->jo($assetTag);
+    $data['events']           = $this->events($assetTag);
+    $data['insurance']        = $this->insurance($assetTag);
 
     $pdf = PDF::loadView('asset.report1',  $data);
     return $pdf->stream('asset.report1.pdf');
@@ -100,6 +101,12 @@ class PdfController extends Controller {
       $assets = $assets->first();
 
       return $assets;
+   }
+
+   public function asset_photo($assetTag){
+
+    $data = DB::table('asset_photos as ap')->where('ap.asset_tag', $assetTag)->where('ap.asset_photo_status', 1)->first();
+    return $data;
    }
 
    public function jo($assetTag){

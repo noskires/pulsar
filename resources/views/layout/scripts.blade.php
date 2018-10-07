@@ -32,6 +32,13 @@
 <script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>  
 <!-- <script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>   -->
 
+<script src="{{URL::to('bower_components/baguettebox.js/dist/baguetteBox.min.js')}}"></script>  
+<script type="text/javascript">
+  baguetteBox.run('.gallery', {
+
+  });
+</script>
+
 <!-- Pulsar App -->
 
 <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script> -->
@@ -42,10 +49,9 @@
 
 <script type="text/javascript" src="{{URL::to('bower_components/ui-bootstrap-tpls-2.3.0.js')}}"></script>
 
+<!-- simpleLightbox Gallery-->
+<script src="{{URL::to('bower_components/simpleLightbox-master/dist/simpleLightbox.min.js')}}"></script>
 
-<!-- PDF -->
-<script src="{{URL::to('bower_components/pdfmake/build/pdfmake.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/pdfmake/build/vfs_fonts.js')}}"></script>
 
 <script src="{{URL::to('js/pulsarApp.js')}}"></script>
 
@@ -69,6 +75,7 @@
 
 <script src="{{URL::to('js/services/stockUnit.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/particulars.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/assetPhotos.srvcs.js')}}"></script> 
 <!-- Controllers -->
 <script src="{{URL::to('js/controller/dataTablesCtrl.js')}}"></script> 
 

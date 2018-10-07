@@ -28,6 +28,7 @@
     @yield('content')
     <div ui-view></div>
   </div>
+
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
@@ -42,3 +43,4 @@
 
 </body>
 </html>
+
