@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+    <head>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>SimpleLightbox</title>
+
+
+        <link rel="stylesheet" href="dist/simpleLightbox.min.css">
+        <script src="dist/simpleLightbox.min.js"></script>
+    </head>
+<body>
+    <section id="section-examples" class="attireBlock mod1">
+
+
+    <div class="inner">
+        <div class="imageGallery1">
+            <a href="demo/images/4big.jpg" title="Caption for gallery item 1"><img src="demo/images/4small.jpg" alt="Gallery image 1" /></a>
+            <a href="demo/images/5big.jpg" title="Caption for gallery item 2"><img src="demo/images/5small.jpg" alt="Gallery image 2" /></a>
+            <a href="demo/images/6big.jpg" title="Caption for gallery item 3"><img src="demo/images/6small.jpg" alt="Gallery image 3" /></a>
+        </div>
+
+
+<style>
+    .imageGallery1 {
+        overflow: hidden; margin: 30px -20px;
+    }
+    .imageGallery1 > a {
+        float: left; width: 10%; padding: 1px; box-sizing: border-box; position: relative;
+    }
+    .imageGallery1 > a:first-child { left: -5px; }
+    .imageGallery1 > a:last-child { right: -5px; }
+    .imageGallery1 > a > img {
+    display: block; width: 100%;
+    }
+</style>
+
+<script>
+    new SimpleLightbox({elements: '.imageGallery1 a'});
+    // or if using jQuery
+    // $('.imageGallery1 a').simpleLightbox();
+</script>
+
+</section>
+
+</footer>
+</body>
+</html>

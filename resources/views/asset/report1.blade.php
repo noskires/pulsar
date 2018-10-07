@@ -94,7 +94,11 @@
 			            </table>
 			        </td>
 	                <td align="center">
-	                	<img src="assets/dist/img/dumptruck_1024x768.jpg" style='width:190px;'> <br>
+                    @if($asset_photo)
+                    <img src="uploads/{{$asset_photo->asset_photo_name}}" style='width:190px;'> <br>
+                    @else
+	                	<img src="uploads/no-image.png" style='width:190px;'> <br>
+                    @endif
 	                	<img src="assets/dist/img/qrcode.png" style='width:150px;'>
 	            	</td>
           		</tr>

@@ -71,6 +71,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                exportAssets: function(data) {
+                    return $http({
+                        method: 'GET',
+                        url: '/api/v1/export-assets',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 // getTag: function(data) {
                 //     return $http({
                 //         method: 'POST',

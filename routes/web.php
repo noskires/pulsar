@@ -72,8 +72,7 @@ Route::get('/asset/new','AssetsController@index');
 Route::get('/asset/list-equipments','AssetsController@index'); 
 Route::get('/asset/list-equipments/{asset_code}','AssetsController@index'); 
 Route::get('/asset/more-details/{asset_code}','AssetsController@index'); 
-
-
+Route::get('/asset/more-details4/{asset_code}','AssetsController@index'); 
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +91,8 @@ Route::get('/api/v1/assetEvents','AssetsController@asset_events');
 Route::get('/api/v1/assets-by-name','AssetsController@assetsByName'); 
 Route::get('/api/v1/assets/asset-categories','AssetsController@asset_categories');
 Route::get('/api/v1/assets/methods','AssetsController@methods');
+
+Route::get('/api/v1/assets-photos','AssetPhotosController@assetPhotos'); 
 
 /*
 |--------------------------------------------------------------------------
@@ -436,5 +437,13 @@ Route::get('/api/v1/municipalities','Address\MunicipalitiesController@municipali
 
 Route::get('/api/v1/positions','Employee\PositionsController@positions');
 
+/*
+|--------------------------------------------------------------------------
+| Export excel 
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/export-employees','ExportController@exportEmployees')->name('exports.employees');
+Route::get('/api/v1/export-assets','ExportController@exportAssets')->name('exports.assets');
 
 });

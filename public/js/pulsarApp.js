@@ -43,9 +43,6 @@
             };
         })
 
-
-
-
         Config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$interpolateProvider', 'dynamicNumberStrategyProvider']
         function Config($stateProvider, $urlRouterProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $interpolateProvider, dynamicNumberStrategyProvider){
             console.log("App here!");
@@ -111,6 +108,12 @@
                 url: '/asset/more-details/:assetTag',
                 controller: 'AssetMoreDetailsCtrl as amdc',
                 templateUrl: 'asset.more.details.view',
+            })
+
+            .state('asset-more-details4', {
+                url: '/asset/more-details4/:assetTag',
+                controller: 'AssetMoreDetailsCtrl as amdc',
+                templateUrl: 'asset.more.details.view4',
             })
 
             // .state('asset-list-equipments.asset', {
@@ -296,6 +299,10 @@
                 url: '/angular-datatables/new',
                 controller: 'EmployeesCtrl as ec',
                 templateUrl: 'employee.list.view'
+            })
+
+            .state('image', {
+                url: '/assets/dist/img/dumptruck2_1024x768.jpg'
             })
             //for testing only
 

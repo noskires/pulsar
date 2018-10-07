@@ -10,6 +10,8 @@
 <!-- Main content -->
 <section class="content">
   <div class="box">
+
+    <a href="#" class="btn btn-info" style="margin:10px;" ng-click="ac.exportAssets()" > Export Assets </a>
     <div class="box-body">
       <table datatable="ng" class="table table-bordered table-hover" width="100%">
         <thead>
@@ -53,76 +55,66 @@
 
 <script type="text/ng-template" id="assetInfo.modal">
 <!-- MODAL HERE HERE -->
-  
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" ng-click="vm.ok()">
-        <span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag: <b><%vm.formData.asset.tag%></b></h4>
-    </div>
-    <div class="modal-body">
-      <!-- Custom Tabs (Pulled to the right) -->
-      <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs pull-right">
-          <li class="active"><a href="#tab_1-1" data-toggle="tab">Asset Details</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              Options <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Assign</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lease</a></li>
-              <li role="presentation" class="divider"></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Donate</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sell</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Dispose</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lost / Missing</a></li>
-              <li role="presentation" class="divider"></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>Create Job Order</b></a></li>
-            </ul>
-          </li>
-          <li class="pull-left header"><%vm.formData.asset.name%></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="tab_1-1">
-            <div class="row">
-              <div class="col-sm-6"><br>
-                <!-- <img src="../../dist/img/dumptruck3_1024x768.jpg" style="width:100%;height:100%;"> -->
-                <img src="{{URL::to('assets/dist/img/dumptruck.jpg')}}" style="width:100%;height:100%;" class="img-square">
-              </div>
-              <div class="col-sm-6">
+ 
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="vm.ok()">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag: <b><%vm.formData.asset.tag%></b></h4>
+      </div>
+      <div class="modal-body">
+        <!-- Custom Tabs (Pulled to the right) -->
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs pull-right">
+            <li class="active"><a href="#tab_1-1" data-toggle="tab">Asset Details</a></li>
+            <li class="pull-left header">Dump Truck</li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab_1-1">
+              <div class="row">
+                <div class="col-sm-6"><br>
+                  <img src="uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==0">
+                  <img src="uploads/<%vm.assetPhoto[0].asset_photo_name%>" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==1">
+                </div>
+
+                <div style="font-size: 14px;">
                 <b>Category:</b> <%vm.formData.asset.asset_name%><br>
                 <b>ID:</b> <%vm.formData.asset.code%><br>
                 <b>Model:</b> <%vm.formData.asset.model%><br>
                 <b>Make/Brand:</b> <%vm.formData.asset.brand%><br>
                 <b>Date Acquired:</b> <%vm.formData.asset.date_acquired%><br>
-                <b>Acquisition Cost:</b> ₱<%vm.formData.asset.acquisition_cost | number:2%><br>
-                <b>Plate No.:</b> <%vm.formData.asset.plate_no%> <br>
+                <b>Acquisition Cost:</b> <%vm.formData.asset.acquisition_code%><br>
+                <b>Plate No:</b> <%vm.formData.asset.plate_no%><br>
                 <b>Engine No:</b> <%vm.formData.asset.engine_no%> <br>
-                <b>Location:</b> <%vm.formData.asset.municipality_text%><br>
+                <b>Location:</b> <%vm.formData.asset.municipality_text%> <br>
+                <b>Warranty:</b> <%vm.formData.asset.warranty_date%> <br>
                 <b>Assigned to:</b> <a href="#"><%vm.formData.asset.employee_name%></a><br>
-                <b>Status:</b> <small class="label bg-green">Active</small><br><br>
+                <b>Status:</b> <small class="label bg-green"><%vm.formData.asset.status%></small>
               </div>
-            </div>        
+              </div>        
+            </div>
+            <!-- /.tab-pane -->
           </div>
-          <!-- /.tab-pane -->
+          <!-- /.tab-content -->
         </div>
-        <!-- /.tab-content -->
+        <button type="button" class="btn btn-primary pull-right" ui-sref="asset-more-details({assetTag:vm.formData.asset.tag})" ng-click="vm.ok()">
+          <li class="fa fa-navicon "></li> More Details</button>
+        <a class="btn btn-info pull-right" style="margin-right: 7px;" ng-click="vm.printAssetDetails(vm.formData.asset.tag)" target="_blank" ng-href="<%vm.url%>"  style="margin-right: 7px;"><li class="fa fa-print"></li> Print
+        </a>
+
+        <!-- <button type="button" class="btn btn-default pull-right" style="margin-right: 7px;"><li class="fa fa-folder-o"></li> Create J.O.</button>   -->
+
+        <!-- nav-tabs-custom -->
       </div>
-      
+      <div class="modal-footer">
+      </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary pull-right" ui-sref="asset-more-details({assetTag:vm.formData.asset.tag})" ng-click="vm.ok()">
-        <li class="fa fa-navicon "></li> More Details</button>
-      <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button>
-      <!-- nav-tabs-custom -->
-    </div>
+    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
+  <!-- /.modal-dialog --> 
+
+<!-- asdf -->
  
 </script>
 

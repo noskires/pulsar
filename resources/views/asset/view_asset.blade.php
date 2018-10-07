@@ -1,4 +1,7 @@
+
+
 <!-- Content Header (Page header) -->
+
 <section class="content-header">
   <h1><span class="fa fa-tags"> </span> Asset Profile</h1>
   <ol class="breadcrumb">
@@ -6,56 +9,22 @@
     <li class="active">Assets</li>
   </ol>
 </section>
-
 <section class="content">
   <div class="row">
 <!-- ////// LEFT COLUMN -->
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"> <%amdc.asset.name%> : <b><%amdc.asset.tag%></b></h3>
+          <h3 class="box-title"><b> <%amdc.asset.name%>: <%amdc.asset.tag%></b></h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <div class="col-md-6">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner">
-                <div class="item active">
-                  <img src="{{URL::to('assets/dist/img/dumptruck_1024x768.jpg')}}" style="width:100%;height:100%;">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h3>Quarry</h3>
-                    <p>04/06/2018</p>
-                  </div>
-                </div>
-                <div class="item">
-                  <img src="{{URL::to('assets/dist/img/dumptruck2_1024x768.jpg')}}" style="width:100%;height:100%;">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h3>Station</h3>
-                    <p>02/02/2018</p>
-                  </div>
-                </div>
-                <div class="item">
-                  <img src="{{URL::to('assets/dist/img/dumptruck3_1024x768.jpg')}}" style="width:100%;height:100%;">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h3>Motor Pool</h3>
-                    <p>01/01/2017</p>
-                  </div>
-                </div>
-              </div>
-              <!-- Left and right controls -->
-              <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
+          <div class="col-md-5"><br>
+            <img src="uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==0">
+            <img src="uploads/<%amdc.assetPhoto[0].asset_photo_name%>" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==1">
           </div>
-<!-- ////// BASIC DETAILS -->
-          <div class="col-md-5"> 
+          <!-- ////// BASIC DETAILS -->
+          <div class="col-md-7"> 
             <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title">Basic Details</h3>
@@ -76,20 +45,18 @@
               </div>
             </div>
           </div>
-<!-- ////// END BASIC DETAILS -->
+        <!-- ////// END BASIC DETAILS -->
         </div>
       </div>
-    <div>
-<!-- ////// ASSET EVENTS -->
+
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs pull-right tab-head">
           <li><a href="#tab_8-8" data-toggle="tab">Documents</a></li>
           <li><a href="#tab_7-7" data-toggle="tab">Insurances</a></li>
           <li><a href="#tab_3-3" data-toggle="tab">Events</a></li>
           <li class="active"><a href="#tab_2-2" data-toggle="tab">Maintenance History</a></li>
-          <li class="pull-left header"><h4><i class="fa fa-flag"></i> Attributes</li></h4>
+          <li class="pull-left header"><h4><b> Attributes</b></h4>
         </ul>
-
 
         <div class="tab-content">
           <!-- /.tab-pane -->
@@ -108,8 +75,6 @@
           <!-- /.tab-pane -->
 
           <div class="active tab-pane" id="tab_2-2">
-            
-            <a href="#" ng-click="amdc.printAssetDetails()"> Print Asset Details </a>
             <h4><b>Maintenance History</b></h4>
             <table class="table" width="100%" datatable="ng">
               <thead>
@@ -149,8 +114,7 @@
           <!-- /.tab-pane -->
 
           <div class="tab-pane" id="tab_7-7">
-            <h4><b>Asset Insurance:</b><button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#modal-insurance">
-            <li class="fa fa-link"></li> Link Insurance</button></h4> 
+            <h4><b>Asset Insurance:</b></h4> 
             <table class="table" width="100%">
               <thead>
               <tr>
@@ -159,7 +123,6 @@
                 <th>Contact Person</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th><li class="fa fa-edit"></li></th>
               </tr>
               </thead>
               <tbody>
@@ -169,7 +132,9 @@
                 <td><%insurance.insurance_agent%></td>
                 <td><%insurance.date_issued%></td>
                 <td><%insurance.expiration_date%></td>
-                <td><a href="#" data-toggle="modal" data-target="#modal-warranty"><code class="text-green">EDIT</code></a></td>
+              </tr>
+              <tr ng-if="amdc.insurance.length==0">
+                <td colspan="5" align="center"> NO RECORDS </td>
               </tr>
               </tbody>
             </table>
@@ -226,14 +191,14 @@
       </div>
 <!-- ////// END ASSET ATTRIBUTES -->
     </div>
-    <!-- /.col -->
-  </div>
 
-<!-- ////// RIGHT COLUMN -->
-    <div class="col-md-4">
-<!-- ////// APPLICATION BUTTONS -->
+    <!-- right column -->
+    <div class="col-md-3">
+
       <div class="box"> 
-
+            <div class="box-header with-border">
+              <h3 class="box-title"><b>Actions</b></h3>
+            </div> 
         <div class="box-body">
           <a class="btn btn-app" data-toggle="modal" ng-click="amdc.editAsset()">
             <i class="fa fa-edit"></i> Edit
@@ -277,11 +242,12 @@
             <i class="fa fa-compass"></i> Other Actions
           </a>
         </div>
-        <!-- /.box-body -->
       </div>
-<!-- ////// END APPLICATION BUTTONS -->
-<!-- ////// OPERATING DATA -->
-      <div class="box"> 
+
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title"><b>Current Operating Records </b></h3>
+        </div>  
         <div class="box-body">
           <div class="wrapper" style="color: #000;background-color: #fff;">
               <div class="counter col_fourth col-sm-3">
@@ -311,336 +277,249 @@
           </div>
         </div>
       </div>
-<!-- ////// END OPERATING DATA -->
+
+
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="box-title"><b>Image Gallery</b></h3>
+          </div> 
+          <div class="box-body">
+
+            <div class="gallery">
+                <a href="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" data-caption="Golden Gate Bridge"><img src="https://feimosi.github.io/baguetteBox.js/img/thumbs/1-1.jpg"></a>
+                <a href="https://feimosi.github.io/baguetteBox.js/img/1-2.jpg" title="Midnight City"><img src="https://feimosi.github.io/baguetteBox.js/img/thumbs/1-2.jpg"></a>
+                <a href="https://feimosi.github.io/baguetteBox.js/img/1-3.jpg"><img src="https://feimosi.github.io/baguetteBox.js/img/thumbs/1-3.jpg"></a>
+            </div>
+
+            <div class="imageGallery1">
+              <a href="uploads/<%assetPhoto.asset_photo_name%>" title="Dump Truck:CONE-03082018-DT1 10/20/2017" ng-repeat="assetPhoto in amdc.assetPhotos">
+                <img src="uploads/<%assetPhoto.asset_photo_name%>" alt="Gallery image 1"/>
+              </a>
+            </div>
+          </div>
+        </div>
     </div>
-<!-- ////// END RIGHT COLUMN -->
+
   </div>
 
-
-
-<!-- START TABS -->
-<br>
-<div class="row">
-<!-- ////// RIGHT COLUMN -->
-    <!-- /.col -->
-</div>
-
-<!-- ////// ATTRIBUTES MODALS HERE -->
-<!-- MODAL-WARRANTY HERE HERE -->
-    <div class="modal fade" id="modal-warranty">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><li class="fa fa-plus"></li> Add an Asset Warranty</h4>
-          </div>
-        <form class="form-horizontal" id="">
-          <div class="modal-body"><br>
-            <div class="form-group">
-              <label for="controlnumber" class="col-sm-3 control-label">Length (Months)</label>
-              <div class="col-sm-8"><input type="text" class="form-control" id="warranty_months" required=""></div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Expiration Date</label>
-              <div class="col-sm-8">
-              <div class="input-group date">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="warranty_expiration" required="">
-            </div></div>
-            </div>
-            <div class="form-group">
-              <label for="rs-desc" class="col-sm-3 control-label">Description/Remarks</label>
-              <div class="col-sm-8"><textarea class="col-sm-8 form-control" id="warranty_desc" rows="2"></textarea></div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-<!-- MODAL-INSURANCE HERE HERE -->
-    <div class="modal fade" id="modal-insurance">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><li class="fa fa-link"></li> Link an Insurance</h4>
-          </div>
-          <form class="form-horizontal" id="">
-          <div class="modal-body">
-          <p>Select an insurance from the list below. <br>To define a new insurance go to Advanced > Insurance.</p><br> 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Insurance</label>
-              <div class="col-sm-8">
-              <select class="form-control select2" style="width: 100%;" required="">
-              <option selected="selected" value="0">- - - nothing selected - - -</option>
-              <option value="1">Insurance#12323 (BPI Car Insurance)</option>
-              <option value="2">Insurance#22222 (BPI Car Insurance)</option>
-              <option value="3">Insurance#33333 (BPI Car Insurance)</option>
-              </select>
-              </div>              
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Link Insurance</button>
-          </div>
-          </form>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-
 <!-- MODAL-DOCS HERE HERE -->
-    <div class="modal fade" id="modal-docs">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><li class="fa fa-upload"></li> Upload new Document</h4>
-          </div>
-
-
-
-
-          <form class="form-horizontal" id="">
-          <div class="modal-body"><br>
-            <div class="form-group">
-              <label for="assetimg" class="col-sm-3 control-label">Upload File</label>
-              <div class="col-sm-8">
-              <div class="input-group">
-              <label class="input-group-btn">
-                <span class="btn btn-default">Browse&hellip; <input type="file" style="display: none;"></span>
-              </label>
-              <input type="text" class="form-control" id="asset_doc" readonly required="">
-            </div> </div>               
-            </div>
-            <div class="form-group">
-              <label for="controlnumber" class="col-sm-3 control-label">Description </label>
-              <div class="col-sm-8"><input type="text" class="form-control" id="asset_docdesc" required=""></div>
-            </div>
-
-
-          </div>
-
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Upload</button>
-          </div>
-          </form>
-        </div>
-        <!-- /.modal-content -->
+<div class="modal fade" id="modal-docs">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-upload"></li> Upload new Document</h4>
       </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-
-<!-- MODAL-IMAGE HERE HERE -->
-    <div class="modal fade" id="modal-image">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><li class="fa fa-image"></li> Upload new Image</h4>
-          </div>
-
-          <div  class="form-group">
-            upload file:
-            <form action="{{ URL::to('upload') }}" method="post" enctype="multipart/form-data">
-              <label>Select image to upload:</label>
-                <input type="file" name="file" id="file">
-                <input type="submit" value="Upload" name="submit">
-              <input type="hidden" value="{{ csrf_token() }}" name="_token">
-            </form>
-          </div>
-          
-          <form class="form-horizontal" id="">
-          <div class="modal-body"><br>
-            <div class="form-group">
-              <label for="assetimg" class="col-sm-3 control-label">Upload Image</label>
-              <div class="col-sm-8">
-              <div class="input-group">
-              <label class="input-group-btn">
-                <span class="btn btn-default">Browse&hellip; <input type="file" style="display: none;"></span>
-              </label>
-              <input type="text" class="form-control" id="asset_doc" readonly required="">
-            </div> </div>               
-            </div>
-            <div class="form-group">
-              <label for="controlnumber" class="col-sm-3 control-label">Description </label>
-              <div class="col-sm-8"><input type="text" class="form-control" id="asset_docdesc" required=""></div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Upload</button>
-          </div>
-          </form>
+      <form class="form-horizontal" id="">
+      <div class="modal-body"><br>
+        <div class="form-group">
+          <label for="assetimg" class="col-sm-3 control-label">Upload File</label>
+          <div class="col-sm-8">
+          <div class="input-group">
+          <label class="input-group-btn">
+            <span class="btn btn-default">Browse&hellip; <input type="file" style="display: none;"></span>
+          </label>
+          <input type="text" class="form-control" id="asset_doc" readonly required="">
+        </div> </div>               
         </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->        
-
-<!-- MODAL-OTHER ACTIONS HERE HERE -->
-    <div class="modal fade" id="modal-actions">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><li class="fa fa-compass"></li> Add Asset Event</h4>
-          </div>
-          <form class="form-horizontal" id="" ng-model="assetEventDetails">
-          <div class="modal-body"><br>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Event</label>
-              <div class="col-sm-8">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="assetEventDetails.status">
-              <option>Select Asset Event</option>
-              <option value="LEASE">Lease</option>
-              <option value="DONATE">Donate</option>
-              <option value="SELL">Sell</option>
-              <option value="DISPOSE">Dispose</option>
-              <option value="LOST/MISSING">Lost/Missing</option>
-              </select>
-              </div>              
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Event Date</label>
-              <div class="col-sm-8">
-              <div class="input-group date">
-              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="event_date" required="" ng-model="assetEventDetails.event_date">
-            </div></div>
-            </div>
-            <div class="form-group">
-              <label for="rs-desc" class="col-sm-3 control-label">Description/Remarks</label>
-              <div class="col-sm-8"><textarea class="col-sm-8 form-control" id="" rows="3" ng-model="assetEventDetails.remarks"></textarea></div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" ng-click="amdc.addAssetEventBtn(assetEventDetails)">Submit</button>
-          </div>
-        </form>
+        <div class="form-group">
+          <label for="controlnumber" class="col-sm-3 control-label">Description </label>
+          <div class="col-sm-8"><input type="text" class="form-control" id="asset_docdesc" required=""></div>
         </div>
-        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
+      </form>
     </div>
-    <!-- /.modal -->
-
-<!-- MODAL-EDIT HERE HERE -->
-<script type="text/ng-template" id="assetEditTpl.modal">
-    
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><li class="fa fa-edit"></li> Edit Basic Details of Asset</h4>
-              </div>
-              <form class="form-horizontal" id="">
-              <div class="box-body">
-                <div class="form-group col-sm-12">
-                  <label for="controlnumber" class="col-sm-2 control-label">Asset Category</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="assettag" placeholder="CONSTRUCTION EQUIPMENT" disabled ng-model="vm.formData.asset_name"></div>
-                </div>
-
-                <div class="form-group col-sm-12">  
-                  <label for="assetname" class="col-sm-2 control-label">Asset Name</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="assetname" placeholder="DUMPTRUCK" required="" disabled ng-model="vm.formData.name"></div>
-                </div>
-
-                <div class="form-group col-sm-12">
-                  <label for="controlnumber" class="col-sm-2 control-label">Asset ID</label>
-                  <div class="col-sm-4"><input type="text" class="form-control" id="assettag" placeholder="CONE-03082018-DT1" disabled ng-model="vm.formData.tag"></div>
-                </div>               
-
-                <div class="form-group col-sm-12">
-                  <label for="controlnumber" class="col-sm-2 control-label">Description</label>
-                  <div class="col-sm-10"><input type="text" class="form-control" id="description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification"></div>
-                </div>
-
-                <div class="form-group col-sm-12">
-                  <label for="modelnumber" class="col-sm-2 control-label">Model</label>
-                  <div class="col-sm-4"><input type="text" class="form-control" id="modelnumber" placeholder="" required=""ng-model="vm.formData.model"></div>
-                  <label for="brandname" class="col-sm-2 control-label">Brand</label>
-                  <div class="col-sm-4"><input type="text" class="form-control" id="brandname" placeholder="" ng-model="vm.formData.brand"></div>
-                </div>
-
-                <div class="form-group col-sm-12">
-                  <!-- <label class="col-sm-2 control-label">Owner Company</label>
-                  <div class="col-sm-4">
-                  <select class="form-control select2" style="width: 100%;" required="">
-                  <option selected="selected" value="1">PULSAR CONSTRUCTION</option>
-                  <option value="1">JJE CONSTRUCTION</option>
-                  </select>
-                  </div> -->
-
-                  <label class="col-sm-2 control-label">Date Acquired</label>
-                  <div class="col-sm-4">
-                  <div class="input-group date">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" id="dateacquired" ng-model="vm.formData.date_acquired">
-                  </div></div>
-                  <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost</label>
-                  <div class="col-sm-4">
-                  <div class="input-group date">
-                  <span class="input-group-addon" style="font-size: 20px;">₱</span>
-                  <input type="text" class="form-control" id="acquisitioncost" placeholder="" required="" ng-model="vm.formData.acquisition_cost">
-                  </div></div>  
-                </div>
-
-                <div class="form-group col-sm-12">
-                  <label for="platenumber" class="col-sm-2 control-label">Plate No.</label>
-                  <div class="col-sm-4"><input type="text" class="form-control" id="platenumber" placeholder="" required="" ng-model="vm.formData.plate_no"></div>
-                  <label for="enginenumber" class="col-sm-2 control-label">Engine/Serial No.</label>
-                  <div class="col-sm-4"><input type="text" class="form-control" id="enginenumber" placeholder="" required="" ng-model="vm.formData.engine_no"></div>
-                </div>
-
-                <div class="form-group col-sm-12">
-                  <label for="platenumber" class="col-sm-2 control-label">Chassis No.</label>
-                  <div class="col-sm-4"><input type="text" class="form-control" id="chassisnumber" placeholder="" required="" ng-model="vm.formData.chassis_no"></div>
-                  <label class="col-sm-2 control-label">Warranty Date</label>
-                  <div class="col-sm-4">
-                  <div class="input-group date">
-                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" id="datewarranty" datepicker ng-model="vm.formData.waarranty_date">
-                  </div></div>
-                </div>
-
-                <div class="form-group col-sm-12">           
-                <div class="col-sm-8"></div>
-                <div class="col-sm-4"><br>
-                <button class="btn btn-large btn-primary btn-block" data-toggle="confirmation"
-                data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
-                data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-                data-title="Confirm data update." data-content="Are you sure?" ng-click="vm.updateAsset(vm.formData)"> UPDATE
-                </button></div></div>
-              <!-- /.box-body -->
-            </form>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-    
-
-      </script>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 <!-- /.modal -->
 
+<!-- MODAL-IMAGE HERE HERE -->
+<div class="modal fade" id="modal-image">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-image"></li> Upload new Image</h4>
+      </div>
+      <form class="form-horizontal" id="" action="{{ URL::to('upload') }}" method="post" enctype="multipart/form-data">
+      <div class="modal-body"><br>
+        <div class="form-group">
+          <label for="assetimg" class="col-sm-3 control-label">Upload Image</label>
+          <div class="col-sm-8">
+          <div class="input-group">
+          <label class="input-group-btn">
+            <span class="btn btn-default">Browse&hellip; <input type="file" name="file" id="file" style="display: none;"></span>
+          </label>
+          <input type="text" class="form-control" id="" readonly required="">
+          <input type="hidden" name="assetTag" value="<%amdc.asset.tag%>">
+          <input type="hidden" value="{{ csrf_token() }}" name="_token">
+        </div> </div>               
+        </div>
+        <div class="form-group">
+          <label for="controlnumber" class="col-sm-3 control-label">Description </label>
+          <div class="col-sm-8"><input type="text" class="form-control" id="asset_docdesc" name="description" required=""></div>
+        </div>
+        <div class="form-group">
+          <label for="controlnumber" class="col-sm-3 control-label">Set as primary photo </label>
+          <div class="col-sm-8">
+          <input type="checkbox" name="status" value="1"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" name="uploadPhotoButton" value="asdf">Upload</button>
+      </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->        
+
+<!-- MODAL-OTHER ACTIONS HERE HERE -->
+<div class="modal fade" id="modal-actions">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-compass"></li> Add Asset Event</h4>
+      </div>
+      <form class="form-horizontal" id="" ng-model="assetEventDetails">
+      <div class="modal-body"><br>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Event</label>
+          <div class="col-sm-8">
+          <select class="form-control select2" style="width: 100%;" required="" ng-model="assetEventDetails.status">
+          <option>Select Asset Event</option>
+          <option value="LEASE">Lease</option>
+          <option value="DONATE">Donate</option>
+          <option value="SELL">Sell</option>
+          <option value="DISPOSE">Dispose</option>
+          <option value="LOST/MISSING">Lost/Missing</option>
+          </select>
+          </div>              
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Event Date</label>
+          <div class="col-sm-8">
+          <div class="input-group date">
+          <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+          <input type="text" class="form-control pull-right" id="event_date" required="" ng-model="assetEventDetails.event_date">
+        </div></div>
+        </div>
+        <div class="form-group">
+          <label for="rs-desc" class="col-sm-3 control-label">Description/Remarks</label>
+          <div class="col-sm-8"><textarea class="col-sm-8 form-control" id="" rows="3" ng-model="assetEventDetails.remarks"></textarea></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" ng-click="amdc.addAssetEventBtn(assetEventDetails)">Submit</button>
+      </div>
+    </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+
+<!-- MODAL-EDIT HERE HERE -->
+  <script type="text/ng-template" id="assetEditTpl.modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-edit"></li> Edit Basic Details of Asset</h4>
+        </div>
+        <form class="form-horizontal" id="">
+        <div class="box-body">
+          <div class="form-group col-sm-12">
+            <label for="controlnumber" class="col-sm-2 control-label">Asset Category</label>
+            <div class="col-sm-10"><input type="text" class="form-control" id="assettag" placeholder="CONSTRUCTION EQUIPMENT" disabled ng-model="vm.formData.asset_name"></div>
+          </div>
+          <div class="form-group col-sm-12">  
+            <label for="assetname" class="col-sm-2 control-label">Asset Name</label>
+            <div class="col-sm-10"><input type="text" class="form-control" id="assetname" placeholder="DUMPTRUCK" required="" disabled ng-model="vm.formData.name"></div>
+          </div>
+          <div class="form-group col-sm-12">
+            <label for="controlnumber" class="col-sm-2 control-label">Asset ID</label>
+            <div class="col-sm-4"><input type="text" class="form-control" id="assettag" placeholder="CONE-03082018-DT1" disabled ng-model="vm.formData.tag"></div>
+          </div>               
+          <div class="form-group col-sm-12">
+            <label for="controlnumber" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10"><input type="text" class="form-control" id="description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification"></div>
+          </div>
+
+          <div class="form-group col-sm-12">
+            <label for="modelnumber" class="col-sm-2 control-label">Model</label>
+            <div class="col-sm-4"><input type="text" class="form-control" id="modelnumber" placeholder="" required=""ng-model="vm.formData.model"></div>
+            <label for="brandname" class="col-sm-2 control-label">Brand</label>
+            <div class="col-sm-4"><input type="text" class="form-control" id="brandname" placeholder="" ng-model="vm.formData.brand"></div>
+          </div>
+          <div class="form-group col-sm-12">
+            <label class="col-sm-2 control-label">Date Acquired</label>
+            <div class="col-sm-4">
+            <div class="input-group date">
+            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+            <input type="text" class="form-control pull-right" id="dateacquired" ng-model="vm.formData.date_acquired">
+            </div></div>
+            <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost</label>
+            <div class="col-sm-4">
+            <div class="input-group date">
+            <span class="input-group-addon" style="font-size: 20px;">₱</span>
+            <input type="text" class="form-control" id="acquisitioncost" placeholder="" required="" ng-model="vm.formData.acquisition_cost">
+            </div></div>  
+          </div>
+
+          <div class="form-group col-sm-12">
+            <label for="platenumber" class="col-sm-2 control-label">Plate No.</label>
+            <div class="col-sm-4"><input type="text" class="form-control" id="platenumber" placeholder="" required="" ng-model="vm.formData.plate_no"></div>
+            <label for="enginenumber" class="col-sm-2 control-label">Engine/Serial No.</label>
+            <div class="col-sm-4"><input type="text" class="form-control" id="enginenumber" placeholder="" required="" ng-model="vm.formData.engine_no"></div>
+          </div>
+
+          <div class="form-group col-sm-12">
+            <label for="platenumber" class="col-sm-2 control-label">Chassis No.</label>
+            <div class="col-sm-4"><input type="text" class="form-control" id="chassisnumber" placeholder="" required="" ng-model="vm.formData.chassis_no"></div>
+            <label class="col-sm-2 control-label">Warranty Date</label>
+            <div class="col-sm-4">
+            <div class="input-group date">
+            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+            <input type="text" class="form-control pull-right" id="datewarranty" datepicker ng-model="vm.formData.waarranty_date">
+            </div></div>
+          </div>
+
+          <div class="form-group col-sm-12">           
+          <div class="col-sm-8"></div>
+          <div class="col-sm-4"><br>
+          <button class="btn btn-large btn-primary btn-block" data-toggle="confirmation"
+          data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+          data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+          data-title="Confirm data update." data-content="Are you sure?" ng-click="vm.updateAsset(vm.formData)"> UPDATE
+          </button></div></div>
+        <!-- /.box-body -->
+      </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+  </script>
+  <!-- /.modal -->
+
 </section>
+
+
+
