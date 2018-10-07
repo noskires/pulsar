@@ -38,7 +38,7 @@
                 <b>Acquisition Cost:</b> <%amdc.asset.acquisition_cost%><br>
                 <b>Plate No:</b> <%amdc.asset.plate_no%><br>
                 <b>Engine No:</b> <%amdc.asset.engine_no%> <br>
-                <b>Location:</b> <%amdc.asset.municipality_text%> <br>
+                <b>Location:</b> <%amdc.asset.barangay+' '+amdc.asset.municipality_text +' '+ amdc.asset.province_text+' '+ amdc.asset.region_text_short%> <br>
                 <b>Warranty:</b> <%amdc.asset.warranty_date%> <br>
                 <b>Assigned to:</b> <a href="#"><%amdc.asset.employee_name%></a><br>
                 <b>Status:</b> <small class="label bg-green"><%amdc.asset.status%></small>
@@ -284,12 +284,6 @@
             <h3 class="box-title"><b>Image Gallery</b></h3>
           </div> 
           <div class="box-body">
-
-            <div class="gallery">
-                <a href="https://feimosi.github.io/baguetteBox.js/img/1-1.jpg" data-caption="Golden Gate Bridge"><img src="https://feimosi.github.io/baguetteBox.js/img/thumbs/1-1.jpg"></a>
-                <a href="https://feimosi.github.io/baguetteBox.js/img/1-2.jpg" title="Midnight City"><img src="https://feimosi.github.io/baguetteBox.js/img/thumbs/1-2.jpg"></a>
-                <a href="https://feimosi.github.io/baguetteBox.js/img/1-3.jpg"><img src="https://feimosi.github.io/baguetteBox.js/img/thumbs/1-3.jpg"></a>
-            </div>
 
             <div class="imageGallery1">
               <a href="uploads/<%assetPhoto.asset_photo_name%>" title="Dump Truck:CONE-03082018-DT1 10/20/2017" ng-repeat="assetPhoto in amdc.assetPhotos">

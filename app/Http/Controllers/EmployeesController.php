@@ -36,12 +36,15 @@ class EmployeesController extends Controller {
                       'e.division AS division_code',
                       'div.org_name AS division',
                       'e.unit AS unit_code',
-                      'unit.org_name AS unit'
+                      'unit.org_name AS unit',
+                      'e.organizational_unit AS organizational_unit_code',
+                      'org_unit.org_name AS organizational_unit_name'
                     )
                     ->leftjoin('positions as p','p.position_code','=','e.position_code')
                     ->leftjoin('organizations as dep','dep.org_code','=','e.department')
                     ->leftjoin('organizations as div','div.org_code','=','e.division')
-                    ->leftjoin('organizations as unit','unit.org_code','=','e.unit');
+                    ->leftjoin('organizations as unit','unit.org_code','=','e.unit')
+                    ->leftjoin('organizations as org_unit','org_unit.org_code','=','e.organizational_unit');
 
       	if ($data['jobType']){ 
       		$employees = $employees->where('e.position_code', $data['jobType']);
@@ -86,12 +89,15 @@ class EmployeesController extends Controller {
                       'e.division AS division_code',
                       'div.org_name AS division',
                       'e.unit AS unit_code',
-                      'unit.org_name AS unit'
+                      'unit.org_name AS unit',
+                      'e.organizational_unit AS organizational_unit_code',
+                      'org_unit.org_name AS organizational_unit_name'
                     )
                     ->leftjoin('positions as p','p.position_code','=','e.position_code')
                     ->leftjoin('organizations as dep','dep.org_code','=','e.department')
                     ->leftjoin('organizations as div','div.org_code','=','e.division')
-                    ->leftjoin('organizations as unit','unit.org_code','=','e.unit');
+                    ->leftjoin('organizations as unit','unit.org_code','=','e.unit')
+                    ->leftjoin('organizations as org_unit','org_unit.org_code','=','e.organizational_unit');
 
         if ($data['employee_id']){ 
           $employees = $employees->where('employee_id', $data['employee_id']);
@@ -131,6 +137,14 @@ class EmployeesController extends Controller {
     $data['department'] = $request->input('department');
     $data['division'] = $request->input('division');
     $data['unit'] = $request->input('unit');
+
+    if($data['unit'] != ""){
+      $data['organizational_unit'] = $data['unit'];
+    }elseif($data['division'] != ""){
+      $data['organizational_unit'] = $data['division'];
+    }else{
+      $data['organizational_unit'] = $data['department'];
+    }
     
     $transaction = DB::transaction(function($data) use($data){
     try{
@@ -152,6 +166,7 @@ class EmployeesController extends Controller {
         $employee->department = $data['department'];
         $employee->division = $data['division'];
         $employee->unit = $data['unit'];
+        $employee->organizational_unit = $data['organizational_unit'];
         $employee->save();
 
         return response()->json([

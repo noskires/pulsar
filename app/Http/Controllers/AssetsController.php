@@ -75,14 +75,28 @@ class AssetsController extends Controller {
                 'a.status',
                 'sc.asset_category',
                 'sc.asset_name',
-                'm.municipality_text'
+                'e.organizational_unit',
+                'org.org_name as organizational_unit_name',
+                'org.barangay as barangay',
+                'm.municipality_code as municipality_code',
+                'm.municipality_text',
+                'p.province_code as province_code',
+                'p.province_text',
+                'r.region_code as region_code',
+                'r.region_text_short',
+                'r.region_text_long'
               )
+
             // ->leftjoin('Employees as e','e.employee_code','=','a.assign_to')
-            ->leftjoin('Projects as p','p.project_code','=','a.project_code')
-            ->leftjoin('municipalities as m','m.municipality_code','=','p.municipality_code')
+            // ->leftjoin('Projects as p','p.project_code','=','a.project_code')
+            
             ->leftjoin('asset_categories as sc','sc.asset_code','=','a.category')
             ->leftjoin('ares as are','are.are_code','=','a.are_code')
-      			->leftjoin('Employees as e','e.employee_code','=','are.employee_code');
+            ->leftjoin('Employees as e','e.employee_code','=','are.employee_code')
+            ->leftjoin('organizations as org','org.org_code','=','e.organizational_unit')
+            ->leftjoin('municipalities as m','m.municipality_code','=','org.municipality_code')
+            ->leftjoin('provinces as p','p.province_code','=','m.province_code')
+      			->leftjoin('regions as r','r.region_code','=','p.region_code');
 
       	if ($data['tag']){ 
       		$asset = $asset->where('a.tag', $data['tag']);
