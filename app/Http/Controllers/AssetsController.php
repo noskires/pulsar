@@ -65,6 +65,7 @@ class AssetsController extends Controller {
                 'a.category',
                 'a.model',
                 'a.brand',
+                'a.description',
                 DB::raw('DATE_FORMAT(a.date_acquired, "%M %d, %Y") as date_acquired'),
                 'a.acquisition_cost',
                 'a.plate_no',
@@ -320,6 +321,59 @@ class AssetsController extends Controller {
           $assetEvent->status = "Assigned";
           $assetEvent->remarks = "Assigned";
           $assetEvent->save();
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+
+  public function updateAsset(Request $request){
+
+      $data = array();
+
+      $data['tag'] = $request->input('tag');
+      $data['description'] = $request->input('description');
+      $data['model'] = $request->input('model');
+      $data['brand'] = $request->input('brand');
+      $data['date_acquired'] = date('Y-m-d', strtotime($request->input('date_acquired')));
+      $data['acquisition_cost'] = $request->input('acquisition_cost');
+      $data['plate_no'] = $request->input('plate_no');
+      $data['engine_no'] = $request->input('engine_no');
+      $data['chassis_no'] = $request->input('chassis_no');
+      $data['warranty_date'] = date('Y-m-d', strtotime($request->input('warranty_date')));
+      // $data['warranty_date'] = $request->input('warranty_date');
+
+      $transaction = DB::transaction(function($data) use($data){
+      // try{
+      
+          DB::table('assets')
+            ->where('tag', $data['tag'])
+            ->update([
+              'description'   => $data['description'],
+              'model'         => $data['model'],
+              'brand'         => $data['brand'],
+              'date_acquired' => $data['date_acquired'],
+              'acquisition_cost' => $data['acquisition_cost'],
+              'plate_no'      => $data['plate_no'],
+              'engine_no'     => $data['engine_no'],
+              'chassis_no'    => $data['chassis_no'],
+              'warranty_date' => $data['warranty_date'],
+            ]);
 
         return response()->json([
             'status' => 200,

@@ -83,6 +83,7 @@ Route::get('/asset/more-details4/{asset_code}','AssetsController@index');
 Route::post('/api/v1/assets/save','AssetsController@save');
 Route::post('/api/v1/assets/saveAssetEvent','AssetsController@saveAssetEvent');
 Route::post('/api/v1/assets/update','AssetsController@update');
+Route::post('/api/v1/assets/update-asset','AssetsController@updateAsset');
 Route::post('/api/v1/assets/asset-tag','AssetsController@asset_tag');
 
 Route::get('/api/v1/assets','AssetsController@assets'); 

@@ -81,7 +81,7 @@
 			              </tr>
 			              <tr>
 			                <td>Location:</td>
-			                <td>{{$asset->model}}</td>
+			                <td>{{$asset->barangay.' '.$asset->municipality_text.' '.$asset->province_text.' '.$asset->region_text_short}}</td>
 			              </tr>
 			              <tr>
 			                <td>Assigned to:</td>

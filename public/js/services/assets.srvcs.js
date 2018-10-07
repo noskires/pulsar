@@ -71,6 +71,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                updateAsset: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/assets/update-asset',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 exportAssets: function(data) {
                     return $http({
                         method: 'GET',

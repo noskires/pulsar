@@ -87,7 +87,8 @@
                 <b>Acquisition Cost:</b> <%vm.formData.asset.acquisition_code%><br>
                 <b>Plate No:</b> <%vm.formData.asset.plate_no%><br>
                 <b>Engine No:</b> <%vm.formData.asset.engine_no%> <br>
-                <b>Location:</b> <%vm.formData.asset.municipality_text%> <br>
+                <b>Location:</b> <%vm.formData.asset.barangay+' '+vm.formData.asset.municipality_text +' '+ vm.formData.asset.province_text+' '+ vm.formData.asset.region_text_short%> <br>
+                
                 <b>Warranty:</b> <%vm.formData.asset.warranty_date%> <br>
                 <b>Assigned to:</b> <a href="#"><%vm.formData.asset.employee_name%></a><br>
                 <b>Status:</b> <small class="label bg-green"><%vm.formData.asset.status%></small>

@@ -356,13 +356,29 @@
             };
         }
 
-        AssetsEditModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'WarrantiesSrvcs', 'formData', '$window'];
-        function AssetsEditModalInstanceCtrl ($stateParams, $uibModalInstance, WarrantiesSrvcs, formData, $window) {
+        AssetsEditModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'AssetsSrvcs', 'WarrantiesSrvcs', 'formData', '$window'];
+        function AssetsEditModalInstanceCtrl ($stateParams, $uibModalInstance, AssetsSrvcs, WarrantiesSrvcs, formData, $window) {
             var vm = this;
             console.log(vm.formData = formData.asset)
             vm.updateAsset = function(data){
                 console.log(data)
+
+                AssetsSrvcs.updateAsset(data).then(function(response){
+                    if (response.data.status == 200) {
+                        alert(response.data.message);
+                    }
+                    else {
+                        alert(response.data.message);
+                    }
+                    console.log(response.data);
+                });
+
+                vm.ok();
             }
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
         }
 
         AssetsWarrantyModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'WarrantiesSrvcs', 'formData', '$window'];
