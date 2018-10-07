@@ -72,13 +72,13 @@
 <script src="{{URL::to('js/services/banks.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/insurance.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/ares.srvcs.js')}}"></script> 
-
 <script src="{{URL::to('js/services/stockUnit.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/particulars.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/assetPhotos.srvcs.js')}}"></script> 
-<!-- Controllers -->
-<script src="{{URL::to('js/controller/dataTablesCtrl.js')}}"></script> 
 
+<!-- Controllers -->
+
+<script src="{{URL::to('js/controller/dataTablesCtrl.js')}}"></script> 
 <script src="{{URL::to('js/controller/employees.js')}}"></script> 
 <script src="{{URL::to('js/controller/assets.js')}}"></script> 
 <script src="{{URL::to('js/controller/maintenance.js')}}"></script>
