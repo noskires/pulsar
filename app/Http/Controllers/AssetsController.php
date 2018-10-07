@@ -72,6 +72,7 @@ class AssetsController extends Controller {
                 'a.engine_no',
                 'a.chassis_no',
                 DB::raw('DATE_FORMAT(a.warranty_date, "%M %d, %Y") as warranty_date'),
+                // DB::raw('DATE_FORMAT(a.warranty_date, "%Y % %d") as warranty_date'),
                 'a.project_code',
                 'a.status',
                 'sc.asset_category',
