@@ -32,12 +32,14 @@
               <div class="box-body" style="font-size: 14px;">
                 <b>Category:</b> <%amdc.asset.asset_category%><br>
                 <b>ID:</b> <%amdc.asset.code%><br>
+                <b>Description:</b> <%amdc.asset.description%><br>
                 <b>Model:</b> <%amdc.asset.model%><br>
                 <b>Make/Brand:</b> <%amdc.asset.brand%><br>
                 <b>Date Acquired:</b> <%amdc.asset.date_acquired%><br>
                 <b>Acquisition Cost:</b> <%amdc.asset.acquisition_cost%><br>
                 <b>Plate No:</b> <%amdc.asset.plate_no%><br>
                 <b>Engine No:</b> <%amdc.asset.engine_no%> <br>
+                <b>Chassis No:</b> <%amdc.asset.chassis_no%> <br>
                 <b>Location:</b> <%amdc.asset.barangay+' '+amdc.asset.municipality_text +' '+ amdc.asset.province_text+' '+ amdc.asset.region_text_short%> <br>
                 <b>Warranty:</b> <%amdc.asset.warranty_date%> <br>
                 <b>Assigned to:</b> <a href="#"><%amdc.asset.employee_name%></a><br>
@@ -277,21 +279,18 @@
           </div>
         </div>
       </div>
-
-
-        <div class="box">
-          <div class="box-header with-border">
-            <h3 class="box-title"><b>Image Gallery</b></h3>
-          </div> 
-          <div class="box-body">
-
-            <div class="imageGallery1">
-              <a href="uploads/<%assetPhoto.asset_photo_name%>" title="Dump Truck:CONE-03082018-DT1 10/20/2017" ng-repeat="assetPhoto in amdc.assetPhotos">
-                <img src="uploads/<%assetPhoto.asset_photo_name%>" alt="Gallery image 1"/>
-              </a>
-            </div>
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title"><b>Image Gallery</b></h3>
+        </div> 
+        <div class="box-body">
+          <div class="imageGallery1">
+            <a href="uploads/<%assetPhoto.asset_photo_name%>" title="Dump Truck:CONE-03082018-DT1 10/20/2017" ng-repeat="assetPhoto in amdc.assetPhotos">
+              <img src="uploads/<%assetPhoto.asset_photo_name%>" alt="Gallery image 1"/>
+            </a>
           </div>
         </div>
+      </div>
     </div>
 
   </div>
@@ -435,7 +434,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" ng-click="vm.ok()" >
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title"><li class="fa fa-edit"></li> Edit Basic Details of Asset</h4>
         </div>
@@ -455,9 +454,8 @@
           </div>               
           <div class="form-group col-sm-12">
             <label for="controlnumber" class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-10"><input type="text" class="form-control" id="description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification"></div>
+            <div class="col-sm-10"><input type="text" class="form-control" id="description" placeholder="Load Capacity/ Remarks/ Technical Description/ Specification" ng-model="vm.formData.description"></div>
           </div>
-
           <div class="form-group col-sm-12">
             <label for="modelnumber" class="col-sm-2 control-label">Model</label>
             <div class="col-sm-4"><input type="text" class="form-control" id="modelnumber" placeholder="" required=""ng-model="vm.formData.model"></div>
@@ -493,7 +491,7 @@
             <div class="col-sm-4">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right" id="datewarranty" datepicker ng-model="vm.formData.waarranty_date">
+            <input type="text" class="form-control pull-right" id="datewarranty" datepicker ng-model="vm.formData.warranty_date">
             </div></div>
           </div>
 
