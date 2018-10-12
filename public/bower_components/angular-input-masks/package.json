@@ -1,0 +1,149 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "angular-input-masks",
+        "scope": null,
+        "escapedName": "angular-input-masks",
+        "name": "angular-input-masks",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\Erik\\xampp\\htdocs\\pulsar-master"
+    ]
+  ],
+  "_from": "angular-input-masks@latest",
+  "_id": "angular-input-masks@4.2.1",
+  "_inCache": true,
+  "_location": "/angular-input-masks",
+  "_nodeVersion": "8.11.2",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/angular-input-masks_4.2.1_1529330155786_0.04792267459431665"
+  },
+  "_npmUser": {
+    "name": "assisrafael",
+    "email": "igor.rafael@gmail.com"
+  },
+  "_npmVersion": "6.1.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular-input-masks",
+    "scope": null,
+    "escapedName": "angular-input-masks",
+    "name": "angular-input-masks",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-input-masks/-/angular-input-masks-4.2.1.tgz",
+  "_shasum": "03acf402c22997bbf55d88bfbdb396241c9bef84",
+  "_shrinkwrap": null,
+  "_spec": "angular-input-masks",
+  "_where": "C:\\Users\\Erik\\xampp\\htdocs\\pulsar-master",
+  "author": {
+    "name": "igor.rafael@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/assisrafael/angular-input-masks/issues"
+  },
+  "dependencies": {
+    "br-validations": "^0.3.1",
+    "date-fns": "2.0.0-alpha.7",
+    "string-mask": "^0.3.0"
+  },
+  "description": "Personalized input masks for AngularJS",
+  "devDependencies": {
+    "angular": "^1.3.16",
+    "angular-i18n": "^1.3.16",
+    "angular-mocks": "^1.3.16",
+    "browserify": "^14.4.0",
+    "browserify-istanbul": "^2.0.0",
+    "eslint": "^4.7.0",
+    "express": "^4.8.5",
+    "gulp": "^3.9.0",
+    "gulp-header": "^1.2.2",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "istanbul": "^0.4.2",
+    "jasmine-core": "^2.2.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "karma": "^1.1.0",
+    "karma-browserify": "^5.0.2",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "1.1.1",
+    "karma-coveralls": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "merge-stream": "^1.0.0",
+    "minimist": "^1.1.1",
+    "protractor": "^5.1.2",
+    "standard-version": "^4.2.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "webdriver-manager": "^12.0.6"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-SHGItayfo5ciSZ0qNzToPeMl7S884oGwiEcSeNzRzFG5DTM5QU+SN0kIBryqVWO9ub8QW2TrzU5br9iWiMQwSA==",
+    "shasum": "03acf402c22997bbf55d88bfbdb396241c9bef84",
+    "tarball": "https://registry.npmjs.org/angular-input-masks/-/angular-input-masks-4.2.1.tgz",
+    "fileCount": 114,
+    "unpackedSize": 1350263,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbJ7ntCRA9TVsSAnZWagAAlLkP/0AZK5srg8D/+Ym/A7Hh\nEtHWqYlQylTmO2HBxQCO9pUAdxANNbQIivBiFQtvs9ul04wW/NDvi7P6nS6l\ntPNuAGSfVs3nE2I1/9YiC9Eeh/ZocIgcHD+yl9gxOIIpCBEeloo879LYAg9T\nL83LqlEUYQKRJ5RXXQwwgSCsSsS9KZkgl7CE+aEtXqG1vOa3Ms+M3ROskeou\n9UfLXHjaJnpj2G8ZSnZxqnnHSou8RzzO4at6pTMvYURYPezph+oVylOtHfte\nSB4xP0AN1o3WtZ487I8vq13lx3ax0WLQW91/8XI1r3Q0hoVRMa3Y4J/ecxYT\nxG7BTCQGzOXa4Xqyaif0lY3fIchYKlLGIkGFpkxtqwbQk7gppQSoa7MfIWx4\niGnpwpFWIW/7S4LcXiBh9VydWk9XrMmhlHZ4OhF5RpibYyK8RO4Dptt8tb7q\neZpCoQYkKYqxLrDUTmN6U3Wa++YUfBz/MNs8Gmb7zBuEV1csZAMELaqSgp0H\nnEM53BHRapChe6ilMaWVtc0bpgPz9GVktypwRL9p5ODPyTgfbN+4nPG13Qjr\nelE35yI1XyHi2ILrDfFNOqNPI+Fm0H3wl+5a6WEmVJrAdVMth9a0MowUFNgR\nMhJ/dqglJvSC9jL5swNC+2nUXMSg1KPVXL5It3CuoWBdk8hRlYD3h6ZxqC/w\n1Rgw\r\n=FGx8\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "files": [
+    "src/",
+    "releases/",
+    "index.js",
+    "br.js",
+    "ch.js",
+    "fr.js",
+    "us.js",
+    "LICENSE",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "gitHead": "155055155c87c0ace35f759c0fd998fa5a4e9f43",
+  "homepage": "http://github.com/assisrafael/angular-input-masks",
+  "keywords": [
+    "input",
+    "mask",
+    "angularjs"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "assisrafael",
+      "email": "igor.rafael@gmail.com"
+    }
+  ],
+  "name": "angular-input-masks",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/assisrafael/angular-input-masks.git"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "ci": "npm run lint && npm run webdriver && npm run test",
+    "demo": "gulp serve",
+    "lint": "eslint *.js src/ config/ --fix",
+    "prepare": "npm run build",
+    "pretest:e2e": "npm run build",
+    "release": "standard-version",
+    "start": "node server.js",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:e2e": "protractor config/protractor.conf.js",
+    "test:unit": "karma start config/karma.conf.js --single-run",
+    "test:unit:watch": "karma start config/karma.conf.js --auto-watch",
+    "webdriver": "webdriver-manager update"
+  },
+  "version": "4.2.1"
+}

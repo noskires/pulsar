@@ -52,6 +52,9 @@
 <!-- simpleLightbox Gallery-->
 <script src="{{URL::to('bower_components/simpleLightbox-master/dist/simpleLightbox.min.js')}}"></script>
 
+<script src="{{URL::to('bower_components/ui-mask/ui-mask.js')}}"></script>
+<script src="{{URL::to('bower_components/angular-input-masks/releases/angular-input-masks-standalone.min.js')}}"></script>
+<!-- <script src="angular-input-masks-standalone.min.js"></script> -->
 
 <script src="{{URL::to('js/pulsarApp.js')}}"></script>
 

@@ -467,7 +467,7 @@
             <div class="col-sm-4">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right" id="dateacquired" ng-model="vm.formData.date_acquired">
+            <input type="text" class="form-control pull-right" id="dateacquired" ng-model="vm.formData.date_acquired" ui-date-mask="MM/DD/YYYY">
             </div></div>
             <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost</label>
             <div class="col-sm-4">
@@ -491,11 +491,9 @@
             <div class="col-sm-4">
             <div class="input-group date">
             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-            <input type="text" class="form-control pull-right" id="datewarranty" ng-model="vm.formData.warranty_date" autocomplete="off" />
-          
+            <input type="text" class="form-control pull-right" id="datewarranty" ng-model="vm.formData.warranty_date" autocomplete="off" ui-date-mask="MM/DD/YYYY"/>
             </div></div>
           </div>
-
           <div class="form-group col-sm-12">           
           <div class="col-sm-8"></div>
           <div class="col-sm-4"><br>

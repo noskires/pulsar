@@ -14,9 +14,9 @@ class UploadController extends Controller {
 
 	public function upload(Request $request){
 
-			// $request->validate($request, [
-		 //    	'image' => 'mimes:jpeg,bmp,png', //only allow this type extension file.
-			// ]);
+		// $this->validate($request, [
+	 //        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+	 //    ]);
 
 		if(Input::hasFile('file')){
 			

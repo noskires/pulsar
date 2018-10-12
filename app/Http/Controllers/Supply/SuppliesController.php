@@ -48,7 +48,7 @@ public function index(){
     $data['reOrderLevel'] = $request->input('reOrderLevel');
 
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         $supply = new Supply;
 
@@ -70,15 +70,15 @@ public function index(){
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;
