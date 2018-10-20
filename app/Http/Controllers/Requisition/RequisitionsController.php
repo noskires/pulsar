@@ -25,7 +25,23 @@ class RequisitionsController extends Controller {
       'requisitionCode'=>$request->input('requisitionCode'),
     );
 
-    $requisitions = DB::table('requisition_slips as jo');
+    $requisitions = DB::table('requisition_slips as rs')
+              ->select(
+                'rs.requisition_slip_code', 
+                'rs.date_requested',
+                'rs.date_needed',
+                'rs.description', 
+                'rs.request_type',
+                'rs.reference_code',
+                'rs.received_by',
+                DB::raw('CONCAT(trim(CONCAT(receivedEmployee.lname," ",COALESCE(receivedEmployee.affix,""))),", ", COALESCE(receivedEmployee.fname,"")," ", COALESCE(receivedEmployee.mname,"")) as received_by_name'),
+                'rs.date_received',
+                'rs.inspected_by',
+                DB::raw('CONCAT(trim(CONCAT(inspectedEmployee.lname," ",COALESCE(inspectedEmployee.affix,""))),", ", COALESCE(inspectedEmployee.fname,"")," ", COALESCE(inspectedEmployee.mname,"")) as inspected_by_name'),
+                'rs.date_inspected'
+              )
+    ->leftjoin('employees as receivedEmployee','receivedEmployee.employee_code','=','rs.received_by')
+    ->leftjoin('employees as inspectedEmployee','inspectedEmployee.employee_code','=','rs.inspected_by');
 
     if ($data['requisitionCode']){
       $requisitions = $requisitions->where('requisition_slip_code', $data['requisitionCode']);
@@ -88,58 +104,58 @@ class RequisitionsController extends Controller {
 
   }
 
-  public function job_orders(Request $request){
+  // public function job_orders(Request $request){
 
-    $data = array(
-      'joCode'=>$request->input('joCode'),
-    );
+  //   $data = array(
+  //     'joCode'=>$request->input('joCode'),
+  //   );
 
-    $job_orders = DB::table('job_orders as jo')
-            ->select(
-                'jo.job_order_code', 
-                'jo.job_order_date', 
-                'jo.request_purpose', 
-                'jo.date_started', 
-                'jo.date_completed', 
-                'jo.particulars',
-                DB::raw('datediff(jo.date_completed, jo.date_started) as work_duration'),
-                'jo.conducted_by', 
-                'jo.assessed_by', 
-                'jo.date_assessed', 
-                'jo.approved_by', 
-                'jo.date_approved', 
-                'jo.inspected_by', 
-                'jo.date_inspected', 
-                'jo.tested_by', 
-                'jo.accepted_by', 
-                'a.tag', 
-                'a.name',
-                'e.employee_id', 
-                DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
-                'p.project_code',
-                'm.municipality_code',
-                'm.municipality_text',
-                'rp.request_purpose as request_purpose_text'
-              )
-            -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
-            -> leftjoin('Projects as p','p.project_code','=','a.project_code')
-            -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
-            -> leftjoin('Employees as e','e.employee_id','=','a.assign_to')
-            -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
+  //   $job_orders = DB::table('job_orders as jo')
+  //           ->select(
+  //               'jo.job_order_code', 
+  //               'jo.job_order_date', 
+  //               'jo.request_purpose', 
+  //               'jo.date_started', 
+  //               'jo.date_completed', 
+  //               'jo.particulars',
+  //               DB::raw('datediff(jo.date_completed, jo.date_started) as work_duration'),
+  //               'jo.conducted_by', 
+  //               'jo.assessed_by', 
+  //               'jo.date_assessed', 
+  //               'jo.approved_by', 
+  //               'jo.date_approved', 
+  //               'jo.inspected_by', 
+  //               'jo.date_inspected', 
+  //               'jo.tested_by', 
+  //               'jo.accepted_by', 
+  //               'a.tag',
+  //               'a.name',
+  //               'e.employee_id',
+  //               DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
+  //               'p.project_code',
+  //               'm.municipality_code',
+  //               'm.municipality_text',
+  //               'rp.request_purpose as request_purpose_text'
+  //             )
+  //           -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
+  //           -> leftjoin('Projects as p','p.project_code','=','a.project_code')
+  //           -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
+  //           -> leftjoin('Employees as e','e.employee_id','=','a.assign_to')
+  //           -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
 
-    if ($data['joCode']){
-      $job_orders = $job_orders->where('job_order_code', $data['joCode']);
-    }
+  //   if ($data['joCode']){
+  //     $job_orders = $job_orders->where('job_order_code', $data['joCode']);
+  //   }
 
-    $job_orders = $job_orders->get();
+  //   $job_orders = $job_orders->get();
 
-    return response()-> json([
-      'status'=>200,
-      'data'=>$job_orders,
-      'message'=>''
-    ])->setEncodingOptions(JSON_NUMERIC_CHECK);
+  //   return response()-> json([
+  //     'status'=>200,
+  //     'data'=>$job_orders,
+  //     'message'=>''
+  //   ])->setEncodingOptions(JSON_NUMERIC_CHECK);
 
-  }
+  // }
 
   public function save_asset(Request $request){
     
@@ -233,47 +249,34 @@ class RequisitionsController extends Controller {
 
   public function update(Request $request){
     
-    // return $request->all();
-    // echo "erikson";
     $data = array();
-    // $data['purpose'] = $request->input('asset_tag');
-    $data['purpose'] = $request->input('request_purpose');
-    $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate')));
-    $data['date_started'] = date('Y-m-d', strtotime($request->input('date_started')));
-    $data['date_completed'] = date('Y-m-d', strtotime($request->input('date_completed')));
-    $data['job_order_code'] = $request->input('job_order_code');
-    $data['conducted_by'] = $request->input('conducted_by');
-    $data['particulars'] = $request->input('particulars');
-    $data['work_duration'] = $request->input('work_duration');
-    $data['date_approved'] = date('Y-m-d', strtotime($request->input('date_approved')));
-    $data['approved_by'] = $request->input('approved_by');
-    $data['date_assessed'] = date('Y-m-d', strtotime($request->input('date_assessed')));
-    $data['assessed_by'] = $request->input('assessed_by');
-    $data['date_inspected'] = date('Y-m-d', strtotime($request->input('date_inspected')));
+  
+    $data['requisition_slip_code'] = $request->input('requisition_slip_code');
+    $data['received_by'] = $request->input('received_by');
+    $data['date_received'] = date('Y-m-d', strtotime($request->input('date_received')));
     $data['inspected_by'] = $request->input('inspected_by');
-    $data['accepted_by'] = $request->input('accepted_by');
-    $data['tested_by'] = $request->input('tested_by');
+    $data['date_inspected'] = date('Y-m-d', strtotime($request->input('date_inspected')));
+
+    // return $data;
 
     $transaction = DB::transaction(function($data) use($data){
     try{
 
-          DB::table('job_orders')
-            ->where('job_order_code', $data['job_order_code'])
+          if($data['date_received']=='1970-01-01'){
+            $data['date_received'] = null;
+          }
+
+          if($data['date_inspected']=='1970-01-01'){
+            $data['date_inspected'] = null;
+          }
+
+          DB::table('requisition_slips')
+            ->where('requisition_slip_code', $data['requisition_slip_code'])
             ->update([
-              'date_started' => $data['date_started'],
-              'date_completed' => $data['date_completed'],
-              'accepted_by' => $data['accepted_by'],
-              'particulars' => $data['particulars'],
-              'work_duration' => $data['work_duration'],
-              'date_approved' => $data['date_approved'],
-              'approved_by' => $data['approved_by'],
-              'date_assessed' => $data['date_assessed'],
-              'assessed_by' => $data['assessed_by'],
-              'date_inspected' => $data['date_inspected'],
+              'received_by' => $data['received_by'],
+              'date_received' => $data['date_received'],
               'inspected_by' => $data['inspected_by'],
-              'conducted_by' => $data['conducted_by'],
-              'request_purpose' => $data['purpose'],
-              'tested_by' => $data['tested_by']
+              'date_inspected' => $data['date_inspected']
             ]);
 
         return response()->json([
@@ -333,6 +336,35 @@ class RequisitionsController extends Controller {
               'quantity' => $totalQuantity
             ]);
         }
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+
+  public function remove_requisition_slip_items(Request $request){
+  
+    $data = Input::post();
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+        DB::table('requisition_slips_items')->where('requisition_slip_item_code', $data['requisition_slip_item_code'])->delete();
 
         return response()->json([
             'status' => 200,

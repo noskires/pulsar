@@ -55,6 +55,22 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                DeleteRequisitionSlipItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/requisition-slip-items/delete',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                UpdateRequisition: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/requisitions/update',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
             };
         }
 })();

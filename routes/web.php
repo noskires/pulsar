@@ -205,12 +205,15 @@ Route::get('/api/v1/job-orders','JobOrder\JobOrdersController@job_orders');
 */
 
 Route::post('/api/v1/requisition-slip-items/save','Requisition\RequisitionsController@save_requisition_slip_items'); 
+Route::post('/api/v1/requisition-slip-items/delete','Requisition\RequisitionsController@remove_requisition_slip_items'); 
 Route::get('/api/v1/requisition-slip-items','Requisition\RequisitionsController@requisitionSlipItems');
 
 Route::get('/requisition/list','Requisition\RequisitionsController@index');
 Route::get('/requisition/list/{requisitionCode}','Requisition\RequisitionsController@index');
 Route::get('/requisition-issue-slip/new','Requisition\RequisitionsController@index');
+
 Route::get('/api/v1/requisitions','Requisition\RequisitionsController@requisitions'); 
+Route::post('/api/v1/requisitions/update','Requisition\RequisitionsController@update'); 
 
 /*
 |--------------------------------------------------------------------------

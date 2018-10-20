@@ -32,10 +32,10 @@
               <td><%requisition.date_needed%></td>  
               <td><%requisition.request_type%></td>  
               <td><%requisition.reference_code%></td>  
-              <td>Mykee Caparas</td>
-              <td>03/12/2018</td>
-              <td>Jay Bulan</td>
-              <td>03/13/2018</td> 
+              <td><%requisition.received_by_name%></td>  
+              <td><%requisition.date_received%></td>  
+              <td><%requisition.inspected_by_name%></td>  
+              <td><%requisition.date_inspected%></td>  
             </tr> 
             
             </tbody>
@@ -56,7 +56,7 @@
     <div class="modal-dialog" style="width:100%;">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" ui-sref="list-receipt" ng-click="vm.ok()">
+          <button type="button" class="close" ui-sref="list-requesition" ng-click="vm.ok()">
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title"><li class="fa fa-file-o"></li> Requisition Control No: <b><%vm.formData.requisition_slip_code%></b></h4>
         </div>
@@ -120,30 +120,32 @@
                     <table class="table table-bordered" class="tbl_list_rcpt">
                       <thead>
                         <tr>
-                          <th>Supply Name</th>
+                          <th>Supply Name</th> 
                           <th width="25%">Description</th>
                           <th width="9%">Stock Unit</th>
                           <th width="9%">Quantity</th>
                           <th width="9%">Cost</th>
                           <th width="7%">Total</th>
-                          <th width="11%">Options</th>
+                          <th width="11%" ng-if="!vm.formData.date_inspected"></th>
                         </tr> 
                       </thead>
                       <tbody>
-                        <tr ng-repeat="requisitionSlipItem in vm.requisitionSlipItems">
+                        <tr ng-repeat="requisitionSlipItem in vm.requisitionSlipItems"> 
                           <td><%requisitionSlipItem.supply_name%></td>
                           <td><%requisitionSlipItem.item_description%></td>
                           <td><%requisitionSlipItem.item_stock_unit%></td>
                           <td><%requisitionSlipItem.item_quantity%></td>
                           <td><%requisitionSlipItem.item_cost | number:2%></td>
                           <td ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + requisitionSlipItem.item_total"><%requisitionSlipItem.item_total | number:2%></td>
-                          <td><a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
-                              <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a></td>
+                          <td ng-if="!vm.formData.date_inspected">
+                            <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->
+                            <a href="#" data-toggle="modal"  ng-click="vm.removeRequisitionSlipItem(requisitionSlipItem.requisition_slip_item_code)"><code class="text-red">REMOVE</code></a>
+                          </td>
                         </tr>
                         <tr>
                           <td colspan="5" align="right"><b>GRAND TOTAL</b></td>
                           <td colspan="1"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
-                          <td></td>
+                          <td ng-if="!vm.formData.date_inspected"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -157,23 +159,23 @@
             <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-body">
-                  <form ng-model="vm.withdrawalDetails">
+                  <form ng-model="vm.formData">
                       <h4><b>**Withdrawal Information</b></h4><br>
                       <div class="form-group col-sm-12">
                         <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
                         <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.withdrawalDetails.receivedBy">   
-                              <option selected="selected" value="0">- - - Select Employee - - -</option>
-                              <option ng-value="employee.id" ng-repeat="employee in vm.employees">
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by">   
+                              <option value="">- - - Select Employee - - -</option>
+                              <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <% employee.fname + ' '+employee.lname%>
                               </option>
                           </select>
                         </div>
                         <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
                         <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.withdrawalDetails.inspectedBy">   
-                              <option selected="selected" value="0">- - - Select Employee - - -</option>
-                              <option ng-value="employee.id" ng-repeat="employee in vm.employees">
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by">   
+                              <option value="">- - - Select Employee - - -</option>
+                              <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <% employee.fname + ' '+employee.lname%>
                               </option>
                           </select>
@@ -184,19 +186,19 @@
                         <div class="col-sm-4">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input type="text" class="form-control pull-right" id="" ng-model="vm.withdrawalDetails.dateReceived">
+                        <input type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received">
                       </div></div>
 
                         <label class="col-sm-2 control-label">Date Inspected</label>
                         <div class="col-sm-4">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input type="text" class="form-control pull-right" id="" ng-model="vm.withdrawalDetails.dateInspected">
+                        <input type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
                       </div></div>
                       </div>
                           <div class="form-group">
                             <div class="form-group">
-                              <input type="button" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.withdrawalDetails)">
+                              <input type="button" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
                           </div>
                           </div>
                   </form>

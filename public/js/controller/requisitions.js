@@ -145,12 +145,12 @@
             }; 
         }
 
-        RequisitionSlipModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
-        function RequisitionSlipModalInstanceCtrl ($uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, $window) {
+        RequisitionSlipModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
+        function RequisitionSlipModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, $window) {
 
             var vm = this;
             vm.formData = formData.requisition;
-            console.log(vm.formData)
+            // console.log(vm.formData)
             vm.personalDetails = [
             {
                 'requisition_slip_code':vm.formData.requisition_slip_code,
@@ -188,7 +188,17 @@
             }, function (){ alert('Bad Request!!!') })
 
             vm.withdrawal = function(data){
-                // alert('widtral')
+
+                data['requisition_slip_code'] = $stateParams.requisitionSlipCode;
+                RequisitionsSrvcs.UpdateRequisition(data).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        vm.ok();
+                        $state.go('list-requesition');
+                    }
+                }, function (){ alert('Bad Request!!!') })
                 console.log(data)
             }
 
@@ -244,6 +254,25 @@
                 }); 
                 vm.personalDetails = newDataList;
             };
+
+
+            vm.removeRequisitionSlipItem = function(requisitionSlipItemCode){
+
+                RequisitionsSrvcs.DeleteRequisitionSlipItems({'requisition_slip_item_code':requisitionSlipItemCode}).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        vm.supplyGrandTotal = 0;
+                        RequisitionsSrvcs.RequisitionSlipItems({requisitionCode:vm.formData.requisition_slip_code, requisitionSlipItemCode:'', supplyCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.requisitionSlipItems = response.data.data;
+                                console.log(vm.requisitionSlipItems)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
 
             vm.checkAll = function () {
                 if (!vm.selectedAll) {
