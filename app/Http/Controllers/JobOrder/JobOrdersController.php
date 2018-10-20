@@ -3,6 +3,7 @@ namespace App\Http\Controllers\JobOrder;
 use Illuminate\Http\Request;
 
 use DB;
+use Auth;
 use App\Employee;
 use App\Project;
 use App\AssetEvent;
@@ -30,19 +31,21 @@ class JobOrdersController extends Controller {
           'jo.job_order_code', 
           'jo.job_order_date', 
           // 'jo.request_purpose', 
+          'jo.organizational_unit', 
           'jo.date_started', 
           'jo.date_completed', 
           'jo.particulars',
           DB::raw('datediff(jo.date_completed, jo.date_started) as work_duration'),
-          'jo.conducted_by', 
+          'jo.conducted_by',
           'jo.assessed_by', 
           'jo.date_assessed', 
           'jo.approved_by', 
           'jo.date_approved', 
           'jo.inspected_by', 
-          'jo.date_inspected', 
+          'jo.date_inspected',
           'jo.tested_by', 
           'jo.accepted_by', 
+          'jo.date_accepted', 
           'jo.operating_hours', 
           'jo.distance_travelled', 
           'jo.diesel_consumption', 
@@ -53,18 +56,31 @@ class JobOrdersController extends Controller {
           'a.name',
           // 'e.employee_id', 
           // DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
-          'p.project_code',
-          'm.municipality_code',
+          // 'p.project_code',
+          'org.org_name as organizational_unit_name',
+          'org.barangay as barangay',
+          'm.municipality_code as municipality_code',
           'm.municipality_text',
+          'p.province_code as province_code',
+          'p.province_text',
+          'r.region_code as region_code',
+          'r.region_text_short',
+          'r.region_text_long',
           'are.are_code',
+          'e.employee_code',
           DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name')
           // 'rp.request_purpose as request_purpose_text'
         )
-      -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
-      -> leftjoin('Projects as p','p.project_code','=','a.project_code')
-      -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
-      -> leftjoin('ares as are','are.are_code','=','a.are_code')
-      -> leftjoin('employees as e','e.employee_code','=','are.employee_code');
+      ->leftjoin('Assets as a','a.tag','=','jo.asset_tag')
+      // ->leftjoin('Projects as p','p.project_code','=','a.project_code')
+      // ->leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
+      ->leftjoin('ares as are','are.are_code','=','a.are_code')
+      ->leftjoin('employees as e','e.employee_code','=','jo.employee_code')
+      ->leftjoin('organizations as org','org.org_code','=','jo.organizational_unit')
+      ->leftjoin('municipalities as m','m.municipality_code','=','jo.municipality_code')
+      ->leftjoin('provinces as p','p.province_code','=','m.province_code')
+      ->leftjoin('regions as r','r.region_code','=','p.region_code');
+      // ->leftjoin('employees as e','e.employee_code','=','are.employee_code');
       // -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
 
     if ($data['joCode']){
@@ -94,6 +110,9 @@ class JobOrdersController extends Controller {
     $data = array();
     $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate'))); 
     $data['assetTag'] = $request->input('tag');
+    $data['employee_code'] = $request->input('employee_code');
+    $data['organizational_unit'] = $request->input('organizational_unit');
+    $data['municipality_code'] = $request->input('municipality_code');
     
     $transaction = DB::transaction(function($data) use($data){
     // try{
@@ -125,13 +144,16 @@ class JobOrdersController extends Controller {
         $jo->job_order_date = $data['orderDate']; 
         $jo->date_started = $data['orderDate'];
         $jo->asset_tag = $data['assetTag'];
+        $jo->employee_code = $data['employee_code'];
+        $jo->organizational_unit = $data['organizational_unit'];
+        $jo->municipality_code = $data['municipality_code'];
         $jo->operating_hours = $asset->total_operating_hours;
         $jo->distance_travelled = $asset->total_distance_travelled;
         $jo->diesel_consumption = $asset->total_diesel_consumption;
         $jo->gas_consumption = $asset->total_gas_consumption;
         $jo->oil_consumption = $asset->total_oil_consumption;
         $jo->number_loads = $asset->total_number_loads;
-
+        $jo->changed_by = Auth::user()->email;
         $jo->save();
 
         //add repair event
@@ -195,6 +217,7 @@ class JobOrdersController extends Controller {
     $data['date_inspected'] = date('Y-m-d', strtotime($request->input('date_inspected')));
     $data['inspected_by'] = $request->input('inspected_by');
     $data['accepted_by'] = $request->input('accepted_by');
+    $data['date_accepted'] = date('Y-m-d', strtotime($request->input('date_accepted')));
     $data['tested_by'] = $request->input('tested_by');
     $data['asset_tag'] = $request->input('tag');
 
@@ -239,17 +262,22 @@ class JobOrdersController extends Controller {
             $data['date_inspected'] = null;
           }
 
+          if($data['date_accepted']=='1970-01-01'){
+            $data['date_accepted'] = null;
+          }
+
           DB::table('job_orders')
             ->where('job_order_code', $data['job_order_code'])
             ->update([
               'date_started' => $data['date_started'],
               'date_completed' => $data['date_completed'],
               'accepted_by' => $data['accepted_by'],
+              'date_accepted' => $data['date_accepted'],
               'particulars' => $data['particulars'],
               'work_duration' => $data['work_duration'],
               'date_approved' => $data['date_approved'],
               'approved_by' => $data['approved_by'],
-              'date_assessed' => $data['date_assessed'],
+              'date_assessed' => '2018-10-07',
               'assessed_by' => $data['assessed_by'],
               'date_inspected' => $data['date_inspected'],
               'inspected_by' => $data['inspected_by'],
@@ -278,13 +306,4 @@ class JobOrdersController extends Controller {
     return $transaction;
   }
 
-  // public function sampleDate()
-  // {
-  //   // echo Carbon::now('Asia/Manila');
-  //   $jo = new JobOrder;
-  //   // echo  $jo->get()->count();
-
-  //   // echo date('Ymd', strtotime(Carbon::now('Asia/Manila')));
-  //   echo  $count = (str_pad(($jo->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')->get()->count() + 1), 4, "0", STR_PAD_LEFT));
-  // }
 }

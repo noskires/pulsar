@@ -40,13 +40,14 @@
                         vm.asset = response.data.data[0];
                         console.log(vm.asset)
 
-                        vm.joDetails = {
-                            tag: vm.asset.tag,
-                            name: vm.asset.name,
-                            location: vm.asset.municipality_text,
-                            requestingEmployee: vm.asset.employee_name,
-                        };
-
+                        // vm.joDetails = {
+                        //     tag: vm.asset.tag,
+                        //     name: vm.asset.name,
+                        //     location_code: vm.asset.municipality_code,
+                        //     location: vm.asset.municipality_text,
+                        //     requestingEmployee: vm.asset.employee_name,
+                        // };
+                        
                         console.log(vm.joDetails);
                     }
                 }, function (){ alert('Bad Request!!!') })
@@ -73,11 +74,13 @@
                                 };
                               }
                             },
-                            size: 'lg'
+                            size: 'xlg'
                         });
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
+
+
 
             vm.newJobOrder =  function(data){
 
@@ -172,13 +175,13 @@
                 }, function (){ alert('Bad Request!!!') });
             }
 
-            // EmployeesSrvcs.employees({jobType:''}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.employees = response.data.data;
-            //         console.log(vm.employees)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             vm.routeTo = function(route){
                 $window.location.href = route;

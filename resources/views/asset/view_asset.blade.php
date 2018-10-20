@@ -474,16 +474,14 @@
             <div class="input-group date">
             <span class="input-group-addon" style="font-size: 20px;">₱</span>
             <input type="text" class="form-control" id="acquisitioncost" placeholder="" required="" ng-model="vm.formData.acquisition_cost">
-            </div></div>  
+            </div></div>
           </div>
-
           <div class="form-group col-sm-12">
             <label for="platenumber" class="col-sm-2 control-label">Plate No.</label>
             <div class="col-sm-4"><input type="text" class="form-control" id="platenumber" placeholder="" required="" ng-model="vm.formData.plate_no"></div>
             <label for="enginenumber" class="col-sm-2 control-label">Engine/Serial No.</label>
             <div class="col-sm-4"><input type="text" class="form-control" id="enginenumber" placeholder="" required="" ng-model="vm.formData.engine_no"></div>
           </div>
-
           <div class="form-group col-sm-12">
             <label for="platenumber" class="col-sm-2 control-label">Chassis No.</label>
             <div class="col-sm-4"><input type="text" class="form-control" id="chassisnumber" placeholder="" required="" ng-model="vm.formData.chassis_no"></div>

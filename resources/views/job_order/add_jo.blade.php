@@ -18,33 +18,46 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="" ng-model="joc.joDetails">
+        <form class="form-horizontal" id="" ng-model="joc.asset">
           <div class="box-body">
             <div class="form-group">
               <label class="col-sm-3 control-label">Job Order Date</label>
               <div class="col-sm-9">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right datepicker" ng-model="joc.joDetails.orderDate" datepicker autocomplete="off" readonly="readonly">
+              <input type="text" class="form-control pull-right datepicker" ng-model="joc.asset.orderDate" datepicker autocomplete="off" readonly="readonly">
             </div></div>
             </div> 
             <div class="form-group">
               <label for="assetname" class="col-sm-3 control-label">Asset Name</label>
               <div class="col-sm-9">
-              <input type="text" class="form-control" ng-model="joc.joDetails.name" disabled="">
+              <input type="text" class="form-control" ng-model="joc.asset.name" disabled="">
               </div>
             </div>
             <div class="form-group">
               <label for="assettag" class="col-sm-3 control-label">Asset Tag </label>
-              <div class="col-sm-9"><input type="text" class="form-control" id="assettag" ng-model="joc.joDetails.tag"  disabled=""></div>
+              <div class="col-sm-9"><input type="text" class="form-control" id="assettag" ng-model="joc.asset.tag"  disabled=""></div>
             </div>
             <div class="form-group">
               <label for="location" class="col-sm-3 control-label">Location</label>
-              <div class="col-sm-9"><input type="text" class="form-control" placeholder="Location" ng-model="joc.joDetails.location" disabled=""></div>
+              <div class="col-sm-9">
+                <input type="hidden" class="form-control" placeholder="Location" ng-model="joc.asset.municipality_code" disabled="">
+                <input type="text" class="form-control" placeholder="Location" ng-model="joc.asset.municipality_text+' '+joc.asset.province_text+' '+joc.asset.region_text_long" disabled="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="location" class="col-sm-3 control-label">Organizational Unit</label>
+              <div class="col-sm-9">
+                <input type="hidden" class="form-control" placeholder="Org Unit" ng-model="joc.asset.organizational_unit" disabled="">
+                <input type="text" class="form-control" placeholder="Org Unit" ng-model="joc.asset.organizational_unit_name" disabled="">
+              </div>
             </div>
             <div class="form-group">
               <label for="requestingemp" class="col-sm-3 control-label">Requesting Employee</label>
-              <div class="col-sm-9"><input type="text" class="form-control" placeholder="Employee" ng-model="joc.joDetails.requestingEmployee" disabled=""></div>
+              <div class="col-sm-9">
+                <input type="hidden" class="form-control" placeholder="Employee" ng-model="joc.asset.employee_code" disabled="">
+                <input type="text" class="form-control" placeholder="Employee" ng-model="joc.asset.employee_name" disabled="">
+              </div>
             </div>
           </div>
           <!-- /.box-body -->
@@ -53,7 +66,7 @@
             <button class="btn btn-large btn-primary pull-right" data-toggle="confirmation"
             data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
             data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-            data-title="Comfirmation" data-content="Are you sure?" ng-click="joc.newJobOrder(joc.joDetails)"> Confirmation
+            data-title="Comfirmation" data-content="Are you sure?" ng-click="joc.newJobOrder(joc.asset)"> Confirmation
             </button>
           </div>
         </form>

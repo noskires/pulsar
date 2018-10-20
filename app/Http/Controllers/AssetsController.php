@@ -56,6 +56,7 @@ class AssetsController extends Controller {
       	$asset = DB::table('Assets as a')
       			// ->select('*')
             ->select(
+                'e.employee_code',
                 DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name'),
                 'a.asset_id',
                 'a.tag', 
