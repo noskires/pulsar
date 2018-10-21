@@ -93,18 +93,18 @@
             <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Asset Tag</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="" placeholder="" value="<%rac.asset.name+ ' : '+rac.asset.tag%>" disabled>
+                <input type="text" class="form-control" id="" placeholder="" value="<%rac.jobOrders.name+ ' : '+rac.jobOrders.tag%>" disabled>
               </div>
             </div>
             <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Requesting Employee</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="" placeholder="" value="<%rac.asset.employee_name%>" disabled>
+                <input type="text" class="form-control" id="" placeholder="" value="<%rac.jobOrders.employee_name%>" disabled>
               </div>
             </div>
             <div class="form-group">
               <label for="equipmentplate" class="col-sm-3 control-label">Location</label>
-              <div class="col-sm-9"><input type="text" class="form-control" id="equipmentplate" placeholder="" disabled=""></div>
+              <div class="col-sm-9"><input type="text" class="form-control" id="equipmentplate" placeholder="" disabled="" ng-model="rac.jobOrders.municipality_text+' '+rac.jobOrders.province_text+' '+rac.jobOrders.region_text_long"></div>
             </div>
 
           </div>

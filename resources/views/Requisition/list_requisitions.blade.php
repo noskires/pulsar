@@ -23,6 +23,7 @@
               <th>Date Received</th>
               <th>Inspected By</th>
               <th>Date Inspected</th> 
+              <th>Status</th> 
             </tr>
             </thead>
             <tbody>
@@ -36,6 +37,7 @@
               <td><%requisition.date_received%></td>  
               <td><%requisition.inspected_by_name%></td>  
               <td><%requisition.date_inspected%></td>  
+              <td><%requisition.status%></td>  
             </tr> 
             
             </tbody>
@@ -66,7 +68,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body" ng-if="!vm.formData.status" >
                   <form ng-submit="vm.addNew()" >
                     <table class="table table-striped table-bordered" class="tbl_rs_supply">
                       <thead>
@@ -126,7 +128,7 @@
                           <th width="9%">Quantity</th>
                           <th width="9%">Cost</th>
                           <th width="7%">Total</th>
-                          <th width="11%" ng-if="!vm.formData.date_inspected"></th>
+                          <th width="11%" ng-if="!vm.formData.status"></th>
                         </tr> 
                       </thead>
                       <tbody>
@@ -134,18 +136,18 @@
                           <td><%requisitionSlipItem.supply_name%></td>
                           <td><%requisitionSlipItem.item_description%></td>
                           <td><%requisitionSlipItem.item_stock_unit%></td>
-                          <td><%requisitionSlipItem.item_quantity%></td>
-                          <td><%requisitionSlipItem.item_cost | number:2%></td>
-                          <td ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + requisitionSlipItem.item_total"><%requisitionSlipItem.item_total | number:2%></td>
-                          <td ng-if="!vm.formData.date_inspected">
+                          <td align="right"><%requisitionSlipItem.item_quantity%></td>
+                          <td align="right"><%requisitionSlipItem.item_cost | number:2%></td>
+                          <td align="right" ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + requisitionSlipItem.item_total"><%requisitionSlipItem.item_total | number:2%></td>
+                          <td ng-if="!vm.formData.status">
                             <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->
                             <a href="#" data-toggle="modal"  ng-click="vm.removeRequisitionSlipItem(requisitionSlipItem.requisition_slip_item_code)"><code class="text-red">REMOVE</code></a>
                           </td>
                         </tr>
                         <tr>
                           <td colspan="5" align="right"><b>GRAND TOTAL</b></td>
-                          <td colspan="1"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
-                          <td ng-if="!vm.formData.date_inspected"></td>
+                          <td colspan="1" align="right"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
+                          <td ng-if="!vm.formData.status"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -196,10 +198,10 @@
                         <input type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
                       </div></div>
                       </div>
-                          <div class="form-group">
+                          <div class="form-group" >
                             <div class="form-group">
-                              <input type="button" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
-                          </div>
+                              <input type="button" ng-if="!vm.formData.status" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
+                            </div>
                           </div>
                   </form>
                 </div>
@@ -209,7 +211,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
           <!-- <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button> -->
           
         </div>

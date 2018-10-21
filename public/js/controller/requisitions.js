@@ -75,7 +75,8 @@
                 if(response.data.status == 200)
                 {
                     vm.jobOrders = response.data.data[0];
-
+                    console.log(vm.jobOrders)
+                    
                     AssetsSrvcs.assets({tag:vm.jobOrders.tag, name:'', category:'', areCode:'', isAll:false}).then (function (response) {
                         if(response.data.status == 200)
                         {

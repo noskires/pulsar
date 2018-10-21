@@ -49,6 +49,20 @@ class RequisitionsController extends Controller {
 
     $requisitions = $requisitions->get();
 
+
+    foreach ($requisitions as $key => $requisition) {
+
+      if($requisition->received_by && $requisition->date_received && $requisition->inspected_by && $requisition->date_inspected)
+      {
+
+        $requisition->status = "Closed";
+      }
+      else{
+        $requisition->status = null;
+      }
+      
+    }
+
     return response()-> json([
       'status'=>200,
       'data'=>$requisitions,

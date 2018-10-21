@@ -60,6 +60,7 @@
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs pull-right">
       <li class="active"><a href="#tab_1-1" data-toggle="tab">Job Order Details</a></li>
+      <li class="active"><a role="menuitem" tabindex="-1" href="#" ui-sref="requesition-asset-create({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()">Create R.S.</a></li>
 
       <li class="pull-left header"><h4><%vm.formData.jobOrder.name%> : <b><%vm.formData.jobOrder.tag%></b></h4></li>
       </ul>
