@@ -166,7 +166,7 @@
                       <div class="form-group col-sm-12">
                         <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
                         <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by">   
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.status">   
                               <option value="">- - - Select Employee - - -</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <% employee.fname + ' '+employee.lname%>
@@ -175,7 +175,7 @@
                         </div>
                         <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
                         <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by">   
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.status">   
                               <option value="">- - - Select Employee - - -</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <% employee.fname + ' '+employee.lname%>
@@ -188,14 +188,14 @@
                         <div class="col-sm-4">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received">
+                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received">
                       </div></div>
 
                         <label class="col-sm-2 control-label">Date Inspected</label>
                         <div class="col-sm-4">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
+                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
                       </div></div>
                       </div>
                           <div class="form-group" >

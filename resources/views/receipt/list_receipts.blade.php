@@ -21,6 +21,8 @@
         <th>Amount</th>
         <th>Payee Type</th>
         <th>Payee Name</th>
+        <th>PO</th>
+        <th>Voucher</th>
       </tr>
       </thead>
       <tbody>
@@ -32,6 +34,8 @@
         <td><%receipt.amount | number:2%></td>
         <td><%receipt.payee_type%></td>
         <td><%receipt.payee_text%></td>
+        <td></td>
+        <td></td>
       </tr> 
       </tbody>
     </table>
