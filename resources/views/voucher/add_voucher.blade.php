@@ -40,7 +40,7 @@
               <div class="col-sm-9">
                 <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.payee">
                   <option selected="selected" value="0">- - select payee - -</option>
-                  <option ng-if="vc.payeeType=='EMPLOYEE'" value="<%employee.employee_id%>" ng-repeat="employee in vc.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>
+                  <option ng-if="vc.payeeType=='EMPLOYEE'" value="<%employee.employee_code%>" ng-repeat="employee in vc.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>
 
                   <option ng-if="vc.payeeType=='SUPPLIER'" value="<%supplier.supplier_code%>" ng-repeat="supplier in vc.suppliers"> <%supplier.supplier_name%> </option>
 

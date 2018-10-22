@@ -39,7 +39,7 @@ class VouchersController extends Controller {
 	                'v.bank_code',
 	                'b.bank_name'
               	)
-            ->leftjoin('Employees as e','e.employee_id','=','v.payee')
+            ->leftjoin('Employees as e','e.employee_code','=','v.payee')
             ->leftjoin('Banks as b','b.bank_code','=','v.bank_code')
             ->leftjoin('Particulars as p','p.particular_code','=','v.particulars');
 
@@ -54,8 +54,9 @@ class VouchersController extends Controller {
 			if($voucher->payee_type=="EMPLOYEE")
 			{
 				$employee = DB::table('employees as e')
-							->select(DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'))
-							->where('employee_id', $voucher->payee)->first();
+							->select(DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name'))
+							// ->where('e.employee_code', '816000001')->first();
+							->where('employee_code', $voucher->payee)->first();
 				if($employee)
 				{
 					$voucher->payee_text = $employee->employee_name;
