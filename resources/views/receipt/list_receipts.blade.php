@@ -57,7 +57,7 @@
         <div class="modal-body">
           <p>Add supply items under a receipt number. <%vm.formData.amount%> </p>
           <!-- Custom Tabs (Pulled to the right) -->
-          <div class="row">
+          <div class="row" ng-if="!vm.formData.voucher_code">
             <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-body">
@@ -65,7 +65,7 @@
                     <table class="table table-striped table-bordered" class="tbl_rs_supply">
                       <thead>
                         <tr>
-                          <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th> 
+                          <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th>  -->
                           <th>Supply Name</th>
                           <th width="25%">Description</th>
                           <th width="9%">Stock Unit</th>
@@ -76,7 +76,7 @@
                       </thead>
                       <tbody>
                         <tr ng-repeat="personalDetail in vm.personalDetails" >
-                          <td><input type="checkbox" ng-model="personalDetail.selected"/></td> 
+                          <!-- <td><input type="checkbox" ng-model="personalDetail.selected"/></td>  -->
                           <td>
                             <select class="form-control select2" style="width: 60%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
                               <option selected="selected" value="0">- - select supply - -</option>
@@ -92,18 +92,21 @@
                         </tr>
                       </tbody>
                     </table>
+
                     <div class="form-group">
                       <div class="form-group">
                         <input type="button" class="btn btn-info pull-right" value="Submit Form" style="margin-right: 10px;" ng-click="vm.addReceiptItems(vm.personalDetails)">
-                        <button ng-hide="!vm.personalDetails.length" type="button" class="btn btn-danger pull-left fa fa-trash-o" ng-click="vm.remove()"></button>
-                        <button type="submit" class="pull-left btn btn-primary fa fa-plus addnew"></button>
+                        <!-- <button ng-hide="!vm.personalDetails.length" type="button" class="btn btn-danger pull-left fa fa-trash-o" ng-click="vm.remove()"></button> -->
+                        <!-- <button type="submit" class="pull-left btn btn-primary fa fa-plus addnew"></button> -->
+                      </div>
                     </div>
-                    </div>
+
                   </form>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">
@@ -111,7 +114,7 @@
                   <form>
                     <table class="table table-bordered" class="tbl_list_rcpt">
                       <thead>
-                        <tr>
+                        <tr> 
                           <th>Supply Name</th>
                           <th width="25%">Description</th>
                           <th width="9%">Stock Unit</th>
@@ -122,7 +125,7 @@
                         </tr> 
                       </thead>
                       <tbody>
-                        <tr ng-repeat="receiptItem in vm.receiptItems">
+                        <tr ng-repeat="receiptItem in vm.receiptItems"> 
                           <td><%receiptItem.supply_name%></td>
                           <td><%receiptItem.receipt_item_description%></td>
                           <td><%receiptItem.receipt_item_stock_unit%></td>

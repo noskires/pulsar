@@ -43,8 +43,6 @@ class ReceiptsController extends Controller {
               )
                ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
                ->leftjoin('voucher_items as vi','vi.receipt_code','=','r.receipt_code');
-     
-
 
     if ($data['receiptCode']){
       $receipts = $receipts->where('r.receipt_code', $data['receiptCode']);
@@ -260,10 +258,11 @@ class ReceiptsController extends Controller {
         for($i = 0; $i < count($data); $i++) {
           $c            = new ReceiptItem;
 
-          $receiptItemCode = (str_pad(($c->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-          ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+          // $receiptItemCode = (str_pad(($c->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+          // ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-          $c->receipt_item_code = "RCPITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$receiptItemCode;
+          // $c->receipt_item_code = "RCPITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$receiptItemCode;
+          $c->receipt_item_code = "RCPITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));;
 
           $c->receipt_code     = $data[$i]['receipt_code'];
           $c->receipt_item_supply_code     = $data[$i]['supply_name'];

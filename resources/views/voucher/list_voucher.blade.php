@@ -136,7 +136,7 @@
                   <td><%voucherItem.receipt_date%></td>
                   <td align="right" ng-init="vm.voucherItemGrandTotal = vm.voucherItemGrandTotal + voucherItem.amount"><%voucherItem.amount | number:2%></td>
                   <td>
-                    <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a>
+                    <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->
                     <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a>
                   </td>
                 </tr>

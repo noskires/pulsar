@@ -246,7 +246,8 @@
             };
 
             vm.removeSupplyBtn = function(receiptItemCode, receiptItemQuantity, supplyCode){
-                alert(supplyCode)
+                
+                vm.supplyGrandTotal = 0;
                 ReceiptSrvcs.deleteReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode}).then (function (response) {
                     console.log(response.data.data)
                     alert(response.data.message)
