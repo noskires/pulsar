@@ -187,6 +187,7 @@ Route::get('/job-order/new','JobOrder\JobOrdersController@index');
 Route::get('/job-order/list','JobOrder\JobOrdersController@index');
 Route::get('/job-order/list/{jobOrderCode}','JobOrder\JobOrdersController@index');
 Route::get('/job-order/new/{assetTag}','JobOrder\JobOrdersController@index');
+Route::get('/job-order/report/{jobOrderCode}', 'JobOrder\JobOrderReportController@export');
 
 /*
 |--------------------------------------------------------------------------
@@ -197,6 +198,7 @@ Route::get('/job-order/new/{assetTag}','JobOrder\JobOrdersController@index');
 Route::post('/api/v1/job-order/save','JobOrder\JobOrdersController@save');
 Route::post('/api/v1/job-order/update','JobOrder\JobOrdersController@update');
 Route::get('/api/v1/job-orders','JobOrder\JobOrdersController@job_orders');
+
 
 /*
 |--------------------------------------------------------------------------

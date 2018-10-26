@@ -242,8 +242,8 @@
       <!-- /.tab-content -->
       <div class="modal-footer">
       <button type="button" class="btn btn-default pull-left" ng-click="vm.ok()" ui-sref="list-jo">Close Window</button>
-      <!-- <button type="button" class="btn btn-default"><li class="fa fa-check"></li> Close J.O.</button>
-      <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button> -->
+      <button type="button" class="btn btn-default" ui-sref="requesition-asset-create({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()"><li class="fa fa-check"></li> Create J.O.</button>
+      <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
       <button type="button" class="btn btn-primary" ng-click="vm.updateJobOrder(vm.formData.jobOrder)" ui-sref="list-jo">Save changes</button>
       </div>
     </div>
