@@ -217,6 +217,8 @@ Route::get('/requisition-issue-slip/new','Requisition\RequisitionsController@ind
 Route::get('/api/v1/requisitions','Requisition\RequisitionsController@requisitions'); 
 Route::post('/api/v1/requisitions/update','Requisition\RequisitionsController@update'); 
 
+Route::get('/requisition/report/{requisitionCode}', 'Requisition\RequisitionReportController@export');
+
 /*
 |--------------------------------------------------------------------------
 | Requisition Apis
@@ -400,6 +402,8 @@ Route::get('/api/v1/suppliers','Supplier\SuppliersController@suppliers');
 Route::get('/supply/new','Supply\SuppliesController@index');
 Route::get('/supply/list','Supply\SuppliesController@index');
 Route::get('/supply/list/{supplyCode}','Supply\SuppliesController@index');
+
+Route::get('/supply/report/{supplyCode}', 'Supply\SupplyReportController@export');
 
 /*
 |--------------------------------------------------------------------------

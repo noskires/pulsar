@@ -1,5 +1,6 @@
 <?php
-namespace App\Http\Controllers\JobOrder;
+namespace App\Http\Controllers\Supply
+;
 use Illuminate\Http\Request;
 
 use DB;
@@ -11,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use PDF;
 
-class JobOrderReportController extends Controller {
+class SupplyReportController extends Controller {
 
 	public function index(){
 	  	// return view('employee.index');
@@ -19,19 +20,15 @@ class JobOrderReportController extends Controller {
 		return $pdf->stream('asset.report1.pdf');
 	}
 
-	public function export($jobOrderCode){
+	public function export($supplyCode){
 
-		$data['job_order']        = $this->job_order($jobOrderCode);
-		$data['requisition_slips'] = $this->requisition_slips($jobOrderCode);
+		// $data['job_order']        = $this->job_order($jobOrderCode);
+		// $data['requisition_slips'] = $this->requisition_slips($jobOrderCode);
 
-		$data['requisition_slip_items'] = array();
+		// $data['requisition_slip_items'] = array();
 
-		foreach($data['requisition_slips'] as $requisition_slip){
-			array_push($data['requisition_slip_items'], $this->requisition_slip_items($requisition_slip->requisition_slip_code));
-		}
-
-		$data['asset']            = $this->asset($data['job_order']->asset_tag);
-		$data['asset_photo']      = $this->asset_photo($data['job_order']->asset_tag);
+		// $data['asset']            = $this->asset($data['job_order']->asset_tag);
+		// $data['asset_photo']      = $this->asset_photo($data['job_order']->asset_tag);
 		// $data['asset_monitoring'] = $this->asset_monitoring($data['assetTag']);
 		// $data['jos']              = $this->jo($data['assetTag']);
 		// $data['events']           = $this->events($data['assetTag']);
@@ -39,8 +36,8 @@ class JobOrderReportController extends Controller {
 
 		// return $data;
 
-		$pdf = PDF::loadView('job_order.report_jo', $data);
-		return $pdf->stream('job_order.report_jo.pdf');
+		$pdf = PDF::loadView('supply.report_supply');
+		return $pdf->stream('supply.report_supply.pdf');
 	}
 
 	public function job_order($jobOrderCode){

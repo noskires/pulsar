@@ -329,6 +329,10 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             };
+
+            vm.printRequisitionDetails = function(tag){
+                vm.url = 'requisition/report/'+tag;
+            }
         }
 
 })();

@@ -123,6 +123,7 @@
           <tr>
             <th align="left">Requisition No.</th>
             <th align="left">Date Requested</th>
+            <th align="left">Date Needed</th>
             <th align="left">Received by</th>
             <th align="left">Date Received</th>
             <th align="left">Inspected by</th>
@@ -134,6 +135,7 @@
           <tr style="font-size: 12px !important;">
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->requisition_slip_code}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->date_requested}} </td>
+            <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->date_needed}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->received_by_name}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->date_received}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->inspected_by_name}} </td>
@@ -142,7 +144,7 @@
           @endforeach
           @if(count($requisition_slips)==0)
            <tr>
-            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="6"> NO RECORDS </td>
+            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="7"> NO RECORDS </td>
           </tr>
           @endif
           </tbody>
@@ -159,8 +161,7 @@
             <th align="left">Supply Name</th>
             <th align="left">Description</th>
             <th align="left">Stock Unit</th>
-            <th align="left">Quantity</th>
-            <th align="left">Total Cost</th>
+            <th align="left">Quantity</th> 
           </tr>
           </thead>
           <tbody>
@@ -173,7 +174,6 @@
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_description}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_stock_unit}} </td>
             <td style="border-top: 1px solid #e1e1e1;" align="center"> {{$requisition_slip_item->item_quantity}} </td>
-            <td style="border-top: 1px solid #e1e1e1;" align="right"> {{number_format($requisition_slip_item->item_total, 2)}} </td>
           </tr>
           @endforeach
           @else
@@ -196,7 +196,7 @@
             <th align="left">Requested by:</th>
             <th align="left">{{$job_order->requested_by_name}}</th>
             <th align="left">Approved by:</th>
-            <th align="left">{{$job_order->approved_by_name}} </th>
+            <th align="left">{{$job_order->inspected_by_name}} </th>
           </tr>
           </thead>
           <tbody style="font-size:11px;">
@@ -204,7 +204,7 @@
               <td></td>
               <td> {{$job_order->received_by_position}} </td>
               <td></td>
-              <td> </td>
+              <td> {{$job_order->inspected_by_position}}</td>
             </tr>
           </tbody>
         </table> <br>
