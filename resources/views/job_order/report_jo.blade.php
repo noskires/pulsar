@@ -202,7 +202,7 @@
           <tbody style="font-size:11px;">
             <tr>
               <td></td>
-              <td> {{$job_order->received_by_positio}n} </td>
+              <td> {{$job_order->received_by_position}} </td>
               <td></td>
               <td> </td>
             </tr>
