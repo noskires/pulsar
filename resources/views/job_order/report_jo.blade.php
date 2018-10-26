@@ -165,6 +165,8 @@
           </thead>
           <tbody>
           
+
+          @if(count($requisition_slip_items)>0)
           @foreach($requisition_slip_items[0] as $requisition_slip_item)
           <tr>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->supply_name}} </td>
@@ -174,6 +176,11 @@
             <td style="border-top: 1px solid #e1e1e1;" align="right"> {{number_format($requisition_slip_item->item_total, 2)}} </td>
           </tr>
           @endforeach
+          @else
+          <tr>
+            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="5"> NO RECORDS </td>
+          </tr>
+          @endif
           </tbody>
         </table> <br>
       </div>
@@ -195,7 +202,7 @@
           <tbody style="font-size:11px;">
             <tr>
               <td></td>
-              <td> {{$job_order->received_by_position}} </td>
+              <td> {{$job_order->received_by_positio}n} </td>
               <td></td>
               <td> </td>
             </tr>

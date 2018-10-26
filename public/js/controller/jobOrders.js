@@ -186,5 +186,9 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             };
+
+            vm.printJobOrderDetails = function(tag){
+                vm.url = 'job-order/report/'+tag;
+            }
         }
 })();
