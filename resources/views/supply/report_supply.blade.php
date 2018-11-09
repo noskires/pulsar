@@ -19,8 +19,8 @@
     </div>
     <div class="row">
       <div class="col-md-6" style="border-bottom: 2px solid black;">
-        <h2 class="page-header"><i class="fa fa-tags"></i> <img src="../../dist/img/clipboard.png" style="margin-bottom:-4px;width:30px;">&nbsp;STOCK CARD<br></h2>
-        <div style="position: absolute;top:1%;right:0;"> <img src="../../dist/img/qrcode.png" width="100px"> </div>
+        <h2 class="page-header"><i class="fa fa-tags"></i> <img src="assets/dist/img/clipboard.png" style="margin-bottom:-4px;width:30px;">&nbsp;STOCK CARD<br></h2>
+        <div style="position: absolute;top:1%;right:0;"> <img src="assets/dist/img/qrcode.png" style='width:100px;'> </div>
       </div>
     </div>
 <br>    
@@ -29,24 +29,24 @@
           <table border="0" width="100%" style="font-size:16px;">
           <tr>
             <td align="left" width="20%" style="font-weight: bold;">Supply Name:</td>
-            <td align="left">Bizlogiks</td>
+            <td align="left">{{$supply->supply_name}}</td>
           </tr>          
           <tr>
             <td align="left" width="20%" style="font-weight: bold;">Supply Category:</td>
-            <td align="left">Bizlogiks</td>
+            <td align="left">{{$supply->category_code}}</td>
           </tr>
           <tr>
             <td align="left" width="20%" style="font-weight: bold;">Supply Unit:</td>
-            <td align="left">Bizlogiks</td>
+            <td align="left">{{$supply->stock_unit}}</td>
           </tr>
           <tr>
             <td align="left" width="20%" style="font-weight: bold;">Re-order Level:</td>
-            <td align="left">300</td>
+            <td align="left">{{$supply->re_order_level}}</td>
           </tr>
           <tr><td colspan="4">&nbsp;</td></tr>
           <tr>
             <td align="left" width="20%" style="font-weight: bold;">Supply Quantity:</td>
-            <td align="left">100</td>
+            <td align="left">{{$supply->quantity}}</td>
           </tr>
         </table>
       </div>
@@ -67,36 +67,29 @@
             <th align="left">Available Stock</th>
           </tr>
           </thead>
-          <tbody style="font-size: 12px;">
-          <tr>
-            <td style="border-top: 1px solid #e1e1e1;"> RCPT DATE </td>
-            <td style="border-top: 1px solid #e1e1e1;"> RCPT# 12345 </td>
-            <td style="border-top: 1px solid #e1e1e1;"> ERIK-SUPPLIER </td>
-            <td style="border-top: 1px solid #e1e1e1;"> 200 </td>
-            <td style="border-top: 1px solid #e1e1e1;"> </td>
-            <td style="border-top: 1px solid #e1e1e1;"> 200 </td>
-          </tr>          
-          <tr>
-            <td style="border-top: 1px solid #e1e1e1;"> RS DATE </td>
-            <td style="border-top: 1px solid #e1e1e1;"> EX: RIS123 </td>
-            <td style="border-top: 1px solid #e1e1e1;"> LOADER </td>
-            <td style="border-top: 1px solid #e1e1e1;"> </td>
-            <td style="border-top: 1px solid #e1e1e1;"> 50 </td>
-            <td style="border-top: 1px solid #e1e1e1;"> 150 </td>
-          </tr>
-          <tr>
-            <td style="border-top: 1px solid #e1e1e1;"> RS DATE </td>
-            <td style="border-top: 1px solid #e1e1e1;"> EX: RIS123 </td>
-            <td style="border-top: 1px solid #e1e1e1;"> PROJECT TULAY </td>
-            <td style="border-top: 1px solid #e1e1e1;"> </td>
-            <td style="border-top: 1px solid #e1e1e1;"> 50 </td>
-            <td style="border-top: 1px solid #e1e1e1;"> 100 </td>
-          </tr>
+          <tbody style="font-size: 12px;padding:3px">
+            {{$stocks = 0}}
+            @foreach($stock_items as $stock_item)
+            <tr>
+              <td style="border-top: 1px solid #e1e1e1;"> {{$stock_item->date}} </td>
+              <td style="border-top: 1px solid #e1e1e1;"> {{$stock_item->reference}} </td>
+              <td style="border-top: 1px solid #e1e1e1;"> {{$stock_item->particulars}}</td>
+              @if($stock_item->type=="RCP")
+              {{$stocks = $stocks + $stock_item->quantity }}
+              <td style="border-top: 1px solid #e1e1e1;text-align: right;padding: 3px;"> {{number_format($stock_item->quantity, 2)}} </td>
+              <td style="border-top: 1px solid #e1e1e1;">  </td>
+              @else
+              {{$stocks = $stocks - $stock_item->quantity }}
+              <td style="border-top: 1px solid #e1e1e1;"> </td>
+              <td style="border-top: 1px solid #e1e1e1;text-align: right;padding: 3px;"> {{number_format($stock_item->quantity, 2)}} </td>
+              @endif
+              <td style="border-top: 1px solid #e1e1e1;text-align: right;padding: 3px;"> {{number_format($stocks, 2)}} </td>
+            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
     </div>
-<br>
 <br>
 </section>
 </div>

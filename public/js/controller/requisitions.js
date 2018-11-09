@@ -257,9 +257,12 @@
             };
 
 
-            vm.removeRequisitionSlipItem = function(requisitionSlipItemCode){
+            vm.removeRequisitionSlipItem = function(requisitionSlipItemCode, requisitionItemQuantity, requisitionItemSupplyCode){
 
-                RequisitionsSrvcs.DeleteRequisitionSlipItems({'requisition_slip_item_code':requisitionSlipItemCode}).then (function (response) {
+                RequisitionsSrvcs.DeleteRequisitionSlipItems({'requisition_slip_item_code':requisitionSlipItemCode, 
+                                                            'requisition_item_quantity':requisitionItemQuantity,
+                                                            'requisition_item_supply_code':requisitionItemSupplyCode
+                                                            }).then (function (response) {
                     console.log(response.data)
                     if(response.data.status == 200)
                     {

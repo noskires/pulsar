@@ -60,7 +60,7 @@
                         <th>No.</th>
                         <th>Receipt No.</th>
                         <th>Receipt Type</th>
-                        <th>Supplier Name</th>
+                        <!-- <th>Supplier Name</th> -->
                         <th>Supply Qty</th>
                         <th>Stock Unit</th>
                         <th>Total Amount</th> 
@@ -70,7 +70,7 @@
                         <td><%$index+1%></td>
                         <td><%receiptItem.receipt_code%></td>
                         <td><%receiptItem.receipt_type_name%></td>
-                        <td><%receiptItem.supplier_code%></td>
+                        <!-- <td><%receiptItem.supplier_code%></td> -->
                         <td ng-init="vm.supplyTotalQuantity = vm.supplyTotalQuantity + receiptItem.receipt_item_quantity"><%receiptItem.receipt_item_quantity%></td>
                         <td><%receiptItem.receipt_item_stock_unit%></td>
                         <td><%receiptItem.receipt_item_total%></td>

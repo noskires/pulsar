@@ -378,6 +378,20 @@ class RequisitionsController extends Controller {
     $transaction = DB::transaction(function($data) use($data){
     // try{
 
+
+        $supply = DB::table('supplies')
+          ->select('quantity')
+          ->where('supply_code', $data['requisition_item_supply_code'])
+          ->first();
+
+          $totalQuantity = $supply->quantity + $data['requisition_item_quantity'];
+
+        DB::table('supplies')
+          ->where('supply_code', $data['requisition_item_supply_code'])
+            ->update([
+              'quantity' => $totalQuantity
+            ]);
+
         DB::table('requisition_slips_items')->where('requisition_slip_item_code', $data['requisition_slip_item_code'])->delete();
 
         return response()->json([

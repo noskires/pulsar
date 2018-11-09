@@ -102,7 +102,7 @@
         <li><a href="#" ui-sref="list-voucher"><i class="fa fa-list-ul"></i> List of Vouchers</a></li>
         <li><a href="#" ui-sref="voucher-create"><i class="fa fa-plus"></i> Create a Voucher</a></li>
       </ul>
-    </li>    
+    </li>
     <li class="header">DATABASE</li>
     <li class="treeview">
       <a href="#">
