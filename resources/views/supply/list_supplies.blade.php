@@ -83,6 +83,10 @@
           </div>
         </div>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="vm.ok()">Close</button>
+        <a type="button" class="btn btn-info" ng-click="vm.printSupplyDetails(vm.formData.supply_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
+      </div>
     </div>
     <!-- /.modal-content -->
   </div>

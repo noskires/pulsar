@@ -105,5 +105,9 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             };
+
+            vm.printSupplyDetails = function(tag){
+                vm.url = 'supply/report/'+tag;
+            }
         }
 })();
