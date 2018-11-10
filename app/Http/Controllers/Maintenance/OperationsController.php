@@ -115,7 +115,7 @@ class OperationsController extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         // $operation->operation_code = "OPN-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
-        $operation->operation_code = date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+        $operation->operation_code = "OPN-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
         $operation->operation_date = $data['operationDate']; 
         $operation->asset_tag = $data['assetTag']; 
         $operation->project_code = $data['projectCode']; 

@@ -4,6 +4,7 @@
         .module('pulsarApp')
         .controller('EmployeesCtrl', EmployeesCtrl) 
         .controller('EmployeesModalInstanceCtrl', EmployeesModalInstanceCtrl) 
+        .controller('PositionsModalInstanceCtrl', PositionsModalInstanceCtrl) 
 
         EmployeesCtrl.$inject = ['EmployeesSrvcs', '$window', '$uibModal'];
         function EmployeesCtrl(EmployeesSrvcs, $window, $uibModal){
@@ -27,6 +28,22 @@
                       formData: function () {
                         return {
                             title:'Employees Controller',
+                            message:"response.data.message"
+                        };
+                      }
+                    }
+                });
+            }
+
+            vm.addNewPosition = function(){
+                var modalInstance = $uibModal.open({
+                    controller:'PositionsModalInstanceCtrl',
+                    templateUrl:'positionNewTpl.modal',
+                    controllerAs: 'vm',
+                    resolve :{
+                      formData: function () {
+                        return {
+                            title:'Positions Controller',
                             message:"response.data.message"
                         };
                       }
@@ -164,5 +181,40 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             };
+        }
+
+
+        PositionsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'EmployeesSrvcs', 'OrganizationsSrvcs', '$window'];
+        function PositionsModalInstanceCtrl ($uibModalInstance, formData, EmployeesSrvcs, OrganizationsSrvcs, $window) {
+
+            alert('position  modal')
+            var vm = this;
+
+            vm.submit = function(data){
+                console.log(data);
+                EmployeesSrvcs.NewPosition(data).then(function(response){
+                    if (response.data.status == 200) {
+                        alert(response.data.message);
+                        vm.routeTo('employee/list');
+                    }
+                    else {
+                        alert(response.data.message);
+                    }
+                    console.log(response.data);
+                });
+            };
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+            
+            vm.close = function() {
+                $uibModalInstance.close();
+            };
+
+            vm.routeTo = function(route){
+                $window.location.href = route;
+            };
+
         }
 })();

@@ -24,14 +24,6 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
-                positions: function(data) {
-                    return $http({
-                        method: 'GET',
-                        data: data,
-                        url: '/api/v1/positions?positionCode='+data.positionCode,
-                        headers: {'Content-Type': 'application/json'}
-                    })
-                },
                 save: function(data) {
                     return $http({
                         method: 'POST',
@@ -45,6 +37,22 @@
                         method: 'POST',
                         url: '/api/v1/employee/update',
                         data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                positions: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/positions?positionCode='+data.positionCode,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                NewPosition: function(data) {
+                    return $http({
+                        method: 'POST',
+                        data: data,
+                        url: '/api/v1/position/save',
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

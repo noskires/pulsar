@@ -445,6 +445,7 @@ Route::get('/api/v1/municipalities','Address\MunicipalitiesController@municipali
 |--------------------------------------------------------------------------
 */
 
+Route::post('/api/v1/position/save','Employee\PositionsController@save');
 Route::get('/api/v1/positions','Employee\PositionsController@positions');
 
 /*

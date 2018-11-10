@@ -1,4 +1,4 @@
-Content Header (Page header) -->
+<!--Content Header (Page header) -->
 <section class="content-header">
 <h1><span class="fa fa-user"> </span> Manage Employees</h1>
 <ol class="breadcrumb">
@@ -29,7 +29,12 @@ Content Header (Page header) -->
           <button type="button" class="btn btn-default"><li class="fa fa-refresh"></li> Filter Display</button>
           </div>
           <div class="col-sm-4"> 
-          <button type="button" class="btn btn-primary" ng-click="ec.addNewEmployee()"><li class="fa fa-plus"></li> Add New Employee</button>
+          <button type="button" class="btn btn-primary" ng-click="ec.addNewEmployee()"><li class="fa fa-plus"></li> 
+            Add New Employee
+          </button>
+          <button type="button" class="btn btn-primary" ng-click="ec.addNewPosition()"><li class="fa fa-plus"></li> 
+            Add New Position
+          </button>
           </div>  
         </div>
       </div>
@@ -87,7 +92,8 @@ Content Header (Page header) -->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="vm.ok()">
-          <span aria-hidden="true">&times;</span></button>
+          <span aria-hidden="true">&times;</span>
+        </button>
         <h4 class="modal-title">Add New Employee Information</h4>
       </div>
       <div class="modal-body">
@@ -337,3 +343,53 @@ Content Header (Page header) -->
 </div>
 </script>
 <!-- /.modal
+
+  <!-- MODAL CONTENTS -->
+<script type="text/ng-template" id="positionNewTpl.modal">
+<div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="vm.ok()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add New Position</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Custom Tabs (Pulled to the right) -->
+        <div class="nav-tabs-custom">
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab_1-1">
+              <!-- form start -->
+                <form class="form-horizontal" id="" ng-model="vm.positionDetails">
+                  <div class="box-body">
+                    <!-- <div class="form-group col-sm-12">
+                      <label for="controlnumber" class="col-sm-3 control-label">Employee ID</label>
+                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_id" ng-model="vm.employeeDetails.emp_id"></div>
+                    </div> -->
+                    <div class="form-group col-sm-12">
+                      <label for="controlnumber" class="col-sm-3 control-label">Position Title</label>
+                      <div class="col-sm-9"><input type="text" class="form-control" id="position_text" ng-model="vm.positionDetails.position_text"></div>
+                    </div>
+                  </div>
+                  <!-- /.box-body -->
+                </form>
+            </div>
+            <!-- /.tab-pane -->
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+        </div>
+        <!-- nav-tabs-custom -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" ng-click="vm.ok()">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.submit(vm.positionDetails)">Save</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+</script>
+<!-- /.modal -->
