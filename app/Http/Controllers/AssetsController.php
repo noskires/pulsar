@@ -30,7 +30,7 @@ class AssetsController extends Controller {
           $asset_categories = $asset_categories->where('asset_category', $data['assetCategory']);
         }
 
-        $asset_categories = $asset_categories->get();
+        $asset_categories = $asset_categories->orderBy('asset_name')->get();
 
         return response()-> json([
             'status'=>200,
