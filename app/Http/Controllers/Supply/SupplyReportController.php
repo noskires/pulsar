@@ -45,7 +45,7 @@ class SupplyReportController extends Controller {
 
 				if($supplier)
 				{
-					$stock_item->particulars = $supplier->supplier_name;
+					$stock_item->particulars = $supplier->supplier_name . " ( ".$stock_item->payee." )";
 				}
 				else
 				{
@@ -58,7 +58,7 @@ class SupplyReportController extends Controller {
 			}
 		}
 
-		// return $data['stock_items'];
+		return $data['stock_items'];
 
 		$pdf = PDF::loadView('supply.report_supply', $data);
 		return $pdf->stream('supply.report_supply.pdf');
@@ -98,7 +98,7 @@ class SupplyReportController extends Controller {
 					DB::raw('"RIS" as type'),
 					DB::raw('null as payee_type'),
 					DB::raw('null as payee'),
-					'a.name as asset_name'
+					DB::raw('CONCAT(CONCAT(a.name," ( ",COALESCE(a.code,"")," )")) as asset_name')
 				)
 				->join('requisition_slips_items as ris','ris.requisition_slip_code','=','rs.requisition_slip_code')
 				->leftjoin('job_orders as jo','jo.job_order_code','=','rs.reference_code')
