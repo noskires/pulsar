@@ -74,7 +74,7 @@ class ProjectsController extends Controller {
     $data['barangay'] = $request->input('barangay');
    
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         $organization = new Organization;
         $depCode = str_pad($organization->where('org_type', 'Unit')->get()->count() + 1, 8, "0", STR_PAD_LEFT);
@@ -117,15 +117,15 @@ class ProjectsController extends Controller {
             'data' => 'null',
             'message' => 'Successfully saved.'
         ]);
-      } 
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // } 
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

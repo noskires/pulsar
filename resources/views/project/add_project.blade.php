@@ -66,7 +66,7 @@
               <label class="col-sm-3 control-label">Project Engineer</label>
               <div class="col-sm-9">
                 <select class="form-control select2" style="width: 100%;" ng-model="pc.projectDetails.projectEngineer">
-                  <option value="<%employee.employee_id%>" ng-repeat="employee in pc.employees"><%employee.fname+' '+employee.lname%></option>
+                  <option value="<%employee.employee_code%>" ng-repeat="employee in pc.employees"><%employee.fname+' '+employee.lname%></option>
                 </select>
               </div>
             </div>
