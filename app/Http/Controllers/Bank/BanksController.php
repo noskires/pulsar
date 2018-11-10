@@ -48,7 +48,8 @@ class BanksController extends Controller {
 			    $bankCode = (str_pad(($bank->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				$bank->bank_code = "BANK-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$bankCode;
+				// $bank->bank_code = "BANK-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$bankCode;
+				$bank->bank_code = "BANK-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
 				$bank->bank_name = $data['bank_name'];
 				$bank->branch = $data['branch'];
 				$bank->manager = $data['manager'];

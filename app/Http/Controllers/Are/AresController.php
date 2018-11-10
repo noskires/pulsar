@@ -70,8 +70,9 @@ class AresController extends Controller {
 				// $areCode = (str_pad(($are->whereDate('created_at', 'like', Carbon::today()->toDateString())
 			 //    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				$are->are_code = "ARE-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$areCode;
 				// $are->are_code = "ARE-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$areCode;
+				// $are->are_code = "ARE-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$areCode;
+				$are->are_code = "ARE-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
 				$are->employee_code = $data['employeeCode'];
 				$are->save();
 

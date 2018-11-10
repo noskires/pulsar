@@ -50,7 +50,8 @@ class InsuranceController extends Controller {
 			    $insuranceCode = (str_pad(($insurance->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				$insurance->insurance_code = "INSU-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$insuranceCode;
+				// $insurance->insurance_code = "INSU-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$insuranceCode;
+				$insurance->insurance_code = "INSU-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
 				$insurance->insurance_co = $data['insurance_co'];
 				$insurance->description = $data['description'];
 				$insurance->policy_number = $data['policy_number'];

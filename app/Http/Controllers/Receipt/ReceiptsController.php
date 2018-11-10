@@ -169,7 +169,8 @@ class ReceiptsController extends Controller {
         $receiptCode = (str_pad(($receipt->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        $receipt->receipt_code = "RCP-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$receiptCode;
+        // $receipt->receipt_code = "RCP-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$receiptCode;
+        $receipt->receipt_code = "RCP-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
         $receipt->receipt_date = $data['receiptDate'];
         $receipt->amount = $data['amount'];
         $receipt->purchase_order_code = $data['purchaseOrderCode'];

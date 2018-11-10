@@ -428,7 +428,7 @@ class AssetsController extends Controller {
 
               $assetEvent = new AssetEvent;
               // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
-              $assetEvent->asset_event_code = 1212;
+              $assetEvent->asset_event_code = "AEVNT-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
               $assetEvent->status = $data['status'];
               $assetEvent->asset_tag = $data['asset_tag'];
               $assetEvent->event_date = $data['event_date'];

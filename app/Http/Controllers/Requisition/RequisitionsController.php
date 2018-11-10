@@ -326,7 +326,8 @@ class RequisitionsController extends Controller {
           $requisitionSlipItemCode = (str_pad(($requisitionSlipItem->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
           ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-          $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$requisitionSlipItemCode;
+          // $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$requisitionSlipItemCode;
+          $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
 
           $requisitionSlipItem->requisition_slip_code     = $data[$i]['requisition_slip_code'];
           $requisitionSlipItem->supply_code     = $data[$i]['supply_name'];

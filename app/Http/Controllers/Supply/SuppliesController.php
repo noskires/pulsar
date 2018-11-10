@@ -60,7 +60,8 @@ public function index(){
         $supCode = (str_pad(($supply->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        $supply->supply_code = "SUP-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$supCode;
+        // $supply->supply_code = "SUP-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$supCode;
+        $supply->supply_code = "SUP-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
         $supply->supply_name = $data['supplyName'];
         $supply->description = $data['description'];
         $supply->category_code = $data['category'];

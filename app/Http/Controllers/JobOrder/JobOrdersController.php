@@ -140,7 +140,8 @@ class JobOrdersController extends Controller {
         $joCode = (str_pad(($jo->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        $jo->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
+        // $jo->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
+        $jo->job_order_code = "JO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
         $jo->job_order_date = $data['orderDate']; 
         $jo->date_started = $data['orderDate'];
         $jo->asset_tag = $data['assetTag'];
