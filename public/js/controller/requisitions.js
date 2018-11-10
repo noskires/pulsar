@@ -172,7 +172,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:''}).then (function (response) {
+            SuppliesSrvcs.supplies({supplyCode:'', quantityStatus:1}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;

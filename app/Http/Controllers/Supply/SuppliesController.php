@@ -18,6 +18,7 @@ public function index(){
 
     $data = array(
       'supplyCode'=>$request->input('supplyCode'),
+      'quantityStatus'=>$request->input('quantityStatus'),
     );
 
   	$supplies = DB::table('supplies as s')
@@ -26,6 +27,10 @@ public function index(){
 
     if ($data['supplyCode']){
       $supplies = $supplies->where('supply_code', $data['supplyCode']);
+    }
+
+    if ($data['quantityStatus'] == 1){
+      $supplies = $supplies->where('quantity', '>', 0);
     }
 
     $supplies = $supplies->get();
