@@ -58,7 +58,7 @@ class SupplyReportController extends Controller {
 			}
 		}
 
-		return $data['stock_items'];
+		// return $data['stock_items'];
 
 		$pdf = PDF::loadView('supply.report_supply', $data);
 		return $pdf->stream('supply.report_supply.pdf');
