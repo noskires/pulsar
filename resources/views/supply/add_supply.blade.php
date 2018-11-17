@@ -26,7 +26,7 @@
               <div class="col-sm-10">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="sc.supplyDetails.category">
                 <option selected="selected" value="0">- - select supply category - -</option>
-                <option ng-value="assetCategory.asset_code" ng-repeat="assetCategory in sc.assetCategories"><%assetCategory.asset_name%></option>
+                <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in sc.supplyCategories"><%supplyCategory.supply_category_name%></option>
               </select></div>
             </div>
             <div class="form-group col-sm-12">

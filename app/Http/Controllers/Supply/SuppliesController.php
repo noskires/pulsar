@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
 class SuppliesController extends Controller {
-public function index(){
-  return view('layout.index');
-}
+  public function index(){
+    return view('layout.index');
+  }
 
   public function supplies(Request $request){
 
@@ -23,7 +23,7 @@ public function index(){
 
   	$supplies = DB::table('supplies as s')
             ->leftjoin('stock_units as su','su.stock_unit_code','=','s.stock_unit')
-            ->leftjoin('asset_categories as ag','ag.asset_code','=','s.category_code'); 
+            ->leftjoin('supply_categories as sc','sc.supply_category_code','=','s.category_code'); 
 
     if ($data['supplyCode']){
       $supplies = $supplies->where('supply_code', $data['supplyCode']);

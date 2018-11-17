@@ -188,6 +188,10 @@
   @include('supply.list_supplies')
 </script>
 
+<script type="text/ng-template" id="supply.category.list.view">
+  @include('supply.list_supply_categories')
+</script>
+
 <!-- Organization -->
 
 <script type="text/ng-template" id="organization.create.department.view">

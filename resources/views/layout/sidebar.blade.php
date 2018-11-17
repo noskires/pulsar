@@ -175,7 +175,17 @@
         <li><a href="#"><i class="fa fa-paperclip"></i>Other Reports</a></li>
       </ul>
     </li>
-    <li><a href="#"><i class="fa fa-wrench"></i> <span>Setup</span></a></li>
+    <li class="treeview">
+      <a href="#"><i class="fa fa-wrench"></i> <span>Setup</span></a>
+      <ul class="treeview-menu">
+        <li>
+            <a href="#" ui-sref="list-supply-categories"><i class="fa fa-list-ul"></i>Supply Category</a>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </li>
+      </ul>
+    </li>
     <li class="treeview">
           <a href="#">
             <i class="fa fa-cloud"></i> <span>Advanced</span>

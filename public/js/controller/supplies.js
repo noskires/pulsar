@@ -5,8 +5,8 @@
         .controller('SuppliesCtrl', SuppliesCtrl)
         .controller('SuppliesModalInstanceCtrl', SuppliesModalInstanceCtrl)
 
-        SuppliesCtrl.$inject = ['$stateParams', 'SuppliesSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function SuppliesCtrl($stateParams, SuppliesSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        SuppliesCtrl.$inject = ['$stateParams', 'SuppliesSrvcs', 'SupplyCategoriesSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function SuppliesCtrl($stateParams, SuppliesSrvcs, SupplyCategoriesSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -56,15 +56,13 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetsSrvcs.asset_categories({assetCategory:'Supplies'}).then (function (response) {
+            SupplyCategoriesSrvcs.SupplyCategories({supplyCategoryCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
-                    vm.assetCategories = response.data.data;
-                    console.log(vm.assetCategories)
+                    vm.supplyCategories = response.data.data;
+                    console.log(vm.supplyCategories)
                 }
             }, function (){ alert('Bad Request!!!') })
-
-
 
             vm.newSupply = function(data){
                 SuppliesSrvcs.save(data).then(function(response){

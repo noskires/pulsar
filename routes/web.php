@@ -402,8 +402,11 @@ Route::get('/api/v1/suppliers','Supplier\SuppliersController@suppliers');
 Route::get('/supply/new','Supply\SuppliesController@index');
 Route::get('/supply/list','Supply\SuppliesController@index');
 Route::get('/supply/list/{supplyCode}','Supply\SuppliesController@index');
-
 Route::get('/supply/report/{supplyCode}', 'Supply\SupplyReportController@export');
+
+Route::get('/supply-category/new','Supply\SupplyCategoriesController@index');
+Route::get('/supply-categories/list','Supply\SupplyCategoriesController@index');
+Route::get('/supply-category/list/{supplyCategoryCode}','Supply\SupplyCategoriesController@index');
 
 /*
 |--------------------------------------------------------------------------
@@ -413,6 +416,10 @@ Route::get('/supply/report/{supplyCode}', 'Supply\SupplyReportController@export'
 
 Route::post('/api/v1/supply/save','Supply\SuppliesController@save'); 
 Route::get('/api/v1/supplies','Supply\SuppliesController@supplies');
+
+Route::post('/api/v1/supply-category/save','Supply\SupplyCategoriesController@save'); 
+Route::post('/api/v1/supply-category/update','Supply\SupplyCategoriesController@update'); 
+Route::get('/api/v1/supplies-category','Supply\SupplyCategoriesController@supplyCategories');
 
 /*
 |--------------------------------------------------------------------------

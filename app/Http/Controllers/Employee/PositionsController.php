@@ -45,7 +45,7 @@ class PositionsController extends Controller {
 
           $position = new Position;
 
-            $positionCode = (str_pad(($position->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+          $positionCode = (str_pad(($position->get()->count() + 1), 5, "0", STR_PAD_LEFT));
 
           $position->position_code = "POS-".$positionCode;
           $position->position_text = $data['position_text'];

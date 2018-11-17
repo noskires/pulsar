@@ -309,6 +309,23 @@
                 controller: 'SuppliesCtrl as sc',
                 templateUrl: 'supply.list.view'
             })
+
+            .state('supply-category-create', {
+                url: '/supply-category/:supplyCategoryRequest',
+                controller: 'SupplyCategoriesCtrl as scc',
+                templateUrl: 'supply.category.list.view'
+            })
+            .state('list-supply-categories', {
+                url: '/supply-categories/list',
+                controller: 'SupplyCategoriesCtrl as scc',
+                templateUrl: 'supply.category.list.view'
+            })
+            .state('list-supply-categoriesCopy', {
+                url: '/supply-category/list/:supplyCategoryCode',
+                controller: 'SupplyCategoriesCtrl as scc',
+                templateUrl: 'supply.category.list.view'
+            })
+
             .state('org-deparment-create', {
                 url: '/organization/department/new',
                 controller: 'OrganizationsCtrl as oc',

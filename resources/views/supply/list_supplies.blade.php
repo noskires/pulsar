@@ -26,7 +26,7 @@
         <tbody>
         <tr ng-repeat="supply in sc.supplies">
           <td><a href="#" ui-sref="list-supplyCopy({supplyCode:supply.supply_code})"><b> <%supply.supply_code%> </b></a></td>
-          <td><%supply.asset_name%></td>
+          <td><%supply.supply_category_name%></td>
           <td><%supply.supply_name%></td>
           <td><%supply.description%></td> 
           <td><%supply.quantity%></td> 
