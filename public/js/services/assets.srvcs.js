@@ -23,14 +23,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
-                asset_categories: function(data) {
-                    return $http({
-                        method: 'GET',
-                        data: data,
-                        url: '/api/v1/assets/asset-categories?assetCategory='+data.assetCategory,
-                        headers: {'Content-Type': 'application/json'}
-                    })
-                },
+                // asset_categories: function(data) {
+                //     return $http({
+                //         method: 'GET',
+                //         data: data,
+                //         url: '/api/v1/assets/asset-categories?assetCategory='+data.assetCategory,
+                //         headers: {'Content-Type': 'application/json'}
+                //     })
+                // },
                 asset_methods: function(data) {
                     return $http({
                         method: 'GET',

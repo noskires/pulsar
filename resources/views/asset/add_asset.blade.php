@@ -27,7 +27,7 @@
               <div class="col-sm-10">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.categoryCode" ng-change="ac.assetTag(ac.assetsDetails)">
                 <option selected="selected" value="0">- - - Select Category - - -</option>
-                <option value="<%category.asset_code%>" ng-repeat="category in ac.asset_categories"><%category.asset_name +" ("+category.asset_code+")"%></option>
+                <option value="<%category.asset_category_code%>" ng-repeat="category in ac.asset_categories"><%category.asset_category_name +" ("+category.asset_category_code+")"%></option>
               </select>
               </div>
             </div>

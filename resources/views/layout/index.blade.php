@@ -110,6 +110,10 @@
   @include('asset.view_asset')
 </script>
 
+<script type="text/ng-template" id="asset.category.list.view">
+  @include('asset.list_asset_categories')
+</script>
+
 <!-- AREs -->
  
 <script type="text/ng-template" id="ares.list.view">

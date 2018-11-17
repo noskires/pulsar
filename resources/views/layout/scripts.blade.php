@@ -61,6 +61,7 @@
 <!-- Services -->
 <script src="{{URL::to('js/services/employees.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/assets.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/assetCategories.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/maintenance.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/organizations.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/jobOrders.srvcs.js')}}"></script> 
@@ -85,6 +86,7 @@
 <script src="{{URL::to('js/controller/dataTablesCtrl.js')}}"></script> 
 <script src="{{URL::to('js/controller/employees.js')}}"></script> 
 <script src="{{URL::to('js/controller/assets.js')}}"></script> 
+<script src="{{URL::to('js/controller/assetCategories.js')}}"></script> 
 <script src="{{URL::to('js/controller/maintenance.js')}}"></script>
 <script src="{{URL::to('js/controller/organizations.js')}}"></script>
 <script src="{{URL::to('js/controller/jobOrders.js')}}"></script> 

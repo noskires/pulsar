@@ -1,40 +1,38 @@
 <?php
-namespace App\Http\Controllers\Supply;
+namespace App\Http\Controllers\Asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 Use Auth;
 use DB;
-use App\Organization;
-use App\Position;
-use App\SupplyCategory;
+use App\AssetCategory;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Carbon\Carbon;
 
-class SupplyCategoriesController extends Controller {
+class AssetCategoriesController extends Controller {
   public function index(){
     return view('layout.index');
   }
 
-   public function supplyCategories(Request $request){
+   public function assetCategories(Request $request){
 
       $data = array(
-        'supplyCategoryCode'=>$request->input('supplyCategoryCode'),
+        'assetCategoryCode'=>$request->input('assetCategoryCode'),
       );
 
-    	$supplyCategories = DB::table('supply_categories');
+      $assetCategories = DB::table('asset_categories');
 
-      if ($data['supplyCategoryCode']){
-        $supplyCategories = $supplyCategories->where('supply_category_code', $data['supplyCategoryCode']);
+      if ($data['assetCategoryCode']){
+        $assetCategories = $assetCategories->where('asset_category_code', $data['assetCategoryCode']);
       }
 
-      $supplyCategories = $supplyCategories->get();
+      $assetCategories = $assetCategories->get();
       
       return response()-> json([
           'status'=>200,
-          'data'=>$supplyCategories,
+          'data'=>$assetCategories,
           'message'=>''
       ]);
 
@@ -47,12 +45,13 @@ class SupplyCategoriesController extends Controller {
       $transaction = DB::transaction(function($data) use($data){
       try{
 
-          $supplyCategory = new SupplyCategory;
-          $supplyCategory->supply_category_code = "SUP-CTGY".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
-          $supplyCategory->supply_category_name = $data['category_name'];
-          $supplyCategory->supply_category_status = 1;
-          $supplyCategory->changed_by = Auth::user()->email;
-          $supplyCategory->save();
+          $assetCategory = new AssetCategory;
+          // $assetCategory->asset_category_code = "ASSET-CTGY".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+          $assetCategory->asset_category_code = $data['asset_category_code'];
+          $assetCategory->asset_category_name = $data['asset_category_name'];
+          $assetCategory->asset_category_status = 1;
+          $assetCategory->changed_by = Auth::user()->email;
+          $assetCategory->save();
 
           return response()->json([
               'status' => 200,
@@ -82,7 +81,7 @@ class SupplyCategoriesController extends Controller {
       $transaction = DB::transaction(function($data) use($data){
       try{
 
-          $assetCategory = SupplyCategory::where('supply_category_code', $data['supply_category_code'])->first();
+          $assetCategory = AssetCategory::where('asset_category_code', $data['asset_category_code'])->first();
           $assetCategory->asset_category_name = $data['asset_category_name'];
           $assetCategory->asset_category_status = 1;
           $assetCategory->changed_by = Auth::user()->email;

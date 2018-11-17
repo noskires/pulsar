@@ -179,6 +179,7 @@
       <a href="#"><i class="fa fa-wrench"></i> <span>Setup</span></a>
       <ul class="treeview-menu">
         <li>
+            <a href="#" ui-sref="list-asset-categories"><i class="fa fa-list-ul"></i>Asset Category</a>
             <a href="#" ui-sref="list-supply-categories"><i class="fa fa-list-ul"></i>Supply Category</a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

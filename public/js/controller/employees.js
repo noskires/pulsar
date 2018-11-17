@@ -187,7 +187,6 @@
         PositionsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'EmployeesSrvcs', 'OrganizationsSrvcs', '$window'];
         function PositionsModalInstanceCtrl ($uibModalInstance, formData, EmployeesSrvcs, OrganizationsSrvcs, $window) {
 
-            alert('position  modal')
             var vm = this;
 
             vm.submit = function(data){

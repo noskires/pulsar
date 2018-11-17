@@ -74,6 +74,10 @@ Route::get('/asset/list-equipments/{asset_code}','AssetsController@index');
 Route::get('/asset/more-details/{asset_code}','AssetsController@index'); 
 Route::get('/asset/more-details4/{asset_code}','AssetsController@index'); 
 
+Route::get('/asset-category/new','Asset\AssetCategoriesController@index');
+Route::get('/asset-categories/list','Asset\AssetCategoriesController@index');
+Route::get('/asset-category/list/{assetCategoryCode}','Asset\AssetCategoriesController@index');
+
 /*
 |--------------------------------------------------------------------------
 | Assets Apis
@@ -94,6 +98,10 @@ Route::get('/api/v1/assets/asset-categories','AssetsController@asset_categories'
 Route::get('/api/v1/assets/methods','AssetsController@methods');
 
 Route::get('/api/v1/assets-photos','AssetPhotosController@assetPhotos'); 
+
+Route::get('/api/v1/asset-categories','Asset\AssetCategoriesController@assetCategories');
+Route::post('/api/v1/asset-category/save','Asset\AssetCategoriesController@save'); 
+Route::post('/api/v1/asset-category/update','Asset\AssetCategoriesController@update'); 
 
 /*
 |--------------------------------------------------------------------------

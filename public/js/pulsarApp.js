@@ -205,6 +205,26 @@
                 templateUrl: 'asset.more.details.view4',
             })
 
+            //11-18-2018
+
+            .state('asset-category-create', {
+                url: '/asset-category/:assetCategoryRequest',
+                controller: 'AssetCategoriesCtrl as acc',
+                templateUrl: 'asset.category.list.view'
+            })
+            .state('list-asset-categories', {
+                url: '/asset-categories/list',
+                controller: 'AssetCategoriesCtrl as acc',
+                templateUrl: 'asset.category.list.view'
+            })
+            .state('list-asset-categoriesCopy', {
+                url: '/asset-category/list/:assetCategoryCode',
+                controller: 'AssetCategoriesCtrl as acc',
+                templateUrl: 'asset.category.list.view'
+            })
+
+            //11-18-2018
+
             // .state('asset-list-equipments.asset', {
             //     url: '/:assetTag',
             //     controller: 'AssetsCtrl as ac',

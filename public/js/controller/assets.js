@@ -84,8 +84,8 @@
 
         }
 
-        AssetsAddCtrl.$inject = ['$state', '$stateParams', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
-        function AssetsAddCtrl($state, $stateParams, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
+        AssetsAddCtrl.$inject = ['$state', '$stateParams', 'AssetsSrvcs', 'AssetCategoriesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
+        function AssetsAddCtrl($state, $stateParams, AssetsSrvcs, AssetCategoriesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -107,7 +107,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetsSrvcs.asset_categories({assetCategory:'Assets'}).then (function (response) {
+            AssetCategoriesSrvcs.AssetCategories({assetCategoryCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.asset_categories = response.data.data;

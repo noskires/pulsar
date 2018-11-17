@@ -77,8 +77,8 @@ class AssetsController extends Controller {
                 DB::raw('DATE_FORMAT(a.warranty_date, "%m/%d/%Y") as warranty_date'),
                 'a.project_code',
                 'a.status',
-                'sc.asset_category',
-                'sc.asset_name',
+                // 'ac.asset_category',
+                'ac.asset_category_name',
                 'e.organizational_unit',
                 'org.org_name as organizational_unit_name',
                 'org.barangay as barangay',
@@ -94,7 +94,7 @@ class AssetsController extends Controller {
             // ->leftjoin('Employees as e','e.employee_code','=','a.assign_to')
             // ->leftjoin('Projects as p','p.project_code','=','a.project_code')
             
-            ->leftjoin('asset_categories as sc','sc.asset_code','=','a.category')
+            ->leftjoin('asset_categories as ac','ac.asset_category_code','=','a.category')
             ->leftjoin('ares as are','are.are_code','=','a.are_code')
             ->leftjoin('Employees as e','e.employee_code','=','are.employee_code')
             ->leftjoin('organizations as org','org.org_code','=','e.organizational_unit')
