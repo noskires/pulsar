@@ -38,9 +38,12 @@ class OperationsController1 extends Controller {
                 'a.name as asset_name',
                 'p.name as project_name'
               )
-            -> leftjoin('Assets as a','a.tag','=','o.asset_tag')
-            -> leftjoin('Projects as p','p.project_code','=','o.project_code');
-            // -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
+            ->leftjoin('Assets as a','a.tag','=','o.asset_tag')
+            ->leftjoin('Projects as p','p.project_code','=','o.project_code');
+            // ->leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
+            // ->leftjoin('municipalities as m','m.municipality_code','=','org.municipality_code')
+            // ->leftjoin('provinces as p','p.province_code','=','m.province_code')
+            // ->leftjoin('regions as r','r.region_code','=','p.region_code');
             // -> leftjoin('Employees as e','e.employee_id','=','a.assign_to')
             // -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
 

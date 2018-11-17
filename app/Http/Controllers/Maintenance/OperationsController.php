@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Maintenance;
 use Illuminate\Http\Request;
 
+Use Auth;
 use DB;
 use App\Employee;
 use App\Project;
@@ -36,10 +37,20 @@ class OperationsController extends Controller {
                 'o.number_loads', 
                 'a.tag', 
                 'a.name as asset_name',
-                'p.name as project_name'
+                'project.name as project_name',
+                'm.municipality_code as municipality_code',
+                'm.municipality_text',
+                'p.province_code as province_code',
+                'p.province_text',
+                'r.region_code as region_code',
+                'r.region_text_short',
+                'r.region_text_long'
               )
-            -> leftjoin('Assets as a','a.tag','=','o.asset_tag')
-            -> leftjoin('Projects as p','p.project_code','=','o.project_code');
+            ->leftjoin('Assets as a','a.tag','=','o.asset_tag')
+            ->leftjoin('Projects as project','project.project_code','=','o.project_code')
+            ->leftjoin('municipalities as m','m.municipality_code','=','project.municipality_code')
+            ->leftjoin('provinces as p','p.province_code','=','m.province_code')
+            ->leftjoin('regions as r','r.region_code','=','p.region_code');
 
     if ($data['operationCode']){
       $operations = $operations->where('operation_code', $data['operationCode']);
@@ -126,6 +137,7 @@ class OperationsController extends Controller {
         $operation->gas_consumption = $data['gasConsumption']; 
         $operation->oil_consumption = $data['oilConsumption']; 
         $operation->number_loads = $data['numberLoads']; 
+        $operation->changed_by = Auth::user()->email;
         $operation->save();
 
         return response()->json([

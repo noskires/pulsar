@@ -40,6 +40,7 @@
                   <th>Asset Tag</th>
                   <th>Project Name</th>
                   <th>Project ID</th>
+                  <th>Office Location</th>
                   <th>Activity/Remarks</th>
                   <th>Operating Time(HRS)</th>
                   <th>Distance Travelled(KM/HR)</th>
@@ -57,6 +58,7 @@
                   <td><%operation.asset_tag%></td>
                   <td><%operation.project_name%></td>
                   <td><%operation.project_code%></td>
+                  <td><%operation.barangay+' '+operation.municipality_text +' '+ operation.province_text+' '+ operation.region_text_short%></td>
                   <td><%operation.remarks%></td>
                   <td align="right"><%operation.operating_hours | number:2%></td>
                   <td align="right"><%operation.distance_travelled | number:2%></td>
