@@ -82,12 +82,12 @@ class SupplyCategoriesController extends Controller {
       $transaction = DB::transaction(function($data) use($data){
       try{
 
-          $assetCategory = SupplyCategory::where('supply_category_code', $data['supply_category_code'])->first();
-          $assetCategory->asset_category_name = $data['asset_category_name'];
-          $assetCategory->asset_category_status = 1;
-          $assetCategory->changed_by = Auth::user()->email;
-          $assetCategory->timestamps = true;
-          $assetCategory->save();
+          $supplyCategory = SupplyCategory::where('supply_category_code', $data['supply_category_code'])->first();
+          $supplyCategory->supply_category_name = $data['supply_category_name'];
+          $supplyCategory->supply_category_status = 1;
+          $supplyCategory->changed_by = Auth::user()->email;
+          $supplyCategory->timestamps = true;
+          $supplyCategory->save();
 
           return response()->json([
               'status' => 200,
