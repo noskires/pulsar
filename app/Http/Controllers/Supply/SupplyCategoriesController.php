@@ -24,7 +24,7 @@ class SupplyCategoriesController extends Controller {
         'supplyCategoryCode'=>$request->input('supplyCategoryCode'),
       );
 
-    	$supplyCategories = DB::table('supply_categories1');
+    	$supplyCategories = DB::table('supply_categories');
 
       if ($data['supplyCategoryCode']){
         $supplyCategories = $supplyCategories->where('supply_category_code', $data['supplyCategoryCode']);
