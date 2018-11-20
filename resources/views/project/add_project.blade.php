@@ -46,6 +46,11 @@
             </div>
 
             <div class="form-group col-sm-12">
+              <label for="projectname" class="col-sm-3 control-label">Customer</label>
+              <div class="col-sm-9"><input type="text" class="form-control" id="customerId" ng-model="pc.projectDetails.customerId" placeholder="" required=""></div>
+            </div>
+
+            <div class="form-group col-sm-12">
               <label for="projectname" class="col-sm-3 control-label">Project Name</label>
               <div class="col-sm-9"><input type="text" class="form-control" id="projectname" ng-model="pc.projectDetails.name" placeholder="" required=""></div>
             </div>

@@ -144,7 +144,7 @@
     <li class="treeview"><a href="#" ui-sref="org-office-create"><i class="fa fa-building"></i> Office </a></li>
     <li class="treeview">
       <a href="#">
-        <i class="fa fa-cube"></i> <span>Project Monitoring</span>
+        <i class="fa fa-cube"></i> <span>Projects</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
@@ -154,7 +154,7 @@
         <li><a href="#" ui-sref="project-create"><i class="fa fa-plus"></i> Add a Project</a></li>
       </ul>
     </li>
-    <li><a href="#" ui-sref="list-employees"><i class="fa fa-user"></i> <span>Employee Manager</span></a></li>
+    <li><a href="#" ui-sref="list-employees"><i class="fa fa-user"></i> <span>Employees</span></a></li>
     <li class="header">TOOLS</li>
     <li class="treeview">
       <a href="#">
