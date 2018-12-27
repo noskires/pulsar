@@ -125,6 +125,7 @@
                 <th>Contact Person</th>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Insurance Coverage</th>
               </tr>
               </thead>
               <tbody>
@@ -134,6 +135,7 @@
                 <td><%insurance.insurance_agent%></td>
                 <td><%insurance.date_issued%></td>
                 <td><%insurance.expiration_date%></td>
+                <td><%insurance.insurance_coverage%></td>
               </tr>
               <tr ng-if="amdc.insurance.length==0">
                 <td colspan="5" align="center"> NO RECORDS </td>

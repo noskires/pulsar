@@ -24,7 +24,22 @@ class InsuranceController extends Controller {
 			'insuranceCode'=>$request->input('insuranceCode'),
 		);
 
-		$banks = DB::table('insurance');
+		$banks = DB::table('insurance as i')
+                    ->select(
+                      'i.insurance_id',
+                      'i.insurance_code',
+                      'i.insurance_co',
+                      'i.description',
+                      'i.policy_number',
+                      'i.insurance_coverage',
+                      DB::raw('DATE_FORMAT(i.date_issued, "%m/%d/%Y") as date_issued'),
+                      DB::raw('DATE_FORMAT(i.expiration_date, "%m/%d/%Y") as expiration_date'),
+                      'i.applicable_premium',
+                      'i.insurance_agent',
+                      'i.email',
+                      'i.mobile_number', 
+                      'i.telephone_number'
+                    );
 
 		if ($data['insuranceCode']){
 			$banks = $banks->where('insurance_code', $data['insuranceCode']);
@@ -135,11 +150,18 @@ class InsuranceController extends Controller {
 	    );
 
 	    $insuranceItems = DB::table('assets as a')
-	              // ->select(
-	              //   'ii.insurance_item_code',
-	              //   'ii.insurance_code',
-	              //   'ii.asset_code'
-	              // )
+	              ->select(
+	                'a.tag',
+	                'ii.insurance_item_code',
+	                'ii.asset_code',
+	                'i.insurance_code',
+	                'i.insurance_co',
+	                'i.description',
+	                'i.insurance_agent',
+	                DB::raw('DATE_FORMAT(i.date_issued, "%m/%d/%Y") as date_issued'),
+                    DB::raw('DATE_FORMAT(i.expiration_date, "%m/%d/%Y") as expiration_date'),
+	                'i.insurance_coverage'
+	              )
 	            ->leftjoin('insurance_items as ii','ii.asset_code','=','a.tag')
 	            ->leftjoin('insurance as i','i.insurance_code','=','ii.insurance_code');
 
