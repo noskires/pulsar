@@ -273,7 +273,7 @@
                       <div class="col-sm-9">
                       <div class="input-group date">
                       <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                      <input type="text" class="form-control pull-right" datepicker ng-model="vm.formData.birthdate">
+                      <input type="text" class="form-control pull-right" ng-model="vm.formData.birthdate">
                     </div></div>
                     </div>
                     <div class="form-group col-sm-12">

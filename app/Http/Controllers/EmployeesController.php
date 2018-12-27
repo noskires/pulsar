@@ -130,13 +130,15 @@ class EmployeesController extends Controller {
     $data['suffix'] = $request->input('suffix');
     $data['fname'] = $request->input('fname');
     $data['mname'] = $request->input('mname');
-    $data['bday'] = date('Y-m-d', strtotime($request->input('bday')));
+    $data['birthdate'] = date('Y-m-d', strtotime($request->input('birthdate')));
     $data['position_code'] = $request->input('position_code');
     $data['email'] = $request->input('email');
     $data['phone_no'] = $request->input('phone_no');
     $data['department'] = $request->input('department');
     $data['division'] = $request->input('division');
     $data['unit'] = $request->input('unit');
+
+    return $request->all();
 
     if($data['unit'] != ""){
       $data['organizational_unit'] = $data['unit'];
@@ -160,7 +162,7 @@ class EmployeesController extends Controller {
         $employee->fname = $data['fname'];
         $employee->mname = $data['mname'];
         $employee->position_code = $data['position_code'];
-        $employee->birthdate = $data['bday'];
+        $employee->birthdate = $data['birthdate'];
         $employee->email_account = $data['email'];
         $employee->phone_number = $data['phone_no'];
         $employee->department = $data['department'];
@@ -171,7 +173,7 @@ class EmployeesController extends Controller {
 
         return response()->json([
             'status' => 200,
-            'data' => $data['position_code'],
+            'data' => $data['birthdate'],
             'message' => 'Successfully saved.'
         ]);
 
@@ -197,7 +199,7 @@ class EmployeesController extends Controller {
     $data['suffix'] = $request->input('affix');
     $data['fname'] = $request->input('fname');
     $data['mname'] = $request->input('mname');
-    $data['bday'] = date('Y-m-d', strtotime($request->input('bday')));
+    $data['birthdate'] = date('Y-m-d', strtotime($request->input('birthdate')));
     $data['position_code'] = $request->input('position_code');
     $data['email'] = $request->input('email_account');
     $data['phone_no'] = $request->input('phone_number');
@@ -216,7 +218,7 @@ class EmployeesController extends Controller {
               'fname' => $data['fname'],
               'mname' => $data['mname'],
               'position_code' => $data['position_code'],
-              'birthdate' => $data['bday'],
+              'birthdate' => $data['birthdate'],
               'email_account' => $data['email'],
               'phone_number' => $data['phone_no'],
               'department' => $data['department'],
@@ -226,7 +228,7 @@ class EmployeesController extends Controller {
 
         return response()->json([
             'status' => 200,
-            'data' => 'null',
+            'data' => $data['birthdate'],
             'message' => 'Successfully saved.'
         ]);
 
