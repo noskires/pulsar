@@ -124,6 +124,7 @@
                     vm.receiptItems = response.data.data;
                     console.log(vm.receiptItems)
                 }
+                
             }, function (){ alert('Bad Request!!!') })
 
             SupplyCategoriesSrvcs.SupplyCategories({supplyCategoryCode:''}).then (function (response) {

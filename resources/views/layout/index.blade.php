@@ -234,6 +234,12 @@
   @include('bank.list_banks')
 </script>
 
+<!-- Purchase Order -->
+ 
+<script type="text/ng-template" id="purchase.order.list.view">
+  @include('purchase_order.list_purchase_order')
+</script>
+
 <!-- Insurance -->
  
 <script type="text/ng-template" id="insurance.list.view">

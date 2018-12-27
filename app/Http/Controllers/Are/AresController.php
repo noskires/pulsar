@@ -19,6 +19,20 @@ class AresController extends Controller {
 		return view('layout.index');
 	}
 
+	public function purchaseOrders(Request $request){
+
+		$pos = DB::table('purchase_orders AS po');
+					// ->select(
+
+		$pos = $pos->get();
+
+		return response()-> json([
+			'status'=>200,
+			'data'=>$pos,
+			'message'=>''
+		]);
+	}
+
 	public function ares(Request $request){
 
 		$data = array(

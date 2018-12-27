@@ -380,6 +380,31 @@ Route::post('/api/v1/are/update','Are\AresController@update');
 
 Route::get('/api/v1/are','Are\AresController@ares');
 
+
+/*
+|--------------------------------------------------------------------------
+| POs
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/purchase-order/new','PurchaseOrdersController@index');
+Route::get('/purchase-orders/list','PurchaseOrdersController@index');
+Route::get('/purchase-order/list/{poCode}','PurchaseOrdersController@index');
+
+/*
+|--------------------------------------------------------------------------
+| POs Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/purchase-order/save','PurchaseOrdersController@save');
+Route::post('/api/v1/purchase-order/update', 'PurchaseOrdersController@update');
+Route::get('/api/v1/purchase-orders','PurchaseOrdersController@purchaseOrders');
+
+Route::post('/api/v1/purchase-order-items/save','PurchaseOrdersController@save_purchase_order_items');
+Route::post('/api/v1/purchase-order-items/update','PurchaseOrdersController@update_purchase_order_items');
+Route::post('/api/v1/purchase-order-items/remove','PurchaseOrdersController@remove_po_items');
+Route::get('/api/v1/purchase-order-items','PurchaseOrdersController@purchaseOrderItems');
 /*
 |--------------------------------------------------------------------------
 | Supplier

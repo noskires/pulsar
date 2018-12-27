@@ -434,6 +434,16 @@
                 templateUrl: 'ares.list.view'
             })
 
+            .state('list-po', {
+                url: '/purchase-orders/list',
+                controller: 'PurchaseOrdersCtrl as poc',
+                templateUrl: 'purchase.order.list.view'
+            })
+            .state('list-poCopy', {
+                url: '/purchase-order/list/:poCode',
+                controller: 'PurchaseOrdersCtrl as poc',
+                templateUrl: 'purchase.order.list.view'
+            })
 
             //for testing only
             .state('angular-data-tables', {
