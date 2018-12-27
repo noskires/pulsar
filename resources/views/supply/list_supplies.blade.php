@@ -21,6 +21,7 @@
           <th>Supply Qty</th>
           <th>Supply Unit</th>
           <th>Re-order Level</th>
+          <th>Options</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
           <td><%supply.quantity%></td> 
           <td><%supply.stock_unit_name%></td> 
           <td><%supply.re_order_level%></td> 
+          <td><a href="#" ui-sref="edit-supply({supplyCode2:supply.supply_code})"><code class="text-white bg-blue">EDIT</code></a></td> 
         </tr>
         </tbody>
       </table>
@@ -93,6 +95,67 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+</script>
+
+<script type="text/ng-template" id="supplyEdit.modal">
+  <div>
+    <div class="modal-dialog modal-lg" style="width: 1200px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-briefcase"></li> Supply ID: <b><%vm.formData.supply_code%></b></h4>
+        </div>
+        <div class="modal-body">
+          <p>Edit Supply Information</p>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  
+                  <div class="form-group col-sm-12">
+                    <label for="requestpurpose" class="col-sm-2 control-label">Supply Category*</label>
+                    <div class="col-sm-4">
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.category_code">
+                        <option selected="selected" value="0">- - select supply category - -</option>
+                        <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in vm.supplyCategories"><%supplyCategory.supply_category_name%></option>
+                      </select>
+                    </div>
+
+                    <label class="col-sm-2 control-label">Supply Unit*</label>
+                    <div class="col-sm-2">
+
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.stock_unit_code">
+                        <option selected="selected" value="0">- - select stock unit - -</option>
+                        <option ng-value="stockUnit.stock_unit_code" ng-repeat="stockUnit in vm.stockUnits"><%stockUnit.stock_unit_name%></option>
+                      </select>
+
+                    </div>
+                  </div>
+
+                  <div class="form-group col-sm-12">
+                    <label for="controlnumber" class="col-sm-2 control-label">Supply Name*</label>
+                    <div class="col-sm-4"><input type="text" class="form-control" id="supplyname" required="" ng-model="vm.formData.supply_name"></div>
+                    <label for="platenumber" class="col-sm-2 control-label">Re-order Level*</label>
+                    <div class="col-sm-2"><input type="text" class="form-control" id="reoderlevel" placeholder="" required="" ng-model="vm.formData.re_order_level"></div>
+                  </div>
+
+                  <div class="form-group col-sm-12">
+                    <label for="supplydescription" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-4"><textarea class="form-control" id="supplydescription" rows="1" required="" ng-model="vm.formData.description"></textarea></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" ng-click="vm.ok()">Close</button>
+          <button type="button" class="btn btn-primary pull-right" ng-click="vm.updateSupply(vm.formData)">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </script>
 
 </section>

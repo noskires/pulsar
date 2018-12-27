@@ -89,4 +89,46 @@ class SuppliesController extends Controller {
 
     return $transaction;
   }
+
+  public function update(Request $request){
+
+    $data = array();
+    $data['supply_code'] = $request->input('supply_code');
+    $data['category_code'] = $request->input('category_code');
+    $data['supply_name']   = $request->input('supply_name');
+    $data['description'] = $request->input('description');
+    $data['re_order_level'] = $request->input('re_order_level');
+    $data['stock_unit'] = $request->input('stock_unit_code');
+
+      $transaction = DB::transaction(function($data) use($data){
+      try{
+        
+            DB::table('supplies')
+              ->where('supply_code', $data['supply_code'])
+              ->update([
+                'category_code' => $data['category_code'],
+                'supply_name' => $data['supply_name'],
+                'description' => $data['description'],
+                're_order_level' => $data['re_order_level'],
+                'stock_unit' => $data['stock_unit']
+              ]);
+
+          return response()->json([
+              'status' => 200,
+              'data' => $data['supply_code'],
+              'message' => 'Successfully saved.'
+          ]);
+
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json([
+              'status' => 500,
+              'data' => 'null',
+              'message' => 'Error, please try again!'
+          ]);
+        }
+      });
+      return $transaction;
+  }
 }

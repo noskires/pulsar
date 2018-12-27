@@ -329,6 +329,11 @@
                 controller: 'SuppliesCtrl as sc',
                 templateUrl: 'supply.list.view'
             })
+            .state('edit-supply', {
+                url: '/supply/edit/:supplyCode2',
+                controller: 'SuppliesCtrl as sc',
+                templateUrl: 'supply.list.view'
+            })
 
             .state('supply-category-create', {
                 url: '/supply-category/:supplyCategoryRequest',
