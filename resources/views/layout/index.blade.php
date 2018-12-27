@@ -196,6 +196,10 @@
   @include('supply.list_supply_categories')
 </script>
 
+<script type="text/ng-template" id="supply.supplier.list.view">
+  @include('supply.list_suppliers')
+</script>
+
 <!-- Organization -->
 
 <script type="text/ng-template" id="organization.create.department.view">

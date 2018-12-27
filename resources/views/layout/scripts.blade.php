@@ -97,6 +97,7 @@
 <script src="{{URL::to('js/controller/supplies.js')}}"></script> 
 <script src="{{URL::to('js/controller/supplyCategories.js')}}"></script> 
 <script src="{{URL::to('js/controller/vouchers.js')}}"></script> 
+<script src="{{URL::to('js/controller/suppliers.js')}}"></script> 
 <script src="{{URL::to('js/controller/banks.js')}}"></script> 
 <script src="{{URL::to('js/controller/insurance.js')}}"></script> 
 <script src="{{URL::to('js/controller/ares.js')}}"></script> 

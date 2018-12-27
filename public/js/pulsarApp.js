@@ -346,6 +346,22 @@
                 templateUrl: 'supply.category.list.view'
             })
 
+            .state('supplier-create', {
+                url: '/supplier/:supplierRequest',
+                controller: 'SuppliersCtrl as sc',
+                templateUrl: 'supply.supplier.list.view'
+            })
+            .state('list-suppliers', {
+                url: '/suppliers/list',
+                controller: 'SuppliersCtrl as sc',
+                templateUrl: 'supply.supplier.list.view'
+            })
+            .state('list-supplierCopy', {
+                url: '/supplier/list/:supplierCode',
+                controller: 'SuppliersCtrl as sc',
+                templateUrl: 'supply.supplier.list.view'
+            })
+
             .state('org-deparment-create', {
                 url: '/organization/department/new',
                 controller: 'OrganizationsCtrl as oc',

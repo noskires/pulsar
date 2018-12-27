@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Supplier;
 use Illuminate\Http\Request;
 
 use DB;
-use App\Voucher;
+use App\Supplier;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -36,61 +36,100 @@ class SuppliersController extends Controller {
 
 	public function save(Request $request){
 
-		// $data = array();
+		$data = array();
+		$data['supplier_name']   = $request->input('supplier_name');
+		$data['supplier_owner']   = $request->input('supplier_owner');
+		$data['dti_expiry_date'] = date('Y-m-d', strtotime($request->input('dti_expiry_date')));
+		$data['business_permit_no']   = $request->input('business_permit_no');
+		$data['business_permit_expiry_date'] = date('Y-m-d', strtotime($request->input('business_permit_expiry_date')));
+		$data['bir_no']   = $request->input('bir_no');
+		$data['contact_no']   = $request->input('contact_no');
+		$data['address']   = $request->input('address');
 
-		// $data['payeeType']   = $request->input('payeeType');
-		// $data['payee'] = $request->input('payee');
-		// $data['particulars'] = $request->input('particulars');
-		// $data['description'] = $request->input('description');
-		// $data['vatPayee'] = $request->input('vatPayee');
-		// $data['otherTaxes'] = $request->input('otherTaxes');
-		// $data['tax1'] = $request->input('tax1');
-		// $data['tax2'] = $request->input('tax2');
-		// $data['amount'] = $request->input('amount');
-		// $data['checkNumber'] = $request->input('checkNumber');
-		// $data['checkDate'] = date('Y-m-d', strtotime($request->input('checkDate')));
-		// $data['bankCode'] = $request->input('bankCode');
+		// return $request->all();
+		$transaction = DB::transaction(function($data) use($data){
+		try{
 
-		// $transaction = DB::transaction(function($data) use($data){
-		// // try{
+				$supplier = new Supplier;
 
-		// 		$voucher = new Voucher;
+			    $supplierCode = (str_pad(($supplier->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-		// 	    $voucherCode = (str_pad(($voucher->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-		// 	    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+				$supplier->supplier_code = "SUPLR-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$supplierCode;
+				$supplier->supplier_name = $data['supplier_name'];
+				$supplier->supplier_owner = $data['supplier_owner'];
+				$supplier->dti_expiry_date = $data['dti_expiry_date'];
+				$supplier->business_permit_no = $data['business_permit_no'];
+				$supplier->business_permit_expiry_date = $data['business_permit_expiry_date'];
+				$supplier->bir_no = $data['bir_no'];
+				$supplier->contact_no = $data['contact_no'];
+				$supplier->address = $data['address'];
+				$supplier->save();
 
-		// 		$voucher->voucher_code = "DV-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$voucherCode;
-		// 		$voucher->payee_type = $data['payeeType'];
-		// 		$voucher->payee = $data['payee'];
-		// 		$voucher->particulars = $data['particulars'];
-		// 		$voucher->description = $data['description'];
-		// 		$voucher->vat_payee = $data['vatPayee'];
-		// 		$voucher->other_taxes = $data['otherTaxes'];
-		// 		$voucher->tax_1 = $data['tax1'];
-		// 		$voucher->tax_2 = $data['tax2'];
-		// 		$voucher->amount = $data['amount'];
-		// 		$voucher->check_number = $data['checkNumber'];
-		// 		$voucher->check_date = $data['checkDate'];
-		// 		$voucher->bank_code = $data['bankCode'];
-		// 		$voucher->save();
+				return response()->json([
+				    'status' => 200,
+				    'data' => 'null',
+				    'message' => 'Successfully saved.'
+				]);
 
-		// 		return response()->json([
-		// 		    'status' => 200,
-		// 		    'data' => 'null',
-		// 		    'message' => 'Successfully saved.'
-		// 		]);
+			}
+			catch (\Exception $e) 
+			{
+			  	return response()->json([
+				    'status' => 500,
+				    'data' => 'null',
+				    'message' => 'Error, please try again!'
+				]);
+			}
+		});
 
-			// }
-			// catch (\Exception $e) 
-			// {
-			//   	return response()->json([
-			// 	    'status' => 500,
-			// 	    'data' => 'null',
-			// 	    'message' => 'Error, please try again!'
-			// 	]);
-			// }
-		// });
+		return $transaction;
+	}
 
-		// return $transaction;
+	public function update(Request $request){
+
+    	$data = array();
+		$data['supplier_code']   = $request->input('supplier_code');
+		$data['supplier_name']   = $request->input('supplier_name');
+		$data['supplier_owner']   = $request->input('supplier_owner');
+		$data['dti_expiry_date'] = date('Y-m-d', strtotime($request->input('dti_expiry_date')));
+		$data['business_permit_no']   = $request->input('business_permit_no');
+		$data['business_permit_expiry_date'] = date('Y-m-d', strtotime($request->input('business_permit_expiry_date')));
+		$data['bir_no']   = $request->input('bir_no');
+		$data['contact_no']   = $request->input('contact_no');
+		$data['address']   = $request->input('address');
+
+	    $transaction = DB::transaction(function($data) use($data){
+	    try{
+	      
+	          DB::table('suppliers')
+	            ->where('supplier_code', $data['supplier_code'])
+	            ->update([
+	              'supplier_name' => $data['supplier_name'],
+	              'supplier_owner' => $data['supplier_owner'],
+	              'dti_expiry_date' => $data['dti_expiry_date'],
+	              'business_permit_no' => $data['business_permit_no'],
+	              'business_permit_expiry_date' => $data['business_permit_expiry_date'],
+	              'bir_no' => $data['bir_no'],
+	              'contact_no' => $data['contact_no'],
+	              'address' => $data['address']
+	            ]);
+
+	        return response()->json([
+	            'status' => 200,
+	            'data' => $data['supplier_code'],
+	            'message' => 'Successfully saved.'
+	        ]);
+
+	      }
+	      catch (\Exception $e) 
+	      {
+	          return response()->json([
+	            'status' => 500,
+	            'data' => 'null',
+	            'message' => 'Error, please try again!'
+	        ]);
+	      }
+    	});
+    	return $transaction;
 	}
 }

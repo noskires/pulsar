@@ -352,7 +352,6 @@ Route::post('/api/v1/insurance-items/remove','Insurance\InsuranceController@remo
 
 Route::post('/api/v1/insurance/update','Insurance\InsuranceController@update');
 Route::get('/api/v1/insurance','Insurance\InsuranceController@insurance');
-
 Route::get('/api/v1/insurance-items','Insurance\InsuranceController@insuranceItems');
 
 /*
@@ -388,7 +387,7 @@ Route::get('/api/v1/are','Are\AresController@ares');
 */
 
 Route::get('/supplier/new','Supplier\SuppliersController@index');
-Route::get('/supplier/list','Supplier\SuppliersController@index');
+Route::get('/suppliers/list','Supplier\SuppliersController@index');
 Route::get('/supplier/list/{supplierCode}','Supplier\SuppliersController@index');
 
 /*
