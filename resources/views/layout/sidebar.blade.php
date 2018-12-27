@@ -80,15 +80,15 @@
       </ul>
     </li>
     <li class="treeview">
-      <a href="#">
+      <a href="#" >
         <i class="fa fa-shopping-basket"></i> <span>Purchase Order</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-list-ul"></i> List of P.O.</a></li>
-        <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li>
+        <li><a href="#" ui-sref="list-po"><i class="fa fa-list-ul"></i> List of P.O.</a></li>
+        <!-- <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li> -->
       </ul>
     </li>       
      <li class="treeview">

@@ -129,7 +129,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            EmployeesSrvcs.employees({jobType:'POS-002'}).then (function (response) {
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.employees = response.data.data;
