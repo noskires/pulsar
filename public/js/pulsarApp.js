@@ -367,6 +367,22 @@
                 templateUrl: 'supply.supplier.list.view'
             })
 
+            .state('particular-create', { 
+                url: '/particular/:particularRequest',
+                controller: 'ParticularsCtrl as pc',
+                templateUrl: 'particular.list.view'
+            })
+            .state('list-particular', {
+                url: '/particulars/list',
+                controller: 'ParticularsCtrl as pc',
+                templateUrl: 'particular.list.view'
+            })
+            .state('list-particularCopy', {
+                url: '/particular/list/:particularCode',
+                controller: 'ParticularsCtrl as pc',
+                templateUrl: 'particular.list.view'
+            })
+
             .state('org-deparment-create', {
                 url: '/organization/department/new',
                 controller: 'OrganizationsCtrl as oc',
@@ -444,6 +460,8 @@
                 controller: 'PurchaseOrdersCtrl as poc',
                 templateUrl: 'purchase.order.list.view'
             })
+
+
 
             //for testing only
             .state('angular-data-tables', {

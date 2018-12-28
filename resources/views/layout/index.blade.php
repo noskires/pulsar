@@ -240,6 +240,12 @@
   @include('purchase_order.list_purchase_order')
 </script>
 
+<!-- Particulars -->
+ 
+<script type="text/ng-template" id="particular.list.view">
+  @include('particular.list_particulars')
+</script>
+
 <!-- Insurance -->
  
 <script type="text/ng-template" id="insurance.list.view">

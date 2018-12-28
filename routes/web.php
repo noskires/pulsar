@@ -461,7 +461,32 @@ Route::get('/api/v1/supplies-category','Supply\SupplyCategoriesController@supply
 |--------------------------------------------------------------------------
 */
 
+
+
+
 Route::get('/api/v1/stock-units','Supply\StockUnitsController@stock_units');
+
+
+/*
+|--------------------------------------------------------------------------
+| Particulars
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/particular/new','ParticularsController@index');
+Route::get('/particulars/list','ParticularsController@index');
+Route::get('/particular/list/{particularCode}','ParticularsController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Particulars Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/particular/save','ParticularsController@save');
+Route::post('/api/v1/particular/update','ParticularsController@update');
+Route::get('/api/v1/particulars','ParticularsController@particulars');
+
 
 /*
 |--------------------------------------------------------------------------

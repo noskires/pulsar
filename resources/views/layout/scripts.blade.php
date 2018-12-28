@@ -102,6 +102,7 @@
 <script src="{{URL::to('js/controller/banks.js')}}"></script> 
 <script src="{{URL::to('js/controller/insurance.js')}}"></script> 
 <script src="{{URL::to('js/controller/ares.js')}}"></script> 
+<script src="{{URL::to('js/controller/particulars.js')}}"></script> 
 <script src="{{URL::to('js/controller/purchaseOrders.js')}}"></script> 
 
 @yield('additionalScripts')
