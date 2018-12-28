@@ -6,14 +6,16 @@
         // .controller('ReceiptItemsCtrl', ReceiptItemsCtrl)
         .controller('ReceiptsModalInstanceCtrl', ReceiptsModalInstanceCtrl)
 
-        ReceiptsCtrl.$inject = ['$state', '$stateParams', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function ReceiptsCtrl($state, $stateParams, ReceiptSrvcs, RequisitionsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        ReceiptsCtrl.$inject = ['$state', '$stateParams', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', 'PurchaseOrdersSrvcs', '$window', '$uibModal'];
+        function ReceiptsCtrl($state, $stateParams, ReceiptSrvcs, RequisitionsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, AssetsSrvcs, JobOrdersSrvcs, PurchaseOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
             
             // alert($stateParams.receiptCode)
 
             vm.payeeType = "SUPPLIER";
+            vm.supplierStatus = true;
+
             SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
                 if (response.data.status == 200) {
                     vm.suppliers = response.data.data;
@@ -90,6 +92,8 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            
+
             vm.newReceipt = function(data){
                 console.log(data);
                 ReceiptSrvcs.save(data).then(function(response){
@@ -153,6 +157,29 @@
                 }
 
             };
+
+            vm.selectPayee = function(payeeType, supplierCode){
+                // alert(payee)
+                PurchaseOrdersSrvcs.pos({poCode:'', supplierCode:supplierCode, status:1}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.pos = response.data.data;
+                        console.log(vm.pos)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+
+
+                if(payeeType == "SUPPLIER")
+                {
+            
+                    vm.supplierStatus = true;
+                    
+                }
+                else{
+                    vm.supplierStatus = false;
+
+                }
+            }
 
             vm.routeTo = function(route){
                 $window.location.href = route;

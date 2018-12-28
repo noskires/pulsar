@@ -161,6 +161,10 @@ class ReceiptsController extends Controller {
     $data['payeeType'] = $request->input('payeeType');
     $data['payee'] = $request->input('payee');
 
+    if($data['payeeType']!="SUPPLIER"){
+      $data['purchaseOrderCode'] = null;
+    }
+
     $transaction = DB::transaction(function($data) use($data){
     // try{
 

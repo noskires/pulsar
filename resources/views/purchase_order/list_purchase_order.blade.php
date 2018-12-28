@@ -90,7 +90,7 @@
           <h4 class="modal-title"><li class="fa fa-file-o"></li> Purchase Order No: <b><%vm.formData.po_code%></b></h4>
         </div>
         <div class="modal-body">
-          <p>Add requested supply items to specific Requisition Slip</p>
+          <p>Add requested supply items to specific Purchase Order</p>
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="row">
             <div class="col-md-12">

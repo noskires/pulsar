@@ -20,6 +20,8 @@ class PurchaseOrdersController extends Controller {
 
 		$data = array(
 			'poCode'=>$request->input('poCode'),
+			'supplierCode'=>$request->input('supplierCode'),
+			'status'=>$request->input('status'),
 		);
 
 		$pos = DB::table('purchase_orders AS po')
@@ -34,11 +36,20 @@ class PurchaseOrdersController extends Controller {
                       'po.inspected_by',
                       'po.date_inspected'
                     )
-                    ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code');
+                    ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')
+                    ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code');
 
 		if ($data['poCode']){
-			$pos = $pos->where('po_code', $data['poCode']);
+			$pos = $pos->where('po.po_code', $data['poCode']);
 		}
+
+		if ($data['supplierCode']){
+			$pos = $pos->where('po.supplier_code', $data['supplierCode']);
+		}
+
+		if ($data['status'] == 1){
+      		$pos = $pos->whereNull('r.purchase_order_code');
+      	}
 
 		$pos = $pos->get();
 
