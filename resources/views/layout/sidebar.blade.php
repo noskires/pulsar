@@ -182,6 +182,7 @@
             <a href="#" ui-sref="list-asset-categories"><i class="fa fa-list-ul"></i>Asset Category</a>
             <a href="#" ui-sref="list-supply-categories"><i class="fa fa-list-ul"></i>Supply Category</a>
             <a href="#" ui-sref="list-suppliers"><i class="fa fa-list-ul"></i>Supplier</a>
+            <a href="#" ui-sref="list-particular"><i class="fa fa-list-ul"></i>Particular</a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
