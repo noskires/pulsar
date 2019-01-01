@@ -47,6 +47,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                saveOffice: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/requisition-issue-slip/office/save',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 SaveRequisitionSlipItems: function(data) {
                     return $http({
                         method: 'POST',

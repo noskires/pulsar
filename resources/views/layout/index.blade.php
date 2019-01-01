@@ -168,6 +168,10 @@
   @include('requisition.add_asset_ris')
 </script>
 
+<script type="text/ng-template" id="ris.create.office.view">
+  @include('requisition.add_office_ris')
+</script>
+
 <script type="text/ng-template" id="ris.list.view">
   @include('requisition.list_requisitions')
 </script>

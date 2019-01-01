@@ -88,7 +88,7 @@
                           <td><input type="checkbox" ng-model="personalDetail.selected"/></td> 
                           <td>
                             <select class="form-control select2" style="width: 100%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
-                              <option selected="selected" value="0">- - select supply - -</option>
+                              <option value="">- - select supply - -</option>
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
                           </td>

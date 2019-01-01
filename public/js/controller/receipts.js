@@ -212,7 +212,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:''}).then (function (response) {
+            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', quantityStatus:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
@@ -222,7 +222,7 @@
 
             vm.selectSupply = function(index, supplyCode){
 
-                SuppliesSrvcs.supplies({supplyCode:supplyCode}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:'', quantityStatus:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receiptItemSupply = response.data.data[0];

@@ -227,6 +227,7 @@ Route::post('/api/v1/requisitions/update','Requisition\RequisitionsController@up
 
 Route::get('/requisition/report/{requisitionCode}', 'Requisition\RequisitionReportController@export');
 
+Route::get('/requisition-issue-slip/office/new','Requisition\RequisitionsController@index');
 /*
 |--------------------------------------------------------------------------
 | Requisition Apis
@@ -239,6 +240,8 @@ Route::post('/api/v1/requisition-issue-slip/project/save','Requisition\Requisiti
 Route::get('/requisition-issue-slip/asset/new/{jobOrderCode}','Requisition\RequisitionsController@index');
 Route::get('/requisition-issue-slip/project/new/{jobOrderCode}','Requisition\RequisitionsController@index');
 
+Route::post('/api/v1/requisition-issue-slip/office/save','Requisition\RequisitionsController@save_office'); 
+Route::post('/api/v1/requisition-issue-slip/office/update','Requisition\RequisitionsController@update_office'); 
 /*
 |--------------------------------------------------------------------------
 | Receipts

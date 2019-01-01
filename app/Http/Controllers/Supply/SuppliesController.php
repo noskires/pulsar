@@ -19,6 +19,7 @@ class SuppliesController extends Controller {
     $data = array(
       'supplyCode'=>$request->input('supplyCode'),
       'quantityStatus'=>$request->input('quantityStatus'),
+      'supplyCategory'=>$request->input('supplyCategory'),
     );
 
   	$supplies = DB::table('supplies as s')
@@ -31,6 +32,17 @@ class SuppliesController extends Controller {
 
     if ($data['quantityStatus'] == 1){
       $supplies = $supplies->where('quantity', '>', 0);
+    }
+
+    if ($data['supplyCategory'] === "Project"){
+      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
+    }
+    elseif ($data['supplyCategory'] === "Office"){
+      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
+    }
+    else{
+      $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
+      $supplies = $supplies->orWhere('sc.supply_category_name', 'like', '%Maintenance%');
     }
 
     $supplies = $supplies->get();
@@ -53,7 +65,7 @@ class SuppliesController extends Controller {
     $data['reOrderLevel'] = $request->input('reOrderLevel');
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         $supply = new Supply;
 
@@ -76,15 +88,15 @@ class SuppliesController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

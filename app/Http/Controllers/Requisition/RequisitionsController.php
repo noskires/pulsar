@@ -263,6 +263,54 @@ class RequisitionsController extends Controller {
     return $transaction;
   }
 
+  public function save_office(Request $request){
+    
+    // return $request->all();
+    $data = array();
+    $data['date_requested'] = date('Y-m-d', strtotime($request->input('date_requested')));
+    $data['date_needed'] = date('Y-m-d', strtotime($request->input('date_needed')));
+    $data['description'] = $request->input('description');
+    $data['reference_code'] = $request->input('reference_code');
+    $data['request_type'] = $request->input('request_type');
+    $data['requesting_employee'] = $request->input('requesting_employee');
+    
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+        $requisition = new Requisition;
+
+        $risCode = (str_pad(($requisition->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+        $requisition->requisition_slip_code = "RS-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+        $requisition->date_requested = $data['date_requested'];
+        $requisition->date_needed = $data['date_needed'];
+        $requisition->description = $data['description'];
+        $requisition->request_type = $data['request_type'];
+        $requisition->reference_code = $data['reference_code'];
+        $requisition->requesting_employee = $data['requesting_employee'];
+        $requisition->save();
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+
   public function update(Request $request){
     
     $data = array();

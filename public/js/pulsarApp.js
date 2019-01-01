@@ -282,6 +282,11 @@
                 controller: 'RequisitionProjectCtrl as rpc',
                 templateUrl: 'ris.create.project.view'
             })
+            .state('requesition-office-create', {
+                url: '/requisition-issue-slip/office/new',
+                controller: 'RequisitionOfficetCtrl as roc',
+                templateUrl: 'ris.create.office.view'
+            })
             .state('list-requesition', {
                 url: '/requisition/list',
                 controller: 'RequisitionCtrl as rc',

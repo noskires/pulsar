@@ -5,6 +5,7 @@
         .controller('RequisitionCtrl', RequisitionCtrl)
         .controller('RequisitionProjectCtrl', RequisitionProjectCtrl)
         .controller('RequisitionAssetCtrl', RequisitionAssetCtrl)
+        .controller('RequisitionOfficetCtrl', RequisitionOfficetCtrl)
         .controller('RequisitionSlipModalInstanceCtrl', RequisitionSlipModalInstanceCtrl)
 
         RequisitionCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
@@ -12,7 +13,7 @@
             var vm = this;
             var data = {};
 
-            // alert($stateParams.requisitionSlipCode)
+            alert($stateParams.requisitionSlipCode)
 
             if($stateParams.requisitionSlipCode)
             {
@@ -52,13 +53,13 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            // EmployeesSrvcs.employees({jobType:'POS-002'}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.employees = response.data.data;
-            //         console.log(vm.employees)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             vm.routeTo = function(route){
                 $window.location.href = route;
@@ -146,12 +147,73 @@
             }; 
         }
 
+        RequisitionOfficetCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'ProjectsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', '$window', '$uibModal'];
+        function RequisitionOfficetCtrl($stateParams, RequisitionsSrvcs, ProjectsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal){
+            var vm = this;
+            var data = {};
+
+            ProjectsSrvcs.projects({projectCode:$stateParams.projectCode}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.project = response.data.data[0];
+                    
+                    console.log(vm.project)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.newRequisitionSlip = function(data){
+                console.log(data);
+
+                // data['projectCode'] = $stateParams.projectCode;
+                RequisitionsSrvcs.saveOffice(data).then(function(response){
+                    if (response.data.status == 200) {
+                        alert(response.data.message);
+                        // vm.routeTo('projects/list');
+                    }
+                    else {
+                        alert(response.data.message);
+                    }
+                    console.log(response.data);
+                });
+            };
+
+            vm.routeTo = function(route){
+                $window.location.href = route;
+            }; 
+        }
+
         RequisitionSlipModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
         function RequisitionSlipModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, $window) {
 
             var vm = this;
             vm.formData = formData.requisition;
             // console.log(vm.formData)
+            alert(vm.formData.request_type)
+
             vm.personalDetails = [
             {
                 'requisition_slip_code':vm.formData.requisition_slip_code,
@@ -172,7 +234,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:'', quantityStatus:1}).then (function (response) {
+            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:1}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
@@ -204,8 +266,8 @@
             }
 
             vm.selectSupply = function(index, supplyCode){
-
-                SuppliesSrvcs.supplies({supplyCode:supplyCode}).then (function (response) {
+                alert(supplyCode)
+                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receiptItemSupply = response.data.data[0];
