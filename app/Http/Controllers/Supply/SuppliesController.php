@@ -26,6 +26,16 @@ class SuppliesController extends Controller {
             ->leftjoin('stock_units as su','su.stock_unit_code','=','s.stock_unit')
             ->leftjoin('supply_categories as sc','sc.supply_category_code','=','s.category_code'); 
 
+    if ($data['supplyCategory'] == "Project"){
+      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
+    }
+    elseif ($data['supplyCategory'] == "Office"){
+      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
+    }
+    elseif ($data['supplyCategory'] == "Asset"){
+      $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
+    }
+
     if ($data['supplyCode']){
       $supplies = $supplies->where('supply_code', $data['supplyCode']);
     }
@@ -34,16 +44,7 @@ class SuppliesController extends Controller {
       $supplies = $supplies->where('quantity', '>', 0);
     }
 
-    if ($data['supplyCategory'] === "Project"){
-      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
-    }
-    elseif ($data['supplyCategory'] === "Office"){
-      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
-    }
-    elseif ($data['supplyCategory'] === "Asset"){
-      $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
-      $supplies = $supplies->orWhere('sc.supply_category_name', 'like', '%Maintenance%');
-    }
+    
 
     $supplies = $supplies->get();
 

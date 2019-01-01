@@ -270,7 +270,7 @@
 
             vm.selectSupply = function(index, supplyCode){
                 alert(supplyCode)
-                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:''}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:1}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receiptItemSupply = response.data.data[0];
@@ -278,7 +278,7 @@
                         console.log(response.data.data)
 
                         angular.forEach(vm.personalDetails, function(v, k){
-                            // alert(index)
+                            alert(index)
                             if(index == k)
                             {
                                 v.supply_desc = vm.receiptItemSupply.description; 
