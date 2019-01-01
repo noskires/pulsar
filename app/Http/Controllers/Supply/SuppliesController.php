@@ -44,10 +44,6 @@ class SuppliesController extends Controller {
       $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
       $supplies = $supplies->orWhere('sc.supply_category_name', 'like', '%Maintenance%');
     }
-    else{
-      $supplies = $supplies->where('sc.supply_category_name', 'like', '%%');
-      $supplies = $supplies->orWhere('sc.supply_category_name', 'like', '%%');
-    }
 
     $supplies = $supplies->get();
 
