@@ -179,6 +179,7 @@ class RequisitionsController extends Controller {
     $data['date_needed'] = date('Y-m-d', strtotime($request->input('date_needed')));
     $data['description'] = $request->input('description');
     $data['jobOrderCode'] = $request->input('jobOrderCode');
+    $data['requestingEmployee'] = $request->input('employee_code');
     
     $transaction = DB::transaction(function($data) use($data){
     // try{
@@ -195,12 +196,12 @@ class RequisitionsController extends Controller {
         $requisition->description = $data['description'];
         $requisition->request_type = "Asset";
         $requisition->reference_code = $data['jobOrderCode'];
-        $requisition->requesting_employee = 816000001;
+        $requisition->requesting_employee = $data['requestingEmployee'];
         $requisition->save();
 
         return response()->json([
             'status' => 200,
-            'data' => 'null',
+            'data' => $data,
             'message' => 'Successfully saved.'
         ]);
 

@@ -89,13 +89,15 @@
             }, function (){ alert('Bad Request!!!') })
 
 
-            vm.newRequisitionSlip = function(data){
-                console.log(data);
+            vm.newRequisitionSlip = function(data, employee_code){
+                console.log(employee_code);
+
                 data['jobOrderCode'] = $stateParams.jobOrderCode;
+                data['employee_code'] = employee_code;
                 RequisitionsSrvcs.saveAsset(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('job-order/list/'+$stateParams.jobOrderCode);
+                        // vm.routeTo('job-order/list/'+$stateParams.jobOrderCode);
                     }
                     else {
                         alert(response.data.message);
@@ -243,7 +245,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            EmployeesSrvcs.employees({jobType:'POS-002'}).then (function (response) {
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.employees = response.data.data;
@@ -273,8 +275,10 @@
                     {
                         vm.receiptItemSupply = response.data.data[0];
                         console.log(vm.receiptItemSupply)
+                        console.log(response.data.data)
 
                         angular.forEach(vm.personalDetails, function(v, k){
+                            // alert(index)
                             if(index == k)
                             {
                                 v.supply_desc = vm.receiptItemSupply.description; 

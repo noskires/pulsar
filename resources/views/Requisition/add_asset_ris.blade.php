@@ -114,7 +114,7 @@
             <button class="btn btn-large btn-primary pull-right" data-toggle="confirmation"
             data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
             data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-            data-title="Comfirmation" data-content="Are you sure?" ng-click="rac.newRequisitionSlip(rac.risDetails)"> Confirmation
+            data-title="Comfirmation" data-content="Are you sure?" ng-click="rac.newRequisitionSlip(rac.risDetails, rac.jobOrders.employee_code)"> Confirmation
             </button>
           </div>
         </form>
