@@ -13,7 +13,7 @@
             var vm = this;
             var data = {};
 
-            alert($stateParams.requisitionSlipCode)
+            // alert($stateParams.requisitionSlipCode)
 
             if($stateParams.requisitionSlipCode)
             {
@@ -147,8 +147,8 @@
             }; 
         }
 
-        RequisitionOfficetCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'ProjectsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', '$window', '$uibModal'];
-        function RequisitionOfficetCtrl($stateParams, RequisitionsSrvcs, ProjectsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal){
+        RequisitionOfficetCtrl.$inject = ['$state', '$stateParams', 'RequisitionsSrvcs', 'ProjectsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', '$window', '$uibModal'];
+        function RequisitionOfficetCtrl($state, $stateParams, RequisitionsSrvcs, ProjectsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -193,6 +193,7 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
                         // vm.routeTo('projects/list');
+                        $state.go('list-requesition');
                     }
                     else {
                         alert(response.data.message);
@@ -212,7 +213,7 @@
             var vm = this;
             vm.formData = formData.requisition;
             // console.log(vm.formData)
-            alert(vm.formData.request_type)
+            // alert(vm.formData.request_type)
 
             vm.personalDetails = [
             {
