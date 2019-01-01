@@ -81,6 +81,7 @@
 <script src="{{URL::to('js/services/particulars.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/assetPhotos.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/purchaseOrders.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/clients.srvcs.js')}}"></script> 
 
 <!-- Controllers -->
 
@@ -104,5 +105,6 @@
 <script src="{{URL::to('js/controller/ares.js')}}"></script> 
 <script src="{{URL::to('js/controller/particulars.js')}}"></script> 
 <script src="{{URL::to('js/controller/purchaseOrders.js')}}"></script> 
+<script src="{{URL::to('js/controller/clients.js')}}"></script> 
 
 @yield('additionalScripts')

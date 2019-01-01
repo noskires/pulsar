@@ -487,6 +487,26 @@ Route::post('/api/v1/particular/save','ParticularsController@save');
 Route::post('/api/v1/particular/update','ParticularsController@update');
 Route::get('/api/v1/particulars','ParticularsController@particulars');
 
+/*
+|--------------------------------------------------------------------------
+| Clients
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/client/new','Client\ClientsController@index');
+Route::get('/clients/list','Client\ClientsController@index');
+Route::get('/clients/list/{particularCode}','Client\ClientsController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Clients Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/client/save','Client\ClientsController@save');
+Route::post('/api/v1/client/update','Client\ClientsController@update');
+Route::get('/api/v1/clients','Client\ClientsController@clients');
+
 
 /*
 |--------------------------------------------------------------------------

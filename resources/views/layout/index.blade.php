@@ -252,6 +252,12 @@
   @include('insurance.list_insurance')
 </script>
 
+<!-- Clients -->
+ 
+<script type="text/ng-template" id="client.list.view">
+  @include('client.list_clients')
+</script>
+
 <!-- Shared Modal -->
 
 <script type="text/ng-template" id="shared.modal">

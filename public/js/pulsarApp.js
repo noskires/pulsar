@@ -367,6 +367,7 @@
                 templateUrl: 'supply.supplier.list.view'
             })
 
+            //particulars
             .state('particular-create', { 
                 url: '/particular/:particularRequest',
                 controller: 'ParticularsCtrl as pc',
@@ -383,6 +384,24 @@
                 templateUrl: 'particular.list.view'
             })
 
+            //clients
+            .state('client-create', { 
+                url: '/client/:clientRequest',
+                controller: 'ClientsCtrl as cc',
+                templateUrl: 'client.list.view'
+            })
+            .state('list-client', {
+                url: '/clients/list',
+                controller: 'ClientsCtrl as cc',
+                templateUrl: 'client.list.view'
+            })
+            .state('list-clientCopy', {
+                url: '/clients/list/:clientCode',
+                controller: 'ClientsCtrl as cc',
+                templateUrl: 'client.list.view'
+            })
+
+            //org
             .state('org-deparment-create', {
                 url: '/organization/department/new',
                 controller: 'OrganizationsCtrl as oc',

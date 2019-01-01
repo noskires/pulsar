@@ -11,7 +11,6 @@
 
 <!-- Main content -->
 <section class="content">
-
   <div class="row">
     <div class="col-md-12"> 
       <div class="">
@@ -34,9 +33,7 @@
                   data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
                   data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="poc.newPoBtn(poc.poDetails);poc.toggle()"> CONFIRMATION
                   </button>
-
                 </div>
-       
               </div>
              </div> 
           </form>

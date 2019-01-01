@@ -13,7 +13,7 @@
 
 <section class="content">
   <div class="col-md-9"> 
-    <h4><b>Suppliers</b> &nbsp; 
+    <h4><b>Particulars</b> &nbsp; 
     <button type="button" class="btn btn-primary pull-right" ui-sref="particular-create({particularRequest:'new'})"> <li class="fa fa-plus"></li> </button></h4> 
     <div class="box box-primary">
       <div class="box-body">

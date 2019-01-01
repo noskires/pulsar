@@ -203,6 +203,7 @@
             <li><a href="#"><i class="fa fa-user"></i>Users</a></li>
             <li><a href="#"><i class="fa fa-users"></i>User's Group</a></li>
             <li><a href="pages/advanced/offices.html"><i class="fa fa-building"></i>Offices</a></li>
+            <li><a href="#" ui-sref="list-client"><i class="fa fa-building"></i>Client</a></li>
           </ul>
         </li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help/Support</span></a></li>
