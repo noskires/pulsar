@@ -44,8 +44,6 @@ class SuppliesController extends Controller {
       $supplies = $supplies->where('quantity', '>', 0);
     }
 
-    
-
     $supplies = $supplies->get();
 
     return response()-> json([

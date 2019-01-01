@@ -67,8 +67,8 @@
 
         }
 
-        RequisitionAssetCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function RequisitionAssetCtrl($stateParams, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        RequisitionAssetCtrl.$inject = ['$state', '$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function RequisitionAssetCtrl($state, $stateParams, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -97,6 +97,7 @@
                 RequisitionsSrvcs.saveAsset(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
+                        $state.go('list-requesition');
                         // vm.routeTo('job-order/list/'+$stateParams.jobOrderCode);
                     }
                     else {
@@ -215,7 +216,7 @@
             var vm = this;
             vm.formData = formData.requisition;
             // console.log(vm.formData)
-            alert(vm.formData.request_type)
+            // alert(vm.formData.request_type)
 
             vm.personalDetails = [
             {
@@ -269,7 +270,7 @@
             }
 
             vm.selectSupply = function(index, supplyCode){
-                alert(supplyCode)
+                // alert(supplyCode)
                 SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:1}).then (function (response) {
                     if(response.data.status == 200)
                     {
@@ -278,7 +279,7 @@
                         console.log(response.data.data)
 
                         angular.forEach(vm.personalDetails, function(v, k){
-                            alert(index)
+                            // alert(index)
                             if(index == k)
                             {
                                 v.supply_desc = vm.receiptItemSupply.description; 
