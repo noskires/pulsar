@@ -181,7 +181,7 @@ class RequisitionsController extends Controller {
     $data['jobOrderCode'] = $request->input('jobOrderCode');
     
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         $requisition = new Requisition;
 
@@ -195,6 +195,7 @@ class RequisitionsController extends Controller {
         $requisition->description = $data['description'];
         $requisition->request_type = "Asset";
         $requisition->reference_code = $data['jobOrderCode'];
+        $requisition->requesting_employee = '';
         $requisition->save();
 
         return response()->json([
@@ -203,15 +204,15 @@ class RequisitionsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

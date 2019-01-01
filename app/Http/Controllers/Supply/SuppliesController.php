@@ -40,9 +40,13 @@ class SuppliesController extends Controller {
     elseif ($data['supplyCategory'] === "Office"){
       $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
     }
-    else{
+    elseif ($data['supplyCategory'] === "Asset"){
       $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
       $supplies = $supplies->orWhere('sc.supply_category_name', 'like', '%Maintenance%');
+    }
+    else{
+      $supplies = $supplies->where('sc.supply_category_name', 'like', '%%');
+      $supplies = $supplies->orWhere('sc.supply_category_name', 'like', '%%');
     }
 
     $supplies = $supplies->get();
