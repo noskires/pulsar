@@ -195,7 +195,7 @@ class RequisitionsController extends Controller {
         $requisition->description = $data['description'];
         $requisition->request_type = "Asset";
         $requisition->reference_code = $data['jobOrderCode'];
-        $requisition->requesting_employee = '';
+        $requisition->requesting_employee = 816000001;
         $requisition->save();
 
         return response()->json([

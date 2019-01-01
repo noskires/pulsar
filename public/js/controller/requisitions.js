@@ -213,7 +213,7 @@
             var vm = this;
             vm.formData = formData.requisition;
             // console.log(vm.formData)
-            // alert(vm.formData.request_type)
+            alert(vm.formData.request_type)
 
             vm.personalDetails = [
             {
