@@ -23,12 +23,16 @@
           <tr>
             <th>Fund Code</th>
             <th>Fund Name</th>
+            <th align="right">Amount</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
           <tr ng-repeat="fund in fc.funds">
           <td><a href="#" ui-sref="list-fundCopy({fundCode:fund.fund_code})"><b> <%fund.fund_code%> </b></a></td>
           <td><%fund.fund_name%></td>
+          <td><%fund.total_fund_item_amount | number:2%></td>
+          <td> <a href="#" ui-sref="edit-fund({fundCode2:fund.fund_code})"><b> Edit </b></a></td>
         </tr>
           </tbody>
         </table>
@@ -93,4 +97,106 @@
       </div>
     </div>
   </div>
+</script>
+
+<script type="text/ng-template" id="fundInfo.modal"> 
+  <div>
+    <div class="modal-dialog" style="width:100%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ui-sref="list-fund" ng-click="vm.ok()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-file-o"></li> Fund Control No: <b><%vm.formData.fund_code%></b></h4>
+        </div>
+        <div class="modal-body">
+          <!-- <p>Add requested supply items to specific Requisition Slip</p> -->
+          <!-- Custom Tabs (Pulled to the right) -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <form ng-submit="vm.addNew()" >
+                    <table class="table table-striped table-bordered" class="tbl_rs_supply">
+                      <thead>
+                        <tr>
+                          <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th> 
+                          <th>Particular</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="fundDetail in vm.fundDetails" >
+                          <td><input type="checkbox" ng-model="fundDetail.selected"/></td> 
+                          <td>
+                            <select class="form-control select2" style="width: 100%;" required="" ng-model="fundDetail.particular_code" ng-init="parentIndex = $index">
+                              <option value="">- - Select Particular - -</option>
+                              <option ng-value="particular.particular_code" ng-repeat="particular in vm.particulars"><%particular.description%></option>
+                            </select>
+                          </td>
+                          <td>
+                            <input type="text" class="form-control" ng-model="fundDetail.fund_item_amount" required/>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="form-group">
+                      <div class="form-group">
+                        <input type="button" class="btn btn-info pull-right" value="Submit Form" style="margin-right: 10px;" ng-click="vm.addFundItems(vm.fundDetails)">
+                        <button ng-hide="!vm.fundDetails.length" type="button" class="btn btn-danger pull-left fa fa-trash-o" ng-click="vm.remove()"></button>
+                        <button type="submit" class="pull-left btn btn-primary fa fa-plus addnew"></button>
+                    </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <form>
+                    <table class="table table-bordered" class="tbl_list_rcpt">
+                      <thead>
+                        <tr>
+                          <th>Particuar Code</th> 
+                          <th>Particuar Name</th> 
+                          <th width="25%">Amount</th>
+                        </tr> 
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="fundItem in vm.fundItems"> 
+                          <!-- <td><%fundItem.fund_name%></td> -->
+                          <td><%fundItem.particular_code%></td>
+                          <td><%fundItem.description%></td>
+                          <td align="right"><%fundItem.fund_item_amount | number:2%></td>
+                          <!-- <td>
+                            <a href="#" data-toggle="modal"  ng-click="vm.removeRequisitionSlipItem(requisitionSlipItem.requisition_slip_item_code, requisitionSlipItem.item_quantity, requisitionSlipItem.supply_code)"><code class="text-red">REMOVE</code></a>
+                          </td> -->
+                        </tr>
+                        <tr>
+                          <td colspan="2" align="right"><b>GRAND TOTAL</b></td>
+                          <td colspan="1" align="right"><b>₱<%vm.totalFundItems | number:2%></b></td>
+                          <td ng-if="!vm.formData.status"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <a type="button" class="btn btn-info" ng-click="vm.printRequisitionDetails(vm.formData.requisition_slip_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
+          
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 </script>

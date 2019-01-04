@@ -405,6 +405,11 @@
                 controller: 'FundsCtrl as fc',
                 templateUrl: 'fund.list.view'
             })
+            .state('edit-fund', {
+                url: '/fund/edit/:fundCode2',
+                controller: 'FundsCtrl as fc',
+                templateUrl: 'fund.list.view'
+            })
 
             //clients
             .state('client-create', { 

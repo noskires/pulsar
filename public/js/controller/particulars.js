@@ -110,8 +110,7 @@
                 ParticularsSrvcs.update(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-
-
+                        
                         ParticularsSrvcs.particulars({particularCode:''}).then (function (response) {
                             if(response.data.status == 200)
                             {

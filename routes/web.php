@@ -499,6 +499,7 @@ Route::get('/api/v1/particulars','ParticularsController@particulars');
 Route::get('/fund/new','Fund\FundsController@index');
 Route::get('/funds/list','Fund\FundsController@index');
 Route::get('/fund/list/{fundCode}','Fund\FundsController@index');
+Route::get('/fund/edit/{fundCode}','Fund\FundsController@index');
 
 /*
 |--------------------------------------------------------------------------
@@ -509,6 +510,11 @@ Route::get('/fund/list/{fundCode}','Fund\FundsController@index');
 Route::post('/api/v1/fund/save','Fund\FundsController@save');
 Route::post('/api/v1/fund/update','Fund\FundsController@update');
 Route::get('/api/v1/funds','Fund\FundsController@funds');
+
+Route::post('/api/v1/fund-item/save','Fund\FundsController@save_fund_items');
+Route::post('/api/v1/fund-item/update','Fund\FundsController@update_fund_item');
+Route::post('/api/v1/fund-item/remove','Fund\FundsController@remove_fund_item');
+Route::get('/api/v1/fund-items','Fund\FundsController@fundItems');
 
 /*
 |--------------------------------------------------------------------------

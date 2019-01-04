@@ -31,6 +31,30 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                fundItems: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: '/api/v1/fund-items?fundCode='+data.fundCode+'&fundItemCode='+data.fundItemCode,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                saveFundItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/fund-item/save',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                removeFundItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/fund-items/remove',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
             };
         }
 })();
