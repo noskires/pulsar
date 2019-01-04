@@ -140,7 +140,7 @@ class EmployeesController extends Controller {
     $data['division'] = $request->input('division');
     $data['unit'] = $request->input('unit');
 
-    return $request->all();
+    // return $request->all();
 
     if($data['unit'] != ""){
       $data['organizational_unit'] = $data['unit'];
