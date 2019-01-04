@@ -389,6 +389,23 @@
                 templateUrl: 'particular.list.view'
             })
 
+            //funds
+            .state('fund-create', { 
+                url: '/fund/:fundRequest',
+                controller: 'FundsCtrl as fc',
+                templateUrl: 'fund.list.view'
+            })
+            .state('list-fund', {
+                url: '/funds/list',
+                controller: 'FundsCtrl as fc',
+                templateUrl: 'fund.list.view'
+            })
+            .state('list-fundCopy', {
+                url: '/fund/list/:fundCode',
+                controller: 'FundsCtrl as fc',
+                templateUrl: 'fund.list.view'
+            })
+
             //clients
             .state('client-create', { 
                 url: '/client/:clientRequest',

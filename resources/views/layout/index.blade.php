@@ -232,6 +232,12 @@
   @include('voucher.list_voucher')
 </script>
 
+<!-- Funds -->
+ 
+<script type="text/ng-template" id="fund.list.view">
+  @include('fund.list_funds')
+</script>
+
 <!-- Banks -->
  
 <script type="text/ng-template" id="banks.list.view">

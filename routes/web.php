@@ -492,6 +492,26 @@ Route::get('/api/v1/particulars','ParticularsController@particulars');
 
 /*
 |--------------------------------------------------------------------------
+| Funds
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/fund/new','Fund\FundsController@index');
+Route::get('/funds/list','Fund\FundsController@index');
+Route::get('/fund/list/{fundCode}','Fund\FundsController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Funds Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/fund/save','Fund\FundsController@save');
+Route::post('/api/v1/fund/update','Fund\FundsController@update');
+Route::get('/api/v1/funds','Fund\FundsController@funds');
+
+/*
+|--------------------------------------------------------------------------
 | Clients
 |--------------------------------------------------------------------------
 */
