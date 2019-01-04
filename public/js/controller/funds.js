@@ -4,6 +4,7 @@
         .module('pulsarApp')
         .controller('FundsCtrl', FundsCtrl)
         .controller('FundsModalInstanceCtrl', FundsModalInstanceCtrl)
+        .controller('FundItemsModalInstanceCtrl', FundItemsModalInstanceCtrl)
 
         FundsCtrl.$inject = ['$stateParams', 'SuppliersSrvcs', 'ParticularsSrvcs', 'FundsSrvcs',  '$window', '$uibModal'];
         function FundsCtrl($stateParams, SuppliersSrvcs, ParticularsSrvcs, FundsSrvcs, $window, $uibModal){
@@ -28,7 +29,7 @@
                         vm.fund = response.data.data[0];
 
                         var modalInstance = $uibModal.open({
-                            controller:'FundsModalInstanceCtrl',
+                            controller:'FundItemsModalInstanceCtrl',
                             templateUrl:'fundInfo.modal',
                             controllerAs: 'vm',
                             resolve :{
@@ -76,7 +77,7 @@
 
             if($stateParams.fundRequest == "new")
             {
-
+                vm.fund_code = 0;
                 var modalInstance = $uibModal.open({
                     controller:'FundsModalInstanceCtrl',
                     templateUrl:'fundNew.modal',
@@ -85,7 +86,8 @@
                         formData: function () {
                             return {
                                 title:'Fund Controller',
-                                message:''
+                                message:'',
+                                fund: vm.fund_code
                             };
                         }
                     },
@@ -105,12 +107,6 @@
             vm.formData = formData.fund;
             console.log(vm.formData)
 
-            vm.fundDetails = [
-            {
-                'fund_code':vm.formData.fund_code,
-                'particular_code':'',
-                'fund_item_amount':''
-            }];
 
             ParticularsSrvcs.particulars({particularCode:''}).then (function (response) {
                 if(response.data.status == 200)
@@ -157,36 +153,6 @@
                 }, function (){ console.log(response.data); alert('Bad Request!!!') });
             }
 
-            
-            vm.addFundItems = function(data){
-                console.log(data)
-
-                FundsSrvcs.saveFundItems(data).then (function (response) {
-                    console.log(response.data)
-                    if(response.data.status == 200)
-                    {
-                        alert(response.data.message);
-                        vm.fundDetails = [
-                        {
-                            'fund_code':vm.formData.fund_code,
-                            'particular_code':'',
-                            'fund_item_amount':''
-                        }];
-
-                        vm.supplyGrandTotal = 0;
-
-                        FundsSrvcs.fundItems({fundCode:vm.formData.fund_code, fundItemCode:''}).then (function (response) {
-                            if(response.data.status == 200)
-                            {
-                                vm.fundItems = response.data.data;
-                                vm.totalFundItems = response.data.totalFundItems;
-                                console.log(vm.totalFundItems)
-                            }
-                        }, function (){ alert('Bad Request!!!') })
-                    }
-                }, function (){ alert('Bad Request!!!') })
-            }
-
             vm.updateFund =  function(data){
                 console.log(data)
 
@@ -224,5 +190,71 @@
             // vm.printSupplyDetails = function(tag){
             //     vm.url = 'supply/report/'+tag;
             // }
+        }
+
+        FundItemsModalInstanceCtrl.$inject = ['$uibModalInstance', '$state', 'formData', 'SuppliersSrvcs', 'FundsSrvcs', 'ParticularsSrvcs'];
+        function FundItemsModalInstanceCtrl ($uibModalInstance, $state, formData, SuppliersSrvcs, FundsSrvcs, ParticularsSrvcs) {
+
+            var vm = this;
+            vm.formData = formData.fund;
+            console.log(vm.formData)
+
+            vm.fundDetails = [
+            {
+                'fund_code':vm.formData.fund_code,
+                'particular_code':'',
+                'fund_item_amount':''
+            }];
+
+            ParticularsSrvcs.particulars({particularCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.particulars = response.data.data;
+                    console.log(vm.particulars)
+                }
+            }, function (){ alert('Bad Request!!!') })
+            
+
+            FundsSrvcs.fundItems({fundCode:vm.formData.fund_code, fundItemCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.fundItems = response.data.data;
+                    vm.totalFundItems = response.data.totalFundItems;
+                    console.log(vm.fundItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.addFundItems = function(data){
+                console.log(data)
+
+                FundsSrvcs.saveFundItems(data).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        vm.fundDetails = [
+                        {
+                            'fund_code':vm.formData.fund_code,
+                            'particular_code':'',
+                            'fund_item_amount':''
+                        }];
+
+                        vm.supplyGrandTotal = 0;
+
+                        FundsSrvcs.fundItems({fundCode:vm.formData.fund_code, fundItemCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.fundItems = response.data.data;
+                                vm.totalFundItems = response.data.totalFundItems;
+                                console.log(vm.fundItems)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
         }
 })();
