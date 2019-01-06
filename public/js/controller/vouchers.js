@@ -5,8 +5,8 @@
         .controller('VouchersCtrl', VouchersCtrl)
         .controller('VouchersModalInstanceCtrl', VouchersModalInstanceCtrl)
 
-        VouchersCtrl.$inject = ['$stateParams', 'VouchersSrvcs', 'ParticularsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function VouchersCtrl($stateParams, VouchersSrvcs, ParticularsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        VouchersCtrl.$inject = ['$stateParams', 'VouchersSrvcs', 'ParticularsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', 'FundsSrvcs', '$window', '$uibModal'];
+        function VouchersCtrl($stateParams, VouchersSrvcs, ParticularsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, FundsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
             vm.payeeType = "SUPPLIER";
@@ -67,6 +67,18 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            FundsSrvcs.funds({fundCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.funds = response.data.data;
+                    console.log(vm.funds)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            
+
+
+
             
 
             vm.selectPayeeType = function(payeeType){
@@ -116,6 +128,21 @@
                 }
 
             };
+
+            vm.selectFund = function(fundCode){
+                vm.fundCode = fundCode;
+                // alert(vm.fundCode)
+
+                FundsSrvcs.fundItems({fundCode:vm.fundCode, fundItemCode:'', filterFundItem:0}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.fundItems = response.data.data;
+                        vm.totalFundItems = response.data.totalFundItems;
+                        console.log(vm.fundItems)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+
+            }
 
             vm.newVoucher = function(data){
                 console.log(data);

@@ -119,6 +119,55 @@ class FundsController extends Controller {
     	return $transaction;
 	}
 
+	public function fundItems(Request $request){
+
+		$data = array(
+			'fundCode'=>$request->input('fundCode'),
+			'fundItemCode'=>$request->input('fundItemCode'),
+			'filterFundItem'=>$request->input('filterFundItem'),
+		);
+
+	
+		$fundItems = DB::table('fund_items as fi')
+              ->select(
+                'fi.fund_code', 
+                'fi.fund_item_code',
+                'fi.particular_code',
+                'fi.fund_item_amount',
+                'f.fund_name',
+                'p.description',
+                'v.voucher_code'
+              )
+            ->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
+            ->leftjoin('particulars as p','p.particular_code','=','fi.particular_code')
+            ->leftjoin('vouchers as v','v.fund_item_code','=','fi.fund_item_code');
+
+		
+
+		if($data['filterFundItem']==0)
+        { 
+            $fundItems = $fundItems->whereNull('v.voucher_code');
+        }
+
+        if ($data['fundCode']){
+			$fundItems = $fundItems->where('fi.fund_code', $data['fundCode']);
+		}
+
+		if ($data['fundItemCode']){
+			$fundItems = $fundItems->where('fi.fund_item_code', $data['fundItemCode']);
+		}
+
+		$fundItems = $fundItems->get();
+		$totalFundItems = $fundItems->sum('fund_item_amount');
+
+		return response()-> json([
+			'status'=>200,
+			'data'=>$fundItems,
+			'totalFundItems'=>$totalFundItems,
+			'message'=>''
+		]);
+	}
+
 	public function save_fund_items(Request $request){
     // return $request->all();
     $data = Input::post();
@@ -162,42 +211,5 @@ class FundsController extends Controller {
     return $transaction;
   	}
 
-  	public function fundItems(Request $request){
-
-		$data = array(
-			'fundCode'=>$request->input('fundCode'),
-			'fundItemCode'=>$request->input('fundItemCode'),
-		);
-
-	
-		$fundItems = DB::table('fund_items as fi')
-              ->select(
-                'fi.fund_code', 
-                'fi.fund_item_code',
-                'fi.particular_code',
-                'fi.fund_item_amount',
-                'f.fund_name',
-                'p.description'
-              )
-            ->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
-            ->leftjoin('particulars as p','p.particular_code','=','fi.particular_code');
-
-		if ($data['fundCode']){
-			$fundItems = $fundItems->where('fi.fund_code', $data['fundCode']);
-		}
-
-		if ($data['fundItemCode']){
-			$fundItems = $fundItems->where('fi.fund_item_code', $data['fundItemCode']);
-		}
-
-		$fundItems = $fundItems->get();
-		$totalFundItems = $fundItems->sum('fund_item_amount');
-
-		return response()-> json([
-			'status'=>200,
-			'data'=>$fundItems,
-			'totalFundItems'=>$totalFundItems,
-			'message'=>''
-		]);
-	}
+  	
 }

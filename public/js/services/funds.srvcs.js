@@ -35,7 +35,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/fund-items?fundCode='+data.fundCode+'&fundItemCode='+data.fundItemCode,
+                        url: '/api/v1/fund-items?fundCode='+data.fundCode+'&fundItemCode='+data.fundItemCode+'&filterFundItem='+data.filterFundItem,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

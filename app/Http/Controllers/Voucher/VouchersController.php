@@ -26,7 +26,7 @@ class VouchersController extends Controller {
 	                'v.voucher_code',
 	                'v.payee_type', 
 	                'v.payee', 
-	                'v.particulars',
+	                'v.fund_item_code',
 	                'v.description',
 	                'v.vat_payee',
 	                'v.other_taxes',
@@ -34,14 +34,19 @@ class VouchersController extends Controller {
 	                'v.tax_2',
 	                'v.amount',
 	                'v.check_number',
-	                'p.description',
+	                // 'v.fund_item_code',
+	                'p.description as particular_name',
 	                DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
 	                'v.bank_code',
-	                'b.bank_name'
+	                'b.bank_name',
+	                'fi.fund_item_amount',
+	                'f.fund_name'
               	)
-            ->leftjoin('Employees as e','e.employee_code','=','v.payee')
-            ->leftjoin('Banks as b','b.bank_code','=','v.bank_code')
-            ->leftjoin('Particulars as p','p.particular_code','=','v.particulars');
+            ->leftjoin('employees as e','e.employee_code','=','v.payee')
+            ->leftjoin('banks as b','b.bank_code','=','v.bank_code')
+            ->leftjoin('fund_items as fi','fi.fund_item_code','=','v.fund_item_code')
+            ->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
+            ->leftjoin('particulars as p','p.particular_code','=','fi.particular_code');
 
 		if ($data['voucherCode']){
 			$vouchers = $vouchers->where('voucher_code', $data['voucherCode']);
@@ -115,7 +120,7 @@ class VouchersController extends Controller {
 
 		$data['payeeType']   = $request->input('payeeType');
 		$data['payee'] = $request->input('payee');
-		$data['particulars'] = $request->input('particulars');
+		$data['fundItemCode'] = $request->input('fundItemCode');
 		$data['description'] = $request->input('description');
 		$data['vatPayee'] = $request->input('vatPayee');
 		$data['otherTaxes'] = $request->input('otherTaxes');
@@ -137,16 +142,9 @@ class VouchersController extends Controller {
 				$voucher->voucher_code = "DV-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$voucherCode;
 				$voucher->payee_type = $data['payeeType'];
 				$voucher->payee = $data['payee'];
-				$voucher->particulars = $data['particulars'];
+				$voucher->fund_item_code = $data['fundItemCode'];
 				$voucher->description = $data['description'];
-				// $voucher->vat_payee = $data['vatPayee'];
-				// $voucher->other_taxes = $data['otherTaxes'];
-				// $voucher->tax_1 = $data['tax1'];
-				// $voucher->tax_2 = $data['tax2'];
 				$voucher->amount = 0;
-				// $voucher->check_number = $data['checkNumber'];
-				// $voucher->check_date = $data['checkDate'];
-				// $voucher->bank_code = $data['bankCode'];
 				$voucher->save();
 
 				return response()->json([

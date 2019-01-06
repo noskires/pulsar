@@ -41,25 +41,35 @@
                 <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.payee">
                   <option selected="selected" value="0">- - select payee - -</option>
                   <option ng-if="vc.payeeType=='EMPLOYEE'" value="<%employee.employee_code%>" ng-repeat="employee in vc.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>
-
                   <option ng-if="vc.payeeType=='SUPPLIER'" value="<%supplier.supplier_code%>" ng-repeat="supplier in vc.suppliers"> <%supplier.supplier_name%> </option>
-
                   <option ng-if="vc.payeeType=='BANK'" value="<%bank.bank_code%>" ng-repeat="bank in vc.banks"> <%bank.bank_name%> </option>
                 </select> 
               </div>
             </div>
-            <div class="form-group col-sm-12">
-              <label for="dv-particulars" class="col-sm-3 control-label">Particulars</label>
-              <div class="col-sm-9">
-                <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.particulars">
-                  <option selected="selected" value="0">- - select payee - -</option>
-                  <option value="<%particular.particular_code%>" ng-repeat="particular in vc.particulars"> <%particular.description%> </option>
-                </select>
-              </div>
-            </div>
+            
             <div class="form-group col-sm-12">
               <label for="dv-desc" class="col-sm-3 control-label">Description/Remarks</label>
               <div class="col-sm-9"><textarea class="col-sm-9 form-control" id="dv-desc" rows="2" ng-model="vc.voucherDetails.description"></textarea></div>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label for="dv-particulars" class="col-sm-3 control-label">Fund</label>
+              <div class="col-sm-9">
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.fund_code" ng-change="vc.selectFund(vc.voucherDetails.fund_code)">
+                  <option value="">- - Select Fund - -</option>
+                  <option value="<%fund.fund_code%>" ng-repeat="fund in vc.funds"> <%fund.fund_name%> </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label for="dv-particulars" class="col-sm-3 control-label">Particular</label>
+              <div class="col-sm-9">
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.fundItemCode">
+                  <option value="">- - Select Fund Item - -</option>
+                  <option value="<%fundItem.fund_item_code%>" ng-repeat="fundItem in vc.fundItems"> <%fundItem.description%> </option>
+                </select>
+              </div>
             </div>
 
           </div>

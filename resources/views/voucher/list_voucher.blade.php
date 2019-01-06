@@ -49,6 +49,7 @@
               <th>DV No.</th>
               <th>Payee Type</th>
               <th>Payee Name</th>
+              <th>Fund Name</th>
               <th>Particulars</th>
               <th>Description/Remarks</th>
               <th>Amount</th>
@@ -63,7 +64,8 @@
               <td></td>
               <td><%voucher.payee_type%></td>
               <td><%voucher.payee_text%></td>
-              <td><%voucher.description%></td>
+              <td><%voucher.fund_name%></td>
+              <td><%voucher.particular_name%></td>
               <td><%voucher.description%></td>
               <td align="right"><%voucher.amount | number:2%></td>
               <td><%voucher.check_number%></td>
