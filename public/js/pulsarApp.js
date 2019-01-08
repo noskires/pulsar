@@ -356,6 +356,22 @@
                 templateUrl: 'supply.category.list.view'
             })
 
+            .state('supply-unit-create', {
+                url: '/supply-unit/:supplyUnitRequest',
+                controller: 'SupplyUnitsCtrl as suc',
+                templateUrl: 'supply.unit.list.view'
+            })
+            .state('list-supply-unit', {
+                url: '/supply-unit/list',
+                controller: 'SupplyUnitsCtrl as suc',
+                templateUrl: 'supply.unit.list.view'
+            })
+            .state('list-supplyUnitCopy', {
+                url: '/supply-unit/list/:supplyUnitCode',
+                controller: 'SupplyUnitsCtrl as suc',
+                templateUrl: 'supply.unit.list.view'
+            })
+
             .state('supplier-create', {
                 url: '/supplier/:supplierRequest',
                 controller: 'SuppliersCtrl as sc',

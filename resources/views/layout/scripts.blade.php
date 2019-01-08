@@ -72,6 +72,7 @@
 <script src="{{URL::to('js/services/warranties.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/supplies.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/supplyCategories.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/supplyUnits.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/vouchers.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/suppliers.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/banks.srvcs.js')}}"></script> 
@@ -99,6 +100,7 @@
 <script src="{{URL::to('js/controller/receipts.js')}}"></script> 
 <script src="{{URL::to('js/controller/supplies.js')}}"></script> 
 <script src="{{URL::to('js/controller/supplyCategories.js')}}"></script> 
+<script src="{{URL::to('js/controller/supplyUnits.js')}}"></script> 
 <script src="{{URL::to('js/controller/vouchers.js')}}"></script> 
 <script src="{{URL::to('js/controller/suppliers.js')}}"></script> 
 <script src="{{URL::to('js/controller/banks.js')}}"></script> 

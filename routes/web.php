@@ -444,6 +444,10 @@ Route::get('/supply-category/new','Supply\SupplyCategoriesController@index');
 Route::get('/supply-categories/list','Supply\SupplyCategoriesController@index');
 Route::get('/supply-category/list/{supplyCategoryCode}','Supply\SupplyCategoriesController@index');
 
+Route::get('/supply-unit/new','Supply\SupplyUnitsController@index');
+Route::get('/supply-unit/list','Supply\SupplyUnitsController@index');
+Route::get('/supply-unit/list/{supplyUnitCode}','Supply\SupplyUnitsController@index');
+
 /*
 |--------------------------------------------------------------------------
 | Supplies Apis
@@ -457,6 +461,10 @@ Route::get('/api/v1/supplies','Supply\SuppliesController@supplies');
 Route::post('/api/v1/supply-category/save','Supply\SupplyCategoriesController@save'); 
 Route::post('/api/v1/supply-category/update','Supply\SupplyCategoriesController@update'); 
 Route::get('/api/v1/supplies-category','Supply\SupplyCategoriesController@supplyCategories');
+
+Route::post('/api/v1/supply-unit/save','Supply\SupplyUnitsController@save'); 
+Route::post('/api/v1/supply-unit/update','Supply\SupplyUnitsController@update'); 
+Route::get('/api/v1/supply-unit','Supply\SupplyUnitsController@supplyUnits');
 
 /*
 |--------------------------------------------------------------------------

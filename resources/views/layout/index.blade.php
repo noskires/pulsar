@@ -200,6 +200,10 @@
   @include('supply.list_supply_categories')
 </script>
 
+<script type="text/ng-template" id="supply.unit.list.view">
+  @include('supply.list_supply_units')
+</script>
+
 <script type="text/ng-template" id="supply.supplier.list.view">
   @include('supply.list_suppliers')
 </script>
