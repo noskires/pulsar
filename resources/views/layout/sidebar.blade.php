@@ -186,6 +186,7 @@
             <a href="#" ui-sref="list-suppliers"><i class="fa fa-list-ul"></i>Supplier</a>
             <a href="#" ui-sref="list-particular"><i class="fa fa-list-ul"></i>Particular</a>
             <a href="#" ui-sref="list-particular"><i class="fa fa-list-ul"></i>Particular</a>
+            <a href="#" ui-sref="list-particular"><i class="fa fa-list-ul"></i>Others</a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
