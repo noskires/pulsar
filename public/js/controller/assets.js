@@ -345,6 +345,7 @@
                 AssetsSrvcs.saveAssetEvent(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
+                        vm.ok()
                         // $state.go('asset-list-equipments');
                     }
                     else {

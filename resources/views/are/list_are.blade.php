@@ -137,8 +137,8 @@
                 <tr>
                   <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th>  -->
                   <th>Asset Tag</th>
-                  <th width="25%"> Started At</th>
-                  <th width="25%"> Ended At</th>
+                  <th width="25%"> Start Date</th>
+                  <!-- <th width="25%"> Ended At</th> -->
               </thead>
               <tbody>
                 <tr ng-repeat="assetItemDetail in vm.assetItemDetails" >
@@ -150,7 +150,7 @@
                     </select>
                   </td>
                   <td><input type="text" class="form-control" ng-model="assetItemDetail.started_at" required/></td>
-                  <td><input type="text" class="form-control" ng-model="assetItemDetail.ended_at" required/></td>
+                  <!-- <td><input type="text" class="form-control" ng-model="assetItemDetail.ended_at" required/></td> -->
                 </tr>
               </tbody>
             </table>
@@ -188,6 +188,8 @@
               <td><%assignedAsset.name%></td>
               <td><%assignedAsset.model%></td>
               <td><%assignedAsset.brand%></td>
+              <td><%assignedAsset.started_at%></td>
+              <td><%assignedAsset.ended_at%></td>
             </tr> 
             </tbody>
           </table>

@@ -100,7 +100,7 @@
 
             vm.areCode = $stateParams.areCode;
             
-            alert(vm.areCode)
+            // alert(vm.areCode)
             vm.assetItemDetails = [
             {
                 'are_code':vm.areCode,

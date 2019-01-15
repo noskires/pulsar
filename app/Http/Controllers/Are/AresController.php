@@ -59,7 +59,7 @@ class AresController extends Controller {
 		$data = Input::post();
 
 		$transaction = DB::transaction(function($data) use($data){
-		try{
+		// try{
 				$are = new Are;
 
 				$areCode = (str_pad(($are->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
@@ -68,7 +68,7 @@ class AresController extends Controller {
 				$are->are_code = "ARE-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".date('His', strtotime(Carbon::now('Asia/Manila')));
 				$are->employee_code = $data['employeeCode'];
 				// $are->asset_code = $data['assetCode'];
-				// $are->show_status = 1;
+				$are->show_status = 1;
 				$are->save();
 
 				return response()->json([
@@ -76,15 +76,15 @@ class AresController extends Controller {
 				    'data' => 'null',
 				    'message' => 'Successfully saved.'
 				]);
-			}
-			catch (\Exception $e) 
-			{
-			  	return response()->json([
-				    'status' => 500,
-				    'data' => 'null',
-				    'message' => 'Error, please try again!'
-				]);
-			}
+			// }
+			// catch (\Exception $e) 
+			// {
+			//   	return response()->json([
+			// 	    'status' => 500,
+			// 	    'data' => 'null',
+			// 	    'message' => 'Error, please try again!'
+			// 	]);
+			// }
 		});
 
 		return $transaction;
