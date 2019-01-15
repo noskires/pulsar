@@ -35,7 +35,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/are-items?areCode='+data.areCode+'&areItemCode='+data.areItemCode,
+                        url: '/api/v1/are-items?areCode='+data.areCode+'&areItemCode='+data.areItemCode+'&areItemCode='+data.assetCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

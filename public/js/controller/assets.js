@@ -26,7 +26,9 @@
                     category:'', 
                     areCode:'', 
                     status:'',
-                    isAll:1
+                    isAll:1,
+                    withActiveAre:2
+
                 }
 
                 AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
@@ -55,13 +57,16 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+  
+
             vm.assetsDetails = {
-                tag:'', 
-                name:'', 
-                category:'', 
-                areCode:'', 
+                tag:'',
+                name:'',
+                category:'',
+                areCode:'',
                 status:'',
-                isAll:1
+                isAll:0,
+                withActiveAre:2 // 2 means shall all records 
             }
 
             AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
@@ -69,6 +74,7 @@
                 {
                     vm.assets = response.data.data;
                     console.log(vm.assets)
+                    console.log(response.data)
                 }
             }, function (){ alert('Bad Request!!!') })
 
@@ -244,7 +250,8 @@
                     category:'', 
                     areCode:'', 
                     status:'',
-                    isAll:1
+                    isAll:1,
+                    withActiveAre:2
                 }
                 AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
                     if(response.data.status == 200)
@@ -333,6 +340,7 @@
 
             vm.addAssetEventBtn = function(data) {
                 data['asset_tag'] = vm.tag;
+                data['asset_code'] = vm.tag;
                 console.log(data)
                 AssetsSrvcs.saveAssetEvent(data).then(function(response){
                     if (response.data.status == 200) {
@@ -353,6 +361,10 @@
 
             vm.routeToOpen = function(route){
                 $window.open = route;
+            };
+
+            vm.ok = function() {
+                $uibModalInstance.close();
             };
         }
 

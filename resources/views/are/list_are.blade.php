@@ -104,9 +104,9 @@
 
         </div>
         <div class="modal-body">
-          <h3><li class="fa fa-search"></li> Browse</h3>
+          <h3><li class="fa fa-search"></li> Browse </h3>
           <p>To add an asset to the ARE, search an item and click the <strong>plus button</strong> beside it.</p>
-          <table datatable="ng" class="table table-bordered table-hover" width="100%">
+          <!-- <table datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
               <th style="width: 10px;"></th>
@@ -129,7 +129,40 @@
               <td><%availableAsset.brand%></td>
             </tr>
             </tbody>
-          </table>
+          </table> -->
+
+          <form ng-submit="vm.addNew()" >
+            <table class="table table-striped table-bordered" class="tbl_rs_supply">
+              <thead>
+                <tr>
+                  <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th>  -->
+                  <th>Asset Tag</th>
+                  <th width="25%"> Started At</th>
+                  <th width="25%"> Ended At</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="assetItemDetail in vm.assetItemDetails" >
+                  <!-- <td><input type="checkbox" ng-model="assetItemDetail.selected"/></td>  -->
+                  <td>
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="assetItemDetail.asset_code" ng-init="parentIndex = $index" ng-change="vm.selectAsset(parentIndex, assetItemDetail.asset_code)">
+                      <option value="">- - Select Asset - -</option>
+                      <option ng-value="availableAsset.asset_code" ng-repeat="availableAsset in vm.availableAssets"><%availableAsset.tag%></option>
+                    </select>
+                  </td>
+                  <td><input type="text" class="form-control" ng-model="assetItemDetail.started_at" required/></td>
+                  <td><input type="text" class="form-control" ng-model="assetItemDetail.ended_at" required/></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="form-group">
+              <div class="form-group">
+                <input type="button" class="btn btn-info pull-right" value="Submit Form" style="margin-right: 10px;" ng-click="vm.addAreItems(vm.assetItemDetails)">
+                <!-- <button ng-hide="!vm.assetItemDetails.length" type="button" class="btn btn-danger pull-left fa fa-trash-o" ng-click="vm.remove()"></button>
+                <button type="submit" class="pull-left btn btn-primary fa fa-plus addnew"></button> -->
+              </div>
+            </div>
+          </form>
+
           <br><hr>
           <h3><li class="fa fa-link"></li> Acknowledged Items</h3>
           <p>
@@ -143,6 +176,8 @@
               <th>Name</th>
               <th>Model</th>
               <th>Brand</th>
+              <th>Start</th>
+              <th>End</th>
             </tr>
             </thead>
             <tbody>

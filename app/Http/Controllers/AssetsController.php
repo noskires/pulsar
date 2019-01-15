@@ -12,6 +12,7 @@ use App\Log;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class AssetsController extends Controller {
   	public function index(){
@@ -41,15 +42,19 @@ class AssetsController extends Controller {
 
     public function assets(Request $request){
 
+        $date2 = Carbon::create(2018, 12, 31);
+
+
         $data = array(
+            'assetCode'=>$request->input('assetCode'),
             'tag'=>$request->input('tag'),
             'name'=>$request->input('name'),
             'category'=>$request->input('category'),
             'areCode'=>$request->input('areCode'),
             'status'=>$request->input('status'),
             'isAll'=>$request->input('isAll'),
+            'withActiveAre'=>$request->input('withActiveAre')
         );
-
 
         // return $data['status'];
 
@@ -59,25 +64,22 @@ class AssetsController extends Controller {
                 'e.employee_code',
                 DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name'),
                 'a.asset_id',
+                'a.asset_code',
                 'a.tag', 
                 'a.code', 
-                'a.are_code', 
                 'a.name',
                 'a.category',
                 'a.model',
                 'a.brand',
                 'a.description',
                 DB::raw('DATE_FORMAT(a.date_acquired, "%m/%d/%Y") as date_acquired'),
-                // DB::raw('DATE_FORMAT(a.date_acquired, "%M %d, %Y") as date_acquired'),
                 'a.acquisition_cost',
                 'a.plate_no',
                 'a.engine_no',
                 'a.chassis_no',
-                // DB::raw('DATE_FORMAT(a.warranty_date, "%M %d, %Y") as warranty_date'),
                 DB::raw('DATE_FORMAT(a.warranty_date, "%m/%d/%Y") as warranty_date'),
                 'a.project_code',
                 'a.status',
-                // 'ac.asset_category',
                 'ac.asset_category_name',
                 'e.organizational_unit',
                 'org.org_name as organizational_unit_name',
@@ -88,15 +90,26 @@ class AssetsController extends Controller {
                 'p.province_text',
                 'r.region_code as region_code',
                 'r.region_text_short',
-                'r.region_text_long'
+                'r.region_text_long',
+                // 'are_item.are_item_code',
+                // 'are_item.ended_at',
+                // 'are.are_code'
+                // DB::raw('count(are_item.ended_at = "9999-12-31") as with_active_are')
+                DB::raw('SUM(CASE WHEN are_item.ended_at = "9999-12-31" THEN 1 ELSE 0 END) AS count_with_active_are')
               )
 
             // ->leftjoin('Employees as e','e.employee_code','=','a.assign_to')
             // ->leftjoin('Projects as p','p.project_code','=','a.project_code')
             
+            ->leftjoin('are_items as are_item','are_item.asset_code','=','a.asset_code')
+              ->where(function ($query) {
+                // $query->whereDate('are_item.ended_at', '9999-12-31');
+                // $query->whereRaw('SUM(CASE WHEN are_item.ended_at = "2018-12-31" THEN 1 ELSE 0 END)', 1);
+                // $query->orderBy("are_item.ended_at", "asc");
+              })
+            ->leftjoin('ares as are','are.are_code','=','are_item.are_code')
             ->leftjoin('asset_categories as ac','ac.asset_category_code','=','a.category')
-            ->leftjoin('ares as are','are.are_code','=','a.are_code')
-            ->leftjoin('Employees as e','e.employee_code','=','are.employee_code')
+            ->leftjoin('employees as e','e.employee_code','=','are.employee_code')
             ->leftjoin('organizations as org','org.org_code','=','e.organizational_unit')
             ->leftjoin('municipalities as m','m.municipality_code','=','org.municipality_code')
             ->leftjoin('provinces as p','p.province_code','=','m.province_code')
@@ -114,30 +127,74 @@ class AssetsController extends Controller {
           $asset = $asset->where('a.category', $data['category']);
         }
 
-        if($data['isAll']==0)
-        {
-          if ($data['areCode']){ 
-            $asset = $asset->where('a.are_code', $data['areCode']);
-          }
-
-          if (!$data['areCode']){ 
-            $asset = $asset->whereNull('a.are_code');
-          }
+        if ($data['areCode']){ 
+          $asset = $asset->where('are.are_code', $data['areCode']);
         }
+
+        // if($data['isAll']==0)
+        // {
+        //   $asset = $asset->whereNull('are.are_code');
+        // }
+        // else{
+        //   $asset = $asset->whereDate('are_item.ended_at', '9999-12-31');
+        // }
 
         if ($data['status']){ 
           $asset = $asset->whereIn('a.status', explode(',', $data['status']));
         }
 
-        // if ($data['type']){ 
-          // $asset = $asset->where('sc.asset_category', 'Assets');
-        // }
+        $asset = $asset->groupBy(
+                'e.employee_code',
+                'employee_name',
+                'a.asset_id',
+                'a.asset_code',
+                'a.tag', 
+                'a.code', 
+                'a.name',
+                'a.category',
+                'a.model',
+                'a.brand',
+                'a.description',
+                'a.date_acquired',
+                'a.acquisition_cost',
+                'a.plate_no',
+                'a.engine_no',
+                'a.chassis_no',
+                'a.warranty_date',
+                'a.project_code',
+                'a.status',
+                'ac.asset_category_name',
+                'e.organizational_unit',
+                'org.org_name',
+                'org.barangay',
+                'm.municipality_code',
+                'm.municipality_text',
+                'p.province_code',
+                'p.province_text',
+                'r.region_code',
+                'r.region_text_short',
+                'r.region_text_long'
+                // 'are_item.are_item_code',
+                // 'are_item.ended_at'
+                // 'are.are_code'
+              );
 
+
+        if ($data['withActiveAre'] == 1){ 
+          $asset = $asset->havingRaw('SUM(CASE WHEN are_item.ended_at = "9999-12-31" THEN 1 ELSE 0 END) = 1');
+        }elseif ($data['withActiveAre'] == 0){ 
+          $asset = $asset->havingRaw('SUM(CASE WHEN are_item.ended_at = "9999-12-31" THEN 1 ELSE 0 END) = 0');
+        }else{
+
+        }
+
+ 
       	$asset = $asset->get();
 
         return response()-> json([
             'status'=>200,
             'data'=>$asset,
+            'data2'=>$data,
             'message'=> ''
         ]);
     }
@@ -237,7 +294,9 @@ class AssetsController extends Controller {
         	// try{
 
 	            $asset = new Asset;
-	            $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
+              $assetCode = (str_pad(($asset->get()->count() + 1), 6, "0", STR_PAD_LEFT)); 
+              $asset->asset_code = "ASSET-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$assetCode;
+              $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
 	            $asset->name = $data['assetName'];
 	            $asset->code = $data['assetID'];
 	            $asset->model = $data['modelnumber'];
@@ -246,8 +305,8 @@ class AssetsController extends Controller {
 	            $asset->brand = $data['brand'];
 	            $asset->date_acquired = $data['dateAcquired'];
 	            $asset->acquisition_cost = $data['acquisitionCost'];
-	            $asset->plate_no = $data['plateNumber'];
-              $asset->engine_no = $data['engineNumber'];
+	            $asset->plate_no         = $data['plateNumber'];
+              $asset->engine_no        = $data['engineNumber'];
               $asset->chassis_no = $data['chassisNumber'];
 	            $asset->warranty_date = $data['warrantyDate'];
 	            // $asset->assign_to = $data['assignTo'];
@@ -418,10 +477,13 @@ class AssetsController extends Controller {
         
         $data = array();
 
+        // $end_date = date('2019-m-d', strtotime($request->input('event_date')));
+
         $data['status'] = $request->input('status');
         $data['event_date'] = date('Y-m-d', strtotime($request->input('event_date')));
         $data['remarks'] = $request->input('remarks');
         $data['asset_tag'] = $request->input('asset_tag');
+        $data['asset_code'] = $request->input('asset_code');
        
         $transaction = DB::transaction(function($data) use($data){
           // try{
@@ -440,6 +502,31 @@ class AssetsController extends Controller {
               ->update([
                 'status' => $data['status']
               ]);
+
+              if($data['status']=="RETURN"){
+
+                //termporary query
+                $asset = DB::table('assets')->where('tag', $data['asset_tag'])->first();
+                $are = DB::table('are_items')
+                    ->where('asset_code', $asset->asset_code)
+                    ->where('ended_at', "9999-12-31")
+                    ->first();
+                  
+                if($are)
+                {
+
+
+                DB::table('are_items')
+                ->where('asset_code', $asset->asset_code)
+                ->where('are_item_code', $are->are_item_code)
+                ->update([
+                  'ended_at' => $data['event_date']
+                ]);
+                
+                }
+
+              }
+
 
               return response()->json([
                   'status' => 200,

@@ -91,40 +91,57 @@
             }; 
         }
 
-        AreModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'AssetsSrvcs', 'InsuranceSrvcs', 'BanksSrvcs', 'formData', 'ReceiptSrvcs'];
-        function AreModalInstanceCtrl ($stateParams, $uibModalInstance, AssetsSrvcs, InsuranceSrvcs, BanksSrvcs, formData, ReceiptSrvcs) {
+        AreModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'AresSrvcs', 'AssetsSrvcs', 'InsuranceSrvcs', 'BanksSrvcs', 'formData', 'ReceiptSrvcs'];
+        function AreModalInstanceCtrl ($stateParams, $uibModalInstance, AresSrvcs, AssetsSrvcs, InsuranceSrvcs, BanksSrvcs, formData, ReceiptSrvcs) {
             // alert('insurance model')
             var vm = this;
             vm.formData = formData.are;
             console.log(vm.formData) 
-            // console.log(vm.formData)
 
             vm.areCode = $stateParams.areCode;
+            
+            alert(vm.areCode)
+            vm.assetItemDetails = [
+            {
+                'are_code':vm.areCode,
+                'asset_code':'',
+                'started_at':''
+            }];
+
+            // vm.assetsDetails = {
+            //     tag:'', 
+            //     name:'', 
+            //     category:'', 
+            //     areCode:$stateParams.areCode, 
+            //     status:'',
+            //     withActiveAre:1
+            // }
+
+            // AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.assignedAssets = response.data.data;
+            //         console.log(vm.assignedAssets)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
+
+            vm.areItemDetails = {
+                areCode:vm.areCode,
+                areItemCode:'',
+                assetCode:'',
+            }
+
 
             vm.assetsDetails = {
-                tag:'', 
-                name:'', 
-                category:'', 
-                areCode:$stateParams.areCode, 
+                tag:'',
+                name:'',
+                category:'',
+                areCode:'',
                 status:'',
-                isAll:0
+                isAll:0,
+                withActiveAre:0
             }
-            AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
-                if(response.data.status == 200)
-                {
-                    vm.assignedAssets = response.data.data;
-                    console.log(vm.assignedAssets)
-                }
-            }, function (){ alert('Bad Request!!!') })
 
-            vm.assetsDetails = {
-                tag:'', 
-                name:'', 
-                category:'', 
-                areCode:'', 
-                status:'',
-                isAll:0
-            }
             AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
                 if(response.data.status == 200)
                 {
@@ -133,6 +150,62 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+
+            AresSrvcs.areItems(vm.areItemDetails).then (function (response) { 
+                if(response.data.status == 200)
+                {
+                    vm.assignedAssets = response.data.data;
+                    console.log(vm.assignedAssets)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.addAreItems = function(data){
+
+                console.log(data)
+
+                AresSrvcs.saveAreItems(data[0]).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+
+                        alert(response.data.message);
+                        console.log(response.data.data)
+                        vm.assetItemDetails = [
+                        {
+                            'are_code':vm.areCode,
+                            'asset_code':'asset_code',
+                            'started_at':''
+                        }];
+
+                        vm.assetsDetails = {
+                            tag:'', 
+                            name:'', 
+                            category:'', 
+                            areCode:'', 
+                            status:'',
+                            isAll:0,
+                            withActiveAre:0
+                        }
+                        
+                        AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.availableAssets = response.data.data;
+                                console.log(vm.availableAssets)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+
+                        AresSrvcs.areItems(vm.areItemDetails).then (function (response) { 
+                            if(response.data.status == 200)
+                            {
+                                vm.assignedAssets = response.data.data;
+                                console.log(vm.assignedAssets)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
 
             vm.assignAssetBtn =  function(assetTag){
                 // alert(assetTag)
@@ -170,110 +243,9 @@
                         }
                     }, function (){ alert('Bad Request!!!') })
 
-                    // AssetsSrvcs.assetEvents({tag:'', name:'', category:'', areCode:'', assetEventCode:''}).then (function (response) {
-                    //     if(response.data.status == 200)
-                    //     {
-                    //         vm.assetEvents = response.data.data;
-                    //         console.log(vm.assetEvents)
-                    //     }
-                    // }, function (){ alert('Bad Request!!!') })
-
                 }, function (){ alert('Bad Request!!!') })
             }
-            // AssetsSrvcs.assets({tag:tag, name:'', category:'', areCode:$stateParams.areCode}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.assignedAssets = response.data.data;
-            //         console.log(vm.assets)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
 
-            // vm.updateInsurance = function(data){
-            //     InsuranceSrvcs.update(data).then (function (response) {
-            //         if(response.data.status == 200)
-            //         {
-            //             alert(response.data.message);
-            //             vm.ok();
-            //         }
-            //         else
-            //         {
-            //             alert(response.data.message);
-            //         }
-                    
-            //     }, function (){ alert('Bad Request!!!') })
-            // }
-
-            // InsuranceSrvcs.insuranceItems({insuranceCode:$stateParams.insuranceCode, insuranceItemCode:'',assetCode:'', insuranceItemStatus:1}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.associatedAssets = response.data.data;
-            //         console.log(vm.associatedAssets)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
-            // InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:'', insuranceItemStatus:2}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.availableAssets = response.data.data;
-            //         console.log(vm.availableAssets)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
-            // vm.addInsuranceItems = function(assetTag){
-                // alert(assetTag)
-
-                // data = {insuranceCode:$stateParams.insuranceCode, assetTag:assetTag};
-
-                // InsuranceSrvcs.saveInsuranceItems({insurance_code:$stateParams.insuranceCode, asset_code:assetTag}).then (function (response) {
-            //         if(response.data.status == 200)
-            //         {
-            //             alert(response.data.message);
-
-            //             InsuranceSrvcs.insuranceItems({insuranceCode:$stateParams.insuranceCode, insuranceItemCode:'',assetCode:'', insuranceItemStatus:1}).then (function (response) {
-            //                 if(response.data.status == 200)
-            //                 {
-            //                     vm.associatedAssets = response.data.data;
-            //                     console.log(vm.associatedAssets)
-            //                 }
-            //             }, function (){ alert('Bad Request!!!') })
-
-            //             InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:'', insuranceItemStatus:2}).then (function (response) {
-            //                 if(response.data.status == 200)
-            //                 {
-            //                     vm.availableAssets = response.data.data;
-            //                     console.log(vm.availableAssets)
-            //                 }
-            //             }, function (){ alert('Bad Request!!!') })
-            //         }
-            //     }, function (){ alert('Bad Request!!!') })
-            // }
-
-            // vm.removeInsuranceItems = function(insuranceItemCode){
-
-            //     InsuranceSrvcs.removeInsuranceItems({insurance_item_code:insuranceItemCode}).then (function (response) {
-            //         if(response.data.status == 200)
-            //         {
-            //             alert(response.data.message);
-
-            //             InsuranceSrvcs.insuranceItems({insuranceCode:$stateParams.insuranceCode, insuranceItemCode:'',assetCode:'', insuranceItemStatus:1}).then (function (response) {
-            //                 if(response.data.status == 200)
-            //                 {
-            //                     vm.associatedAssets = response.data.data;
-            //                     console.log(vm.associatedAssets)
-            //                 }
-            //             }, function (){ alert('Bad Request!!!') })
-
-            //             InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:'', insuranceItemStatus:2}).then (function (response) {
-            //                 if(response.data.status == 200)
-            //                 {
-            //                     vm.availableAssets = response.data.data;
-            //                     console.log(vm.availableAssets)
-            //                 }
-            //             }, function (){ alert('Bad Request!!!') })
-            //         }
-            //         // console.log(response.data)
-            //     }, function (){ alert('Bad Request!!!') })
-            // }
 
             vm.ok = function(){
                 $uibModalInstance.close();

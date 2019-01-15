@@ -375,13 +375,12 @@ Route::get('/are/list/{areCode}','Are\AresController@index');
 
 Route::post('/api/v1/are/save','Are\AresController@save');
 Route::post('/api/v1/are/update','Are\AresController@update');
-
-// Route::post('/api/v1/insurance-items/save','Insurance\InsuranceController@save_insurance_items'); 
-// Route::post('/api/v1/insurance-items/remove','Insurance\InsuranceController@remove_insurance_items'); 
-// Route::post('/api/v1/insurance/update','Insurance\InsuranceController@update');
-// Route::get('/api/v1/insurance','Insurance\InsuranceController@insurance');
-
 Route::get('/api/v1/are','Are\AresController@ares');
+
+Route::post('/api/v1/are-items/save','Are\AresController@save_are_items');
+Route::post('/api/v1/are-items/update','Are\AresController@update_are_items');
+Route::post('/api/v1/are-items/remove','Are\AresController@remove_are_items');
+Route::get('/api/v1/are-items','Are\AresController@areItems');
 
 
 /*

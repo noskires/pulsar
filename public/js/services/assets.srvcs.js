@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/assets?tag='+data.tag+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&status='+data.status+'&isAll='+data.isAll,
+                        url: '/api/v1/assets?tag='+data.tag+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&status='+data.status+'&isAll='+data.isAll+'&withActiveAre='+data.withActiveAre,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

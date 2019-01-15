@@ -401,6 +401,7 @@
           <option value="SELL">Sell</option>
           <option value="DISPOSE">Dispose</option>
           <option value="LOST/MISSING">Lost/Missing</option>
+          <option value="RETURN">Return</option>
           </select>
           </div>              
         </div>
@@ -418,8 +419,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" ng-click="amdc.addAssetEventBtn(assetEventDetails)">Submit</button>
+        <button type="button" class="btn btn-default" ng-click="vm.ok()">Close</button>
+        <button type="submit" class="btn btn-primary" ng-click="amdc.addAssetEventBtn(assetEventDetails);vm.ok()">Submit</button>
       </div>
     </form>
     </div>
