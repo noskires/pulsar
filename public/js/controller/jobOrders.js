@@ -31,7 +31,8 @@
                     category:'', 
                     areCode:'', 
                     status:'',
-                    isAll:1
+                    isAll:1, 
+                    withActiveAre:2
                 }
 
                 AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
@@ -79,8 +80,6 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
-
-
 
             vm.newJobOrder =  function(data){
 
