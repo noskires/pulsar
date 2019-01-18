@@ -251,6 +251,7 @@ Route::post('/api/v1/requisition-issue-slip/office/update','Requisition\Requisit
 Route::get('/receipt/new','Receipt\ReceiptsController@index');
 Route::get('/receipt/list','Receipt\ReceiptsController@index');
 Route::get('/receipt/list/{receiptCode}','Receipt\ReceiptsController@index');
+Route::get('/receipt/report/{receiptCode}', 'Receipt\ReceiptReportController@export');
 
 /*
 |--------------------------------------------------------------------------

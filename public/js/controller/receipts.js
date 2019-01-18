@@ -341,6 +341,10 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             };
+
+            vm.printReceiptDetails = function(tag){
+                vm.url = 'receipt/report/'+tag;
+            }
         }
 })();
 
