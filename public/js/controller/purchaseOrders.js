@@ -243,5 +243,9 @@
                 $window.location.href = route;
             };
 
+            vm.printPurchaseOrderDetails = function(tag){
+                vm.url = 'purchase-order/report/'+tag;
+            }
+
         }
 })();
