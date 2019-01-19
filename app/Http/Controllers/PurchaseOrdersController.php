@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use DB;
+use Auth;
 use App\PurchaseOrder;
 use App\PurchaseOrderItem;
 use App\Http\Requests;
@@ -27,6 +28,7 @@ class PurchaseOrdersController extends Controller {
 		$pos = DB::table('purchase_orders AS po')
 					->select(
                       'po.po_code',
+                      'po.reference_code',
                       's.supplier_code',
                       's.supplier_name',
                       's.supplier_owner',
@@ -52,6 +54,8 @@ class PurchaseOrdersController extends Controller {
       	}
 
 		$pos = $pos->get();
+
+		
 
 		foreach ($pos as $key => $po) {
 
@@ -84,6 +88,9 @@ class PurchaseOrdersController extends Controller {
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 				$po->po_code = "PO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
 				$po->supplier_code = $data['supplier_code'];
+				$po->request_type = $data['request_type'];
+				$po->reference_code = $data['reference_code'];
+				$po->changed_by = Auth::user()->email;
 				$po->save();
 
 				return response()->json([

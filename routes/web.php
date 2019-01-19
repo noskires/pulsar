@@ -393,6 +393,7 @@ Route::get('/api/v1/are-items','Are\AresController@areItems');
 Route::get('/purchase-order/new','PurchaseOrdersController@index');
 Route::get('/purchase-orders/list','PurchaseOrdersController@index');
 Route::get('/purchase-order/list/{poCode}','PurchaseOrdersController@index');
+Route::get('/purchase-order/report/{poCode}', 'PurchaseOrderReportController@export');
 
 /*
 |--------------------------------------------------------------------------

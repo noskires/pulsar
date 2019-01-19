@@ -152,7 +152,7 @@
                       <label class="col-sm-3 control-label">Department</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.department" ng-change="vm.selectDepartment(vm.employeeDetails.department)">
-                        <option selected="selected" value="0">- - Select Department - -</option>
+                        <option selected="selected" value="">- - Select Department - -</option>
                         <option ng-value="department.org_code" ng-repeat="department in vm.departments"><%department.department_name%></option>
                       </select></div>
                     </div>
@@ -160,7 +160,7 @@
                       <label class="col-sm-3 control-label">Division</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.division" ng-change="vm.selectDivision(vm.employeeDetails.division)">
-                        <option selected="selected" value="0">- - select division - -</option>
+                        <option selected="selected" value="">- - select division - -</option>
                         <option ng-value="division.org_code" ng-repeat="division in vm.divisions"><%division.division_name%></option>
                       </select></div>
                     </div>
@@ -168,7 +168,7 @@
                       <label class="col-sm-3 control-label">Unit</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.unit">
-                        <option selected="selected" value="0">- - select unit - -</option>
+                        <option selected="selected" value="">- - select unit - -</option>
                         <option ng-value="unit.org_code" ng-repeat="unit in vm.units"><%unit.unit_name%></option>
                       </select></div>
                     </div>
@@ -289,7 +289,7 @@
                       <label class="col-sm-3 control-label">Department</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.department_code" ng-change="vm.selectDepartment(vm.formData.department_code)">
-                        <option selected="selected" value="0">- - Select Department - -</option>
+                        <option selected="selected" value="">- - Select Department - -</option>
                         <option ng-value="department.org_code" ng-repeat="department in vm.departments"><%department.department_name%></option>
                       </select></div>
                     </div>
@@ -297,7 +297,7 @@
                       <label class="col-sm-3 control-label">Division</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.division_code" ng-change="vm.selectDivision(vm.formData.division_code)">
-                        <option selected="selected" value="0">- - select division - -</option>
+                        <option selected="selected" value="">- - select division - -</option>
                         <option ng-value="division.org_code" ng-repeat="division in vm.divisions"><%division.division_name%></option>
                       </select></div>
                     </div>
@@ -305,7 +305,7 @@
                       <label class="col-sm-3 control-label">Unit</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.unit_code">
-                        <option selected="selected" value="0">- - select unit - -</option>
+                        <option selected="selected" value="">- - select unit - -</option>
                         <option ng-value="unit.org_code" ng-repeat="unit in vm.units"><%unit.unit_name%></option>
                       </select></div>
                     </div>

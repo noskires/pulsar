@@ -1,8 +1,9 @@
 <?php
-namespace App\Http\Controllers\Receipt;
+namespace App\Http\Controllers\PurchaseOrder;
 use Illuminate\Http\Request;
 
 use DB;
+use App\PurchaseOrder;
 use App\Organization;
 use App\Warranty;
 use App\Receipt;
@@ -12,7 +13,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use PDF;
 
-class ReceiptReportController extends Controller {
+class PurchaseOrderReportController extends Controller {
 
 	public function index(){
 	  	// return view('employee.index');

@@ -1,8 +1,9 @@
 <?php
-namespace App\Http\Controllers\Receipt;
+namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
+use App\PurchaseOrder;
 use App\Organization;
 use App\Warranty;
 use App\Receipt;
@@ -12,7 +13,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use PDF;
 
-class ReceiptReportController extends Controller {
+class PurchaseOrderReportController extends Controller {
 
 	public function index(){
 	  	// return view('employee.index');
@@ -20,16 +21,96 @@ class ReceiptReportController extends Controller {
 		return $pdf->stream('asset.report1.pdf');
 	}
 
-	public function export($receiptCode){
+	public function export($purchaseOrderCode){
 
-		$data['receipt']        = $this->receipt($receiptCode);
-		$data['receipt_items']        = $this->receipt_items($receiptCode);
-		$data['receipt_items_total']        = $this->receipt_items($receiptCode)->sum('receipt_item_total');
+		$data['purchase_order']        = $this->purchase_order($purchaseOrderCode);
+		$data['purchase_order_items']  = $this->purchase_order_items($purchaseOrderCode);
 
 		// return $data;
 
-		$pdf = PDF::loadView('receipt.report_receipt', $data);
-		return $pdf->stream('receipt.report_receipt.pdf');
+		$pdf = PDF::loadView('purchase_order.report_purchase_order', $data);
+		return $pdf->stream('purchase_order.report_purchase_order.pdf');
+
+	}
+
+	public function purchase_order($purchaseOrderCode){
+		$data = DB::table('purchase_orders AS po')
+				->select(
+                  'po.po_code',
+                  'po.request_type',
+                  'po.reference_code',
+                  's.supplier_code',
+                  's.supplier_name',
+                  's.supplier_owner',
+                  's.address',
+                  's.bir_no',
+                  'po.received_by',
+                  'po.date_received',
+                  'po.inspected_by',
+                  'po.date_inspected',
+                  	DB::raw('CONCAT(trim(CONCAT(recby.lname," ",COALESCE(recby.affix,""))),", ", COALESCE(recby.fname,"")," ", COALESCE(recby.mname,"")) as received_by_name'),
+					DB::raw('CONCAT(trim(CONCAT(insby.lname," ",COALESCE(insby.affix,""))),", ", COALESCE(insby.fname,"")," ", COALESCE(insby.mname,"")) as inspected_by_name'),
+					'recbypos.position_text as received_by_position',
+					'insbypos.position_text as inspected_by_position'
+                )
+                ->leftjoin('employees as recby','recby.employee_code','=','po.received_by')
+				->leftjoin('employees as insby','insby.employee_code','=','po.inspected_by')
+				->leftjoin('positions as recbypos','recbypos.position_code','=','recby.position_code')
+				->leftjoin('positions as insbypos','insbypos.position_code','=','insby.position_code')
+                ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')
+                ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code')
+                // ->leftjoin('organizations as org','org.org_code','=','po.reference_code')
+                ->where('po.po_code', $purchaseOrderCode)->first();
+
+                if($data->request_type=="Office")
+				{
+					$organization = DB::table('organizations as org')
+					->where('org_code', $data->reference_code)->first();
+					
+					if($organization)
+					{
+						$data->requesting_office = $organization->org_name;
+					}
+					else
+					{
+						$data->requesting_office = null;
+					}
+				}
+				else{
+
+					$project = DB::table('projects as project')
+					->where('project_code', $data->reference_code)->first();
+					
+					if($project)
+					{
+						$data->requesting_office = $project->name;
+					}
+					else
+					{
+						$data->requesting_office = null;
+					}
+
+				}
+
+			return $data;
+
+	}
+
+	public function purchase_order_items($purchaseOrderCode){
+		$data = DB::table('purchase_order_items as poi')
+	           ->select(
+	                'poi.po_code', 
+	                'poi.po_item_code',
+	                'poi.supply_code',
+	                's.supply_name',
+	                'poi.item_description', 
+	                'poi.item_quantity',
+	                'poi.item_stock_unit'
+	              )
+
+	    ->leftjoin('supplies as s','s.supply_code','=','poi.supply_code')
+	    ->where('poi.po_code', $purchaseOrderCode)->get();
+	    return $data;
 	}
 
 	public function receipt($receiptCode){

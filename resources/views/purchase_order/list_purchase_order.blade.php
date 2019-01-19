@@ -20,14 +20,34 @@
           <form class="form-horizontal" id="" ng-model="ac.insuranceDetails">
             <div class="box-body">
               <div class="form-group col-sm-12">
+
+                <label for="controlnumber" class="col-sm-2 control-label">Request Type</label>
+                <div class="col-sm-3">
+                  <select style="width: 100%;" ng-model="poc.poDetails.request_type">
+                    <option value="">--Select Request Type--</option>
+                    <option value="Office">Office</option>
+                    <option value="Project">Project</option>
+                  </select>
+                </div>
+                <br>
+                <label for="controlnumber" class="col-sm-2 control-label">Reference</label>
+                <div class="col-sm-3">
+                  <select style="width: 100%;" ng-model="poc.poDetails.reference_code">
+                    <option value="">--Select--</option>
+                    <option ng-if="poc.poDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in poc.organizations"><%organization.org_name%></option>
+                    <option ng-if="poc.poDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in poc.projects"><%project.name%></option>
+                  </select>
+                </div>
+                <br>
                 <label for="controlnumber" class="col-sm-2 control-label">Supplier Name</label>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="poc.poDetails.supplier_code">
                     <option selected="selected" value="">Select Supplier</option>
                     <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
                   </select>
                 </div>
-                <div class="col-sm-4">
+
+                <div class="col-sm-3">
                   <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
                   data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
                   data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
@@ -59,6 +79,7 @@
               <th>Business Name</th>
               <th>Owner</th>
               <th>BIR</th>
+              <th>Requesting Office</th>
             </tr>
             </thead>
             <tbody>
@@ -67,6 +88,7 @@
               <td><%po.supplier_name%></td>
               <td><%po.supplier_owner%></td>
               <td><%po.bir_no%></td>
+              <td><%po.reference_code%></td>
             </tr>
             </tbody>
           </table>

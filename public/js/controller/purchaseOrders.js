@@ -5,8 +5,8 @@
         .controller('PurchaseOrdersCtrl', PurchaseOrdersCtrl)
         .controller('PurchaseOrdersModalInstanceCtrl', PurchaseOrdersModalInstanceCtrl)
 
-        PurchaseOrdersCtrl.$inject = ['$stateParams', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', '$window', '$uibModal'];
-        function PurchaseOrdersCtrl($stateParams, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, $window, $uibModal){
+        PurchaseOrdersCtrl.$inject = ['$stateParams', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
+        function PurchaseOrdersCtrl($stateParams, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -54,6 +54,22 @@
                 {
                     vm.pos = response.data.data;
                     console.log(vm.pos)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
                 }
             }, function (){ alert('Bad Request!!!') })
 
