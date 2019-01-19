@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
+use Auth;
 use App\Employee;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -171,6 +172,7 @@ class EmployeesController extends Controller {
         $employee->division = $data['division'];
         $employee->unit = $data['unit'];
         $employee->organizational_unit = $data['organizational_unit'];
+        $employee->changed_by = Auth::user()->email;
         $employee->save();
 
         return response()->json([
@@ -209,6 +211,14 @@ class EmployeesController extends Controller {
     $data['division'] = $request->input('division_code');
     $data['unit'] = $request->input('unit_code');
 
+    if($data['unit'] != ""){
+      $data['organizational_unit'] = $data['unit'];
+    }elseif($data['division'] != ""){
+      $data['organizational_unit'] = $data['division'];
+    }else{
+      $data['organizational_unit'] = $data['department'];
+    }
+
     $transaction = DB::transaction(function($data) use($data){
     // try{
       
@@ -225,7 +235,9 @@ class EmployeesController extends Controller {
               'phone_number' => $data['phone_no'],
               'department' => $data['department'],
               'division' => $data['division'],
-              'unit' => $data['unit']
+              'unit' => $data['unit'],
+              'organizational_unit' => $data['organizational_unit'],
+              'changed_by' => Auth::user()->email
             ]);
 
         return response()->json([
