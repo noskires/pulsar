@@ -91,7 +91,21 @@
         <li><a href="#" ui-sref="list-po"><i class="fa fa-list-ul"></i> List of P.O.</a></li>
         <!-- <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li> -->
       </ul>
-    </li>       
+    </li>  
+
+    <li class="treeview">
+      <a href="#" >
+        <i class="fa fa-shopping-basket"></i> <span>Utilization</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="#" ui-sref="list-utilization"><i class="fa fa-list-ul"></i> List of Utilization </a></li>
+        <!-- <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li> -->
+      </ul>
+    </li>   
+
      <li class="treeview">
       <a href="#">
         <i class="fa fa-credit-card"></i> <span> Vouchers</span>

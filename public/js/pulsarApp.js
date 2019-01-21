@@ -523,6 +523,16 @@
                 templateUrl: 'purchase.order.list.view'
             })
 
+            .state('list-utilization', {
+                url: '/utilization/list',
+                controller: 'UtilizationsCtrl as uc',
+                templateUrl: 'utilization.list.view'
+            })
+            .state('list-utilizationCopy', {
+                url: '/utilization/list/:utilizationCode',
+                controller: 'UtilizationsCtrl as uc',
+                templateUrl: 'utilization.list.view'
+            })
 
 
             //for testing only

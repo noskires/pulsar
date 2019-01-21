@@ -82,6 +82,7 @@
 <script src="{{URL::to('js/services/particulars.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/assetPhotos.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/purchaseOrders.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/utilization.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/clients.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/funds.srvcs.js')}}"></script> 
 
@@ -108,6 +109,7 @@
 <script src="{{URL::to('js/controller/ares.js')}}"></script> 
 <script src="{{URL::to('js/controller/particulars.js')}}"></script> 
 <script src="{{URL::to('js/controller/purchaseOrders.js')}}"></script> 
+<script src="{{URL::to('js/controller/utilization.js')}}"></script> 
 <script src="{{URL::to('js/controller/clients.js')}}"></script> 
 <script src="{{URL::to('js/controller/funds.js')}}"></script> 
 

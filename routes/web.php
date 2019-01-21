@@ -409,6 +409,35 @@ Route::post('/api/v1/purchase-order-items/save','PurchaseOrdersController@save_p
 Route::post('/api/v1/purchase-order-items/update','PurchaseOrdersController@update_purchase_order_items');
 Route::post('/api/v1/purchase-order-items/remove','PurchaseOrdersController@remove_po_items');
 Route::get('/api/v1/purchase-order-items','PurchaseOrdersController@purchaseOrderItems');
+
+
+/*
+|--------------------------------------------------------------------------
+| Utilizations
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/utilization/new','UtilizationsController@index');
+Route::get('/utilization/list','UtilizationsController@index');
+Route::get('/utilization/list/{utilizationCode}','UtilizationsController@index');
+Route::get('/utilization/report/{utilizationCode}', 'UtilizationsController@export');
+
+/*
+|--------------------------------------------------------------------------
+| Utilizations Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/utilization/save','UtilizationsController@save');
+Route::post('/api/v1/utilization/update', 'UtilizationsController@update');
+Route::get('/api/v1/utilizations','UtilizationsController@utilizations');
+
+Route::post('/api/v1/utilization-item/save','UtilizationsController@save_utilization_item');
+Route::post('/api/v1/utilization-item/update','UtilizationsController@update_utilization_item');
+Route::post('/api/v1/utilization-item/remove','UtilizationsController@remove_utilization_item');
+Route::get('/api/v1/utilization-items','UtilizationsController@utilizationItems');
+
+
 /*
 |--------------------------------------------------------------------------
 | Supplier
