@@ -37,7 +37,7 @@
 			             </tr>
 			              <tr>
 			                <td>Name:</td>
-			                <td>{{$asset->asset_name}}</td>
+			                <td>{{$asset->name}}</td>
 			              </tr>
 			              <tr>
 			                <td>Description:</td>

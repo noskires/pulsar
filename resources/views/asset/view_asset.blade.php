@@ -30,7 +30,7 @@
                 <h3 class="box-title">Basic Details</h3>
               </div>
               <div class="box-body" style="font-size: 14px;">
-                <b>Category:</b> <%amdc.asset.asset_category%><br>
+                <b>Category:</b> <%amdc.asset.asset_category_name%><br>
                 <b>ID:</b> <%amdc.asset.code%><br>
                 <b>Description:</b> <%amdc.asset.description%><br>
                 <b>Model:</b> <%amdc.asset.model%><br>
