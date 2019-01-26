@@ -2,7 +2,7 @@
     'use strict';
     angular
         // .module('pulsarApp',[])
-        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber', 'ui.mask', 'ui.utils.masks'])
+        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber', 'ui.mask', 'ui.utils.masks', 'checklist-model'])
         .config(Config)
         .controller('MainCtrl', MainCtrl)
         // .directive('myDate', dateInput)
@@ -552,6 +552,41 @@
                 url: '/assets/dist/img/dumptruck2_1024x768.jpg'
             })
             //for testing only
+
+
+            //roles
+            .state('role-create', { 
+                url: '/role/:roleRequest',
+                controller: 'RolesCtrl as rc',
+                templateUrl: 'role.list.view'
+            })
+            .state('list-role', {
+                url: '/role/list',
+                controller: 'RolesCtrl as rc',
+                templateUrl: 'role.list.view'
+            })
+            .state('list-roleCopy', {
+                url: '/role/list/:roleCode',
+                controller: 'RolesCtrl as rc',
+                templateUrl: 'role.list.view'
+            })
+
+            //users
+            .state('user-create', { 
+                url: '/user/:userRequest',
+                controller: 'UsersCtrl as uc',
+                templateUrl: 'user.list.view'
+            })
+            .state('list-user', {
+                url: '/user/list',
+                controller: 'UsersCtrl as uc',
+                templateUrl: 'user.list.view'
+            })
+            .state('list-userCopy', {
+                url: '/user/list/:userCode',
+                controller: 'UsersCtrl as uc',
+                templateUrl: 'user.list.view'
+            })
 
             $urlRouterProvider.otherwise('/index');
 

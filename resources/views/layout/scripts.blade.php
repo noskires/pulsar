@@ -21,6 +21,9 @@
 <!-- Angular-dynamic-number -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-dynamic-number/release/dynamic-number.min.js')}}"></script>
 
+<!-- Checklist-model -->
+<script type="text/javascript" src="{{URL::to('bower_components/checklist-model/checklist-model.js')}}"></script>
+
 <!-- angular-datatables -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/angular-datatables.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js')}}"></script>
@@ -85,6 +88,10 @@
 <script src="{{URL::to('js/services/utilization.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/clients.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/funds.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/roles.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/roleItems.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/modules.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/users.srvcs.js')}}"></script> 
 
 <!-- Controllers -->
 
@@ -112,5 +119,7 @@
 <script src="{{URL::to('js/controller/utilization.js')}}"></script> 
 <script src="{{URL::to('js/controller/clients.js')}}"></script> 
 <script src="{{URL::to('js/controller/funds.js')}}"></script> 
+<script src="{{URL::to('js/controller/roles.js')}}"></script> 
+<script src="{{URL::to('js/controller/users.js')}}"></script> 
 
 @yield('additionalScripts')

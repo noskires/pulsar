@@ -106,12 +106,10 @@ class EmployeesController extends Controller {
           $employees = $employees->where('employee_id', $data['employee_id']);
         }
 
-
         if ($data['employee_code']){ 
           $employees = $employees->where('employee_code', $data['employee_code']);
         }
-
-
+        
         $employees = $employees->orderBy('lname', 'asc')
                     ->orderBy('affix', 'asc')
                     ->orderBy('fname', 'asc')
@@ -127,71 +125,71 @@ class EmployeesController extends Controller {
 
     public function save(Request $request){
       // return $request->all();
-    $data = array();
-    $data['emp_id'] = $request->input('emp_id');
-    $data['lname'] = $request->input('lname');
-    $data['suffix'] = $request->input('suffix');
-    $data['fname'] = $request->input('fname');
-    $data['mname'] = $request->input('mname');
-    $data['birthdate'] = date('Y-m-d', strtotime($request->input('birthdate')));
-    $data['position_code'] = $request->input('position_code');
-    $data['email'] = $request->input('email');
-    $data['phone_no'] = $request->input('phone_no');
-    $data['department'] = $request->input('department');
-    $data['division'] = $request->input('division');
-    $data['unit'] = $request->input('unit');
+      $data = array();
+      $data['emp_id'] = $request->input('emp_id');
+      $data['lname'] = $request->input('lname');
+      $data['suffix'] = $request->input('suffix');
+      $data['fname'] = $request->input('fname');
+      $data['mname'] = $request->input('mname');
+      $data['birthdate'] = date('Y-m-d', strtotime($request->input('birthdate')));
+      $data['position_code'] = $request->input('position_code');
+      $data['email'] = $request->input('email');
+      $data['phone_no'] = $request->input('phone_no');
+      $data['department'] = $request->input('department');
+      $data['division'] = $request->input('division');
+      $data['unit'] = $request->input('unit');
 
-    // return $request->all();
+      // return $request->all();
 
-    if($data['unit'] != ""){
-      $data['organizational_unit'] = $data['unit'];
-    }elseif($data['division'] != ""){
-      $data['organizational_unit'] = $data['division'];
-    }else{
-      $data['organizational_unit'] = $data['department'];
-    }
-    
-    $transaction = DB::transaction(function($data) use($data){
-    try{
-
-        $employee = new Employee;
-
-        $employeeCode = (str_pad(($employee->get()->count() + 1), 6, "0", STR_PAD_LEFT)); 
-        $employee->employee_code = "816".$employeeCode;
-
-        // $employee->employee_code = $data['emp_id'];
-        $employee->lname = $data['lname'];
-        $employee->affix = $data['suffix'];
-        $employee->fname = $data['fname'];
-        $employee->mname = $data['mname'];
-        $employee->position_code = $data['position_code'];
-        $employee->birthdate = $data['birthdate'];
-        $employee->email_account = $data['email'];
-        $employee->phone_number = $data['phone_no'];
-        $employee->department = $data['department'];
-        $employee->division = $data['division'];
-        $employee->unit = $data['unit'];
-        $employee->organizational_unit = $data['organizational_unit'];
-        $employee->changed_by = Auth::user()->email;
-        $employee->save();
-
-        return response()->json([
-            'status' => 200,
-            'data' => $data['birthdate'],
-            'message' => 'Successfully saved.'
-        ]);
-
+      if($data['unit'] != ""){
+        $data['organizational_unit'] = $data['unit'];
+      }elseif($data['division'] != ""){
+        $data['organizational_unit'] = $data['division'];
+      }else{
+        $data['organizational_unit'] = $data['department'];
       }
-      catch (\Exception $e) 
-      {
+      
+      $transaction = DB::transaction(function($data) use($data){
+      try{
+
+          $employee = new Employee;
+
+          $employeeCode = (str_pad(($employee->get()->count() + 1), 6, "0", STR_PAD_LEFT)); 
+          $employee->employee_code = "816".$employeeCode;
+
+          // $employee->employee_code = $data['emp_id'];
+          $employee->lname = $data['lname'];
+          $employee->affix = $data['suffix'];
+          $employee->fname = $data['fname'];
+          $employee->mname = $data['mname'];
+          $employee->position_code = $data['position_code'];
+          $employee->birthdate = $data['birthdate'];
+          $employee->email_account = $data['email'];
+          $employee->phone_number = $data['phone_no'];
+          $employee->department = $data['department'];
+          $employee->division = $data['division'];
+          $employee->unit = $data['unit'];
+          $employee->organizational_unit = $data['organizational_unit'];
+          $employee->changed_by = Auth::user()->email;
+          $employee->save();
+
           return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
-    });
-    return $transaction;
+              'status' => 200,
+              'data' => $data['birthdate'],
+              'message' => 'Successfully saved.'
+          ]);
+
+        }
+        catch (\Exception $e) 
+        {
+            return response()->json([
+              'status' => 500,
+              'data' => 'null',
+              'message' => 'Error, please try again!'
+          ]);
+        }
+      });
+      return $transaction;
   }
 
 

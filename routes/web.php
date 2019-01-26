@@ -574,6 +574,90 @@ Route::post('/api/v1/client/save','Client\ClientsController@save');
 Route::post('/api/v1/client/update','Client\ClientsController@update');
 Route::get('/api/v1/clients','Client\ClientsController@clients');
 
+/*
+|--------------------------------------------------------------------------
+| Roles
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/role/new','Role\RolesController@index');
+Route::get('/role/list','Role\RolesController@index');
+Route::get('/role/list/{roleCode}','Role\RolesController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Roles Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/role/save','Role\RolesController@save');
+Route::post('/api/v1/role/update','Role\RolesController@update');
+Route::get('/api/v1/roles','Role\RolesController@list');
+
+
+/*
+|--------------------------------------------------------------------------
+| RoleItems
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/role-item/new','Role\RoleItemsController@index');
+Route::get('/role-item/list','Role\RoleItemsController@index');
+Route::get('/role-item/list/{roleCode}','Role\RoleItemsController@index');
+
+/*
+|--------------------------------------------------------------------------
+| RoleItems Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/role-item/save','Role\RoleItemsController@save');
+Route::post('/api/v1/role-item/update','Role\RoleItemsController@update');
+Route::post('/api/v1/role-item/delete','Role\RoleItemsController@delete');
+Route::get('/api/v1/role-items','Role\RoleItemsController@list');
+
+
+/*
+|--------------------------------------------------------------------------
+| Modules
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/module/new','Role\ModulesController@index');
+Route::get('/module/list','Role\ModulesController@index');
+Route::get('/module/list/{roleCode}','Role\ModulesController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Modules Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/module/save','Role\ModulesController@save');
+Route::post('/api/v1/module/update','Role\ModulesController@update');
+Route::get('/api/v1/modules','Role\ModulesController@list');
+
+
+/*
+|--------------------------------------------------------------------------
+| Users
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/user/new','User\UsersController@index');
+Route::get('/user/list','User\UsersController@index');
+Route::get('/user/list/{userCode}','User\UsersController@index');
+
+/*
+|--------------------------------------------------------------------------
+| Users Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/user/save','User\UsersController@save');
+Route::post('/api/v1/user/update','User\UsersController@update');
+Route::get('/api/v1/users','User\UsersController@list');
+
 
 /*
 |--------------------------------------------------------------------------

@@ -201,6 +201,8 @@
             <a href="#" ui-sref="list-particular"><i class="fa fa-list-ul"></i>Particular</a>
             <a href="#" ui-sref="list-particular"><i class="fa fa-list-ul"></i>Particular</a>
             <a href="#" ui-sref="list-particular"><i class="fa fa-list-ul"></i>Others</a>
+            <a href="#" ui-sref="list-user"><i class="fa fa-list-ul"></i>Users</a>
+            <a href="#" ui-sref="list-role"><i class="fa fa-list-ul"></i>Roles</a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

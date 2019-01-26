@@ -278,6 +278,16 @@
   @include('client.list_clients')
 </script>
 
+<!-- Roles -->
+<script type="text/ng-template" id="role.list.view">
+  @include('role.list_roles')
+</script>
+
+<!-- Users -->
+<script type="text/ng-template" id="user.list.view">
+  @include('user.list_user')
+</script>
+
 <!-- Shared Modal -->
 
 <script type="text/ng-template" id="shared.modal">
