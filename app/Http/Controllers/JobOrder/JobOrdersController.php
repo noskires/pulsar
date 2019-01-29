@@ -52,6 +52,7 @@ class JobOrdersController extends Controller {
           'jo.gas_consumption', 
           'jo.oil_consumption', 
           'jo.number_loads', 
+          'jo.old_reference', 
           'a.tag', 
           'a.name',
           // 'e.employee_id', 
@@ -184,6 +185,106 @@ class JobOrdersController extends Controller {
             'data' => 'null',
             'message' => 'Successfully saved.'
         ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+
+  public function save2(Request $request){
+    
+    $data = array();
+    $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate'))); 
+    $data['assetTag'] = $request->input('tag');
+    $data['employee_code'] = $request->input('employee_code');
+    // $data['organizational_unit'] = $request->input('organizational_unit');
+    // $data['municipality_code'] = $request->input('municipality_code');
+    $data['old_reference'] = $request->input('reference');
+    
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+        $employee = DB::table('employees as e')
+                    ->select( 
+                      'e.organizational_unit',
+                      'o.municipality_code'
+                    )
+                    ->leftjoin('organizations as o','o.org_code','=','e.organizational_unit')
+                    ->where('e.employee_code', $data['employee_code'])->first();
+
+        $asset = DB::table('assets as a')
+            ->select( 
+                      'a.tag',
+                      'a.name as asset_name', 
+                      DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
+                      DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
+                      DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
+                      DB::raw("COALESCE(SUM(o.gas_consumption), 0) as total_gas_consumption"),
+                      DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
+                      DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
+                    )
+            ->leftjoin('operations as o','o.asset_tag','=','a.tag')
+            ->leftjoin('Projects as p','p.project_code','=','o.project_code')
+            ->groupBy('a.tag', 'a.name')
+            ->where('a.tag', $data['assetTag'])
+            ->first();
+
+
+        // return $asset;
+        $jo = new JobOrder;
+        $joCode = (str_pad(($jo->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+        // $jo->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
+        $jo->job_order_code = "JO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+        $jo->job_order_date = $data['orderDate']; 
+        $jo->date_started = $data['orderDate'];
+        $jo->asset_tag = $data['assetTag'];
+        $jo->employee_code = $data['employee_code'];
+        $jo->organizational_unit = $employee->organizational_unit;
+        $jo->municipality_code = $employee->municipality_code;
+        $jo->operating_hours = $asset->total_operating_hours;
+        $jo->distance_travelled = $asset->total_distance_travelled;
+        $jo->diesel_consumption = $asset->total_diesel_consumption;
+        $jo->gas_consumption = $asset->total_gas_consumption;
+        $jo->oil_consumption = $asset->total_oil_consumption;
+        $jo->number_loads = $asset->total_number_loads;
+        $jo->old_reference = $data['old_reference'];
+        $jo->changed_by = Auth::user()->email;
+        $jo->save();
+
+        //add repair event
+        $assetEvent = new AssetEvent;
+        // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
+        $assetEvent->asset_event_code = 1212;
+        $assetEvent->status = "MAINTENANCE";
+        $assetEvent->asset_tag = $data['assetTag'];
+        $assetEvent->event_date = $data['orderDate'];
+        $assetEvent->remarks = "Under Maintenance";
+        $assetEvent->save();
+
+        DB::table('assets')
+            ->where('tag', $data['assetTag'])
+            ->update([
+              'status' => 'MAINTENANCE'
+            ]);
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+ 
 
       // }
       // catch (\Exception $e) 

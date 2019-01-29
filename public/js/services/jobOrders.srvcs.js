@@ -23,6 +23,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                save2: function(data) { // for manual entry of jo
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/job-order2/save',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 update: function(data) {
                     return $http({
                         method: 'POST',

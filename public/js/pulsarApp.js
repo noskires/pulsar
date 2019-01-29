@@ -268,6 +268,18 @@
                 controller: 'JobOrdersCtrl as joc',
                 templateUrl: 'jo.list.view'
             })
+
+            //manual entry of jo
+
+
+            .state('list-jo2', {
+                url: '/job-order2/list',
+                controller: 'JobOrdersCtrl as joc',
+                templateUrl: 'jo2.list.view'
+            })
+
+
+
             // .state('list-jo.jo', {
             //     url: '/:joCode',
             //     controller: 'JobOrdersCtrl as joc'

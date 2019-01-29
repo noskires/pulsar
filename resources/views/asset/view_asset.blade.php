@@ -210,7 +210,9 @@
           <a class="btn btn-app" data-toggle="modal" data-target="#modal-image"> 
             <i class="fa fa-image"></i> Photo
           </a>            
-          <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})" ng-if="amdc.asset.employee_name && amdc.asset.status=='ACTIVE' || 
+
+          
+          <!-- <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})" ng-if="amdc.asset.employee_name && amdc.asset.status=='ACTIVE' || 
 
            amdc.asset.status=='Active'">
                 <i class="fa fa-wrench"></i> Repair
@@ -238,7 +240,7 @@
           </a>
           <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: ')" ng-if="amdc.asset.status=='LOST'">
             <i class="fa fa-wrench"></i> Repair
-          </a>
+          </a> -->
           <a ng-click="amdc.printAssetDetails(amdc.tag)" target="_blank" ng-href="<%amdc.url%>"  class="btn btn-app">
             <i class="fa fa-print"></i> Print
           </a>

@@ -5,8 +5,8 @@
         .controller('JobOrdersCtrl', JobOrdersCtrl) 
         .controller('JobOrderModalInstanceCtrl',JobOrderModalInstanceCtrl)
 
-        JobOrdersCtrl.$inject = ['$state', 'JobOrdersSrvcs', 'AssetsSrvcs', 'EmployeesSrvcs', '$window', '$stateParams', '$uibModal'];
-        function JobOrdersCtrl($state, JobOrdersSrvcs, AssetsSrvcs, EmployeesSrvcs, $window, $stateParams, $uibModal){
+        JobOrdersCtrl.$inject = ['$state', 'JobOrdersSrvcs', 'AssetsSrvcs', 'EmployeesSrvcs', 'AssetCategoriesSrvcs', '$window', '$stateParams', '$uibModal'];
+        function JobOrdersCtrl($state, JobOrdersSrvcs, AssetsSrvcs, EmployeesSrvcs, AssetCategoriesSrvcs, $window, $stateParams, $uibModal){
             var vm = this;
             var data = {}; 
             var tag = "";
@@ -21,6 +21,71 @@
                     console.log(vm.jobOrders)
                 }
             }, function (){ alert('Bad Request!!!') })
+
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            
+
+
+            AssetCategoriesSrvcs.AssetCategories({assetCategoryCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.assetCategories = response.data.data;
+                    console.log(vm.assetCategories)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.selectCategory = function(assetCategory){
+                // alert(assetCategory)
+
+                vm.assetsDetails = {
+                    tag:'',
+                    name:'',
+                    category:assetCategory,
+                    areCode:'',
+                    status:'',
+                    isAll:0,
+                    withActiveAre:2 // 2 means shall all records 
+                }
+
+                AssetsSrvcs.assets(vm.assetsDetails).then (function (response) { 
+                    if(response.data.status == 200)
+                    {
+                        vm.assets = response.data.data;
+                        console.log(vm.assets)
+                        console.log(response.data)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.createJoBtn = function(data){
+                // alert(data)
+                console.log(data)
+
+                JobOrdersSrvcs.save2(data).then(function(response){
+                    if (response.data.status == 200) {
+                        
+                        JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetTag:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.jobOrders = response.data.data;
+                                console.log(vm.jobOrders)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        alert(response.data.message);
+                    }
+                    else {
+                        alert(response.data.message);
+                        console.log(response.data);
+                    }
+                }, function (){ console.log(response.data); alert('Bad Request!!!') });
+            }
 
             if($stateParams.assetTag!=null)
             {

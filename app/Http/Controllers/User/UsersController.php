@@ -58,6 +58,7 @@ class UsersController extends Controller {
           $user                 = new User;
           $user->name           = $data['employee_code'];
           $user->employee_code  = $data['employee_code'];
+          $user->email          = $data['employee_code'];
           $user->role_code      = $data['role_code'];
           $user->password       = bcrypt("pulsar");
           // $user->description    = $data['description'];

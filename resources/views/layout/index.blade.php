@@ -159,6 +159,10 @@
   @include('job_order.list_jo')
 </script>
 
+<script type="text/ng-template" id="jo2.list.view">
+  @include('job_order.list_jo2')
+</script>
+
 <!-- RIS -->
 <script type="text/ng-template" id="ris.create.project.view">
   @include('requisition.add_project_ris')
