@@ -159,7 +159,7 @@
         <tbody>
           <!-- data-toggle="modal" data-target="#modal-default" -->
         <tr ng-repeat="jobOrder in joc.jobOrders">
-          <td><a href="#" ui-sref="list-joCopy({joCode:jobOrder.job_order_code})" ng-click="joc.jobOrderInfo(jobOrder.job_order_code)"><b><%jobOrder.job_order_code%></b></a></td>
+          <td><a href="#" ui-sref="list-joCopy2({joCode2:jobOrder.job_order_code})" ng-click="joc.jobOrderInfo(jobOrder.job_order_code)"><b><%jobOrder.job_order_code%></b></a></td>
           <td><%jobOrder.job_order_date%></td> 
           <td><%jobOrder.name%></td>
           <td><%jobOrder.tag%></td>
@@ -177,15 +177,15 @@
 </section>
 
 
-<script type="text/ng-template" id="jobOrderInfo.modal">
+<script type="text/ng-template" id="jobOrderInfo2.modal">
 <div class="">
   <div class="modal-dialog" style="width:100%;">
   <div class="modal-content">
     <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.ok()" ui-sref="list-jo">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.ok()" ui-sref="list-jo2">
       <span aria-hidden="true">&times;</span>
     </button>
-    <h4 class="modal-title"><li class="fa fa-folder-open-o"></li><b> Job Order #:</b> (<%vm.formData.jobOrder.job_order_code%>)</h4>
+    <h4 class="modal-title"><li class="fa fa-folder-open-o"></li><b> Job Order 222 #:</b> (<%vm.formData.jobOrder.job_order_code%>)</h4>
     </div>
     <div class="modal-body">
     <!-- Custom Tabs (Pulled to the right) -->
@@ -223,7 +223,15 @@
           </div>
           <div class="form-group">
             <label for="requestingemp" class="col-sm-3 control-label">Requesting Employee</label>
-            <div class="col-sm-9"><input type="text" class="form-control" id="requestingemp" disabled="" ng-model="vm.formData.jobOrder.employee_name"></div>
+            <div class="col-sm-9"><input type="text" class="form-control" id="requestingemp" disabled="" ng-model="vm.formData.jobOrder.employee_name">
+
+              <%vm.formData.jobOrder.employee_code%>
+              
+              <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.employee_code" required="" >
+                <option value="" selected disabled hidden>Select Employee</option>
+                <option value="<%employee.employee_code%>" ng-repeat="employee in vm.employees"><%employee.fname+' '+employee.lname%></option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
             <label for="particulars" class="col-sm-3 control-label">Particulars</label>
@@ -376,7 +384,7 @@
       <button type="button" class="btn btn-default pull-left" ng-click="vm.ok()" ui-sref="list-jo">Close Window</button>
       <button type="button" class="btn btn-default" ui-sref="requesition-asset-create({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()"><li class="fa fa-check"></li> Create J.O.</button>
       <a type="button" class="btn btn-info" ng-click="vm.printJobOrderDetails(vm.formData.jobOrder.job_order_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
-      <button type="button" class="btn btn-primary" ng-click="vm.updateJobOrder(vm.formData.jobOrder)" ui-sref="list-jo">Save changes</button>
+      <button type="button" class="btn btn-primary" ng-click="vm.updateJobOrder(vm.formData.jobOrder)" ui-sref="list-jo2">Save changes</button>
       </div>
     </div>
     </div>   

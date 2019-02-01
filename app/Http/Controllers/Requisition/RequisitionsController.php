@@ -275,6 +275,7 @@ class RequisitionsController extends Controller {
     $data['reference_code'] = $request->input('reference_code');
     $data['request_type'] = $request->input('request_type');
     $data['requesting_employee'] = $request->input('requesting_employee');
+    $data['old_reference'] = $request->input('old_reference');
     
     $transaction = DB::transaction(function($data) use($data){
     // try{
@@ -291,6 +292,7 @@ class RequisitionsController extends Controller {
         $requisition->request_type = $data['request_type'];
         $requisition->reference_code = $data['reference_code'];
         $requisition->requesting_employee = $data['requesting_employee'];
+        $requisition->old_reference = $data['old_reference'];
         $requisition->save();
 
         return response()->json([

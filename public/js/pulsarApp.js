@@ -277,7 +277,11 @@
                 controller: 'JobOrdersCtrl as joc',
                 templateUrl: 'jo2.list.view'
             })
-
+            .state('list-joCopy2', {
+                url: '/job-order2/list/:joCode2',
+                controller: 'JobOrdersCtrl as joc',
+                templateUrl: 'jo2.list.view'
+            })
 
 
             // .state('list-jo.jo', {
@@ -308,6 +312,17 @@
                 url: '/requisition/list/:requisitionSlipCode',
                 controller: 'RequisitionCtrl as rc',
                 templateUrl: 'ris.list.view'
+            })
+
+            .state('list-requesition2', {
+                url: '/requisition2/list',
+                controller: 'RequisitionOfficetCtrl as roc',
+                templateUrl: 'ris2.list.view'
+            })
+            .state('list-requesitionCopy2', {
+                url: '/requisition2/list/:requisitionSlipCode',
+                controller: 'RequisitionOfficetCtrl as roc',
+                templateUrl: 'ris2.list.view'
             })
 
             .state('list-employees', {

@@ -76,6 +76,7 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="#" ui-sref="list-requesition"><i class="fa fa-list-ul"></i> List of R.S.</a></li>
+        <li><a href="#" ui-sref="list-requesition2"><i class="fa fa-list-ul"></i> List of R.S. 2</a></li>
         <li><a href="#" ui-sref="requesition-office-create"><i class="fa fa-list-ul"></i> Create R.S.</a></li>
         <li><a href="#"><i class="fa fa-check"></i> Supply Withdrawal</a></li>
       </ul>

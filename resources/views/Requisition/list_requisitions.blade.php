@@ -10,46 +10,42 @@
 <!-- Main content -->
 <section class="content">
   <div class="box">
-        <div class="box-body">
-          <table datatable="ng" class="table table-bordered table-hover" width="100%">
-            <thead>
-            <tr>
-              <th>Control No.</th>
-              <th>Request Date</th>
-              <th>Date Needed</th> 
-              <th>Request Type</th>
-              <th>Reference</th>
-              <th>Received By</th>
-              <th>Date Received</th>
-              <th>Inspected By</th>
-              <th>Date Inspected</th> 
-              <th>Status</th> 
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="requisition in rc.requisitions">
-              <td><a href="#" ui-sref="list-requesitionCopy({requisitionSlipCode:requisition.requisition_slip_code})"><b><%requisition.requisition_slip_code%></b></a></td>
-              <td><%requisition.date_requested%></td>
-              <td><%requisition.date_needed%></td>  
-              <td><%requisition.request_type%></td>  
-              <td><%requisition.reference_code%></td>  
-              <td><%requisition.received_by_name%></td>  
-              <td><%requisition.date_received%></td>  
-              <td><%requisition.inspected_by_name%></td>  
-              <td><%requisition.date_inspected%></td>  
-              <td><%requisition.status%></td>  
-            </tr> 
-            
-            </tbody>
-          </table>
-        </div>
-        <!-- /.box-body -->
+    <div class="box-body">
+      <table datatable="ng" class="table table-bordered table-hover" width="100%">
+        <thead>
+        <tr>
+          <th>Control No.</th>
+          <th>Request Date</th>
+          <th>Date Needed</th> 
+          <th>Request Type</th>
+          <th>Reference</th>
+          <th>Received By</th>
+          <th>Date Received</th>
+          <th>Inspected By</th>
+          <th>Date Inspected</th> 
+          <th>Status</th> 
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="requisition in rc.requisitions">
+          <td><a href="#" ui-sref="list-requesitionCopy({requisitionSlipCode:requisition.requisition_slip_code})"><b><%requisition.requisition_slip_code%></b></a></td>
+          <td><%requisition.date_requested%></td>
+          <td><%requisition.date_needed%></td>  
+          <td><%requisition.request_type%></td>  
+          <td><%requisition.reference_code%></td>  
+          <td><%requisition.received_by_name%></td>  
+          <td><%requisition.date_received%></td>  
+          <td><%requisition.inspected_by_name%></td>  
+          <td><%requisition.date_inspected%></td>  
+          <td><%requisition.status%></td>  
+        </tr> 
+        
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
   </div>
- 
-
 </section>
-
-
 
 
 <!-- MODAL POPUP -->

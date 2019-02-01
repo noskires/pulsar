@@ -180,6 +180,10 @@
   @include('requisition.list_requisitions')
 </script>
 
+<script type="text/ng-template" id="ris2.list.view">
+  @include('requisition.list_requisitions2')
+</script>
+
 <!-- Receipts -->
 
 <script type="text/ng-template" id="receipt.create.view">

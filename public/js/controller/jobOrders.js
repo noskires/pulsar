@@ -70,7 +70,7 @@
 
                 JobOrdersSrvcs.save2(data).then(function(response){
                     if (response.data.status == 200) {
-                        
+
                         JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetTag:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
@@ -145,6 +145,34 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
+
+            if($stateParams.joCode2){
+                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode2,joStatus:'', assetTag:''}).then (function (response) {
+
+                    if(response.data.status == 200)
+                    {
+                        vm.jobOrder = response.data.data[0];
+                        console.log(vm.jobOrder)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'JobOrderModalInstanceCtrl',
+                            templateUrl:'jobOrderInfo2.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'Job Order Controller',
+                                    message:response.data.message,
+                                    jobOrder: response.data.data[0]
+                                };
+                              }
+                            },
+                            size: 'xlg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
 
             vm.newJobOrder =  function(data){
 

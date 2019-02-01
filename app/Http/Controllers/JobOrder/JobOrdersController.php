@@ -32,6 +32,7 @@ class JobOrdersController extends Controller {
           'jo.job_order_date', 
           // 'jo.request_purpose', 
           'jo.organizational_unit', 
+          // 'jo.employee_code', 
           'jo.date_started', 
           'jo.date_completed', 
           'jo.particulars',
@@ -68,7 +69,7 @@ class JobOrdersController extends Controller {
           'r.region_text_short',
           'r.region_text_long',
           'are.are_code',
-          'e.employee_code',
+          'e.employee_code as employee_code1',
           DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name')
           // 'rp.request_purpose as request_purpose_text'
         )

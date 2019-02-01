@@ -231,6 +231,10 @@ Route::post('/api/v1/requisitions/update','Requisition\RequisitionsController@up
 Route::get('/requisition/report/{requisitionCode}', 'Requisition\RequisitionReportController@export');
 
 Route::get('/requisition-issue-slip/office/new','Requisition\RequisitionsController@index');
+
+
+Route::get('/requisition2/list','Requisition\RequisitionsController@index');
+Route::get('/requisition2/list/{requisitionCode}','Requisition\RequisitionsController@index');
 /*
 |--------------------------------------------------------------------------
 | Requisition Apis
