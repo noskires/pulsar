@@ -49,7 +49,7 @@
              </tr>
               <tr>
                 <td>Name:</td>
-                <td>{{$asset->asset_name}}</td>
+                <td>{{$asset->asset_category_name}}</td>
               </tr>
               <tr>
                 <td>Asset ID:</td>
