@@ -123,6 +123,7 @@ class JobOrdersController extends Controller {
             ->select( 
                       'a.tag',
                       'a.name as asset_name', 
+                      'a.asset_code as asset_code', 
                       DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
                       DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
                       DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
@@ -132,7 +133,7 @@ class JobOrdersController extends Controller {
                     )
             ->leftjoin('operations as o','o.asset_tag','=','a.tag')
             ->leftjoin('Projects as p','p.project_code','=','o.project_code')
-            ->groupBy('a.tag', 'a.name')
+            ->groupBy('a.tag', 'a.name', 'a.asset_code')
             ->where('a.tag', $data['assetTag'])
             ->first();
 
@@ -147,6 +148,8 @@ class JobOrdersController extends Controller {
         $jo->job_order_date = $data['orderDate']; 
         $jo->date_started = $data['orderDate'];
         $jo->asset_tag = $data['assetTag'];
+        // $jo->asset_tag = $data['assetTag'];
+        // $jo->asset_code = $asset->asset_code;
         $jo->employee_code = $data['employee_code'];
         $jo->organizational_unit = $data['organizational_unit'];
         $jo->municipality_code = $data['municipality_code'];
@@ -226,6 +229,7 @@ class JobOrdersController extends Controller {
             ->select( 
                       'a.tag',
                       'a.name as asset_name', 
+                      'a.asset_code', 
                       DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
                       DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
                       DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
@@ -234,8 +238,8 @@ class JobOrdersController extends Controller {
                       DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
                     )
             ->leftjoin('operations as o','o.asset_tag','=','a.tag')
-            ->leftjoin('Projects as p','p.project_code','=','o.project_code')
-            ->groupBy('a.tag', 'a.name')
+            // ->leftjoin('Projects as p','p.project_code','=','o.project_code')
+            ->groupBy('a.tag', 'a.name', 'a.asset_code')
             ->where('a.tag', $data['assetTag'])
             ->first();
 
@@ -250,6 +254,7 @@ class JobOrdersController extends Controller {
         $jo->job_order_date = $data['orderDate']; 
         $jo->date_started = $data['orderDate'];
         $jo->asset_tag = $data['assetTag'];
+        $jo->asset_code = $asset->asset_code;
         $jo->employee_code = $data['employee_code'];
         $jo->organizational_unit = $employee->organizational_unit;
         $jo->municipality_code = $employee->municipality_code;

@@ -38,7 +38,8 @@ class RequisitionsController extends Controller {
                 'rs.date_received',
                 'rs.inspected_by',
                 DB::raw('CONCAT(trim(CONCAT(inspectedEmployee.lname," ",COALESCE(inspectedEmployee.affix,""))),", ", COALESCE(inspectedEmployee.fname,"")," ", COALESCE(inspectedEmployee.mname,"")) as inspected_by_name'),
-                'rs.date_inspected'
+                'rs.date_inspected',
+                'rs.old_reference'
               )
     ->leftjoin('employees as receivedEmployee','receivedEmployee.employee_code','=','rs.received_by')
     ->leftjoin('employees as inspectedEmployee','inspectedEmployee.employee_code','=','rs.inspected_by');
@@ -58,7 +59,80 @@ class RequisitionsController extends Controller {
         $requisition->status = "Closed";
       }
       else{
-        $requisition->status = null;
+        $requisition->status = "Open";
+      }
+
+      if($requisition->request_type == "Asset"){
+        $list = DB::table('job_orders as job_order')
+        ->select(
+          'job_order.job_order_code',
+          'asset.code',
+          'asset.name'
+        )
+        ->where('job_order.job_order_code', $requisition->reference_code)
+        ->leftjoin('assets as asset','asset.asset_code','=','job_order.asset_code')
+        ->first();
+
+        if($list){
+
+          $requisition->reference_name = $list->name;
+          $requisition->reference_id = $list->code;
+          
+        }else{
+          
+          $requisition->reference_name = null;
+          $requisition->reference_id = null;
+        }
+
+      }elseif($requisition->request_type == "Office"){
+
+        $list = DB::table('organizations as organization')
+        ->select(
+          'organization.org_code as code',
+          'organization.org_name as name'
+        )
+        ->where('organization.org_code', $requisition->reference_code)
+        ->first();
+
+        if($list){
+
+          $requisition->reference_name = $list->name;
+          $requisition->reference_id = $list->code;
+          
+        }else{
+          
+          $requisition->reference_name = null;
+          $requisition->reference_id = null;
+        }
+
+      }
+      elseif($requisition->request_type == "Project"){
+
+        $list = DB::table('projects as project')
+        ->select(
+          'project.project_code',
+          'project.code',
+          'project.name'
+        )
+        ->where('project.project_code', $requisition->reference_code)
+        ->first();
+
+        if($list){
+
+          $requisition->reference_name = $list->name;
+          $requisition->reference_id = $list->code;
+          
+        }else{
+          
+          $requisition->reference_name = null;
+          $requisition->reference_id = null;
+        }
+
+      }
+      else{
+        $requisition->reference_name = null;
+        $requisition->reference_id = null;
+
       }
       
     }

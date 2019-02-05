@@ -68,56 +68,56 @@
       </a>
     </li>
     <li class="treeview">
-      <a href="#">
-        <i class="fa fa-file-text"></i> <span>Requesition/Issue Slip</span>
-        <span class="pull-right-container">
+      <a href="#" ui-sref="list-requesition2">
+        <i class="fa fa-file-text"></i> <span>Requisition</span>
+        <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        </span> -->
       </a>
-      <ul class="treeview-menu">
-        <li><a href="#" ui-sref="list-requesition"><i class="fa fa-list-ul"></i> List of R.S.</a></li>
-        <li><a href="#" ui-sref="list-requesition2"><i class="fa fa-list-ul"></i> List of R.S. 2</a></li>
-        <li><a href="#" ui-sref="requesition-office-create"><i class="fa fa-list-ul"></i> Create R.S.</a></li>
-        <li><a href="#"><i class="fa fa-check"></i> Supply Withdrawal</a></li>
-      </ul>
+      <!-- <ul class="treeview-menu"> -->
+        <!-- <li><a href="#" ui-sref="list-requesition"><i class="fa fa-list-ul"></i> List of R.S.</a></li> -->
+        <!-- <li><a href="#" ui-sref="list-requesition2"><i class="fa fa-list-ul"></i> List of R.S.</a></li> -->
+        <!-- <li><a href="#" ui-sref="requesition-office-create"><i class="fa fa-list-ul"></i> Create R.S.</a></li> -->
+        <!-- <li><a href="#"><i class="fa fa-check"></i> Supply Withdrawal</a></li> -->
+      <!-- </ul> -->
     </li>
     <li class="treeview">
-      <a href="#" >
+      <a href="#" ui-sref="list-po">
         <i class="fa fa-shopping-basket"></i> <span>Purchase Order</span>
-        <span class="pull-right-container">
+        <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        </span> -->
       </a>
-      <ul class="treeview-menu">
+      <!-- <ul class="treeview-menu">
         <li><a href="#" ui-sref="list-po"><i class="fa fa-list-ul"></i> List of P.O.</a></li>
-        <!-- <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li> -->
-      </ul>
+        <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li>
+      </ul> -->
     </li> 
 
     <li class="treeview">
-      <a href="#" >
+      <a href="#" ui-sref="list-jo2">
         <i class="fa fa-shopping-basket"></i> <span>Job Order</span>
-        <span class="pull-right-container">
+        <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        </span> -->
       </a>
-      <ul class="treeview-menu">
+      <!--<ul class="treeview-menu">
         <li><a href="#" ui-sref="list-jo2"><i class="fa fa-list-ul"></i> List of J.O.</a></li>
-        <!-- <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li> -->
-      </ul>
+        <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li>
+      </ul> -->
     </li>  
 
     <li class="treeview">
-      <a href="#" >
+      <a href="#" ui-sref="list-utilization">
         <i class="fa fa-shopping-basket"></i> <span>Utilization</span>
-        <span class="pull-right-container">
+        <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        </span> -->
       </a>
-      <ul class="treeview-menu">
+      <!-- <ul class="treeview-menu">
         <li><a href="#" ui-sref="list-utilization"><i class="fa fa-list-ul"></i> List of Utilization </a></li>
-        <!-- <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li> -->
-      </ul>
+        <li><a href="#"><i class="fa fa-pencil"></i> Create P.O.</a></li>
+      </ul> -->
     </li>   
 
      <li class="treeview">

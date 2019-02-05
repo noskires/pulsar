@@ -189,10 +189,13 @@
             <thead>
             <tr>
               <th>Control No.</th>
+              <th>Old Reference</th>
               <th>Request Date</th>
               <th>Date Needed</th> 
               <th>Request Type</th>
               <th>Reference</th>
+              <th>Reference Name</th>
+              <th>ID</th>
               <th>Received By</th>
               <th>Date Received</th>
               <th>Inspected By</th>
@@ -203,10 +206,13 @@
             <tbody>
             <tr ng-repeat="requisition in roc.requisitions">
               <td><a href="#" ui-sref="list-requesitionCopy({requisitionSlipCode:requisition.requisition_slip_code})"><b><%requisition.requisition_slip_code%></b></a></td>
+              <td><%requisition.old_reference%></td>
               <td><%requisition.date_requested%></td>
               <td><%requisition.date_needed%></td>  
               <td><%requisition.request_type%></td>  
               <td><%requisition.reference_code%></td>  
+              <td><%requisition.reference_name%></td>  
+              <td><%requisition.reference_id%></td>  
               <td><%requisition.received_by_name%></td>  
               <td><%requisition.date_received%></td>  
               <td><%requisition.inspected_by_name%></td>  
