@@ -32,7 +32,7 @@ class JobOrdersController extends Controller {
           'jo.job_order_date', 
           // 'jo.request_purpose', 
           'jo.organizational_unit', 
-          // 'jo.employee_code', 
+          // 'jo.employee_code as requesting_employee', 
           'jo.date_started', 
           'jo.date_completed', 
           'jo.particulars',
@@ -69,7 +69,8 @@ class JobOrdersController extends Controller {
           'r.region_text_short',
           'r.region_text_long',
           'are.are_code',
-          'e.employee_code as employee_code1',
+          // 'e.employee_code as requesting_employee',
+          'e.employee_code as requested_by',
           DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name')
           // 'rp.request_purpose as request_purpose_text'
         )
@@ -315,6 +316,7 @@ class JobOrdersController extends Controller {
     $data['date_started'] = date('Y-m-d', strtotime($request->input('date_started')));
     $data['date_completed'] = date('Y-m-d', strtotime($request->input('date_completed')));
     $data['job_order_code'] = $request->input('job_order_code');
+    $data['employee_code'] = $request->input('requested_by');
     $data['conducted_by'] = $request->input('conducted_by');
     $data['particulars'] = $request->input('particulars');
     $data['work_duration'] = $request->input('work_duration');
@@ -381,6 +383,7 @@ class JobOrdersController extends Controller {
               'date_completed' => $data['date_completed'],
               'accepted_by' => $data['accepted_by'],
               'date_accepted' => $data['date_accepted'],
+              'employee_code' => $data['employee_code'],
               'particulars' => $data['particulars'],
               'work_duration' => $data['work_duration'],
               'date_approved' => $data['date_approved'],

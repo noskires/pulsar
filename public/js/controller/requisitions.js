@@ -67,8 +67,8 @@
 
         }
 
-        RequisitionAssetCtrl.$inject = ['$state', '$stateParams', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function RequisitionAssetCtrl($state, $stateParams, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        RequisitionAssetCtrl.$inject = ['$state', '$stateParams', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function RequisitionAssetCtrl($state, $stateParams, RequisitionsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -88,6 +88,30 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
 
             vm.newRequisitionSlip = function(data, employee_code){
                 console.log(employee_code);
@@ -98,6 +122,24 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
                         $state.go('list-requesition');
+                        // vm.routeTo('job-order/list/'+$stateParams.jobOrderCode);
+                    }
+                    else {
+                        alert(response.data.message);
+                    }
+                    console.log(response.data);
+                });
+            };
+
+            vm.createRequisitionSlipBtn = function(data){
+                // alert('a')
+
+                data['jobOrderCode'] = $stateParams.jobOrderCode;
+                console.log(data);
+                RequisitionsSrvcs.saveAsset(data).then(function(response){
+                    if (response.data.status == 200) {
+                        alert(response.data.message);
+                        $state.go('list-requesition2');
                         // vm.routeTo('job-order/list/'+$stateParams.jobOrderCode);
                     }
                     else {

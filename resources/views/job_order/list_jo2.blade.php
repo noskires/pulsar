@@ -192,7 +192,7 @@
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs pull-right">
       <li class="active"><a href="#tab_1-1" data-toggle="tab">Job Order Details</a></li>
-      <li class="active"><a role="menuitem" tabindex="-1" href="#" ui-sref="requesition-asset-create({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()">Create R.S.</a></li>
+      <li class="active"><a role="menuitem" tabindex="-1" href="#" ui-sref="requesition-asset-create2({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()">Create R.S.</a></li>
 
       <li class="pull-left header"><h4><%vm.formData.jobOrder.name%> : <b><%vm.formData.jobOrder.tag%></b></h4></li>
       </ul>
@@ -224,13 +224,13 @@
           <div class="form-group">
             <label for="requestingemp" class="col-sm-3 control-label">Requesting Employee</label>
             <div class="col-sm-9"><input type="text" class="form-control" id="requestingemp" disabled="" ng-model="vm.formData.jobOrder.employee_name">
+              <!-- <%vm.formData.jobOrder.requested_by%> -->
+         
 
-              <%vm.formData.jobOrder.employee_code%>
-              
-              <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.employee_code" required="" >
-                <option value="" selected disabled hidden>Select Employee</option>
-                <option value="<%employee.employee_code%>" ng-repeat="employee in vm.employees"><%employee.fname+' '+employee.lname%></option>
-              </select>
+               <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.jobOrder.requested_by" >
+                <option value="">- - select employee - -</option>
+                <option value="<%employee.employee_code%>" ng-repeat="employee in vm.employees"> <%employee.fname+' '+employee.lname%></option>
+              </select> 
             </div>
           </div>
           <div class="form-group">

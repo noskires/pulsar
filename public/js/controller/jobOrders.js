@@ -243,8 +243,8 @@
         }
 
 
-        JobOrderModalInstanceCtrl.$inject = ['$uibModalInstance', '$window', 'formData', 'JobOrdersSrvcs', 'EmployeesSrvcs'];
-        function JobOrderModalInstanceCtrl ($uibModalInstance, $window, formData, JobOrdersSrvcs, EmployeesSrvcs) {
+        JobOrderModalInstanceCtrl.$inject = ['$state', '$uibModalInstance', '$window', 'formData', 'JobOrdersSrvcs', 'EmployeesSrvcs'];
+        function JobOrderModalInstanceCtrl ($state, $uibModalInstance, $window, formData, JobOrdersSrvcs, EmployeesSrvcs) {
 
             var vm = this;
             vm.formData = formData;
@@ -261,7 +261,9 @@
                 JobOrdersSrvcs.update(vm.formData.jobOrder).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('job-order/list');
+                        // vm.routeTo('job-order/list');
+                        $state.go('list-jo2');
+                        vm.ok();
                     }
                     console.log(response.data);
                 }, function (){ alert('Bad Request!!!') });

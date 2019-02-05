@@ -293,16 +293,24 @@
                 controller: 'RequisitionAssetCtrl as rac',
                 templateUrl: 'ris.create.asset.view'
             })
-            .state('requesition-project-create', {
-                url: '/requisition-issue-slip/project/new/:projectCode',
-                controller: 'RequisitionProjectCtrl as rpc',
-                templateUrl: 'ris.create.project.view'
+
+            .state('requesition-asset-create2', {
+                url: '/requisition/asset/new/:jobOrderCode',
+                controller: 'RequisitionAssetCtrl as rac',
+                templateUrl: 'ris2.create.asset.view'
             })
-            .state('requesition-office-create', {
-                url: '/requisition-issue-slip/office/new',
-                controller: 'RequisitionOfficetCtrl as roc',
-                templateUrl: 'ris.create.office.view'
-            })
+
+            // .state('requesition-project-create', {
+            //     url: '/requisition-issue-slip/project/new/:projectCode',
+            //     controller: 'RequisitionProjectCtrl as rpc',
+            //     templateUrl: 'ris.create.project.view'
+            // })
+            // .state('requesition-office-create', {
+            //     url: '/requisition-issue-slip/office/new',
+            //     controller: 'RequisitionOfficetCtrl as roc',
+            //     templateUrl: 'ris.create.office.view'
+            // })
+
             .state('list-requesition', {
                 url: '/requisition/list',
                 controller: 'RequisitionCtrl as rc',

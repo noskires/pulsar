@@ -249,10 +249,10 @@ class RequisitionsController extends Controller {
     
     // return $request->all();
     $data = array();
+    $data['jobOrderCode'] = $request->input('jobOrderCode');
     $data['date_requested'] = date('Y-m-d', strtotime($request->input('date_requested')));
     $data['date_needed'] = date('Y-m-d', strtotime($request->input('date_needed')));
     $data['description'] = $request->input('description');
-    $data['jobOrderCode'] = $request->input('jobOrderCode');
     $data['requestingEmployee'] = $request->input('employee_code');
     
     $transaction = DB::transaction(function($data) use($data){

@@ -245,6 +245,7 @@ Route::post('/api/v1/requisition-issue-slip/asset/save','Requisition\Requisition
 Route::post('/api/v1/requisition-issue-slip/project/save','Requisition\RequisitionsController@save_project'); 
 
 Route::get('/requisition-issue-slip/asset/new/{jobOrderCode}','Requisition\RequisitionsController@index');
+Route::get('/requisition/asset/new/{jobOrderCode}','Requisition\RequisitionsController@index');
 Route::get('/requisition-issue-slip/project/new/{jobOrderCode}','Requisition\RequisitionsController@index');
 
 Route::post('/api/v1/requisition-issue-slip/office/save','Requisition\RequisitionsController@save_office'); 
