@@ -33,6 +33,7 @@ class RequisitionsController extends Controller {
                 'rs.description', 
                 'rs.request_type',
                 'rs.reference_code',
+                'rs.job_order_code',
                 'rs.received_by',
                 DB::raw('CONCAT(trim(CONCAT(receivedEmployee.lname," ",COALESCE(receivedEmployee.affix,""))),", ", COALESCE(receivedEmployee.fname,"")," ", COALESCE(receivedEmployee.mname,"")) as received_by_name'),
                 'rs.date_received',
@@ -77,11 +78,13 @@ class RequisitionsController extends Controller {
 
           $requisition->reference_name = $list->name;
           $requisition->reference_id = $list->code;
+          $requisition->asset_name = null;
           
         }else{
           
           $requisition->reference_name = null;
           $requisition->reference_id = null;
+          $requisition->asset_name = null;
         }
 
       }elseif($requisition->request_type == "Office"){
@@ -103,6 +106,27 @@ class RequisitionsController extends Controller {
           
           $requisition->reference_name = null;
           $requisition->reference_id = null;
+
+        }
+
+        $list2 = DB::table('job_orders as job_order')
+        ->select(
+          'job_order.job_order_code',
+          'asset.code',
+          'asset.name'
+        )
+        ->where('job_order.job_order_code', $requisition->job_order_code)
+        ->leftjoin('assets as asset','asset.asset_code','=','job_order.asset_code')
+        ->first();
+
+        if($list2){
+
+          $requisition->asset_name = $list2->name;
+          $requisition->reference_id = $list2->code;
+          
+        }else{
+          
+          $requisition->asset_name = null;
         }
 
       }
@@ -121,17 +145,20 @@ class RequisitionsController extends Controller {
 
           $requisition->reference_name = $list->name;
           $requisition->reference_id = $list->code;
+          $requisition->asset_name = null;
           
         }else{
           
           $requisition->reference_name = null;
           $requisition->reference_id = null;
+          $requisition->asset_name = null;
         }
 
       }
       else{
         $requisition->reference_name = null;
         $requisition->reference_id = null;
+        $requisition->asset_name = null;
 
       }
       
@@ -253,7 +280,10 @@ class RequisitionsController extends Controller {
     $data['date_requested'] = date('Y-m-d', strtotime($request->input('date_requested')));
     $data['date_needed'] = date('Y-m-d', strtotime($request->input('date_needed')));
     $data['description'] = $request->input('description');
+    $data['request_type'] = $request->input('request_type');
+    $data['reference_code'] = $request->input('reference_code');
     $data['requestingEmployee'] = $request->input('employee_code');
+    $data['old_reference'] = $request->input('old_reference');
     
     $transaction = DB::transaction(function($data) use($data){
     // try{
@@ -268,9 +298,11 @@ class RequisitionsController extends Controller {
         $requisition->date_requested = $data['date_requested'];
         $requisition->date_needed = $data['date_needed'];
         $requisition->description = $data['description'];
-        $requisition->request_type = "Asset";
-        $requisition->reference_code = $data['jobOrderCode'];
+        $requisition->request_type = $data['request_type'];;
+        $requisition->reference_code = $data['reference_code'];
         $requisition->requesting_employee = $data['requestingEmployee'];
+        $requisition->job_order_code = $data['jobOrderCode'];
+        $requisition->old_reference = $data['old_reference'];
         $requisition->save();
 
         return response()->json([

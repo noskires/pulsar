@@ -193,9 +193,10 @@
               <th>Request Date</th>
               <th>Date Needed</th> 
               <th>Request Type</th>
-              <!-- <th>Reference </th> -->
+              <th>Reference </th>
               <th>Reference</th>
               <th>ID</th>
+              <th>Asset</th>
               <th>Received By</th>
               <th>Date Received</th>
               <th>Inspected By</th>
@@ -210,9 +211,10 @@
               <td><%requisition.date_requested%></td>
               <td><%requisition.date_needed%></td>  
               <td><%requisition.request_type%></td>  
-              <!-- <td><%requisition.reference_code%></td>   -->
+              <td><%requisition.reference_code%></td>  
               <td><%requisition.reference_name%></td>  
               <td><%requisition.reference_id%></td>  
+              <td><%requisition.asset_name%></td>  
               <td><%requisition.received_by_name%></td>  
               <td><%requisition.date_received%></td>  
               <td><%requisition.inspected_by_name%></td>  
