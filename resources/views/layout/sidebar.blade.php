@@ -82,7 +82,7 @@
       <!-- </ul> -->
     </li>
     <li class="treeview">
-      <a href="#" ui-sref="list-po">
+      <a href="#" ui-sref="list-po2">
         <i class="fa fa-shopping-basket"></i> <span>Purchase Order</span>
         <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
