@@ -5,8 +5,8 @@
         .controller('PurchaseOrdersCtrl', PurchaseOrdersCtrl)
         .controller('PurchaseOrdersModalInstanceCtrl', PurchaseOrdersModalInstanceCtrl)
 
-        PurchaseOrdersCtrl.$inject = ['$stateParams', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
-        function PurchaseOrdersCtrl($stateParams, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window, $uibModal){
+        PurchaseOrdersCtrl.$inject = ['$stateParams', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'RequisitionsSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
+        function PurchaseOrdersCtrl($stateParams, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, RequisitionsSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -73,9 +73,45 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
+            RequisitionsSrvcs.requisitions({requisitionCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.requisitions = response.data.data;
+                    console.log(vm.requisitions)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             vm.newPoBtn = function(data){
+                console.log(data)
+                PurchaseOrdersSrvcs.save(data).then(function(response){
+                    if (response.data.status == 200) {
+                        alert(response.data.message);
+                        PurchaseOrdersSrvcs.pos({poCode:'', supplierCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.pos = response.data.data;
+                                console.log(vm.pos)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        // vm.ok();
+                        // vm.state = false;
+                    }
+                    else {
+                        alert(response.data.message);
+                    }
+                    console.log(response.data);
+                });
+            };
+
+            vm.newPoBtn2 = function(data){
                 console.log(data)
                 PurchaseOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
@@ -177,7 +213,7 @@
                             }
                         }, function (){ alert('Bad Request!!!') })
 
-                        $state.go('list-po');
+                        // $state.go('list-po2');
                         // vm.ok();
                     }
                 }, function (){ alert('Bad Request!!!') })
@@ -211,7 +247,7 @@
                     if(response.data.status == 200)
                     {
                         alert(response.data.message);
-                        $state.go('list-po');
+                        $state.go('list-po2');
                         vm.ok();
                     }
                 }, function (){ alert('Bad Request!!!') })

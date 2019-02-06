@@ -29,17 +29,23 @@ class PurchaseOrdersController extends Controller {
 					->select(
                       'po.po_code',
                       'po.reference_code',
+                      'po.request_type',
+                      'po.received_by',
+                      'po.date_received',
+                      'po.inspected_by',
+                      'po.date_inspected',
+                      'po.old_reference',
                       's.supplier_code',
                       's.supplier_name',
                       's.supplier_owner',
                       's.bir_no',
-                      'po.received_by',
-                      'po.date_received',
-                      'po.inspected_by',
-                      'po.date_inspected'
+                      's.address',
+                      'e.employee_code',
+                      DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee')
                     )
                     ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')
-                    ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code');
+                    ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code')
+                    ->leftjoin('employees as e','e.employee_code','=','po.employee_code');
 
 		if ($data['poCode']){
 			$pos = $pos->where('po.po_code', $data['poCode']);
@@ -66,8 +72,67 @@ class PurchaseOrdersController extends Controller {
 			else{
 				$po->status = null;
 			}
+
+			if($po->request_type == "Office"){
+
+		        $list = DB::table('organizations as organization')
+		        ->select(
+		          'organization.org_code as code',
+		          'organization.org_name as name'
+		        )
+		        ->where('organization.org_code', $po->reference_code)
+		        ->first();
+
+		        if($list){
+
+		          $po->reference_name = $list->name;
+		          $po->reference_id = $list->code;
+		          
+		        }else{
+		          
+		          $po->reference_name = null;
+		          $po->reference_id = null;
+
+		        }
+
+		      }
+		      elseif($po->request_type == "Project"){
+
+		        $list = DB::table('projects as project')
+		        ->select(
+		          'project.project_code',
+		          'project.code',
+		          'project.name'
+		        )
+		        ->where('project.project_code', $po->reference_code)
+		        ->first();
+
+		        if($list){
+
+		          $po->reference_name = $list->name;
+		          $po->reference_id = $list->code;
+		          $po->asset_name = null;
+		          
+		        }else{
+		          
+		          $po->reference_name = null;
+		          $po->reference_id = null;
+		          $po->asset_name = null;
+		        }
+
+		      }
+		      else{
+		        $po->reference_name = null;
+		        $po->reference_id = null;
+		        $po->asset_name = null;
+
+		      }
 	      
 	    }
+
+	    
+      
+    
 
 		return response()-> json([
 			'status'=>200,
@@ -90,6 +155,8 @@ class PurchaseOrdersController extends Controller {
 				$po->supplier_code = $data['supplier_code'];
 				$po->request_type = $data['request_type'];
 				$po->reference_code = $data['reference_code'];
+				$po->old_reference = $data['old_reference'];
+				$po->employee_code = $data['requesting_employee'];
 				$po->changed_by = Auth::user()->email;
 				$po->save();
 

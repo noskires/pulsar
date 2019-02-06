@@ -214,7 +214,7 @@
               <td><%requisition.reference_code%></td>  
               <td><%requisition.reference_name%></td>  
               <td><%requisition.reference_id%></td>  
-              <td><%requisition.asset_name%></td>  
+              <td><%requisition.asset_name%> <%requisition.asset_name%></td>  
               <td><%requisition.received_by_name%></td>  
               <td><%requisition.date_received%></td>  
               <td><%requisition.inspected_by_name%></td>  

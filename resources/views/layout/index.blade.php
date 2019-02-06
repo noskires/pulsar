@@ -267,6 +267,10 @@
   @include('purchase_order.list_purchase_order')
 </script>
 
+<script type="text/ng-template" id="purchase.order2.list.view">
+  @include('purchase_order.list_purchase_order2')
+</script>
+
 <!-- Utilization -->
  
 <script type="text/ng-template" id="utilization.list.view">

@@ -552,11 +552,26 @@
                 controller: 'PurchaseOrdersCtrl as poc',
                 templateUrl: 'purchase.order.list.view'
             })
+
+            .state('list-po2', {
+                url: '/purchase-orders2/list',
+                controller: 'PurchaseOrdersCtrl as poc',
+                templateUrl: 'purchase.order2.list.view'
+            })
+
             .state('list-poCopy', {
                 url: '/purchase-order/list/:poCode',
                 controller: 'PurchaseOrdersCtrl as poc',
                 templateUrl: 'purchase.order.list.view'
             })
+
+            .state('list-poCopy2', {
+                url: '/purchase-order2/list/:poCode',
+                controller: 'PurchaseOrdersCtrl as poc',
+                templateUrl: 'purchase.order2.list.view'
+            })
+
+
 
             .state('list-utilization', {
                 url: '/utilization/list',
