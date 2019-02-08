@@ -246,7 +246,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">
-                <div class="panel-body" ng-if="!vm.formData.status" >
+                <div class="panel-body" ng-if="vm.formData.status=='OPEN'" >
                   <form ng-submit="vm.addNew()" >
                     <table class="table table-striped table-bordered" class="tbl_rs_supply">
                       <thead>
@@ -306,7 +306,7 @@
                           <th width="9%">Quantity</th>
                           <th width="9%">Cost</th>
                           <th width="7%">Total</th>
-                          <th width="11%" ng-if="!vm.formData.status"></th>
+                          <th width="11%" ng-if="!vm.formData.status=='OPEN'"></th>
                         </tr> 
                       </thead>
                       <tbody>
@@ -317,7 +317,7 @@
                           <td align="right"><%requisitionSlipItem.item_quantity%></td>
                           <td align="right"><%requisitionSlipItem.item_cost | number:2%></td>
                           <td align="right" ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + requisitionSlipItem.item_total"><%requisitionSlipItem.item_total | number:2%></td>
-                          <td ng-if="!vm.formData.status">
+                          <td ng-if="!vm.formData.status=='OPEN'">
                             <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->
                             <a href="#" data-toggle="modal"  ng-click="vm.removeRequisitionSlipItem(requisitionSlipItem.requisition_slip_item_code, requisitionSlipItem.item_quantity, requisitionSlipItem.supply_code)"><code class="text-red">REMOVE</code></a>
                           </td>
@@ -325,7 +325,7 @@
                         <tr>
                           <td colspan="5" align="right"><b>GRAND TOTAL</b></td>
                           <td colspan="1" align="right"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
-                          <td ng-if="!vm.formData.status"></td>
+                          <td ng-if="!vm.formData.status=='OPEN'"></td>
                         </tr>
                       </tbody>
                     </table>
