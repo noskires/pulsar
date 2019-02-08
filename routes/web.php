@@ -229,6 +229,7 @@ Route::get('/api/v1/requisitions','Requisition\RequisitionsController@requisitio
 Route::post('/api/v1/requisitions/update','Requisition\RequisitionsController@update'); 
 
 Route::get('/requisition/report/{requisitionCode}', 'Requisition\RequisitionReportController@export');
+Route::get('/requisition/report2', 'Requisition\RequisitionReportController@export2');
 
 Route::get('/requisition-issue-slip/office/new','Requisition\RequisitionsController@index');
 

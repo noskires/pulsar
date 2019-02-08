@@ -29,6 +29,12 @@ class RequisitionReportController extends Controller {
 		return $pdf->stream('requisition.report_requisition.pdf');
 	}
 
+	public function export2(){
+
+		$pdf = PDF::loadView('pdf.pdf')->setPaper('legal');
+		return $pdf->stream('123.pdf');
+	}
+
 	public function requisition_slip($requisitionSlipCodeis){
 
 		$data = DB::table('requisition_slips as rs')

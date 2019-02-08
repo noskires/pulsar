@@ -29,7 +29,7 @@
                   </div>
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
                   <div class="col-sm-4">
-                    <select style="width: 100%;" class="col-sm-2 control-label" ng-model="poc.poDetails.request_type">
+                    <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.request_type">
                       <option value="">--Select Request Type--</option>
                       <option value="Office">Office</option>
                       <option value="Project">Project</option>
@@ -41,17 +41,16 @@
                   <label for="" class="col-sm-2 control-label">Reference(RIS)</label>
                   <div class="col-sm-4">
 
-                    <select style="width: 100%;" class="col-sm-2 control-label" ng-model="poc.poDetails.old_reference">
-                      <option value="">--Select RIS--</option>
-                      <option ng-if="requisition.old_reference!=null" value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.old_reference%></option>
-                      <option ng-if="requisition.old_reference==null" value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.requisition_slip_code%></option>
+                    <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.requisition_slip_code">
+                      <option value="">Select RIS</option>
+                      <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.requisition_slip_code%></option>
                       
                     </select>
                   </div>
                   <label for="" class="col-sm-2 control-label">Reference Name</label>
                   <div class="col-sm-4">
-                    <select style="width: 100%;" class="col-sm-2 control-label" ng-model="poc.poDetails.reference_code">
-                      <option value="">--Select--</option>
+                    <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.reference_code">
+                      <option value="">Select Reference Name</option>
                       <option ng-if="poc.poDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in poc.organizations"><%organization.org_name%></option>
                       <option ng-if="poc.poDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in poc.projects"><%project.name%></option>
                     </select>
@@ -71,6 +70,13 @@
                     <select class="form-control select2"  style="width: 100%;" ng-model="poc.poDetails.requesting_employee">
                       <option value="<%employee.employee_code%>" ng-repeat="employee in poc.employees"><%employee.fname+' '+employee.lname%></option>
                     </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="assetname" class="col-sm-2 control-label">Reference</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control pull-right"  ng-model="poc.poDetails.old_reference">
                   </div>
                 </div>
 
@@ -156,6 +162,7 @@
             <thead>
             <tr>
               <th>PO Number</th>
+              <th>Old Reference</th>
               <th>Reference (RIS)</th>
               <th>Supplier Owner</th>
               <th>Supplier Name</th>
@@ -170,6 +177,8 @@
             <tr ng-repeat="po in poc.pos">
               <td><a href="#" ui-sref="list-poCopy2({poCode:po.po_code})"><b><%po.po_code%></b></a></td>
               <td><%po.old_reference%></td>
+              <td ng-if="po.requisition_old_reference!=null"><%po.requisition_old_reference%></td>
+              <td ng-if="po.requisition_old_reference==null"><%po.requisition_slip_code%></td>
               <td><%po.supplier_name%></td>
               <td><%po.supplier_owner%></td>
               <td><%po.address%></td>

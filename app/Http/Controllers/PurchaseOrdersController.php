@@ -34,6 +34,7 @@ class PurchaseOrdersController extends Controller {
                       'po.date_received',
                       'po.inspected_by',
                       'po.date_inspected',
+                      'po.requisition_slip_code',
                       'po.old_reference',
                       's.supplier_code',
                       's.supplier_name',
@@ -41,11 +42,13 @@ class PurchaseOrdersController extends Controller {
                       's.bir_no',
                       's.address',
                       'e.employee_code',
-                      DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee')
+                      DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee'),
+                      'requisition_slip.old_reference as requisition_old_reference'
                     )
                     ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')
                     ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code')
-                    ->leftjoin('employees as e','e.employee_code','=','po.employee_code');
+                    ->leftjoin('employees as e','e.employee_code','=','po.employee_code')
+                    ->leftjoin('requisition_slips as requisition_slip','requisition_slip.requisition_slip_code','=','po.requisition_slip_code');
 
 		if ($data['poCode']){
 			$pos = $pos->where('po.po_code', $data['poCode']);
@@ -149,15 +152,16 @@ class PurchaseOrdersController extends Controller {
 		// try{
 				$po = new PurchaseOrder;
 
-				$poCode = (str_pad(($po->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
-				$po->po_code = "PO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
-				$po->supplier_code = $data['supplier_code'];
-				$po->request_type = $data['request_type'];
-				$po->reference_code = $data['reference_code'];
-				$po->old_reference = $data['old_reference'];
-				$po->employee_code = $data['requesting_employee'];
-				$po->changed_by = Auth::user()->email;
+				$poCode 				= (str_pad(($po->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+										->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+				$po->po_code 			= "PO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+				$po->supplier_code 		= $data['supplier_code'];
+				$po->request_type 		= $data['request_type'];
+				$po->reference_code 	= $data['reference_code'];
+				$po->requisition_slip_code = $data['requisition_slip_code'];
+				$po->old_reference 		= $data['old_reference'];
+				$po->employee_code 		= $data['requesting_employee'];
+				$po->changed_by 		= Auth::user()->email;
 				$po->save();
 
 				return response()->json([

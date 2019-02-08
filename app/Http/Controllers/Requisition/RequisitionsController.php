@@ -34,6 +34,7 @@ class RequisitionsController extends Controller {
                 'rs.request_type',
                 'rs.reference_code',
                 'rs.job_order_code',
+                'rs.requisition_slip_code',
                 'rs.received_by',
                 DB::raw('CONCAT(trim(CONCAT(receivedEmployee.lname," ",COALESCE(receivedEmployee.affix,""))),", ", COALESCE(receivedEmployee.fname,"")," ", COALESCE(receivedEmployee.mname,"")) as received_by_name'),
                 'rs.date_received',
