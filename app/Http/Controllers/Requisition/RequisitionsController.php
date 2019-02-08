@@ -157,6 +157,26 @@ class RequisitionsController extends Controller {
           $requisition->asset_name = null;
         }
 
+        $list2 = DB::table('job_orders as job_order')
+        ->select(
+          'job_order.job_order_code',
+          'asset.code',
+          'asset.name'
+        )
+        ->where('job_order.job_order_code', $requisition->job_order_code)
+        ->leftjoin('assets as asset','asset.asset_code','=','job_order.asset_code')
+        ->first();
+
+        if($list2){
+
+          $requisition->asset_name = $list2->name;
+          $requisition->reference_id = $list2->code;
+          
+        }else{
+          
+          $requisition->asset_name = null;
+        }
+
       }
       else{
         $requisition->reference_name = null;
