@@ -236,7 +236,7 @@
     <div class="modal-dialog" style="width:100%;">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" ui-sref="list-requesition" ng-click="vm.ok()">
+          <button type="button" class="close" ui-sref="list-requesition2" ng-click="vm.ok()">
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title"><li class="fa fa-file-o"></li> Requisition Control No: <b><%vm.formData.requisition_slip_code%></b></h4>
         </div>
@@ -344,7 +344,7 @@
                       <div class="form-group col-sm-12">
                         <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
                         <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.status">   
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.status=='CLOSED'">   
                               <option value="">- - - Select Employee - - -</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <% employee.fname + ' '+employee.lname%>
@@ -353,7 +353,7 @@
                         </div>
                         <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
                         <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.status">   
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.status=='CLOSED'">   
                               <option value="">- - - Select Employee - - -</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <% employee.fname + ' '+employee.lname%>
@@ -366,19 +366,19 @@
                         <div class="col-sm-4">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received">
+                        <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received">
                       </div></div>
 
                         <label class="col-sm-2 control-label">Date Inspected</label>
                         <div class="col-sm-4">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
+                        <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
                       </div></div>
                       </div>
                           <div class="form-group" >
                             <div class="form-group">
-                              <input type="button" ng-if="!vm.formData.status" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
+                              <input type="button" ng-if="vm.formData.status=='OPEN'" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
                             </div>
                           </div>
                   </form>

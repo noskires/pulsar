@@ -197,6 +197,36 @@
             var vm = this;
             var data = {};
 
+            if($stateParams.requisitionSlipCode)
+            {
+                vm.requisitionSlipCode = $stateParams.requisitionSlipCode;
+                // alert(vm.receiptCode);
+
+                RequisitionsSrvcs.requisitions({requisitionCode:$stateParams.requisitionSlipCode}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.requisition = response.data.data[0];
+                        console.log(vm.requisition)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'RequisitionSlipModalInstanceCtrl',
+                            templateUrl:'requisitionSlipInfo.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'RIS Controller',
+                                    message:response.data.message,
+                                    requisition: vm.requisition
+                                };
+                              }
+                            },
+                            size: 'xlg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
             ProjectsSrvcs.projects({projectCode:$stateParams.projectCode}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -246,7 +276,7 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
                         // vm.routeTo('projects/list');
-                        $state.go('list-requesition');
+                        $state.go('list-requesition2');
                     }
                     else {
                         alert(response.data.message);
@@ -263,15 +293,15 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
 
-            //             RequisitionsSrvcs.requisitions({requisitionCode:''}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.requisitions = response.data.data;
-            //         console.log(vm.requisitions)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-                        vm.routeTo('requisition2/list');
-                        // $state.go('list-requesition2');
+                        RequisitionsSrvcs.requisitions({requisitionCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.requisitions = response.data.data;
+                                console.log(vm.requisitions)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                                    // vm.routeTo('requisition2/list');
+                        $state.go('list-requesition2');
                     }
                     else {
                         alert(response.data.message);
@@ -338,7 +368,7 @@
                     {
                         alert(response.data.message);
                         vm.ok();
-                        $state.go('list-requesition');
+                        $state.go('list-requesition2');
                     }
                 }, function (){ alert('Bad Request!!!') })
                 console.log(data)
