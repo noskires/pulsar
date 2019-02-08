@@ -60,7 +60,7 @@ class PurchaseOrdersController extends Controller {
 
                     )
                     ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')
-                    ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code')
+                    // ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code')
                     ->leftjoin('employees as e','e.employee_code','=','po.employee_code')
                     ->leftjoin('requisition_slips as requisition_slip','requisition_slip.requisition_slip_code','=','po.requisition_slip_code');
 

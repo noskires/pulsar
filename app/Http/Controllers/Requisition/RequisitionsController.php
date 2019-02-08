@@ -34,14 +34,25 @@ class RequisitionsController extends Controller {
                 'rs.request_type',
                 'rs.reference_code',
                 'rs.job_order_code',
-                'rs.requisition_slip_code',
                 'rs.received_by',
                 DB::raw('CONCAT(trim(CONCAT(receivedEmployee.lname," ",COALESCE(receivedEmployee.affix,""))),", ", COALESCE(receivedEmployee.fname,"")," ", COALESCE(receivedEmployee.mname,"")) as received_by_name'),
                 'rs.date_received',
                 'rs.inspected_by',
                 DB::raw('CONCAT(trim(CONCAT(inspectedEmployee.lname," ",COALESCE(inspectedEmployee.affix,""))),", ", COALESCE(inspectedEmployee.fname,"")," ", COALESCE(inspectedEmployee.mname,"")) as inspected_by_name'),
                 'rs.date_inspected',
-                'rs.old_reference'
+                'rs.old_reference',
+
+                DB::raw('CASE 
+                            WHEN rs.date_received IS NULL 
+                              OR rs.received_by IS NULL 
+                              OR rs.received_by = "1970-01-01" 
+                              OR rs.date_inspected IS NULL 
+                              OR rs.inspected_by IS NULL 
+                            THEN "OPEN"
+                ELSE 
+                  "CLOSED" 
+                END AS status'
+                )
               )
     ->leftjoin('employees as receivedEmployee','receivedEmployee.employee_code','=','rs.received_by')
     ->leftjoin('employees as inspectedEmployee','inspectedEmployee.employee_code','=','rs.inspected_by');
@@ -54,15 +65,6 @@ class RequisitionsController extends Controller {
 
 
     foreach ($requisitions as $key => $requisition) {
-
-      if($requisition->received_by && $requisition->date_received && $requisition->inspected_by && $requisition->date_inspected)
-      {
-
-        $requisition->status = "Closed";
-      }
-      else{
-        $requisition->status = "Open";
-      }
 
       if($requisition->request_type == "Asset"){
         $list = DB::table('job_orders as job_order')
