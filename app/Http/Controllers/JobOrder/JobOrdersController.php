@@ -291,7 +291,6 @@ class JobOrdersController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
- 
 
       // }
       // catch (\Exception $e) 

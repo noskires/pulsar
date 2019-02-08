@@ -41,7 +41,7 @@
             </div>
             <div class="form-group col-sm-12">
               <label for="" class="col-sm-3 control-label">Reference</label>
-              <div class="col-sm-9"><input type="text" class="form-control"></div>
+              <div class="col-sm-9"><input type="text" class="form-control" ng-model="rac.risDetails.old_reference"></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="" class="col-sm-3 control-label">Reference Type</label>
