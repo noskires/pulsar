@@ -99,7 +99,14 @@
                 ReceiptSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        $state.go('list-receipt');
+                        ReceiptSrvcs.receipts({receiptCode:'', payeeType:'', payee:'', voucherCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.receipts = response.data.data;
+                                console.log(vm.receipts)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        $state.go('list-receipt2');
                     }
                     else {
                         alert(response.data.message);
@@ -160,7 +167,7 @@
 
             vm.selectPayee = function(payeeType, supplierCode){
                 // alert(payee)
-                PurchaseOrdersSrvcs.pos({poCode:'', supplierCode:supplierCode, status:1}).then (function (response) {
+                PurchaseOrdersSrvcs.pos({poCode:'', supplierCode:supplierCode, status:2}).then (function (response) { //get all open po status
                     if(response.data.status == 200)
                     {
                         vm.pos = response.data.data;

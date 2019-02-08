@@ -43,7 +43,21 @@ class PurchaseOrdersController extends Controller {
                       's.address',
                       'e.employee_code',
                       DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee'),
-                      'requisition_slip.old_reference as requisition_old_reference'
+                      'requisition_slip.old_reference as requisition_old_reference',
+
+
+                      DB::raw('CASE 
+                      	WHEN po.date_received IS NULL 
+                      		OR po.received_by IS NULL 
+                      		OR po.received_by = "1970-01-01" 
+                      		OR po.date_inspected IS NULL 
+                      		OR po.inspected_by IS NULL 
+                      	THEN "OPEN"
+						ELSE 
+							"CLOSED" 
+						END AS po_status'
+					  )
+
                     )
                     ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')
                     ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code')
@@ -58,23 +72,38 @@ class PurchaseOrdersController extends Controller {
 			$pos = $pos->where('po.supplier_code', $data['supplierCode']);
 		}
 
-		if ($data['status'] == 1){
-      		$pos = $pos->whereNull('r.purchase_order_code');
-      	}
+		if($data['status']){
+
+
+			if ($data['status'] == 1){
+	      		$pos = $pos->where(DB::raw('CASE 
+	                      	WHEN po.date_received IS NULL 
+	                      		OR po.received_by IS NULL 
+	                      		OR po.date_inspected IS NULL 
+	                      		OR po.inspected_by IS NULL 
+	                      	THEN "OPEN"
+							ELSE 
+								"CLOSED" 
+							END'),  'CLOSED'); 
+	      	}else{
+	      		$pos = $pos->where(DB::raw('CASE 
+	                      	WHEN po.date_received IS NULL 
+	                      		OR po.received_by IS NULL 
+	                      		OR po.date_inspected IS NULL 
+	                      		OR po.inspected_by IS NULL 
+	                      	THEN "OPEN"
+							ELSE 
+								"CLOSED" 
+							END'),  'OPEN');
+	      	}
+
+	    }
 
 		$pos = $pos->get();
 
-		
-
+	
 		foreach ($pos as $key => $po) {
 
-			if($po->received_by && $po->date_received && $po->inspected_by && $po->date_inspected)
-			{
-				$po->status = "Closed";
-			}
-			else{
-				$po->status = null;
-			}
 
 			if($po->request_type == "Office"){
 
@@ -189,14 +218,15 @@ class PurchaseOrdersController extends Controller {
 
 		$transaction = DB::transaction(function($data) use($data){
 		try{
+
 				DB::table('purchase_orders')
 				->where('po_code', $data['po_code'])
 				->update([
 					'supplier_code' => $data['supplier_code'],
 					'received_by' => $data['received_by'],
-					'date_received' => date('Y-m-d', strtotime($data['date_received'])),
+					'date_received' => ($data['date_received'])?date('Y-m-d', strtotime($data['date_received'])):null,
 					'inspected_by' => $data['inspected_by'],
-					'date_inspected' => date('Y-m-d', strtotime($data['date_inspected']))
+					'date_inspected' => ($data['date_inspected'])?date('Y-m-d', strtotime($data['date_inspected'])):null
 				]);
 
 				return response()->json([

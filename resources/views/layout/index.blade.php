@@ -199,6 +199,10 @@
   @include('receipt.list_receipts')
 </script>
 
+<script type="text/ng-template" id="receipt2.list.view">
+  @include('receipt.list_receipts2')
+</script>
+
 <!-- Supplies -->
 
 <script type="text/ng-template" id="supply.create.view">

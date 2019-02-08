@@ -185,7 +185,7 @@
               <td><%po.reference_name%></td>
               <td><%po.reference_id%></td>
               <td><%po.requesting_employee%></td>
-              <td></td>
+              <td><%po.po_status%></td>
             </tr>
             </tbody>
           </table>

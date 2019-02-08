@@ -159,16 +159,16 @@
       </ul>
     </li>
     <li class="treeview">
-      <a href="#">
+      <a href="#" ui-sref="list-receipt2">
         <i class="fa fa-file"></i> <span>Receipts</span>
-        <span class="pull-right-container">
+        <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        </span> -->
       </a>
-      <ul class="treeview-menu">
+      <!-- <ul class="treeview-menu">
         <li><a href="#" ui-sref="list-receipt"><i class="fa fa-list-ul"></i> List of Receipts</a></li>
         <li><a href="#" ui-sref="receipt-create"><i class="fa fa-pencil"></i> Create Receipt</a></li> 
-      </ul>
+      </ul> -->
     </li>
     <li class="treeview"><a href="#" ui-sref="org-office-create"><i class="fa fa-building"></i> Office </a></li>
     <li class="treeview">

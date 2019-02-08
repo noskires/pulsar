@@ -344,6 +344,7 @@
                 controller: 'ReceiptsCtrl as rc',
                 templateUrl: 'receipt.create.view'
             })
+
             .state('list-receipt', {
                 url: '/receipt/list',
                 controller: 'ReceiptsCtrl as rc',
@@ -354,6 +355,19 @@
                 controller: 'ReceiptsCtrl as rc',
                 templateUrl: 'receipt.list.view'
             })
+
+            .state('list-receipt2', {
+                url: '/receipt2/list',
+                controller: 'ReceiptsCtrl as rc',
+                templateUrl: 'receipt2.list.view'
+            })
+
+            .state('list-receiptCopy2', {
+                url: '/receipt2/list/:receiptCode',
+                controller: 'ReceiptsCtrl as rc',
+                templateUrl: 'receipt2.list.view'
+            })
+
             .state('supply-create', {
                 url: '/supply/new',
                 controller: 'SuppliesCtrl as sc',
