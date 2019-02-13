@@ -57,7 +57,6 @@ class EmployeesController extends Controller {
                     ->orderBy('fname', 'asc')
                     ->orderBy('mname', 'asc')
                     ->get();
-  
 
         return response()-> json([
             'status'=>200,

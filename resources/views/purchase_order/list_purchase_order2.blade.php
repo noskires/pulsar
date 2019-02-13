@@ -68,7 +68,10 @@
                   <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
                   <div class="col-sm-4">
                     <select class="form-control select2"  style="width: 100%;" ng-model="poc.poDetails.requesting_employee">
-                      <option value="<%employee.employee_code%>" ng-repeat="employee in poc.employees"><%employee.fname+' '+employee.lname%></option>
+                      <option value=""> -- Select Employee -- </option>
+                      <option value="<%employee.employee_code%>" ng-repeat="employee in poc.employees">
+                        <%employee.fname+' '+employee.lname%>
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -436,4 +439,16 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
+</script>
+
+<script type="text/javascript">
+$(function () {
+
+  $('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+  alert('a')
+});
 </script>
