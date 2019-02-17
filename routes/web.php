@@ -435,6 +435,10 @@ Route::get('/utilization/list','UtilizationsController@index');
 Route::get('/utilization/list/{utilizationCode}','UtilizationsController@index');
 Route::get('/utilization/report/{utilizationCode}', 'UtilizationReportController@export');
 
+Route::get('/utilization-office/list','UtilizationsController@index');
+Route::get('/utilization-office/list/{utilizationCode}','UtilizationsController@index');
+Route::get('/utilization-office/report', 'UtilizationReportController@export_office');
+
 /*
 |--------------------------------------------------------------------------
 | Utilizations Apis

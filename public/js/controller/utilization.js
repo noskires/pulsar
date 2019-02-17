@@ -108,6 +108,21 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 
+
+            vm.printUtilizationOfficeDetails = function(data){
+                console.log(data)
+                if(!data.request_type){
+                    alert('Please select request type!');
+                }
+                else if(!data.reference_code){
+                    alert('Please select reference nanme!');
+                }
+                else{
+
+                    vm.url = 'utilization-office/report?reference_code='+data.reference_code+'&request_type='+data.request_type+'&date_from='+data.date_from+'&date_to='+data.date_to;
+                }
+            }
+
         }
 
         UtilizationsModalInstanceCtrl.$inject = ['$state', '$stateParams', 'UtilizationsSrvcs', '$uibModalInstance', 'PurchaseOrdersSrvcs', 'RequisitionsSrvcs', 'SuppliesSrvcs', 'EmployeesSrvcs', 'AssetsSrvcs', 'InsuranceSrvcs', 'BanksSrvcs', 'formData', 'ReceiptSrvcs'];

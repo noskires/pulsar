@@ -281,6 +281,10 @@
   @include('utilization.list_utilization')
 </script>
 
+<script type="text/ng-template" id="utilization.list.office.view">
+  @include('utilization.list_utilization_office')
+</script>
+
 <!-- Particulars -->
  
 <script type="text/ng-template" id="particular.list.view">

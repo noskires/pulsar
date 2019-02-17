@@ -592,6 +592,11 @@
                 controller: 'UtilizationsCtrl as uc',
                 templateUrl: 'utilization.list.view'
             })
+            .state('list-utilization-office', {
+                url: '/utilization-office/list',
+                controller: 'UtilizationsCtrl as uc',
+                templateUrl: 'utilization.list.office.view'
+            })
             .state('list-utilizationCopy', {
                 url: '/utilization/list/:utilizationCode',
                 controller: 'UtilizationsCtrl as uc',

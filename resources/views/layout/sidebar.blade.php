@@ -201,6 +201,7 @@
         <li><a href="#"><i class="fa fa-paperclip"></i>P.O. Reports</a></li>
         <li><a href="#"><i class="fa fa-paperclip"></i>Project Reports</a></li>
         <li><a href="#"><i class="fa fa-paperclip"></i>Status Reports</a></li>
+        <li><a href="#" ui-sref="list-utilization-office"><i class="fa fa-paperclip"></i>Utilization Reports</a></li>
         <li><a href="#"><i class="fa fa-paperclip"></i>Other Reports</a></li>
       </ul>
     </li>
