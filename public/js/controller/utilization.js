@@ -164,7 +164,7 @@
                         alert(response.data.message);
                         vm.personalDetails = [
                         {
-                            'po_code':vm.poCode,
+                            'utilization_code':vm.utilizationCode,
                             'supply_name':'',
                             'supply_desc':'',
                             'supply_qty':0,
