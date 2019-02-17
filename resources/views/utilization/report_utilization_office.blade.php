@@ -41,6 +41,7 @@
           <table border="1" width="100%" style="font-size:13px;border-spacing:0px;">
           <thead>
           <tr>
+            <th align="left">Supply Code</th>
             <th align="left">Supply Name</th>
             <th align="left">Description</th>
             <th align="left">Stock Unit</th>
@@ -51,10 +52,9 @@
           </thead>
           <tbody style="font-size: 12px;">
           @foreach($category_items as $category_item)
+    
             <tr>
-              <td style="border-top: 1px solid #e1e1e1;"> </td>
-            </tr>
-            <tr>
+              <td style="border-top: 1px solid #e1e1e1;"> {{$category_item->supply_code}} </td>
               <td style="border-top: 1px solid #e1e1e1;"> {{$category_item->supply_name}} </td>
               <td style="border-top: 1px solid #e1e1e1;"> {{$category_item->description}}  </td>
               <td style="border-top: 1px solid #e1e1e1;"> {{$category_item->stock_unit}} </td>

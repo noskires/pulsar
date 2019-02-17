@@ -179,7 +179,7 @@
                             }
                         }, function (){ alert('Bad Request!!!') })
 
-                        $state.go('list-utilization');
+                        // $state.go('list-utilization');
                         // vm.ok();
                     }
                 }, function (){ alert('Bad Request!!!') })
