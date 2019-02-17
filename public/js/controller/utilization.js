@@ -47,7 +47,7 @@
                 if(response.data.status == 200)
                 {
                     vm.utilizations = response.data.data;
-                    console.log(vm.pos)
+                    console.log(vm.utilizations)
                 }
             }, function (){ alert('Bad Request!!!') })
 
@@ -64,6 +64,14 @@
                 {
                     vm.projects = response.data.data;
                     console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
                 }
             }, function (){ alert('Bad Request!!!') })
 
@@ -171,7 +179,7 @@
                             }
                         }, function (){ alert('Bad Request!!!') })
 
-                        $state.go('list-po');
+                        $state.go('list-utilization');
                         // vm.ok();
                     }
                 }, function (){ alert('Bad Request!!!') })
@@ -237,9 +245,11 @@
                 $window.location.href = route;
             };
 
-            vm.printPurchaseOrderDetails = function(tag){
-                vm.url = 'purchase-order/report/'+tag;
+            vm.printUtilizationDetails = function(tag){
+                vm.url = 'utilization/report/'+tag;
             }
+
+
 
         }
 })();

@@ -102,16 +102,7 @@ class SupplyReportController extends Controller {
 					DB::raw('null as payee_type'),
 					DB::raw('null as payee'),
 					// DB::raw('CONCAT(CONCAT(a.name," ( ",COALESCE(a.code,"")," )")) as asset_name'),
-
-					DB::raw('CASE 
-						WHEN rs.request_type = "Office" 
-							THEN "Office"
-						WHEN rs.request_type = "Project"
-							THEN "Project"
-						ELSE "" 
-						END AS request_type'
-					),
-
+					'rs.request_type',
 					DB::raw('CASE 
 						WHEN rs.request_type = "Office" 
 							THEN (SELECT CONCAT(org_name," (",org_code,")")  FROM organizations WHERE org_code=rs.reference_code)

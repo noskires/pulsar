@@ -88,7 +88,9 @@
             
             <div class="form-group col-sm-12">
               <label for="rcpt-remarks" class="col-sm-2 control-label">Remarks</label>
-              <div class="col-sm-10"><textarea class="col-sm-12 form-control" id="rcpt-remarks" rows="2" ng-model="rc.receiptDetails.remarks"></textarea></div>
+              <div class="col-sm-10">
+                <textarea class="col-sm-12 form-control" id="rcpt-remarks" rows="2" ng-model="rc.receiptDetails.remarks"></textarea>
+              </div>
             </div>
         </div>
         <!-- /.box-body -->

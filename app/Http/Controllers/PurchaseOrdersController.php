@@ -74,7 +74,6 @@ class PurchaseOrdersController extends Controller {
 
 		if($data['status']){
 
-
 			if ($data['status'] == 1){
 	      		$pos = $pos->where(DB::raw('CASE 
 	                      	WHEN po.date_received IS NULL 

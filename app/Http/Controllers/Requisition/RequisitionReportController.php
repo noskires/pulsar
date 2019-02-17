@@ -178,45 +178,4 @@ class RequisitionReportController extends Controller {
 		return $data;
 	}
 
-	// public function asset_monitoring($assetTag){
-	// 	$assets = DB::table('assets as a')
-	// 	->select( 
-	// 		'a.tag',
-	// 		'a.name as asset_name', 
-	// 		DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
-	// 		DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
-	// 		DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
-	// 		DB::raw("COALESCE(SUM(o.gas_consumption), 0) as total_gas_consumption"),
-	// 		DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
-	// 		DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
-	// 	)
-	// 	->leftjoin('operations as o','o.asset_tag','=','a.tag')
-	// 	->leftjoin('Projects as p','p.project_code','=','o.project_code')
-	// 	->groupBy('a.tag', 'a.name')
-	// 	->where('a.category', 'CONE');
-	// 	$assets = $assets->where('tag', $assetTag);
-	// 	$assets = $assets->first();
-
-	// 	return $assets;
-	// }
-
-	// public function asset_photo($assetTag){
-
-	// 	$data = DB::table('asset_photos as ap')->where('ap.asset_tag', $assetTag)->where('ap.asset_photo_status', 1)->first();
-	// 	return $data;
-	// }
-
-	// public function events($assetTag){
-
-	// 	$data = DB::table('asset_events as ae')->where('ae.asset_tag', $assetTag)->get();
-	// 	return $data;
-	// }
-
-	// public function insurance($assetTag){
-
-	// 	$data = DB::table('insurance_items as ii')->where('ii.asset_code', $assetTag)->leftjoin('insurance as i','i.insurance_code','=','ii.insurance_code')
-	// 	->get();
-	// 	return $data;
-	// }
-
 }

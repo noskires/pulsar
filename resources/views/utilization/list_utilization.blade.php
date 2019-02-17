@@ -7,58 +7,70 @@
     <li><i class="fa fa-tags"></i> Asset Database</li>
     <li class="active">Utilization</li>
   </ol>
-</section>
+</section>  
 
 <!-- Main content -->
 <section class="content">
   <div class="row">
-    <div class="col-md-12"> 
-      <div class="">
-        <div class="panel panel-default">
-          <div class="panel-body">
-          <!-- NEW INSURANCE -->
-          <form class="form-horizontal" id="" ng-model="ac.insuranceDetails">
-            <div class="box-body">
-              <div class="form-group col-sm-12">
+    <div id="button-top" class="col-md-12"> 
+<!-- BUTTONS -->
+      <button class="btn btn-primary" data-toggle="collapse" data-target="#filter" data-parent="#btn-top">
+          <span class="glyphicon glyphicon-refresh"></span> Generate
+      </button> <br>
 
-                <label for="controlnumber" class="col-sm-2 control-label">Request Type</label>
-                <div class="col-sm-3">
-                  <select style="width: 100%;" ng-model="uc.utilizationDetails.request_type">
-                    <option value="">--Select Request Type--</option>
-                    <option value="Office">Office</option>
-                    <option value="Project">Project</option>
-                  </select>
-                </div>
-                <br>
-                <label for="controlnumber" class="col-sm-2 control-label">Reference</label>
-                <div class="col-sm-3">
-                  <select style="width: 100%;" ng-model="uc.utilizationDetails.reference_code">
-                    <option value="">--Select--</option>
-                    <option ng-if="uc.utilizationDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in uc.organizations"><%organization.org_name%></option>
-                    <option ng-if="uc.utilizationDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in uc.projects"><%project.name%></option>
-                  </select>
-                </div>
-    
-
-                <div class="col-sm-3">
-                  <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
-                  data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
-                  data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-                  data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="uc.newUtilizationBtn(uc.utilizationDetails);uc.toggle()"> CONFIRMATION
-                  </button>
-                </div>
-              </div>
-             </div> 
-          </form>
-          </div>
+<!-- FILTER DISPLAY -->
+      <div id="filter" class="collapse"><br>
+      <!-- general form elements -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Generate Utilization</h3>
         </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+        <!-- form start -->
+        <form id="from-unit" class="form-horizontal" role="form">
+          <div class="form-group col-sm-12"">
+            <div class="col-sm-3"> 
+            <button type="button" class="btn btn-default" id="daterange-btn" style="width: 100%;">
+              <span><i class="fa fa-calendar"></i> Select Date Range </span> <i class="fa fa-caret-down"></i>
+            </button>
+            </div>
+            <div class="col-sm-2">
+
+              <select style="width: 100%;" ng-model="uc.utilizationDetails.request_type">
+                <option value="">--Select Request Type--</option>
+                <option value="Office">Office</option>
+                <option value="Project">Project</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+
+              <select style="width: 100%;" ng-model="uc.utilizationDetails.reference_code">
+                <option value="">--Select--</option>
+                <option ng-if="uc.utilizationDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in uc.organizations"><%organization.org_name%></option>
+                <option ng-if="uc.utilizationDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in uc.projects"><%project.name%></option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+
+              <select class="form-control select2"  style="width: 100%;" ng-model="uc.utilizationDetails.employee_code">
+                <option value=""> -- Select Employee -- </option>
+                <option value="<%employee.employee_code%>" ng-repeat="employee in uc.employees">
+                  <%employee.fname+' '+employee.lname%>
+                </option>
+              </select>
+
+            </div>
+            <div class="col-sm-1">
+              <button type="button" class="btn btn-primary btn-flat" ng-click="uc.newUtilizationBtn(uc.utilizationDetails);uc.toggle()">Generate</button></div>
+          </div>
+        </form>
       </div>
-      <!-- BUTTONS -->
-      <button class="btn btn-primary" data-toggle="modal" data-target="#modal-view-are">
-          <span class="glyphicon glyphicon-plus"></span> New PO
-      </button> <br><br>
+      </div>
+      <!-- /.box -->
+      </div>
     </div>
-  </div><br>        
+  </div><br>       
 
 <!-- TABLES -->
   <div class="row">
@@ -68,20 +80,18 @@
           <table datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
-              <th>PO Number</th>
-              <th>Business Name</th>
-              <th>Owner</th>
-              <th>BIR</th>
-              <th>Requesting Office</th>
+              <th>Utilization Code</th>
+              <th>Type</th>
+              <th>Reference</th>
+              <th>Employee</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="utilization in uc.utilizations">
               <td><a href="#" ui-sref="list-utilizationCopy({utilizationCode:utilization.utilization_code})"><b><%utilization.utilization_code%></b></a></td>
-              <td><%utilization.supplier_name%></td>
-              <td><%utilization.supplier_owner%></td>
-              <td><%utilization.bir_no%></td>
-              <td><%utilization.reference_code%></td>
+              <td><%utilization.request_type%></td>
+              <td><%utilization.reference_name%></td>
+              <td><%utilization.employee_name%></td>
             </tr>
             </tbody>
           </table>
@@ -96,7 +106,7 @@
     <div class="modal-dialog" style="width:100%;">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" ui-sref="list-po" ng-click="vm.ok()">
+          <button type="button" class="close" ui-sref="list-utilization" ng-click="vm.ok()">
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title"><li class="fa fa-file-o"></li> Utilization No: <b><%vm.formData.utilization_code%></b></h4>
         </div>
@@ -179,7 +189,7 @@
             </div>
           </div>
 
-          <div class="row">
+<!--           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-body">
@@ -229,12 +239,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
-          <a type="button" class="btn btn-info" ng-click="vm.printPurchaseOrderDetails(vm.formData.po_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
+          <a type="button" class="btn btn-info" ng-click="vm.printUtilizationDetails(vm.formData.utilization_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
           
         </div>
       </div>

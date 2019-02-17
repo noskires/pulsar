@@ -433,7 +433,7 @@ Route::get('/api/v1/purchase-order-items','PurchaseOrdersController@purchaseOrde
 Route::get('/utilization/new','UtilizationsController@index');
 Route::get('/utilization/list','UtilizationsController@index');
 Route::get('/utilization/list/{utilizationCode}','UtilizationsController@index');
-Route::get('/utilization/report/{utilizationCode}', 'UtilizationsController@export');
+Route::get('/utilization/report/{utilizationCode}', 'UtilizationReportController@export');
 
 /*
 |--------------------------------------------------------------------------

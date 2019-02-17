@@ -28,14 +28,25 @@ class UtilizationsController extends Controller {
 
 		$utilizations = DB::table('utilizations AS utilization')
 					->select(
-                      'utilization.utilization_code',
-                      'utilization.reference_code',
-                      'utilization.received_by',
-                      'utilization.date_received',
-                      'utilization.inspected_by',
-                      'utilization.date_inspected'
-                    );
-                    // ->leftjoin('receipts as r','r.purchase_order_code','=','utilization.po_code');
+						'utilization.utilization_code',
+						'utilization.request_type',
+						'utilization.reference_code',
+						'utilization.employee_code',
+						'utilization.received_by',
+						'utilization.date_received',
+						'utilization.inspected_by',
+						'utilization.date_inspected',
+                      	DB::raw('CASE 
+							WHEN utilization.request_type = "Office" 
+								THEN (SELECT CONCAT(org_name," (",org_code,")")  FROM organizations WHERE org_code=utilization.reference_code)
+							WHEN utilization.request_type = "Project"
+								THEN (SELECT CONCAT(name," (",code,")")  FROM projects WHERE project_code=utilization.reference_code)
+							ELSE "" 
+							END AS reference_name'
+					   	),
+					   	DB::raw('CONCAT(trim(CONCAT(employee.lname," ",COALESCE(employee.affix,""))),", ", COALESCE(employee.fname,"")," ", COALESCE(employee.mname,"")) as employee_name')
+                    )
+                    ->leftjoin('employees as employee','employee.employee_code','=','utilization.employee_code');
 
 		if ($data['utilizationCode']){
 			$utilizations = $utilizations->where('utilization.utilization_code', $data['utilizationCode']);
@@ -46,18 +57,6 @@ class UtilizationsController extends Controller {
       	}
 
 		$utilizations = $utilizations->get();
-
-		// foreach ($pos as $key => $po) {
-
-		// 	if($po->received_by && $po->date_received && $po->inspected_by && $po->date_inspected)
-		// 	{
-		// 		$po->status = "Closed";
-		// 	}
-		// 	else{
-		// 		$po->status = null;
-		// 	}
-	      
-	 //    }
 
 		return response()-> json([
 			'status'=>200,
@@ -79,6 +78,7 @@ class UtilizationsController extends Controller {
 				$utilization->utilization_code = "UTLZN-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
 				$utilization->request_type = $data['request_type'];
 				$utilization->reference_code = $data['reference_code'];
+				$utilization->employee_code = $data['employee_code'];
 				$utilization->changed_by = Auth::user()->email;
 				$utilization->save();
 

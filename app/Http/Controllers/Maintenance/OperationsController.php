@@ -85,8 +85,8 @@ class OperationsController extends Controller {
                         DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
                       )
             ->leftjoin('operations as o','o.asset_tag','=','a.tag')
-            ->leftjoin('Projects as p','p.project_code','=','o.project_code')
             ->groupBy('a.tag', 'a.name')
+            ->leftjoin('Projects as p','p.project_code','=','o.project_code')
             ->where('a.category', 'CONE');
 
       if ($data['tag']){
