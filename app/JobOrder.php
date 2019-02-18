@@ -4,8 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JobOrder extends Model
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AudtitableContract;
+
+class JobOrder extends Model implements AudtitableContract
 {
+    use Auditable;
+
     protected $primaryKey = 'job_order_id';
     protected $table = "job_orders";
 }
