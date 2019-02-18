@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AudtitableContract;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements AudtitableContract
 {
-    use Notifiable;
+    use Notifiable, Auditable;
 
     /**
      * The attributes that are mass assignable.
