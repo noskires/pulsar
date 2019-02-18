@@ -41,6 +41,7 @@ class RequisitionsController extends Controller {
                 DB::raw('CONCAT(trim(CONCAT(inspectedEmployee.lname," ",COALESCE(inspectedEmployee.affix,""))),", ", COALESCE(inspectedEmployee.fname,"")," ", COALESCE(inspectedEmployee.mname,"")) as inspected_by_name'),
                 'rs.date_inspected',
                 'rs.old_reference',
+                'rs.created_at',
 
                 DB::raw('CASE 
                             WHEN rs.date_received IS NULL 
@@ -49,10 +50,38 @@ class RequisitionsController extends Controller {
                               OR rs.date_inspected IS NULL 
                               OR rs.inspected_by IS NULL 
                             THEN "OPEN"
-                ELSE 
-                  "CLOSED" 
-                END AS status'
+                            ELSE 
+                              "CLOSED" 
+                            END AS status'
+                ),
+                DB::raw('CASE 
+                            WHEN rs.request_type = "Office" 
+                              THEN (SELECT organizations.org_name FROM organizations WHERE organizations.org_code=rs.reference_code)
+                            WHEN rs.request_type = "Project" 
+                              THEN (SELECT projects.name AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
+                            ELSE 
+                              "" 
+                            END as reference_name'
+                ),
+                DB::raw('CASE    
+                            WHEN rs.job_order_code IS NOT NULL 
+                              THEN (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+                            WHEN rs.request_type = "Office" 
+                              THEN (SELECT organizations.org_code FROM organizations WHERE organizations.org_code=rs.reference_code)
+                            WHEN rs.request_type = "Project" 
+                              THEN (SELECT projects.code AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
+                            WHEN rs.job_order_code IS NULL 
+                              THEN null
+                            END as reference_id'
+                ),
+                DB::raw('CASE 
+                            WHEN rs.job_order_code IS NULL 
+                              THEN null
+                            ELSE 
+                              (SELECT assets.name FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code) 
+                            END as asset_name'
                 )
+
               )
     ->leftjoin('employees as receivedEmployee','receivedEmployee.employee_code','=','rs.received_by')
     ->leftjoin('employees as inspectedEmployee','inspectedEmployee.employee_code','=','rs.inspected_by');
@@ -61,131 +90,8 @@ class RequisitionsController extends Controller {
       $requisitions = $requisitions->where('requisition_slip_code', $data['requisitionCode']);
     }
 
+    $requisitions = $requisitions->orderBy('rs.created_at');
     $requisitions = $requisitions->get();
-
-
-    foreach ($requisitions as $key => $requisition) {
-
-      if($requisition->request_type == "Asset"){
-        $list = DB::table('job_orders as job_order')
-        ->select(
-          'job_order.job_order_code',
-          'asset.code',
-          'asset.name'
-        )
-        ->where('job_order.job_order_code', $requisition->reference_code)
-        ->leftjoin('assets as asset','asset.asset_code','=','job_order.asset_code')
-        ->first();
-
-        if($list){
-
-          $requisition->reference_name = $list->name;
-          $requisition->reference_id = $list->code;
-          $requisition->asset_name = null;
-          
-        }else{
-          
-          $requisition->reference_name = null;
-          $requisition->reference_id = null;
-          $requisition->asset_name = null;
-        }
-
-      }elseif($requisition->request_type == "Office"){
-
-        $list = DB::table('organizations as organization')
-        ->select(
-          'organization.org_code as code',
-          'organization.org_name as name'
-        )
-        ->where('organization.org_code', $requisition->reference_code)
-        ->first();
-
-        if($list){
-
-          $requisition->reference_name = $list->name;
-          $requisition->reference_id = $list->code;
-          
-        }else{
-          
-          $requisition->reference_name = null;
-          $requisition->reference_id = null;
-
-        }
-
-        $list2 = DB::table('job_orders as job_order')
-        ->select(
-          'job_order.job_order_code',
-          'asset.code',
-          'asset.name'
-        )
-        ->where('job_order.job_order_code', $requisition->job_order_code)
-        ->leftjoin('assets as asset','asset.asset_code','=','job_order.asset_code')
-        ->first();
-
-        if($list2){
-
-          $requisition->asset_name = $list2->name;
-          $requisition->reference_id = $list2->code;
-          
-        }else{
-          
-          $requisition->asset_name = null;
-        }
-
-      }
-      elseif($requisition->request_type == "Project"){
-
-        $list = DB::table('projects as project')
-        ->select(
-          'project.project_code',
-          'project.code',
-          'project.name'
-        )
-        ->where('project.project_code', $requisition->reference_code)
-        ->first();
-
-        if($list){
-
-          $requisition->reference_name = $list->name;
-          $requisition->reference_id = $list->code;
-          $requisition->asset_name = null;
-          
-        }else{
-          
-          $requisition->reference_name = null;
-          $requisition->reference_id = null;
-          $requisition->asset_name = null;
-        }
-
-        $list2 = DB::table('job_orders as job_order')
-        ->select(
-          'job_order.job_order_code',
-          'asset.code',
-          'asset.name'
-        )
-        ->where('job_order.job_order_code', $requisition->job_order_code)
-        ->leftjoin('assets as asset','asset.asset_code','=','job_order.asset_code')
-        ->first();
-
-        if($list2){
-
-          $requisition->asset_name = $list2->name;
-          $requisition->reference_id = $list2->code;
-          
-        }else{
-          
-          $requisition->asset_name = null;
-        }
-
-      }
-      else{
-        $requisition->reference_name = null;
-        $requisition->reference_id = null;
-        $requisition->asset_name = null;
-
-      }
-      
-    }
 
     return response()-> json([
       'status'=>200,

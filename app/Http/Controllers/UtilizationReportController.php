@@ -17,12 +17,18 @@ class UtilizationReportController extends Controller {
 	public function export($utilizationCode){
 
 		$data['utilization'] 				= $this->utilizations($utilizationCode);
-		$data['requisition_slip_items'] 	= $this->requisition_slip_items($data['utilization']->reference_code);
+		$data['requisition_slip_items'] 	= $this->requisition_slip_items($utilizationCode);
 
 		// return $data;
 
-		$pdf = PDF::loadView('utilization.report_utilization_office', $data);
-		return $pdf->stream('utilization.report_utilization_office.pdf');
+		if($data['utilization']->request_type==="Office"){
+			$data['office'] 				= $this->office($data['utilization']->reference_code);
+		}else{
+			$data['office'] 				= $this->project($data['utilization']->reference_code);
+		}
+
+		$pdf = PDF::loadView('utilization.report_utilization', $data);
+		return $pdf->stream('utilization.report_utilization.pdf');
 	}
 
 	public function export_office(Request $request){
@@ -195,38 +201,27 @@ class UtilizationReportController extends Controller {
 	}
 
 
-	public function requisition_slip_items($reference_code){
+	public function requisition_slip_items($utilizationCode){
 
-		$data = DB::table('requisition_slips_items as rsi')
+		$data = DB::table('utilization_items as utilization_item')
 		->select(
-			'rs.reference_code',
-			'rsi.supply_code',
+			'utilization.reference_code',
+			'utilization_item.supply_code',
+			'utilization_item.item_quantity',
 			'supply.supply_name',
 			'supply.stock_unit',
 			'supply.description',
 			'supply.category_code',
-			'supply_category.supply_category_name',
-			DB::raw("CAST(COALESCE(SUM(rsi.item_quantity), 0) as INT) AS total_item_quantity_ris"),
-			DB::raw("(SELECT CAST(SUM(utilization_items.item_quantity) AS INT) 
-					FROM utilizations, utilization_items 
-					WHERE utilizations.utilization_code = utilization_items.utilization_code 
-					AND utilizations.reference_code = rs.reference_code
-					AND utilization_items.supply_code = rsi.supply_code)
-					AS total_item_quantity_utilization")
+			'supply_category.supply_category_name'
 		)
-		->leftjoin('requisition_slips as rs','rs.requisition_slip_code','=','rsi.requisition_slip_code')
-		->leftjoin('supplies as supply','supply.supply_code','=','rsi.supply_code')
+		->leftjoin('utilizations as utilization','utilization.utilization_code','=','utilization_item.utilization_code')
+		->leftjoin('supplies as supply','supply.supply_code','=','utilization_item.supply_code')
 		->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','supply.category_code')
-		->where('rs.reference_code', $reference_code)
-		->whereNotNull('rs.date_received')
-		->whereNotNull('rs.received_by')
-		->whereNotNull('rs.date_inspected')
-		->whereNotNull('rs.inspected_by')
- 
-		->groupBy('rs.reference_code', 'rsi.supply_code', 'supply.supply_name', 'supply.stock_unit', 'supply.description', 'supply.category_code', 'supply_category.supply_category_name')
+		->where('utilization.utilization_code', $utilizationCode)
+
 		->get();
 
-		return $data->groupBy('supply_category_name');
+		return $data;
 	}
 
 	public function requisition_slip_items_office($reference_code, $from, $to){

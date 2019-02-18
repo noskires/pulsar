@@ -20,20 +20,31 @@ class SuppliesController extends Controller {
       'supplyCode'=>$request->input('supplyCode'),
       'quantityStatus'=>$request->input('quantityStatus'),
       'supplyCategory'=>$request->input('supplyCategory'),
+      'isRepair'=>$request->input('isRepair'),
     );
 
   	$supplies = DB::table('supplies as s')
             ->leftjoin('stock_units as su','su.stock_unit_code','=','s.stock_unit')
             ->leftjoin('supply_categories as sc','sc.supply_category_code','=','s.category_code'); 
 
-    if ($data['supplyCategory'] == "Project"){
-      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
-    }
-    elseif ($data['supplyCategory'] == "Office"){
-      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
-    }
-    elseif ($data['supplyCategory'] == "Asset"){
+    // if ($data['supplyCategory'] == "Project"){
+    //   $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
+    // }
+    // elseif ($data['supplyCategory'] == "Office"){
+    //   $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
+    // }
+    // elseif ($data['supplyCategory'] == "Asset"){
+    //   $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
+    // }
+
+    if ($data['isRepair'] == 1){
       $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
+    }
+    elseif ($data['isRepair'] == 0){
+      $supplies = $supplies->where('sc.supply_category_name', 'not like', '%Repair%');
+    }
+    else{
+      $supplies = $supplies->where('sc.supply_category_name', 'like', '%%');
     }
 
     if ($data['supplyCode']){

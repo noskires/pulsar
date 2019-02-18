@@ -321,7 +321,13 @@
             var vm = this;
             vm.formData = formData.requisition;
             // console.log(vm.formData)
-            // alert(vm.formData.request_type)
+            // alert(vm.formData.asset_name)
+
+            if(vm.formData.asset_name!=null){
+                vm.isRepair = 1;
+            }else{
+                vm.isRepair = 0;
+            }
 
             vm.personalDetails = [
             {
@@ -343,7 +349,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:1}).then (function (response) {
+            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:1, isRepair: vm.isRepair}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
@@ -376,7 +382,7 @@
 
             vm.selectSupply = function(index, supplyCode){
                 // alert(supplyCode)
-                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:1}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:1, isRepair: vm.isRepair}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receiptItemSupply = response.data.data[0];
