@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AudtitableContract;
+use OwenIt\Auditing\Contracts\UserResolver;
 
 
 class User extends Authenticatable implements AudtitableContract
@@ -35,4 +36,9 @@ class User extends Authenticatable implements AudtitableContract
         if($this->admin){ return true; }
         else{ return false; }
     }
+
+    // public static function resolveId()
+    // {
+    //     return Auth::check() ? Auth::user()->getAuthIdentifier() : null;
+    // }
 }

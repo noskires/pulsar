@@ -120,6 +120,7 @@
                       <thead>
                         <tr>
                           <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th> 
+                          <th>Cost Center</th>
                           <th>Particular</th>
                           <th>Amount</th>
                         </tr>
@@ -128,9 +129,16 @@
                         <tr ng-repeat="fundDetail in vm.fundDetails" >
                           <td><input type="checkbox" ng-model="fundDetail.selected"/></td> 
                           <td>
-                            <select class="form-control select2" style="width: 100%;" required="" ng-model="fundDetail.particular_code" ng-init="parentIndex = $index">
+                            <select class="form-control select2" style="width: 100%;" ng-model="fundDetail.cost_center_code" required="">
+                              <option value="">- - Select Cost Center - -</option>
+                              <option value="<%organization.org_code%>" ng-repeat="organization in vm.organizations"><%organization.org_name%></option>
+                              <option value="<%project.project_code%>" ng-repeat="project in vm.projects"> <%project.cost%> - <%project.name%></option>
+                            </select>
+                          </td>
+                          <td>
+                            <select class="form-control select2" style="width: 100%;" required="" ng-model="fundDetail.supply_category_code" ng-init="parentIndex = $index">
                               <option value="">- - Select Particular - -</option>
-                              <option ng-value="particular.particular_code" ng-repeat="particular in vm.particulars"><%particular.description%></option>
+                              <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in vm.supplyCategories"><%supplyCategory.supply_category_name%></option>
                             </select>
                           </td>
                           <td>
@@ -160,16 +168,17 @@
                     <table class="table table-bordered" class="tbl_list_rcpt">
                       <thead>
                         <tr>
-                          <th>Particuar Code</th> 
-                          <th>Particuar Name</th> 
+                          <th>Cost Center Code</th> 
+                          <!-- <th>Cost Center Name</th>  -->
+                          <th width="25%">Particular</th>
                           <th width="25%">Amount</th>
                         </tr> 
                       </thead>
                       <tbody>
                         <tr ng-repeat="fundItem in vm.fundItems"> 
                           <!-- <td><%fundItem.fund_name%></td> -->
-                          <td><%fundItem.particular_code%></td>
-                          <td><%fundItem.description%></td>
+                          <td><%fundItem.cost_center_code%></td>
+                          <td><%fundItem.supply_category_name%></td>
                           <td align="right"><%fundItem.fund_item_amount | number:2%></td>
                           <!-- <td>
                             <a href="#" data-toggle="modal"  ng-click="vm.removeRequisitionSlipItem(requisitionSlipItem.requisition_slip_item_code, requisitionSlipItem.item_quantity, requisitionSlipItem.supply_code)"><code class="text-red">REMOVE</code></a>

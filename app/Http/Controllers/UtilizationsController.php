@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
 class UtilizationsController extends Controller {
-	
+
 	public function index(){
 		return view('layout.index');
 	}
@@ -70,7 +70,7 @@ class UtilizationsController extends Controller {
 		$data = Input::post();
 
 		$transaction = DB::transaction(function($data) use($data){
-		// try{
+		try{
 				$utilization = new Utilization;
 
 				$utilizationCode = (str_pad(($utilization->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
@@ -87,15 +87,15 @@ class UtilizationsController extends Controller {
 				    'data' => 'null',
 				    'message' => 'Successfully saved.'
 				]);
-			// }
-			// catch (\Exception $e) 
-			// {
-			//   	return response()->json([
-			// 	    'status' => 500,
-			// 	    'data' => 'null',
-			// 	    'message' => 'Error, please try again!'
-			// 	]);
-			// }
+			}
+			catch (\Exception $e) 
+			{
+			  	return response()->json([
+				    'status' => 500,
+				    'data' => 'null',
+				    'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;
@@ -196,10 +196,10 @@ class UtilizationsController extends Controller {
 
           $utilizationItem->utilization_item_code 			= "UTLZNITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
           $utilizationItem->utilization_code     			= $data[$i]['utilization_code'];
-          $utilizationItem->supply_code     		= $data[$i]['supply_name'];
-          $utilizationItem->item_description      = $data[$i]['supply_desc'];
-          $utilizationItem->item_quantity 		= $data[$i]['supply_qty']; 
-          $utilizationItem->item_stock_unit  		= $data[$i]['supply_unit']; 
+          $utilizationItem->supply_code     				= $data[$i]['supply_name'];
+          $utilizationItem->item_description      			= $data[$i]['supply_desc'];
+          $utilizationItem->item_quantity 					= $data[$i]['supply_qty']; 
+          $utilizationItem->item_stock_unit  				= $data[$i]['supply_unit']; 
           $utilizationItem->save(); // fixed typo
 
         }
@@ -229,26 +229,25 @@ class UtilizationsController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
-
-        DB::table('utilization_items')->where('utilization_item_code', $data['utilization_item_code'])->delete();
+    	UtilizationItem::where('utilization_item_code', $data['utilization_item_code'])->firstOrFail()->delete();
 
         return response()->json([
             'status' => 200,
             'data' => 'null',
-            'message' => 'Successfully saved.'
+            'message' => 'Successfully deleted.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

@@ -35,7 +35,7 @@ class VouchersController extends Controller {
 	                'v.amount',
 	                'v.check_number',
 	                // 'v.fund_item_code',
-	                'p.description as particular_name',
+	                'supply_category.supply_category_code',
 	                DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
 	                'v.bank_code',
 	                'b.bank_name',
@@ -46,7 +46,7 @@ class VouchersController extends Controller {
             ->leftjoin('banks as b','b.bank_code','=','v.bank_code')
             ->leftjoin('fund_items as fi','fi.fund_item_code','=','v.fund_item_code')
             ->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
-            ->leftjoin('particulars as p','p.particular_code','=','fi.particular_code');
+            ->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','fi.supply_category_code');
 
 		if ($data['voucherCode']){
 			$vouchers = $vouchers->where('voucher_code', $data['voucherCode']);

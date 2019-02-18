@@ -344,7 +344,9 @@ class PurchaseOrdersController extends Controller {
     // try{
 
 
-        DB::table('purchase_order_items')->where('po_item_code', $data['po_item_code'])->delete();
+        // DB::table('purchase_order_items')->where('po_item_code', $data['po_item_code'])->delete();
+
+        PurchaseOrderItem::where('po_item_code', $data['po_item_code'])->firstOrFail()->delete();
 
         return response()->json([
             'status' => 200,

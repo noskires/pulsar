@@ -55,7 +55,7 @@ class FundsController extends Controller {
 
 		// return $request->all();
 		$transaction = DB::transaction(function($data) use($data){
-		// try{
+		try{
 				$fund = new Fund;
 
 			    $fundCode = (str_pad(($fund->get()->count() + 1), 4, "0", STR_PAD_LEFT));
@@ -71,15 +71,15 @@ class FundsController extends Controller {
 				    'message' => 'Successfully saved.'
 				]);
 
-			// }
-			// catch (\Exception $e) 
-			// {
-			//   	return response()->json([
-			// 	    'status' => 500,
-			// 	    'data' => 'null',
-			// 	    'message' => 'Error, please try again!'
-			// 	]);
-			// }
+			}
+			catch (\Exception $e) 
+			{
+			  	return response()->json([
+				    'status' => 500,
+				    'data' => 'null',
+				    'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;
@@ -93,12 +93,12 @@ class FundsController extends Controller {
 
 	    $transaction = DB::transaction(function($data) use($data){
 	    try{
-	      
-	          DB::table('funds')
-	            ->where('fund_code', $data['fund_code'])
-	            ->update([
-	              'fund_name' => $data['fund_name'],
-	            ]);
+
+	    	$fund = Fund::where('fund_code', $data['fund_code'])->first();
+	        $fund->fund_name = $data['fund_name'];
+	        $fund->changed_by = Auth::user()->email;
+	        $fund->timestamps = true;
+	        $fund->save();
 
 	        return response()->json([
 	            'status' => 200,
@@ -132,14 +132,15 @@ class FundsController extends Controller {
               ->select(
                 'fi.fund_code', 
                 'fi.fund_item_code',
-                'fi.particular_code',
+                'fi.supply_category_code',
                 'fi.fund_item_amount',
+                'fi.cost_center_code',
                 'f.fund_name',
-                'p.description',
+                'supply_category.supply_category_name',
                 'v.voucher_code'
               )
             ->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
-            ->leftjoin('particulars as p','p.particular_code','=','fi.particular_code')
+            ->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','fi.supply_category_code')
             ->leftjoin('vouchers as v','v.fund_item_code','=','fi.fund_item_code');
 
 		
@@ -183,7 +184,8 @@ class FundsController extends Controller {
 
           $fundItem->fund_item_code = "FUNDITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
 
-          $fundItem->particular_code     = $data[$i]['particular_code'];
+          $fundItem->cost_center_code    = $data[$i]['cost_center_code'];
+          $fundItem->supply_category_code= $data[$i]['supply_category_code'];
           $fundItem->fund_code     		 = $data[$i]['fund_code'];
           $fundItem->fund_item_amount    = $data[$i]['fund_item_amount'];
           $fundItem->changed_by = Auth::user()->email;

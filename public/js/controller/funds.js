@@ -100,19 +100,43 @@
             }; 
         }
 
-        FundsModalInstanceCtrl.$inject = ['$uibModalInstance', '$state', 'formData', 'SuppliersSrvcs', 'FundsSrvcs', 'ParticularsSrvcs'];
-        function FundsModalInstanceCtrl ($uibModalInstance, $state, formData, SuppliersSrvcs, FundsSrvcs, ParticularsSrvcs) {
+        FundsModalInstanceCtrl.$inject = ['$uibModalInstance', '$state', 'formData', 'SuppliersSrvcs', 'FundsSrvcs', 'ParticularsSrvcs', 'SupplyCategoriesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs'];
+        function FundsModalInstanceCtrl ($uibModalInstance, $state, formData, SuppliersSrvcs, FundsSrvcs, ParticularsSrvcs, SupplyCategoriesSrvcs, OrganizationsSrvcs, ProjectsSrvcs) {
 
             var vm = this;
             vm.formData = formData.fund;
             console.log(vm.formData)
 
 
-            ParticularsSrvcs.particulars({particularCode:''}).then (function (response) {
+            // ParticularsSrvcs.particulars({particularCode:''}).then (function (response) {
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.particulars = response.data.data;
+            //         console.log(vm.particulars)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
+
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
-                    vm.particulars = response.data.data;
-                    console.log(vm.particulars)
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            SupplyCategoriesSrvcs.SupplyCategories({supplyCategoryCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.supplyCategories = response.data.data;
+                    console.log(vm.supplyCategories)
                 }
             }, function (){ alert('Bad Request!!!') })
             
@@ -192,8 +216,8 @@
             // }
         }
 
-        FundItemsModalInstanceCtrl.$inject = ['$uibModalInstance', '$state', 'formData', 'SuppliersSrvcs', 'FundsSrvcs', 'ParticularsSrvcs'];
-        function FundItemsModalInstanceCtrl ($uibModalInstance, $state, formData, SuppliersSrvcs, FundsSrvcs, ParticularsSrvcs) {
+        FundItemsModalInstanceCtrl.$inject = ['$uibModalInstance', '$state', 'formData', 'SuppliersSrvcs', 'FundsSrvcs', 'ParticularsSrvcs', 'SupplyCategoriesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs'];
+        function FundItemsModalInstanceCtrl ($uibModalInstance, $state, formData, SuppliersSrvcs, FundsSrvcs, ParticularsSrvcs, SupplyCategoriesSrvcs, OrganizationsSrvcs, ProjectsSrvcs) {
 
             var vm = this;
             vm.formData = formData.fund;
@@ -206,11 +230,35 @@
                 'fund_item_amount':''
             }];
 
-            ParticularsSrvcs.particulars({particularCode:''}).then (function (response) {
+            // ParticularsSrvcs.particulars({particularCode:''}).then (function (response) {
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.particulars = response.data.data;
+            //         console.log(vm.particulars)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
+
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
-                    vm.particulars = response.data.data;
-                    console.log(vm.particulars)
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            SupplyCategoriesSrvcs.SupplyCategories({supplyCategoryCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.supplyCategories = response.data.data;
+                    console.log(vm.supplyCategories)
                 }
             }, function (){ alert('Bad Request!!!') })
             
