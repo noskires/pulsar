@@ -235,17 +235,17 @@
                 console.log(data)
             }
 
-            vm.removePoItem = function(poItemCode){
-
-                PurchaseOrdersSrvcs.removePoItems({'po_item_code':poItemCode}).then (function (response) {
+            vm.removeUtilizationItem = function(utilizationItemCode){
+                alert('asdf')
+                UtilizationsSrvcs.removeUtilizationItems({'utilization_item_code':utilizationItemCode}).then (function (response) {
                     console.log(response.data)
                     if(response.data.status == 200)
                     {
-                        PurchaseOrdersSrvcs.poItems({poCode:vm.poCode, poItemCode:'', supplyCode:''}).then (function (response) {
+                        UtilizationsSrvcs.utilizationItems({utilizationCode:vm.utilizationCode, utilizationItemCode:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
-                                vm.poItems = response.data.data;
-                                // console.log(vm.poItems)
+                                vm.utilizationItems = response.data.data;
+                                console.log(vm.utilizationItems)
                             }
                         }, function (){ alert('Bad Request!!!') })
                     }

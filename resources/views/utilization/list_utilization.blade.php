@@ -178,7 +178,7 @@
                           <td><%utilizationItem.item_stock_unit%></td>
                           <td align="right"><%utilizationItem.item_quantity%></td> 
                           <td ng-if="!vm.formData.status">
-                            <a href="#" ng-click="vm.removePoItem(utilizationItem.utilization_item_code)"><code class="text-red">REMOVE</code></a>
+                            <a href="#" ng-click="vm.removeUtilizationItem(utilizationItem.utilization_item_code)"><code class="text-red">REMOVE</code></a>
                           </td>
                         </tr>
                       </tbody>

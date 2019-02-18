@@ -224,7 +224,7 @@ class UtilizationsController extends Controller {
     return $transaction;
   }
 
-  public function remove_po_items(Request $request){
+  public function remove_utilization_item(Request $request){
   
     $data = Input::post();
 
@@ -232,7 +232,7 @@ class UtilizationsController extends Controller {
     // try{
 
 
-        DB::table('purchase_order_items')->where('po_item_code', $data['po_item_code'])->delete();
+        DB::table('utilization_items')->where('utilization_item_code', $data['utilization_item_code'])->delete();
 
         return response()->json([
             'status' => 200,

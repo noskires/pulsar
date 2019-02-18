@@ -47,10 +47,10 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
-                removePoItems: function(data) {
+                removeUtilizationItems: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/purchase-order-item/remove',
+                        url: '/api/v1/utilization-item/remove',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
