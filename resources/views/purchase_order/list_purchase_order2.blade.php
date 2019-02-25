@@ -285,6 +285,17 @@
 
     </section>
 
+<script type="text/javascript">
+$(function () {
+
+$('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+
+});
+</script>
 
 <!-- MODAL CONTENTS -->
 <script type="text/ng-template" id="poInfo.modal"> 
@@ -439,16 +450,15 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
+  <script type="text/javascript">
+  $(function () {
+
+    $('.select2').select2();
+
+  //   $('#datepicker').datepicker({
+  //    autoclose: true
+  //   })
+  });
+  </script>
 </script>
 
-<script type="text/javascript">
-$(function () {
-
-  $('.select2').select2();
-
-//   $('#datepicker').datepicker({
-//    autoclose: true
-//   })
-  alert('a')
-});
-</script>

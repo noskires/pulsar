@@ -104,6 +104,18 @@
   </div>
 </section>
 
+<script type="text/javascript">
+$(function () {
+
+$('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+
+});
+</script>
+
 
 <!-- MODAL CONTENTS -->
 <script type="text/ng-template" id="Edit.modal">

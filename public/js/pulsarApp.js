@@ -591,8 +591,6 @@
                 templateUrl: 'purchase.order2.list.view'
             })
 
-
-
             .state('list-utilization', {
                 url: '/utilization/list',
                 controller: 'UtilizationsCtrl as uc',
@@ -675,3 +673,6 @@
             };
         };
 })();
+
+
+ 

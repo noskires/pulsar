@@ -16,7 +16,7 @@
             {
                 vm.poCode = $stateParams.poCode; 
 
-                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, supplierCode:'', status:0}).then (function (response) {
+                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', status:0}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.po = response.data.data[0];
@@ -49,7 +49,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            PurchaseOrdersSrvcs.pos({poCode:'', supplierCode:'', status:0}).then (function (response) {
+            PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.pos = response.data.data;

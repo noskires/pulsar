@@ -176,6 +176,17 @@
       </div>
 </section>
 
+<script type="text/javascript">
+$(function () {
+
+$('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+
+});
+</script>
 
 <script type="text/ng-template" id="jobOrderInfo2.modal">
 <div class="">

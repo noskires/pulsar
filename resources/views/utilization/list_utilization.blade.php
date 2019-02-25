@@ -37,7 +37,7 @@
             </div>
             <div class="col-sm-2">
 
-              <select style="width: 100%;" ng-model="uc.utilizationDetails.request_type">
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="uc.utilizationDetails.request_type">
                 <option value="">--Select Request Type--</option>
                 <option value="Office">Office</option>
                 <option value="Project">Project</option>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-sm-3">
 
-              <select style="width: 100%;" ng-model="uc.utilizationDetails.reference_code">
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="uc.utilizationDetails.reference_code">
                 <option value="">--Select--</option>
                 <option ng-if="uc.utilizationDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in uc.organizations"><%organization.org_name%></option>
                 <option ng-if="uc.utilizationDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in uc.projects"><%project.name%></option>
@@ -100,6 +100,19 @@
     </div>
   </div>
 </section>
+
+<script type="text/javascript">
+$(function () {
+
+$('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+
+});
+</script>
+
 <!-- MODAL CONTENTS -->
 <script type="text/ng-template" id="utilizationInfo.modal"> 
   <div>
@@ -189,58 +202,6 @@
             </div>
           </div>
 
-<!--           <div class="row">
-            <div class="col-md-12">
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <form ng-model="vm.formData">
-                      <h4><b>**Delivery Information</b></h4><br>
-                      <div class="form-group col-sm-12">
-                        <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
-                        <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.status">   
-                              <option value="">- - - Select Employee - - -</option>
-                              <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
-                                <% employee.fname + ' '+employee.lname%>
-                              </option>
-                          </select>
-                        </div>
-                        <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
-                        <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.status">   
-                              <option value="">- - - Select Employee - - -</option>
-                              <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
-                                <% employee.fname + ' '+employee.lname%>
-                              </option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group col-sm-12">
-                        <label class="col-sm-2 control-label">Date Received</label>
-                        <div class="col-sm-4">
-                        <div class="input-group date">
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received">
-                      </div></div>
-
-                        <label class="col-sm-2 control-label">Date Inspected</label>
-                        <div class="col-sm-4">
-                        <div class="input-group date">
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
-                      </div></div>
-                      </div>
-                          <div class="form-group" >
-                            <div class="form-group">
-                              <input type="button" ng-if="!vm.formData.status" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.updatePo(vm.formData)">
-                            </div>
-                          </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
         </div>
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
@@ -253,4 +214,15 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
+  <script type="text/javascript">
+  $(function () {
+
+    $('.select2').select2();
+
+  //   $('#datepicker').datepicker({
+  //    autoclose: true
+  //   })
+  });
+  </script>
+
 </script>

@@ -205,6 +205,19 @@
   <!-- /.box-body -->
 </div>
 </section>
+
+<script type="text/javascript">
+$(function () {
+
+$('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+
+});
+</script>
+
 <!-- MODAL POPUP -->
 
 <script type="text/ng-template" id="receiptInfo.modal">
@@ -325,6 +338,17 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
+
+   <script type="text/javascript">
+  $(function () {
+
+    $('.select2').select2();
+
+  //   $('#datepicker').datepicker({
+  //    autoclose: true
+  //   })
+  });
+  </script>
 </script>
 
 <script type="text/ng-template" id="receiptInfo2.modal">
@@ -364,4 +388,15 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
+ <script type="text/javascript">
+  $(function () {
+
+    $('.select2').select2();
+
+  //   $('#datepicker').datepicker({
+  //    autoclose: true
+  //   })
+  });
+  </script>
 </script>
