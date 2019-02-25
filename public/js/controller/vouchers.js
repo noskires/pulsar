@@ -5,8 +5,8 @@
         .controller('VouchersCtrl', VouchersCtrl)
         .controller('VouchersModalInstanceCtrl', VouchersModalInstanceCtrl)
 
-        VouchersCtrl.$inject = ['$stateParams', 'VouchersSrvcs', 'ParticularsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', 'FundsSrvcs', '$window', '$uibModal'];
-        function VouchersCtrl($stateParams, VouchersSrvcs, ParticularsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, FundsSrvcs, $window, $uibModal){
+        VouchersCtrl.$inject = ['$stateParams', 'VouchersSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'ParticularsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', 'FundsSrvcs', 'SupplyCategoriesSrvcs', '$window', '$uibModal'];
+        function VouchersCtrl($stateParams, VouchersSrvcs, OrganizationsSrvcs, ProjectsSrvcs, ParticularsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, FundsSrvcs, SupplyCategoriesSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
             vm.payeeType = "SUPPLIER";
@@ -75,11 +75,29 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            
+            SupplyCategoriesSrvcs.SupplyCategories({supplyCategoryCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.supplyCategories = response.data.data;
+                    console.log(vm.supplyCategories)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
-
-            
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             vm.selectPayeeType = function(payeeType){
                 // alert(payeeType)
@@ -149,7 +167,16 @@
                 VouchersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('voucher/list');
+                        // vm.routeTo('voucher/list');
+                        VouchersSrvcs.vouchers({voucherCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.vouchers = response.data.data;
+                                console.log(vm.vouchers)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        
+                        $state.go('list-voucher');
                     }
                     else {
                         alert(response.data.message);
@@ -251,6 +278,33 @@
                         vm.routeTo('voucher/list');
                     }
                     console.log(response.data)
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.removeVoucherItem = function(voucherItemCode){
+
+                VouchersSrvcs.removeVoucherItems({'voucher_item_code':voucherItemCode}).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        vm.voucherItemGrandTotal = 0;
+
+                        VouchersSrvcs.voucherItems({voucherCode:vm.formData.voucher_code, voucherItemCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.voucherItems = response.data.data;
+                                console.log(vm.voucherItems)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                        ReceiptSrvcs.receipts({receiptCode:'', payeeType:vm.formData.payee_type, payee:vm.formData.payee, voucherCode:vm.formData.voucher_code}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.receipts = response.data.data;
+                                console.log(vm.receipts)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                    }
                 }, function (){ alert('Bad Request!!!') })
             }
 

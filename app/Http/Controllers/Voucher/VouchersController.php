@@ -120,7 +120,7 @@ class VouchersController extends Controller {
 
 		$data['payeeType']   = $request->input('payeeType');
 		$data['payee'] = $request->input('payee');
-		$data['fundItemCode'] = $request->input('fundItemCode');
+		$data['fundItemCode'] = $request->input('fund_code');
 		$data['description'] = $request->input('description');
 		$data['vatPayee'] = $request->input('vatPayee');
 		$data['otherTaxes'] = $request->input('otherTaxes');
@@ -130,6 +130,8 @@ class VouchersController extends Controller {
 		$data['checkNumber'] = $request->input('checkNumber');
 		$data['checkDate'] = date('Y-m-d', strtotime($request->input('checkDate')));
 		$data['bankCode'] = $request->input('bankCode');
+		$data['cost_center_code'] = $request->input('cost_center_code');
+		$data['payment_type'] = $request->input('payment_type');
 
 		$transaction = DB::transaction(function($data) use($data){
 		// try{
@@ -139,11 +141,13 @@ class VouchersController extends Controller {
 			    $voucherCode = (str_pad(($voucher->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				$voucher->voucher_code = "DV-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$voucherCode;
+				$voucher->voucher_code = "DV-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$voucherCode;
+				$voucher->cost_center_code = $data['cost_center_code'];
 				$voucher->payee_type = $data['payeeType'];
 				$voucher->payee = $data['payee'];
 				$voucher->fund_item_code = $data['fundItemCode'];
 				$voucher->description = $data['description'];
+				$voucher->payment_type = $data['payment_type'];
 				$voucher->amount = 0;
 				$voucher->save();
 
@@ -186,7 +190,6 @@ class VouchersController extends Controller {
           ->leftjoin('voucher_items as vi','vi.voucher_code','=','v.voucher_code')
           ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')
           ->first();
-
 
           $totalReceiptAmount = $voucher->total_amount;
 
@@ -276,7 +279,8 @@ class VouchersController extends Controller {
           $voucherItemCode = (str_pad(($vc->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
           ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-          $vc->voucher_item_code = "DVITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$voucherItemCode;
+          // $vc->voucher_item_code = "DVITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$voucherItemCode;
+          $vc->voucher_item_code = "DVITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$voucherItemCode;
 
           $vc->voucher_code     = $data[$i]['voucher_code'];
           $vc->receipt_code     = $data[$i]['receipt_code'];
@@ -288,6 +292,35 @@ class VouchersController extends Controller {
             'status' => 200,
             'data' => 'null',
             'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+
+  public function remove_voucher_item(Request $request){
+  
+    $data = Input::post();
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+    	VoucherItem::where('voucher_item_code', $data['voucher_item_code'])->firstOrFail()->delete();
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully deleted.'
         ]);
 
       // }

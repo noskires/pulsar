@@ -13,13 +13,10 @@
 <section class="content">
   <div class="row">
     <div id="button-top" class="col-md-12"> 
-<!-- BUTTONS -->
-      <button class="btn btn-primary" data-toggle="collapse" data-target="#filter" data-parent="#btn-top">
-          <span class="glyphicon glyphicon-refresh"></span> Generate
-      </button> <br>
+ 
 
 <!-- FILTER DISPLAY -->
-      <div id="filter" class="collapse"><br>
+      <div id="filter" ><br>
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">

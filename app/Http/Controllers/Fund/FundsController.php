@@ -137,7 +137,14 @@ class FundsController extends Controller {
                 'fi.cost_center_code',
                 'f.fund_name',
                 'supply_category.supply_category_name',
-                'v.voucher_code'
+                'v.voucher_code',
+                DB::raw('CASE 
+					WHEN (SELECT count(org_code) FROM organizations WHERE org_code=fi.cost_center_code) = 1 
+						THEN (SELECT org_name FROM organizations WHERE org_code=fi.cost_center_code)
+					ELSE 
+						(SELECT CONCAT(name," (",code,")")  FROM projects WHERE project_code=fi.cost_center_code)
+					END AS cost_center_name'
+			   	)
               )
             ->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
             ->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','fi.supply_category_code')

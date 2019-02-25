@@ -567,6 +567,12 @@
                 templateUrl: 'purchase.order.list.view'
             })
 
+            .state('list-po-office', {
+                url: '/purchase-orders-office/list',
+                controller: 'PurchaseOrdersCtrl as poc',
+                templateUrl: 'purchase.order.list.office.view'
+            })
+
             .state('list-po2', {
                 url: '/purchase-orders2/list',
                 controller: 'PurchaseOrdersCtrl as poc',

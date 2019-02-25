@@ -169,7 +169,7 @@
                       <thead>
                         <tr>
                           <th>Cost Center Code</th> 
-                          <!-- <th>Cost Center Name</th>  -->
+                          <th>Cost Center Name</th> 
                           <th width="25%">Particular</th>
                           <th width="25%">Amount</th>
                         </tr> 
@@ -178,6 +178,7 @@
                         <tr ng-repeat="fundItem in vm.fundItems"> 
                           <!-- <td><%fundItem.fund_name%></td> -->
                           <td><%fundItem.cost_center_code%></td>
+                          <td><%fundItem.cost_center_name%></td>
                           <td><%fundItem.supply_category_name%></td>
                           <td align="right"><%fundItem.fund_item_amount | number:2%></td>
                           <!-- <td>

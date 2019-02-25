@@ -89,6 +89,19 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            vm.selectPurchaseOrders = function(referenceCode){
+                // alert(referenceCode)
+
+                PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:referenceCode, supplierCode:'', status:0}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.pos = response.data.data;
+                        console.log(vm.pos)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+
+            }
+
             vm.newPoBtn = function(data){
                 console.log(data)
                 PurchaseOrdersSrvcs.save(data).then(function(response){
@@ -132,6 +145,23 @@
                     console.log(response.data);
                 });
             };
+
+            vm.printPurchaseOrderOfficeDetails = function(data){
+                console.log(data)
+                if(!data.request_type){
+                    alert('Please select request type!');
+                }
+                else if(!data.reference_code){
+                    alert('Please select reference nanme!');
+                }
+                else if(!data.purchase_order_code){
+                    alert('Please select Purchase Order Code!');
+                }
+                else{
+
+                    vm.url = 'purchase-order-office/report?purchase_order_code='+data.purchase_order_code+'&date_from='+data.date_from+'&date_to='+data.date_to;
+                }
+            }
 
             vm.toggle = function () {
                 vm.state = !vm.state;

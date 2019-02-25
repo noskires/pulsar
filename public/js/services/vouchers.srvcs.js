@@ -47,6 +47,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                removeVoucherItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/voucher-item/remove',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
             };
         }
 })();

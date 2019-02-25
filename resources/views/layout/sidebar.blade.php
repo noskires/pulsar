@@ -121,16 +121,16 @@
     </li>   
 
      <li class="treeview">
-      <a href="#">
+      <a href="#" ui-sref="list-voucher">
         <i class="fa fa-credit-card"></i> <span> Vouchers</span>
-        <span class="pull-right-container">
+        <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        </span> -->
       </a>
-      <ul class="treeview-menu">
+     <!--  <ul class="treeview-menu">
         <li><a href="#" ui-sref="list-voucher"><i class="fa fa-list-ul"></i> List of Vouchers</a></li>
         <li><a href="#" ui-sref="voucher-create"><i class="fa fa-plus"></i> Create a Voucher</a></li>
-      </ul>
+      </ul> -->
     </li>
     <li class="header">DATABASE</li>
     <li class="treeview">
@@ -201,6 +201,7 @@
         <li><a href="#"><i class="fa fa-paperclip"></i>P.O. Reports</a></li>
         <li><a href="#"><i class="fa fa-paperclip"></i>Project Reports</a></li>
         <li><a href="#"><i class="fa fa-paperclip"></i>Status Reports</a></li>
+        <li><a href="#" ui-sref="list-po-office"><i class="fa fa-paperclip"></i>Purchase Order Reports</a></li>
         <li><a href="#" ui-sref="list-utilization-office"><i class="fa fa-paperclip"></i>Utilization Reports</a></li>
         <li><a href="#"><i class="fa fa-paperclip"></i>Other Reports</a></li>
       </ul>

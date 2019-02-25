@@ -61,7 +61,7 @@ class RequisitionReportController extends Controller {
 		// ->leftjoin('job_orders as jo','insbypos.position_code','=','insby.position_code')
 		->where('rs.requisition_slip_code', $requisitionSlipCodeis)
 		->first();
-
+		
 		return $data;
 	}
 

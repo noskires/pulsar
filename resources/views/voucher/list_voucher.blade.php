@@ -10,6 +10,150 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
+        <div id="button-top" class="col-md-8"> 
+<!-- BUTTONS -->
+          <button class="btn btn-primary" data-toggle="collapse" data-target="#create-voucher" data-parent="#btn-top">
+              <span class="glyphicon glyphicon-plus"></span> Create Voucher
+          </button> &nbsp;&nbsp;&nbsp;
+          <button class="btn btn-primary" data-toggle="collapse" data-target="#filter" data-parent="#btn-top">
+              <span class="glyphicon glyphicon-refresh"></span> Filter Display
+          </button> <br>
+
+<!-- CREATE VOUCHER -->
+          <div id="create-voucher" class="collapse"><br>
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Create Disbursement Voucher</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form id="from-unit" class="form-horizontal" role="form">
+              <div class="box-body">
+                <div class="form-group col-sm-12">
+                  <label for="dv-payee-name" class="col-sm-3 control-label">Payee Type</label>
+                  <div class="col-sm-9">
+
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.payeeType" ng-change="vc.selectPayeeType(vc.voucherDetails.payeeType)" ng-init="vc.voucherDetails.payeeType=vc.payeeType">
+                      <option selected="selected" value="">- - Select Type - -</option>
+                      <option value="EMPLOYEE">EMPLOYEE</option>
+                      <option value="SUPPLIER">SUPPLIER</option>
+                      <option value="BANK">BANK</option>
+                    </select>
+
+                  </div>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label for="dv-payee-name" class="col-sm-3 control-label">Payee Name</label>
+                  <div class="col-sm-9">
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.payee">
+                      <option selected="selected" value="" disabled="">- - Select Payee - -</option>
+                      <option ng-if="vc.payeeType=='EMPLOYEE'" value="<%employee.employee_code%>" ng-repeat="employee in vc.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>
+                      <option ng-if="vc.payeeType=='SUPPLIER'" value="<%supplier.supplier_code%>" ng-repeat="supplier in vc.suppliers"> <%supplier.supplier_name%> </option>
+                      <option ng-if="vc.payeeType=='BANK'" value="<%bank.bank_code%>" ng-repeat="bank in vc.banks"> <%bank.bank_name%> </option>
+                    </select> 
+                  </div>
+                </div>
+               
+                <div class="form-group col-sm-12">
+                  <label for="dv-desc" class="col-sm-3 control-label">Description</label>
+                  <div class="col-sm-9">
+                    <textarea class="col-sm-9 form-control" id="dv-desc" rows="2" ng-model="vc.voucherDetails.description"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="dv-payee-name" class="col-sm-3 control-label">Fund</label>
+                  <div class="col-sm-9">
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.fund_code" ng-change="vc.selectFund(vc.voucherDetails.fund_code)">
+                      <option value="" disabled="">- - Select Fund Source- -</option>
+                      <option value="<%fund.fund_code%>" ng-repeat="fund in vc.funds"> <%fund.fund_name%> </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="dv-payee-name" class="col-sm-3 control-label">Cost Center</label>
+                  <div class="col-sm-9">
+                    <select class="form-control select2" style="width: 100%;" ng-model="vc.voucherDetails.cost_center_code" required="">
+                      <option value="" disabled="">- - Select Cost Center - -</option>
+                      <option value="<%organization.org_code%>" ng-repeat="organization in vc.organizations"><%organization.org_name%></option>
+                      <option value="<%project.project_code%>" ng-repeat="project in vc.projects"> <%project.cost%> - <%project.name%></option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="dv-particulars" class="col-sm-3 control-label">Particulars</label>
+                  <div class="col-sm-9">
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.supply_category_code" ng-init="parentIndex = $index">
+                      <option value="" disabled="">- - Select Particular - -</option>
+                      <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in vc.supplyCategories"><%supplyCategory.supply_category_name%></option>
+                    </select>
+                  </div>
+                </div>
+
+                 <div class="form-group col-sm-12">
+                  <label for="dv-particulars" class="col-sm-3 control-label">Payment Type</label>
+                  <div class="col-sm-9">
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.payment_type" ng-init="parentIndex = $index">
+                      <option value="" disabled="">- - Select Payment Type - -</option>
+                      <option value="CHECK">Check</option>
+                      <option value="CASH">Cash</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">           
+                  <div class="col-sm-8"></div>
+                  <div class="col-sm-4">
+                  <button class="btn btn-large btn-primary btn-block" data-toggle="confirmation"
+                  data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+                  data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+                  data-title="Confirm data entry." data-content="Are you sure?" ng-click="vc.newVoucher(vc.voucherDetails)"> CONFIRMATION
+                  </button></div></div>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+          </div>
+
+<!-- FILTER DISPLAY -->
+          <div id="filter" class="collapse"><br>
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Filter Displayed Data</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <!-- form start -->
+            <form id="from-unit" class="form-horizontal" role="form">
+              <div class="form-group col-sm-12"">
+                <div class="col-sm-3">
+                <select class="form-control select2" style="width: 100%;" required="">
+                <option selected="selected" value="0">Select Payee Type</option>
+                <option value="1">SUPPLIER</option>
+                <option value="2">BANK</option>
+                <option value="3">EMPLOYEE</option>
+                </select>
+                </div>
+                <div class="col-sm-4"> 
+                <button type="button" class="btn btn-default" id="daterange-btn" style="width: 100%;">
+                  <span><i class="fa fa-calendar"></i> Date range picker </span> <i class="fa fa-caret-down"></i>
+                </button>
+                </div>
+                <div class="col-sm-4">
+                  <button type="button" class="btn btn-default btn-flat">Filter Display</button></div>
+              </div>
+            </form>
+          </div>
+          </div>
+          <!-- /.box -->
+          </div>
+        </div>
+
+  <div class="row">
     <div class="col-sm-12">
   <div class="box">
     <!-- form start -->
@@ -65,7 +209,7 @@
               <td><%voucher.payee_type%></td>
               <td><%voucher.payee_text%></td>
               <td><%voucher.fund_name%></td>
-              <td><%voucher.particular_name%></td>
+              <td><%voucher.supply_category_code%></td>
               <td><%voucher.description%></td>
               <td align="right"><%voucher.amount | number:2%></td>
               <td><%voucher.check_number%></td>
@@ -139,7 +283,7 @@
                   <td align="right" ng-init="vm.voucherItemGrandTotal = vm.voucherItemGrandTotal + voucherItem.amount"><%voucherItem.amount | number:2%></td>
                   <td>
                     <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->
-                    <a href="#" data-toggle="modal" data-target="#modal-delete"><code class="text-red">REMOVE</code></a>
+                    <a href="#" data-toggle="modal" ng-click="vm.removeVoucherItem(voucherItem.voucher_item_code)"><code class="text-red">REMOVE</code></a>
                   </td>
                 </tr>
                 <tr>

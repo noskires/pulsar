@@ -33,6 +33,35 @@ class PurchaseOrderReportController extends Controller {
 
 	}
 
+ 
+
+	public function export_office(Request $request){
+
+		$data = array(
+			'purchase_order_code'=>$request->input('purchase_order_code'),
+			// 'reference_code'=>$request->input('reference_code'),
+			// 'request_type'	=>$request->input('request_type'),
+			'date_from'		=>$request->input('date_from'),
+			'date_to'		=>$request->input('date_to'),
+		);
+
+		$data['purchase_order_items']        = $this->purchase_order_items_office($data['purchase_order_code'], $data['date_from'], $data['date_to']);
+
+
+		$data['purchase_order']        = $this->purchase_orders_office($data['purchase_order_code']);
+
+		if($data['purchase_order']->request_type==="Office"){
+			$data['office'] 				= $this->office($data['purchase_order']->reference_code);
+		}else{
+			$data['office'] 				= $this->project($data['purchase_order']->reference_code);
+		}
+
+		// return $data;
+
+		$pdf = PDF::loadView('purchase_order.report_purchase_order_office', $data);
+		return $pdf->stream('purchase_order.report_purchase_order_office.pdf');
+	}
+
 	public function purchase_order($purchaseOrderCode){
 		$data = DB::table('purchase_orders AS po')
 				->select(
@@ -227,6 +256,133 @@ class PurchaseOrderReportController extends Controller {
 
 		// $data = DB::table('receipt_items as receipt_item')->where('receipt_item.receipt_code', $receiptCode)->get();
 		return $data;
+	}
+
+
+
+	// PO Monitoring Reports //
+
+	public function purchase_orders_office($purchase_order_code){
+
+		$data = DB::table('purchase_orders as purchase_order')
+		->select(
+ 
+			'purchase_order.po_code',
+			'purchase_order.request_type',
+			'purchase_order.reference_code',
+			'purchase_order.supplier_code',
+			'purchase_order.received_by',
+			'purchase_order.date_received',
+			'purchase_order.inspected_by',
+			'purchase_order.date_inspected'
+		)
+		->where('purchase_order.po_code', $purchase_order_code)
+		
+		->first();
+
+		return $data;
+	}
+
+	public function office($reference_code){
+		$data = DB::table('organizations as organization')
+		->select(
+			'municipality.municipality_text',
+			'municipality.municipality_code',
+			'province.province_text',
+			'province.province_code',
+			'region.region_text_long',
+			'region.region_text_short',
+			'region.region_code',
+			DB::raw('CONCAT(organization.org_name," (",organization.org_code,")") AS reference_name')
+		)
+		->leftjoin('municipalities as municipality','municipality.municipality_code','=', 'organization.municipality_code'
+		)
+        ->leftjoin('provinces as province','province.province_code','=','municipality.province_code')
+		->leftjoin('regions as region','region.region_code','=','province.region_code')
+		->where('organization.org_code', $reference_code)
+		->first();
+
+		return $data;
+	}
+
+	public function project($reference_code){
+		$data = DB::table('projects as project')
+		->select(
+
+			'municipality.municipality_text',
+			'municipality.municipality_code',
+			'province.province_text',
+			'province.province_code',
+			'region.region_text_long',
+			'region.region_text_short',
+			'region.region_code',
+			DB::raw('CONCAT(project.name," (",project.code,")") AS reference_name')
+		)
+		->leftjoin('municipalities as municipality','municipality.municipality_code','=', 'project.municipality_code'
+		)
+        ->leftjoin('provinces as province','province.province_code','=','municipality.province_code')
+		->leftjoin('regions as region','region.region_code','=','province.region_code')
+		->where('project.project_code', $reference_code)
+		->first();
+
+		return $data;
+	}
+
+
+	public function purchase_order_items_office($purchase_order_code, $from, $to){
+
+		// $from = "2019-01-01";
+		// $to = "2019-12-31";
+
+		$from 	= date('Y-m-d', strtotime($from)); 
+		$to 	= date('Y-m-d', strtotime($to)); 
+
+		$data = DB::table('purchase_order_items as purchase_order_item')
+		->select(
+			'purchase_order.po_code',
+			'purchase_order.requisition_slip_code',
+			'purchase_order_item.supply_code',
+			'supply.supply_name',
+			'supply.stock_unit',
+			'supply.description',
+			'supply.category_code',
+			'supply_category.supply_category_name',
+			DB::raw("CAST(COALESCE(SUM(purchase_order_item.item_quantity), 0) as INT) AS total_item_quantity_po"),
+
+			DB::raw("(SELECT CAST(COALESCE(SUM(receipt_items.receipt_item_quantity), 0) AS INT) 
+					FROM receipts, receipt_items 
+					WHERE receipts.receipt_code = receipt_items.receipt_code 
+					AND Date(receipt_items.created_at) BETWEEN '$from' AND '$to'
+					
+					AND receipts.purchase_order_code = purchase_order.po_code
+					AND receipt_items.receipt_item_supply_code = purchase_order_item.supply_code)
+					AS total_item_quantity_receipt"),
+
+			DB::raw("(SELECT CAST(COALESCE(SUM(requisition_slips_items.item_quantity), 0) AS INT) 
+					FROM requisition_slips, requisition_slips_items 
+					WHERE requisition_slips.requisition_slip_code = requisition_slips_items.requisition_slip_code 
+					AND Date(requisition_slips_items.created_at) BETWEEN '$from' AND '$to'
+					AND requisition_slips.date_received IS NOT NULL
+					AND requisition_slips.received_by IS NOT NULL
+					AND requisition_slips.date_inspected IS NOT NULL
+					AND requisition_slips.inspected_by IS NOT NULL
+					AND requisition_slips.requisition_slip_code = purchase_order.requisition_slip_code
+					AND requisition_slips_items.supply_code = purchase_order_item.supply_code)
+					AS total_item_quantity_ris")
+		)
+		->leftjoin('purchase_orders as purchase_order','purchase_order.po_code','=','purchase_order_item.po_code')
+		->leftjoin('receipts as receipt','receipt.purchase_order_code','=','purchase_order.po_code')
+		->leftjoin('receipt_items as receipt_item','receipt_item.receipt_code','=','receipt.receipt_code')
+		->leftjoin('supplies as supply','supply.supply_code','=','purchase_order_item.supply_code')
+		->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','supply.category_code')
+		->where('purchase_order_item.po_code', $purchase_order_code)
+ 
+		->groupBy('purchase_order.po_code', 'purchase_order_item.supply_code', 'purchase_order.requisition_slip_code', 'supply.supply_name', 'supply.stock_unit', 'supply.description', 'supply.category_code', 'supply_category.supply_category_name')
+
+
+		->get();
+
+		return $data->groupBy('supply_category_name');
 	}
 
 

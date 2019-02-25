@@ -21,6 +21,7 @@ class PurchaseOrdersController extends Controller {
 
 		$data = array(
 			'poCode'=>$request->input('poCode'),
+			'referenceCode'=>$request->input('referenceCode'),
 			'supplierCode'=>$request->input('supplierCode'),
 			'status'=>$request->input('status'),
 		);
@@ -66,6 +67,10 @@ class PurchaseOrdersController extends Controller {
 
 		if ($data['poCode']){
 			$pos = $pos->where('po.po_code', $data['poCode']);
+		}
+
+		if ($data['referenceCode']){
+			$pos = $pos->where('po.reference_code', $data['referenceCode']);
 		}
 
 		if ($data['supplierCode']){

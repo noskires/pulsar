@@ -297,12 +297,15 @@ Route::get('/voucher/list/{voucherCode}','Voucher\VouchersController@index');
 
 Route::post('/api/v1/voucher/save','Voucher\VouchersController@save');
 Route::post('/api/v1/voucher-items/save','Voucher\VouchersController@save_voucher_items'); 
+Route::post('/api/v1/voucher-item/remove','Voucher\VouchersController@remove_voucher_item');
 Route::post('/api/v1/voucher/update','Voucher\VouchersController@update');
 
 Route::get('/api/v1/vouchers','Voucher\VouchersController@vouchers');
 Route::get('/api/v1/voucher-items','Voucher\VouchersController@voucher_items');
 
-Route::get('/api/v1/sample-voucher','Voucher\VouchersController@sample');
+
+
+// Route::get('/api/v1/sample-voucher','Voucher\VouchersController@sample');
 
 /*
 |--------------------------------------------------------------------------
@@ -404,9 +407,11 @@ Route::get('/api/v1/are-items','Are\AresController@areItems');
 Route::get('/purchase-order/new','PurchaseOrdersController@index');
 Route::get('/purchase-orders/list','PurchaseOrdersController@index');
 Route::get('/purchase-orders2/list','PurchaseOrdersController@index');
+Route::get('/purchase-orders-office/list','PurchaseOrdersController@index');
 Route::get('/purchase-order/list/{poCode}','PurchaseOrdersController@index');
 Route::get('/purchase-order2/list/{poCode}','PurchaseOrdersController@index');
 Route::get('/purchase-order/report/{poCode}', 'PurchaseOrderReportController@export');
+Route::get('/purchase-order-office/report', 'PurchaseOrderReportController@export_office');
 
 /*
 |--------------------------------------------------------------------------
