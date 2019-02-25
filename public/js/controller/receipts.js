@@ -167,7 +167,7 @@
 
             vm.selectPayee = function(payeeType, supplierCode){
                 // alert(payee)
-                PurchaseOrdersSrvcs.pos({poCode:'', supplierCode:supplierCode, status:2}).then (function (response) { //get all open po status
+                PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:supplierCode, status:2}).then (function (response) { //get all open po status
                     if(response.data.status == 200)
                     {
                         vm.pos = response.data.data;
