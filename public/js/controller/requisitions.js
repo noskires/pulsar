@@ -298,6 +298,15 @@
                             {
                                 vm.requisitions = response.data.data;
                                 console.log(vm.requisitions)
+
+                                vm.risDetails = {
+                                    'reference_code':'',
+                                    'date_requested':'',
+                                    'date_needed':'',
+                                    'request_type':false,
+                                    'requesting_employee':false,
+                                    'old_reference':''
+                                };
                             }
                         }, function (){ alert('Bad Request!!!') })
                                     // vm.routeTo('requisition2/list');

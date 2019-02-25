@@ -182,7 +182,7 @@ class PurchaseOrdersController extends Controller {
 		$data = Input::post();
 
 		$transaction = DB::transaction(function($data) use($data){
-		// try{
+		try{
 				$po = new PurchaseOrder;
 
 				$poCode 				= (str_pad(($po->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
@@ -202,15 +202,15 @@ class PurchaseOrdersController extends Controller {
 				    'data' => 'null',
 				    'message' => 'Successfully saved.'
 				]);
-			// }
-			// catch (\Exception $e) 
-			// {
-			//   	return response()->json([
-			// 	    'status' => 500,
-			// 	    'data' => 'null',
-			// 	    'message' => 'Error, please try again!'
-			// 	]);
-			// }
+			}
+			catch (\Exception $e) 
+			{
+			  	return response()->json([
+				    'status' => 500,
+				    'data' => 'null',
+				    'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;

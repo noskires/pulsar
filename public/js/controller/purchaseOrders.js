@@ -5,8 +5,8 @@
         .controller('PurchaseOrdersCtrl', PurchaseOrdersCtrl)
         .controller('PurchaseOrdersModalInstanceCtrl', PurchaseOrdersModalInstanceCtrl)
 
-        PurchaseOrdersCtrl.$inject = ['$stateParams', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'RequisitionsSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
-        function PurchaseOrdersCtrl($stateParams, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, RequisitionsSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window, $uibModal){
+        PurchaseOrdersCtrl.$inject = ['$stateParams', '$state', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'RequisitionsSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
+        function PurchaseOrdersCtrl($stateParams, $state, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, RequisitionsSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -107,15 +107,13 @@
                 PurchaseOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        PurchaseOrdersSrvcs.pos({poCode:'', supplierCode:''}).then (function (response) {
+                        PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.pos = response.data.data;
                                 console.log(vm.pos)
                             }
                         }, function (){ alert('Bad Request!!!') })
-                        // vm.ok();
-                        // vm.state = false;
                     }
                     else {
                         alert(response.data.message);
@@ -129,15 +127,32 @@
                 PurchaseOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        PurchaseOrdersSrvcs.pos({poCode:'', supplierCode:''}).then (function (response) {
+                        PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.pos = response.data.data;
-                                console.log(vm.pos)
+                                // vm.routeTo("/purchase-orders2/list")
+                                // alert('aa')
+                                vm.poDetails = {
+                                    'reference_code':'',
+                                    'date_requested':'',
+                                    'request_type':false,
+                                    'requisition_slip_code':false,
+                                    'supplier_code':false,
+                                    'requesting_employee':false,
+                                    'old_reference':''
+                                };
+
+                                // vm.poDetails.request_type=false;
+                                // $('.select2').val('')
+
+                                // vm.poDetails.$setPristine();
+                                // vm.form_po.$setPristine();
+                                // vm.form_po.$setUntouched();
+                                // console.log(vm.pos)
+                                $state.go('list-po2');
                             }
                         }, function (){ alert('Bad Request!!!') })
-                        // vm.ok();
-                        // vm.state = false;
                     }
                     else {
                         alert(response.data.message);

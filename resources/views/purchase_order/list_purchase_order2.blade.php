@@ -17,7 +17,7 @@
           <div id="create-rs" class="collapse rs">
             <div class="panel panel-default">
               <div class="panel-body">
-            <form class="form-horizontal" id="">
+            <form class="form-horizontal" id="" name="form_po" ng-model="form_po">
               <div class="box-body">
                 <div class="form-group col-sm-12">
                   <label class="col-sm-2 control-label">Request Date</label>
@@ -29,7 +29,7 @@
                   </div>
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
                   <div class="col-sm-4">
-                    <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.request_type">
+                    <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.request_type" required="">
                       <option value="">--Select Request Type--</option>
                       <option value="Office">Office</option>
                       <option value="Project">Project</option>
