@@ -337,6 +337,11 @@ class PurchaseOrderReportController extends Controller {
 		$from 	= date('Y-m-d', strtotime($from)); 
 		$to 	= date('Y-m-d', strtotime($to)); 
 
+		// AND Date(requisition_slips_items.created_at) BETWEEN '$from' AND '$to'
+		// AND Date(receipt_items.created_at) BETWEEN '$from' AND '$to'
+		// ->leftjoin('receipt_items as receipt_item','receipt_item.receipt_code','=','receipt.receipt_code')
+		// ->leftjoin('receipts as receipt','receipt.purchase_order_code','=','purchase_order.po_code')
+
 		$data = DB::table('purchase_order_items as purchase_order_item')
 		->select(
 			'purchase_order.po_code',
@@ -347,21 +352,20 @@ class PurchaseOrderReportController extends Controller {
 			'supply.description',
 			'supply.category_code',
 			'supply_category.supply_category_name',
+
 			DB::raw("CAST(COALESCE(SUM(purchase_order_item.item_quantity), 0) as INT) AS total_item_quantity_po"),
 
 			DB::raw("(SELECT CAST(COALESCE(SUM(receipt_items.receipt_item_quantity), 0) AS INT) 
 					FROM receipts, receipt_items 
 					WHERE receipts.receipt_code = receipt_items.receipt_code 
-					AND Date(receipt_items.created_at) BETWEEN '$from' AND '$to'
-					
-					AND receipts.purchase_order_code = purchase_order.po_code
-					AND receipt_items.receipt_item_supply_code = purchase_order_item.supply_code)
-					AS total_item_quantity_receipt"),
+					AND receipts.purchase_order_code = purchase_order.po_code 
+					AND receipt_items.receipt_item_supply_code = purchase_order_item.supply_code) 
+					AS total_item_quantity_receipt"), 
 
 			DB::raw("(SELECT CAST(COALESCE(SUM(requisition_slips_items.item_quantity), 0) AS INT) 
 					FROM requisition_slips, requisition_slips_items 
 					WHERE requisition_slips.requisition_slip_code = requisition_slips_items.requisition_slip_code 
-					AND Date(requisition_slips_items.created_at) BETWEEN '$from' AND '$to'
+					
 					AND requisition_slips.date_received IS NOT NULL
 					AND requisition_slips.received_by IS NOT NULL
 					AND requisition_slips.date_inspected IS NOT NULL
@@ -369,10 +373,9 @@ class PurchaseOrderReportController extends Controller {
 					AND requisition_slips.requisition_slip_code = purchase_order.requisition_slip_code
 					AND requisition_slips_items.supply_code = purchase_order_item.supply_code)
 					AS total_item_quantity_ris")
+
 		)
 		->leftjoin('purchase_orders as purchase_order','purchase_order.po_code','=','purchase_order_item.po_code')
-		->leftjoin('receipts as receipt','receipt.purchase_order_code','=','purchase_order.po_code')
-		->leftjoin('receipt_items as receipt_item','receipt_item.receipt_code','=','receipt.receipt_code')
 		->leftjoin('supplies as supply','supply.supply_code','=','purchase_order_item.supply_code')
 		->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','supply.category_code')
 		->where('purchase_order_item.po_code', $purchase_order_code)
