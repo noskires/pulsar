@@ -72,7 +72,7 @@
                   </div>
                   <label class="col-sm-2 control-label">Receipt Type</label>
                   <div class="col-sm-4">
-                    <select class="form-control select2" required="" ng-model="rc.receiptDetails.receiptType">
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="rc.receiptDetails.receiptType">
                       <option selected="selected" value="0">- - select type - -</option>
                       <option ng-value="receiptType.receipt_type_code" ng-repeat="receiptType in rc.receiptTypes"><%receiptType.receipt_type_name +" ("+ receiptType.receipt_type_code+")"%> </option>
                     </select>
@@ -87,22 +87,15 @@
                       <option ng-value="po.po_code" ng-repeat="po in rc.pos"> <%po.po_code%> </option>
                     </select> 
                   </div>
-                  <label for="rcpt-amount" class="col-sm-2 control-label">Amount*</label>
+                  <label for="rcpt-amount" class="col-sm-2 control-label">Remarks</label>
                   <div class="col-sm-4">
                     <div class="input-group date">
-                    <span class="input-group-addon" style="font-size: 20px;">₱</span>
-                      <input type="text" class="form-control" id="rcpt-amount" placeholder="" required="" ng-model="rc.receiptDetails.amount">
+                      <textarea class="col-sm-12 form-control" id="rcpt-remarks" rows="2" ng-model="rc.receiptDetails.remarks"></textarea>
                     </div>
                   </div>
                 </div>
 
-                <div class="form-group col-sm-12">
-                  <div class="col-sm-6"></div>
-                  <label for="supplydescription" class="col-sm-2 control-label">Remarks</label>
-                  <div class="col-sm-4">
-                    <textarea class="col-sm-12 form-control" id="rcpt-remarks" rows="2" ng-model="rc.receiptDetails.remarks"></textarea>
-                  </div>
-                </div>
+  
 
               </div>
               <!-- /.box-body -->

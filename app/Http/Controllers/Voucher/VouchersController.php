@@ -237,7 +237,6 @@ class VouchersController extends Controller {
                 'vi.voucher_item_code',
                 'r.receipt_number',
                 'r.receipt_date',
-                'r.amount',
                 'rt.receipt_type_name'
               )
               ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')
