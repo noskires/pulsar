@@ -27,15 +27,14 @@
         <!-- form start -->
         <form id="from-unit" class="form-horizontal" role="form">
           <div class="form-group col-sm-12"">
-            <div class="col-sm-2"> 
-      
+            <!-- <div class="col-sm-2"> 
               <input type="text" class="form-control pull-right" datepicker2 ng-model="poc.purchaseOrderDetails.date_from" required="" readonly="">
             </div>
             <div class="col-sm-2"> 
               <input type="text" class="form-control pull-right" datepicker2 ng-model="poc.purchaseOrderDetails.date_to" required="" readonly="">
-            </div>
+            </div> -->
 
-            <div class="col-sm-2">
+            <div class="col-sm-3">
               <select class="form-control select2" style="width: 100%;" ng-model="poc.purchaseOrderDetails.request_type" required="">
                 <option value="">--Select Request Type--</option>
                 <option value="Office">Office</option>
@@ -51,14 +50,14 @@
               </select>
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-3">
               <select class="form-control select2" style="width: 100%;" ng-model="poc.purchaseOrderDetails.purchase_order_code" required="">
                 <option value="">--Select PO--</option>
                 <option value="<%po.po_code%>" ng-repeat="po in poc.pos"><%po.po_code%></option>
               </select>
             </div>
           
-            <div class="col-sm-1">
+            <div class="col-sm-3">
               <a type="button" class="btn btn-primary btn-flat" ng-click="poc.printPurchaseOrderOfficeDetails(poc.purchaseOrderDetails)" target="_blank" ng-href="<%poc.url%>">Generate</a></div>
           </div>
         </form>

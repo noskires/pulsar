@@ -293,6 +293,7 @@ class PurchaseOrderReportController extends Controller {
 			'region.region_text_long',
 			'region.region_text_short',
 			'region.region_code',
+			DB::raw('"" as description'),
 			DB::raw('CONCAT(organization.org_name," (",organization.org_code,")") AS reference_name')
 		)
 		->leftjoin('municipalities as municipality','municipality.municipality_code','=', 'organization.municipality_code'
@@ -316,6 +317,7 @@ class PurchaseOrderReportController extends Controller {
 			'region.region_text_long',
 			'region.region_text_short',
 			'region.region_code',
+			'project.description',
 			DB::raw('CONCAT(project.name," (",project.code,")") AS reference_name')
 		)
 		->leftjoin('municipalities as municipality','municipality.municipality_code','=', 'project.municipality_code'

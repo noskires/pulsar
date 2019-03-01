@@ -20,8 +20,8 @@
     <div class="row">
       <div class="col-xs-12" style="border-bottom: 2px solid black;">
         <h2 class="page-header"><i class="fa fa-tags"></i> <img src="assets/dist/img/text-file.png" style="margin-bottom:-4px;width:30px;">
-          &nbsp;PO Monitoring REPORT<br></h2>
-        <span style="font-size:16px;letter-spacing:1px;">Period: {{$date_from}} - {{$date_to}}</span>
+          &nbsp;PO Monitoring Report<br></h2>
+        <span style="font-size:16px;letter-spacing:1px;"><b>Control Number: {{$purchase_order_code}}</b></span>
         <div style="position: absolute;top:1%;right:0;"> <img src="assets/dist/img/qrcode.png" style='width:100px;'> </div>
       </div>
       <!-- /.col -->
@@ -32,6 +32,9 @@
     <div class="row">
       <div class="col-md-12">
         Office/Project: <b>{{$office->reference_name}}</b> <br>
+        @if($office->description)
+        Description: <b>{{$office->description}}</b> <br>
+        @endif
         Location: <b>{{$office->municipality_text." ".$office->province_text." ".$office->region_text_long}}</b> <br>
         <br>
 
