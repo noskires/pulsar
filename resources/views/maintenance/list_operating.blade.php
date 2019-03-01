@@ -37,16 +37,16 @@
                   <th>Control Number</th>
                   <th>Date</th>
                   <th>Equipment Name</th>
-                  <th>Asset Tag</th>
+                  <th>Asset ID</th>
                   <th>Project Name</th>
                   <th>Project ID</th>
                   <th>Office Location</th>
                   <th>Activity/Remarks</th>
                   <th>Operating Time(HRS)</th>
-                  <th>Distance Travelled(KM/HR)</th>
-                  <th>Diesel</th>
-                  <th>Gas</th>
-                  <th>Oil</th>
+                  <th>Distance Travelled(KM)</th>
+                  <th>Diesel (L)</th>
+                  <th>Gas (L)</th>
+                  <th>Oil (L)</th>
                   <th>Loads</th>
                 </tr>
                 </thead>

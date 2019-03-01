@@ -104,16 +104,16 @@ class InsuranceController extends Controller {
 		$data = Input::post();
 
 		$transaction = DB::transaction(function($data) use($data){
-		try{
+		// try{
 				DB::table('insurance')
 				->where('insurance_code', $data['insurance_code'])
 				->update([
 					'insurance_co' => $data['insurance_co'],
 					'description' => $data['description'],
 					'policy_number' => $data['policy_number'],
-					'date_issued' => $data['date_issued'],
+					'date_issued' => date('Y-m-d', strtotime($data['date_issued'])),
 					'insurance_coverage' => $data['insurance_coverage'],
-					'expiration_date' => $data['expiration_date'],
+					'expiration_date' => date('Y-m-d', strtotime($data['expiration_date'])),
 					'applicable_premium' => $data['applicable_premium'],
 					'insurance_agent' => $data['insurance_agent'],
 					'email' => $data['email'],
@@ -126,15 +126,15 @@ class InsuranceController extends Controller {
 					'data' => 'null',
 					'message' => 'Successfully saved.'
 				]);
-			}
-			catch (\Exception $e)
-			{
-				return response()->json([
-					'status' => 500,
-					'data' => 'null',
-					'message' => 'Error, please try again!'
-				]);
-			}
+			// }
+			// catch (\Exception $e)
+			// {
+			// 	return response()->json([
+			// 		'status' => 500,
+			// 		'data' => 'null',
+			// 		'message' => 'Error, please try again!'
+			// 	]);
+			// }
 		});
 
 		return $transaction;

@@ -14,13 +14,13 @@
           <table datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
-              <th>Asset Tag</th>
-              <th>Equipment Name</th>
+              <th>Asset ID</th>
+              <th>Asset Name</th>
               <th>Total Operating Time(HRS)</th>
-              <th>Total Distance Travelled(KM/HR)</th>
-              <th>Total Diesel</th>
-              <th>Total Gas</th>
-              <th>Total Oil</th>
+              <th>Total Distance Travelled(KM)</th>
+              <th>Total Diesel (L)</th>
+              <th>Total Gas (L)</th>
+              <th>Total Oil (L)</th>
               <th>Total Loads</th>
             </tr>
             </thead>

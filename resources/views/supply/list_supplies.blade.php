@@ -18,9 +18,9 @@
           <th>Category</th>
           <th>Name</th>
           <th>Description</th>
-          <th>Supply Qty</th>
           <th>Supply Unit</th>
           <th>Re-order Level</th>
+          <th>Supply Qty</th>
           <th>Options</th>
         </tr>
         </thead>
@@ -30,9 +30,9 @@
           <td><%supply.supply_category_name%></td>
           <td><%supply.supply_name%></td>
           <td><%supply.description%></td> 
-          <td><%supply.quantity%></td> 
           <td><%supply.stock_unit_name%></td> 
           <td><%supply.re_order_level%></td> 
+          <td><%supply.quantity%></td> 
           <td><a href="#" ui-sref="edit-supply({supplyCode2:supply.supply_code})"><code class="text-white bg-blue">EDIT</code></a></td> 
         </tr>
         </tbody>

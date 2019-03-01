@@ -74,7 +74,7 @@
                 <div class="form-group col-sm-12">
                   
                 </div>
-                
+
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
@@ -193,10 +193,10 @@
             <tr>
               <th>Control No.</th>
               <th>Old Reference</th>
-              <th>Request Date</th>
+              <th>Date Requested</th>
               <th>Date Needed</th> 
               <th>Request Type</th>
-              <th>Reference </th>
+              <!-- <th>Reference </th> -->
               <th>Reference</th>
               <th>ID</th>
               <th>Asset</th>
@@ -214,7 +214,7 @@
               <td><%requisition.date_requested%></td>
               <td><%requisition.date_needed%></td>  
               <td><%requisition.request_type%></td>  
-              <td><%requisition.reference_code%></td>  
+              <!-- <td><%requisition.reference_code%></td>   -->
               <td><%requisition.reference_name%></td>  
               <td><%requisition.reference_id%></td>  
               <td><%requisition.asset_name%></td>  

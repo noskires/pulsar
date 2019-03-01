@@ -26,63 +26,75 @@ class RequisitionsController extends Controller {
     );
 
     $requisitions = DB::table('requisition_slips as rs')
-              ->select(
-                'rs.requisition_slip_code', 
-                'rs.date_requested',
-                'rs.date_needed',
-                'rs.description', 
-                'rs.request_type',
-                'rs.reference_code',
-                'rs.job_order_code',
-                'rs.received_by',
-                DB::raw('CONCAT(trim(CONCAT(receivedEmployee.lname," ",COALESCE(receivedEmployee.affix,""))),", ", COALESCE(receivedEmployee.fname,"")," ", COALESCE(receivedEmployee.mname,"")) as received_by_name'),
-                'rs.date_received',
-                'rs.inspected_by',
-                DB::raw('CONCAT(trim(CONCAT(inspectedEmployee.lname," ",COALESCE(inspectedEmployee.affix,""))),", ", COALESCE(inspectedEmployee.fname,"")," ", COALESCE(inspectedEmployee.mname,"")) as inspected_by_name'),
-                'rs.date_inspected',
-                'rs.old_reference',
-                'rs.created_at',
+      ->select(
+        'rs.requisition_slip_code', 
+        'rs.date_requested',
+        'rs.date_needed',
+        'rs.description', 
+        'rs.request_type',
+        'rs.reference_code',
+        'rs.job_order_code',
+        'rs.received_by',
+        DB::raw('CONCAT(trim(CONCAT(receivedEmployee.lname," ",COALESCE(receivedEmployee.affix,""))),", ", COALESCE(receivedEmployee.fname,"")," ", COALESCE(receivedEmployee.mname,"")) as received_by_name'),
+        'rs.date_received',
+        'rs.inspected_by',
+        DB::raw('CONCAT(trim(CONCAT(inspectedEmployee.lname," ",COALESCE(inspectedEmployee.affix,""))),", ", COALESCE(inspectedEmployee.fname,"")," ", COALESCE(inspectedEmployee.mname,"")) as inspected_by_name'),
+        'rs.date_inspected',
+        'rs.old_reference',
+        'rs.created_at',
 
-                DB::raw('CASE 
-                            WHEN rs.date_received IS NULL 
-                              OR rs.received_by IS NULL 
-                              OR rs.received_by = "1970-01-01" 
-                              OR rs.date_inspected IS NULL 
-                              OR rs.inspected_by IS NULL 
-                            THEN "OPEN"
-                            ELSE 
-                              "CLOSED" 
-                            END AS status'
-                ),
-                DB::raw('CASE 
-                            WHEN rs.request_type = "Office" 
-                              THEN (SELECT organizations.org_name FROM organizations WHERE organizations.org_code=rs.reference_code)
-                            WHEN rs.request_type = "Project" 
-                              THEN (SELECT projects.name AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
-                            ELSE 
-                              "" 
-                            END as reference_name'
-                ),
-                DB::raw('CASE    
-                            WHEN rs.job_order_code IS NOT NULL 
-                              THEN (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
-                            WHEN rs.request_type = "Office" 
-                              THEN (SELECT organizations.org_code FROM organizations WHERE organizations.org_code=rs.reference_code)
-                            WHEN rs.request_type = "Project" 
-                              THEN (SELECT projects.code AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
-                            WHEN rs.job_order_code IS NULL 
-                              THEN null
-                            END as reference_id'
-                ),
-                DB::raw('CASE 
-                            WHEN rs.job_order_code IS NULL 
-                              THEN null
-                            ELSE 
-                              (SELECT assets.name FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code) 
-                            END as asset_name'
-                )
+        DB::raw(
+          'CASE 
+            WHEN rs.date_received IS NULL 
+              OR rs.received_by IS NULL 
+              OR rs.received_by = "1970-01-01" 
+              OR rs.date_inspected IS NULL 
+              OR rs.inspected_by IS NULL 
+            THEN "OPEN"
+          ELSE 
+            "CLOSED" 
+          END AS status'
+        ),
+        DB::raw(
+          'CASE 
+            WHEN rs.request_type = "Office" 
+              THEN (SELECT organizations.org_name FROM organizations WHERE organizations.org_code=rs.reference_code)
+            WHEN rs.request_type = "Project" 
+              THEN (SELECT CONCAT(projects.code,"-",projects.name) AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
+          ELSE 
+              "" 
+          END as reference_name'
+        ),
+        // DB::raw(
+        //   'CASE    
+        //     WHEN rs.job_order_code IS NOT NULL 
+        //       THEN (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+        //     WHEN rs.request_type = "Office" 
+        //       THEN (SELECT organizations.org_code FROM organizations WHERE organizations.org_code=rs.reference_code)
+        //     WHEN rs.request_type = "Project" 
+        //       THEN (SELECT projects.code AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
+        //     WHEN rs.job_order_code IS NULL 
+        //       THEN null
+        //     END as reference_id'
+        // ),
+        DB::raw(
+          'CASE    
+            WHEN rs.job_order_code IS NOT NULL 
+              THEN (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+            WHEN rs.job_order_code IS NULL 
+              THEN null
+            END as reference_id'
+        ),
+        DB::raw(
+          'CASE 
+            WHEN rs.job_order_code IS NULL 
+              THEN null
+            ELSE 
+              (SELECT assets.name FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+            END as asset_name'
+        )
 
-              )
+      )
     ->leftjoin('employees as receivedEmployee','receivedEmployee.employee_code','=','rs.received_by')
     ->leftjoin('employees as inspectedEmployee','inspectedEmployee.employee_code','=','rs.inspected_by');
 
@@ -147,59 +159,6 @@ class RequisitionsController extends Controller {
     ])->setEncodingOptions(JSON_NUMERIC_CHECK);
 
   }
-
-  // public function job_orders(Request $request){
-
-  //   $data = array(
-  //     'joCode'=>$request->input('joCode'),
-  //   );
-
-  //   $job_orders = DB::table('job_orders as jo')
-  //           ->select(
-  //               'jo.job_order_code', 
-  //               'jo.job_order_date', 
-  //               'jo.request_purpose', 
-  //               'jo.date_started', 
-  //               'jo.date_completed', 
-  //               'jo.particulars',
-  //               DB::raw('datediff(jo.date_completed, jo.date_started) as work_duration'),
-  //               'jo.conducted_by', 
-  //               'jo.assessed_by', 
-  //               'jo.date_assessed', 
-  //               'jo.approved_by', 
-  //               'jo.date_approved', 
-  //               'jo.inspected_by', 
-  //               'jo.date_inspected', 
-  //               'jo.tested_by', 
-  //               'jo.accepted_by', 
-  //               'a.tag',
-  //               'a.name',
-  //               'e.employee_id',
-  //               DB::raw('concat(trim(concat(e.lname," ",e.affix)),", ", e.fName," ", e.mName) as employee_name'),
-  //               'p.project_code',
-  //               'm.municipality_code',
-  //               'm.municipality_text',
-  //               'rp.request_purpose as request_purpose_text'
-  //             )
-  //           -> leftjoin('Assets as a','a.tag','=','jo.asset_tag')
-  //           -> leftjoin('Projects as p','p.project_code','=','a.project_code')
-  //           -> leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
-  //           -> leftjoin('Employees as e','e.employee_id','=','a.assign_to')
-  //           -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
-
-  //   if ($data['joCode']){
-  //     $job_orders = $job_orders->where('job_order_code', $data['joCode']);
-  //   }
-
-  //   $job_orders = $job_orders->get();
-
-  //   return response()-> json([
-  //     'status'=>200,
-  //     'data'=>$job_orders,
-  //     'message'=>''
-  //   ])->setEncodingOptions(JSON_NUMERIC_CHECK);
-
-  // }
 
   public function save_asset(Request $request){
     

@@ -180,11 +180,11 @@
         <th>Receipt Type</th>
         <th>Receipt No.</th>
         <th>Receipt Date</th>
-        <th>Amount</th>
         <th>Payee Type</th>
         <th>Payee Name</th>
         <th>PO</th>
         <th>Voucher</th>
+        <th>Amount</th>
       </tr>
       </thead>
       <tbody>
@@ -193,11 +193,11 @@
         <td><%receipt.receipt_type_name%></td>
         <td><%receipt.receipt_number%></td>
         <td><%receipt.receipt_date%></td>
-        <td><%receipt.amount | number:2%></td>
         <td><%receipt.payee_type%></td>
         <td><%receipt.payee_text%></td>
         <td><%receipt.purchase_order_code%></td>
         <td><%receipt.voucher_code%></td>
+        <td align="right"><%receipt.total_receipt_item_Cost | number:2%></td>
       </tr> 
       </tbody>
     </table>

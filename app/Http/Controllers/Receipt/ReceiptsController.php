@@ -33,16 +33,19 @@ class ReceiptsController extends Controller {
                 'r.purchase_order_code',
                 'r.receipt_type',
                 'r.receipt_number',
-                'r.amount', 
+                // 'r.amount', 
                 'r.receipt_date',
                 'r.payee_type',
                 'r.payee',
                 'r.remarks',
                 'rt.receipt_type_name',
-                'vi.voucher_code'
+                'vi.voucher_code',
+                DB::raw("COALESCE(SUM(receipt_item.receipt_item_total), 0) as total_receipt_item_Cost")
+                 
               )
-               ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
-               ->leftjoin('voucher_items as vi','vi.receipt_code','=','r.receipt_code');
+              ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
+              ->leftjoin('receipt_items as receipt_item','r.receipt_code','=','receipt_item.receipt_code')
+              ->leftjoin('voucher_items as vi','vi.receipt_code','=','r.receipt_code');
 
     if ($data['receiptCode']){
       $receipts = $receipts->where('r.receipt_code', $data['receiptCode']);
@@ -63,6 +66,20 @@ class ReceiptsController extends Controller {
     if ($data['voucherCode']){
       $receipts = $receipts->whereNull('vi.voucher_code');
     }
+
+
+    $receipts = $receipts->groupBy(
+                'r.receipt_code', 
+                'r.purchase_order_code',
+                'r.receipt_type',
+                'r.receipt_number',
+                'r.receipt_date',
+                'r.payee_type',
+                'r.payee',
+                'r.remarks',
+                'rt.receipt_type_name',
+                'vi.voucher_code'
+              );
 
     $receipts = $receipts->get();
 
@@ -153,7 +170,7 @@ class ReceiptsController extends Controller {
     $data = array();
 
     $data['receiptDate'] = date('Y-m-d', strtotime($request->input('receiptDate')));
-    $data['amount']   = $request->input('amount');
+    // $data['amount']   = $request->input('amount');
     $data['purchaseOrderCode'] = $request->input('purchaseOrderCode');
     $data['receiptNumber'] = $request->input('receiptNumber');
     $data['receiptType'] = $request->input('receiptType');
@@ -176,7 +193,7 @@ class ReceiptsController extends Controller {
         // $receipt->receipt_code = "RCP-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$receiptCode;
         $receipt->receipt_code = "RCP-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
         $receipt->receipt_date = $data['receiptDate'];
-        $receipt->amount = $data['amount'];
+        // $receipt->amount = $data['amount'];
         $receipt->purchase_order_code = $data['purchaseOrderCode'];
         $receipt->receipt_number = $data['receiptNumber'];
         $receipt->receipt_type = $data['receiptType'];

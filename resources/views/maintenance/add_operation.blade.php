@@ -57,17 +57,17 @@
             <div class="form-group col-sm-12">
               <label for="operating" class="col-sm-3 control-label">Operating Time(HRS)</label>
               <div class="col-sm-3"><input type="text" class="form-control" id="operating" placeholder="" required="" ng-model="oc.operationDetails.operatingHours" awnum="price"></div>
-              <label for="distance" class="col-sm-3 control-label">Distance Travelled(KM/HR)</label>
+              <label for="distance" class="col-sm-3 control-label">Distance Travelled(KM)</label>
               <div class="col-sm-3"><input type="text" class="form-control" id="distance" placeholder="" required="" ng-model="oc.operationDetails.distanceTravelled" awnum="price"></div>
             </div>
             <div class="form-group col-sm-12">
-              <label for="gas" class="col-sm-3 control-label">Diesel Consumption</label>
+              <label for="gas" class="col-sm-3 control-label">Diesel Consumption (L)</label>
               <div class="col-sm-3"><input type="text" class="form-control" id="gas" placeholder="" required="" ng-model="oc.operationDetails.dieselConsumption" awnum="price"></div>
-              <label for="gas" class="col-sm-3 control-label">Gas Consumption</label>
+              <label for="gas" class="col-sm-3 control-label">Gas Consumption (L)</label>
               <div class="col-sm-3"><input type="text" class="form-control" id="gas" placeholder="" required="" ng-model="oc.operationDetails.gasConsumption" awnum="price"></div>
             </div>
             <div class="form-group col-sm-12">
-              <label for="oil" class="col-sm-3 control-label">Oil Consumption</label>
+              <label for="oil" class="col-sm-3 control-label">Oil Consumption (L)</label>
               <div class="col-sm-3"><input type="text" class="form-control" id="oil" placeholder="" required="" ng-model="oc.operationDetails.oilConsumption" awnum="price"></div>
               <label for="oil" class="col-sm-3 control-label">Number of Loads</label>
               <div class="col-sm-3"><input type="text" class="form-control" id="oil" placeholder="For Dump Truck only" ng-model="oc.operationDetails.numberLoads" awnum="price"></div>
