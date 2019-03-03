@@ -183,7 +183,7 @@ class ReceiptsController extends Controller {
     }
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         $receipt = new Receipt;
 
@@ -208,15 +208,15 @@ class ReceiptsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

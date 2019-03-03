@@ -42,7 +42,7 @@
             <td align="left" style="font-weight: bold;">Receipt Type:</td>
             <td align="left">{{$receipt->receipt_type_name}}</td>
             <td align="left" style="font-weight: bold;">Receipt Number:</td>
-            <td align="left">{{$receipt->receipt_code}}</td>
+            <td align="left">{{$receipt->receipt_number}}</td>
           </tr>
           <tr>
             <td align="left" style="font-weight: bold;">Purchase Order Number:</td>
