@@ -8,16 +8,15 @@
 <!-- Main content -->
 <section class="content">
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12">
       <div class="callout callout-info callout-dismissible">
         <button type="button" class="close" data-dismiss="callout" aria-hidden="true">&times;</button>
         <h4><i class="icon fa fa-info"></i> Note:</h4>
         The system is currently under construction. This version is only for testing purposes.
       </div>
-      <!-- /.box -->
     </div>
-  </div>  
+  </div>   -->
       
   <!-- Small boxes (Stat box) -->
   <div class="row">

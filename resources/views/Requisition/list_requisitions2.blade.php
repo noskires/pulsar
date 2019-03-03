@@ -71,11 +71,25 @@
                   </div>
                 </div>
 
-                <div class="form-group col-sm-12">
-                  
+
+                <div class="form-group col-sm-12"> 
+                  <label for="" class="col-sm-2 control-label"></label>
+                  <div class="col-sm-4"> </div>
+
+                  <label for="rcpt-amount" class="col-sm-2 control-label">Remarks</label>
+                  <div class="col-sm-4">
+                    <div class="input-group date">
+                      <textarea class="col-sm-12 form-control" id="" rows="2" ng-model="roc.risDetails.remarks"></textarea>
+                    </div>
+                  </div>
                 </div>
 
+                
+
               </div>
+
+              
+
               <!-- /.box-body -->
               <div class="box-footer">
                 <div class="form-group col-sm-12">           

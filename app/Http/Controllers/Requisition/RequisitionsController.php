@@ -30,7 +30,7 @@ class RequisitionsController extends Controller {
         'rs.requisition_slip_code', 
         'rs.date_requested',
         'rs.date_needed',
-        'rs.description', 
+        'rs.remarks', 
         'rs.request_type',
         'rs.reference_code',
         'rs.job_order_code',
@@ -270,6 +270,7 @@ class RequisitionsController extends Controller {
     $data['request_type'] = $request->input('request_type');
     $data['requesting_employee'] = $request->input('requesting_employee');
     $data['old_reference'] = $request->input('old_reference');
+    $data['remarks'] = $request->input('remarks');
     
     $transaction = DB::transaction(function($data) use($data){
     // try{
@@ -282,11 +283,11 @@ class RequisitionsController extends Controller {
         $requisition->requisition_slip_code = "RS-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$risCode;
         $requisition->date_requested = $data['date_requested'];
         $requisition->date_needed = $data['date_needed'];
-        $requisition->description = $data['description'];
         $requisition->request_type = $data['request_type'];
         $requisition->reference_code = $data['reference_code'];
         $requisition->requesting_employee = $data['requesting_employee'];
         $requisition->old_reference = $data['old_reference'];
+        $requisition->remarks = $data['remarks'];
         $requisition->save();
 
         return response()->json([
