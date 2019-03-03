@@ -60,7 +60,8 @@ class FundsController extends Controller {
 
 			    $fundCode = (str_pad(($fund->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				$fund->fund_code = "FUND".$fundCode;
+				// $fund->fund_code = "FUND".$fundCode;
+			    $fund->fund_code = "FUND-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$fundCode;
 				$fund->fund_name = $data['fund_name'];
 				$fund->changed_by = Auth::user()->email;
 				$fund->save();

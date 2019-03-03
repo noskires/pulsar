@@ -183,7 +183,7 @@ class PurchaseOrdersController extends Controller {
 
 				$poCode 				= (str_pad(($po->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 										->get()->count() + 1), 4, "0", STR_PAD_LEFT));
-				$po->po_code 			= "PO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+				$po->po_code 			= "PO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$poCode;
 				$po->supplier_code 		= $data['supplier_code'];
 				$po->request_type 		= $data['request_type'];
 				$po->reference_code 	= $data['reference_code'];
@@ -307,7 +307,7 @@ class PurchaseOrdersController extends Controller {
           $purchaseOrderItemCode = (str_pad(($purchaseOrderItem->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
           ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-          $purchaseOrderItem->po_item_code 			= "POITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+          $purchaseOrderItem->po_item_code 			= "POITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$purchaseOrderItemCode;
           $purchaseOrderItem->po_code     			= $data[$i]['po_code'];
           $purchaseOrderItem->supply_code     		= $data[$i]['supply_name'];
           $purchaseOrderItem->item_description      = $data[$i]['supply_desc'];

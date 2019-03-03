@@ -182,7 +182,7 @@ class RequisitionsController extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         // $requisition->requisition_slip_code = "RS-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$risCode;
-        $requisition->requisition_slip_code = "RS-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+        $requisition->requisition_slip_code = "RS-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$risCode;
         $requisition->date_requested = $data['date_requested'];
         $requisition->date_needed = $data['date_needed'];
         $requisition->description = $data['description'];
@@ -231,7 +231,7 @@ class RequisitionsController extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         // $requisition->requisition_slip_code = "RS-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$risCode;
-        $requisition->requisition_slip_code = "RS-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+        $requisition->requisition_slip_code = "RS-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$risCode;
         $requisition->date_requested = $data['date_requested'];
         $requisition->date_needed = $data['date_needed'];
         $requisition->description = $data['description'];
@@ -279,7 +279,7 @@ class RequisitionsController extends Controller {
         $risCode = (str_pad(($requisition->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        $requisition->requisition_slip_code = "RS-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+        $requisition->requisition_slip_code = "RS-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$risCode;
         $requisition->date_requested = $data['date_requested'];
         $requisition->date_needed = $data['date_needed'];
         $requisition->description = $data['description'];
@@ -375,7 +375,7 @@ class RequisitionsController extends Controller {
           ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
           // $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$requisitionSlipItemCode;
-          $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+          $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$requisitionSlipItemCode;
 
           $requisitionSlipItem->requisition_slip_code     = $data[$i]['requisition_slip_code'];
           $requisitionSlipItem->supply_code     = $data[$i]['supply_name'];

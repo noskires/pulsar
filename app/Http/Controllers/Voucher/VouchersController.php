@@ -34,19 +34,26 @@ class VouchersController extends Controller {
 	                'v.tax_2',
 	                'v.amount',
 	                'v.check_number',
-	                // 'v.fund_item_code',
-	                'supply_category.supply_category_code',
+	                'v.cost_center_code',
+                  DB::raw('CASE 
+                    WHEN (SELECT count(org_code) FROM organizations WHERE org_code=v.cost_center_code) = 1 
+                      THEN (SELECT org_name FROM organizations WHERE org_code=v.cost_center_code)
+                    ELSE 
+                      (SELECT CONCAT(name," (",code,")")  FROM projects WHERE project_code=v.cost_center_code)
+                    END AS cost_center_name'
+                  ),
+                  'supply_category.supply_category_code',
+	                'supply_category.supply_category_name',
 	                DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
-	                'v.bank_code',
+                  'v.bank_code',
+	                'v.payment_type',
 	                'b.bank_name',
-	                'fi.fund_item_amount',
-	                'f.fund_name'
+	                'fi.fund_item_amount'
               	)
             ->leftjoin('employees as e','e.employee_code','=','v.payee')
             ->leftjoin('banks as b','b.bank_code','=','v.bank_code')
             ->leftjoin('fund_items as fi','fi.fund_item_code','=','v.fund_item_code')
-            ->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
-            ->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','fi.supply_category_code');
+            ->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','v.supply_category_code');
 
 		if ($data['voucherCode']){
 			$vouchers = $vouchers->where('voucher_code', $data['voucherCode']);
@@ -131,7 +138,8 @@ class VouchersController extends Controller {
 		$data['checkDate'] = date('Y-m-d', strtotime($request->input('checkDate')));
 		$data['bankCode'] = $request->input('bankCode');
 		$data['cost_center_code'] = $request->input('cost_center_code');
-		$data['payment_type'] = $request->input('payment_type');
+    $data['payment_type'] = $request->input('payment_type');
+		$data['supply_category_code'] = $request->input('supply_category_code');
 
 		$transaction = DB::transaction(function($data) use($data){
 		// try{
@@ -142,7 +150,8 @@ class VouchersController extends Controller {
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
 				$voucher->voucher_code = "DV-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$voucherCode;
-				$voucher->cost_center_code = $data['cost_center_code'];
+        $voucher->cost_center_code = $data['cost_center_code'];
+				$voucher->supply_category_code = $data['supply_category_code'];
 				$voucher->payee_type = $data['payeeType'];
 				$voucher->payee = $data['payee'];
 				$voucher->fund_item_code = $data['fundItemCode'];

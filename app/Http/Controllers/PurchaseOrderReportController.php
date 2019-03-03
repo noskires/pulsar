@@ -268,6 +268,7 @@ class PurchaseOrderReportController extends Controller {
 		->select(
  
 			'purchase_order.po_code',
+			'purchase_order.requisition_slip_code',
 			'purchase_order.request_type',
 			'purchase_order.reference_code',
 			'purchase_order.supplier_code',

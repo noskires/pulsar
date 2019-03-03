@@ -48,7 +48,11 @@ class SupplyCategoriesController extends Controller {
       try{
 
           $supplyCategory = new SupplyCategory;
-          $supplyCategory->supply_category_code = "SUP-CTGY".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+
+          $supCategoryCode = (str_pad(($supplyCategory->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+          $supplyCategory->supply_category_code = "SUP-CTGY".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$supCategoryCode;
           $supplyCategory->supply_category_name = $data['category_name'];
           $supplyCategory->supply_category_status = 1;
           $supplyCategory->changed_by = Auth::user()->email;

@@ -75,7 +75,7 @@ class UtilizationsController extends Controller {
 
 				$utilizationCode = (str_pad(($utilization->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
-				$utilization->utilization_code = "UTLZN-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+				$utilization->utilization_code = "UTLZN-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$utilizationCode;
 				$utilization->request_type = $data['request_type'];
 				$utilization->reference_code = $data['reference_code'];
 				$utilization->employee_code = $data['employee_code'];

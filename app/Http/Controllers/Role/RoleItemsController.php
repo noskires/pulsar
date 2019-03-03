@@ -65,7 +65,7 @@ class RoleItemsController extends Controller {
           // foreach($data['modules'] as $module) {
             $roleItem                 = new RoleItem;
             $roleItem->role_code      = $data['role_code'];
-            $roledItemCode             = (str_pad(($roleItem->get()->count() + 1), 6, "0", STR_PAD_LEFT)); 
+            $roledItemCode             = (str_pad(($roleItem->get()->count() + 1), 4, "0", STR_PAD_LEFT)); 
             $roleItem->role_item_code = "ROLEITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$roledItemCode;
             $roleItem->module_code    = $data['module_code'];;
             $roleItem->changed_by     = Auth::user()->email;

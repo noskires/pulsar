@@ -21,7 +21,8 @@
       <div class="col-xs-12" style="border-bottom: 2px solid black;">
         <h2 class="page-header"><i class="fa fa-tags"></i> <img src="assets/dist/img/text-file.png" style="margin-bottom:-4px;width:30px;">
           &nbsp;PO Monitoring Report<br></h2>
-        <span style="font-size:16px;letter-spacing:1px;"><b>Control Number: {{$purchase_order_code}}</b></span>
+        <span style="font-size:16px;letter-spacing:1px;"><b>Control Number: {{$purchase_order_code}}</b></span> <br>
+        <span style="font-size:16px;letter-spacing:1px;"><b>RIS Code: {{$purchase_order->requisition_slip_code}}</b></span>
         <div style="position: absolute;top:1%;right:0;"> <img src="assets/dist/img/qrcode.png" style='width:100px;'> </div>
       </div>
       <!-- /.col -->

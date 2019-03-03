@@ -5,8 +5,8 @@
         .controller('VouchersCtrl', VouchersCtrl)
         .controller('VouchersModalInstanceCtrl', VouchersModalInstanceCtrl)
 
-        VouchersCtrl.$inject = ['$stateParams', 'VouchersSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'ParticularsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', 'FundsSrvcs', 'SupplyCategoriesSrvcs', '$window', '$uibModal'];
-        function VouchersCtrl($stateParams, VouchersSrvcs, OrganizationsSrvcs, ProjectsSrvcs, ParticularsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, FundsSrvcs, SupplyCategoriesSrvcs, $window, $uibModal){
+        VouchersCtrl.$inject = ['$state', '$stateParams', 'VouchersSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'ParticularsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', 'FundsSrvcs', 'SupplyCategoriesSrvcs', '$window', '$uibModal'];
+        function VouchersCtrl($state, $stateParams, VouchersSrvcs, OrganizationsSrvcs, ProjectsSrvcs, ParticularsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, ReceiptSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, FundsSrvcs, SupplyCategoriesSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
             vm.payeeType = "SUPPLIER";

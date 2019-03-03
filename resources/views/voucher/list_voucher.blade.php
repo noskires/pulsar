@@ -189,32 +189,32 @@
           <table id="vouchers" datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
-              <th>Control No.</th>
-              <th>DV No.</th>
+              <th>Control No.</th> 
               <th>Payee Type</th>
               <th>Payee Name</th>
-              <th>Fund Name</th>
+              <th>Cost Center Name</th>
               <th>Particulars</th>
               <th>Description/Remarks</th>
-              <th>Amount</th>
               <th>Check No</th>
               <th>Check Date</th>
               <th>Bank</th>
+              <th>Payment Type</th>
+              <!-- <th>Amount</th> -->
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="voucher in vc.vouchers">
-              <td><a href="#"  ui-sref="list-voucherCopy({voucherCode:voucher.voucher_code})" title="Click for details"><b><%voucher.voucher_code%></b></a></td>
-              <td></td>
+              <td><a href="#"  ui-sref="list-voucherCopy({voucherCode:voucher.voucher_code})" title="Click for details"><b><%voucher.voucher_code%></b></a></td> 
               <td><%voucher.payee_type%></td>
               <td><%voucher.payee_text%></td>
-              <td><%voucher.fund_name%></td>
-              <td><%voucher.supply_category_code%></td>
+              <td><%voucher.cost_center_name%></td>
+              <td><%voucher.supply_category_name%></td>
               <td><%voucher.description%></td>
-              <td align="right"><%voucher.amount | number:2%></td>
               <td><%voucher.check_number%></td>
               <td><%voucher.check_date%></td>
               <td><%voucher.bank_name%></td>
+              <td><%voucher.payment_type%></td>
+              <!-- <td align="right"><%voucher.amount | number:2%></td> -->
             </tr>
 
             </tbody>

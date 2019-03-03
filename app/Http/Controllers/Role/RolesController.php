@@ -53,7 +53,9 @@ class RolesController extends Controller {
     $transaction = DB::transaction(function($data) use($data){
     // try{
           $role                 = new Role;
-          $role->role_code      = "ROLE-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+
+          $roleCode             = (str_pad(($role->get()->count() + 1), 4, "0", STR_PAD_LEFT)); 
+          $role->role_code      = "ROLE-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$roleCode;
           $role->role_name      = $data['roleName'];
           $role->description    = $data['description'];
           $role->changed_by     = Auth::user()->email;

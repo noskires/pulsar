@@ -49,7 +49,7 @@ class BanksController extends Controller {
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
 				// $bank->bank_code = "BANK-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$bankCode;
-				$bank->bank_code = "BANK-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+				$bank->bank_code = "BANK-".date('YmdHis', strtotime(Carbon::now('Asia/Manila'))).'-'.$bankCode;
 				$bank->bank_name = $data['bank_name'];
 				$bank->branch = $data['branch'];
 				$bank->manager = $data['manager'];

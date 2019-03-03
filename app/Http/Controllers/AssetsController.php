@@ -282,19 +282,11 @@ class AssetsController extends Controller {
         $data['chassisNumber'] = $request->input('chassisNumber');
        	$data['warrantyDate'] = date('Y-m-d', strtotime($request->input('warrantyDate'))); 
 
-       	// $data['assignTo'] = $request->input('assignTo');
-       	// $data['fundSource'] = $request->input('fundSource');
-       	// $data['costCenter'] = $request->input('costCenter');
-       	// $data['depreciableCost'] = $request->input('depreciableCost');
-       	// $data['salvageValue'] = $request->input('salvageValue');
-        // $data['method'] = $request->input('method');
-       	// $data['project_code'] = $request->input('projectCode');
-       
         $transaction = DB::transaction(function($data) use($data){
         	// try{
 
 	            $asset = new Asset;
-              $assetCode = (str_pad(($asset->get()->count() + 1), 6, "0", STR_PAD_LEFT)); 
+              $assetCode = (str_pad(($asset->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')->get()->count() + 1), 4, "0", STR_PAD_LEFT));
               $asset->asset_code = "ASSET-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$assetCode;
               $asset->tag = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
 	            $asset->name = $data['assetName'];
@@ -309,13 +301,6 @@ class AssetsController extends Controller {
               $asset->engine_no        = $data['engineNumber'];
               $asset->chassis_no = $data['chassisNumber'];
 	            $asset->warranty_date = $data['warrantyDate'];
-	            // $asset->assign_to = $data['assignTo'];
-	            // $asset->fund_source = $data['fundSource'];
-	            // $asset->cost_center = $data['costCenter'];
-	            // $asset->depreciable_cost = $data['depreciableCost'];
-	            // $asset->salvage_value = $data['salvageValue'];
-	            // $asset->method_id = $data['method'];
-             //  $asset->project_code = $data['project_code'];
 	            $asset->status = "ACTIVE";
 	            $asset->save();
 
@@ -456,21 +441,6 @@ class AssetsController extends Controller {
 
     return $transaction;
   }
-
-
-  // $data['tag'] = $request->input('tag');
-  // $data['are_code'] = $request->input('are_code');
-  // $data['assetName'] = $request->input('asset_name');
-  // $data['assetID'] = $request->input('asset_iD');
-  // $data['modelnumber'] = $request->input('model');
-  // $data['categoryCode'] = $request->input('category_ode');
-  // // $data['description'] = $request->input('description');
-  // $data['brand'] = $request->input('brand');
-  // $data['acquisition_cost'] = $request->input('acquisition_cost');
-  // $data['date_acquired'] = date('Y-m-d', strtotime($request->input('date_acquired')));
-  // $data['plate_no'] = $request->input('plate_no');
-  // $data['engine_no'] = $request->input('engine_no');
-  // $data['chassis_no'] = $request->input('chassis_no');
 
 
   public function saveAssetEvent(Request $request){

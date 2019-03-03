@@ -53,7 +53,7 @@ class ParticularsController extends Controller {
 			    $particularCode = (str_pad(($particular->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				$particular->particularCode = "DV-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$particularCode;
+				$particular->particularCode = "DV-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$particularCode;
 				$particular->description = $data['description'];
 				$voucher->save();
 

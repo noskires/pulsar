@@ -49,7 +49,9 @@ class SupplyUnitsController extends Controller {
       // try{
 
           $supplyUnit = new SupplyUnit;
-          $supplyUnit->stock_unit_code = "STOCK-UNT".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+          $supUnitCode = (str_pad(($supplyUnit->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+          $supplyUnit->stock_unit_code = "STOCK-UNT".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$supUnitCode;
           $supplyUnit->stock_unit_name = $data['stock_unit_name'];
           $supplyUnit->changed_by = Auth::user()->email;
           $supplyUnit->save();

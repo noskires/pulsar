@@ -66,7 +66,7 @@ class WarrantiesController extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         // $warranty->warranty_code = "WRNTY-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$warrantyCode; 
-        $warranty->warranty_code = "WRNTY-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+        $warranty->warranty_code = "WRNTY-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$warrantyCode; 
         $warranty->asset_tag = $data['asset_tag'];
         $warranty->description = $data['description'];
         $warranty->effective_date = $data['effective_date'];

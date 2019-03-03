@@ -40,7 +40,6 @@ class ReceiptReportController extends Controller {
                 'r.purchase_order_code',
                 'r.receipt_type',
                 'r.receipt_number',
-                'r.amount', 
                 'r.receipt_date',
                 'r.payee_type',
                 'r.payee',

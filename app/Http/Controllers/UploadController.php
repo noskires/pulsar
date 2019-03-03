@@ -84,7 +84,7 @@ class UploadController extends Controller {
         $assetPhotoCode = (str_pad(($assetPhoto->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        $assetPhoto->asset_photo_code = "APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
+        $assetPhoto->asset_photo_code = "APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$assetPhotoCode;
         $assetPhoto->asset_tag = $request['assetTag'];
         $assetPhoto->asset_photo_name = $request['name']."-APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila'))).".".$request['extension'];
         $assetPhoto->asset_photo_description = $request['description'];
