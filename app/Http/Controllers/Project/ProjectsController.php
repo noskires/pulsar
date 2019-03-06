@@ -65,11 +65,11 @@ class ProjectsController extends Controller {
     $data['cost'] = $request->input('cost');
     $data['zipCode'] = ''; 
     $data['municipality'] = $request->input('municipality'); 
-    $data['dateStarted'] = date('Y-m-d', strtotime($request->input('dateStarted')));
-    $data['dateStarted'] = date('Y-m-d', strtotime($request->input('dateStarted')));
-    $data['dateCompleted'] = date('Y-m-d', strtotime($request->input('dateCompleted')));
-    $data['projectEngineer'] = $request->input('projectEngineer'); 
-    $data['dateAssigned'] = date('Y-m-d', strtotime($request->input('dateAssigned')));
+    // $data['dateStarted'] = date('Y-m-d', strtotime($request->input('dateStarted')));
+    // $data['dateStarted'] = date('Y-m-d', strtotime($request->input('dateStarted')));
+    // $data['dateCompleted'] = date('Y-m-d', strtotime($request->input('dateCompleted')));
+    // $data['projectEngineer'] = $request->input('projectEngineer'); 
+    // $data['dateAssigned'] = date('Y-m-d', strtotime($request->input('dateAssigned')));
     $data['division'] = $request->input('division');
     $data['barangay'] = $request->input('barangay');
    
@@ -106,10 +106,10 @@ class ProjectsController extends Controller {
         $project->code = $data['code'];
         $project->zip_code = $data['zipCode']; 
         $project->municipality_code = $data['municipality']; 
-        $project->date_started = $data['dateStarted']; 
-        $project->date_completed = $data['dateCompleted']; 
-        $project->project_engineer = $data['projectEngineer']; 
-        $project->date_assigned = $data['dateAssigned']; 
+        // $project->date_started = $data['dateStarted']; 
+        // $project->date_completed = $data['dateCompleted']; 
+        // $project->project_engineer = $data['projectEngineer']; 
+        // $project->date_assigned = $data['dateAssigned']; 
         $project->save();
 
         return response()->json([

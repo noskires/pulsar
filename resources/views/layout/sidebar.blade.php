@@ -172,16 +172,16 @@
     </li>
     <li class="treeview"><a href="#" ui-sref="org-office-create"><i class="fa fa-building"></i> Office </a></li>
     <li class="treeview">
-      <a href="#">
+      <a href="#" ui-sref="list-projects">
         <i class="fa fa-cube"></i> <span>Projects</span>
-        <span class="pull-right-container">
+        <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
-        </span>
+        </span> -->
       </a>
-      <ul class="treeview-menu">
+     <!--  <ul class="treeview-menu">
         <li><a href="#" ui-sref="list-projects"><i class="fa fa-list-ul"></i> List of Projects</a></li>
         <li><a href="#" ui-sref="project-create"><i class="fa fa-plus"></i> Add a Project</a></li>
-      </ul>
+      </ul> -->
     </li>
     <li><a href="#" ui-sref="list-employees"><i class="fa fa-user"></i> <span>Employees</span></a></li>
     <li class="header">TOOLS</li>

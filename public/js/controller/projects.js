@@ -5,8 +5,8 @@
         .controller('ProjectsCtrl', ProjectsCtrl) 
         .controller('ProjectsModalInstanceCtrl', ProjectsModalInstanceCtrl) 
 
-        ProjectsCtrl.$inject = ['$stateParams', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', '$window', '$uibModal'];
-        function ProjectsCtrl($stateParams, OrganizationsSrvcs, ProjectsSrvcs, EmployeesSrvcs, AddressesSrvcs, $window, $uibModal){
+        ProjectsCtrl.$inject = ['$state', '$stateParams', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', 'ClientsSrvcs', '$window', '$uibModal'];
+        function ProjectsCtrl($state, $stateParams, OrganizationsSrvcs, ProjectsSrvcs, EmployeesSrvcs, AddressesSrvcs, ClientsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {}; 
 
@@ -78,7 +78,16 @@
                 ProjectsSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('project/new');
+                        // vm.routeTo('project/new');
+                        ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.projects = response.data.data;
+                                console.log(vm.projects)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        
+                        $state.go('list-projects');
                     }
                     else {
                         alert(response.data.message);
