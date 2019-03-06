@@ -130,7 +130,7 @@ class EmployeesController extends Controller {
       $data['suffix'] = $request->input('suffix');
       $data['fname'] = $request->input('fname');
       $data['mname'] = $request->input('mname');
-      $data['birthdate'] = date('Y-m-d', strtotime($request->input('birthdate')));
+      $data['birthdate'] = date('Y-m-d', strtotime($request->input('bday')));
       $data['position_code'] = $request->input('position_code');
       $data['email'] = $request->input('email');
       $data['phone_no'] = $request->input('phone_no');
@@ -149,7 +149,7 @@ class EmployeesController extends Controller {
       }
       
       $transaction = DB::transaction(function($data) use($data){
-      try{
+      // try{
 
           $employee = new Employee;
 
@@ -178,15 +178,15 @@ class EmployeesController extends Controller {
               'message' => 'Successfully saved.'
           ]);
 
-        }
-        catch (\Exception $e) 
-        {
-            return response()->json([
-              'status' => 500,
-              'data' => 'null',
-              'message' => 'Error, please try again!'
-          ]);
-        }
+        // }
+        // catch (\Exception $e) 
+        // {
+        //     return response()->json([
+        //       'status' => 500,
+        //       'data' => 'null',
+        //       'message' => 'Error, please try again!'
+        //   ]);
+        // }
       });
       return $transaction;
   }
