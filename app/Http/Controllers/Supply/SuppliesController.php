@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Supply;
 use Illuminate\Http\Request;
 
 use DB;
+use Auth;
 use App\Supply;
 
 use App\Http\Requests;
@@ -125,19 +126,19 @@ class SuppliesController extends Controller {
       $transaction = DB::transaction(function($data) use($data){
       try{
         
-            DB::table('supplies')
-              ->where('supply_code', $data['supply_code'])
-              ->update([
-                'category_code' => $data['category_code'],
-                'supply_name' => $data['supply_name'],
-                'description' => $data['description'],
-                're_order_level' => $data['re_order_level'],
-                'stock_unit' => $data['stock_unit']
-              ]);
+            $supply = Supply::where('supply_code', $data['supply_code'])->first();
+            $supply->category_code = $data['category_code'];
+            $supply->supply_name = $data['supply_name'];
+            $supply->description = $data['description'];
+            $supply->re_order_level = $data['re_order_level'];
+            $supply->stock_unit = $data['stock_unit'];
+            $supply->changed_by = Auth::user()->email;
+            $supply->timestamps = true;
+            $supply->save();
 
           return response()->json([
               'status' => 200,
-              'data' => $data['supply_code'],
+              'data' => null,
               'message' => 'Successfully saved.'
           ]);
 

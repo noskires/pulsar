@@ -13,9 +13,9 @@
             if($stateParams.supplyCode)
             {
                 vm.supplyCode = $stateParams.supplyCode;
-                // alert(vm.receiptCode);
+                // alert(vm.supplyCode);
 
-                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode, supplyCategory:'', quantityStatus:''}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode, supplyCategory:'', quantityStatus:null, isRepair:2}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.supply = response.data.data[0];
@@ -43,9 +43,9 @@
             if($stateParams.supplyCode2)
             {
                 vm.supplyCode = $stateParams.supplyCode2;
-                alert(vm.supplyCode);
+                // alert(vm.supplyCode);
 
-                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode, supplyCategory:'', quantityStatus:''}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode, supplyCategory:'', quantityStatus:null, isRepair:2}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.supply = response.data.data[0];
