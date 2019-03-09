@@ -59,7 +59,7 @@ class AresController extends Controller {
 		$data = Input::post();
 
 		$transaction = DB::transaction(function($data) use($data){
-		// try{
+		try{
 				$are = new Are;
 
 				$areCode = (str_pad(($are->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
@@ -70,6 +70,7 @@ class AresController extends Controller {
 				$are->employee_code = $data['employeeCode'];
 				// $are->asset_code = $data['assetCode'];
 				$are->show_status = 1;
+				$are->changed_by = Auth::user()->email;
 				$are->save();
 
 				return response()->json([
@@ -77,15 +78,15 @@ class AresController extends Controller {
 				    'data' => 'null',
 				    'message' => 'Successfully saved.'
 				]);
-			// }
-			// catch (\Exception $e) 
-			// {
-			//   	return response()->json([
-			// 	    'status' => 500,
-			// 	    'data' => 'null',
-			// 	    'message' => 'Error, please try again!'
-			// 	]);
-			// }
+			}
+			catch (\Exception $e) 
+			{
+			  	return response()->json([
+				    'status' => 500,
+				    'data' => 'null',
+				    'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;
@@ -100,10 +101,6 @@ class AresController extends Controller {
 		);
 
 		$ares = DB::table('are_items AS are_item')
-				// ->select(
-    //               	'are_item.are_code'
-                // )
-                // ->leftjoin('ares AS are','are.are_code','=','are_item.are_code')
                 ->leftjoin('assets AS asset','asset.asset_code','=','are_item.asset_code');
 
         if ($data['areItemCode']){
@@ -134,7 +131,7 @@ class AresController extends Controller {
 	    // return $data;
 
 	    $transaction = DB::transaction(function($data) use($data){
-			// try{
+			try{
 				$areItem = new AreItem;
 				$areCode = (str_pad(($areItem->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
@@ -153,15 +150,15 @@ class AresController extends Controller {
 				    'data' => $data,
 				    'message' => 'Successfully saved.'
 				]);
-			// }
-			// catch (\Exception $e) 
-			// {
-			//   	return response()->json([
-			// 	    'status' => 500,
-			// 	    'data' => 'null',
-			// 	    'message' => 'Error, please try again!'
-			// 	]);
-			// }
+			}
+			catch (\Exception $e) 
+			{
+			  	return response()->json([
+				    'status' => 500,
+				    'data' => 'null',
+				    'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;

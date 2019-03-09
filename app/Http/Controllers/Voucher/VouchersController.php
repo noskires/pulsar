@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use DB;
+use Auth;
 use App\Voucher;
 use App\VoucherItem;
 use App\Http\Requests;
@@ -142,22 +143,23 @@ class VouchersController extends Controller {
 		$data['supply_category_code'] = $request->input('supply_category_code');
 
 		$transaction = DB::transaction(function($data) use($data){
-		// try{
+		try{
 
 				$voucher = new Voucher;
 
 			    $voucherCode = (str_pad(($voucher->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				$voucher->voucher_code = "DV-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$voucherCode;
-        $voucher->cost_center_code = $data['cost_center_code'];
-				$voucher->supply_category_code = $data['supply_category_code'];
-				$voucher->payee_type = $data['payeeType'];
-				$voucher->payee = $data['payee'];
-				$voucher->fund_item_code = $data['fundItemCode'];
-				$voucher->description = $data['description'];
-				$voucher->payment_type = $data['payment_type'];
-				$voucher->amount = 0;
+				$voucher->voucher_code           = "DV-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$voucherCode;
+        $voucher->cost_center_code       = $data['cost_center_code'];
+				$voucher->supply_category_code   = $data['supply_category_code'];
+				$voucher->payee_type             = $data['payeeType'];
+				$voucher->payee                  = $data['payee'];
+				$voucher->fund_item_code         = $data['fundItemCode'];
+				$voucher->description            = $data['description'];
+				$voucher->payment_type           = $data['payment_type'];
+				$voucher->amount                 = 0;
+        $voucher->changed_by             = Auth::user()->email;
 				$voucher->save();
 
 				return response()->json([
@@ -166,15 +168,15 @@ class VouchersController extends Controller {
 				    'message' => 'Successfully saved.'
 				]);
 
-			// }
-			// catch (\Exception $e) 
-			// {
-			//   	return response()->json([
-			// 	    'status' => 500,
-			// 	    'data' => 'null',
-			// 	    'message' => 'Error, please try again!'
-			// 	]);
-			// }
+			}
+			catch (\Exception $e) 
+			{
+			  	return response()->json([
+				    'status' => 500,
+				    'data' => 'null',
+				    'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;
@@ -189,27 +191,30 @@ class VouchersController extends Controller {
     $data['bankCode'] = $request->input('bank_code');
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
       	
+
+      //temporary query
     	$voucher = DB::table('vouchers as v')
           ->select(
-          	DB::raw("COALESCE(SUM(r.amount), 0) as total_amount")
+          	DB::raw("COALESCE(SUM(receipt_item.receipt_item_total), 0) as total_amount")
           )
           ->where('v.voucher_code', $data['voucherCode'])
           ->leftjoin('voucher_items as vi','vi.voucher_code','=','v.voucher_code')
           ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')
+          ->leftjoin('receipt_items as receipt_item','receipt_item.receipt_code','=','r.receipt_code')
           ->first();
 
           $totalReceiptAmount = $voucher->total_amount;
 
-		DB::table('vouchers')
-            ->where('voucher_code', $data['voucherCode'])
-            ->update([
-              'check_number' => $data['checkNumber'],
-              'check_date' => $data['checkDate'],
-              'bank_code' => $data['bankCode'],
-              'amount' => $totalReceiptAmount
-            ]);
+          $voucher = Voucher::where('voucher_code', $data['voucherCode'])->first();
+          $voucher->check_number     = $data['checkNumber'];
+          $voucher->check_date       = $data['checkDate'];
+          $voucher->bank_code        = $data['bankCode'];
+          $voucher->amount           = $totalReceiptAmount;
+          $voucher->changed_by       = Auth::user()->email;
+          $voucher->timestamps        = true;
+          $voucher->save();
 
         return response()->json([
             'status' => 200,
@@ -217,15 +222,15 @@ class VouchersController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -278,7 +283,7 @@ class VouchersController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         for($i = 0; $i < count($data); $i++) {
 
@@ -292,6 +297,7 @@ class VouchersController extends Controller {
 
           $vc->voucher_code     = $data[$i]['voucher_code'];
           $vc->receipt_code     = $data[$i]['receipt_code'];
+          $vc->changed_by       = Auth::user()->email;
           $vc->save(); // fixed typo
 
         }
@@ -302,15 +308,15 @@ class VouchersController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -321,7 +327,7 @@ class VouchersController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
     	VoucherItem::where('voucher_item_code', $data['voucher_item_code'])->firstOrFail()->delete();
 
@@ -331,30 +337,18 @@ class VouchersController extends Controller {
             'message' => 'Successfully deleted.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
   }
 
-  // public function sample(){
-  // 	$voucher = DB::table('vouchers as v')
-  //         ->select(
-  //         	DB::raw("COALESCE(SUM(r.amount), 0) as total_amount")
-  //         )
-  //         ->where('v.voucher_code', 'DV-20180428-0002')
-  //         ->leftjoin('voucher_items as vi','vi.voucher_code','=','v.voucher_code')
-  //         ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')->first();
-  //         // ->first();
-
-  //         return $voucher->total_amount;
-  // }
 }

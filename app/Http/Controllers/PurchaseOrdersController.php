@@ -299,7 +299,7 @@ class PurchaseOrdersController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         for($i = 0; $i < count($data); $i++) {
           $purchaseOrderItem            = new PurchaseOrderItem;
@@ -313,6 +313,7 @@ class PurchaseOrdersController extends Controller {
           $purchaseOrderItem->item_description      = $data[$i]['supply_desc'];
           $purchaseOrderItem->item_quantity 		= $data[$i]['supply_qty']; 
           $purchaseOrderItem->item_stock_unit  		= $data[$i]['supply_unit']; 
+          $purchaseOrderItem->changed_by 			= Auth::user()->email;
           $purchaseOrderItem->save(); // fixed typo
 
         }
@@ -323,15 +324,15 @@ class PurchaseOrdersController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -342,10 +343,7 @@ class PurchaseOrdersController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
-
-
-        // DB::table('purchase_order_items')->where('po_item_code', $data['po_item_code'])->delete();
+    try{
 
         PurchaseOrderItem::where('po_item_code', $data['po_item_code'])->firstOrFail()->delete();
 
@@ -355,15 +353,15 @@ class PurchaseOrdersController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

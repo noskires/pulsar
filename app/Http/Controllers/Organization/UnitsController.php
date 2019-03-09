@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Organization;
 use Illuminate\Http\Request;
 
 use DB;
+use Auth;
 use App\Organization;
 use App\Department;
 use App\Division;

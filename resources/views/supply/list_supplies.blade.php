@@ -40,6 +40,21 @@
     </div>
     <!-- /.box-body -->
 </div>
+
+</section>
+
+<script type="text/javascript">
+$(function () {
+
+$('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+
+});
+</script>
+
 <!-- MODAL POPUP -->
 <script type="text/ng-template" id="supplyInfo.modal">
 <div>
@@ -157,5 +172,3 @@
     </div>
   </div>
 </script>
-
-</section>

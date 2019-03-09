@@ -6,6 +6,7 @@ use DB;
 use Auth;
 use App\Asset;
 use App\AssetEvent;
+use App\AreItem;
 use App\Asset_category;
 use App\Employee;
 use App\Log;
@@ -283,7 +284,7 @@ class AssetsController extends Controller {
        	$data['warrantyDate'] = date('Y-m-d', strtotime($request->input('warrantyDate'))); 
 
         $transaction = DB::transaction(function($data) use($data){
-        	// try{
+        	try{
 
 	            $asset = new Asset;
               $assetCode = (str_pad(($asset->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')->get()->count() + 1), 4, "0", STR_PAD_LEFT));
@@ -301,7 +302,8 @@ class AssetsController extends Controller {
               $asset->engine_no        = $data['engineNumber'];
               $asset->chassis_no = $data['chassisNumber'];
 	            $asset->warranty_date = $data['warrantyDate'];
-	            $asset->status = "ACTIVE";
+              $asset->status = "ACTIVE";
+	            $asset->changed_by = Auth::user()->email;
 	            $asset->save();
 
 	            // $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();
@@ -318,15 +320,15 @@ class AssetsController extends Controller {
 	                'data' => 'null',
 	                'message' => 'Successfully saved.'
 	            ]);
-          //   } 
-          //   catch (\Exception $e) 
-          //   {
-		    	   //  return response()->json([
-	         //        'status' => 500,
-	         //        'data' => 'null',
-	         //        'message' => 'Error, please try again!'
-	         //    ]);
-		        // }
+            } 
+            catch (\Exception $e) 
+            {
+		    	    return response()->json([
+	                'status' => 500,
+	                'data' => 'null',
+	                'message' => 'Error, please try again!'
+	            ]);
+		        }
         });
 
         return $transaction;
@@ -354,6 +356,8 @@ class AssetsController extends Controller {
 
       $transaction = DB::transaction(function($data) use($data){
     // try{
+
+          
       
           DB::table('assets')
             ->where('tag', $data['tag'])
@@ -406,21 +410,22 @@ class AssetsController extends Controller {
       // $data['warranty_date'] = $request->input('warranty_date');
 
       $transaction = DB::transaction(function($data) use($data){
-      // try{
-      
-          DB::table('assets')
-            ->where('tag', $data['tag'])
-            ->update([
-              'description'   => $data['description'],
-              'model'         => $data['model'],
-              'brand'         => $data['brand'],
-              'date_acquired' => $data['date_acquired'],
-              'acquisition_cost' => $data['acquisition_cost'],
-              'plate_no'      => $data['plate_no'],
-              'engine_no'     => $data['engine_no'],
-              'chassis_no'    => $data['chassis_no'],
-              'warranty_date' => $data['warranty_date'],
-            ]);
+      try{
+          
+
+          $asset = Asset::where('tag', $data['tag'])->first();
+          $asset->description = $data['description'];
+          $asset->model = $data['model'];
+          $asset->brand = $data['brand'];
+          $asset->date_acquired = $data['date_acquired'];
+          $asset->acquisition_cost = $data['acquisition_cost'];
+          $asset->plate_no = $data['plate_no'];
+          $asset->engine_no = $data['engine_no'];
+          $asset->chassis_no = $data['chassis_no'];
+          $asset->warranty_date = $data['warranty_date'];
+          $asset->changed_by = Auth::user()->email;
+          $asset->timestamps = true;
+          $asset->save();
 
         return response()->json([
             'status' => 200,
@@ -428,15 +433,15 @@ class AssetsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -463,15 +468,22 @@ class AssetsController extends Controller {
               $assetEvent->asset_event_code = "AEVNT-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
               $assetEvent->status = $data['status'];
               $assetEvent->asset_tag = $data['asset_tag'];
-              $assetEvent->event_date = $data['event_date'];
+              $assetEvent->event_date = date('Y-m-d', strtotime($data['event_date']));
               $assetEvent->remarks = $data['remarks'];
+              $assetEvent->changed_by = Auth::user()->email;
               $assetEvent->save();
 
-              DB::table('assets')
-              ->where('tag', $data['asset_tag'])
-              ->update([
-                'status' => $data['status']
-              ]);
+              $asset = Asset::where('tag', $data['asset_tag'])->first();
+              $asset->status = $data['status'];
+              $asset->changed_by = Auth::user()->email;
+              $asset->timestamps = true;
+              $asset->save();
+
+              // DB::table('assets')
+              // ->where('tag', $data['asset_tag'])
+              // ->update([
+              //   'status' => $data['status']
+              // ]);
 
               if($data['status']=="RETURN"){
 
@@ -485,13 +497,18 @@ class AssetsController extends Controller {
                 if($are)
                 {
 
+                // DB::table('are_items')
+                // ->where('asset_code', $asset->asset_code)
+                // ->where('are_item_code', $are->are_item_code)
+                // ->update([
+                //   'ended_at' => $data['event_date']
+                // ]);
 
-                DB::table('are_items')
-                ->where('asset_code', $asset->asset_code)
-                ->where('are_item_code', $are->are_item_code)
-                ->update([
-                  'ended_at' => $data['event_date']
-                ]);
+                $asset = AreItem::where('asset_code', $asset->asset_code)->where('are_item_code', $are->are_item_code)->first();
+                $asset->ended_at = $data['event_date'];
+                $asset->changed_by = Auth::user()->email;
+                $asset->timestamps = true;
+                $asset->save();
                 
                 }
 

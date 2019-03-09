@@ -182,11 +182,11 @@ class UtilizationsController extends Controller {
 
 
 	public function save_utilization_item(Request $request){
-    // return $request->all();
+    
     $data = Input::post();
     
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         for($i = 0; $i < count($data); $i++) {
           $utilizationItem            = new utilizationItem;
@@ -200,6 +200,7 @@ class UtilizationsController extends Controller {
           $utilizationItem->item_description      			= $data[$i]['supply_desc'];
           $utilizationItem->item_quantity 					= $data[$i]['supply_qty']; 
           $utilizationItem->item_stock_unit  				= $data[$i]['supply_unit']; 
+          $utilizationItem->changed_by 						= Auth::user()->email;
           $utilizationItem->save(); // fixed typo
 
         }
@@ -210,15 +211,15 @@ class UtilizationsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

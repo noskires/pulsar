@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Project;
 use Illuminate\Http\Request;
 
 use DB;
+use Auth;
 use App\Organization;
 use App\Employee;
 use App\Project;
@@ -74,7 +75,7 @@ class ProjectsController extends Controller {
     $data['barangay'] = $request->input('barangay');
    
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         $organization = new Organization;
         $depCode = str_pad($organization->where('org_type', 'Unit')->get()->count() + 1, 8, "0", STR_PAD_LEFT);
@@ -84,6 +85,7 @@ class ProjectsController extends Controller {
         $organization->org_type = "Unit"; 
         $organization->municipality_code = $data['municipality'];
         $organization->barangay = $data['barangay'];
+        $organization->changed_by = Auth::user()->email;
         $organization->save();
 
 
@@ -106,10 +108,7 @@ class ProjectsController extends Controller {
         $project->code = $data['code'];
         $project->zip_code = $data['zipCode']; 
         $project->municipality_code = $data['municipality']; 
-        // $project->date_started = $data['dateStarted']; 
-        // $project->date_completed = $data['dateCompleted']; 
-        // $project->project_engineer = $data['projectEngineer']; 
-        // $project->date_assigned = $data['dateAssigned']; 
+        $project->changed_by = Auth::user()->email;
         $project->save();
 
         return response()->json([
@@ -117,15 +116,15 @@ class ProjectsController extends Controller {
             'data' => 'null',
             'message' => 'Successfully saved.'
         ]);
-      // } 
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      } 
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;

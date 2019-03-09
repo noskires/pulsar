@@ -4,11 +4,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use DB;
+use Auth;
 use App\Employee;
 use App\Project;
 use App\JobOrder;
 use App\Requisition;
 use App\RequisitionSlipItem;
+use App\Supply;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -273,7 +275,7 @@ class RequisitionsController extends Controller {
     $data['remarks'] = $request->input('remarks');
     
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         $requisition = new Requisition;
 
@@ -288,6 +290,7 @@ class RequisitionsController extends Controller {
         $requisition->requesting_employee = $data['requesting_employee'];
         $requisition->old_reference = $data['old_reference'];
         $requisition->remarks = $data['remarks'];
+        $requisition->changed_by = Auth::user()->email;
         $requisition->save();
 
         return response()->json([
@@ -296,15 +299,15 @@ class RequisitionsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -333,14 +336,14 @@ class RequisitionsController extends Controller {
             $data['date_inspected'] = null;
           }
 
-          DB::table('requisition_slips')
-            ->where('requisition_slip_code', $data['requisition_slip_code'])
-            ->update([
-              'received_by' => $data['received_by'],
-              'date_received' => $data['date_received'],
-              'inspected_by' => $data['inspected_by'],
-              'date_inspected' => $data['date_inspected']
-            ]);
+          $requisitionSlip = Requisition::where('requisition_slip_code', $data['requisition_slip_code'])->first();
+          $requisitionSlip->received_by        = $data['received_by'];
+          $requisitionSlip->date_received      = $data['date_received'];
+          $requisitionSlip->inspected_by       = $data['inspected_by'];
+          $requisitionSlip->date_inspected     = $data['date_inspected'];
+          $requisitionSlip->changed_by         = Auth::user()->email;
+          $requisitionSlip->timestamps         = true;
+          $requisitionSlip->save();
 
         return response()->json([
             'status' => 200,
@@ -367,7 +370,7 @@ class RequisitionsController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         for($i = 0; $i < count($data); $i++) {
           $requisitionSlipItem            = new RequisitionSlipItem;
@@ -375,30 +378,23 @@ class RequisitionsController extends Controller {
           $requisitionSlipItemCode = (str_pad(($requisitionSlipItem->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
           ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-          // $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$requisitionSlipItemCode;
           $requisitionSlipItem->requisition_slip_item_code = "RSITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$requisitionSlipItemCode;
 
           $requisitionSlipItem->requisition_slip_code     = $data[$i]['requisition_slip_code'];
-          $requisitionSlipItem->supply_code     = $data[$i]['supply_name'];
-          $requisitionSlipItem->item_description      = $data[$i]['supply_desc'];
-          $requisitionSlipItem->item_quantity = $data[$i]['supply_qty'];
-          $requisitionSlipItem->item_cost = $data[$i]['supply_cost'];
-          $requisitionSlipItem->item_stock_unit  = $data[$i]['supply_unit'];
-          $requisitionSlipItem->item_total  = $data[$i]['supply_total'];
+          $requisitionSlipItem->supply_code               = $data[$i]['supply_name'];
+          $requisitionSlipItem->item_description          = $data[$i]['supply_desc'];
+          $requisitionSlipItem->item_quantity             = $data[$i]['supply_qty'];
+          $requisitionSlipItem->item_cost                 = $data[$i]['supply_cost'];
+          $requisitionSlipItem->item_stock_unit           = $data[$i]['supply_unit'];
+          $requisitionSlipItem->item_total                = $data[$i]['supply_total'];
           $requisitionSlipItem->save(); // fixed typo
 
-          $supply = DB::table('supplies')
-          ->select('quantity')
-          ->where('supply_code', $data[$i]['supply_name'])
-          ->first();
+          $supply = Supply::where('supply_code', $data[$i]['supply_name'])->first();
+          $supply->quantity         = $supply->quantity - $data[$i]['supply_qty'];
+          $supply->changed_by       = Auth::user()->email;
+          $supply->timestamps       = true;
+          $supply->save();
 
-          $totalQuantity = $supply->quantity - $data[$i]['supply_qty'];
-
-          DB::table('supplies')
-          ->where('supply_code', $data[$i]['supply_name'])
-            ->update([
-              'quantity' => $totalQuantity
-            ]);
         }
 
         return response()->json([
@@ -407,15 +403,15 @@ class RequisitionsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -428,21 +424,13 @@ class RequisitionsController extends Controller {
     $transaction = DB::transaction(function($data) use($data){
     // try{
 
+        $supply = Supply::where('supply_code', $data['requisition_item_supply_code'])->first();
+        $supply->quantity         = $supply->quantity + $data['requisition_item_quantity'];
+        $supply->changed_by       = Auth::user()->email;
+        $supply->timestamps       = true;
+        $supply->save();
 
-        $supply = DB::table('supplies')
-          ->select('quantity')
-          ->where('supply_code', $data['requisition_item_supply_code'])
-          ->first();
-
-          $totalQuantity = $supply->quantity + $data['requisition_item_quantity'];
-
-        DB::table('supplies')
-          ->where('supply_code', $data['requisition_item_supply_code'])
-            ->update([
-              'quantity' => $totalQuantity
-            ]);
-
-        DB::table('requisition_slips_items')->where('requisition_slip_item_code', $data['requisition_slip_item_code'])->delete();
+        RequisitionSlipItem::where('requisition_slip_item_code', $data['requisition_slip_item_code'])->firstOrFail()->delete();
 
         return response()->json([
             'status' => 200,

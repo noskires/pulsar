@@ -76,7 +76,7 @@ class SuppliesController extends Controller {
     $data['reOrderLevel'] = $request->input('reOrderLevel');
 
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         $supply = new Supply;
 
@@ -91,6 +91,7 @@ class SuppliesController extends Controller {
         $supply->quantity = 0;
         $supply->stock_unit = $data['stockUnit'];
         $supply->re_order_level = $data['reOrderLevel'];
+        $supply->changed_by = Auth::user()->email;
         $supply->save();
 
         return response()->json([
@@ -99,15 +100,15 @@ class SuppliesController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use DB;
+use Auth;
 use App\Receipt;
 use App\ReceiptItem;
+use App\Supply;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -190,16 +192,15 @@ class ReceiptsController extends Controller {
         $receiptCode = (str_pad(($receipt->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        // $receipt->receipt_code = "RCP-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$receiptCode;
         $receipt->receipt_code = "RCP-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$receiptCode;
         $receipt->receipt_date = $data['receiptDate'];
-        // $receipt->amount = $data['amount'];
         $receipt->purchase_order_code = $data['purchaseOrderCode'];
         $receipt->receipt_number = $data['receiptNumber'];
         $receipt->receipt_type = $data['receiptType'];
         $receipt->remarks = $data['remarks'];
         $receipt->payee_type = $data['payeeType'];
         $receipt->payee = $data['payee'];
+        $receipt->changed_by = Auth::user()->email;
         $receipt->save();
 
         return response()->json([
@@ -283,7 +284,6 @@ class ReceiptsController extends Controller {
           $receiptItemCode = (str_pad(($c->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
           ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-          // $c->receipt_item_code = "RCPITM-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$receiptItemCode;
           $c->receipt_item_code = "RCPITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$receiptItemCode;
 
           $c->receipt_code     = $data[$i]['receipt_code'];
@@ -293,20 +293,14 @@ class ReceiptsController extends Controller {
           $c->receipt_item_cost = $data[$i]['supply_cost'];
           $c->receipt_item_stock_unit  = $data[$i]['supply_unit'];
           $c->receipt_item_total  = $data[$i]['supply_total'];
+          $c->changed_by = Auth::user()->email;
           $c->save(); // fixed typo
 
-          $supply = DB::table('supplies')
-          ->select('quantity')
-          ->where('supply_code', $data[$i]['supply_name'])
-          ->first();
-
-          $totalQuantity = $supply->quantity + $data[$i]['supply_qty'];
-
-          DB::table('supplies')
-          ->where('supply_code', $data[$i]['supply_name'])
-            ->update([
-              'quantity' => $totalQuantity
-            ]);
+          $supply = Supply::where('supply_code', $data[$i]['supply_name'])->first();
+          $supply->quantity         = $supply->quantity + $data[$i]['supply_qty'];
+          $supply->changed_by       = Auth::user()->email;
+          $supply->timestamps       = true;
+          $supply->save();
         }
 
         return response()->json([
@@ -341,21 +335,15 @@ class ReceiptsController extends Controller {
     $transaction = DB::transaction(function($data) use($data){
     try{
 
-        DB::table('receipt_items')->where('receipt_item_code', $data['receiptItemCode'])->delete();
 
-        $supply = DB::table('supplies')
-          ->select('quantity')
-          ->where('supply_code', $data['supplyCode'])
-          ->first();
+        $supply = Supply::where('supply_code', $data['supplyCode'])->first();
+        $supply->quantity         = $supply->quantity - $data['receiptItemQuantity'];
+        $supply->changed_by       = Auth::user()->email;
+        $supply->timestamps       = true;
+        $supply->save();
 
-          $totalQuantity = $supply->quantity - $data['receiptItemQuantity'];
-
-          DB::table('supplies')
-          ->where('supply_code', $data['supplyCode'])
-            ->update([
-              'quantity' => $totalQuantity
-            ]);
-
+        ReceiptItem::where('receipt_item_code', $data['receiptItemCode'])->firstOrFail()->delete();
+        
         return response()->json([
             'status' => 200,
             'data' => 'null',

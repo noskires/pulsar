@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use DB;
+use Auth;
 use App\Voucher;
 use App\Bank;
 use App\Insurance;
@@ -59,25 +60,25 @@ class InsuranceController extends Controller {
 		$data = Input::post();
 
 		$transaction = DB::transaction(function($data) use($data){
-		// try{
+		try{
 				$insurance = new Insurance;
 
 			    $insuranceCode = (str_pad(($insurance->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				// $insurance->insurance_code = "INSU-".date('Ymd', strtotime(Carbon::now('Asia/Manila'))).'-'.$insuranceCode;
 				$insurance->insurance_code = "INSU-".date('YmdHis', strtotime(Carbon::now('Asia/Manila'))).'-'.$insuranceCode;
 				$insurance->insurance_co = $data['insurance_co'];
 				$insurance->description = $data['description'];
 				$insurance->policy_number = $data['policy_number'];
 				$insurance->insurance_coverage = $data['insurance_coverage'];
-				$insurance->date_issued = $data['date_issued'];
-				$insurance->expiration_date = $data['expiration_date'];
+				$insurance->date_issued = date('Y-m-d', strtotime($data['date_issued'])); 
+				$insurance->expiration_date = date('Y-m-d', strtotime($data['expiration_date']));
 				$insurance->applicable_premium = $data['applicable_premium'];
 				$insurance->insurance_agent = $data['insurance_agent'];
 				$insurance->email = $data['email'];
 				$insurance->mobile_number = $data['mobile_number'];
 				$insurance->telephone_number = $data['telephone_number'];
+				$insurance->changed_by = Auth::user()->email;
 				$insurance->save();
 
 				return response()->json([
@@ -85,15 +86,15 @@ class InsuranceController extends Controller {
 				    'data' => 'null',
 				    'message' => 'Successfully saved.'
 				]);
-			// }
-			// catch (\Exception $e) 
-			// {
-			//   	return response()->json([
-			// 	    'status' => 500,
-			// 	    'data' => 'null',
-			// 	    'message' => 'Error, please try again!'
-			// 	]);
-			// }
+			}
+			catch (\Exception $e) 
+			{
+			  	return response()->json([
+				    'status' => 500,
+				    'data' => 'null',
+				    'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;
@@ -104,37 +105,39 @@ class InsuranceController extends Controller {
 		$data = Input::post();
 
 		$transaction = DB::transaction(function($data) use($data){
-		// try{
-				DB::table('insurance')
-				->where('insurance_code', $data['insurance_code'])
-				->update([
-					'insurance_co' => $data['insurance_co'],
-					'description' => $data['description'],
-					'policy_number' => $data['policy_number'],
-					'date_issued' => date('Y-m-d', strtotime($data['date_issued'])),
-					'insurance_coverage' => $data['insurance_coverage'],
-					'expiration_date' => date('Y-m-d', strtotime($data['expiration_date'])),
-					'applicable_premium' => $data['applicable_premium'],
-					'insurance_agent' => $data['insurance_agent'],
-					'email' => $data['email'],
-					'mobile_number' => $data['mobile_number'],
-					'telephone_number' => $data['telephone_number']
-				]);
+		try{
+
+
+				$bank = Insurance::where('insurance_code', $data['insurance_code'])->first();
+	            $bank->insurance_co 		= $data['insurance_co'];
+	            $bank->description 			= $data['description'];
+	            $bank->policy_number 		= $data['policy_number'];
+	            $bank->date_issued 			= date('Y-m-d', strtotime($data['date_issued']));
+	            $bank->insurance_coverage 	= $data['insurance_coverage'];
+	            $bank->expiration_date 		= date('Y-m-d', strtotime($data['expiration_date']));
+	            $bank->applicable_premium 	= $data['applicable_premium'];
+	            $bank->insurance_agent 		= $data['insurance_agent'];
+	            $bank->email 				= $data['email'];
+	            $bank->mobile_number 		= $data['mobile_number'];
+	            $bank->telephone_number 	= $data['telephone_number'];
+	            $bank->changed_by 			= Auth::user()->email;
+	            $bank->timestamps 			= true;
+	            $bank->save();
 
 				return response()->json([
 					'status' => 200,
 					'data' => 'null',
 					'message' => 'Successfully saved.'
 				]);
-			// }
-			// catch (\Exception $e)
-			// {
-			// 	return response()->json([
-			// 		'status' => 500,
-			// 		'data' => 'null',
-			// 		'message' => 'Error, please try again!'
-			// 	]);
-			// }
+			}
+			catch (\Exception $e)
+			{
+				return response()->json([
+					'status' => 500,
+					'data' => 'null',
+					'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;
@@ -210,6 +213,8 @@ class InsuranceController extends Controller {
 			$insurance->insurance_item_code = "INSUITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$insuranceItemCode;
 			$insurance->insurance_code = $data['insurance_code'];
 			$insurance->asset_code     = $data['asset_code'];
+			$insurance->changed_by = Auth::user()->email;
+        	$insurance->timestamps = true;
 			$insurance->save(); // fixed typo
 
 	        // }
@@ -241,12 +246,7 @@ class InsuranceController extends Controller {
 	    $transaction = DB::transaction(function($data) use($data){
 	    try{
 
-	        // for($i = 0; $i < count($data); $i++) {
-			$insurance            = new InsuranceItem;
-
-			DB::table('insurance_items')->where('insurance_item_code', $data['insurance_item_code'])->delete();
-
-	        // }
+			InsuranceItem::where('insurance_item_code', $data['insurance_item_code'])->firstOrFail()->delete();
 
 	        return response()->json([
 	            'status' => 200,

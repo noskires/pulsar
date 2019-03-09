@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use DB;
+use Auth;
 use App\Voucher;
 use App\Bank;
 use App\Http\Requests;
@@ -56,7 +57,10 @@ class BanksController extends Controller {
 				$bank->manager_email = $data['manager_email'];
 				$bank->mobile_number = $data['mobile_number'];
 				$bank->telephone_number = $data['telephone_number'];
+				$bank->changed_by = Auth::user()->email;
 				$bank->save();
+
+				
 
 				return response()->json([
 				    'status' => 200,
@@ -83,16 +87,18 @@ class BanksController extends Controller {
 
 		$transaction = DB::transaction(function($data) use($data){
 		try{
-				DB::table('banks')
-				->where('bank_code', $data['bank_code'])
-				->update([
-					'bank_name' => $data['bank_name'],
-					'branch' => $data['branch'],
-					'manager' => $data['manager'],
-					'manager_email' => $data['manager_email'],
-					'mobile_number' => $data['mobile_number'],
-					'telephone_number' => $data['telephone_number']
-				]);
+
+
+				$bank = Bank::where('bank_code', $data['bank_code'])->first();
+	            $bank->bank_name = $data['bank_name'];
+	            $bank->branch = $data['branch'];
+	            $bank->manager = $data['manager'];
+	            $bank->manager_email = $data['manager_email'];
+	            $bank->mobile_number = $data['mobile_number'];
+	            $bank->telephone_number = $data['telephone_number'];
+	            $bank->changed_by = Auth::user()->email;
+	            $bank->timestamps = true;
+	            $bank->save();
 
 				return response()->json([
 					'status' => 200,

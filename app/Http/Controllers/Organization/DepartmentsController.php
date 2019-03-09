@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Organization;
 use Illuminate\Http\Request;
 
 use DB;
+use Auth;
 use App\Organization;
 use App\Department;
 
@@ -72,6 +73,7 @@ class DepartmentsController extends Controller {
         $organization->org_type = "Department"; 
         $organization->municipality_code = $data['municipality'];
         $organization->barangay = $data['barangay'];
+        $organization->changed_by = Auth::user()->email;
         $organization->save();
 
         return response()->json([
