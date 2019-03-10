@@ -8,7 +8,7 @@
 </section>
 
 <!-- Main content -->
-
+  
 <section class="content">
   <div class="row">
     <div id="button-top" class="col-md-9"> 
@@ -37,12 +37,12 @@
           <div class="box-body">
             <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label">Employee ID</label>
-              <div class="col-sm-3"><input type="number" class="form-control"></div>
+              <div class="col-sm-3"><input type="number" class="form-control" ng-model="ec.employeeDetails.employeeID"></div>
               <label for="dv-payee-type" class="col-sm-3 control-label">Gender</label>
               <div class="radio col-sm-3">
-                <label><input type="radio" name="optionsRadios" id="optionsRadios1" value="supplier" checked>Male</label>
+                <label><input type="radio" ng-model="ec.employeeDetails.gender" value="Male">Male</label>
                 &nbsp;&nbsp;&nbsp;
-                <label><input type="radio" name="optionsRadios" id="optionsRadios2" value="bank">Female</label>
+                <label><input type="radio" ng-model="ec.employeeDetails.gender" value="Female">Female</label>
               </div>
             </div>
 
@@ -220,139 +220,6 @@ $('.select2').select2();
 });
 </script>
 
-
-<!-- MODAL CONTENTS -->
-<script type="text/ng-template" id="employeeNewTpl.modal">
-<div>
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" ng-click="vm.ok()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Add New Employee Information</h4>
-      </div>
-      <div class="modal-body">
-        <!-- Custom Tabs (Pulled to the right) -->
-        <div class="nav-tabs-custom">
-          <div class="tab-content">
-            <div class="tab-pane active" id="tab_1-1">
-              <!-- form start -->
-                <form class="form-horizontal" id="" ng-model="vm.employeeDetails">
-                  <div class="box-body">
-                    <!-- <div class="form-group col-sm-12">
-                      <label for="controlnumber" class="col-sm-3 control-label">Employee ID</label>
-                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_id" ng-model="vm.employeeDetails.emp_id"></div>
-                    </div> -->
-                    <div class="form-group col-sm-12">
-                      <label for="controlnumber" class="col-sm-3 control-label">Last Name</label>
-                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_lname" ng-model="vm.employeeDetails.lname"></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label for="controlnumber" class="col-sm-3 control-label">Suffix</label>
-                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.employeeDetails.suffix"></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label for="controlnumber" class="col-sm-3 control-label">First Name</label>
-                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_fname" ng-model="vm.employeeDetails.fname"></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label for="controlnumber" class="col-sm-3 control-label">Middle Name</label>
-                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_mname" ng-model="vm.employeeDetails.mname"></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label class="col-sm-3 control-label">Job Title</label>
-                      <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.position_code">
-                        <option selected="selected" value="0">- - select job title - -</option>
-                        <option ng-value="position.position_code" ng-repeat="position in vm.positions"><%position.position_text%></option>
-                      </select></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label class="col-sm-3 control-label">Birth Date</label>
-                      <div class="col-sm-9">
-                      <div class="input-group date">
-                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                      <input type="text" class="form-control pull-right" datepicker ng-model="vm.employeeDetails.bday">
-                    </div></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label for="controlnumber" class="col-sm-3 control-label">Email Account</label>
-                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.employeeDetails.email"></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label for="controlnumber" class="col-sm-3 control-label">Phone No.</label>
-                      <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.employeeDetails.phone_no"></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label class="col-sm-3 control-label">Department</label>
-                      <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.department" ng-change="vm.selectDepartment(vm.employeeDetails.department)">
-                        <option selected="selected" value="">- - Select Department - -</option>
-                        <option ng-value="department.org_code" ng-repeat="department in vm.departments"><%department.department_name%></option>
-                      </select></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label class="col-sm-3 control-label">Division</label>
-                      <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.division" ng-change="vm.selectDivision(vm.employeeDetails.division)">
-                        <option selected="selected" value="">- - select division - -</option>
-                        <option ng-value="division.org_code" ng-repeat="division in vm.divisions"><%division.division_name%></option>
-                      </select></div>
-                    </div>
-                    <div class="form-group col-sm-12">
-                      <label class="col-sm-3 control-label">Unit</label>
-                      <div class="col-sm-9">
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.employeeDetails.unit">
-                        <option selected="selected" value="">- - select unit - -</option>
-                        <option ng-value="unit.org_code" ng-repeat="unit in vm.units"><%unit.unit_name%></option>
-                      </select></div>
-                    </div>
-                  </div>
-                  <!-- /.box-body -->
-                </form>
-            </div>
-            <!-- /.tab-pane -->
-
-            <div class="tab-pane" id="tab_2-2">
-              <b>EMPLOYEE ASSIGNMENT HISTORY.</b><br>
-              A wonderful serenity has taken possession of my entire soul,
-              like these sweet mornings of spring which I enjoy with my whole heart.
-              I am alone, and feel the charm of existence in this spot,
-              which was created for the bliss of souls like mine. I am so happy,
-              my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-              that I neglect my talents. I should be incapable of drawing a single stroke
-              at the present moment; and yet I feel that I never was a greater artist than now.
-            </div>
-            <!-- /.tab-pane -->
-          </div>
-          <!-- /.tab-content -->
-        </div>
-        <!-- nav-tabs-custom -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" ng-click="vm.ok()">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="vm.submit(vm.employeeDetails)">Save changes</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
- <script type="text/javascript">
-  $(function () {
-
-    $('.select2').select2();
-
-  //   $('#datepicker').datepicker({
-  //    autoclose: true
-  //   })
-  });
-  </script>
-</script>
-<!-- /.modal -->
-
 <!-- MODAL CONTENTS -->
 <script type="text/ng-template" id="employeeEditTpl.modal">
 <div>
@@ -366,22 +233,7 @@ $('.select2').select2();
       <div class="modal-body">
         <!-- Custom Tabs (Pulled to the right) -->
         <div class="nav-tabs-custom">
-         <!--  <ul class="nav nav-tabs pull-right">
-            <li class="active"><a href="#tab_1-1" data-toggle="tab">Details</a></li>
-            <li><a href="#tab_2-2" data-toggle="tab">History</a></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                Options <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mark as Finished</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Print</a></li>
-              </ul>
-            </li>
-            <li class="pull-left header"><i class="fa fa-user"></i> MICHAEL PADILLA CAPARAS</li>
-          </ul> -->
+  
           <div class="tab-content">
             <div class="tab-pane active" id="tab_1-1">
               <!-- form start -->
@@ -406,7 +258,17 @@ $('.select2').select2();
                     <div class="form-group col-sm-12">
                       <label for="controlnumber" class="col-sm-3 control-label">Middle Name</label>
                       <div class="col-sm-9"><input type="text" class="form-control" id="emp_mname" ng-model="vm.formData.mname"></div>
-                    </div>                    
+                    </div>  
+                    <div class="form-group col-sm-12">
+                      <label class="col-sm-3 control-label">Gender</label>
+                      <div class="col-sm-9">
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.gender">
+                        <option selected="selected" value="">- - Select Female - -</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                      </div>
+                    </div>                  
                     <div class="form-group col-sm-12">
                       <label class="col-sm-3 control-label">Job Title</label>
                       <div class="col-sm-9">
@@ -550,15 +412,4 @@ $('.select2').select2();
   <!-- /.modal-dialog -->
 </div>
 
- <script type="text/javascript">
-  $(function () {
-
-    $('.select2').select2();
-
-  //   $('#datepicker').datepicker({
-  //    autoclose: true
-  //   })
-  });
-  </script>
-</script>
 <!-- /.modal -->

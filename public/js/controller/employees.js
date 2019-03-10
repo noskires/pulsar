@@ -3,6 +3,8 @@
     angular
         .module('pulsarApp')
         .controller('EmployeesCtrl', EmployeesCtrl) 
+
+        
         .controller('EmployeesModalInstanceCtrl', EmployeesModalInstanceCtrl) 
         .controller('PositionsModalInstanceCtrl', PositionsModalInstanceCtrl) 
 
@@ -10,6 +12,10 @@
         function EmployeesCtrl($state, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {}; 
+
+            vm.employeeDetails = {
+                'gender':'Male'
+            };
 
             EmployeesSrvcs.employees({jobType:''}).then (function (response) {
                 if(response.data.status == 200)
@@ -19,21 +25,21 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            vm.addNewEmployee = function(){
-                var modalInstance = $uibModal.open({
-                    controller:'EmployeesModalInstanceCtrl',
-                    templateUrl:'employeeNewTpl.modal',
-                    controllerAs: 'vm',
-                    resolve :{
-                      formData: function () {
-                        return {
-                            title:'Employees Controller',
-                            message:"response.data.message"
-                        };
-                      }
-                    }
-                });
-            }
+            // vm.addNewEmployee = function(){
+            //     var modalInstance = $uibModal.open({
+            //         controller:'EmployeesModalInstanceCtrl',
+            //         templateUrl:'employeeNewTpl.modal',
+            //         controllerAs: 'vm',
+            //         resolve :{
+            //           formData: function () {
+            //             return {
+            //                 title:'Employees Controller',
+            //                 message:"response.data.message"
+            //             };
+            //           }
+            //         }
+            //     });
+            // }
 
             vm.addNewPosition = function(){
                 var modalInstance = $uibModal.open({
@@ -139,13 +145,27 @@
                 EmployeesSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        // vm.routeTo('employee/list');
 
                         EmployeesSrvcs.employees({jobType:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.employees = response.data.data;
                                 console.log(vm.employees)
+
+                                vm.employeeDetails = {
+                                    'employeeID':'',
+                                    'lname':'',
+                                    'fname':'',
+                                    'mname':'',
+                                    'gender':'Male',
+                                    'phone_no':'',
+                                    'email':'',
+                                    'bday':'',
+                                    'position_code':false,
+                                    'department':false,
+                                    'division':false,
+                                    'unit':false,
+                                };
                             }
                         }, function (){ alert('Bad Request!!!') })
 
@@ -156,7 +176,6 @@
                     }
                     console.log(response.data);
                 });
-                // alert('sumbbbb')
             };
         }
 
@@ -198,8 +217,6 @@
                     console.log(vm.units)
                 }
             }, function (){ alert('Bad Request!!!') })
-
- 
 
             vm.selectDepartment =  function(departmentCode){
                 console.log(departmentCode);
@@ -253,23 +270,29 @@
                 EmployeesSrvcs.update(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        // vm.routeTo('employee/list');
-                        // console.log(response.data);
                         EmployeesSrvcs.employees({jobType:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.employees = response.data.data;
                                 console.log(vm.employees)
+                                vm.close();
                             }
                         }, function (){ alert('Bad Request!!!') })
 
                         $state.go('list-employees');
+                    }
+                    else {
+                        alert(response.data.message);
                     }
                 }, function (){ alert('Bad Request!!!') });
             }
 
             vm.routeTo = function(route){
                 $window.location.href = route;
+            };
+
+            vm.close = function() {
+                $uibModalInstance.close();
             };
         }
 

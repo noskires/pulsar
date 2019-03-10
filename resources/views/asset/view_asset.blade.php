@@ -32,6 +32,7 @@
               <div class="box-body" style="font-size: 14px;">
                 <b>Category:</b> <%amdc.asset.asset_category_name%><br>
                 <b>ID:</b> <%amdc.asset.code%><br>
+                <b>Name:</b> <%amdc.asset.name%><br>
                 <b>Description:</b> <%amdc.asset.description%><br>
                 <b>Model:</b> <%amdc.asset.model%><br>
                 <b>Make/Brand:</b> <%amdc.asset.brand%><br>

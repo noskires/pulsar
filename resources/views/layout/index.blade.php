@@ -326,12 +326,6 @@
 
 <!-- Shared Modal -->
 
-
-<script type="text/ng-template" id="asset.more.details.view4">
-  @include('asset.view_asset4')
-</script>
-
-
 @endsection
 
 @section('additionalScripts')
