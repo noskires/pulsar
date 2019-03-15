@@ -17,8 +17,6 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="{{URL::to('bower_components/select2/dist/css/select2.min.css')}}">
 
-
-
 <style>
 
   .example-modal .modal {

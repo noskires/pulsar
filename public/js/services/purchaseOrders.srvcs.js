@@ -11,7 +11,12 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/purchase-orders?poCode='+data.poCode+'&supplierCode='+data.supplierCode+'&referenceCode='+data.referenceCode+'&status='+data.status,
+                        url: '/api/v1/purchase-orders?poCode='+data.poCode+
+                                '&supplierCode='+data.supplierCode+
+                                '&referenceCode='+data.referenceCode+
+                                '&dateFrom='+data.dateFrom+
+                                '&dateTo='+data.dateTo+
+                                '&status='+data.status,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

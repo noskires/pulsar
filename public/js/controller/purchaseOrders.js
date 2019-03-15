@@ -16,7 +16,7 @@
             {
                 vm.poCode = $stateParams.poCode; 
 
-                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', status:0}).then (function (response) {
+                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', status:2, dateFrom: '', dateTo:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.po = response.data.data[0];
@@ -41,6 +41,8 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+
+
             SuppliersSrvcs.suppliers({supplierCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -49,13 +51,21 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
-                if(response.data.status == 200)
-                {
-                    vm.pos = response.data.data;
-                    console.log(vm.pos)
-                }
-            }, function (){ alert('Bad Request!!!') })
+            PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:3, dateFrom: '', dateTo:''}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.pos = response.data.data;
+                        console.log(vm.pos)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+
+            // PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.pos = response.data.data;
+            //         console.log(vm.pos)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
 
             OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
                 if(response.data.status == 200)
@@ -92,7 +102,7 @@
             vm.selectPurchaseOrders = function(referenceCode){
                 // alert(referenceCode)
 
-                PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:referenceCode, supplierCode:'', status:0}).then (function (response) {
+                PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:referenceCode, supplierCode:'', status:2, dateFrom: '', dateTo:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.pos = response.data.data;
@@ -107,7 +117,7 @@
                 PurchaseOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
+                        PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:2, dateFrom: '', dateTo:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.pos = response.data.data;
@@ -160,6 +170,17 @@
                     console.log(response.data);
                 });
             };
+
+            vm.filterPoBtn = function(data){
+                console.log(data)
+                PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:data.supplier_code, status:data.status, dateFrom: data.dateFrom, dateTo:data.dateTo}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.pos = response.data.data;
+                        console.log(vm.pos)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
 
             vm.printPurchaseOrderOfficeDetails = function(data){
                 console.log(data)

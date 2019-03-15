@@ -114,28 +114,44 @@
                   <div class="box-body">
                     <div class="form-group col-sm-12">
 
-                      <label class="col-sm-1 control-label">Date</label>
                       <div class="col-sm-2">
-                      <div class="input-group date">
-                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                      <input type="text" class="form-control pull-right" id="daterange-filter">
-                      </div></div>
-
-                      <!-- <label for="requestpurpose" class="col-sm-1 control-label">Repair of</label>
-                      <div class="col-sm-4">
-                      <select class="form-control select2" style="width: 100%;" required="">
-                      <option selected="selected" value="1">All Asset Category</option>
-                      <option value="3">Communication Equipment</option>
-                      <option value="4">Construction Equipment</option>
-                      </select></div> -->
-
-                      <label for="assetname" class="col-sm-2 control-label">PO Status</label>
-                      <div class="col-sm-1">
-                      <label class="checkbox-inline"><input type="checkbox" value="">Open</label>
-                      <label class="checkbox-inline"><input type="checkbox" value="">Closed</label>
+                      <label class="control-label">From</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateFrom">
+                        </div>
                       </div>
+
+                      <div class="col-sm-2">
+                      <label class="control-label">TO</label>
+                        <div class="input-group date">
+                          <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateTo">
+                        </div>
+                      </div>
+
+                      <div class="col-sm-2">
+                        <label class="control-label">Supplier</label>
+                        <select class="form-control select2" style="width: 100%;" ng-model="poc.poFilterDetails.supplier_code">
+                          <option selected="selected" value="">Select Supplier</option>
+                          <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
+                        </select>
+                      </div>
+
+
+                      <div class="col-sm-2">
+                      <label for="assetname" class="control-label">PO Status</label>
+                      <select class="form-control select2" style="width: 100%;" required="" ng-model="poc.poFilterDetails.status">
+                          <option value="">Select Status</option>
+                          <option value=3>ALL</option>
+                          <option value=2>OPEN</option>
+                          <option value=1>CLOSED</option>
+                        </select>
+                      </div>
+
                       <div class="col-sm-1">
-                      <button class="btn btn-large btn-success">FILTER DISPLAY</button>
+                      <br>
+                      <button class="btn btn-large btn-success" ng-click="poc.filterPoBtn(poc.poFilterDetails)">FILTER DISPLAY</button>
                       </div>
                     </div>
                   </div>
@@ -196,58 +212,6 @@
       </div>
     </div>
   </div>
-
-<!-- LIST RS -->
-<!--       <div class="box">
-            <div class="box-body">
-              <table id="tbl_rs" class="table table-bordered table-hover" width="100%">
-                <thead>
-                <tr>
-                  <th>PO No.</th>
-                  <th>Reference (RIS)</th>
-                  <th>Reference (PO)</th>
-                  <th>Date</th>
-                  <th>Supplier Name</th>
-                  <th>Address</th>
-                  <th>Owner</th>
-                  <th>Requesting Office</th>
-                  <th>ID</th>
-                  <th>Requesting Employee</th>
-                  <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>PO-03102018-1</b></a></td>
-                  <td>RIS-1234</td>
-                  <td>PO-1234</td>
-                  <td>04/30/2018</td>
-                  <td>Supplier Name</td>
-                  <td>Supplier Address</td>
-                  <td>Supplier Owner</td>
-                  <td>Requesting Office</td>
-                  <td>Project ID/Office ID</td>
-                  <td>Jay Bulan</td>
-                  <td><small class="label bg-gray">Closed</small></td>
-                </tr>
-                <tr>
-                  <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>PO-03102018-1</b></a></td>
-                  <td>RIS-1234</td>
-                  <td>PO-1234</td>
-                  <td>04/30/2018</td>
-                  <td>Supplier Name</td>
-                  <td>Supplier Address</td>
-                  <td>Supplier Owner</td>
-                  <td>Requesting Office</td>
-                  <td>Project ID/Office ID</td>
-                  <td>Jay Bulan</td>
-                  <td><small class="label bg-green">Open</small></td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-      <!-- </div> -->
 
         <div class="modal fade" id="modal-editrs">
           <div class="modal-dialog modal-md">

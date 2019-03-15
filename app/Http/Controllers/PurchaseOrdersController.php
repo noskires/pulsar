@@ -24,41 +24,45 @@ class PurchaseOrdersController extends Controller {
 			'referenceCode'=>$request->input('referenceCode'),
 			'supplierCode'=>$request->input('supplierCode'),
 			'status'=>$request->input('status'),
+			'dateFrom'=>$request->input('dateFrom'),
+			'dateTo'=>$request->input('dateTo')
+			// 'dateFrom'=>date('Y-m-d', strtotime($request->input('dateFrom'))),
+			// 'dateTo'=>date('Y-m-d', strtotime($request->input('dateTo')))
+			
 		);
+
+		// return $data;
 
 		$pos = DB::table('purchase_orders AS po')
 					->select(
-                      'po.po_code',
-                      'po.reference_code',
-                      'po.request_type',
-                      'po.received_by',
-                      'po.date_received',
-                      'po.inspected_by',
-                      'po.date_inspected',
-                      'po.requisition_slip_code',
-                      'po.old_reference',
-                      's.supplier_code',
-                      's.supplier_name',
-                      's.supplier_owner',
-                      's.bir_no',
-                      's.address',
-                      'e.employee_code',
-                      DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee'),
-                      'requisition_slip.old_reference as requisition_old_reference',
-
-
-                      DB::raw('CASE 
-                      	WHEN po.date_received IS NULL 
-                      		OR po.received_by IS NULL 
-                      		OR po.received_by = "1970-01-01" 
-                      		OR po.date_inspected IS NULL 
-                      		OR po.inspected_by IS NULL 
-                      	THEN "OPEN"
-						ELSE 
-							"CLOSED" 
-						END AS po_status'
-					  )
-
+						'po.po_code',
+						'po.reference_code',
+						'po.request_type',
+						'po.received_by',
+						'po.date_received',
+						'po.inspected_by',
+						'po.date_inspected',
+						'po.requisition_slip_code',
+						'po.old_reference',
+						's.supplier_code',
+						's.supplier_name',
+						's.supplier_owner',
+						's.bir_no',
+						's.address',
+						'e.employee_code',
+                     	 DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee'),
+                      	'requisition_slip.old_reference as requisition_old_reference',
+                      	DB::raw('CASE 
+	                      	WHEN po.date_received IS NULL 
+	                      		OR po.received_by IS NULL 
+	                      		OR po.received_by = "1970-01-01" 
+	                      		OR po.date_inspected IS NULL 
+	                      		OR po.inspected_by IS NULL 
+	                      	THEN "OPEN"
+							ELSE 
+								"CLOSED" 
+							END AS po_status'
+					  	)
                     )
                     ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')
                     // ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code')
@@ -89,7 +93,8 @@ class PurchaseOrdersController extends Controller {
 							ELSE 
 								"CLOSED" 
 							END'),  'CLOSED'); 
-	      	}else{
+	      	}
+	      	elseif($data['status'] == 2){
 	      		$pos = $pos->where(DB::raw('CASE 
 	                      	WHEN po.date_received IS NULL 
 	                      		OR po.received_by IS NULL 
@@ -99,13 +104,21 @@ class PurchaseOrdersController extends Controller {
 							ELSE 
 								"CLOSED" 
 							END'),  'OPEN');
+	      	}else{
+	      		//nothing here
 	      	}
 
 	    }
 
+	    if($data['dateFrom']){
+	    	$pos = $pos->whereBetween('po.created_at', array(
+	    			date('Y-m-d', strtotime($data['dateFrom'])), 
+	    			date('Y-m-d', strtotime($data['dateTo']))
+	    		));
+	    }
+
 		$pos = $pos->get();
 
-	
 		foreach ($pos as $key => $po) {
 
 
