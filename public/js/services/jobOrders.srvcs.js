@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/job-orders?joCode='+data.joCode+'&joStatus='+data.joStatus+'&assetTag='+data.assetTag,
+                        url: '/api/v1/job-orders?joCode='+data.joCode+'&joStatus='+data.joStatus+'&assetCode='+data.assetCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

@@ -357,7 +357,7 @@
             <span class="btn btn-default">Browse&hellip; <input type="file" name="file" id="file" style="display: none;"></span>
           </label>
           <input type="text" class="form-control" id="" readonly required="">
-          <input type="hidden" name="assetTag" value="<%amdc.asset.tag%>">
+          <input type="hidden" name="assetCode" value="<%amdc.assetCode%>">
           <input type="hidden" value="{{ csrf_token() }}" name="_token">
         </div> </div>               
         </div>

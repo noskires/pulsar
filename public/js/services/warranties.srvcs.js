@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/warranties?tag='+data.tag,
+                        url: '/api/v1/warranties?assetCode='+data.assetCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

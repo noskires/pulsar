@@ -42,9 +42,9 @@
               <label for="assetname" class="col-sm-2 control-label">Asset Name</label>
               <div class="col-sm-4">
 
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="jo.details.tag">
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="jo.details.assetCode">
                 <option selected="selected" value="">- - SELECT EQUIPMENT - -</option>
-                <option ng-value="asset.tag" ng-repeat="asset in joc.assets"><%asset.name + " : " + asset.tag%></option> 
+                <option ng-value="asset.asset_code" ng-repeat="asset in joc.assets"><%asset.name + " : " + asset.tag%></option> 
               </select>
 
               </div>
@@ -148,6 +148,7 @@
           <th>Control No.</th>
           <th>Job Order Date</th> 
           <th>Asset Name</th>
+          <th>Asset Code</th>
           <th>Asset Tag</th>
           <th>Location</th>
           <th>Requesting Employee</th>
@@ -162,6 +163,7 @@
           <td><a href="#" ui-sref="list-joCopy2({joCode2:jobOrder.job_order_code})" ng-click="joc.jobOrderInfo(jobOrder.job_order_code)"><b><%jobOrder.job_order_code%></b></a></td>
           <td><%jobOrder.job_order_date%></td> 
           <td><%jobOrder.name%></td>
+          <td><%jobOrder.asset_code%></td>
           <td><%jobOrder.tag%></td>
           <td><%jobOrder.municipality_text+" "+jobOrder.province_text+" "+jobOrder.region_text_long%></td>
           <td><%jobOrder.employee_name%></td>

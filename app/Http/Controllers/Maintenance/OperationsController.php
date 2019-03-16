@@ -36,6 +36,7 @@ class OperationsController extends Controller {
                 'o.oil_consumption', 
                 'o.number_loads', 
                 'a.tag', 
+                'a.asset_code', 
                 'a.name as asset_name',
                 'project.name as project_name',
                 'm.municipality_code as municipality_code',
@@ -46,7 +47,7 @@ class OperationsController extends Controller {
                 'r.region_text_short',
                 'r.region_text_long'
               )
-            ->leftjoin('Assets as a','a.tag','=','o.asset_tag')
+            ->leftjoin('Assets as a','a.asset_code','=','o.asset_code')
             ->leftjoin('Projects as project','project.project_code','=','o.project_code')
             ->leftjoin('municipalities as m','m.municipality_code','=','project.municipality_code')
             ->leftjoin('provinces as p','p.province_code','=','m.province_code')
@@ -70,12 +71,12 @@ class OperationsController extends Controller {
   public function assets_monitoring(Request $request){
 
       $data = array(
-        'tag'=>$request->input('tag'),
+        'assetCode'=>$request->input('assetCode'),
       );
 
       $assets = DB::table('assets as a')
               ->select( 
-                        'a.tag',
+                        'a.asset_code',
                         'a.name as asset_name', 
                         DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
                         DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
@@ -84,13 +85,13 @@ class OperationsController extends Controller {
                         DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
                         DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
                       )
-            ->leftjoin('operations as o','o.asset_tag','=','a.tag')
-            ->groupBy('a.tag', 'a.name')
+            ->leftjoin('operations as o','o.asset_code','=','a.asset_code')
+            ->groupBy('a.asset_code', 'a.name')
             ->leftjoin('Projects as p','p.project_code','=','o.project_code')
             ->where('a.category', 'CONE');
 
-      if ($data['tag']){
-        $assets = $assets->where('tag', $data['tag']);
+      if ($data['assetCode']){
+        $assets = $assets->where('a.asset_code', $data['assetCode']);
       }
 
       $assets = $assets->get();
@@ -104,40 +105,41 @@ class OperationsController extends Controller {
    public function save(Request $request){
 
     $data = array();
-    $data['operationDate'] = date('Y-m-d', strtotime($request->input('operationDate')));
-    $data['assetName'] = $request->input('assetName');
-    $data['assetTag'] = $request->input('assetTag');
-    $data['projectName'] = $request->input('projectName');
-    $data['projectCode'] = $request->input('projectCode');
-    $data['remarks'] = $request->input('remarks');
-    $data['operatingHours'] = $request->input('operatingHours');
-    $data['distanceTravelled'] = $request->input('distanceTravelled');
-    $data['dieselConsumption'] = $request->input('dieselConsumption');
-    $data['gasConsumption'] = $request->input('gasConsumption');
-    $data['oilConsumption'] = $request->input('oilConsumption');
-    $data['numberLoads'] = $request->input('numberLoads');
+    $data['operationDate']        = date('Y-m-d', strtotime($request->input('operationDate')));
+    $data['assetName']            = $request->input('assetName');
+    $data['assetCode']            = $request->input('assetCode');
+    $data['assetTag']             = $request->input('assetTag');
+    $data['projectName']          = $request->input('projectName');
+    $data['projectCode']          = $request->input('projectCode');
+    $data['remarks']              = $request->input('remarks');
+    $data['operatingHours']       = $request->input('operatingHours');
+    $data['distanceTravelled']    = $request->input('distanceTravelled');
+    $data['dieselConsumption']    = $request->input('dieselConsumption');
+    $data['gasConsumption']       = $request->input('gasConsumption');
+    $data['oilConsumption']       = $request->input('oilConsumption');
+    $data['numberLoads']          = $request->input('numberLoads');
    
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         $operation = new Operation;
 
         $operationCode = (str_pad(($operation->where('operation_date', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        // $operation->operation_code = "OPN-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
-        $operation->operation_code = "OPN-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
-        $operation->operation_date = $data['operationDate']; 
-        $operation->asset_tag = $data['assetTag']; 
-        $operation->project_code = $data['projectCode']; 
-        $operation->remarks = $data['remarks']; 
-        $operation->operating_hours = $data['operatingHours']; 
-        $operation->distance_travelled = $data['distanceTravelled']; 
-        $operation->diesel_consumption = $data['dieselConsumption']; 
-        $operation->gas_consumption = $data['gasConsumption']; 
-        $operation->oil_consumption = $data['oilConsumption']; 
-        $operation->number_loads = $data['numberLoads']; 
-        $operation->changed_by = Auth::user()->email;
+        $operation->operation_code      = "OPN-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
+        $operation->operation_date      = $data['operationDate']; 
+        $operation->asset_code           = $data['assetCode']; 
+        // $operation->asset_tag           = $data['assetTag']; 
+        $operation->project_code        = $data['projectCode']; 
+        $operation->remarks             = $data['remarks']; 
+        $operation->operating_hours     = $data['operatingHours']; 
+        $operation->distance_travelled  = $data['distanceTravelled']; 
+        $operation->diesel_consumption  = $data['dieselConsumption']; 
+        $operation->gas_consumption     = $data['gasConsumption']; 
+        $operation->oil_consumption     = $data['oilConsumption']; 
+        $operation->number_loads        = $data['numberLoads']; 
+        $operation->changed_by          = Auth::user()->email;
         $operation->save();
 
         return response()->json([
@@ -145,15 +147,15 @@ class OperationsController extends Controller {
             'data' => 'null',
             'message' => 'Successfully saved.'
         ]);
-      } 
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // } 
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

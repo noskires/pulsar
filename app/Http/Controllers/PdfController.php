@@ -18,24 +18,24 @@ class PdfController extends Controller {
     return $pdf->stream('asset.report1.pdf');
    }
 
-   public function export($assetTag){
+   public function export($assetCode){
       // return view('employee.index');
 
-    $data['some_data'] = array('you', 'are', 'the', 'one');
-    $data['assetTag'] = $assetTag;
+    // $data['some_data'] = array('you', 'are', 'the', 'one');
+    // $data['assetCode'] = $assetCode;
 
-    $data['asset']            = $this->asset($assetTag);
-    $data['asset_photo']      = $this->asset_photo($assetTag);
-    $data['asset_monitoring'] = $this->asset_monitoring($assetTag);
-    $data['jos']              = $this->jo($assetTag);
-    $data['events']           = $this->events($assetTag);
-    $data['insurance']        = $this->insurance($assetTag);
+    $data['asset']            = $this->asset($assetCode);
+    $data['asset_photo']      = $this->asset_photo($assetCode);
+    $data['asset_monitoring'] = $this->asset_monitoring($assetCode);
+    $data['jos']              = $this->jo($assetCode);
+    $data['events']           = $this->events($assetCode);
+    $data['insurance']        = $this->insurance($assetCode);
 
     $pdf = PDF::loadView('asset.report1',  $data);
     return $pdf->stream('asset.report1.pdf');
    }
 
-   public function asset($assetTag){
+   public function asset($assetCode){
     $asset = DB::table('Assets as a')
             // ->select('*')
             ->select(
@@ -79,7 +79,7 @@ class PdfController extends Controller {
             ->leftjoin('provinces as p','p.province_code','=','m.province_code')
             ->leftjoin('regions as r','r.region_code','=','p.region_code');
 
-          $asset = $asset->where('a.tag', $assetTag);
+          $asset = $asset->where('a.asset_code', $assetCode);
         
         $asset = $asset->first();
 
@@ -87,10 +87,10 @@ class PdfController extends Controller {
    }
 
 
-   public function asset_monitoring($assetTag){
+   public function asset_monitoring($assetCode){
     $assets = DB::table('assets as a')
               ->select( 
-                        'a.tag',
+                        'a.asset_code',
                         'a.name as asset_name', 
                         DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
                         DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
@@ -99,13 +99,13 @@ class PdfController extends Controller {
                         DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
                         DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
                       )
-            ->leftjoin('operations as o','o.asset_tag','=','a.tag')
+            ->leftjoin('operations as o','o.asset_code','=','a.asset_code')
             ->leftjoin('Projects as p','p.project_code','=','o.project_code')
-            ->groupBy('a.tag', 'a.name')
+            ->groupBy('a.asset_code', 'a.name')
             ->where('a.category', 'CONE');
 
 
-        $assets = $assets->where('tag', $assetTag);
+        $assets = $assets->where('a.asset_code', $assetCode);
 
 
       $assets = $assets->first();
@@ -113,27 +113,27 @@ class PdfController extends Controller {
       return $assets;
    }
 
-   public function asset_photo($assetTag){
+   public function asset_photo($assetCode){
 
-    $data = DB::table('asset_photos as ap')->where('ap.asset_tag', $assetTag)->where('ap.asset_photo_status', 1)->first();
+    $data = DB::table('asset_photos as ap')->where('ap.asset_code', $assetCode)->where('ap.asset_photo_status', 1)->first();
     return $data;
    }
 
-   public function jo($assetTag){
+   public function jo($assetCode){
 
-    $data = DB::table('job_orders as jo')->where('jo.asset_tag', $assetTag)->get();
+    $data = DB::table('job_orders as jo')->where('jo.asset_code', $assetCode)->get();
     return $data;
    }
 
-   public function events($assetTag){
+   public function events($assetCode){
 
-    $data = DB::table('asset_events as ae')->where('ae.asset_tag', $assetTag)->get();
+    $data = DB::table('asset_events as ae')->where('ae.asset_code', $assetCode)->get();
     return $data;
    }
 
-   public function insurance($assetTag){
+   public function insurance($assetCode){
 
-    $data = DB::table('insurance_items as ii')->where('ii.asset_code', $assetTag)->leftjoin('insurance as i','i.insurance_code','=','ii.insurance_code')
+    $data = DB::table('insurance_items as ii')->where('ii.asset_code', $assetCode)->leftjoin('insurance as i','i.insurance_code','=','ii.insurance_code')
     ->get();
     return $data;
    }

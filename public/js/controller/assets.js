@@ -14,21 +14,21 @@
             var vm = this;
             var data = {};
 
-           // alert($stateParams.assetTag);
+           alert($stateParams.assetCode);
 
-           if($stateParams.assetTag)
-            {   
-                var tag = $stateParams.assetTag;
+           vm.assetCode = $stateParams.assetCode;
+
+           if($stateParams.assetCode)
+            { 
 
                 vm.assetsDetails = {
-                    tag:tag, 
+                    assetCode:$stateParams.assetCode, 
                     name:'', 
                     category:'', 
                     areCode:'', 
                     status:'',
                     isAll:1,
                     withActiveAre:2
-
                 }
 
                 AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
@@ -47,7 +47,7 @@
                                 return {
                                     title:'Assets Controller',
                                     message:response.data.message,
-                                    asset: response.data.data[0]
+                                    asset: vm.asset
                                 };
                               }
                             },
@@ -57,10 +57,8 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-  
-
             vm.assetsDetails = {
-                tag:'',
+                assetCode:'',
                 name:'',
                 category:'',
                 areCode:'',
@@ -162,7 +160,9 @@
             var vm = this;
             vm.formData = formData;
 
-            AssetPhotosSrvcs.assetPhotos({tag:$stateParams.assetTag, name:'',status:1}).then (function (response) {
+            vm.assetCode = $stateParams.assetCode;
+
+            AssetPhotosSrvcs.assetPhotos({assetCode:$stateParams.assetCode, name:'',status:1}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assetPhoto = response.data.data;
@@ -170,9 +170,21 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            vm.printAssetDetails = function(tag){
-                vm.url = 'export/'+tag;
+            vm.printAssetDetails = function(assetCode){
+                vm.url = 'export/'+assetCode;
             }
+
+            // AssetPhotosSrvcs.assetPhotos({tag:$stateParams.assetCode, name:'',status:1}).then (function (response) {
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.assetPhoto = response.data.data;
+            //         console.log(vm.assetPhoto)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
+
+            // vm.printAssetDetails = function(tag){
+            //     vm.url = 'export/'+tag;
+            // }
 
             // console.log(vm.formData);
             vm.ok = function() {
@@ -203,12 +215,12 @@
                 alert(message);
             }
 
+            vm.assetCode = $stateParams.assetCode;
+
             vm.editAsset = function(argument) {
 
-                var tag = $stateParams.assetTag;
-
                 vm.assetsDetails = {
-                    tag:tag, 
+                    assetCode:$stateParams.assetCode, 
                     name:'', 
                     category:'', 
                     areCode:'', 
@@ -239,13 +251,11 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            if($stateParams.assetTag)
+            if($stateParams.assetCode)
             {
-                // alert($stateParams.assetTag)
-                vm.tag = $stateParams.assetTag;
 
                 vm.assetsDetails = {
-                    tag:vm.tag, 
+                    assetCode:$stateParams.assetCode,
                     name:'', 
                     category:'', 
                     areCode:'', 
@@ -261,7 +271,8 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
 
-                AssetsSrvcs.assetEvents({tag:vm.tag, name:'', category:'', areCode:'', isAll:1, assetEventCode:''}).then (function (response) {
+            //changed
+                AssetsSrvcs.assetEvents({assetCode:$stateParams.assetCode, name:'', category:'', areCode:'', isAll:1, assetEventCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.assetEvents = response.data.data;
@@ -269,7 +280,8 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
 
-                MaintenanceSrvcs.assetsMonitoring({tag:vm.tag}).then (function (response) {
+            //changed
+                MaintenanceSrvcs.assetsMonitoring({assetCode:$stateParams.assetCode}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.assetsMonitoring = response.data.data[0];
@@ -277,7 +289,8 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
 
-                WarrantiesSrvcs.warranties({tag:vm.tag}).then (function (response) {
+            //changed
+                WarrantiesSrvcs.warranties({assetCode:$stateParams.assetCode}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.warranties = response.data.data;
@@ -286,7 +299,9 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:'', assetTag:$stateParams.assetTag}).then (function (response) {
+            //changed
+
+            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:'', assetCode:$stateParams.assetCode}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.jobOrders = response.data.data;
@@ -294,7 +309,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:$stateParams.assetTag, insuranceItemStatus:1}).then (function (response) {
+            InsuranceSrvcs.insuranceItems({insuranceCode:'', insuranceItemCode:'',assetCode:$stateParams.assetCode, insuranceItemStatus:1}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.insurance = response.data.data;
@@ -302,7 +317,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetPhotosSrvcs.assetPhotos({tag:$stateParams.assetTag, name:'',status:''}).then (function (response) {
+            AssetPhotosSrvcs.assetPhotos({tag:$stateParams.assetCode, name:'',status:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assetPhotos = response.data.data;
@@ -310,7 +325,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetPhotosSrvcs.assetPhotos({tag:$stateParams.assetTag, name:'',status:1}).then (function (response) {
+            AssetPhotosSrvcs.assetPhotos({tag:$stateParams.assetCode, name:'',status:1}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assetPhoto = response.data.data;
@@ -319,8 +334,8 @@
             }, function (){ alert('Bad Request!!!') })
 
 
-            vm.printAssetDetails = function(tag){
-                vm.url = 'export/'+tag;
+            vm.printAssetDetails = function(assetCode){
+                vm.url = 'export/'+$stateParams.assetCode
             }
 
             vm.addNewWarranty = function(){ 
@@ -408,12 +423,12 @@
 
             vm.submitWarranty = function(data){
 
-                data['asset_tag'] = $stateParams.assetTag;
+                data['asset_tag'] = $stateParams.assetCode;
                 WarrantiesSrvcs.save(data).then (function (response) {
                     if(response.data.status == 200)
                     {
                         alert(response.data.message);
-                        vm.routeTo('asset/more-details/'+$stateParams.assetTag);
+                        vm.routeTo('asset/more-details/'+$stateParams.assetCode);
                         // WarrantiesSrvcs.warranties({tag:vm.tag}).then (function (response) {
                         //     if(response.data.status == 200)
                         //     {

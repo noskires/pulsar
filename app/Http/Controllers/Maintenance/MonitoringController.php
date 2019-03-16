@@ -40,12 +40,6 @@ class OperationsController1 extends Controller {
               )
             ->leftjoin('Assets as a','a.tag','=','o.asset_tag')
             ->leftjoin('Projects as p','p.project_code','=','o.project_code');
-            // ->leftjoin('Municipalities as m','m.municipality_code','=','p.municipality_code')
-            // ->leftjoin('municipalities as m','m.municipality_code','=','org.municipality_code')
-            // ->leftjoin('provinces as p','p.province_code','=','m.province_code')
-            // ->leftjoin('regions as r','r.region_code','=','p.region_code');
-            // -> leftjoin('Employees as e','e.employee_id','=','a.assign_to')
-            // -> leftjoin('Request_purpose as rp','rp.request_purpose_id','=','jo.request_purpose');
 
     if ($data['operationCode']){
       $operations = $operations->where('operation_code', $data['operationCode']);
@@ -64,18 +58,18 @@ class OperationsController1 extends Controller {
    public function save(Request $request){
     
     $data = array();
-    $data['operationDate'] = date('Y-m-d', strtotime($request->input('operationDate')));
-    $data['assetName'] = $request->input('assetName');
-    $data['assetTag'] = $request->input('assetTag');
-    $data['projectName'] = $request->input('projectName');
-    $data['projectCode'] = $request->input('projectCode');
-    $data['remarks'] = $request->input('remarks');
-    $data['operatingHours'] = $request->input('operatingHours');
-    $data['distanceTravelled'] = $request->input('distanceTravelled');
-    $data['dieselConsumption'] = $request->input('dieselConsumption');
-    $data['gasConsumption'] = $request->input('gasConsumption');
-    $data['oilConsumption'] = $request->input('oilConsumption');
-    $data['numberLoads'] = $request->input('numberLoads');
+    $data['operationDate']                  = date('Y-m-d', strtotime($request->input('operationDate')));
+    $data['assetName']                      = $request->input('assetName');
+    $data['assetCode']                      = $request->input('assetCode');
+    $data['projectName']                    = $request->input('projectName');
+    $data['projectCode']                    = $request->input('projectCode');
+    $data['remarks']                        = $request->input('remarks');
+    $data['operatingHours']                 = $request->input('operatingHours');
+    $data['distanceTravelled']              = $request->input('distanceTravelled');
+    $data['dieselConsumption']              = $request->input('dieselConsumption');
+    $data['gasConsumption']                 = $request->input('gasConsumption');
+    $data['oilConsumption']                 = $request->input('oilConsumption');
+    $data['numberLoads']                    = $request->input('numberLoads');
    
     $transaction = DB::transaction(function($data) use($data){
     try{
@@ -86,17 +80,17 @@ class OperationsController1 extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         // $operation->operation_code = "OPN-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
-        $operation->operation_code = "OPN-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
-        $operation->operation_date = $data['operationDate']; 
-        $operation->asset_tag = $data['assetTag']; 
-        $operation->project_code = $data['projectCode']; 
-        $operation->remarks = $data['remarks']; 
-        $operation->operating_hours = $data['operatingHours']; 
-        $operation->distance_travelled = $data['distanceTravelled']; 
-        $operation->diesel_consumption = $data['dieselConsumption']; 
-        $operation->gas_consumption = $data['gasConsumption']; 
-        $operation->oil_consumption = $data['oilConsumption']; 
-        $operation->number_loads = $data['numberLoads']; 
+        $operation->operation_code          = "OPN-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$operationCode;
+        $operation->operation_date          = $data['operationDate']; 
+        $operation->asset_code              = $data['assetCode']; 
+        $operation->project_code            = $data['projectCode']; 
+        $operation->remarks                 = $data['remarks']; 
+        $operation->operating_hours         = $data['operatingHours']; 
+        $operation->distance_travelled      = $data['distanceTravelled']; 
+        $operation->diesel_consumption      = $data['dieselConsumption']; 
+        $operation->gas_consumption         = $data['gasConsumption']; 
+        $operation->oil_consumption         = $data['oilConsumption']; 
+        $operation->number_loads            = $data['numberLoads']; 
         $operation->save();
 
         return response()->json([

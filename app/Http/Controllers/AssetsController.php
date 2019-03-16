@@ -116,8 +116,8 @@ class AssetsController extends Controller {
             ->leftjoin('provinces as p','p.province_code','=','m.province_code')
       			->leftjoin('regions as r','r.region_code','=','p.region_code');
 
-      	if ($data['tag']){ 
-      		$asset = $asset->where('a.tag', $data['tag']);
+      	if ($data['assetCode']){ 
+      		$asset = $asset->where('a.asset_code', $data['assetCode']);
       	}
 
         if ($data['name']){ 
@@ -175,9 +175,6 @@ class AssetsController extends Controller {
                 'r.region_code',
                 'r.region_text_short',
                 'r.region_text_long'
-                // 'are_item.are_item_code',
-                // 'are_item.ended_at'
-                // 'are.are_code'
               );
 
 
@@ -203,7 +200,7 @@ class AssetsController extends Controller {
     public function asset_events(Request $request){
 
         $data = array(
-            'tag'=>$request->input('tag'),
+            'assetCode'=>$request->input('assetCode'),
             'name'=>$request->input('name'),
             'category'=>$request->input('category'),
             'areCode'=>$request->input('areCode'),
@@ -216,25 +213,9 @@ class AssetsController extends Controller {
           $asset_events = $asset_events->where('asset_event_code', $data['assetEventCode']);
         }
 
-        if ($data['tag']){ 
-          $asset = $asset_events->where('ae.asset_tag', $data['tag']);
+        if ($data['assetCode']){ 
+          $asset = $asset_events->where('ae.asset_code', $data['assetCode']);
         }
-
-        // if ($data['name']){ 
-        //   $asset = $asset->where('a.name', $data['name']);
-        // }
-
-        // if ($data['category']){ 
-        //   $asset = $asset->where('a.category', $data['category']);
-        // }
-
-        // if ($data['areCode']){ 
-        //   $asset = $asset->where('a.are_code', $data['areCode']);
-        // }
-
-        // if (!$data['areCode']){ 
-        //   $asset = $asset->whereNull('a.are_code');
-        // }
 
         $asset_events = $asset_events->get();
 
@@ -305,15 +286,6 @@ class AssetsController extends Controller {
               $asset->status = "ACTIVE";
 	            $asset->changed_by = Auth::user()->email;
 	            $asset->save();
-
-	            // $assetCopy = DB::table('Assets')->where('tag', $asset->tag)->first();
-	            // $assetCopy->asset_id;
-
-	            // $log = new Log;
-	            // $log->log_code = $assetCopy->asset_id;
-	            // $log->log_desc = "Added new asset";
-	            // $log->user_id = Auth::user()->id;
-	            // $log->save();
 
 	            return response()->json([
 	                'status' => 200,
@@ -451,39 +423,29 @@ class AssetsController extends Controller {
   public function saveAssetEvent(Request $request){
         
         $data = array();
-
-        // $end_date = date('2019-m-d', strtotime($request->input('event_date')));
-
-        $data['status'] = $request->input('status');
-        $data['event_date'] = date('Y-m-d', strtotime($request->input('event_date')));
-        $data['remarks'] = $request->input('remarks');
-        $data['asset_tag'] = $request->input('asset_tag');
-        $data['asset_code'] = $request->input('asset_code');
+        $data['status']         = $request->input('status');
+        $data['event_date']     = date('Y-m-d', strtotime($request->input('event_date')));
+        $data['remarks']        = $request->input('remarks');
+        $data['asset_tag']      = $request->input('asset_tag');
+        $data['asset_code']     = $request->input('asset_code');
        
         $transaction = DB::transaction(function($data) use($data){
           // try{
 
               $assetEvent = new AssetEvent;
-              // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
               $assetEvent->asset_event_code = "AEVNT-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
-              $assetEvent->status = $data['status'];
-              $assetEvent->asset_tag = $data['asset_tag'];
-              $assetEvent->event_date = date('Y-m-d', strtotime($data['event_date']));
-              $assetEvent->remarks = $data['remarks'];
-              $assetEvent->changed_by = Auth::user()->email;
+              $assetEvent->status           = $data['status'];
+              $assetEvent->asset_tag        = $data['asset_tag'];
+              $assetEvent->event_date       = date('Y-m-d', strtotime($data['event_date']));
+              $assetEvent->remarks          = $data['remarks'];
+              $assetEvent->changed_by       = Auth::user()->email;
               $assetEvent->save();
 
-              $asset = Asset::where('tag', $data['asset_tag'])->first();
-              $asset->status = $data['status'];
-              $asset->changed_by = Auth::user()->email;
-              $asset->timestamps = true;
-              $asset->save();
-
-              // DB::table('assets')
-              // ->where('tag', $data['asset_tag'])
-              // ->update([
-              //   'status' => $data['status']
-              // ]);
+              // $asset = Asset::where('tag', $data['asset_tag'])->first();
+              // $asset->status      = $data['status'];
+              // $asset->changed_by  = Auth::user()->email;
+              // $asset->timestamps  = true;
+              // $asset->save();
 
               if($data['status']=="RETURN"){
 
@@ -497,23 +459,15 @@ class AssetsController extends Controller {
                 if($are)
                 {
 
-                // DB::table('are_items')
-                // ->where('asset_code', $asset->asset_code)
-                // ->where('are_item_code', $are->are_item_code)
-                // ->update([
-                //   'ended_at' => $data['event_date']
-                // ]);
-
-                $asset = AreItem::where('asset_code', $asset->asset_code)->where('are_item_code', $are->are_item_code)->first();
-                $asset->ended_at = $data['event_date'];
-                $asset->changed_by = Auth::user()->email;
-                $asset->timestamps = true;
-                $asset->save();
+                  $asset = AreItem::where('asset_code', $asset->asset_code)->where('are_item_code', $are->are_item_code)->first();
+                  $asset->ended_at = $data['event_date'];
+                  $asset->changed_by = Auth::user()->email;
+                  $asset->timestamps = true;
+                  $asset->save();
                 
                 }
 
               }
-
 
               return response()->json([
                   'status' => 200,

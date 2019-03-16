@@ -17,6 +17,7 @@
         <thead>
         <tr>
           <th>Asset Tag</th>
+          <th>Asset Code</th>
           <th>Category</th>
           <th>Name</th>
           <th>Asset ID</th>
@@ -34,6 +35,7 @@
         <tbody>
         <tr ng-repeat="asset in ac.assets">
           <td><a href="#" ui-sref="asset-list-equipmentsCopy({assetTag:asset.tag})"><b><%asset.tag%></b></a></td>
+          <td><a href="#" ui-sref="asset-list-equipmentsCopy({assetCode:asset.asset_code})"><b><%asset.asset_code%></b></a></td>
           <td><%asset.category%></td>
           <td><%asset.name%></td>
           <td><%asset.code%></td>
@@ -99,9 +101,9 @@
           </div>
           <!-- /.tab-content -->
         </div>
-        <button type="button" class="btn btn-primary pull-right" ui-sref="asset-more-details({assetTag:vm.formData.asset.tag})" ng-click="vm.ok()">
+        <button type="button" class="btn btn-primary pull-right" ui-sref="asset-more-details({assetCode:vm.formData.asset.asset_code})" ng-click="vm.ok()">
           <li class="fa fa-navicon "></li> More Details</button>
-        <a class="btn btn-info pull-right" style="margin-right: 7px;" ng-click="vm.printAssetDetails(vm.formData.asset.tag)" target="_blank" ng-href="<%vm.url%>"  style="margin-right: 7px;"><li class="fa fa-print"></li> Print
+        <a class="btn btn-info pull-right" style="margin-right: 7px;" ng-click="vm.printAssetDetails(vm.formData.asset.asset_code)" target="_blank" ng-href="<%vm.url%>"  style="margin-right: 7px;"><li class="fa fa-print"></li> Print
         </a>
 
         <!-- <button type="button" class="btn btn-default pull-right" style="margin-right: 7px;"><li class="fa fa-folder-o"></li> Create J.O.</button>   -->

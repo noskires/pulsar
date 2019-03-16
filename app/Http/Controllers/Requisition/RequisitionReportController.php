@@ -42,7 +42,7 @@ class RequisitionReportController extends Controller {
 			'rs.requisition_slip_code',
 			'rs.date_requested',
 			'rs.date_needed',
-			'rs.description',
+			'rs.remarks',
 			'rs.request_type',
 			'rs.reference_code',
 			'rs.received_by',
@@ -71,7 +71,7 @@ class RequisitionReportController extends Controller {
 		->select(
 			'jo.job_order_code',
 			'jo.job_order_date',
-			'jo.asset_tag',
+			'jo.asset_code',
 			'jo.employee_code',
 			'jo.organizational_unit',
 			'jo.municipality_code',

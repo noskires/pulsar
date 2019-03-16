@@ -158,16 +158,19 @@
             
             $stateProvider
             .state('main-view', main)
+
             .state('operation', {
                 url: '/maintenance/operation',
                 controller: 'OperationCtrl as oc',
                 templateUrl: 'operation.view'
             })
+
             .state('operation-create', {
                 url: '/maintenance/new',
                 controller: 'OperationCtrl as oc',
                 templateUrl: 'operation.create.view'
             })
+
             .state('list-operating', {
                 url: '/maintenance/list-operating',
                 controller: 'ListOperatingCtrl as loc',
@@ -189,18 +192,18 @@
                 templateUrl: 'asset.list.equipments.view',
             })
             .state('asset-list-equipmentsCopy', {
-                url: '/asset/list-equipments/:assetTag',
+                url: '/asset/list-equipments/:assetCode',
                 controller: 'AssetsCtrl as ac',
                 templateUrl: 'asset.list.equipments.view'
             })
             .state('asset-more-details', {
-                url: '/asset/more-details/:assetTag',
+                url: '/asset/more-details/:assetCode',
                 controller: 'AssetMoreDetailsCtrl as amdc',
                 templateUrl: 'asset.more.details.view',
             })
 
             .state('asset-more-details4', {
-                url: '/asset/more-details4/:assetTag',
+                url: '/asset/more-details4/:assetCode',
                 controller: 'AssetMoreDetailsCtrl as amdc',
                 templateUrl: 'asset.more.details.view4',
             })

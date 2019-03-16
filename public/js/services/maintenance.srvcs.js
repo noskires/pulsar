@@ -35,7 +35,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/operations/assets-monitoring?tag='+data.tag,
+                        url: '/api/v1/operations/assets-monitoring?assetCode='+data.assetCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

@@ -14,7 +14,7 @@
             // alert($stateParams.assetTag);
             // alert($stateParams.joCode)
             
-            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetTag:''}).then (function (response) {
+            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.jobOrders = response.data.data;
@@ -45,7 +45,7 @@
                 // alert(assetCategory)
 
                 vm.assetsDetails = {
-                    tag:'',
+                    assetCode:'',
                     name:'',
                     category:assetCategory,
                     areCode:'',

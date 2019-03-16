@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 use DB;
+use Auth;
 use App\AssetPhoto;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -22,9 +23,9 @@ class UploadController extends Controller {
 			
 			// echo 'Uploaded';
 			$file = Input::file('file');
-			$request['assetTag'] = Input::input('assetTag');
+			$request['assetCode'] = Input::input('assetCode');
 			$request['description'] = Input::input('description');
-			$request['name'] = $request['assetTag'];
+			$request['name'] = $request['assetCode'];
 			$request['status'] = $request['status'];
 			$request['extension'] = $file->getClientOriginalExtension();
 			// $request['name'] = $file->getClientOriginalName();
@@ -33,7 +34,7 @@ class UploadController extends Controller {
 			if($request['status'] == 1){
 
 	        	DB::table('asset_photos')
-	            ->where('asset_tag', $request['assetTag'])
+	            ->where('asset_code', $request['assetCode'])
 	            ->update([
 	              'asset_photo_status' => 0,
 	            ]);
@@ -44,13 +45,13 @@ class UploadController extends Controller {
 	        }
 
 			$assetPhoto = new AssetPhoto;
-	        $assetPhotoCode = (str_pad(($assetPhoto->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-	        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
-	        $assetPhoto->asset_photo_code = "APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
-	        $assetPhoto->asset_tag = $request['assetTag'];
-	        $assetPhoto->asset_photo_name = $request['name']."-APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila'))).".".$request['extension'];
-	        $assetPhoto->asset_photo_description = $request['description'];
-	        $assetPhoto->asset_photo_status = $request['status'];
+	        $assetPhotoCode 						= (str_pad(($assetPhoto->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+	        $assetPhoto->asset_photo_code 			= "APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$assetPhotoCode;
+	        $assetPhoto->asset_code 				= $request['assetCode'];
+	        $assetPhoto->asset_photo_name 			= $request['name']."-APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila'))).".".$request['extension'];
+	        $assetPhoto->asset_photo_description 	= $request['description'];
+	        $assetPhoto->asset_photo_status 		= $request['status'];
+	        $assetPhoto->changed_by     			= Auth::user()->email;
 	        $assetPhoto->save();
 	        
 	        $file->move('uploads',  $assetPhoto->asset_photo_name);
@@ -61,7 +62,7 @@ class UploadController extends Controller {
 	        //     'message' => 'Successfully saved.'
 	        // ]);
 
-			return redirect('asset/more-details/'.$request['assetTag']);
+			return redirect('asset/more-details/'.$request['assetCode']);
 		}
 
 		else
@@ -85,7 +86,7 @@ class UploadController extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         $assetPhoto->asset_photo_code = "APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$assetPhotoCode;
-        $assetPhoto->asset_tag = $request['assetTag'];
+        $assetPhoto->asset_code = $request['assetCode'];
         $assetPhoto->asset_photo_name = $request['name']."-APC-".date('YmdHis', strtotime(Carbon::now('Asia/Manila'))).".".$request['extension'];
         $assetPhoto->asset_photo_description = $request['description'];
         $assetPhoto->asset_photo_status = 0;

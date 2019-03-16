@@ -31,7 +31,7 @@
             }
 
             vm.assetsDetails = {
-                tag:'', 
+                assetCode:'', 
                 name:'', 
                 category:'CONE', 
                 areCode:'', 
@@ -85,7 +85,7 @@
             var vm = this;
             var data = {};
             
-            MaintenanceSrvcs.assetsMonitoring({tag:''}).then (function (response) {
+            MaintenanceSrvcs.assetsMonitoring({assetCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assetsMonitoring = response.data.data;

@@ -156,7 +156,7 @@
             <thead>
             <tr>
               <th> </th>
-              <th>Asset Tag</th>
+              <th>Asset Code</th>
               <th>ID</th>
               <th>Category</th>
               <th>Name</th>
@@ -168,8 +168,8 @@
             <tr ng-repeat="associatedAsset in vm.associatedAssets">
               <td align="center">
                 <button type="button" class="btn btn-danger btn-xs fa fa-minus" ng-click="vm.removeInsuranceItems(associatedAsset.insurance_item_code)"></button>
-              </td>
-              <td><a href="#"><b><%associatedAsset.tag%></b></a></td>
+              </td> 
+              <td><%associatedAsset.asset_code%></td>
               <td><%associatedAsset.code%></td>
               <td><%associatedAsset.category%></td>
               <td><%associatedAsset.name%></td>
@@ -179,35 +179,35 @@
             </tbody>
           </table>
           
-<br><hr>
-      <h3><li class="fa fa-link"></li> Associate New Assets</h3>
-      <p>Select assets that are connected to your insurance policy. To associate assets, check boxes next to all of the assets for the insurance policy and select <strong>Associate Assets</strong>.</p>
-          <table id="tbl-assets" class="table table-bordered table-hover" width="100%" datatable="ng">
-            <thead>
-            <tr>
-              <th> </th>
-              <th>Asset Tag</th>
-              <th>ID</th>
-              <th>Category</th>
-              <th>Name</th>
-              <th>Model</th>
-              <th>Brand</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="availableAsset in vm.availableAssets">
-              <td align="center">
-                <button class="btn btn-primary btn-xs fa fa-plus" ng-click="vm.addInsuranceItems(availableAsset.tag)"></button>
-              </td>
-              <td><a href="#"><b><%availableAsset.tag%></b></a></td>
-              <td><%availableAsset.code%></td>
-              <td><%availableAsset.category%></td>
-              <td><%availableAsset.name%></td>
-              <td><%availableAsset.model%></td>
-              <td><%availableAsset.brand%></td>
-            </tr>
-            </tbody>
-          </table>
+          <br><hr>
+          <h3><li class="fa fa-link"></li> Associate New Assets</h3>
+          <p>Select assets that are connected to your insurance policy. To associate assets, check boxes next to all of the assets for the insurance policy and select <strong>Associate Assets</strong>.</p>
+              <table id="tbl-assets" class="table table-bordered table-hover" width="100%" datatable="ng">
+                <thead>
+                <tr>
+                  <th> </th> 
+                  <th>Asset Code</th>
+                  <th>ID</th>
+                  <th>Category</th>
+                  <th>Name</th>
+                  <th>Model</th>
+                  <th>Brand</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="availableAsset in vm.availableAssets">
+                  <td align="center">
+                    <button class="btn btn-primary btn-xs fa fa-plus" ng-click="vm.addInsuranceItems(availableAsset.asset_code)"></button>
+                  </td> 
+                  <td><a href="#"><b><%availableAsset.asset_code%></b></a></td>
+                  <td><%availableAsset.code%></td>
+                  <td><%availableAsset.category%></td>
+                  <td><%availableAsset.name%></td>
+                  <td><%availableAsset.model%></td>
+                  <td><%availableAsset.brand%></td>
+                </tr>
+                </tbody>
+              </table>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2-2">

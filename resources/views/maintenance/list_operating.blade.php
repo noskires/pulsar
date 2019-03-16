@@ -35,6 +35,7 @@
                 <thead>
                 <tr>
                   <th>Control Number</th>
+                  <th>Asset Code</th>
                   <th>Date</th>
                   <th>Equipment Name</th>
                   <th>Asset ID</th>
@@ -53,6 +54,7 @@
                 <tbody>
                 <tr ng-repeat="operation in loc.operations">
                   <td><a href="#" data-toggle="modal" data-target="#modal-default"><b><%operation.operation_code%></b></a></td>
+                  <td><%operation.asset_code%></td>
                   <td><%operation.operation_date%></td>
                   <td><%operation.asset_name%></td>
                   <td><%operation.asset_tag%></td>

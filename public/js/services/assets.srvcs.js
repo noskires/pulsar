@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/assets?tag='+data.tag+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&status='+data.status+'&isAll='+data.isAll+'&withActiveAre='+data.withActiveAre,
+                        url: '/api/v1/assets?assetCode='+data.assetCode+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&status='+data.status+'&isAll='+data.isAll+'&withActiveAre='+data.withActiveAre,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
@@ -19,7 +19,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/assetEvents?tag='+data.tag+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&isAll='+data.isAll+'&assetEventCode='+data.assetEventCode,
+                        url: '/api/v1/assetEvents?assetCode='+data.assetCode+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&isAll='+data.isAll+'&assetEventCode='+data.assetEventCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

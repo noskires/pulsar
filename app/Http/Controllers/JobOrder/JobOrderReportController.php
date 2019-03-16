@@ -49,7 +49,6 @@ class JobOrderReportController extends Controller {
 		->select(
 			'jo.job_order_code',
 			'jo.job_order_date',
-			'jo.asset_tag',
 			'jo.employee_code',
 			DB::raw('CONCAT(trim(CONCAT(reqby.lname," ",COALESCE(reqby.affix,""))),", ", COALESCE(reqby.fname,"")," ", COALESCE(reqby.mname,"")) as requested_by_name'),
 			'jo.organizational_unit',

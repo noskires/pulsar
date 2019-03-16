@@ -55,6 +55,16 @@
               <label for="projectname" class="col-sm-2 control-label">Project Name</label>
               <div class="col-sm-10"><input type="text" class="form-control" ng-model="pc.projectDetails.name" placeholder="" required=""></div>
             </div>
+
+            <div class="form-group col-sm-12"">
+              <label class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-10">
+                <div class="input-group date">
+                  <textarea class="col-sm-12 form-control" id="" rows="2" ng-model="pc.projectDetails.description"></textarea>
+                </div>
+              </div>
+            </div>
+
             <div class="form-group col-sm-12"">
               <label for="projectname" class="col-sm-2 control-label">Client</label>
               <div class="col-sm-10">
@@ -64,6 +74,7 @@
               </select>
               </div>
             </div>
+
             <div class="form-group col-sm-12"">
               <label for="projectcost" class="col-sm-2 control-label">Project Cost</label>
               <div class="col-sm-4"><input type="number" class="form-control" ng-model="pc.projectDetails.cost" placeholder="" required=""></div>

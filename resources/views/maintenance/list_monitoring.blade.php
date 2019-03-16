@@ -14,6 +14,7 @@
           <table datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
+              <th>Asset Code</th>
               <th>Asset ID</th>
               <th>Asset Name</th>
               <th>Total Operating Time(HRS)</th>
@@ -26,6 +27,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="asset in lmc.assetsMonitoring">
+              <td><a href="#" data-toggle="modal" data-target="#modal-default"><b><%asset.asset_code%> </b></a></td>
               <td><a href="#" data-toggle="modal" data-target="#modal-default"><b><%asset.tag%> </b></a></td>
               <td><%asset.asset_name%></td>
               <td align="right"><%asset.total_operating_hours | number:2%></td>

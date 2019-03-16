@@ -60,34 +60,29 @@ class ProjectsController extends Controller {
     
   // return $request->all();
     $data = array();
-    $data['projectName'] = $request->input('name');
-    $data['description'] = $request->input('description');
-    $data['code'] = $request->input('code');
-    $data['cost'] = $request->input('cost');
-    $data['zipCode'] = ''; 
-    $data['municipality'] = $request->input('municipality'); 
-    // $data['dateStarted'] = date('Y-m-d', strtotime($request->input('dateStarted')));
-    // $data['dateStarted'] = date('Y-m-d', strtotime($request->input('dateStarted')));
-    // $data['dateCompleted'] = date('Y-m-d', strtotime($request->input('dateCompleted')));
-    // $data['projectEngineer'] = $request->input('projectEngineer'); 
-    // $data['dateAssigned'] = date('Y-m-d', strtotime($request->input('dateAssigned')));
-    $data['division'] = $request->input('division');
-    $data['barangay'] = $request->input('barangay');
+    $data['projectName']                  = $request->input('name');
+    $data['remarks']                      = $request->input('remarks');
+    $data['code']                         = $request->input('code');
+    $data['cost']                         = $request->input('cost');
+    $data['description']                  = $request->input('description');
+    $data['zipCode']                      = ''; 
+    $data['municipality']                 = $request->input('municipality'); 
+    $data['division']                     = $request->input('division');
+    $data['barangay']                     = $request->input('barangay');
    
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         $organization = new Organization;
-        $depCode = str_pad($organization->where('org_type', 'Unit')->get()->count() + 1, 8, "0", STR_PAD_LEFT);
-        $organization->org_code = "52".$depCode; 
-        $organization->next_org_code = $data['division']; 
-        $organization->org_name = $data['projectName']; 
-        $organization->org_type = "Unit"; 
-        $organization->municipality_code = $data['municipality'];
-        $organization->barangay = $data['barangay'];
-        $organization->changed_by = Auth::user()->email;
+        $depCode                          = str_pad($organization->where('org_type', 'Unit')->get()->count() + 1, 8, "0", STR_PAD_LEFT);
+        $organization->org_code           = "52".$depCode; 
+        $organization->next_org_code      = $data['division']; 
+        $organization->org_name           = $data['projectName']; 
+        $organization->org_type           = "Unit"; 
+        $organization->municipality_code  = $data['municipality'];
+        $organization->barangay           = $data['barangay'];
+        $organization->changed_by         = Auth::user()->email;
         $organization->save();
-
 
         $unit_code = DB::table('organizations')
                     ->select('org_code')
@@ -100,15 +95,16 @@ class ProjectsController extends Controller {
         $proCode = (str_pad(($project->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        $project->project_code = "PRO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$proCode;
-        $project->org_code = $unit_code->org_code;
-        $project->name = $data['projectName'];
-        $project->description = $data['description'];
-        $project->cost = $data['cost'];
-        $project->code = $data['code'];
-        $project->zip_code = $data['zipCode']; 
-        $project->municipality_code = $data['municipality']; 
-        $project->changed_by = Auth::user()->email;
+        $project->project_code             = "PRO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$proCode;
+        $project->org_code                 = $unit_code->org_code;
+        $project->name                     = $data['projectName'];
+        $project->description              = $data['description'];
+        $project->cost                     = $data['cost'];
+        $project->code                     = $data['code'];
+        $project->zip_code                 = $data['zipCode']; 
+        $project->municipality_code        = $data['municipality']; 
+        
+        $project->changed_by               = Auth::user()->email;
         $project->save();
 
         return response()->json([
@@ -116,15 +112,15 @@ class ProjectsController extends Controller {
             'data' => 'null',
             'message' => 'Successfully saved.'
         ]);
-      } 
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // } 
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

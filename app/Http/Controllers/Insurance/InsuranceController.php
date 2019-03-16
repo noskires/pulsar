@@ -154,9 +154,13 @@ class InsuranceController extends Controller {
 
 	    $insuranceItems = DB::table('assets as a')
 	              ->select(
-	                'a.tag',
+	                'a.asset_code',
+	                'a.code',
+	                'a.name',
+	                'a.model',
+	                'a.brand',
+	                'a.category',
 	                'ii.insurance_item_code',
-	                'ii.asset_code',
 	                'i.insurance_code',
 	                'i.insurance_co',
 	                'i.description',
@@ -165,7 +169,7 @@ class InsuranceController extends Controller {
                     DB::raw('DATE_FORMAT(i.expiration_date, "%m/%d/%Y") as expiration_date'),
 	                'i.insurance_coverage'
 	              )
-	            ->leftjoin('insurance_items as ii','ii.asset_code','=','a.tag')
+	            ->leftjoin('insurance_items as ii','ii.asset_code','=','a.asset_code')
 	            ->leftjoin('insurance as i','i.insurance_code','=','ii.insurance_code');
 
 	    if ($data['insuranceCode']){
