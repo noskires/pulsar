@@ -249,7 +249,7 @@
             var vm = this;
             vm.formData = formData;
 
-            alert($stateParams.joCode)
+            // alert($stateParams.joCode)
 
             vm.ok = function() {
                 $uibModalInstance.close();
