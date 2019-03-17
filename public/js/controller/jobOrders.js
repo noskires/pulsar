@@ -71,7 +71,7 @@
                 JobOrdersSrvcs.save2(data).then(function(response){
                     if (response.data.status == 200) {
 
-                        JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetTag:''}).then (function (response) {
+                        JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetCode:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.jobOrders = response.data.data;
@@ -87,11 +87,11 @@
                 }, function (){ console.log(response.data); alert('Bad Request!!!') });
             }
 
-            if($stateParams.assetTag!=null)
+            if($stateParams.assetCode!=null)
             {
 
                 vm.assetsDetails = {
-                    tag:$stateParams.assetTag, 
+                    tag:$stateParams.assetCode, 
                     name:'', 
                     category:'', 
                     areCode:'', 
@@ -120,7 +120,7 @@
             }
 
             if($stateParams.joCode){
-                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode,joStatus:'', assetTag:''}).then (function (response) {
+                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode,joStatus:'', assetCode:''}).then (function (response) {
 
                     if(response.data.status == 200)
                     {
@@ -147,7 +147,7 @@
             }
 
             if($stateParams.joCode2){
-                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode2,joStatus:'', assetTag:''}).then (function (response) {
+                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode2,joStatus:'', assetCode:''}).then (function (response) {
 
                     if(response.data.status == 200)
                     {
@@ -243,11 +243,14 @@
         }
 
 
-        JobOrderModalInstanceCtrl.$inject = ['$state', '$uibModalInstance', '$window', 'formData', 'JobOrdersSrvcs', 'EmployeesSrvcs'];
-        function JobOrderModalInstanceCtrl ($state, $uibModalInstance, $window, formData, JobOrdersSrvcs, EmployeesSrvcs) {
+        JobOrderModalInstanceCtrl.$inject = ['$stateParams', '$state', '$uibModalInstance', '$window', 'formData', 'JobOrdersSrvcs', 'EmployeesSrvcs'];
+        function JobOrderModalInstanceCtrl ($stateParams, $state, $uibModalInstance, $window, formData, JobOrdersSrvcs, EmployeesSrvcs) {
 
             var vm = this;
             vm.formData = formData;
+
+            alert($stateParams.joCode)
+
             vm.ok = function() {
                 $uibModalInstance.close();
             };

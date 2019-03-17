@@ -48,7 +48,7 @@ class AssetsController extends Controller {
 
         $data = array(
             'assetCode'=>$request->input('assetCode'),
-            'tag'=>$request->input('tag'),
+            // 'tag'=>$request->input('tag'),
             'name'=>$request->input('name'),
             'category'=>$request->input('category'),
             'areCode'=>$request->input('areCode'),
@@ -66,7 +66,7 @@ class AssetsController extends Controller {
                 DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name'),
                 'a.asset_id',
                 'a.asset_code',
-                'a.tag', 
+                // 'a.tag', 
                 'a.code', 
                 'a.name',
                 'a.category',
@@ -149,7 +149,7 @@ class AssetsController extends Controller {
                 'employee_name',
                 'a.asset_id',
                 'a.asset_code',
-                'a.tag', 
+                // 'a.tag', 
                 'a.code', 
                 'a.name',
                 'a.category',

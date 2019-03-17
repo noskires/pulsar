@@ -30,12 +30,8 @@ class JobOrderReportController extends Controller {
 			array_push($data['requisition_slip_items'], $this->requisition_slip_items($requisition_slip->requisition_slip_code));
 		}
 
-		$data['asset']            = $this->asset($data['job_order']->asset_tag);
-		$data['asset_photo']      = $this->asset_photo($data['job_order']->asset_tag);
-		// $data['asset_monitoring'] = $this->asset_monitoring($data['assetTag']);
-		// $data['jos']              = $this->jo($data['assetTag']);
-		// $data['events']           = $this->events($data['assetTag']);
-		// $data['insurance']        = $this->insurance($data['assetTag']);
+		$data['asset']            = $this->asset($data['job_order']->asset_code);
+		$data['asset_photo']      = $this->asset_photo($data['job_order']->asset_code);
 
 		// return $data;
 
@@ -47,6 +43,7 @@ class JobOrderReportController extends Controller {
 
 		$data = DB::table('job_orders as jo')
 		->select(
+
 			'jo.job_order_code',
 			'jo.job_order_date',
 			'jo.employee_code',
@@ -77,6 +74,7 @@ class JobOrderReportController extends Controller {
 			'jo.gas_consumption',
 			'jo.oil_consumption',
 			'jo.number_loads',
+			'jo.asset_code',
 			'recbypos.position_text as received_by_position',
 			'insbypos.position_text as inspected_by_position'
 		)
@@ -93,13 +91,13 @@ class JobOrderReportController extends Controller {
 		return $data;
 	}
 
-	public function asset($assetTag){
+	public function asset($assetCode){
 		$asset = DB::table('Assets as a')
 		// ->select('*')
 		->select(
 			DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name'),
 			'a.asset_id',
-			'a.tag', 
+			// 'a.tag', 
 			'a.code', 
 			'a.are_code', 
 			'a.name',
@@ -135,7 +133,7 @@ class JobOrderReportController extends Controller {
 		->leftjoin('municipalities as m','m.municipality_code','=','org.municipality_code')
 		->leftjoin('provinces as p','p.province_code','=','m.province_code')
 		->leftjoin('regions as r','r.region_code','=','p.region_code');
-		$asset = $asset->where('a.tag', $assetTag);
+		$asset = $asset->where('a.asset_code', $assetCode);
 		$asset = $asset->first();
 
 		return $asset;
@@ -148,7 +146,7 @@ class JobOrderReportController extends Controller {
 			'rs.requisition_slip_code',
 			'rs.date_requested',
 			'rs.date_needed',
-			'rs.description',
+			'rs.remarks',
 			'rs.request_type',
 			'rs.reference_code',
 			'rs.received_by',
@@ -187,37 +185,31 @@ class JobOrderReportController extends Controller {
 		return $data;
 	}
 
-	public function asset_monitoring($assetTag){
-		$assets = DB::table('assets as a')
-		->select( 
-			'a.tag',
-			'a.name as asset_name', 
-			DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
-			DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
-			DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
-			DB::raw("COALESCE(SUM(o.gas_consumption), 0) as total_gas_consumption"),
-			DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
-			DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
-		)
-		->leftjoin('operations as o','o.asset_tag','=','a.tag')
-		->leftjoin('Projects as p','p.project_code','=','o.project_code')
-		->groupBy('a.tag', 'a.name')
-		->where('a.category', 'CONE');
-		$assets = $assets->where('tag', $assetTag);
-		$assets = $assets->first();
+	// public function asset_monitoring($assetTag){
+	// 	$assets = DB::table('assets as a')
+	// 	->select( 
+	// 		'a.tag',
+	// 		'a.name as asset_name', 
+	// 		DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
+	// 		DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
+	// 		DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
+	// 		DB::raw("COALESCE(SUM(o.gas_consumption), 0) as total_gas_consumption"),
+	// 		DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
+	// 		DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
+	// 	)
+	// 	->leftjoin('operations as o','o.asset_tag','=','a.tag')
+	// 	->leftjoin('Projects as p','p.project_code','=','o.project_code')
+	// 	->groupBy('a.tag', 'a.name')
+	// 	->where('a.category', 'CONE');
+	// 	$assets = $assets->where('tag', $assetTag);
+	// 	$assets = $assets->first();
 
-		return $assets;
-	}
+	// 	return $assets;
+	// }
 
-	public function asset_photo($assetTag){
+	public function asset_photo($assetCode){
 
-		$data = DB::table('asset_photos as ap')->where('ap.asset_tag', $assetTag)->where('ap.asset_photo_status', 1)->first();
-		return $data;
-	}
-
-	public function events($assetTag){
-
-		$data = DB::table('asset_events as ae')->where('ae.asset_tag', $assetTag)->get();
+		$data = DB::table('asset_photos as ap')->where('ap.asset_code', $assetCode)->where('ap.asset_photo_status', 1)->first();
 		return $data;
 	}
 
