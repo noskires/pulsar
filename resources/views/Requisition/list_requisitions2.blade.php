@@ -335,18 +335,18 @@ $('.select2').select2();
                           <th width="9%">Quantity</th>
                           <th width="9%">Cost</th>
                           <th width="7%">Total</th>
-                          <th width="11%" ng-if="!vm.formData.status=='OPEN'"></th>
+                          <th width="11%" ng-if="vm.formData.status=='OPEN'"></th>
                         </tr> 
                       </thead>
                       <tbody>
                         <tr ng-repeat="requisitionSlipItem in vm.requisitionSlipItems"> 
-                          <td><%requisitionSlipItem.supply_name%></td>
+                          <td><%requisitionSlipItem.supply_name%> | <%vm.formData.status%></td>
                           <td><%requisitionSlipItem.item_description%></td>
                           <td><%requisitionSlipItem.item_stock_unit%></td>
                           <td align="right"><%requisitionSlipItem.item_quantity%></td>
                           <td align="right"><%requisitionSlipItem.item_cost | number:2%></td>
                           <td align="right" ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + requisitionSlipItem.item_total"><%requisitionSlipItem.item_total | number:2%></td>
-                          <td ng-if="!vm.formData.status=='OPEN'">
+                          <td ng-if="vm.formData.status=='OPEN'">
                             <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->
                             <a href="#" data-toggle="modal"  ng-click="vm.removeRequisitionSlipItem(requisitionSlipItem.requisition_slip_item_code, requisitionSlipItem.item_quantity, requisitionSlipItem.supply_code)"><code class="text-red">REMOVE</code></a>
                           </td>

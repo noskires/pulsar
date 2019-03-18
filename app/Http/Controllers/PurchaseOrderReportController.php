@@ -373,6 +373,7 @@ class PurchaseOrderReportController extends Controller {
 					AND requisition_slips.received_by IS NOT NULL
 					AND requisition_slips.date_inspected IS NOT NULL
 					AND requisition_slips.inspected_by IS NOT NULL
+					
 					AND requisition_slips.requisition_slip_code = purchase_order.requisition_slip_code
 					AND requisition_slips_items.supply_code = purchase_order_item.supply_code)
 					AS total_item_quantity_ris")
