@@ -147,6 +147,10 @@
   @include('project.list_projects')
 </script>
 
+<script type="text/ng-template" id="project.profile.view">
+  @include('project.project_profile')
+</script>
+
 <!-- JO -->
 
 <script type="text/ng-template" id="jo.create.view">

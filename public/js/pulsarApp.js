@@ -255,6 +255,26 @@
                 controller: 'ProjectsCtrl as pc',
                 templateUrl: 'project.list.projects.view'
             })
+
+            .state('project-profile', {
+                url: '/project/profile/:projectCode',
+                controller: 'ProjectProfileDetailsCtrl as projectProfileCtrl',
+                templateUrl: 'project.profile.view'
+            })
+
+            // .state('project-profile-copy', {
+            //     url: '/project/profile/:projectCode/:actionType',
+            //     controller: 'ProjectProfileDetailsCtrl as projectProfileCtrl',
+            //     templateUrl: 'project.profile.view'
+            // })
+
+            .state('project-profile-edit', {
+                url: '/project/profile/:projectCode/edit',
+                controller: 'ProjectProfileEditCtrl as projectProfileCtrl',
+                templateUrl: 'project.profile.view'
+            })
+
+
             //Projects//
             .state('jo-create', {
                 url: '/job-order/new/:assetTag',

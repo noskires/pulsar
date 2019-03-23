@@ -4,6 +4,8 @@
         .module('pulsarApp')
         .controller('ProjectsCtrl', ProjectsCtrl) 
         .controller('ProjectsModalInstanceCtrl', ProjectsModalInstanceCtrl) 
+        .controller('ProjectProfileDetailsCtrl', ProjectProfileDetailsCtrl) 
+        .controller('ProjectProfileEditCtrl', ProjectProfileEditCtrl) 
 
         ProjectsCtrl.$inject = ['$state', '$stateParams', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', 'ClientsSrvcs', '$window', '$uibModal'];
         function ProjectsCtrl($state, $stateParams, OrganizationsSrvcs, ProjectsSrvcs, EmployeesSrvcs, AddressesSrvcs, ClientsSrvcs, $window, $uibModal){
@@ -169,5 +171,63 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             };
+        }
+
+        ProjectProfileDetailsCtrl.$inject = ['$stateParams', 'ProjectsSrvcs', '$window', '$uibModal'];
+        function ProjectProfileDetailsCtrl($stateParams, ProjectsSrvcs, $window, $uibModal){
+            var vm = this;
+            var data = {};
+
+            alert($stateParams.projectCode)
+
+            if($stateParams.projectCode)
+            {
+                alert('edit here ')
+                vm.projectCode = $stateParams.projectCode;
+
+                ProjectsSrvcs.projects({projectCode:vm.projectCode}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.project = response.data.data[0];
+                        console.log(vm.project)
+                        
+                        var modalInstance = $uibModal.open({
+                            controller:'ProjectProfileEditCtrl',
+                            templateUrl:'project.edit.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'Project Controller',
+                                    message:response.data.message,
+                                    project: vm.project
+                                };
+                              }
+                            }
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+            
+        }
+
+        ProjectProfileEditCtrl.$inject = ['$uibModalInstance', ,'ProjectsSrvcs', 'formData', '$window', '$uibModal'];
+        function ProjectProfileEditCtrl ($uibModalInstance, ProjectsSrvcs, formData, $window, $uibModal) {
+
+            var vm = this;
+            vm.formData = formData.project;
+
+            console.log(vm.formData)
+
+            alert('asdf')
+            
+
+            // vm.ok = function() {
+            //     $uibModalInstance.close();
+            // };
+            
+            // vm.routeTo = function(route){
+            //     $window.location.href = route;
+            // };
         }
 })();

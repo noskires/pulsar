@@ -174,6 +174,8 @@ Route::get('/api/v1/organizations','Organization\OrganizationsController@organiz
 Route::get('/project/new','Project\ProjectsController@index');
 Route::get('/projects/list','Project\ProjectsController@index');
 Route::get('/projects/list/{projectCode}','Project\ProjectsController@index');
+Route::get('/project/profile/{projectCode}','Project\ProjectsController@index');
+Route::get('/project/profile/{projectCode}/edit','Project\ProjectsController@index');
 
 /*
 |--------------------------------------------------------------------------

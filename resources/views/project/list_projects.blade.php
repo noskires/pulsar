@@ -351,61 +351,111 @@ $('.select2').select2();
 </script>
 
   <script type="text/ng-template" id="projectInfo.modal">
+    <!-- MODAL CONTENTS -->
     <div>
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Project Profile</h4>
+            <h4 class="modal-title"><i class="fa fa-cube"></i> Project Profile: <b><%vm.formData.project_code%></b></h4>
           </div>
           <div class="modal-body">
             <!-- Custom Tabs (Pulled to the right) -->
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs pull-right">
                 <li class="active"><a href="#tab_1-1" data-toggle="tab">Details</a></li>
-                <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    Options <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="requesition-project-create({projectCode:vm.formData.project_code})" ng-click="vm.ok()" href="#">Create R.S.</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mark as Finished</a></li>
-                    <li role="presentation" class="divider"></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Print</a></li>
-                  </ul>
-                </li>
-                <li class="pull-left header"><i class="fa fa-cube"></i> <%vm.formData.name+' : '+vm.formData.project_code%></li>
+                <li class="pull-left header"> <%vm.formData.name%></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1-1">
-                  <b>BUNTUN BRIDGE PROJECT</b><br>
-                  <b>TABLE HERE.</b><br>
-                  A wonderful serenity has taken possession of my entire soul,
-                  like these sweet mornings of spring which I enjoy with my whole heart.
-                  I am alone, and feel the charm of existence in this spot,
-                  which was created for the bliss of souls like mine. I am so happy,
-                  my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-                  that I neglect my talents. I should be incapable of drawing a single stroke
-                  at the present moment; and yet I feel that I never was a greater artist than now.
+                  <form action="view-project.html">
+                    <table id="projects-modal-tbl" class="table table-bordered">
+                      <!-- <tr>
+                        <td>Control No.</td>
+                        <td>2017-5310001</td>
+                      </tr> -->
+                      <tr>  
+                        <td>Project ID</td>
+                        <td><%vm.formData.code%></td>
+                      </tr>
+                      <!-- <tr>
+                        <td>Project Name</td>
+                        <td>BUNTUN BRIDGE PROJECT</td>
+                      </tr>   -->
+                      <tr>
+                        <td>Project Cost</td>
+                        <td><%vm.formData.cost%></td>
+                      </tr>
+                      <tr>
+                        <td>Region</td>
+                        <td>Region II</td>
+                      </tr>
+                      <tr>
+                        <td>Province</td>
+                        <td>Cagayan</td>
+                      </tr>
+                      <tr>
+                        <td>Municipality</td>
+                        <td>Tuguegarao City</td>
+                      </tr>
+                      <tr>
+                        <td>Zip Code</td>
+                        <td>3500</td>
+                      </tr>
+                      <tr>
+                        <td>Barangay</td>
+                        <td>Buntun</td>
+                      </tr>
+                      <tr>
+                        <td>Department</td>
+                        <td>Pulsar Construction</td>
+                      </tr>
+                      <tr>
+                        <td>Division</td>
+                        <td>Construction</td>
+                      </tr>
+                      <tr>
+                        <td>Date Assigned</td>
+                       <td><%vm.formData.date_assigned%></td>
+                      </tr>
+                      <tr>
+                        <td>Target Date</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Date Started</td>
+                        <td><%vm.formData.date_started%></td>
+                      </tr> 
+                      <tr>
+                        <td>Project Engineer</td>
+                        <td><%vm.formData.project_engineer%></td>
+                        <!-- <td><a href="../employee/list-employees.html" target="_blank">ENGR. MICHAEL CAPARAS</a></td> -->
+                      </tr>
+                      <tr>
+                        <td>Date Completed</td>
+                        <td><%vm.formData.date_completed%></td>
+                      </tr>
+                      
+                  </table>
                 </div>
                 <!-- /.tab-pane -->
               </div>
               <!-- /.tab-content -->
             </div>
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary pull-right" formtarget="_blank">
+              <li class="fa fa-navicon "></li> More Details</button>
+            <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button>
             <!-- nav-tabs-custom -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
         <!-- /.modal-content -->
       </div>
       <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+    <!-- /.modal -->       
   </script>
 </section>

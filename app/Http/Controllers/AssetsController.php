@@ -369,7 +369,7 @@ class AssetsController extends Controller {
 
       $data = array();
 
-      $data['tag'] = $request->input('tag');
+      $data['asset_code'] = $request->input('asset_code');
       $data['description'] = $request->input('description');
       $data['model'] = $request->input('model');
       $data['brand'] = $request->input('brand');
@@ -382,10 +382,10 @@ class AssetsController extends Controller {
       // $data['warranty_date'] = $request->input('warranty_date');
 
       $transaction = DB::transaction(function($data) use($data){
-      try{
+      // try{
           
 
-          $asset = Asset::where('tag', $data['tag'])->first();
+          $asset = Asset::where('asset_code', $data['asset_code'])->first();
           $asset->description = $data['description'];
           $asset->model = $data['model'];
           $asset->brand = $data['brand'];
@@ -405,15 +405,15 @@ class AssetsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;
