@@ -178,11 +178,19 @@
             var vm = this;
             var data = {};
 
-            alert($stateParams.projectCode)
+            // alert($stateParams.projectCode)
 
-            if($stateParams.projectCode)
+            ProjectsSrvcs.projects({projectCode:$stateParams.projectCode}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.project = response.data.data[0];
+                    console.log(vm.project)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            if($stateParams.actionType=='edit')
             {
-                alert('edit here ')
+             
                 vm.projectCode = $stateParams.projectCode;
 
                 ProjectsSrvcs.projects({projectCode:vm.projectCode}).then (function (response) {
@@ -211,23 +219,109 @@
             
         }
 
-        ProjectProfileEditCtrl.$inject = ['$uibModalInstance', ,'ProjectsSrvcs', 'formData', '$window', '$uibModal'];
-        function ProjectProfileEditCtrl ($uibModalInstance, ProjectsSrvcs, formData, $window, $uibModal) {
+        ProjectProfileEditCtrl.$inject = ['$uibModalInstance', '$state', '$stateParams','ProjectsSrvcs', 'OrganizationsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', 'formData', '$window', '$uibModal'];
+        function ProjectProfileEditCtrl ($uibModalInstance, $state, $stateParams, ProjectsSrvcs, OrganizationsSrvcs, EmployeesSrvcs, AddressesSrvcs, formData, $window, $uibModal) {
 
             var vm = this;
             vm.formData = formData.project;
 
             console.log(vm.formData)
 
-            alert('asdf')
+            
+            
             
 
-            // vm.ok = function() {
-            //     $uibModalInstance.close();
-            // };
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'Department', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.departments = response.data.data;
+                    console.log(vm.departments)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+
+            vm.selectDepartment =  function(departmentCode){
+                console.log(departmentCode);
+                OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:departmentCode, orgType:'Division', startDate:'', endDate:''}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.divisions = response.data.data;
+                        console.log(vm.divisions)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.selectDepartment(vm.formData.department_code)
             
-            // vm.routeTo = function(route){
-            //     $window.location.href = route;
-            // };
+
+            vm.selectRegion =  function(region_code){
+                console.log(region_code);
+                AddressesSrvcs.province({region_code:region_code}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.provinces = response.data.data;
+                        console.log(vm.provinces)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.selectRegion(vm.formData.region_code)
+
+            vm.selectProvince =  function(province_code){
+                console.log(province_code);
+                AddressesSrvcs.municipality({province_code:province_code}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.municipalities = response.data.data;
+                        console.log(vm.municipalities)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.selectProvince(vm.formData.province_code)
+
+            EmployeesSrvcs.employees({jobType:'POS-00004'}).then (function (response) { //POS-002
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            AddressesSrvcs.region().then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.regions = response.data.data;
+                    console.log(vm.regions)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+
+            vm.updateProjectBtn = function(data){
+                console.log(data)
+
+                ProjectsSrvcs.update(data).then(function(response){
+                    if (response.data.status == 200) {
+                        alert(response.data.message);
+                        
+                        $state.go('project-profile', {projectCode: $stateParams.projectCode});
+                        vm.ok();
+                    }
+                    else {
+                        alert(response.data.message);
+                        // vm.routeTo('asset/create');
+                    }
+                    console.log(response.data);
+                });
+            }
+            
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+            
+            vm.routeTo = function(route){
+                $window.location.href = route;
+            };
         }
 })();

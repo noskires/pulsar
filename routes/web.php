@@ -184,6 +184,7 @@ Route::get('/project/profile/{projectCode}/edit','Project\ProjectsController@ind
 */
 
 Route::post('/api/v1/projects/save','Project\ProjectsController@save');
+Route::post('/api/v1/projects/update','Project\ProjectsController@update');
 
 Route::get('/api/v1/projects','Project\ProjectsController@projects');
 

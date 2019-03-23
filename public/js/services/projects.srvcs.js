@@ -22,6 +22,22 @@
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
+                },
+                update: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/projects/update',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                delete: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/projects/delete',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
                 }
             };
         }

@@ -102,7 +102,7 @@
           <!-- /.tab-content -->
         </div>
         <button type="button" class="btn btn-primary pull-right" ui-sref="asset-more-details({assetCode:vm.formData.asset.asset_code})" ng-click="vm.ok()">
-          <li class="fa fa-navicon "></li> More Details</button>
+          <li class="fa fa-navicon "></li> More Details 1</button>
         <a class="btn btn-info pull-right" style="margin-right: 7px;" ng-click="vm.printAssetDetails(vm.formData.asset.asset_code)" target="_blank" ng-href="<%vm.url%>"  style="margin-right: 7px;"><li class="fa fa-print"></li> Print
         </a>
 

@@ -14,7 +14,7 @@
             var vm = this;
             var data = {};
 
-           alert($stateParams.assetCode);
+           // alert($stateParams.assetCode);
 
            vm.assetCode = $stateParams.assetCode;
 
@@ -317,7 +317,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetPhotosSrvcs.assetPhotos({tag:$stateParams.assetCode, name:'',status:''}).then (function (response) {
+            AssetPhotosSrvcs.assetPhotos({assetCode:$stateParams.assetCode, name:'',status:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assetPhotos = response.data.data;
@@ -325,7 +325,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            AssetPhotosSrvcs.assetPhotos({tag:$stateParams.assetCode, name:'',status:1}).then (function (response) {
+            AssetPhotosSrvcs.assetPhotos({assetCode:$stateParams.assetCode, name:'',status:1}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assetPhoto = response.data.data;

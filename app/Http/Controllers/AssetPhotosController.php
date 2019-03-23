@@ -15,15 +15,15 @@ class AssetPhotosController extends Controller {
   public function assetPhotos(Request $request){
 
     $data = array(
-      'tag'=>$request->input('tag'),
+      'assetCode'=>$request->input('assetCode'),
       'name'=>$request->input('name'),
       'status'=>$request->input('status'),
     );
 
   	$assetPhotos = DB::table('asset_photos');
 
-    if ($data['tag']){
-      $assetPhotos = $assetPhotos->where('asset_tag', $data['tag']);
+    if ($data['assetCode']){
+      $assetPhotos = $assetPhotos->where('asset_code', $data['assetCode']);
     }
 
     if ($data['name']){

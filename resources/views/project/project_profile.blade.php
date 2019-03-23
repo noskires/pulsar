@@ -15,7 +15,7 @@
 <div class="col-md-11">
   <div class="box box-primary">
     <div class="box-header">
-      <h3 class="box-title"><b>BUNTUN BRIDGE PROJECT</b></h3>
+      <h3 class="box-title"><b><%projectProfileCtrl.project.name%></b></h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -24,14 +24,14 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-              <img src="../../dist/img/construction-buntun1.jpg" style="width:100%;height:100%;">
+              <img src="assets/dist/img/construction-buntun1.jpg" style="width:100%;height:100%;">
               <div class="carousel-caption d-none d-md-block">
                 <h3>Buntun Phase 3</h3>
                 <p>04/06/2018</p>
               </div>
             </div>
             <div class="item">
-              <img src="../../dist/img/construction-buntun2.jpg" style="width:100%;height:100%;">
+              <img src="assets/dist/img/construction-buntun2.jpg" style="width:100%;height:100%;">
               <div class="carousel-caption d-none d-md-block">
                 <h3>Buntun Phase 2</h3>
                 <p>02/02/2018</p>
@@ -56,20 +56,20 @@
             <h3 class="box-title">Overview</h3>
           </div>
           <div class="box-body" style="font-size: 14px;">
-            <b>Control No.: </b>2017-5310001<br>
-            <b>Project ID: </b>5310001<br>
-            <b>Project Cost: </b>₱ 1,234,567.00<br>
-            <b>Region: </b>Region II<br>
-            <b>Province: </b>Cagayan<br>
-            <b>Municipality: </b>Tuguegarao City<br>
-            <b>Zip Code: </b>3500<br>
-            <b>Barangay: </b>Buntun<br>
-            <b>Department: </b>Pulsar Construction<br>
-            <b>Division: </b>Construction<br>
-            <b>Date Assigned: </b>01/30/2017<br>
-            <b>Target Date: </b>12/25/2018<br>
-            <b>Date Started: </b>02/01/2017<br>
-            <b>Project Engineer: </b><a href="../employee/list-employees.html" target="_blank">ENGR. MICHAEL CAPARAS</a><br>
+            <b>Control No.: </b><%projectProfileCtrl.project.project_code%><br>
+            <b>Project ID: </b><%projectProfileCtrl.project.code%><br>
+            <b>Project Cost: </b><%projectProfileCtrl.project.cost%><br>
+            <b>Region: </b></b><%projectProfileCtrl.project.region_text_long%><br>
+            <b>Province: </b><%projectProfileCtrl.project.province_text%><br>
+            <b>Municipality: </b><%projectProfileCtrl.project.municipality_text%><br>
+            <b>Zip Code: </b><%projectProfileCtrl.project.zip_code%><br>
+            <b>Barangay: </b><%projectProfileCtrl.project.barangay%><br>
+            <b>Department: </b><%projectProfileCtrl.project.department_name%><br>
+            <b>Division: </b><%projectProfileCtrl.project.division_name%><br>
+            <b>Target Date: </b><%projectProfileCtrl.project.date_started%><br>
+            <b>Date Started: </b><%projectProfileCtrl.project.date_started%><br>
+            <b>Project Engineer: </b> <%projectProfileCtrl.project.project_engineer_name%> </a><br>
+            <!-- <b>Project Engineer: </b><a href="../employee/list-employees.html" target="_blank">ENGR. MICHAEL CAPARAS</a><br> -->
             <b>Date Completed: </b><br>
             <b>Status: </b> <small class="label bg-green">On-going</small>
           </div>
@@ -95,7 +95,7 @@
           <a class="btn btn-app">
             <i class="fa fa-user"></i> Employees
           </a>
-          <a class="btn btn-app" ui-sref="project-profile-copy({projectCode:'123', actionType:'edit'})">
+          <a class="btn btn-app" ui-sref="project-profile-copy({projectCode:projectProfileCtrl.project.project_code, actionType:'edit'})">
             <i class="fa fa-edit"></i> Edit
           </a>
           <a class="btn btn-app">
@@ -240,8 +240,8 @@
     </ul>
     <div class="tab-content">
       <div>
-    <button ng-click="my_tree.collapse_all()" class="btn btn-default btn-sm">Collapse All</button>
-    <input class="input-sm pull-right" type="text" data-ng-model="filterString" placeholder="Filter" />
+    <button class="btn btn-default btn-sm">Collapse All</button>
+    <input class="input-sm pull-right" type="text" placeholder="Filter" />
     <tree-grid tree-data="tree_data" tree-control="my_tree" col-defs="col_defs" expand-on="expanding_property" on-select="my_tree_handler(branch)" expand-level="1" icon-leaf= "glyphicon glyphicon-globe"></tree-grid>
 </div>
     </div>
@@ -385,13 +385,13 @@
 </section>
 
 
-<script type="text/ng-template" id="project.edit.modal111">
+<script type="text/ng-template" id="project.edit.modal">
 <!-- MODAL-EDIT HERE HERE -->
 <div>
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ui-sref="project-profile({projectCode:vm.formData.project_code})" ng-click="vm.ok()">
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title"><li class="fa fa-edit"></li> Edit Project Details</h4>
       </div>
@@ -401,23 +401,18 @@
         <div class="form-group col-sm-12">
           <label class="col-sm-2 control-label">Department</label>
             <div class="col-sm-10">
-              <select class="form-control select2" style="width: 100%;" required="">
-                <option selected hidden value="">Select Department</option>
-                <option value="1">PULSAR CONSTRUCTION</option>
-                <option value="2">DEPTARTMENT 1</option>
-                <option value="3">DEPTARTMENT 2</option>
+              <select class="form-control select2" style="width: 100%;" required="" ng-change="vm.selectDepartment(vm.formData.department_code)" ng-model="vm.formData.department_code" >
+                <option selected="selected" value="">-- SELECT DEPARTMENT --</option>
+                <option value="<%department.org_code%>" ng-repeat="department in vm.departments"><%department.org_name%></option>
               </select>
             </div>
           </div>
           <div class="form-group col-sm-12">  
           <label class="col-sm-2 control-label">Division</label>
             <div class="col-sm-10">
-              <select class="form-control select2" style="width: 100%;" required="">
-                <option selected hidden value="">Select Division</option>
-                <option value="1">CONSTRUCTION</option>
-                <option value="2">OPERATIONS</option>
-                <option value="3">ACCOUNTING</option>
-                <option value="3">ENGINEERING</option>
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.division_code">
+                <option selected="selected" value="">-- SELECT DIVISION --</option>
+                <option value="<%division.org_code%>" ng-repeat="division in vm.divisions"><% division.org_name%></option>
               </select>
             </div>
           <hr style="border-color:#e1e1e1;border-width:1px 0;">
@@ -425,18 +420,14 @@
 
         <div class="form-group col-sm-12">
         </div>
-
-        <div class="form-group col-sm-12"">
-          <label for="controlnumber" class="col-sm-2 control-label">Control Number</label>
-          <div class="col-sm-6"><input type="text" class="form-control" id="controlnumber" placeholder="PROJ-01012017-5310001" disabled></div>
-        </div>
+ 
         <div class="form-group col-sm-12"">
           <label for="projectid" class="col-sm-2 control-label">Project ID</label>
-          <div class="col-sm-6"><input type="text" class="form-control" id="projectid" placeholder="" required=""></div>
+          <div class="col-sm-6"><input type="text" class="form-control" id="projectid" placeholder="" ng-model="vm.formData.code" required=""></div>
         </div>
         <div class="form-group col-sm-12"">
           <label for="projectname" class="col-sm-2 control-label">Project Name</label>
-          <div class="col-sm-10"><input type="text" class="form-control" id="projectname" placeholder="" required=""></div>
+          <div class="col-sm-10"><input type="text" class="form-control" id="projectname" placeholder="" ng-model="vm.formData.name" required=""></div>
         </div>
         <div class="form-group col-sm-12"">
           <label for="projectname" class="col-sm-2 control-label">Client</label>
@@ -449,7 +440,7 @@
         </div>
         <div class="form-group col-sm-12"">
           <label for="projectcost" class="col-sm-2 control-label">Project Cost</label>
-          <div class="col-sm-4"><input type="number" class="form-control" id="projectcost" placeholder="" required=""></div>
+          <div class="col-sm-4"><input type="number" class="form-control" id="projectcost" placeholder="" ng-model="vm.formData.cost" required=""></div>
         </div>
 
         <div class="form-group col-sm-12">
@@ -458,66 +449,52 @@
         <div class="form-group col-sm-12">
           <label class="col-sm-2 control-label">Region</label>
           <div class="col-sm-4">
-          <select class="form-control select2" style="width: 100%;" required="">
-          <option selected="selected" value="1">Region II</option>
-          <option value="2">Region I</option>
-          <option value="3">Region III</option>
-          </select>
+            <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.region_code" ng-change="vm.selectRegion(vm.formData.region_code)">
+              <option selected="selected" value="">- - - SELECT REGION - - -</option>
+              <option value="<%region.region_code%>" ng-repeat="region in vm.regions"><% region.region_text_short%></option>
+            </select>
           </div>
           <label class="col-sm-2 control-label">Province</label>
           <div class="col-sm-4">
-          <select class="form-control select2" style="width: 100%;" required="">
-          <option selected="selected" value="1">Cagayan</option>
-          <option value="2">Isabela</option>
-          <option value="3">Vizcaya</option>
-          <option value="4">Batanes</option>
-          <option value="5">Quirino</option>
-          </select>
+            <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.province_code" ng-change="vm.selectProvince(vm.formData.province_code)">
+                  <option selected="selected" value="">- - - SELECT PROVINCE - - -</option>
+                  <option value="<%province.province_code%>" ng-repeat="province in vm.provinces"><% province.province_text%></option>
+                </select>
           </div>
         </div>
         <div class="form-group col-sm-12">
           <label class="col-sm-2 control-label">Municipality</label>
           <div class="col-sm-6">
-          <select class="form-control select2" style="width: 100%;" required="">
-          <option selected="selected" value="1">Tuguegarao City</option>
-          <option value="2">Iguig</option>
-          <option value="3">Solana</option>
-          <option value="4">Enrile</option>
-          <option value="5">Peñablanca</option>
-          <option value="6">Gonzaga</option>
-          <option value="7">Sta. Ana</option>
-          </select>
+            <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.municipality_code">
+              <option selected="selected" value="">- - - SELECT MUNICIPALITY - - -</option>
+              <option value="<%municipality.municipality_code%>" ng-repeat="municipality in vm.municipalities"><% municipality.municipality_text%></option>
+            </select>
           </div>
           <label for="zipcode" class="col-sm-2 control-label">Zip Code</label>
-          <div class="col-sm-2"><input type="text" class="form-control" id="emp_barangay" placeholder="" disabled required=""></div>
+          <div class="col-sm-2"><input type="text" class="form-control" id="emp_barangay" placeholder="" disabled required="" ng-model="vm.formData.zipcode"></div>
         </div>
         <div class="form-group col-sm-12">
           <label class="col-sm-2 control-label">Barangay</label>
           <div class="col-sm-4">
-          <select class="form-control select2" style="width: 100%;" required="">
-          <option selected="selected" value="1">Ugac Norte</option>
-          <option value="2">Caritan</option>
-          <option value="3">Pallua</option>
-          </select>
+          <input type="text" class="form-control" id="emp_barangay" placeholder="" disabled required="" ng-model="vm.formData.barangay">
           </div>
           <label for="zipcode" class="col-sm-2 control-label">Street/Bldg/Unit</label>
-          <div class="col-sm-4"><input type="text" class="form-control" id="emp_street" placeholder=""></div>
+          <div class="col-sm-4"><input type="text" class="form-control" id="emp_street" placeholder="" ng-model="vm.formData.street"></div>
         </div>
 
         <div class="form-group col-sm-12">
         <label class="col-sm-2 control-label">Project Engineer</label>
-        <div class="col-sm-4">
-        <select class="form-control select2" style="width: 100%;">
-          <option selected="selected">Jay Bulan</option>
-          <option>Mykee Caparas</option>
-          <option>Erick Supnet</option>
+        <div class="col-sm-4"> 
+        <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.employee_code">
+          <option selected="selected" value="">- - - SELECT PROJECT ENGINEER - - -</option>
+          <option ng-value="employee.employee_code" selected="selected" ng-repeat="employee in vm.employees"><%employee.employee_name%></option> 
         </select>
       </div>
           <label class="col-sm-2 control-label">Date Assigned</label>
           <div class="col-sm-4">
           <div class="input-group date">
           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" class="form-control pull-right" id="datepicker4">
+          <input type="text" class="form-control pull-right" id="datepicker4" ng-model="vm.formData.date_assigned">
         </div></div>
       </div>
         <div class="form-group col-sm-12">
@@ -525,13 +502,13 @@
           <div class="col-sm-4">
           <div class="input-group date">
           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" class="form-control pull-right" id="datepicker">
+          <input type="text" class="form-control pull-right" id="datepicker" ng-model="vm.formData.target_date">
         </div></div>
           <label class="col-sm-2 control-label">Date Started</label>
           <div class="col-sm-4">
           <div class="input-group date">
           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" class="form-control pull-right" id="datepicker2">
+          <input type="text" class="form-control pull-right" id="datepicker2" ng-model="vm.formData.date_started">
         </div></div>
       </div>
       <div class="form-group col-sm-12">
@@ -539,7 +516,7 @@
           <div class="col-sm-4">
           <div class="input-group date">
           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" class="form-control pull-right" id="datepicker3">
+          <input type="text" class="form-control pull-right" id="datepicker3" ng-model="vm.formData.date_completed">
         </div></div>
       </div>
       
@@ -551,7 +528,7 @@
         <button class="btn btn-large btn-primary pull-right" data-toggle="confirmation"
         data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
         data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-        data-title="Comfirmation" data-content="Are you sure?"> Confirmation
+        data-title="Comfirmation" data-content="Are you sure?" ng-click="vm.updateProjectBtn(vm.formData)"> Confirmation
         </button>
       </div>
     </form>

@@ -262,11 +262,11 @@
                 templateUrl: 'project.profile.view'
             })
 
-            // .state('project-profile-copy', {
-            //     url: '/project/profile/:projectCode/:actionType',
-            //     controller: 'ProjectProfileDetailsCtrl as projectProfileCtrl',
-            //     templateUrl: 'project.profile.view'
-            // })
+            .state('project-profile-copy', {
+                url: '/project/profile/:projectCode/:actionType',
+                controller: 'ProjectProfileDetailsCtrl as projectProfileCtrl',
+                templateUrl: 'project.profile.view'
+            })
 
             .state('project-profile-edit', {
                 url: '/project/profile/:projectCode/edit',

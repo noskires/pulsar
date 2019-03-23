@@ -22,7 +22,7 @@
               <label class="col-sm-1 control-label">Department</label>
                 <div class="col-sm-5">
 
-                  <select class="form-control select2" style="width: 100%;" required="" ng-change="pc.selectDepartment(pc.projectDetails.department)" ng-model="pc.projectDetails.department">
+                  <select class="form-control select2" style="width: 100%;" required="" ng-change="pc.selectDepartment(pc.projectDetails.department_code)" ng-model="pc.projectDetails.department_code">
                     <option selected="selected" value="">-- SELECT DEPARTMENT --</option>
                     <option value="<%department.org_code%>" ng-repeat="department in pc.departments"><% department.org_name%></option>
                   </select>
@@ -31,7 +31,7 @@
               <label class="col-sm-1 control-label">Division</label>
                 <div class="col-sm-5">
 
-                  <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.division">
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.division_code">
                     <option selected="selected" value="">-- SELECT DIVISION --</option>
                     <option value="<%division.org_code%>" ng-repeat="division in pc.divisions"><% division.org_name%></option>
                   </select>
@@ -229,111 +229,7 @@
         </div>
         <!-- /.box-body -->
   </div>
-  <!-- MODAL CONTENTS -->
-    <div class="modal fade" id="modal-default">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title"><i class="fa fa-cube"></i> Project Profile: <b>5310001</b></h4>
-          </div>
-          <div class="modal-body">
-            <!-- Custom Tabs (Pulled to the right) -->
-            <div class="nav-tabs-custom">
-              <ul class="nav nav-tabs pull-right">
-                <li class="active"><a href="#tab_1-1" data-toggle="tab">Details</a></li>
-                <li class="pull-left header"> BUNTUN BRIDGE PROJECT</li>
-              </ul>
-              <div class="tab-content">
-                <div class="tab-pane active" id="tab_1-1">
-                  <form action="view-project.html">
-                    <table id="projects-modal-tbl" class="table table-bordered">
-                      <tr>
-                        <td>Control No.</td>
-                        <td>2017-5310001</td>
-                      </tr>
-                      <tr>  
-                        <td>Project ID</td>
-                        <td>5310001</td>
-                      </tr>
-                      <tr>
-                        <td>Project Name</td>
-                        <td>BUNTUN BRIDGE PROJECT</td>
-                      </tr>  
-                      <tr>
-                        <td>Project Cost</td>
-                        <td>₱ 1,234,567.00</td>
-                      </tr>
-                      <tr>
-                        <td>Region</td>
-                        <td>Region II</td>
-                      </tr>
-                      <tr>
-                        <td>Province</td>
-                        <td>Cagayan</td>
-                      </tr>
-                      <tr>
-                        <td>Municipality</td>
-                        <td>Tuguegarao City</td>
-                      </tr>
-                      <tr>
-                        <td>Zip Code</td>
-                        <td>3500</td>
-                      </tr>
-                      <tr>
-                        <td>Barangay</td>
-                        <td>Buntun</td>
-                      </tr>
-                      <tr>
-                        <td>Department</td>
-                        <td>Pulsar Construction</td>
-                      </tr>
-                      <tr>
-                        <td>Division</td>
-                        <td>Construction</td>
-                      </tr>
-                      <tr>
-                        <td>Date Assigned</td>
-                        <td>01/30/2017</td>
-                      </tr>
-                      <tr>
-                        <td>Target Date</td>
-                        <td>12/25/2018</td>
-                      </tr>
-                      <tr>
-                        <td>Date Started</td>
-                        <td>01/01/2017</td>
-                      </tr> 
-                      <tr>
-                        <td>Project Engineer</td>
-                        <td><a href="../employee/list-employees.html" target="_blank">ENGR. MICHAEL CAPARAS</a></td>
-                      </tr>
-                      <tr>
-                        <td>Date Completed</td>
-                        <td></td>
-                      </tr>
-                      
-                  </table>
-                </div>
-                <!-- /.tab-pane -->
-              </div>
-              <!-- /.tab-content -->
-            </div>
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary pull-right" formtarget="_blank">
-              <li class="fa fa-navicon "></li> More Details</button>
-            <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button>
-            <!-- nav-tabs-custom -->
-          </div>
-          <div class="modal-footer">
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->       
+   
 
 </section>
 
@@ -356,7 +252,7 @@ $('.select2').select2();
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ui-sref="list-projects" ng-click="vm.ok()">
               <span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title"><i class="fa fa-cube"></i> Project Profile: <b><%vm.formData.project_code%></b></h4>
           </div>
@@ -389,23 +285,23 @@ $('.select2').select2();
                       </tr>
                       <tr>
                         <td>Region</td>
-                        <td>Region II</td>
+                        <td><%vm.formData.region_text_long%></td>
                       </tr>
                       <tr>
                         <td>Province</td>
-                        <td>Cagayan</td>
+                        <td><%vm.formData.province_text%></td>
                       </tr>
                       <tr>
                         <td>Municipality</td>
-                        <td>Tuguegarao City</td>
+                        <td><%vm.formData.municipality_text%></td>
                       </tr>
                       <tr>
                         <td>Zip Code</td>
-                        <td>3500</td>
+                        <td></td>
                       </tr>
                       <tr>
                         <td>Barangay</td>
-                        <td>Buntun</td>
+                        <td></td>
                       </tr>
                       <tr>
                         <td>Department</td>
@@ -421,7 +317,7 @@ $('.select2').select2();
                       </tr>
                       <tr>
                         <td>Target Date</td>
-                        <td></td>
+                        <td><%vm.formData.target_date%></td>
                       </tr>
                       <tr>
                         <td>Date Started</td>
@@ -429,7 +325,7 @@ $('.select2').select2();
                       </tr> 
                       <tr>
                         <td>Project Engineer</td>
-                        <td><%vm.formData.project_engineer%></td>
+                        <td><%vm.formData.project_engineer_name%></td>
                         <!-- <td><a href="../employee/list-employees.html" target="_blank">ENGR. MICHAEL CAPARAS</a></td> -->
                       </tr>
                       <tr>
@@ -444,7 +340,7 @@ $('.select2').select2();
               <!-- /.tab-content -->
             </div>
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary pull-right" formtarget="_blank">
+            <button type="submit" class="btn btn-primary pull-right" formtarget="_blank" ui-sref="project-profile({projectCode:vm.formData.project_code})" ng-click="vm.ok()">
               <li class="fa fa-navicon "></li> More Details</button>
             <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button>
             <!-- nav-tabs-custom -->
