@@ -1,5 +1,3 @@
-
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-bus"> </span> List of Requisitions</h1>
@@ -27,7 +25,7 @@
                   <div class="col-sm-4">
                     <div class="input-group date">
                     <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                    <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="roc.risDetails.date_requested">
+                    <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="roc.risDetails.date_requested" datepicker autocomplete="off" readonly="">
                     </div>
                   </div>
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
@@ -45,7 +43,7 @@
                   <div class="col-sm-4">
                     <div class="input-group date">
                     <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                    <input type="text" class="form-control pull-right" id="datepicker-dateneeded" ng-model="roc.risDetails.date_needed">
+                    <input type="text" class="form-control pull-right" id="datepicker-dateneeded" ng-model="roc.risDetails.date_needed" datepicker autocomplete="off" readonly="">
                     </div>
                   </div>
                   <label for="" class="col-sm-2 control-label">Reference Name</label>
@@ -66,7 +64,8 @@
                   <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" ng-model="roc.risDetails.requesting_employee">
-                    <option value="<%employee.employee_code%>" ng-repeat="employee in roc.employees"><%employee.fname+' '+employee.lname%></option>
+                    <option value="" selected disabled hidden>Select Employee</option>
+                    <option value="<%employee.employee_code%>" ng-repeat="employee in roc.employees"><%employee.employee_name%></option>
                   </select>
                   </div>
                 </div>
@@ -161,48 +160,8 @@
 
 <!-- LIST RS -->
       <div class="box">
-            <div class="box-body">
-              <!-- <table id="tbl_rs" class="table table-bordered table-hover" width="100%">
-                <thead>
-                <tr>
-                  <th>Control No.</th>
-                  <th>Reference</th>
-                  <th>Date Requested</th>
-                  <th>Date Needed</th>
-                  <th>Request Type</th>
-                  <th>Reference Name</th>
-                  <th>ID</th>
-                  <th>Requested by</th>
-                  <th>Date Received</th>
-                  <th>Inspected By</th>
-                  <th>Date Inspected</th>
-                  <th>Status</th>
-                  <th>Options</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td><a href="#" data-toggle="modal" data-target="#modal-default"><b>RS-03102018-1</b></a></td>
-                  <td>0001</td>
-                  <td>03/15/2018</td>
-                  <td>04/30/2018</td>
-                  <td>Request Type here</td>
-                  <td>Reference Name here</td>
-                  <td>ID1234</td>
-                  <td>Mykee Caparas</td>
-                  <td>03/12/2018</td>
-                  <td>Jay Bulan</td>
-                  <td>03/13/2018</td>
-                  <td><small class="label bg-gray">Closed</small></td>
-                  <td></td>
-                </tr>
-                
-                </tbody>
-              </table> -->
-
-              <br>
-
-              <table datatable="ng" class="table table-bordered table-hover" width="100%">
+        <div class="box-body">
+          <table datatable="ng" class="table table-bordered table-hover" width="100%">
             <thead>
             <tr>
               <th>Control No.</th>
@@ -241,10 +200,9 @@
             
             </tbody>
           </table>
-            </div>
+        </div>
             <!-- /.box-body -->
       </div>
-
   </section>
 
 <script type="text/javascript">
@@ -295,7 +253,7 @@ $('.select2').select2();
                           <td><input type="checkbox" ng-model="personalDetail.selected"/></td> 
                           <td>
                             <select class="form-control select2" style="width: 100%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
-                              <option value="">- - select supply - -</option>
+                              <option value="">- - SELECT SUPPLY - -</option>
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
                           </td>
@@ -374,42 +332,55 @@ $('.select2').select2();
                         <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
                         <div class="col-sm-4">
                           <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.status=='CLOSED'">   
-                              <option value="">- - - Select Employee - - -</option>
+                              <option value="">- - - SELECT EMPLOYEE - - -</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
-                                <% employee.fname + ' '+employee.lname%>
+                                <%employee.employee_name%>
                               </option>
                           </select>
                         </div>
                         <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
                         <div class="col-sm-4">
                           <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.status=='CLOSED'">   
-                              <option value="">- - - Select Employee - - -</option>
+                              <option value="">- - - SELECT EMPLOYEE - - -</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
-                                <% employee.fname + ' '+employee.lname%>
+                                <%employee.employee_name%>
                               </option>
                           </select>
                         </div>
                       </div>
+
                       <div class="form-group col-sm-12">
                         <label class="col-sm-2 control-label">Date Received</label>
                         <div class="col-sm-4">
-                        <div class="input-group date">
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received">
-                      </div></div>
+                          <div class="input-group date">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                            <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received" datepicker autocomplete="off" readonly="">
+                          </div>
+                        </div>
 
                         <label class="col-sm-2 control-label">Date Inspected</label>
                         <div class="col-sm-4">
-                        <div class="input-group date">
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
-                      </div></div>
-                      </div>
-                          <div class="form-group" >
-                            <div class="form-group">
-                              <input type="button" ng-if="vm.formData.status=='OPEN'" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
-                            </div>
+                          <div class="input-group date">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                            <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected" datepicker autocomplete="off" readonly="">
                           </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-2 control-label">Remarks</label>
+                          <div class="col-sm-10">
+                             <textarea class="form-control pull-right" id="" ng-model="vm.formData.withdrawal_remarks"></textarea>
+                          </div>
+                      </div>
+
+                        <div class="form-group" >
+                          <div class="form-group">
+                            <input type="button" ng-if="vm.formData.status=='OPEN'" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
+                          </div>
+                        </div>
+                      </div>
+
                   </form>
                 </div>
               </div>

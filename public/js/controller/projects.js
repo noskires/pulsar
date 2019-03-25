@@ -56,6 +56,14 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            ClientsSrvcs.clients({clientCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.clients = response.data.data;
+                    console.log(vm.clients)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
             OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'Department', startDate:'', endDate:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -219,8 +227,8 @@
             
         }
 
-        ProjectProfileEditCtrl.$inject = ['$uibModalInstance', '$state', '$stateParams','ProjectsSrvcs', 'OrganizationsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', 'formData', '$window', '$uibModal'];
-        function ProjectProfileEditCtrl ($uibModalInstance, $state, $stateParams, ProjectsSrvcs, OrganizationsSrvcs, EmployeesSrvcs, AddressesSrvcs, formData, $window, $uibModal) {
+        ProjectProfileEditCtrl.$inject = ['$uibModalInstance', '$state', '$stateParams','ProjectsSrvcs', 'OrganizationsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', 'ClientsSrvcs', 'formData', '$window', '$uibModal'];
+        function ProjectProfileEditCtrl ($uibModalInstance, $state, $stateParams, ProjectsSrvcs, OrganizationsSrvcs, EmployeesSrvcs, AddressesSrvcs, ClientsSrvcs, formData, $window, $uibModal) {
 
             var vm = this;
             vm.formData = formData.project;
@@ -228,7 +236,13 @@
             console.log(vm.formData)
 
             
-            
+            ClientsSrvcs.clients({clientCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.clients = response.data.data;
+                    console.log(vm.clients)
+                }
+            }, function (){ alert('Bad Request!!!') })
             
 
             OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'Department', startDate:'', endDate:''}).then (function (response) {

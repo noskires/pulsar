@@ -38,7 +38,7 @@
               <div class="col-sm-9">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.operationDetails.assetCode" ng-init="oc.operationDetails.assetCode=''">
                 <option selected="selected" value="">- - SELECT EQUIPMENT - -</option>
-                <option ng-value="asset.asset_code" ng-repeat="asset in oc.assets"><%asset.name + " : " + asset.tag%></option> 
+                <option ng-value="asset.asset_code" ng-repeat="asset in oc.assets"><%asset.name + " : " + asset.code%></option> 
               </select>
             </div>
             </div>

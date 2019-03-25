@@ -20,14 +20,16 @@
         <table id="suppliers" class="table table-bordered table-hover" width="100%" datatable="ng" >
           <thead>
           <tr>
-            <th>Supply Unit Name</th>
+            <!-- <th>Supply Unit Name</th> -->
             <th>Supply Unit</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
           <tr ng-repeat="supplyUnit in suc.supplyUnits">
-          <td><a href="#" ui-sref="list-supplyUnitCopy({supplyUnitCode:supplyUnit.stock_unit_code})"><b> <%supplyUnit.stock_unit_code%> </b></a></td>
+          <!-- <td></td> -->
           <td><%supplyUnit.stock_unit_name%></td>
+          <td><a href="#" ui-sref="list-supplyUnitCopy({supplyUnitCode:supplyUnit.stock_unit_code})"><b> Edit</b></a></td>
         </tr>
           </tbody>
         </table>

@@ -53,7 +53,7 @@
               <div class="col-sm-2">
                 <div class="input-group date">
                   <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" id="datepicker-bday" ng-model="ec.employeeDetails.bday">
+                  <input type="text" class="form-control pull-right" id="datepicker-bday" ng-model="ec.employeeDetails.bday" datepicker autocomplete="off">
                 </div>
               </div>
               <label for="controlnumber" class="col-sm-1 control-label">Suffix</label>
@@ -263,7 +263,7 @@ $('.select2').select2();
                       <label class="col-sm-3 control-label">Gender</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.gender">
-                        <option selected="selected" value="">- - Select Female - -</option>
+                        <option selected="selected" value="">- - SELECT GENDER - -</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                       </select>
@@ -282,7 +282,7 @@ $('.select2').select2();
                       <div class="col-sm-9">
                       <div class="input-group date">
                       <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                      <input type="text" class="form-control pull-right" ng-model="vm.formData.birthdate">
+                      <input type="text" class="form-control pull-right" ng-model="vm.formData.birthdate" datepicker autocomplete="off">
                     </div></div>
                     </div>
                     <div class="form-group col-sm-12">
@@ -298,7 +298,7 @@ $('.select2').select2();
                       <label class="col-sm-3 control-label">Department</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.department_code" ng-change="vm.selectDepartment(vm.formData.department_code)">
-                        <option selected="selected" value="">- - Select Department - -</option>
+                        <option selected="selected" value="">- - SELECT DEPARTMENT - -</option>
                         <option ng-value="department.org_code" ng-repeat="department in vm.departments"><%department.department_name%></option>
                       </select></div>
                     </div>
@@ -306,7 +306,7 @@ $('.select2').select2();
                       <label class="col-sm-3 control-label">Division</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.division_code" ng-change="vm.selectDivision(vm.formData.division_code)">
-                        <option selected="selected" value="">- - select division - -</option>
+                        <option selected="selected" value="">- - SELECT DIVISION - -</option>
                         <option ng-value="division.org_code" ng-repeat="division in vm.divisions"><%division.division_name%></option>
                       </select></div>
                     </div>
@@ -314,7 +314,7 @@ $('.select2').select2();
                       <label class="col-sm-3 control-label">Unit</label>
                       <div class="col-sm-9">
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.unit_code">
-                        <option selected="selected" value="">- - select unit - -</option>
+                        <option ng-value="">- - SELECT UNIT - -</option>
                         <option ng-value="unit.org_code" ng-repeat="unit in vm.units"><%unit.unit_name%></option>
                       </select></div>
                     </div>
@@ -325,16 +325,7 @@ $('.select2').select2();
             </div>
             <!-- /.tab-pane -->
 
-            <div class="tab-pane" id="tab_2-2">
-              <b>EMPLOYEE ASSIGNMENT HISTORY.</b><br>
-              A wonderful serenity has taken possession of my entire soul,
-              like these sweet mornings of spring which I enjoy with my whole heart.
-              I am alone, and feel the charm of existence in this spot,
-              which was created for the bliss of souls like mine. I am so happy,
-              my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-              that I neglect my talents. I should be incapable of drawing a single stroke
-              at the present moment; and yet I feel that I never was a greater artist than now.
-            </div>
+        
             <!-- /.tab-pane -->
           </div>
           <!-- /.tab-content -->
@@ -351,16 +342,16 @@ $('.select2').select2();
   <!-- /.modal-dialog -->
 </div>
 
- <script type="text/javascript">
-  $(function () {
+<script type="text/javascript">
+$(function () {
 
-    $('.select2').select2();
+  $('.select2').select2();
 
-  //   $('#datepicker').datepicker({
-  //    autoclose: true
-  //   })
-  });
-  </script>
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+});
+</script>
 </script>
 <!-- /.modal
 

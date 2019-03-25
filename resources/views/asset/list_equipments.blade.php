@@ -15,8 +15,7 @@
     <div class="box-body">
       <table datatable="ng" class="table table-bordered table-hover" width="100%">
         <thead>
-        <tr>
-          <th>Asset Tag</th>
+        <tr> 
           <th>Asset Code</th>
           <th>Category</th>
           <th>Name</th>
@@ -33,8 +32,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="asset in ac.assets">
-          <td><a href="#" ui-sref="asset-list-equipmentsCopy({assetTag:asset.tag})"><b><%asset.tag%></b></a></td>
+        <tr ng-repeat="asset in ac.assets"> 
           <td><a href="#" ui-sref="asset-list-equipmentsCopy({assetCode:asset.asset_code})"><b><%asset.asset_code%></b></a></td>
           <td><%asset.category%></td>
           <td><%asset.name%></td>

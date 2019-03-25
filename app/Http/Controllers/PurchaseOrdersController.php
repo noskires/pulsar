@@ -230,32 +230,41 @@ class PurchaseOrdersController extends Controller {
 		$data = Input::post();
 
 		$transaction = DB::transaction(function($data) use($data){
-		try{
+		// try{
 
-				DB::table('purchase_orders')
-				->where('po_code', $data['po_code'])
-				->update([
-					'supplier_code' => $data['supplier_code'],
-					'received_by' => $data['received_by'],
-					'date_received' => ($data['date_received'])?date('Y-m-d', strtotime($data['date_received'])):null,
-					'inspected_by' => $data['inspected_by'],
-					'date_inspected' => ($data['date_inspected'])?date('Y-m-d', strtotime($data['date_inspected'])):null
-				]);
+				$employee = PurchaseOrder::where('po_code', $data['po_code'])->first();
+				$employee->received_by          = $data['received_by'];
+				$employee->date_received        = ($data['date_received'])?date('Y-m-d', strtotime($data['date_received'])):null;
+				$employee->inspected_by         = $data['inspected_by'];
+				$employee->date_inspected       = ($data['date_inspected'])?date('Y-m-d', strtotime($data['date_inspected'])):null;
+				$employee->changed_by       	= Auth::user()->email;
+				$employee->timestamps       	= true;
+				$employee->save();
+
+				// DB::table('purchase_orders')
+				// ->where('po_code', $data['po_code'])
+				// ->update([
+				// 	'supplier_code' => $data['supplier_code'],
+				// 	'received_by' => $data['received_by'],
+				// 	'date_received' => ($data['date_received'])?date('Y-m-d', strtotime($data['date_received'])):null,
+				// 	'inspected_by' => $data['inspected_by'],
+				// 	'date_inspected' => ($data['date_inspected'])?date('Y-m-d', strtotime($data['date_inspected'])):null
+				// ]);
 
 				return response()->json([
 					'status' => 200,
 					'data' => 'null',
 					'message' => 'Successfully saved.'
 				]);
-			}
-			catch (\Exception $e)
-			{
-				return response()->json([
-					'status' => 500,
-					'data' => 'null',
-					'message' => 'Error, please try again!'
-				]);
-			}
+			// }
+			// catch (\Exception $e)
+			// {
+			// 	return response()->json([
+			// 		'status' => 500,
+			// 		'data' => 'null',
+			// 		'message' => 'Error, please try again!'
+			// 	]);
+			// }
 		});
 
 		return $transaction;

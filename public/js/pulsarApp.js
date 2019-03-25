@@ -20,10 +20,12 @@
                       endDate: '+0d',
                       // defaultDate: new Date()
                         format: "yyyy-mm-dd",
+                        // format: "mm/dd/yyyy",
                         immediateUpdates: true,
                         todayBtn: true,
                         // todayHighlight: true
-                    }).datepicker("setDate", "0");
+                    })
+                    // .datepicker("setDate", "0");
                   }
             };
         })

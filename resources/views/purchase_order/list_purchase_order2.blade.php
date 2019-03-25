@@ -24,13 +24,13 @@
                   <div class="col-sm-4">
                     <div class="input-group date">
                     <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                    <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="poc.poDetails.date_requested">
+                    <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="poc.poDetails.date_requested" datepicker autocomplete="off" readonly="">
                     </div>
                   </div>
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
                   <div class="col-sm-4">
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.request_type" required="">
-                      <option value="">--Select Request Type--</option>
+                      <option value="">- - SELECT REQUEST TYPE - -</option>
                       <option value="Office">Office</option>
                       <option value="Project">Project</option>
                     </select>
@@ -42,7 +42,7 @@
                   <div class="col-sm-4">
 
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.requisition_slip_code">
-                      <option value="">Select RIS</option>
+                      <option value="">- - SELECT RIS - -</option>
                       <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.requisition_slip_code%></option>
                       
                     </select>
@@ -50,7 +50,7 @@
                   <label for="" class="col-sm-2 control-label">Reference Name</label>
                   <div class="col-sm-4">
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.reference_code">
-                      <option value="">Select Reference Name</option>
+                      <option value="">- - SELECT REFERENCE NAME - -</option>
                       <option ng-if="poc.poDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in poc.organizations"><%organization.org_name%></option>
                       <option ng-if="poc.poDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in poc.projects"><%project.name%></option>
                     </select>
@@ -61,16 +61,16 @@
                   <label for="assetname" class="col-sm-2 control-label">Supplier</label>
                   <div class="col-sm-4">
                     <select class="form-control select2" style="width: 100%;" required="" ng-model="poc.poDetails.supplier_code">
-                      <option selected="selected" value="">Select Supplier</option>
+                      <option selected="selected" value="">- - SELECT SUPPLIER - -</option>
                       <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
                     </select>
                   </div>
                   <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
                   <div class="col-sm-4">
                     <select class="form-control select2"  style="width: 100%;" ng-model="poc.poDetails.requesting_employee">
-                      <option value=""> -- Select Employee -- </option>
+                      <option value="">- - SELECT EMPLOYEE - -</option>
                       <option value="<%employee.employee_code%>" ng-repeat="employee in poc.employees">
-                        <%employee.fname+' '+employee.lname%>
+                        <%employee.employee_name%>
                       </option>
                     </select>
                   </div>
@@ -118,7 +118,7 @@
                       <label class="control-label">From</label>
                         <div class="input-group date">
                           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateFrom">
+                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateFrom" datepicker autocomplete="off" readonly="">
                         </div>
                       </div>
 
@@ -126,23 +126,23 @@
                       <label class="control-label">TO</label>
                         <div class="input-group date">
                           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateTo">
+                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateTo" datepicker autocomplete="off" readonly="">
                         </div>
                       </div>
 
-                      <div class="col-sm-2">
+                      <div class="col-sm-3">
                         <label class="control-label">Supplier</label>
                         <select class="form-control select2" style="width: 100%;" ng-model="poc.poFilterDetails.supplier_code">
-                          <option selected="selected" value="">Select Supplier</option>
+                          <option selected="selected" value="">- - SELECT SUPPLIER - -</option>
                           <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
                         </select>
                       </div>
 
 
-                      <div class="col-sm-2">
+                      <div class="col-sm-3">
                       <label for="assetname" class="control-label">PO Status</label>
                       <select class="form-control select2" style="width: 100%;" required="" ng-model="poc.poFilterDetails.status">
-                          <option value="">Select Status</option>
+                          <option value="">- - SELECT STATUS - -</option>
                           <option value=3>ALL</option>
                           <option value=2>OPEN</option>
                           <option value=1>CLOSED</option>
@@ -294,7 +294,7 @@ $('.select2').select2();
                           <!-- <td><input type="checkbox" ng-model="personalDetail.selected"/></td>  -->
                           <td>
                             <select class="form-control select2" style="width: 100%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
-                              <option selected="selected" value="0">- - select supply - -</option>
+                              <option value="">- - SELECT SUPPLY - -</option>
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
                           </td>
@@ -360,18 +360,18 @@ $('.select2').select2();
                         <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
                         <div class="col-sm-4">
                           <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.status">   
-                              <option value="">- - - Select Employee - - -</option>
+                              <option value="">- - SELECT EMPLOYEE - -</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
-                                <% employee.fname + ' '+employee.lname%>
+                                <%employee.employee_name%>
                               </option>
                           </select>
                         </div>
                         <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
                         <div class="col-sm-4">
                           <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.status">   
-                              <option value="">- - - Select Employee - - -</option>
+                              <option value="">- - SELECT EMPLOYEE - </option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
-                                <% employee.fname + ' '+employee.lname%>
+                                <%employee.employee_name%>
                               </option>
                           </select>
                         </div>
@@ -381,14 +381,14 @@ $('.select2').select2();
                         <div class="col-sm-4">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received">
+                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received" datepicker autocomplete="off" readonly="">
                       </div></div>
 
                         <label class="col-sm-2 control-label">Date Inspected</label>
                         <div class="col-sm-4">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected">
+                        <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected" datepicker autocomplete="off" readonly="">
                       </div></div>
                       </div>
                           <div class="form-group" >

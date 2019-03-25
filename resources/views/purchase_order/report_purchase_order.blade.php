@@ -63,7 +63,7 @@
         </table>
       </div>
     </div>
-<br>
+    <br>
 <!-- DELIVERY DETAILS -->    
     <div class="row">
       <div class="col-md-12">
@@ -88,7 +88,6 @@
             <td align="left" width="15%" style="font-weight: bold;">Date Inspected:</td>
             <td align="left">{{$purchase_order->date_inspected}}</td>
           </tr>
-
         </table> <br>
       </div>
     </div>

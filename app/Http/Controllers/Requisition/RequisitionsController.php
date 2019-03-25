@@ -42,6 +42,7 @@ class RequisitionsController extends Controller {
         'rs.inspected_by',
         DB::raw('CONCAT(trim(CONCAT(inspectedEmployee.lname," ",COALESCE(inspectedEmployee.affix,""))),", ", COALESCE(inspectedEmployee.fname,"")," ", COALESCE(inspectedEmployee.mname,"")) as inspected_by_name'),
         'rs.date_inspected',
+        'rs.withdrawal_remarks',
         'rs.old_reference',
         'rs.created_at',
 
@@ -323,6 +324,7 @@ class RequisitionsController extends Controller {
     $data['date_received'] = date('Y-m-d', strtotime($request->input('date_received')));
     $data['inspected_by'] = $request->input('inspected_by');
     $data['date_inspected'] = date('Y-m-d', strtotime($request->input('date_inspected')));
+    $data['withdrawal_remarks'] = $request->input('withdrawal_remarks');
 
     // return $data;
 
@@ -342,6 +344,7 @@ class RequisitionsController extends Controller {
           $requisitionSlip->date_received      = $data['date_received'];
           $requisitionSlip->inspected_by       = $data['inspected_by'];
           $requisitionSlip->date_inspected     = $data['date_inspected'];
+          $requisitionSlip->withdrawal_remarks = $data['withdrawal_remarks'];
           $requisitionSlip->changed_by         = Auth::user()->email;
           $requisitionSlip->timestamps         = true;
           $requisitionSlip->save();

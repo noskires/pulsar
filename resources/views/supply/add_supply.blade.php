@@ -25,7 +25,7 @@
               <label class="col-sm-2 control-label">Category*</label>
               <div class="col-sm-10">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="sc.supplyDetails.category">
-                <option selected="selected" value="0">- - select supply category - -</option>
+                <option selected="selected" value="">- - SELECT SUPPLY CATEGORY - -</option>
                 <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in sc.supplyCategories"><%supplyCategory.supply_category_name%></option>
               </select></div>
             </div>
@@ -41,7 +41,7 @@
               <label class="col-sm-2 control-label">Stock Unit*</label>
               <div class="col-sm-4">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="sc.supplyDetails.stockUnit">
-              <option selected="selected" value="0">- - select stock unit - -</option>
+              <option selected="selected" value="">- - SELECT STOCK UNIT - -</option>
                 <option ng-value="stockUnit.stock_unit_code" ng-repeat="stockUnit in sc.stockUnits"><%stockUnit.stock_unit_name%></option>
               </select></div>
             </div>

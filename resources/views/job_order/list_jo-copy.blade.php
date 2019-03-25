@@ -52,7 +52,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.ok()" ui-sref="list-jo">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Job Order No: <b><%vm.formData.jobOrder.job_order_code%></b></h4>
+        <h4 class="modal-title">Job Order No: 1<b><%vm.formData.jobOrder.job_order_code%></b></h4>
       </div>
       <div class="modal-body">
           <!-- Custom Tabs (Pulled to the right) -->

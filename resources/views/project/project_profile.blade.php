@@ -66,11 +66,11 @@
             <b>Barangay: </b><%projectProfileCtrl.project.barangay%><br>
             <b>Department: </b><%projectProfileCtrl.project.department_name%><br>
             <b>Division: </b><%projectProfileCtrl.project.division_name%><br>
+            <b>Date Assigned: </b><%projectProfileCtrl.project.date_assigned%><br>
             <b>Target Date: </b><%projectProfileCtrl.project.date_started%><br>
             <b>Date Started: </b><%projectProfileCtrl.project.date_started%><br>
             <b>Project Engineer: </b> <%projectProfileCtrl.project.project_engineer_name%> </a><br>
-            <!-- <b>Project Engineer: </b><a href="../employee/list-employees.html" target="_blank">ENGR. MICHAEL CAPARAS</a><br> -->
-            <b>Date Completed: </b><br>
+            <b>Date Completed: <%projectProfileCtrl.project.date_completed%> </a></b><br>
             <b>Status: </b> <small class="label bg-green">On-going</small>
           </div>
         </div>
@@ -432,9 +432,9 @@
         <div class="form-group col-sm-12"">
           <label for="projectname" class="col-sm-2 control-label">Client</label>
           <div class="col-sm-10">
-          <select class="form-control select2" style="width: 100%;" required="">
-          <option selected="selected" value="1">Client 1</option>
-          <option value="2">Client 2</option>
+          <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.client_code"> 
+            <option value="">- - SELECT CLIENT - -</option>
+            <option value="<%client.client_code%>" ng-repeat="client in vm.clients"><%client.client_name%></option>
           </select>
           </div>
         </div>
@@ -494,7 +494,7 @@
           <div class="col-sm-4">
           <div class="input-group date">
           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" class="form-control pull-right" id="datepicker4" ng-model="vm.formData.date_assigned">
+          <input type="text" class="form-control pull-right" id="datepicker4" ng-model="vm.formData.date_assigned" datepicker autocomplete="off" readonly="">
         </div></div>
       </div>
         <div class="form-group col-sm-12">
@@ -502,13 +502,13 @@
           <div class="col-sm-4">
           <div class="input-group date">
           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" class="form-control pull-right" id="datepicker" ng-model="vm.formData.target_date">
+          <input type="text" class="form-control pull-right" id="datepicker" ng-model="vm.formData.target_date" datepicker autocomplete="off" readonly="">
         </div></div>
           <label class="col-sm-2 control-label">Date Started</label>
           <div class="col-sm-4">
           <div class="input-group date">
           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" class="form-control pull-right" id="datepicker2" ng-model="vm.formData.date_started">
+          <input type="text" class="form-control pull-right" id="datepicker2" ng-model="vm.formData.date_started" datepicker autocomplete="off" readonly="">
         </div></div>
       </div>
       <div class="form-group col-sm-12">
@@ -516,7 +516,7 @@
           <div class="col-sm-4">
           <div class="input-group date">
           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-          <input type="text" class="form-control pull-right" id="datepicker3" ng-model="vm.formData.date_completed">
+          <input type="text" class="form-control pull-right" id="datepicker3" ng-model="vm.formData.date_completed" datepicker autocomplete="off" readonly="">
         </div></div>
       </div>
       
@@ -538,5 +538,17 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<script type="text/javascript">
+$(function () {
+
+$('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+
+});
+</script>
 
 </script>

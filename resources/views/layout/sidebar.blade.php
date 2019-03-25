@@ -38,7 +38,7 @@
       <li><a href="#" ui-sref="operation-create"><i class="fa fa-circle-o"></i> Daily Operating Report</a></li>
       <li><a href="#" ui-sref="list-operating"><i class="fa fa-circle-o"></i> Operating Records</a></li>
       <li><a href="#" ui-sref="list-monitoring"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li> 
-      <li><a href="#" ui-sref="list-jo"><i class="fa fa-list-ul"></i> List of J.O.</a></li>
+      <!-- <li><a href="#" ui-sref="list-jo"><i class="fa fa-list-ul"></i> List of J.O.</a></li> -->
         <!-- <li><a ui-sref="list-monitoring-view"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li>  -->
       </ul>
       
@@ -53,12 +53,12 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> Due for Maintenance</a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-green"></i> On-going Maintenance</a></li>
+       <!--  <li><a href="#"><i class="fa fa-circle-o text-red"></i> Due for Maintenance</a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-green"></i> On-going Maintenance</a></li> -->
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Supply Levels</a></li>
       </ul>
     </li>   
-    <li>
+   <!--  <li>
       <a href="#">
         <i class="fa fa-calendar"></i> <span>Calendar</span>
         <span class="pull-right-container">
@@ -66,7 +66,7 @@
           <small class="label pull-right bg-blue">15</small>
         </span>
       </a>
-    </li>
+    </li> -->
     <li class="treeview">
       <a href="#" ui-sref="list-requesition2">
         <i class="fa fa-file-text"></i> <span>Requisition</span>

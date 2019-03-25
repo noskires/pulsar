@@ -26,7 +26,7 @@
               <label class="col-sm-2 control-label">Asset Category* </label>
               <div class="col-sm-10">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="ac.assetsDetails.categoryCode" ng-change="ac.assetTag(ac.assetsDetails)">
-                <option selected="selected" value="0">- - - Select Category - - -</option>
+                <option selected="selected" value="">- - - SELECT CATEGORY - - -</option>
                 <option value="<%category.asset_category_code%>" ng-repeat="category in ac.asset_categories"><%category.asset_category_name +" ("+category.asset_category_code+")"%></option>
               </select>
               </div>
@@ -52,13 +52,13 @@
               <div class="col-sm-4">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right datepicker" datepicker ng-model="ac.assetsDetails.dateAcquired">
+              <input type="text" class="form-control pull-right datepicker" ng-model="ac.assetsDetails.dateAcquired" datepicker autocomplete="off" readonly="">
             </div></div>
               <label for="acquisitioncost" class="col-sm-2 control-label">Acquisition Cost*</label>
               <div class="col-sm-4">
               <div class="input-group date">
               <span class="input-group-addon" style="font-size: 20px;">₱</span>
-              <input type="number" class="form-control" id="acquisitionCost" ng-model="ac.assetsDetails.acquisitionCost" placeholder="" required="">
+              <input type="text" class="form-control" id="acquisitionCost" ng-model="ac.assetsDetails.acquisitionCost" placeholder="" required="" awnum="price">
             </div></div>
             </div>
             <div class="form-group col-sm-12">

@@ -32,6 +32,7 @@ class JobOrdersController extends Controller {
           'jo.job_order_date', 
           'jo.organizational_unit', 
           'jo.date_started', 
+          // DB::raw('DATE_FORMAT(jo.date_started, "%m/%d/%Y") as date_started'),
           'jo.date_completed', 
           'jo.particulars',
           DB::raw('datediff(jo.date_completed, jo.date_started) as work_duration'),
@@ -53,6 +54,7 @@ class JobOrdersController extends Controller {
           'jo.number_loads', 
           'jo.old_reference', 
           'a.asset_code', 
+          'a.code', 
           'a.name',
           'org.org_name as organizational_unit_name',
           'org.barangay as barangay',
@@ -313,7 +315,7 @@ class JobOrdersController extends Controller {
     $data['accepted_by'] = $request->input('accepted_by');
     $data['date_accepted'] = date('Y-m-d', strtotime($request->input('date_accepted')));
     $data['tested_by'] = $request->input('tested_by');
-    $data['asset_tag'] = $request->input('tag');
+    // $data['asset_tag'] = $request->input('tag');
 
     $transaction = DB::transaction(function($data) use($data){
     // try{
