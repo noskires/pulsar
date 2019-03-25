@@ -26,18 +26,18 @@
               <div class="col-sm-3">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="datepicker" required="" ng-model="rac.risDetails.date_requested">
+              <input type="text" class="form-control pull-right" id="datepicker" required="" ng-model="rac.risDetails.date_requested" datepicker autocomplete="off" readonly="">
             </div></div>
               <label class="col-sm-3 control-label">Date Needed</label>
               <div class="col-sm-3">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="datepicker2" required="" ng-model="rac.risDetails.date_needed">
+              <input type="text" class="form-control pull-right" id="datepicker2" required="" ng-model="rac.risDetails.date_needed" datepicker autocomplete="off" readonly="">
             </div></div>
             </div>
             <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-3 control-label">Asset Details</label>
-              <div class="col-sm-9"><input type="text" class="form-control" placeholder="DUMPTRUCK: CONE-03082018-DT1" disabled></div>
+              <!-- <div class="col-sm-9"><input type="text" class="form-control" placeholder="DUMPTRUCK: CONE-03082018-DT1" disabled></div> -->
             </div>
             <div class="form-group col-sm-12">
               <label for="" class="col-sm-3 control-label">Reference</label>
@@ -47,7 +47,7 @@
               <label for="" class="col-sm-3 control-label">Reference Type</label>
               <div class="col-sm-9">
                 <select class="form-control select2" style="width: 100%;" ng-model="rac.risDetails.request_type" required="">
-                  <option value="">--Select Request Type--</option>
+                  <option value="">- - SELECT REQUEST TYPE - -</option>
                   <option value="Office">Office</option>
                   <option value="Project">Project</option>
                 </select>
@@ -57,7 +57,7 @@
               <label for="" class="col-sm-3 control-label">Reference Name</label>
               <div class="col-sm-9">
                   <select class="form-control select2" style="width: 100%;"  ng-model="rac.risDetails.reference_code" required="">
-                    <option value="">--Select--</option>
+                    <option value="">- - SELECT - -</option>
                     <option ng-if="rac.risDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in rac.organizations"><%organization.org_name%></option>
                     <option ng-if="rac.risDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in rac.projects"><%project.name%></option>
                   </select>
@@ -65,9 +65,10 @@
             </div>
             <div class="form-group col-sm-12">
             <label for="assetname" class="col-sm-3 control-label">Requesting Employee</label>
-              <div class="col-sm-4">
+              <div class="col-sm-9">
                   <select class="form-control select2" style="width: 100%;" ng-model="rac.risDetails.employee_code">
-                    <option value="<%employee.employee_code%>" ng-repeat="employee in rac.employees"><%employee.fname+' '+employee.lname%></option>
+                    <option value="">- - SELECT EMPLOYEE - -</option>
+                    <option ng-value=employee.employee_code ng-repeat="employee in rac.employees"><%employee.employee_name%></option>
                   </select>
               </div>
             </div>
@@ -91,3 +92,15 @@
   </div>
   <!-- /.row -->
 </section>
+
+<script type="text/javascript">
+$(function () {
+
+$('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+
+});
+</script>
