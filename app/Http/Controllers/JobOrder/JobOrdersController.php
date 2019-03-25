@@ -99,102 +99,102 @@ class JobOrdersController extends Controller {
 
   }
 
-  public function save(Request $request){
+  // public function save(Request $request){
     
-    $data = array();
-    $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate'))); 
-    $data['assetTag'] = $request->input('tag');
-    $data['employee_code'] = $request->input('employee_code');
-    $data['organizational_unit'] = $request->input('organizational_unit');
-    $data['municipality_code'] = $request->input('municipality_code');
+  //   $data = array();
+  //   $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate'))); 
+  //   $data['assetTag'] = $request->input('tag');
+  //   $data['employee_code'] = $request->input('employee_code');
+  //   $data['organizational_unit'] = $request->input('organizational_unit');
+  //   $data['municipality_code'] = $request->input('municipality_code');
     
-    $transaction = DB::transaction(function($data) use($data){
-    // try{
+  //   $transaction = DB::transaction(function($data) use($data){
+  //   // try{
 
-        $asset = DB::table('assets as a')
-            ->select( 
-                      'a.a',
-                      'a.name as asset_name', 
-                      'a.asset_code as asset_code', 
-                      DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
-                      DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
-                      DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
-                      DB::raw("COALESCE(SUM(o.gas_consumption), 0) as total_gas_consumption"),
-                      DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
-                      DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
-                    )
-            ->leftjoin('operations as o','o.asset_code','=','a.asset_code')
-            ->leftjoin('Projects as p','p.project_code','=','o.project_code')
-            ->groupBy('a.tag', 'a.name', 'a.asset_code')
-            ->where('a.tag', $data['assetTag'])
-            ->first();
+  //       $asset = DB::table('assets as a')
+  //           ->select( 
+  //                     'a.a',
+  //                     'a.name as asset_name', 
+  //                     'a.asset_code as asset_code', 
+  //                     DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
+  //                     DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
+  //                     DB::raw("COALESCE(SUM(o.diesel_consumption), 0) as total_diesel_consumption"),
+  //                     DB::raw("COALESCE(SUM(o.gas_consumption), 0) as total_gas_consumption"),
+  //                     DB::raw("COALESCE(SUM(o.oil_consumption), 0) as total_oil_consumption"),
+  //                     DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
+  //                   )
+  //           ->leftjoin('operations as o','o.asset_code','=','a.asset_code')
+  //           ->leftjoin('Projects as p','p.project_code','=','o.project_code')
+  //           ->groupBy('a.tag', 'a.name', 'a.asset_code')
+  //           ->where('a.tag', $data['assetTag'])
+  //           ->first();
 
 
-        // return $asset;
-        $jo = new JobOrder;
-        $joCode = (str_pad(($jo->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-        ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+  //       // return $asset;
+  //       $jo = new JobOrder;
+  //       $joCode = (str_pad(($jo->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+  //       ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-        // $jo->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
-        $jo->job_order_code = "JO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
-        $jo->job_order_date = $data['orderDate']; 
-        $jo->date_started = $data['orderDate'];
-        $jo->asset_tag = $data['assetTag'];
-        // $jo->asset_tag = $data['assetTag'];
-        // $jo->asset_code = $asset->asset_code;
-        $jo->employee_code = $data['employee_code'];
-        $jo->organizational_unit = $data['organizational_unit'];
-        $jo->municipality_code = $data['municipality_code'];
-        $jo->operating_hours = $asset->total_operating_hours;
-        $jo->distance_travelled = $asset->total_distance_travelled;
-        $jo->diesel_consumption = $asset->total_diesel_consumption;
-        $jo->gas_consumption = $asset->total_gas_consumption;
-        $jo->oil_consumption = $asset->total_oil_consumption;
-        $jo->number_loads = $asset->total_number_loads;
-        $jo->changed_by = Auth::user()->email;
-        $jo->save();
+  //       // $jo->job_order_code = "JO-".date('Ymd', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
+  //       $jo->job_order_code = "JO-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$joCode;
+  //       $jo->job_order_date = $data['orderDate']; 
+  //       $jo->date_started = $data['orderDate'];
+  //       $jo->asset_tag = $data['assetTag'];
+  //       // $jo->asset_tag = $data['assetTag'];
+  //       // $jo->asset_code = $asset->asset_code;
+  //       $jo->employee_code = $data['employee_code'];
+  //       $jo->organizational_unit = $data['organizational_unit'];
+  //       $jo->municipality_code = $data['municipality_code'];
+  //       $jo->operating_hours = $asset->total_operating_hours;
+  //       $jo->distance_travelled = $asset->total_distance_travelled;
+  //       $jo->diesel_consumption = $asset->total_diesel_consumption;
+  //       $jo->gas_consumption = $asset->total_gas_consumption;
+  //       $jo->oil_consumption = $asset->total_oil_consumption;
+  //       $jo->number_loads = $asset->total_number_loads;
+  //       $jo->changed_by = Auth::user()->email;
+  //       $jo->save();
 
-        //add repair event
-        $assetEvent = new AssetEvent;
-        // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
-        $assetEvent->asset_event_code = 1212;
-        $assetEvent->status = "MAINTENANCE";
-        $assetEvent->asset_tag = $data['assetTag'];
-        $assetEvent->event_date = $data['orderDate'];
-        $assetEvent->remarks = "Under Maintenance";
-        $assetEvent->save();
+  //       //add repair event
+  //       $assetEvent = new AssetEvent;
+  //       // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
+  //       $assetEvent->asset_event_code = 1212;
+  //       $assetEvent->status = "MAINTENANCE";
+  //       $assetEvent->asset_tag = $data['assetTag'];
+  //       $assetEvent->event_date = $data['orderDate'];
+  //       $assetEvent->remarks = "Under Maintenance";
+  //       $assetEvent->save();
 
-        DB::table('assets')
-            ->where('tag', $data['assetTag'])
-            ->update([
-              'status' => 'MAINTENANCE'
-            ]);
+  //       DB::table('assets')
+  //           ->where('tag', $data['assetTag'])
+  //           ->update([
+  //             'status' => 'MAINTENANCE'
+  //           ]);
 
-        return response()->json([
-            'status' => 200,
-            'data' => 'null',
-            'message' => 'Successfully saved.'
-        ]);
+  //       return response()->json([
+  //           'status' => 200,
+  //           'data' => 'null',
+  //           'message' => 'Successfully saved.'
+  //       ]);
 
-        return response()->json([
-            'status' => 200,
-            'data' => 'null',
-            'message' => 'Successfully saved.'
-        ]);
+  //       return response()->json([
+  //           'status' => 200,
+  //           'data' => 'null',
+  //           'message' => 'Successfully saved.'
+  //       ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
-    });
+  //     // }
+  //     // catch (\Exception $e) 
+  //     // {
+  //     //     return response()->json([
+  //     //       'status' => 500,
+  //     //       'data' => 'null',
+  //     //       'message' => 'Error, please try again!'
+  //     //   ]);
+  //     // }
+  //   });
 
-    return $transaction;
-  }
+  //   return $transaction;
+  // }
 
   public function save2(Request $request){
     
@@ -258,7 +258,6 @@ class JobOrdersController extends Controller {
 
         //add repair event
         $assetEvent = new AssetEvent;
-        // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
         $assetEvent->asset_event_code = "AEVNT-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
         $assetEvent->status           = "MAINTENANCE";
         $assetEvent->asset_code       = $data['assetCode'];
@@ -296,8 +295,7 @@ class JobOrdersController extends Controller {
   public function update(Request $request){
   
     $data = array();
-    // $data['purpose'] = $request->input('asset_tag');
-    // $data['purpose'] = $request->input('request_purpose');
+    $data['asset_code'] = $request->input('asset_code');
     $data['orderDate'] = date('Y-m-d', strtotime($request->input('orderDate')));
     $data['date_started'] = date('Y-m-d', strtotime($request->input('date_started')));
     $data['date_completed'] = date('Y-m-d', strtotime($request->input('date_completed')));
@@ -315,7 +313,6 @@ class JobOrdersController extends Controller {
     $data['accepted_by'] = $request->input('accepted_by');
     $data['date_accepted'] = date('Y-m-d', strtotime($request->input('date_accepted')));
     $data['tested_by'] = $request->input('tested_by');
-    // $data['asset_tag'] = $request->input('tag');
 
     $transaction = DB::transaction(function($data) use($data){
     // try{
@@ -327,16 +324,15 @@ class JobOrdersController extends Controller {
           {
             //add repair event
             $assetEvent = new AssetEvent;
-            // $asset->asset_event_code = $data['categoryCode']."-".date('Ymd', strtotime($data['dateAcquired']))."-".$data['assetID'];
-            $assetEvent->asset_event_code = 1212;
+            $assetEvent->asset_event_code = "AEVNT-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
             $assetEvent->status = "ACTIVE";
-            $assetEvent->asset_tag = $data['asset_tag'];
+            $assetEvent->asset_code = $data['asset_code'];
             $assetEvent->event_date = $data['date_completed'];
             $assetEvent->remarks = "Active";
             $assetEvent->save();
 
             DB::table('assets')
-            ->where('tag', $data['asset_tag'])
+            ->where('asset_code', $data['asset_code'])
             ->update([
               'status' => 'ACTIVE'
             ]);

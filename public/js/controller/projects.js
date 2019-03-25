@@ -12,6 +12,8 @@
             var vm = this;
             var data = {}; 
 
+            vm.projectDetails = {'client_code' : 'CLIENT-0001-20190324023723'};
+
             vm.open1 = function() {
                 vm.popup1.opened = true;
             };
@@ -85,10 +87,14 @@
 
             vm.newProject =  function(data){
                 console.log(data);
+
                 ProjectsSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
                         // vm.routeTo('project/new');
+
+                        vm.projectDetails.client_code = 'CLIENT-0001-20190324023723';
+
                         ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
