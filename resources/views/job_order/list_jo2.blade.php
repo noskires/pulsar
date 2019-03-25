@@ -53,20 +53,15 @@
             <div class="form-group col-sm-12">
               <label for="assettag" class="col-sm-2 control-label">Reference</label>
               <div class="col-sm-4"><input type="text" class="form-control" ng-model="jo.details.reference" required="" ></div>
-              <label for="assettag" class="col-sm-2 control-label">Asset Tag</label>
-              <div class="col-sm-4"><input type="text" class="form-control" id="assettag" placeholder="CONE-03082018-DT1" disabled=""></div>
-            </div>
-
-            <div class="form-group col-sm-12">
-              <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
+              <label for="assettag" class="col-sm-2 control-label">Requesting Employee</label>
               <div class="col-sm-4">
-
-              <select class="form-control select2" style="width: 100%;" ng-model="jo.details.employee_code" required="" >
-                <option value="" selected disabled hidden>Select Employee</option>
-                <option value="<%employee.employee_code%>" ng-repeat="employee in joc.employees"><%employee.employee_name%></option>
-              </select>
+                <select class="form-control select2" style="width: 100%;" ng-model="jo.details.employee_code" required="" >
+                  <option value="" selected disabled hidden>- - SELECT EMPLOYEE - -</option>
+                  <option value="<%employee.employee_code%>" ng-repeat="employee in joc.employees"><%employee.employee_name%></option>
+                </select>
               </div>
             </div>
+ 
           </div>
           <!-- /.box-body -->
           <div class="box-footer">

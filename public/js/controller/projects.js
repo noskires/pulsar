@@ -10,9 +10,12 @@
         ProjectsCtrl.$inject = ['$state', '$stateParams', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'EmployeesSrvcs', 'AddressesSrvcs', 'ClientsSrvcs', '$window', '$uibModal'];
         function ProjectsCtrl($state, $stateParams, OrganizationsSrvcs, ProjectsSrvcs, EmployeesSrvcs, AddressesSrvcs, ClientsSrvcs, $window, $uibModal){
             var vm = this;
-            var data = {}; 
+            var data = {};
 
-            vm.projectDetails = {'client_code' : 'CLIENT-0001-20190324023723'};
+            vm.newProjectStatus = false;
+
+
+            // vm.projectDetails = {'client_code' : 'CLIENT-0001-20190324023723'};
 
             vm.open1 = function() {
                 vm.popup1.opened = true;
@@ -88,12 +91,20 @@
             vm.newProject =  function(data){
                 console.log(data);
 
+                vm.newProjectStatus = true;
+
+                // vm.projectDetails = {
+                //     'client_code' : 'CLIENT-0001-20190324023723',
+                //     'code' : 'ABCD1234'
+                // };
+
                 ProjectsSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        // vm.routeTo('project/new');
 
-                        vm.projectDetails.client_code = 'CLIENT-0001-20190324023723';
+                        $state.go('list-projects');
+
+                        vm.newProjectStatus = false;
 
                         ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
                             if(response.data.status == 200)
@@ -102,15 +113,16 @@
                                 console.log(vm.projects)
                             }
                         }, function (){ alert('Bad Request!!!') })
-                        
-                        $state.go('list-projects');
                     }
                     else {
+                        vm.newProjectStatus = false;
                         alert(response.data.message);
-                        // vm.routeTo('asset/create');
                     }
                     console.log(response.data);
-                });
+                }, function (){ 
+                    vm.newProjectStatus = false;
+                    alert('Bad Request!!!') 
+                })
             }
 
             vm.selectRegion =  function(region_code){

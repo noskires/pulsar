@@ -12,7 +12,7 @@
    <div class="row">
 
 <!-- NEW JOB ORDER SLIDE -->
-    <div class="col-md-12"> 
+    <!-- <div class="col-md-12"> 
       <div id="create-rs" class="collapse rs">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -69,8 +69,8 @@
               <label for="projectname" class="col-sm-2 control-label">Client</label>
               <div class="col-sm-10">
               <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.client_code"> 
-                <option value="">- - SELECT CLIENT - -</option>
-                <option value="<%client.client_code%>" ng-repeat="client in pc.clients"><%client.client_name%></option>
+                <option ng-value="">- - SELECT CLIENT - -</option>
+                <option ng-value="client.client_code" ng-repeat="client in pc.clients"><%client.client_name%></option>
               </select>
               </div>
             </div>
@@ -122,7 +122,6 @@
               <div class="col-sm-4"><input type="text" class="form-control" ng-model="pc.projectDetails.streetBldgUnit" placeholder=""></div>
             </div>
           </div>
-          <!-- /.box-body -->
           <div class="box-footer">
             <div class="form-group col-sm-12">           
               <div class="col-sm-8"></div>
@@ -130,7 +129,7 @@
               <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
               data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
               data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-              data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="pc.newProject(pc.projectDetails)">CONFIRMATION</button>
+              data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="pc.newProject(pc.projectDetails)" ng-disabled="pc.newProjectStatus">CONFIRMATION</button>
               </div>
             </div>
           </div>
@@ -138,7 +137,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
 <!-- FILTER SLIDE -->
     <div class="col-md-12"> 
@@ -177,7 +176,7 @@
   </div>     
 
 <!-- BUTTONS -->
-<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#create-rs">
+<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#create-rs" ui-sref="project-create">
     <span class="glyphicon glyphicon-plus"></span> Add Construction Project
 </button> &nbsp; 
 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#filter-rs">

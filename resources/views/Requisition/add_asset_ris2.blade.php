@@ -35,10 +35,10 @@
               <input type="text" class="form-control pull-right" id="datepicker2" required="" ng-model="rac.risDetails.date_needed" datepicker autocomplete="off" readonly="">
             </div></div>
             </div>
-            <div class="form-group col-sm-12">
+            <!-- <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-3 control-label">Asset Details</label>
-              <!-- <div class="col-sm-9"><input type="text" class="form-control" placeholder="DUMPTRUCK: CONE-03082018-DT1" disabled></div> -->
-            </div>
+              <div class="col-sm-9"><input type="text" class="form-control" placeholder="DUMPTRUCK: CONE-03082018-DT1" disabled></div>
+            </div> -->
             <div class="form-group col-sm-12">
               <label for="" class="col-sm-3 control-label">Reference</label>
               <div class="col-sm-9"><input type="text" class="form-control" ng-model="rac.risDetails.old_reference"></div>
