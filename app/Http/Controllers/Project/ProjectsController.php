@@ -23,7 +23,7 @@ class ProjectsController extends Controller {
       'projectCode'=>$request->input('projectCode'),
     );
 
-  	$projects = DB::table('Projects as p')
+  	$projects = DB::table('projects as p')
         ->select(
           'p.project_code',
           'p.department_code',
