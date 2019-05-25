@@ -26,7 +26,7 @@ class AssetsController extends Controller {
             'assetCategory'=>$request->input('assetCategory')
         );
 
-      	$asset_categories = DB::table('Asset_categories as ac');
+      	$asset_categories = DB::table('asset_categories as ac');
 
         if ($data['assetCategory']){ 
           $asset_categories = $asset_categories->where('asset_category', $data['assetCategory']);
@@ -59,7 +59,7 @@ class AssetsController extends Controller {
 
         // return $data['status'];
 
-      	$asset = DB::table('Assets as a')
+      	$asset = DB::table('assets as a')
       			// ->select('*')
             ->select(
                 'e.employee_code',
