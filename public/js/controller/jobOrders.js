@@ -192,50 +192,6 @@
                 }, function (){ console.log(response.data); alert('Bad Request!!!') });
             }
 
-            // EmployeesSrvcs.employees({jobType:''}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.employees = response.data.data;
-            //         console.log(vm.employees)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
-            // var today = new Date();
-            // vm.AvailableDate = new Date();
-            // vm.ExpireDate = new Date();
-            // vm.dateFormat = 'yyyy-MM-dd';
-            // vm.availableDateOptions = {
-            //     formatYear: 'yy',
-            //     startingDay: 1,
-            //     minDate: today,
-            //     maxDate: new Date(2030, 5, 22)
-            // };
-            // vm.expireDateOptions = {
-            //     formatYear: 'yy',
-            //     startingDay: 1,
-            //     minDate: today,
-            //     maxDate: new Date(2030, 5, 22)
-            // };
-            // vm.availableDatePopup = {
-            //     opened: false
-            // };
-            // vm.expireDatePopup = {
-            //     opened: false
-            // };
-            // vm.ChangeExpiryMinDate = function(availableDate) {
-            //     if (availableDate != null) {
-            //         var expiryMinDate = new Date(availableDate);
-            //         vm.expireDateOptions.minDate = expiryMinDate;
-            //         vm.ExpireDate = expiryMinDate;
-            //     }
-            // };
-            // vm.ChangeExpiryMinDate();
-            // vm.OpenAvailableDate = function() {
-            //     vm.availableDatePopup.opened = !vm.availableDatePopup.opened;
-            // };
-            // vm.OpenExpireDate = function() {
-            //     vm.expireDatePopup.opened = !vm.expireDatePopup.opened;
-            // };
 
             vm.routeTo = function(route){
                 $window.location.href = route;

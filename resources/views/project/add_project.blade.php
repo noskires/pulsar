@@ -68,7 +68,7 @@
             <div class="form-group col-sm-12"">
               <label for="projectname" class="col-sm-2 control-label">Client</label>
               <div class="col-sm-10">
-              <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.client_code"> 
+              <select class="form-control select2" style="width: 100%;" required="" ng-model="pc.projectDetails.client_code">
                 <option value="">- - SELECT CLIENT - -</option>
                 <option ng-value="client.client_code" ng-repeat="client in pc.clients"><%client.client_name%></option>
               </select>

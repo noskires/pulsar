@@ -53,6 +53,8 @@
                             },
                             // size: 'lg'
                         });
+
+                        
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
@@ -77,8 +79,9 @@
             }, function (){ alert('Bad Request!!!') })
 
             vm.exportAssets = function(){
+                alert('a')
                 AssetsSrvcs.exportAssets().then (function (response) {
-                    vm.routeTo('api/v1/export-assets')
+                    // vm.routeTo('api/v1/export-assets')
                 }, function (){ alert('Bad Request!!!') })
             }
 
