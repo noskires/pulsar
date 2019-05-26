@@ -19,7 +19,7 @@ class EmployeesController extends Controller {
             'jobType'=>$request->input('jobType'),
         );
 
-      	$employees = DB::table('Employees as e')
+      	$employees = DB::table('employees as e')
                     ->select(
                       'e.employee_code',
                       'e.lname',
@@ -73,7 +73,7 @@ class EmployeesController extends Controller {
             'employee_code'=>$request->input('employee_code'),
         );
 
-        $employees = DB::table('Employees as e')
+        $employees = DB::table('employees as e')
                     ->select(
                       'e.employee_code',
                       'e.lname',

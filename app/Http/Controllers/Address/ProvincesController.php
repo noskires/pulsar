@@ -21,7 +21,7 @@ class ProvincesController extends Controller {
           'region_code'=>$request->input('region_code'),
       );
 
-      $provinces = DB::table('Provinces');
+      $provinces = DB::table('provinces');
 
       if ($data['region_code']){ 
         $provinces = $provinces->where('region_code', $data['region_code']);

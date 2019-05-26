@@ -21,7 +21,7 @@ class MunicipalitiesController extends Controller {
           'province_code'=>$request->input('province_code'),
       );
 
-    	$municipalities = DB::table('Municipalities');
+    	$municipalities = DB::table('municipalities');
 
       if ($data['province_code']){ 
         $municipalities = $municipalities->where('province_code', $data['province_code']);

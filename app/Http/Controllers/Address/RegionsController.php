@@ -17,7 +17,7 @@ class RegionsController extends Controller {
 
    public function region(){
 
-      	$regions = DB::table('Regions');
+      	$regions = DB::table('regions');
 
       	$regions = $regions->get();
 

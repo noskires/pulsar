@@ -36,7 +36,7 @@ class PdfController extends Controller {
    }
 
    public function asset($assetCode){
-    $asset = DB::table('Assets as a')
+    $asset = DB::table('assets as a')
             // ->select('*')
             ->select(
                 DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name'),
