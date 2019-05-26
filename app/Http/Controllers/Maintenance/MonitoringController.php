@@ -39,7 +39,7 @@ class OperationsController1 extends Controller {
                 'p.name as project_name'
               )
             ->leftjoin('Assets as a','a.tag','=','o.asset_tag')
-            ->leftjoin('Projects as p','p.project_code','=','o.project_code');
+            ->leftjoin('projects as p','p.project_code','=','o.project_code');
 
     if ($data['operationCode']){
       $operations = $operations->where('operation_code', $data['operationCode']);

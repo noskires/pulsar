@@ -69,7 +69,7 @@ class JobOrdersController extends Controller {
           'e.employee_code as requested_by',
           DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name')
         )
-      ->leftjoin('Assets as a','a.asset_code','=','jo.asset_code')
+      ->leftjoin('assets as a','a.asset_code','=','jo.asset_code')
       ->leftjoin('ares as are','are.are_code','=','a.are_code')
       ->leftjoin('employees as e','e.employee_code','=','jo.employee_code')
       ->leftjoin('organizations as org','org.org_code','=','jo.organizational_unit')

@@ -26,7 +26,7 @@ class OperationsController extends Controller {
             ->select(
                 'o.operation_code', 
                 'o.operation_date', 
-                'o.asset_tag',
+                // 'o.asset_tag',
                 'o.project_code', 
                 'o.remarks', 
                 'o.operating_hours', 
@@ -47,8 +47,8 @@ class OperationsController extends Controller {
                 'r.region_text_short',
                 'r.region_text_long'
               )
-            ->leftjoin('Assets as a','a.asset_code','=','o.asset_code')
-            ->leftjoin('Projects as project','project.project_code','=','o.project_code')
+            ->leftjoin('assets as a','a.asset_code','=','o.asset_code')
+            ->leftjoin('projects as project','project.project_code','=','o.project_code')
             ->leftjoin('municipalities as m','m.municipality_code','=','project.municipality_code')
             ->leftjoin('provinces as p','p.province_code','=','m.province_code')
             ->leftjoin('regions as r','r.region_code','=','p.region_code');
@@ -87,7 +87,7 @@ class OperationsController extends Controller {
                       )
             ->leftjoin('operations as o','o.asset_code','=','a.asset_code')
             ->groupBy('a.asset_code', 'a.name')
-            ->leftjoin('Projects as p','p.project_code','=','o.project_code')
+            ->leftjoin('projects as p','p.project_code','=','o.project_code')
             ->where('a.category', 'CONE');
 
       if ($data['assetCode']){
