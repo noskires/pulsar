@@ -64,20 +64,20 @@ Route::get('/api/v1/operations/assets-monitoring','Maintenance\OperationsControl
 
 /*
 |--------------------------------------------------------------------------
-| Assets
+| Assets - MODULE-001
 |--------------------------------------------------------------------------
 */
+Route::group(['middleware' => 'checkModules:MODULE-001'], function () {
+    Route::get('/asset/new','AssetsController@index'); 
+    Route::get('/asset/list-equipments','AssetsController@index'); 
+    Route::get('/asset/list-equipments/{asset_code}','AssetsController@index'); 
+    Route::get('/asset/more-details/{asset_code}','AssetsController@index'); 
+    Route::get('/asset/more-details4/{asset_code}','AssetsController@index'); 
 
-Route::get('/asset/new','AssetsController@index'); 
-Route::get('/asset/list-equipments','AssetsController@index'); 
-Route::get('/asset/list-equipments/{asset_code}','AssetsController@index'); 
-Route::get('/asset/more-details/{asset_code}','AssetsController@index'); 
-Route::get('/asset/more-details4/{asset_code}','AssetsController@index'); 
-
-Route::get('/asset-category/new','Asset\AssetCategoriesController@index');
-Route::get('/asset-categories/list','Asset\AssetCategoriesController@index');
-Route::get('/asset-category/list/{assetCategoryCode}','Asset\AssetCategoriesController@index');
-
+    Route::get('/asset-category/new','Asset\AssetCategoriesController@index');
+    Route::get('/asset-categories/list','Asset\AssetCategoriesController@index');
+    Route::get('/asset-category/list/{assetCategoryCode}','Asset\AssetCategoriesController@index');
+});
 /*
 |--------------------------------------------------------------------------
 | Assets Apis
@@ -117,12 +117,13 @@ Route::get('/api/v1/warranties','WarrantiesController@warranties');
 | Warranties Apis
 |--------------------------------------------------------------------------
 */
+Route::group(['middleware' => 'checkModules:MODULE-003'], function () {
+    Route::get('/employee/list','EmployeesController@index');
+    Route::get('/employee/new','EmployeesController@index');
+});
 
 Route::post('/api/v1/employees/save','EmployeesController@save');
 Route::post('/api/v1/employee/update','EmployeesController@update');
-
-Route::get('/employee/list','EmployeesController@index');
-Route::get('/employee/new','EmployeesController@index');
 Route::get('/api/v1/employees','EmployeesController@employees');
 Route::get('/api/v1/employees2','EmployeesController@employees2');
 
@@ -167,16 +168,17 @@ Route::get('/api/v1/organizations','Organization\OrganizationsController@organiz
 
 /*
 |--------------------------------------------------------------------------
-| Projects
+| Projects -- MODULE-003
 |--------------------------------------------------------------------------
 */
 
-Route::get('/project/new','Project\ProjectsController@index');
-Route::get('/projects/list','Project\ProjectsController@index');
-Route::get('/projects/list/{projectCode}','Project\ProjectsController@index');
-Route::get('/project/profile/{projectCode}','Project\ProjectsController@index');
-Route::get('/project/profile/{projectCode}/edit','Project\ProjectsController@index');
-
+Route::group(['middleware' => 'checkModules:MODULE-003'], function () {
+    Route::get('/project/new','Project\ProjectsController@index');
+    Route::get('/projects/list','Project\ProjectsController@index');
+    Route::get('/projects/list/{projectCode}','Project\ProjectsController@index');
+    Route::get('/project/profile/{projectCode}','Project\ProjectsController@index');
+    Route::get('/project/profile/{projectCode}/edit','Project\ProjectsController@index');
+});
 /*
 |--------------------------------------------------------------------------
 | Project Apis

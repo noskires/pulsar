@@ -1,24 +1,25 @@
-(function(){
+(function () {
     'use strict';
     angular
         // .module('pulsarApp',[])
-        .module('pulsarApp',['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber', 'ui.mask', 'ui.utils.masks', 'checklist-model'])
+        .module('pulsarApp', ['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber', 'ui.mask', 'ui.utils.masks', 'checklist-model'])
         .config(Config)
         .controller('MainCtrl', MainCtrl)
         // .directive('myDate', dateInput)
-        .directive("datepicker", function() {
+        .directive("datepicker", function () {
             return {
-              restrict: "A",
-                  require: "ngModel",
-                  link: function(scope, elem, attrs, ngModelCtrl) {
+                restrict: "A",
+                require: "ngModel",
+                link: function (scope, elem, attrs, ngModelCtrl) {
                     elem.on("changeDate", updateModel);
+
                     function updateModel(event) {
-                      ngModelCtrl.$setViewValue(event.date);
+                        ngModelCtrl.$setViewValue(event.date);
                     }
                     elem.datepicker({
-                      autoclose: true,
-                      endDate: '+0d',
-                      // defaultDate: new Date()
+                        autoclose: true,
+                        endDate: '+0d',
+                        // defaultDate: new Date()
                         format: "yyyy-mm-dd",
                         // format: "mm/dd/yyyy",
                         immediateUpdates: true,
@@ -26,139 +27,142 @@
                         // todayHighlight: true
                     })
                     // .datepicker("setDate", "0");
-                  }
+                }
             };
         })
 
-        .directive("datepicker2", function() {
+        .directive("datepicker2", function () {
             return {
-              restrict: "A",
-                  require: "ngModel",
-                  link: function(scope, elem, attrs, ngModelCtrl) {
+                restrict: "A",
+                require: "ngModel",
+                link: function (scope, elem, attrs, ngModelCtrl) {
                     elem.on("changeDate", updateModel);
+
                     function updateModel(event) {
-                      ngModelCtrl.$setViewValue(event.date);
+                        ngModelCtrl.$setViewValue(event.date);
                     }
                     elem.datepicker({
-                      autoclose: true
+                        autoclose: true
                     });
-                  }
+                }
             };
         })
 
         // this is the important bit:
-        .directive('datepickerPopup', function (){
-          return {
-            restrict: 'EAC',
-            require: 'ngModel',
-            link: function(scope, element, attr, controller) {
-              //remove the default formatter from the input directive to prevent conflict
-              controller.$formatters.shift();
+        .directive('datepickerPopup', function () {
+            return {
+                restrict: 'EAC',
+                require: 'ngModel',
+                link: function (scope, element, attr, controller) {
+                    //remove the default formatter from the input directive to prevent conflict
+                    controller.$formatters.shift();
+                }
             }
-          }
         });
 
-        
 
-        dateInput.$inject = ["$filter", "$parse"];
-          function dateInput($filter, $parse) {
-            return {
-              restrict: 'A',
-              require: 'ngModel',
-              replace: true,
-              transclude: true,
-              template: '<input ng-transclude ui-mask="19/39/2999" ui-mask-raw="false" ng-keypress="limitToValidDate($event)" placeholder="MM/DD/YYYY"/>',
-              link: function(scope, element, attrs, controller) {
+
+    dateInput.$inject = ["$filter", "$parse"];
+
+    function dateInput($filter, $parse) {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            replace: true,
+            transclude: true,
+            template: '<input ng-transclude ui-mask="19/39/2999" ui-mask-raw="false" ng-keypress="limitToValidDate($event)" placeholder="MM/DD/YYYY"/>',
+            link: function (scope, element, attrs, controller) {
                 scope.limitToValidDate = limitToValidDate;
                 var dateFilter = $filter("date");
                 var today = new Date();
                 var date = {};
 
                 function isValidMonth(month) {
-                  return month >= 0 && month < 12;
+                    return month >= 0 && month < 12;
                 }
 
                 function isValidDay(day) {
-                  return day > 0 && day < 32;
+                    return day > 0 && day < 32;
                 }
 
                 function isValidYear(year) {
-                  return year > (today.getFullYear() - 115) && year < (today.getFullYear() + 115);
+                    return year > (today.getFullYear() - 115) && year < (today.getFullYear() + 115);
                 }
 
                 function isValidDate(inputDate) {
-                  inputDate = new Date(formatDate(inputDate));
-                  if (!angular.isDate(inputDate)) {
-                    return false;
-                  }
-                  date.month = inputDate.getMonth();
-                  date.day = inputDate.getDate();
-                  date.year = inputDate.getFullYear();
-                  return (isValidMonth(date.month) && isValidDay(date.day) && isValidYear(date.year));
+                    inputDate = new Date(formatDate(inputDate));
+                    if (!angular.isDate(inputDate)) {
+                        return false;
+                    }
+                    date.month = inputDate.getMonth();
+                    date.day = inputDate.getDate();
+                    date.year = inputDate.getFullYear();
+                    return (isValidMonth(date.month) && isValidDay(date.day) && isValidYear(date.year));
                 }
 
                 function formatDate(newDate) {
-                  var modelDate = $parse(attrs.ngModel);
-                  newDate = dateFilter(newDate, "MM/dd/yyyy");
-                  modelDate.assign(scope, newDate);
-                  return newDate;
+                    var modelDate = $parse(attrs.ngModel);
+                    newDate = dateFilter(newDate, "MM/dd/yyyy");
+                    modelDate.assign(scope, newDate);
+                    return newDate;
                 }
 
-                controller.$validators.date = function(modelValue) {
-                  return angular.isDefined(modelValue) && isValidDate(modelValue);
+                controller.$validators.date = function (modelValue) {
+                    return angular.isDefined(modelValue) && isValidDate(modelValue);
                 };
 
                 var pattern = "^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(19|20)\\d\\d$" +
-                  "|^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(19|20)\\d$" +
-                  "|^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(19|20)$" +
-                  "|^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[12]$" +
-                  "|^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$" +
-                  "|^(0[1-9]|1[012])([0-3])$" +
-                  "|^(0[1-9]|1[012])$" +
-                  "|^[01]$";
+                    "|^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(19|20)\\d$" +
+                    "|^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(19|20)$" +
+                    "|^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[12]$" +
+                    "|^(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$" +
+                    "|^(0[1-9]|1[012])([0-3])$" +
+                    "|^(0[1-9]|1[012])$" +
+                    "|^[01]$";
                 var regexp = new RegExp(pattern);
 
                 function limitToValidDate(event) {
-                  var key = event.charCode ? event.charCode : event.keyCode;
-                  if ((key >= 48 && key <= 57) || key === 9 || key === 46) {
-                    var character = String.fromCharCode(event.which);
-                    var start = element[0].selectionStart;
-                    var end = element[0].selectionEnd;
-                    var testValue = (element.val().slice(0, start) + character + element.val().slice(end)).replace(/\s|\//g, "");
-                    if (!(regexp.test(testValue))) {
-                      event.preventDefault();
+                    var key = event.charCode ? event.charCode : event.keyCode;
+                    if ((key >= 48 && key <= 57) || key === 9 || key === 46) {
+                        var character = String.fromCharCode(event.which);
+                        var start = element[0].selectionStart;
+                        var end = element[0].selectionEnd;
+                        var testValue = (element.val().slice(0, start) + character + element.val().slice(end)).replace(/\s|\//g, "");
+                        if (!(regexp.test(testValue))) {
+                            event.preventDefault();
+                        }
                     }
-                  }
                 }
-              }
             }
-          }
+        }
+    }
 
-        Config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$interpolateProvider', 'dynamicNumberStrategyProvider']
-        function Config($stateProvider, $urlRouterProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $interpolateProvider, dynamicNumberStrategyProvider){
-            console.log("App here!");
-            $interpolateProvider.startSymbol('<%');
-            $interpolateProvider.endSymbol('%>');
-            
-            $locationProvider.html5Mode(true);
+    Config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$interpolateProvider', 'dynamicNumberStrategyProvider']
 
-            var main = {
-                url: '/index',
-                // controller: 'OperationCtrl as oc',
-                templateUrl: 'main.view'
-            };
+    function Config($stateProvider, $urlRouterProvider, $locationProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $interpolateProvider, dynamicNumberStrategyProvider) {
+        console.log("App here!");
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
 
-            dynamicNumberStrategyProvider.addStrategy('price', {
-                numInt: 7,
-                numFract: 2,
-                numSep: '.',
-                numPos: true,
-                numNeg: true,
-                numRound: 'round',
-                numThousand: true
-            });
-            
-            $stateProvider
+        $locationProvider.html5Mode(true);
+
+        var main = {
+            url: '/index',
+            // controller: 'OperationCtrl as oc',
+            templateUrl: 'main.view'
+        };
+
+        dynamicNumberStrategyProvider.addStrategy('price', {
+            numInt: 7,
+            numFract: 2,
+            numSep: '.',
+            numPos: true,
+            numNeg: true,
+            numRound: 'round',
+            numThousand: true
+        });
+
+        $stateProvider
             .state('main-view', main)
 
             .state('operation', {
@@ -463,7 +467,7 @@
             })
 
             //particulars
-            .state('particular-create', { 
+            .state('particular-create', {
                 url: '/particular/:particularRequest',
                 controller: 'ParticularsCtrl as pc',
                 templateUrl: 'particular.list.view'
@@ -480,7 +484,7 @@
             })
 
             //funds
-            .state('fund-create', { 
+            .state('fund-create', {
                 url: '/fund/:fundRequest',
                 controller: 'FundsCtrl as fc',
                 templateUrl: 'fund.list.view'
@@ -502,7 +506,7 @@
             })
 
             //clients
-            .state('client-create', { 
+            .state('client-create', {
                 url: '/client/:clientRequest',
                 controller: 'ClientsCtrl as cc',
                 templateUrl: 'client.list.view'
@@ -653,7 +657,7 @@
 
 
             //roles
-            .state('role-create', { 
+            .state('role-create', {
                 url: '/role/:roleRequest',
                 controller: 'RolesCtrl as rc',
                 templateUrl: 'role.list.view'
@@ -670,7 +674,7 @@
             })
 
             //users
-            .state('user-create', { 
+            .state('user-create', {
                 url: '/user/:userRequest',
                 controller: 'UsersCtrl as uc',
                 templateUrl: 'user.list.view'
@@ -686,18 +690,34 @@
                 templateUrl: 'user.list.view'
             })
 
-            $urlRouterProvider.otherwise('/index');
+        $urlRouterProvider.otherwise('/index');
 
-        }
+    }
 
-        MainCtrl.$inject = ['$window','$http'];
-        function MainCtrl($window, $http) {
-            var vm = this;
-            vm.routeTo = function(route){
-                $window.location.href = route;
-            };
+    MainCtrl.$inject = ['$window', '$http', 'UsersSrvcs', '$scope'];
+
+    async function MainCtrl($window, $http, UsersSrvcs, $scope) {
+        var vm = this;
+        vm.routeTo = function (route) {
+            $window.location.href = route;
         };
+        vm.getUsers = function () {
+            return new Promise(resolve => {
+                UsersSrvcs.list({
+                    isSelfOnly: true
+                }).then(function (response) {
+                    if (response.data.status == 200) {
+                        resolve(response.data.data);
+                    }
+                }, function () {
+                    alert('Bad Request!!!')
+                })
+            });
+        };
+
+        vm.users = await vm.getUsers();
+        $scope.checkModuleAccess = function (navBarModules) {
+            return (navBarModules) ? vm.users[0].modules.includes(navBarModules) : false;
+        };
+    };
 })();
-
-
- 

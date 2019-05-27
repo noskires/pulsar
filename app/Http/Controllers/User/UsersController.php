@@ -20,9 +20,9 @@ class UsersController extends Controller {
 
     $filter = array(
       'userCode'=>$request->input('userCode'),
-      'roleName'=>$request->input('roleName')
+      'roleName'=>$request->input('roleName'),
+      'isSelfOnly'=>$request->input('isSelfOnly'),
     );
-
 
   	$list = DB::table('users as user')
             ->select(
@@ -35,11 +35,24 @@ class UsersController extends Controller {
             ->leftjoin('roles as role','role.role_code','=','user.role_code')
             ->whereNotNull('user.employee_code');
 
-    if ($filter['userCode']){
+    
+
+    if ($filter['isSelfOnly']){
+      $list = $list->where('user.employee_code', Auth::user()->employee_code);
+    } else if ($filter['userCode']){
       $list = $list->where('user.employee_code', $filter['userCode']);
     }
 
     $list = $list->get();
+    
+    foreach ($list as $i => $item) {
+      $roleItems = DB::table('role_items as ri');
+      $items =  $roleItems-> select('module_code')-> where('role_code', $item->role_code)->get();
+      $modules = $items->map(function ($item) {
+         return ($item->module_code);
+        });
+      $list[$i]->modules=$modules;
+    }
 
     return response()-> json([
       'status'=>200,

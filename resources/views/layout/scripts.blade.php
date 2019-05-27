@@ -22,7 +22,7 @@
 <script type="text/javascript" src="{{URL::to('bower_components/angular-dynamic-number/release/dynamic-number.min.js')}}"></script>
 
 <!-- Checklist-model -->
-<script type="text/javascript" src="{{URL::to('bower_components/checklist-model/checklist-model.js')}}"></script>
+<script typasset/list-equipmentse="text/javascript" src="{{URL::to('bower_components/checklist-model/checklist-model.js')}}"></script>
 
 <!-- angular-datatables -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/angular-datatables.min.js')}}"></script>

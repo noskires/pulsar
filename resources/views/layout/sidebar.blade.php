@@ -134,7 +134,7 @@
     </li>
     <li class="header">DATABASE</li>
     <li class="treeview">
-      <a href="#">
+      <a href="#" ng-if="checkModuleAccess('MODULE-001')">
         <i class="fa fa-tags"></i> <span>Assets</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
@@ -171,7 +171,7 @@
       </ul> -->
     </li>
     <li class="treeview"><a href="#" ui-sref="org-office-create"><i class="fa fa-building"></i> Office </a></li>
-    <li class="treeview">
+    <li class="treeview" ng-if="checkModuleAccess('MODULE-003')">
       <a href="#" ui-sref="list-projects">
         <i class="fa fa-cube"></i> <span>Projects</span>
         <!-- <span class="pull-right-container">
@@ -183,7 +183,7 @@
         <li><a href="#" ui-sref="project-create"><i class="fa fa-plus"></i> Add a Project</a></li>
       </ul> -->
     </li>
-    <li><a href="#" ui-sref="list-employees"><i class="fa fa-user"></i> <span>Employees</span></a></li>
+    <li ng-if="checkModuleAccess('MODULE-002')"><a href="#" ui-sref="list-employees"><i class="fa fa-user"></i> <span>Employees</span></a></li>
     <li class="header">TOOLS</li>
     <li class="treeview">
       <a href="#">
