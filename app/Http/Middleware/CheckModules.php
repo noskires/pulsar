@@ -27,8 +27,7 @@ class CheckModules
         $modules = $users->data[0]->modules;
         $hasAccess = in_array($module_,$modules);
 
-        // return $next($request);
-        if ($hasAccess) {
+        if ($hasAccess || $request->route()->uri === 'index') {
             return $next($request);
         } else {
             return redirect('/index');
