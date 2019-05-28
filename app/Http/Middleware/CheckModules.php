@@ -18,7 +18,7 @@ class CheckModules
      */
     public function handle($request, Closure $next, $module_='')
     {
-        $uc = new UsersController(); 
+        $uc = new UsersController();
         $request->merge([
             'isSelfOnly' => true,
         ]);
@@ -27,8 +27,9 @@ class CheckModules
         $modules = $users->data[0]->modules;
         $hasAccess = in_array($module_,$modules);
 
+        // return $next($request);
         if ($hasAccess) {
-            return $next($request);    
+            return $next($request);
         } else {
             return redirect('/index');
         }

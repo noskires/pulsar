@@ -1,5 +1,5 @@
 
-<header class="main-header" ng-controller="MainCtrl as mc">
+<header class="main-header">
 <!-- Logo -->
 <a href="index.html" class="logo">
 <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -53,7 +53,7 @@
               <a href="#">
                 <i class="fa fa-calendar text-blue"></i> Calendar notifications
               </a>
-            </li>                  
+            </li>
           </ul>
         </li>
         <li class="footer"><a href="#">View all</a></li>
@@ -160,7 +160,7 @@
             <a href="#" class="btn btn-default btn-flat">Profile</a>
           </div>
           <div class="pull-right">
-       
+
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>

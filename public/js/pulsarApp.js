@@ -3,8 +3,8 @@
     angular
         // .module('pulsarApp',[])
         .module('pulsarApp', ['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber', 'ui.mask', 'ui.utils.masks', 'checklist-model'])
-        .config(Config)
         .controller('MainCtrl', MainCtrl)
+        .config(Config)
         // .directive('myDate', dateInput)
         .directive("datepicker", function () {
             return {
@@ -149,7 +149,8 @@
         var main = {
             url: '/index',
             // controller: 'OperationCtrl as oc',
-            templateUrl: 'main.view'
+            templateUrl: 'main.view',
+            // controller: 'MainCtrl as mc',
         };
 
         dynamicNumberStrategyProvider.addStrategy('price', {

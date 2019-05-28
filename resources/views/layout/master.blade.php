@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="pulsarApp">
+<html ng-app="pulsarApp" ng-cloak>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
