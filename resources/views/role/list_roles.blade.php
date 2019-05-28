@@ -151,7 +151,7 @@
                   <table>
                     <tr ng-repeat="roleItem in vm.roleItems">
                       <td>
-                        <%roleItem.module_code%> 
+                        <%roleItem.module_code%> | <%roleItem.module_name%>
                       </td>
                       <td>
                         <a href="#" ng-click="vm.deleteRoleItemBtn(roleItem)"> <code class="text-red">REMOVE</code></a>
