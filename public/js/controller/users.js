@@ -79,7 +79,7 @@
                             }
                         }, function (){ alert('Bad Request!!!') })
 
-                        $state.go('list-role', { roleCode:''});
+                        $state.go('list-user', { roleCode:''});
                         // vm.ok();
                     }
                     else {

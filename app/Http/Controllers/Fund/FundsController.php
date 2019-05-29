@@ -28,10 +28,11 @@ class FundsController extends Controller {
               ->select( 
                         'f.fund_code',
                         'f.fund_name',
+                        'f.fund_year',
                         DB::raw("COALESCE(SUM(fi.fund_item_amount), 0) as total_fund_item_amount")
                       )
             ->leftjoin('fund_items as fi','fi.fund_code','=','f.fund_code')
-            ->groupBy('f.fund_code', 'f.fund_name');
+            ->groupBy('f.fund_code', 'f.fund_year', 'f.fund_name');
 
  
 
@@ -52,6 +53,7 @@ class FundsController extends Controller {
 
 		$data = array();
 		$data['fund_name']   = $request->input('fund_name');
+		$data['fund_year']   = $request->input('fund_year');
 
 		// return $request->all();
 		$transaction = DB::transaction(function($data) use($data){
@@ -63,6 +65,7 @@ class FundsController extends Controller {
 				// $fund->fund_code = "FUND".$fundCode;
 			    $fund->fund_code = "FUND-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$fundCode;
 				$fund->fund_name = $data['fund_name'];
+				$fund->fund_year = $data['fund_year'];
 				$fund->changed_by = Auth::user()->email;
 				$fund->save();
 
@@ -91,12 +94,14 @@ class FundsController extends Controller {
     	$data = array();
 		$data['fund_code']   = $request->input('fund_code');
 		$data['fund_name']   = $request->input('fund_name');
+		$data['fund_year']   = $request->input('fund_year');
 
 	    $transaction = DB::transaction(function($data) use($data){
 	    try{
 
 	    	$fund = Fund::where('fund_code', $data['fund_code'])->first();
 	        $fund->fund_name = $data['fund_name'];
+	        $fund->fund_year = $data['fund_year'];
 	        $fund->changed_by = Auth::user()->email;
 	        $fund->timestamps = true;
 	        $fund->save();
