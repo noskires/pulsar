@@ -5,24 +5,33 @@
         .controller('RolesCtrl', RolesCtrl)
         .controller('RolesModalInstanceCtrl', RolesModalInstanceCtrl)
 
-    RolesCtrl.$inject = ['$stateParams', '$state', 'RolesSrvcs', 'RoleItemsSrvcs', 'ParticularsSrvcs', '$window', '$uibModal'];
+    RolesCtrl.$inject = ['$stateParams', '$state', 'RolesSrvcs', 'RoleItemsSrvcs', 'ParticularsSrvcs', '$window', '$uibModal', '$scope'];
 
-    function RolesCtrl($stateParams, $state, RolesSrvcs, RoleItemsSrvcs, ParticularsSrvcs, $window, $uibModal) {
+    function RolesCtrl($stateParams, $state, RolesSrvcs, RoleItemsSrvcs, ParticularsSrvcs, $window, $uibModal, $scope) {
         var vm = this;
-        var data = {};
 
-        RolesSrvcs.list({
-            roleCode: ''
-        }).then(function (response) {
-            if (response.data.status == 200) {
-                vm.roles = response.data.data;
-                console.log(vm.roles)
-            }
-        }, function () {
-            alert('Bad Request!!!')
-        })
+        vm.getRoles = () => {
+            return new Promise(resolve => {
+                    RolesSrvcs.list({
+                    roleCode: ''
+                }).then(function (response) {
+                    if (response.data.status == 200) {
+                        const i = response.data.data;
+                        const data = i.map(e => ({...e, is_active: (e.is_active) ? true: false}));
+                        resolve(data);
+                    }
+                }, function () {
+                    alert('Bad Request!!!');
+                })
+            });
+        };
 
-
+        vm.getRoles().then(async ()=> {
+            const data = await vm.getRoles();
+            $scope.$apply(() => {
+                vm.roles = data;
+            });
+        });
 
         if ($stateParams.roleCode) {
             vm.roleCode = $stateParams.roleCode;
@@ -60,15 +69,8 @@
             'Employees',
             'Finance'
         ];
-
-        console.log(vm.roles)
-
         vm.createRoleBtn = function (data) {
-            console.log(data)
-            // alert('create')
             RolesSrvcs.save(data).then(function (response) {
-
-                console.log(response.data)
                 if (response.data.status == 200) {
                     alert(response.data.message);
 
@@ -77,8 +79,6 @@
                     }).then(function (response) {
                         if (response.data.status == 200) {
                             vm.roles = response.data.data;
-                            console.log(vm.roles)
-                            console.log(response.data)
                         }
                     }, function () {
                         alert('Bad Request!!!')
@@ -87,7 +87,6 @@
                     $state.go('list-role', {
                         roleCode: ''
                     });
-                    // vm.ok();
                 } else {
                     alert(response.data.message);
                     console.log(response.data);
@@ -98,7 +97,21 @@
             });
         }
 
-        // if($stateParams.clientRequest == "new")
+        vm.activate = function(role) {
+
+            const data = angular.copy(role);
+            data.is_active = (role.is_active) ? 1 :0;
+            console.log('role:', data);
+
+            RolesSrvcs.update(data).then(response => {
+                if (response.data.status != 200) {
+                    alert(response.data.message);
+                }
+            }, function () {
+                alert('Bad Request!!!')
+            });
+        }
+        // if($stateParams.clientRequest == "new")e
         // {
 
         //     var modalInstance = $uibModal.open({

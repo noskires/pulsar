@@ -54,20 +54,20 @@ class RolesController extends Controller {
     // try{
           $role                 = new Role;
 
-          $roleCode             = (str_pad(($role->get()->count() + 1), 4, "0", STR_PAD_LEFT)); 
+          $roleCode             = (str_pad(($role->get()->count() + 1), 4, "0", STR_PAD_LEFT));
           $role->role_code      = "ROLE-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$roleCode;
           $role->role_name      = $data['roleName'];
           $role->description    = $data['description'];
           $role->changed_by     = Auth::user()->email;
-        
+
           $role->save();
 
           $role =  DB::table('roles')->latest('role_code')->first();
-          
+
           // foreach($data['modules'] as $module) {
           //   $roleItem                 = new RoleItem;
           //   $roleItem->role_code      = $role->role_code;
-          //   $roledItemCode             = (str_pad(($roleItem->get()->count() + 1), 6, "0", STR_PAD_LEFT)); 
+          //   $roledItemCode             = (str_pad(($roleItem->get()->count() + 1), 6, "0", STR_PAD_LEFT));
           //   $roleItem->role_item_code = "ROLEITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$roledItemCode;
           //   $roleItem->module_code    = $module;
           //   $roleItem->changed_by     = Auth::user()->email;
@@ -81,7 +81,7 @@ class RolesController extends Controller {
         ]);
 
       // }
-      // catch (\Exception $e) 
+      // catch (\Exception $e)
       // {
       //     return response()->json([
       //       'status' => 500,
@@ -104,6 +104,7 @@ class RolesController extends Controller {
         $role = Role::where('role_code', $data['role_code'])->first();
         $role->role_name = $data['role_name'];
         $role->description = $data['description'];
+        $role->is_active = $data['is_active'];
         $role->changed_by = Auth::user()->email;
         $role->timestamps = true;
         $role->save();
@@ -115,17 +116,17 @@ class RolesController extends Controller {
         ]);
 
       }
-      catch (\Exception $e) 
+      catch (\Exception $e)
       {
         return response()->json([
           'status' => 500,
           'data' => 'null',
           'message' => 'Error, please try again!'
         ]);
-      } 
+      }
 
     });
     return $transaction;
   }
-  
+
 }

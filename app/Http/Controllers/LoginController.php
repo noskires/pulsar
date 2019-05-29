@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\User;
+use App\Role;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -15,13 +16,18 @@ class LoginController extends Controller {
   }
 
   public function login(Request $request){
-    // dd($request->all());
-    if(Auth::attempt([
+    $user = User::where('email', $request->email)->first();
+    $role = Role::where('role_code', $user->role_code)->first();
+
+    if (!$role->is_active) {
+      return redirect('login')->with('status', 'Login failed; Account is disabled.');
+    } else if(Auth::attempt([
       'email'=>$request->email,
       'password'=>$request->password
       ]))
     {
-      $user = User::where('email', $request->email)->first();
+      return redirect('index');
+      /*
       if($user->is_admin())
       {
         return redirect('index');
@@ -33,11 +39,12 @@ class LoginController extends Controller {
         return redirect('index');
         // return redirect()->route('/login');
       }
+       */
     }
     else
     {
       // return redirect()->route('login');
-      return redirect('login')->with('status', 'Login failed; Invalid email or password');
+      return redirect('login')->with('status', 'Login failed; Invalid email or password.');
     }
   }
   // public function user()
