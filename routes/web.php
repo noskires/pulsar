@@ -613,11 +613,11 @@ Route::get('/api/v1/clients','Client\ClientsController@clients');
 | Roles -- MODULE-013
 |--------------------------------------------------------------------------
 */
-// Route::group(['middleware' => 'checkModules:MODULE-013'], function () {
+Route::group(['middleware' => 'checkModules:MODULE-013'], function () {
     Route::get('/role/new','Role\RolesController@index');
     Route::get('/role/list','Role\RolesController@index');
     Route::get('/role/list/{roleCode}','Role\RolesController@index');
-// });
+});
 /*
 |--------------------------------------------------------------------------
 | Roles Apis

@@ -122,120 +122,85 @@
         };
     }
 
-    RolesModalInstanceCtrl.$inject = ['$uibModalInstance', '$state', 'Datum', 'RolesSrvcs', 'RoleItemsSrvcs', 'ModulesSrvcs', 'ClientsSrvcs', 'ParticularsSrvcs'];
+    RolesModalInstanceCtrl.$inject = ['$uibModalInstance', '$state', 'Datum', 'RolesSrvcs', 'RoleItemsSrvcs', 'ModulesSrvcs', 'ClientsSrvcs', 'ParticularsSrvcs', '$scope'];
 
-    function RolesModalInstanceCtrl($uibModalInstance, $state, Datum, RolesSrvcs, RoleItemsSrvcs, ModulesSrvcs, ClientsSrvcs, ParticularsSrvcs) {
+    function RolesModalInstanceCtrl($uibModalInstance, $state, Datum, RolesSrvcs, RoleItemsSrvcs, ModulesSrvcs, ClientsSrvcs, ParticularsSrvcs, $scope) {
 
         var vm = this;
         vm.data = Datum.list;
-        console.log(vm.Datum)
+        vm.getRoleItems = () => {
+            return new Promise(resolve => {
+                RoleItemsSrvcs.list({
+                    roleItemCode: '',
+                    roleCode: vm.data.role_code
+                }).then(function (response) {
+                    if (response.data.status == 200) {
+                        resolve(response.data.data);
+                    }
+                }, function () {
+                    alert('Bad Request!!!')
+                })
+            });
+        };
 
-        RoleItemsSrvcs.list({
-            roleItemCode: '',
-            roleCode: vm.data.role_code
-        }).then(function (response) {
-            if (response.data.status == 200) {
-                vm.roleItems = response.data.data;
-                console.log(vm.roleItems)
-            }
-        }, function () {
-            alert('Bad Request!!!')
-        })
-
-        ModulesSrvcs.list({
-            moduleCode: ''
-        }).then(function (response) {
-            if (response.data.status == 200) {
-                vm.modules = response.data.data;
-                console.log(vm.modules)
-            }
-        }, function () {
-            alert('Bad Request!!!')
-        })
-
-        vm.createRoleItemBtn = function (data) {
-            data['role_code'] = vm.data.role_code;
-            RoleItemsSrvcs.save(data).then(function (response) {
-                // console.log(response.data)
-                if (response.data.status == 200) {
-                    alert(response.data.message);
-
-                    ModulesSrvcs.list({
-                        moduleCode: ''
-                    }).then(function (response) {
-                        if (response.data.status == 200) {
-                            vm.modules = response.data.data;
-                            console.log(vm.modules)
-                        }
-                    }, function () {
-                        alert('Bad Request!!!')
-                    })
-
-                    RoleItemsSrvcs.list({
-                        roleItemCode: '',
-                        roleCode: vm.data.role_code
-                    }).then(function (response) {
-                        if (response.data.status == 200) {
-                            vm.roleItems = response.data.data;
-                            console.log(vm.roleItems)
-                        }
-                    }, function () {
-                        alert('Bad Request!!!')
-                    })
-
-                    // $state.go('list-roleCopy', { roleCode:vm.data.role_code});
-                    // vm.ok();
-                } else {
-                    alert(response.data.message);
-                    // console.log(response.data);
-                }
-            }, function () {
-                console.log(response.data);
-                alert('Bad Request!!!')
+        vm.getModules = () => {
+            return new Promise(resolve => {
+                ModulesSrvcs.list({
+                    moduleCode: ''
+                }).then(function (response) {
+                    if (response.data.status == 200) {
+                        resolve(response.data.data);
+                    }
+                }, function () {
+                    alert('Bad Request!!!')
+                })
             });
         }
 
-        vm.deleteRoleItemBtn = function (data) {
-            console.log(data)
-            // data['role_item_code'] = data;
-            RoleItemsSrvcs.delete(data).then(function (response) {
-                // console.log(response.data)
-                if (response.data.status == 200) {
-                    alert(response.data.message);
-
-                    ModulesSrvcs.list({
-                        moduleCode: ''
-                    }).then(function (response) {
-                        if (response.data.status == 200) {
-                            vm.modules = response.data.data;
-                            console.log(vm.modules)
-                        }
-                    }, function () {
-                        alert('Bad Request!!!')
-                    })
-
-                    RoleItemsSrvcs.list({
-                        roleItemCode: '',
-                        roleCode: vm.data.role_code
-                    }).then(function (response) {
-                        if (response.data.status == 200) {
-                            vm.roleItems = response.data.data;
-                            console.log(vm.roleItems)
-                        }
-                    }, function () {
-                        alert('Bad Request!!!')
-                    })
-
-                    // $state.go('list-roleCopy', { roleCode:vm.data.role_code});
-                    // vm.ok();
-                } else {
-                    alert(response.data.message);
-                    // console.log(response.data);
-                }
-            }, function () {
-                console.log(response.data);
-                alert('Bad Request!!!')
+        vm.filterOutModules = async (modules) => {
+            vm.modules = await vm.getModules();
+            $scope.$apply(() => {
+                vm.modules = vm.modules.filter(item => !modules.includes(item.module_code));
             });
+        };
+
+        vm.refreshDisplay = async () => {
+            vm.roleItems = await vm.getRoleItems();
+            await vm.filterOutModules(vm.roleItems.map(e => e.module_code));
+        }
+
+        vm.refreshDisplay().then(async () => {
+            await vm.refreshDisplay();
+        });
+
+        vm.createRoleItemBtn = function (data) {
+            if (!data || !data.module_code) return;
+            data['role_code'] = vm.data.role_code;
+            RoleItemsSrvcs.save(data).then(async function (response) {
+                    if (response.data.status == 200) {
+                        await vm.refreshDisplay();
+                    } else {
+                        alert(response.data.message);
+                    }
+                },
+                function () {
+                    console.log(response.data);
+                    alert('Bad Request!!!')
+                });
+        }
+
+        vm.deleteRoleItemBtn = function (data) {
+            RoleItemsSrvcs.delete(data).then(async function (response) {
+                    if (response.data.status == 200) {
+                        await vm.refreshDisplay();
+                    } else {
+                        alert(response.data.message);
+                    }
+                },
+                function () {
+                    console.log(response.data);
+                    alert('Bad Request!!!')
+                });
         }
 
         vm.updateRoleBtn = function (data) {
