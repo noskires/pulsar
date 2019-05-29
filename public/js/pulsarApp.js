@@ -697,7 +697,7 @@
 
     MainCtrl.$inject = ['$window', '$http', 'UsersSrvcs', '$scope'];
 
-    async function MainCtrl($window, $http, UsersSrvcs, $scope) {
+    function MainCtrl($window, $http, UsersSrvcs, $scope) {
         var vm = this;
         vm.routeTo = function (route) {
             $window.location.href = route;
@@ -716,8 +716,12 @@
             });
         };
 
-        vm.users = await vm.getUsers();
+        vm.getUsers().then(e => $scope.$apply(() => {
+            vm.users = e
+        }));
+
         $scope.checkModuleAccess = function (navBarModules) {
+            if (!vm.users) return;
             return (navBarModules) ? vm.users[0].modules.includes(navBarModules) : false;
         };
     };
