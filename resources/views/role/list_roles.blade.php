@@ -10,7 +10,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-12">
       <div id="add-bank" class="collapse department">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -31,21 +31,21 @@
             </div>
             <!-- <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label">Modules</label>
-              <div class="col-sm-10"> 
+              <div class="col-sm-10">
 
               <input type="checkbox" checklist-model="role.modules" value="Assets"> Assets
               <input type="checkbox" checklist-model="role.modules" value="Projects"> Projects
               <input type="checkbox" checklist-model="role.modules" value="Employees"> Employees
               <input type="checkbox" checklist-model="role.modules" value="Finance"> Finance
-            
+
               </div>
             </div> -->
             <div class="form-group col-sm-12">
             </div>
-          </div> 
+          </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <div class="form-group col-sm-12">           
+            <div class="form-group col-sm-12">
               <div class="col-sm-8"></div>
               <div class="col-sm-4">
               <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
@@ -70,10 +70,10 @@
           <span class="glyphicon glyphicon-plus"></span> Create New
       </button>
     </div>
-  </div><br>  
+  </div><br>
 <!-- TABLES -->
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-body">
           <table id="tbl-accessrights" class="table table-bordered table-hover" width="100%">
@@ -90,8 +90,7 @@
               <td><a href="#" ui-sref="list-roleCopy({roleCode:role.role_code})"><b><%role.role_name%></b></a></td>
               <td><%role.description%></td>
               <td>1</td>
-              <td><a href="#" data-toggle="modal" data-target="#modal-renewal"><code class="text-green">Enable</code></a>
-                  &nbsp;&nbsp;&nbsp;<a href="#"><code class="text-red">Disable</code></a></td>
+              <td><input type="checkbox" ng-model="role.is_active" ng-checked="role.is_active" ng-true-value="true" ng-false-value="false" ng-change="rc.activate(role)"/></td>
             </tr>
             </tbody>
           </table>
@@ -138,11 +137,11 @@
                 <label for="controlnumber" class="col-sm-3 control-label">Modules</label>
                 <div class="col-sm-9">
                   <div class="form-group col-sm-12">
-                 
+
                     <select class="form-control select2 col-sm-9" style="width: 60%;" required="" ng-model="roleItem.module_code">
                       <option value="">- - select module - -</option>
                       <option ng-value="module.module_code" ng-repeat="module in vm.modules"><%module.module_name%></option>
-                    </select> 
+                    </select>
                   <div class="col-sm-3">
                   <a href="#" class="btn btn-default" ng-click="vm.createRoleItemBtn(roleItem)"> <code class="text-blue">ADD NEW MODULE</code></a>
                   </div>
@@ -164,7 +163,7 @@
               </div>
             </div>
             <!-- /.box-body -->
-                
+
         </form>
       </div>
       <div class="modal-footer">
