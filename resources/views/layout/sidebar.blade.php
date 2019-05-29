@@ -217,7 +217,7 @@
             <a href="#" ui-sref="list-particular" ng-if="checkModuleAccess('MODULE-005')"><i class="fa fa-list-ul"></i>Particular</a>
             <a href="#" ui-sref="list-particular" ng-if="checkModuleAccess('--')"><i class="fa fa-list-ul"></i>Others</a>
             <a href="#" ui-sref="list-user" ng-if="checkModuleAccess('MODULE-003')"><i class="fa fa-list-ul"></i>Users</a>
-            <a href="#" ui-sref="list-role"><i class="fa fa-list-ul"></i>Roles</a>
+            <a href="#" ui-sref="list-role" ng-if="checkModuleAccess('MODULE-013')"><i class="fa fa-list-ul"></i>Roles</a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
