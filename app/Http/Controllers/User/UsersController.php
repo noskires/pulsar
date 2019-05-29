@@ -35,8 +35,6 @@ class UsersController extends Controller {
             ->leftjoin('roles as role','role.role_code','=','user.role_code')
             ->whereNotNull('user.employee_code');
 
-    
-
     if ($filter['isSelfOnly']){
       $list = $list->where('user.employee_code', Auth::user()->employee_code);
     } else if ($filter['userCode']){

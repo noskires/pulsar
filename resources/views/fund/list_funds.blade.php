@@ -22,6 +22,7 @@
           <thead>
           <tr>
             <th>Fund Code</th>
+            <th>Fund Year</th>
             <th>Fund Name</th>
             <th align="right">Amount</th>
             <th></th>
@@ -30,6 +31,7 @@
           <tbody>
           <tr ng-repeat="fund in fc.funds">
           <td><a href="#" ui-sref="list-fundCopy({fundCode:fund.fund_code})"><b> <%fund.fund_code%> </b></a></td>
+          <td><%fund.fund_year%></td>
           <td><%fund.fund_name%></td>
           <td><%fund.total_fund_item_amount | number:2%></td>
           <td> <a href="#" ui-sref="edit-fund({fundCode2:fund.fund_code})"><b> Edit </b></a></td>
@@ -54,7 +56,11 @@
           <form class="form-horizontal" ng-model="vm.fundDetails">
             <div class="box-body">
               <div class="form-group col-sm-12">
-                <label class="col-sm-4 control-label">Fund</label>
+                <label class="col-sm-4 control-label">Year</label>
+                <div class="col-sm-8"><input type="text" class="form-control" required="" ng-model="vm.fundDetails.fund_year"><br></div>
+              </div>
+              <div class="form-group col-sm-12">
+                <label class="col-sm-4 control-label">Fund Name</label>
                 <div class="col-sm-8"><input type="text" class="form-control" required="" ng-model="vm.fundDetails.fund_name"><br></div>
               </div>
             </div>
@@ -83,7 +89,11 @@
           <form class="form-horizontal" id="">
             <div class="box-body">
               <div class="form-group col-sm-12">
-                <label class="col-sm-4 control-label">Fund</label>
+                <label class="col-sm-4 control-label">Year</label>
+                <div class="col-sm-8"><input type="text" class="form-control" required="" ng-model="vm.formData.fund_year"><br></div>
+              </div>
+              <div class="form-group col-sm-12">
+                <label class="col-sm-4 control-label">Fund Name</label>
                 <div class="col-sm-8"><input type="text" class="form-control" required="" ng-model="vm.formData.fund_name"><br></div>
               </div>
             </div>
