@@ -8,6 +8,7 @@
     UsersCtrl.$inject = ['$stateParams', '$state', 'UsersSrvcs', 'EmployeesSrvcs', 'RolesSrvcs', 'RoleItemsSrvcs', 'ParticularsSrvcs', '$window', '$uibModal', '$scope'];
     function UsersCtrl($stateParams, $state, UsersSrvcs, EmployeesSrvcs, RolesSrvcs, RoleItemsSrvcs, ParticularsSrvcs, $window, $uibModal, $scope) {
         var vm = this;
+        console.log(this);
         vm.getUsers = function () {
             return new Promise(resolve => {
                 UsersSrvcs.list({ userCode: '', isSelfOnly: false }).then(function (response) {
