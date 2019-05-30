@@ -37,6 +37,7 @@ class OperationsController extends Controller {
                 'o.number_loads', 
                 'a.tag', 
                 'a.asset_code', 
+                'a.code', 
                 'a.name as asset_name',
                 'project.name as project_name',
                 'm.municipality_code as municipality_code',

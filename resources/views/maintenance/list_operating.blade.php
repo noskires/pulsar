@@ -49,6 +49,7 @@
                   <th>Gas (L)</th>
                   <th>Oil (L)</th>
                   <th>Loads</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,7 +58,7 @@
                   <td><%operation.asset_code%></td>
                   <td><%operation.operation_date%></td>
                   <td><%operation.asset_name%></td>
-                  <td><%operation.asset_tag%></td>
+                  <td><%operation.code%></td>
                   <td><%operation.project_name%></td>
                   <td><%operation.project_code%></td>
                   <td><%operation.barangay+' '+operation.municipality_text +' '+ operation.province_text+' '+ operation.region_text_short%></td>
@@ -68,6 +69,7 @@
                   <td align="right"><%operation.gas_consumption | number:2%></td>
                   <td align="right"><%operation.oil_consumption | number:2%></td>
                   <td align="right"><%operation.number_loads | number:2%></td>
+                  <td align="center"> <a href="#"> Edit </a> | <a href="#"> Delete </a> </td>
                 </tr>
                 </tbody>
               </table>
