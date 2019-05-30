@@ -115,6 +115,7 @@
       <div class="col-md-12">
         <h4><b>CURRENT OPERATING RECORD</b></h4>
           <table border="0" width="100%" style="font-size:12px;">
+            @if($asset_monitoring)
             <tr>
               <td style="border-top: 1px solid #e1e1e1;">Operating Hours</td>
               <td style="border-top: 1px solid #e1e1e1; padding-right:20px;" align="right"> {{number_format($asset_monitoring->total_operating_hours, 2)}} </td>
@@ -133,6 +134,11 @@
               <td style="border-top: 1px solid #e1e1e1;">Oil (L) Consumed</td>
               <td style="border-top: 1px solid #e1e1e1; padding-right:20px;" align="right"> {{number_format($asset_monitoring->total_oil_consumption, 2)}} </td>
             </tr>
+            @else
+            <tr>
+              <td style="border-top: 1px solid #e1e1e1;" colspan=4>No Records</td>
+            </tr>
+            @endif
           </table> <br>
       </div>
     </div> 

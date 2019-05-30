@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Organization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 use DB;
 use Auth;
@@ -95,5 +96,41 @@ class DepartmentsController extends Controller {
 
     return $transaction;
   }
+
+
+  public function update(Request $request){
+
+    $data = Input::post();
+    
+
+		$transaction = DB::transaction(function($data) use($data){
+		// try{
+
+				$department = Organization::where('org_code', $data['org_code'])->first();
+	            $department->org_name 		    = $data['org_name'];
+	            $department->municipality_code 		= $data['municipality_code'];
+	            $department->barangay 		    = $data['barangay'];
+	            $department->changed_by 			= Auth::user()->email;
+	            $department->timestamps 			= true;
+	            $department->save();
+
+				return response()->json([
+					'status' => 200,
+					'data' => 'null',
+					'message' => 'Successfully saved.'
+				]);
+			// }
+			// catch (\Exception $e)
+			// {
+			// 	return response()->json([
+			// 		'status' => 500,
+			// 		'data' => 'null',
+			// 		'message' => 'Error, please try again!'
+			// 	]);
+			// }
+		});
+
+		return $transaction;
+	}
 
 }

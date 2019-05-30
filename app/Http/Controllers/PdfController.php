@@ -104,9 +104,7 @@ class PdfController extends Controller {
             ->groupBy('a.asset_code', 'a.name')
             ->where('a.category', 'CONE');
 
-
         $assets = $assets->where('a.asset_code', $assetCode);
-
 
       $assets = $assets->first();
 

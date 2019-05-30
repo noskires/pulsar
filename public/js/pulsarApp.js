@@ -544,6 +544,15 @@
                 controller: 'OfficesCtrl as oc',
                 templateUrl: 'organization.create.office.view'
             })
+
+            .state('org-office', {
+                url: '/organization/:orgUnitCode',
+                controller: 'OfficesCtrl as oc',
+                templateUrl: 'organization.create.office.view'
+            })
+
+
+
             .state('voucher-create', {
                 url: '/voucher/new',
                 controller: 'VouchersCtrl as vc',

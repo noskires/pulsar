@@ -27,7 +27,10 @@ class OrganizationsController extends Controller {
       'orgType'=>$request->input('orgType'),
     );
 
-    $organizations = DB::table('organizations');
+    $organizations = DB::table('organizations as organization')
+    ->leftjoin('municipalities as m','m.municipality_code','=','organization.municipality_code')
+    ->leftjoin('provinces as p','p.province_code','=','m.province_code')
+    ->leftjoin('regions as r','r.region_code','=','p.region_code');
 
     if ($data['orgCode']){
       $organizations = $organizations->where('org_code', $data['orgCode']);
@@ -41,7 +44,11 @@ class OrganizationsController extends Controller {
       $organizations = $organizations->where('org_type', $data['orgType']);
     }
 
+    
+
     $organizations = $organizations->get();
+
+    
 
     return response()-> json([
         'status'=>200,

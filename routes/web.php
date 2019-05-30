@@ -136,7 +136,10 @@ Route::get('/api/v1/employees2','EmployeesController@employees2');
 // MODULE-014 - Office Location
 Route::group(['middleware' => 'checkModules:MODULE-014'], function () {
     Route::get('/organizations','Organization\DepartmentsController@index');
+    Route::get('/organization/{orgUnitCode}','Organization\DepartmentsController@index');
+    
 });
+
 Route::get('/organization/department/new','Organization\DepartmentsController@index');
 Route::get('/organization/division/new','Organization\DepartmentsController@index');
 Route::get('/organization/unit/new','Organization\DepartmentsController@index');
@@ -150,7 +153,6 @@ Route::get('/organization/unit/new','Organization\DepartmentsController@index');
 //department
 Route::post('/api/v1/organization/department/save','Organization\DepartmentsController@save');
 Route::post('/api/v1/organization/department/update','Organization\DepartmentsController@update');
-
 Route::get('/api/v1/organization/departments','Organization\DepartmentsController@departments');
 
 //division
