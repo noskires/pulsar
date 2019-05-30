@@ -10,7 +10,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-12">
       <div id="add-bank" class="collapse department">
         <div class="panel panel-default">
           <div class="panel-body">
@@ -24,11 +24,11 @@
             <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label">Employee Name</label>
               <div class="col-sm-4">
-     
+
                 <select class="form-control select2" style="width: 100%;" required="" ng-model="user.employee_code">
                   <option value="">- - select employee - -</option>
                   <option ng-value="employee.employee_code" ng-repeat="employee in uc.employees"><%employee.employee_name%></option>
-                </select> 
+                </select>
               </div>
             </div>
             <div class="form-group col-sm-12">
@@ -46,10 +46,10 @@
             </div>
             <div class="form-group col-sm-12">
             </div>
-          </div> 
+          </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <div class="form-group col-sm-12">           
+            <div class="form-group col-sm-12">
               <div class="col-sm-8"></div>
               <div class="col-sm-4">
               <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
@@ -72,10 +72,10 @@
           <span class="glyphicon glyphicon-plus"></span> Create New
       </button>
     </div>
-  </div><br>  
+  </div><br>
 <!-- TABLES -->
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-body">
           <table id="tbl-accessrights" class="table table-bordered table-hover" width="100%">
@@ -84,7 +84,7 @@
               <th>Employee</th>
               <th>UserID</th>
               <th>Access Group Name</th>
-              <th>Options</th>
+              <th>Activation | Reset Password</th>
             </tr>
             </thead>
             <tbody>
@@ -92,9 +92,12 @@
               <td><a href="#" ui-sref="list-userCopy({userCode:user.employee_code})"><b><%user.employee_name%></b></a></td>
               <td><%user.employee_code%></td>
               <td><%user.role_name%></td>
-              <td><a href="#" data-toggle="modal" data-target="#modal-renewal"><code class="text-green">Enable</code></a>
-                  &nbsp;&nbsp;<a href="#"><code class="text-red">Disable</code></a>
-                  &nbsp;&nbsp;<a href="#"><code class="text-yellow">Password-Reset</code></a></td>
+              <td>
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch<%$index%>" ng-model="role.is_active" ng-checked="role.is_active" ng-change="rc.activate(role)">
+                  <label class="onoffswitch-label" for="myonoffswitch<%$index%>"></label>
+                </div>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -162,7 +165,7 @@ $('.select2').select2();
         </div>
         <div class="form-group col-sm-12">
         </div>
-                <!-- /.box-body -->   
+                <!-- /.box-body -->
       </form>
     </div>
     <div class="modal-footer">

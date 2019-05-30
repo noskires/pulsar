@@ -24,7 +24,7 @@
   <!-- /.search form -->
   <!-- sidebar menu -->
   <ul class="sidebar-menu" data-widget="tree">
-    <li class="header">MAIN NAVIGATION<%mc%></li>
+    <li class="header">MAIN NAVIGATION</li>
     <li class="active"><a href="index"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>
     <li class="treeview" ng-if="checkModuleAccess('MODULE-005')">
       <a href="#">

@@ -82,7 +82,7 @@
               <th>Access Group Name</th>
               <th>Description</th>
               <th>Active Users</th>
-              <th>Options</th>
+              <th>Log In Activation</th>
             </tr>
             </thead>
             <tbody>
@@ -90,7 +90,13 @@
               <td><a href="#" ui-sref="list-roleCopy({roleCode:role.role_code})"><b><%role.role_name%></b></a></td>
               <td><%role.description%></td>
               <td>1</td>
-              <td><input type="checkbox" ng-model="role.is_active" ng-checked="role.is_active" ng-true-value="true" ng-false-value="false" ng-change="rc.activate(role)"/></td>
+              <!-- <td><input type="checkbox" ng-model="role.is_active" ng-checked="role.is_active" ng-true-value="true" ng-false-value="false" ng-change="rc.activate(role)"/></td> -->
+              <td>
+                <div class="onoffswitch">
+                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch<%$index%>" ng-model="role.is_active" ng-checked="role.is_active" ng-change="rc.activate(role)">
+                  <label class="onoffswitch-label" for="myonoffswitch<%$index%>"></label>
+                </div>
+              </td>
             </tr>
             </tbody>
           </table>
