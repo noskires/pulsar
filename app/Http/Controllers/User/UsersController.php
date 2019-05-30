@@ -21,7 +21,7 @@ class UsersController extends Controller {
     $filter = array(
       'userCode'=>$request->input('userCode'),
       'roleName'=>$request->input('roleName'),
-      'isSelfOnly'=>$request->input('isSelfOnly'),
+      'isSelfOnly'=> ( $request->input('isSelfOnly') == 'true'),
     );
 
   	$list = DB::table('users as user')
@@ -33,16 +33,16 @@ class UsersController extends Controller {
             )
             ->leftjoin('employees as employee','employee.employee_code','=','user.employee_code')
             ->leftjoin('roles as role','role.role_code','=','user.role_code')
-            ->whereNotNull('user.employee_code');
+            ->whereNotNull('user.employee_code')
+            ->whereNotNull('employee.employee_code');
 
     if ($filter['isSelfOnly']){
       $list = $list->where('user.employee_code', Auth::user()->employee_code);
     } else if ($filter['userCode']){
       $list = $list->where('user.employee_code', $filter['userCode']);
     }
-
     $list = $list->get();
-    
+
     foreach ($list as $i => $item) {
       $roleItems = DB::table('role_items as ri');
       $items =  $roleItems-> select('module_code')-> where('role_code', $item->role_code)->get();
@@ -83,7 +83,7 @@ class UsersController extends Controller {
         ]);
 
       // }
-      // catch (\Exception $e) 
+      // catch (\Exception $e)
       // {
       //     return response()->json([
       //       'status' => 500,
@@ -117,17 +117,17 @@ class UsersController extends Controller {
         ]);
 
       // }
-      // catch (\Exception $e) 
+      // catch (\Exception $e)
       // {
       //   return response()->json([
       //     'status' => 500,
       //     'data' => 'null',
       //     'message' => 'Error, please try again!'
       //   ]);
-      // } 
+      // }
 
     });
     return $transaction;
   }
-  
+
 }
