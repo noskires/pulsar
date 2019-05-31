@@ -37,6 +37,16 @@
                         'Content-Type': 'application/json'
                     }
                 })
+            },
+            resetPassword: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: '/api/v1/user/reset-password',
+                    data: data,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
             }
         };
     }

@@ -693,6 +693,7 @@ Route::get('/user/list/{userCode}','User\UsersController@index');
 Route::post('/api/v1/user/save','User\UsersController@save');
 Route::post('/api/v1/user/update','User\UsersController@update');
 Route::get('/api/v1/users','User\UsersController@list');
+Route::post('/api/v1/user/reset-password','User\UsersController@resetPassword');
 
 
 /*

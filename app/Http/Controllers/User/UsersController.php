@@ -28,6 +28,8 @@ class UsersController extends Controller {
             ->select(
               'employee.employee_code',
               'user.is_active',
+              'user.auto_generated',
+              'user.password',
               DB::raw('CONCAT(trim(CONCAT(employee.lname," ",COALESCE(employee.affix,""))),", ", COALESCE(employee.fname,"")," ", COALESCE(employee.mname,"")) as employee_name'),
               'role.role_code',
               'role.is_active as role_is_active',
@@ -52,6 +54,7 @@ class UsersController extends Controller {
          return ($item->module_code);
         });
       $list[$i]->modules=$modules;
+      $list[$i]->password= ($item->auto_generated) ? $item->password : '-';
     }
 
     return response()-> json([
@@ -73,7 +76,8 @@ class UsersController extends Controller {
           $user->employee_code  = $data['employee_code'];
           $user->email          = $data['employee_code'];
           $user->role_code      = $data['role_code'];
-          $user->password       = bcrypt("pulsar");
+          $user->password       = bcrypt($this->generatePassword());
+          $user->auto_generated = true;
           // $user->description    = $data['description'];
           // $user->changed_by     = Auth::user()->email;
           $user->save();
@@ -132,4 +136,36 @@ class UsersController extends Controller {
     return $transaction;
   }
 
+  public function resetPassword(Request $request) {
+    $data = Input::post();
+    $transaction = DB::transaction(function($data) use($data){
+      $user = User::where('employee_code', $data['employee_code'])->first();
+      $user->password = bcrypt($this->generatePassword());
+      $user->auto_generated = true;
+      $user->timestamps = true;
+      $user->save();
+
+      return response()->json([
+        'status' => 200,
+        'data' => 'null',
+        'message' => 'Successfully saved.'
+      ]);
+    });
+    return $transaction;
+  }
+
+  function generatePassword() {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $numbers = '1234567890';
+    $specialChars = '!@#$()_+?><';
+    $pass = array();
+    $random;
+    for ($i = 0; $i < 8; $i++) {
+        if ($i <= 5 ) $random = $alphabet[rand(0, strlen($alphabet) - 1)];
+        if ($i == 6) $random = $numbers[rand(0, strlen($numbers) - 1)];
+        if ($i == 7) $random = $specialChars[rand(0, strlen($specialChars) - 1)];
+        $pass[] = $random;
+    }
+    return implode($pass);
+  }
 }

@@ -38,6 +38,18 @@
             });
         };
 
+        vm.getGeneratedPassword = function (user) {
+            return new Promise(resolve => {
+                UsersSrvcs.resetPassword(user).then(function (response) {
+                    if (response.data.status == 200) {
+                        resolve(response.data.data);
+                    }
+                }, function () {
+                    alert('Bad Request!!!')
+                })
+            });
+        };
+
         vm.refreshDisplay = function () {
             vm.getEmployees().then(async (e) => {
                 const users = await vm.getUsers();
@@ -133,6 +145,11 @@
             });
         }
 
+        vm.resetPassword = async function (user) {
+            await vm.getGeneratedPassword(user);
+            vm.refreshDisplay();
+
+        }
         vm.routeTo = function (route) {
             $window.location.href = route;
         };
