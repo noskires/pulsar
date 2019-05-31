@@ -27,8 +27,10 @@ class UsersController extends Controller {
   	$list = DB::table('users as user')
             ->select(
               'employee.employee_code',
+              'user.is_active',
               DB::raw('CONCAT(trim(CONCAT(employee.lname," ",COALESCE(employee.affix,""))),", ", COALESCE(employee.fname,"")," ", COALESCE(employee.mname,"")) as employee_name'),
               'role.role_code',
+              'role.is_active as role_is_active',
               'role.role_name'
             )
             ->leftjoin('employees as employee','employee.employee_code','=','user.employee_code')
@@ -103,9 +105,9 @@ class UsersController extends Controller {
 
     $transaction = DB::transaction(function($data) use($data){
     // try{
-
         $role = User::where('employee_code', $data['employee_code'])->first();
         $role->role_code = $data['role_code'];
+        $role->is_active = $data['is_active'];
         // $role->changed_by = Auth::user()->email;
         $role->timestamps = true;
         $role->save();

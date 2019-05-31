@@ -19,7 +19,7 @@ class LoginController extends Controller {
     $user = User::where('email', $request->email)->first();
     $role = Role::where('role_code', $user->role_code)->first();
 
-    if (!$role->is_active) {
+    if (!$role->is_active || !$user->is_active) {
       return redirect('login')->with('status', 'Login failed; Account is disabled.');
     } else if(Auth::attempt([
       'email'=>$request->email,
