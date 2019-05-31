@@ -21,11 +21,12 @@ class RolesController extends Controller {
 
     $filter = array(
       'roleCode'=>$request->input('roleCode'),
-      'roleName'=>$request->input('roleName')
+      'roleName'=>$request->input('roleName') 
     );
 
 
-  	$list = DB::table('roles as role');
+    $list = DB::table('roles as role')
+    ->leftjoin(DB::raw("((SELECT r.role_Code, COUNT(u.role_code) AS active_user_count From roles r LEFT JOIN(SELECT role_code FROM users WHERE is_active =1) u ON r.role_code = u.role_code GROUP BY r.role_code)) AS u"), 'u.role_code', '=', 'role.role_code');
 
     if ($filter['roleCode']){
       $list = $list->where('role.role_code', $filter['roleCode']);

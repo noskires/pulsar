@@ -123,6 +123,7 @@
 
         vm.updateUserBtn = function (data) {
             UsersSrvcs.update(data).then(function (response) {
+                vm.refreshDisplay();
                 if (response.data.status != 200) {
                     alert(response.data.message);
                 }

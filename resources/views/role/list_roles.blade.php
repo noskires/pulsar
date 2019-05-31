@@ -89,7 +89,7 @@
             <tr ng-repeat="role in rc.roles">
               <td><a href="#" ui-sref="list-roleCopy({roleCode:role.role_code})"><b><%role.role_name%></b></a></td>
               <td><%role.description%></td>
-              <td>1</td>
+              <td><%role.active_user_count%></td>
               <!-- <td><input type="checkbox" ng-model="role.is_active" ng-checked="role.is_active" ng-true-value="true" ng-false-value="false" ng-change="rc.activate(role)"/></td> -->
               <td>
                 <div class="onoffswitch">

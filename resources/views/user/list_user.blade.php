@@ -91,7 +91,7 @@
             <tr ng-repeat="user in uc.users">
               <td><a href="#" ui-sref="list-userCopy({userCode:user.employee_code})"><b><%user.employee_name%></b></a></td>
               <td><%user.employee_code%></td>
-              <td><%user.role_name%> <strong><i><%(user.role_is_active) ? '' : ' (DEACTIVED)'%><i></strong></td>
+                <td><%user.role_name%> <strong><i><%(user.role_is_active) ? '' : ' (DEACTIVED)'%><i></strong></td>
               <td>
                 <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch<%$index%>" ng-model="user.is_active" ng-checked="user.is_active" ng-change="uc.updateUserBtn(user)">
