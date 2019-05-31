@@ -25,6 +25,7 @@ Route::post('/auth', ['uses'=>'LoginController@login', 'as'=>'auth']);
 Route::get('/info','LoginController@phpinfo');
 
 Route::group(['middleware'=>'auth'], function(){
+Route::get('/reset-password','ResetPasswordController@index');
 
 //testing angular table
 // Route::get('/angular-datatables','MaintenanceController@index');
@@ -693,6 +694,7 @@ Route::get('/user/list/{userCode}','User\UsersController@index');
 Route::post('/api/v1/user/save','User\UsersController@save');
 Route::post('/api/v1/user/update','User\UsersController@update');
 Route::get('/api/v1/users','User\UsersController@list');
+Route::post('/api/v1/user/generate-password','User\UsersController@generatePassword');
 Route::post('/api/v1/user/reset-password','User\UsersController@resetPassword');
 
 

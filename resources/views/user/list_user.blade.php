@@ -99,7 +99,7 @@
                 </div>
                 <button class="btn bg-olive btn-flat margin" ng-click="uc.resetPassword(user)">Reset Password
                 </button>
-                <strong><i><%user.password%></i></strong>
+                <strong><i><%user.password_generated%></i></strong>
               </td>
             </tr>
             </tbody>

@@ -320,6 +320,11 @@
   @include('user.list_user')
 </script>
 
+<!-- Reset Password -->
+<script type="text/ng-template" id="auth.passwords.reset2">
+  @include('auth.passwords.reset2')
+</script>
+
 <!-- Shared Modal -->
 
 <script type="text/ng-template" id="shared.modal">

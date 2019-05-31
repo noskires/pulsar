@@ -40,7 +40,7 @@
 
         vm.getGeneratedPassword = function (user) {
             return new Promise(resolve => {
-                UsersSrvcs.resetPassword(user).then(function (response) {
+                UsersSrvcs.generatePassword(user).then(function (response) {
                     if (response.data.status == 200) {
                         resolve(response.data.data);
                     }

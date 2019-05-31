@@ -29,7 +29,7 @@ class UsersController extends Controller {
               'employee.employee_code',
               'user.is_active',
               'user.auto_generated',
-              'user.password',
+              'user.password_generated',
               DB::raw('CONCAT(trim(CONCAT(employee.lname," ",COALESCE(employee.affix,""))),", ", COALESCE(employee.fname,"")," ", COALESCE(employee.mname,"")) as employee_name'),
               'role.role_code',
               'role.is_active as role_is_active',
@@ -54,7 +54,7 @@ class UsersController extends Controller {
          return ($item->module_code);
         });
       $list[$i]->modules=$modules;
-      $list[$i]->password= ($item->auto_generated) ? $item->password : '-';
+      $list[$i]->password_generated= ($item->auto_generated) ? $item->password_generated : '';
     }
 
     return response()-> json([
@@ -76,7 +76,8 @@ class UsersController extends Controller {
           $user->employee_code  = $data['employee_code'];
           $user->email          = $data['employee_code'];
           $user->role_code      = $data['role_code'];
-          $user->password       = bcrypt($this->generatePassword());
+          $user->password       = bcrypt($this->getRandomPassword());
+          $user->password_generated = $this->getRandomPassword();
           $user->auto_generated = true;
           // $user->description    = $data['description'];
           // $user->changed_by     = Auth::user()->email;
@@ -136,11 +137,12 @@ class UsersController extends Controller {
     return $transaction;
   }
 
-  public function resetPassword(Request $request) {
+  public function generatePassword(Request $request) {
     $data = Input::post();
     $transaction = DB::transaction(function($data) use($data){
       $user = User::where('employee_code', $data['employee_code'])->first();
-      $user->password = bcrypt($this->generatePassword());
+      $user->password = bcrypt($this->getRandomPassword());
+      $user->password_generated = $this->getRandomPassword();
       $user->auto_generated = true;
       $user->timestamps = true;
       $user->save();
@@ -154,7 +156,34 @@ class UsersController extends Controller {
     return $transaction;
   }
 
-  function generatePassword() {
+  public function resetPassword(Request $request) {
+    $data = Input::post();
+    $errors = $this->checkPasswordErrors($data);
+    if (count($errors)) {
+      return response()->json([
+        'status' => 400,
+        'data' => $errors,
+        'message' => 'Invalid password'
+      ]);
+    }
+
+    $transaction = DB::transaction(function($data) use($data){
+      $user = User::where('employee_code', $data['employee_code'])->first();
+      $user->password = bcrypt($data['password']);
+      $user->auto_generated = false;
+      $user->timestamps = true;
+      $user->save();
+
+      return response()->json([
+        'status' => 200,
+        'data' => 'null',
+        'message' => 'Successfully saved.'
+      ]);
+    });
+    return $transaction;
+  }
+  
+  function getRandomPassword() {
     $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $numbers = '1234567890';
     $specialChars = '!@#$()_+?><';
@@ -167,5 +196,32 @@ class UsersController extends Controller {
         $pass[] = $random;
     }
     return implode($pass);
+  }
+
+  function checkPasswordErrors($data) {
+    $errors = array();
+    if ($data['password'] !== $data['password_confirmation']) {
+      $errors[] = 'Password must be match.';
+    }
+    if (strlen($data['password']) < 8 || strlen($data['password']) > 16) {
+      $errors[] = "Password should be min 8 characters and max 16 characters";
+  }
+  if (!preg_match("/\d/", $data['password'])) {
+      $errors[] = "Password should contain at least one digit";
+  }
+  if (!preg_match("/[A-Z]/", $data['password'])) {
+      $errors[] = "Password should contain at least one Capital Letter";
+  }
+  if (!preg_match("/[a-z]/", $data['password'])) {
+      $errors[] = "Password should contain at least one small Letter";
+  }
+  if (!preg_match("/\W/", $data['password'])) {
+      $errors[] = "Password should contain at least one special character";
+  }
+  if (preg_match("/\s/", $data['password'])) {
+      $errors[] = "Password should not contain any white space";
+  }
+    return $errors;
+
   }
 }

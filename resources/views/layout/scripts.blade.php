@@ -121,5 +121,5 @@
 <script src="{{URL::to('js/controller/funds.js')}}"></script> 
 <script src="{{URL::to('js/controller/roles.js')}}"></script> 
 <script src="{{URL::to('js/controller/users.js')}}"></script> 
-
+<script src="{{URL::to('js/controller/resetPassword.js')}}"></script> 
 @yield('additionalScripts')

@@ -26,20 +26,10 @@ class LoginController extends Controller {
       'password'=>$request->password
       ]))
     {
+      if ($user->auto_generated) {
+        return redirect('reset-password');
+      }
       return redirect('index');
-      /*
-      if($user->is_admin())
-      {
-        return redirect('index');
-        // echo Auth::user()->id;
-      }
-      else
-      {
-        // echo "user";
-        return redirect('index');
-        // return redirect()->route('/login');
-      }
-       */
     }
     else
     {

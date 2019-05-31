@@ -699,6 +699,12 @@
                 controller: 'UsersCtrl as uc',
                 templateUrl: 'user.list.view'
             })
+            // Reset Password
+            .state('reset-password', {
+                url: '/reset-password',
+                controller: 'ResetPasswordCtrl as rp',
+                templateUrl: 'auth.passwords.reset2'
+            })
 
         $urlRouterProvider.otherwise('/index');
 
