@@ -7,7 +7,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">Username</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control" name="email" value="<%rp.form.employee_code%>" readonly>

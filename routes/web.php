@@ -25,6 +25,7 @@ Route::post('/auth', ['uses'=>'LoginController@login', 'as'=>'auth']);
 Route::get('/info','LoginController@phpinfo');
 
 Route::group(['middleware'=>'auth'], function(){
+Route::get('/logout','LoginController@logout');
 Route::get('/reset-password','ResetPasswordController@index');
 
 //testing angular table
