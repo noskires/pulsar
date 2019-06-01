@@ -11,7 +11,7 @@
 
 <section class="content">
 
-       <div class="row">
+<div class="row">
 
 <!-- NEW JOB ORDER SLIDE -->
         <div class="col-md-12"> 
@@ -25,7 +25,7 @@
                   <div class="col-sm-4">
                     <div class="input-group date">
                     <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                    <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="roc.risDetails.date_requested" datepicker autocomplete="off" readonly="">
+                    <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="roc.risDetails.date_requested" datepicker2 autocomplete="off" readonly="">
                     </div>
                   </div>
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
@@ -43,7 +43,7 @@
                   <div class="col-sm-4">
                     <div class="input-group date">
                     <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                    <input type="text" class="form-control pull-right" id="datepicker-dateneeded" ng-model="roc.risDetails.date_needed" datepicker autocomplete="off" readonly="">
+                    <input type="text" class="form-control pull-right" id="datepicker-dateneeded" ng-model="roc.risDetails.date_needed" datepicker2 autocomplete="off" readonly="">
                     </div>
                   </div>
                   <label for="" class="col-sm-2 control-label">Reference Name</label>
@@ -354,7 +354,7 @@ $('.select2').select2();
                         <div class="col-sm-4">
                           <div class="input-group date">
                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                            <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received" datepicker autocomplete="off" readonly="">
+                            <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received" datepicker2 autocomplete="off" readonly="">
                           </div>
                         </div>
 
