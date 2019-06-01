@@ -56,6 +56,7 @@
         <ul class="nav nav-tabs pull-right tab-head">
           <li><a href="#tab_8-8" data-toggle="tab">Documents</a></li>
           <li><a href="#tab_7-7" data-toggle="tab">Insurances</a></li>
+          <li><a href="#tab_9-9" data-toggle="tab">Registration Details</a></li>
           <li><a href="#tab_3-3" data-toggle="tab">Events</a></li>
           <li class="active"><a href="#tab_2-2" data-toggle="tab">Maintenance History</a></li>
           <li class="pull-left header"><h4><b> Attributes</b></h4>
@@ -76,6 +77,7 @@
             </table>
           </div>
           <!-- /.tab-pane -->
+          
 
           <div class="active tab-pane" id="tab_2-2">
             <h4><b>Maintenance History</b></h4>
@@ -113,6 +115,45 @@
               </tr>
               </tbody>
             </table>
+          </div>
+          <!-- /.tab-pane -->
+
+
+          <div class="tab-pane" id="tab_9-9">
+            <h4><b>Registration Details</b><button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#modal-registration">
+            <li class="fa fa-plus"></li>&nbsp; Add Registration Details</button></h4> 
+            <table class="table" width="100%">
+            <thead>
+            <tr>
+              <th>Date of Renewal</th>
+              <th>Status of Renewal</th>
+              <th>OR No.</th>
+              <th>OR Date</th>
+              <th>MV File No.</th>
+              <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>04/01/2018</td>
+              <td>Completed</td>
+              <td>000-111</td>
+              <td>01/01/2018</td>
+              <td>123-456</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>04/01/2019</td>
+              <td>On-process</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><a href="#" data-toggle="modal" data-target="#modal-renewal"><code class="text-green">Enter Renewal Details</code></a>
+                  &nbsp;&nbsp;&nbsp;<a href="#"><code class="text-red">Remove</code></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
           </div>
           <!-- /.tab-pane -->
 
@@ -516,5 +557,85 @@
 
 </section>
 
+<!-- registration -->
+<!-- MODAL CONTENTS -->
+<script type="text/ng-template" id="add.registration.modal">
+<div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ui-sref="org-office-create()" ng-click="vm.ok()">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Department</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Custom Tabs (Pulled to the right) -->
+        <form class="form-horizontal" id="">
+            <div class="box-body">
+              <div class="form-group col-sm-12">
+                <label for="controlnumber" class="col-sm-3 control-label">Department Name</label>
+                <div class="col-sm-6"><input type="text" class="form-control" ng-model="vm.data.org_name"></div>
+              </div>
+        
+              <div class="form-group col-sm-12">
+                <label class="col-sm-1 control-label">Region</label>
+                <div class="col-sm-5">
+                <select class="form-control" style="width: 100%;" required="" ng-model="vm.data.region_code" ng-change="vm.selectRegion(vm.data.region_code)">
+                  <option selected="selected" value="">- - - Select Region - - -</option>
+                  <option ng-value="region.region_code" ng-repeat="region in vm.regions"><% region.region_text_short%></option>
+                </select>
+                </div>
+                
+                <label class="col-sm-1 control-label">Province</label>
+                <div class="col-sm-5">
+                <select class="form-control" style="width: 100%;" required="" ng-model="vm.data.province_code" ng-change="vm.selectProvince(vm.data.province_code)">
+                  <option selected="selected" value="">- - - Select Province - - -</option>
+                  <option ng-value="province.province_code" ng-repeat="province in vm.provinces"><% province.province_text%></option>
+                </select>
+                </div>
+                <!-- <div class="col-sm-1"><input type="text" class="form-control" id="dept-zipcode" placeholder="Zip Code" disabled required=""></div> -->
+              </div>
+              <div class="form-group col-sm-12">
+                <label class="col-sm-1 control-label">Municipality</label>
+                <div class="col-sm-5">
+                <select class="form-control" style="width: 100%;" required="" ng-model="vm.data.municipality_code">
+                  <option selected="selected" value="">- - - Select Municipality - - -</option>
+                  <option ng-value="municipality.municipality_code" ng-repeat="municipality in vm.municipalities"><% municipality.municipality_text%></option>
+                </select>
+                </div>
+                <label class="col-sm-1 control-label">Barangay</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" id="" required="" ng-model="vm.data.barangay">
+                </div>
+              </div>
+
+
+            </div>
+            <!-- /.box-body -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" ui-sref="list-role({roleCode:''})" ng-click="vm.ok()">Close</button>
+        <button class="btn btn-large btn-danger pull-left" data-toggle="confirmation"
+          data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+          data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+          data-title="Confirmation." data-content="Are you sure?" style="width: 10%;"> Delete
+        </button>
+        <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
+          data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+          data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+          data-title="Confirm data entry." data-content="Update entry?" style="width: 20%;" ng-click="vm.updateDepartmentBtn(vm.data)"> Update
+        </button>
+        <!-- nav-tabs-custom -->
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+</script>
+<!-- /.modal -->
+
+<!-- registration -->
 
 

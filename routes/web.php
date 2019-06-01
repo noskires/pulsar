@@ -104,6 +104,10 @@ Route::get('/api/v1/asset-categories','Asset\AssetCategoriesController@assetCate
 Route::post('/api/v1/asset-category/save','Asset\AssetCategoriesController@save');
 Route::post('/api/v1/asset-category/update','Asset\AssetCategoriesController@update');
 
+Route::get('/api/v1/asset-registrations','Asset\AssetRegistrationsController@assetRgstns');
+Route::post('/api/v1/asset-registration/save','Asset\AssetRegistrationsController@save');
+Route::post('/api/v1/asset-registration/update','Asset\AssetRegistrationsController@update');
+
 /*
 |--------------------------------------------------------------------------
 | Warranties Apis
