@@ -14,7 +14,9 @@ class LoginController extends Controller {
   public function phpinfo(){
     phpinfo();
   }
-
+  public function logout(Request $request){
+    return redirect('login')->with(Auth::logout());
+  }
   public function login(Request $request){
     $user = User::where('email', $request->email)->first();
     $role = Role::where('role_code', $user->role_code)->first();
