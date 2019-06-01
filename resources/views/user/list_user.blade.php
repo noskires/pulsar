@@ -33,7 +33,7 @@
             </div>
             <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label"></label>
-              <div class="col-sm-10"><code class="text-green">NOTE: The default password is set to <b>"pulsar"</b></code></div>
+              <!-- <div class="col-sm-10"><code class="text-green">NOTE: The default password is set to <b>"pulsar"</b></code></div> -->
             </div>
             <div class="form-group col-sm-12">
               <label for="controlnumber" class="col-sm-2 control-label">Access Group</label>
