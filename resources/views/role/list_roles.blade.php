@@ -108,7 +108,7 @@
 
 
 <!-- MODAL CONTENTS -->
-<script type="text/ng-template" id="Edit.modal">
+<script type="text/ng-template" id="role.edit.modal">
 <div>
   <div class="modal-dialog">
     <div class="modal-content">

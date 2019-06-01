@@ -12,12 +12,12 @@
 
         vm.getRoles = () => {
             return new Promise(resolve => {
-                    RolesSrvcs.list({
+                RolesSrvcs.list({
                     roleCode: ''
                 }).then(function (response) {
                     if (response.data.status == 200) {
                         const i = response.data.data;
-                        const data = i.map(e => ({...e, is_active: (e.is_active) ? true: false}));
+                        const data = i.map(e => ({ ...e, is_active: (e.is_active) ? true : false }));
                         resolve(data);
                     }
                 }, function () {
@@ -26,7 +26,7 @@
             });
         };
 
-        vm.getRoles().then(async ()=> {
+        vm.getRoles().then(async () => {
             const data = await vm.getRoles();
             $scope.$apply(() => {
                 vm.roles = data;
@@ -44,7 +44,7 @@
 
                     var modalInstance = $uibModal.open({
                         controller: 'RolesModalInstanceCtrl',
-                        templateUrl: 'Edit.modal',
+                        templateUrl: 'role.edit.modal',
                         controllerAs: 'vm',
                         resolve: {
                             Datum: function () {
@@ -97,10 +97,10 @@
             });
         }
 
-        vm.activate = function(role) {
+        vm.activate = function (role) {
 
             const data = angular.copy(role);
-            data.is_active = (role.is_active) ? 1 :0;
+            data.is_active = (role.is_active) ? 1 : 0;
             console.log('role:', data);
 
             RolesSrvcs.update(data).then(response => {
@@ -190,12 +190,12 @@
             if (!data || !data.module_code) return;
             data['role_code'] = vm.data.role_code;
             RoleItemsSrvcs.save(data).then(async function (response) {
-                    if (response.data.status == 200) {
-                        await vm.refreshDisplay();
-                    } else {
-                        alert(response.data.message);
-                    }
-                },
+                if (response.data.status == 200) {
+                    await vm.refreshDisplay();
+                } else {
+                    alert(response.data.message);
+                }
+            },
                 function () {
                     console.log(response.data);
                     alert('Bad Request!!!')
@@ -204,12 +204,12 @@
 
         vm.deleteRoleItemBtn = function (data) {
             RoleItemsSrvcs.delete(data).then(async function (response) {
-                    if (response.data.status == 200) {
-                        await vm.refreshDisplay();
-                    } else {
-                        alert(response.data.message);
-                    }
-                },
+                if (response.data.status == 200) {
+                    await vm.refreshDisplay();
+                } else {
+                    alert(response.data.message);
+                }
+            },
                 function () {
                     console.log(response.data);
                     alert('Bad Request!!!')
