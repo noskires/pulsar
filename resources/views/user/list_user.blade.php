@@ -93,11 +93,13 @@
               <td><%user.employee_code%></td>
               <td><%user.role_name%> <strong><i><%(user.role_is_active) ? '' : ' (DEACTIVED)'%><i></strong></td>
               <td>
+              <div style="display: inline-block;">
                 <div class="onoffswitch">
                   <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch<%$index%>" ng-model="user.is_active" ng-checked="user.is_active" ng-change="uc.updateUserBtn(user)">
                   <label class="onoffswitch-label" for="myonoffswitch<%$index%>"></label>
                 </div>
-                <button class="btn bg-olive btn-flat margin" ng-click="uc.resetPassword(user)">Reset Password
+              </div>
+                <button class="btn btn-sm bg-olive btn-flat margin" ng-click="uc.resetPassword(user)" style="margin-top: 0;margin-bottom: 0;">Reset Password
                 </button>
                 <strong><i><%user.password_generated%></i></strong>
               </td>
