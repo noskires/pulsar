@@ -140,9 +140,10 @@ class UsersController extends Controller {
   public function generatePassword(Request $request) {
     $data = Input::post();
     $transaction = DB::transaction(function($data) use($data){
+      $randomPassword = $this->getRandomPassword();
       $user = User::where('employee_code', $data['employee_code'])->first();
-      $user->password = bcrypt($this->getRandomPassword());
-      $user->password_generated = $this->getRandomPassword();
+      $user->password = bcrypt($randomPassword);
+      $user->password_generated = $randomPassword;
       $user->auto_generated = true;
       $user->timestamps = true;
       $user->save();
