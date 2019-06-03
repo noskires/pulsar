@@ -215,6 +215,12 @@
                 templateUrl: 'asset.more.details.view4',
             })
 
+            .state('asset-registration', {
+                url: '/asset/more-details/:assetCode/registration/:assetRegistrationCode',
+                controller: 'AssetMoreDetailsCtrl as amdc',
+                templateUrl: 'asset.more.details.view',
+            })
+
             //11-18-2018
 
             .state('asset-category-create', {

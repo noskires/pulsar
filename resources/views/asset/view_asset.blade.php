@@ -341,6 +341,65 @@
 
   </div>
 
+
+
+<!-- MODAL-REGISTRATION HERE HERE -->
+
+<div class="modal fade" id="modal-registration">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-plus"></li> Add Asset Registration Details</h4>
+      </div>
+    <form class="form-horizontal" id="" ng-model="assetRegistrationDetails">
+      <div class="modal-body"><br>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Date of Renewal</label>
+          <div class="col-sm-8">
+          <div class="input-group date">
+          <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+          <input type="text" class="form-control pull-right" id="datepicker-renewal" datepicker required="" ng-model="assetRegistrationDetails.registrationDate">
+        </div></div>
+        </div>
+        <div class="form-group">
+          <label for="rs-desc" class="col-sm-3 control-label">Status of Renewal</label>
+          <div class="col-sm-8">
+            <label><input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck"> Completed</label>                    
+            &nbsp;&nbsp;
+            <label><input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck" checked="checked"> On-process</label>
+          </div>
+        </div>
+        <div class="form-group" id="ifYes" style="visibility:hidden">
+          <label for="controlnumber" class="col-sm-3 control-label">OR No.</label>
+          <div class="col-sm-8"><input type="text" class="form-control" id="" required=""></div>
+
+          <label for="controlnumber" class="col-sm-3 control-label">OR Date</label>
+          <div class="col-sm-8">
+            <div class="input-group date">
+            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+            <input type="text" class="form-control pull-right" id="datepicker-ordate" required="" >
+            </div>
+          </div>
+
+          <label for="controlnumber" class="col-sm-3 control-label">MV File No.</label>
+          <div class="col-sm-8"><input type="text" class="form-control" id="" required=""></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" ng-click="amdc.addAssetRegistrationBtn(assetRegistrationDetails)">Submit</button>
+      </div>
+    </form>
+
+    
+    </div>
+  </div>
+</div>
+
+<!-- MODAL-REGISTRATION HERE HERE -->
+
 <!-- MODAL-DOCS HERE HERE -->
 <div class="modal fade" id="modal-docs">
   <div class="modal-dialog">
@@ -471,10 +530,9 @@
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
+  
 </div>
 <!-- /.modal -->
-
-
 
 <!-- MODAL-EDIT HERE HERE -->
   <script type="text/ng-template" id="assetEditTpl.modal">
@@ -576,7 +634,6 @@
                 <label for="controlnumber" class="col-sm-3 control-label">Department Name</label>
                 <div class="col-sm-6"><input type="text" class="form-control" ng-model="vm.data.org_name"></div>
               </div>
-        
               <div class="form-group col-sm-12">
                 <label class="col-sm-1 control-label">Region</label>
                 <div class="col-sm-5">
@@ -637,5 +694,7 @@
 <!-- /.modal -->
 
 <!-- registration -->
+
+
 
 

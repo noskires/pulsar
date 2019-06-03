@@ -92,6 +92,7 @@
 <script src="{{URL::to('js/services/roleItems.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/modules.srvcs.js')}}"></script> 
 <script src="{{URL::to('js/services/users.srvcs.js')}}"></script> 
+<script src="{{URL::to('js/services/assetRegistrations.srvcs.js')}}"></script> 
 
 <!-- Controllers -->
 

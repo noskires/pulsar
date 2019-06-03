@@ -356,8 +356,6 @@
                   <input type="text" class="form-control" id="" required="" ng-model="vm.data.barangay">
                 </div>
               </div>
-
-
             </div>
             <!-- /.box-body -->
         </form>
@@ -383,5 +381,3 @@
 </div>
 </script>
 <!-- /.modal -->
-
-

@@ -71,7 +71,7 @@
               <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
               data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
               data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
-              data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="joc.createJoBtn(jo.details)">CONFIRMATION</button>
+              data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="joc.createJoBtn(jo.details)">CONFIRMATION 2</button>
               </div>
             </div>
           </div>
