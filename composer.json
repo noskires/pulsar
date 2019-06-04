@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
+        "php": "~7.0.0",
         "barryvdh/laravel-dompdf": "^0.8.3",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
@@ -36,8 +36,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
