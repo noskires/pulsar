@@ -41,16 +41,17 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            // 'host' => env('DB_HOST', '127.0.0.1'),
-            'host' => env('DB_HOST', 'remotemysql.com'),
+            'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            /* 'database' => env('DB_DATABASE', 'forge'),
+            'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''), */
-            'database' => env('DB_DATABASE', 'TT7uaBVpWX'),
-            'username' => env('DB_USERNAME', 'TT7uaBVpWX'),
-            'password' => env('DB_PASSWORD', 'EZ01QCN7Lx'),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'password' => env('DB_PASSWORD', ''),
+            // Uses config for cloud credentials.
+            // 'host' => env('DB_HOST', 'remotemysql.com'),
+            // 'database' => env('DB_DATABASE', 'TT7uaBVpWX'),
+            // 'username' => env('DB_USERNAME', 'TT7uaBVpWX'),
+            // 'password' => env('DB_PASSWORD', 'EZ01QCN7Lx'),
+            // 'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
