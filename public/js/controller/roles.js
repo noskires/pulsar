@@ -62,13 +62,13 @@
             })
         }
 
-
         vm.modules = [
             'Assets',
             'Projects',
             'Employees',
             'Finance'
         ];
+        
         vm.createRoleBtn = function (data) {
             RolesSrvcs.save(data).then(function (response) {
                 if (response.data.status == 200) {

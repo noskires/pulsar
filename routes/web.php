@@ -77,6 +77,7 @@ Route::group(['middleware' => 'checkModules:MODULE-001'], function () {
     Route::get('/asset/more-details4/{asset_code}','AssetsController@index');
 
     Route::get('/asset/more-details/{asset_code}/registration/{asset_registration_code}','AssetsController@index');
+    Route::get('/asset/more-details/{asset_code}/registration/new','AssetsController@index');
 
     Route::get('/asset-category/new','Asset\AssetCategoriesController@index');
     Route::get('/asset-categories/list','Asset\AssetCategoriesController@index');

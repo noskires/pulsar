@@ -96,7 +96,7 @@
 
     <li class="treeview" ng-if="checkModuleAccess('MODULE-008')">
       <a href="#" ui-sref="list-jo2">
-        <i class="fa fa-shopping-basket"></i> <span>Job Order</span>
+        <i class="fa fa-folder-open"></i> <span>Job Order</span>
         <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span> -->
@@ -109,7 +109,7 @@
 
     <li class="treeview" ng-if="checkModuleAccess('MODULE-009')">
       <a href="#" ui-sref="list-utilization">
-        <i class="fa fa-shopping-basket"></i> <span>Utilization</span>
+        <i class="fa fa-bar-chart"></i> <span>Utilization</span>
         <!-- <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span> -->
@@ -133,30 +133,14 @@
       </ul> -->
     </li>
     <li class="header">DATABASE</li>
-    <li class="treeview">
-      <a href="#" ng-if="checkModuleAccess('MODULE-001')">
-        <i class="fa fa-tags"></i> <span>Assets</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="#" ui-sref="asset-list-equipments"><i class="fa fa-list-ul"></i> List of Assets</a></li>
-        <li><a href="#" ui-sref="asset-create"><i class="fa fa-plus"></i> Add an Asset</a></li>
-        <li><a href="#" ui-sref="list-ares"><i class="fa fa-file-text-o"></i> ARE </a></li>
-      </ul>
+    <li class="treeview"  ng-if="checkModuleAccess('MODULE-001')">
+      <li><a href="#" ui-sref="asset-list-equipments"><i class="fa fa-tags"></i> Assets</a></li>
+    </li>
+    <li class="treeview"  ng-if="checkModuleAccess('MODULE-001')">
+    <li><a href="#" ui-sref="list-ares"><i class="fa fa-file-text-o"></i> ARE </a></li>
     </li>
     <li class="treeview" ng-if="checkModuleAccess('MODULE-011')">
-      <a href="#">
-        <i class="fa fa-briefcase"></i> <span>Supplies</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="#" ui-sref="list-supply"><i class="fa fa-list-ul"></i> List of Supplies</a></li>
-        <li><a href="#" ui-sref="supply-create"><i class="fa fa-plus"></i> Add Supply</a></li>
-      </ul>
+        <li><a href="#" ui-sref="list-supply"><i class="fa fa-briefcase"></i> Supplies</a></li>
     </li>
     <li class="treeview" ng-if="checkModuleAccess('MODULE-012')">
       <a href="#" ui-sref="list-receipt2">

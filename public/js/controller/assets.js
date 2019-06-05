@@ -10,8 +10,8 @@
         .controller('AssetsEditModalInstanceCtrl', AssetsEditModalInstanceCtrl)
         .controller('AssetRegistrationAddModalInstanceCtrl', AssetRegistrationAddModalInstanceCtrl)
 
-    AssetsCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
-    function AssetsCtrl($stateParams, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, $window, $uibModal) {
+    AssetsCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'AssetRegistrationsSrvcs', 'AssetCategoriesSrvcs', '$window', '$uibModal'];
+    function AssetsCtrl($stateParams, AssetsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, AssetRegistrationsSrvcs, AssetCategoriesSrvcs, $window, $uibModal) {
         var vm = this;
         var data = {};
 
@@ -76,8 +76,28 @@
             }
         }, function () { alert('Bad Request!!!') })
 
+        AssetCategoriesSrvcs.AssetCategories({ assetCategoryCode: '' }).then(function (response) {
+            if (response.data.status == 200) {
+                vm.asset_categories = response.data.data;
+                console.log(vm.asset_categories)
+            }
+        }, function () { alert('Bad Request!!!') })
+
+        vm.submit = function (data) {
+            AssetsSrvcs.save(data).then(function (response) {
+                if (response.data.status == 200) {
+                    alert(response.data.message);
+                    // $state.go('asset-list-equipments');
+                    vm.routeTo('asset/list-equipments')
+                }
+                else {
+                    alert(response.data.message);
+                }
+                console.log(response.data);
+            });
+        };
+
         vm.exportAssets = function () {
-            alert('a')
             AssetsSrvcs.exportAssets().then(function (response) {
                 // vm.routeTo('api/v1/export-assets')
             }, function () { alert('Bad Request!!!') })
@@ -201,19 +221,26 @@
         };
     }
 
-    AssetMoreDetailsCtrl.$inject = ['$stateParams', 'AssetsSrvcs', 'AssetPhotosSrvcs', 'MaintenanceSrvcs', 'WarrantiesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'InsuranceSrvcs', 'JobOrdersSrvcs', 'AssetRegistrationsSrvcs', '$window', '$uibModal'];
-    function AssetMoreDetailsCtrl($stateParams, AssetsSrvcs, AssetPhotosSrvcs, MaintenanceSrvcs, WarrantiesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, InsuranceSrvcs, JobOrdersSrvcs, AssetRegistrationsSrvcs, $window, $uibModal) {
+    AssetMoreDetailsCtrl.$inject = ['$state', '$stateParams', 'AssetsSrvcs', 'AssetPhotosSrvcs', 'MaintenanceSrvcs', 'WarrantiesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'InsuranceSrvcs', 'JobOrdersSrvcs', 'AssetRegistrationsSrvcs', '$window', '$uibModal'];
+    function AssetMoreDetailsCtrl($state, $stateParams, AssetsSrvcs, AssetPhotosSrvcs, MaintenanceSrvcs, WarrantiesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, InsuranceSrvcs, JobOrdersSrvcs, AssetRegistrationsSrvcs, $window, $uibModal) {
         var vm = this;
         var data = {};
+
+        vm.attribute_tabs = [
+            {name: "Maintenance History", status: ""},
+            {name: "Events", status: ""},
+            {name: "Registration Details", status: "active"},
+            {name: "Insurance", status: ""},
+            {name: "Documents", status: ""}
+        ]
+        
+        console.log(vm.attribute_tabs)
 
         vm.messageAlert = function (message) {
             alert(message);
         }
 
-
-
         vm.assetCode = $stateParams.assetCode;
-
         vm.editAsset = function (argument) {
 
             vm.assetsDetails = {
@@ -258,6 +285,7 @@
                 isAll: 1,
                 withActiveAre: 2
             }
+
             AssetsSrvcs.assets(vm.assetsDetails).then(function (response) {
                 if (response.data.status == 200) {
                     vm.asset = response.data.data[0];
@@ -290,31 +318,12 @@
             }, function () { alert('Bad Request!!!') })
         }
 
-
-        //asset registration 
-        // alert($stateParams.assetRegistrationCode)
-        // if ($stateParams.assetRegistrationCode) {
-
-        //     vm.assetRegistrationDetails = {
-        //         registrationCode: $stateParams.assetRegistrationCode
-        //     }
-
-        //     AssetRegistrationsSrvcs.save(vm.assetRegistrationDetails).then(function (response) {
-        //         if (response.data.status == 200) {
-        //             vm.registration = response.data.data[0];
-        //             console.log(vm.registration)
-        //         }
-        //     }, function () { alert('Bad Request!!!') })
-
-        //     //changed
-        //     AssetRegistrationsSrvcs.list({ assetRegistrationCode: $stateParams.assetRegistrationCode }).then(function (response) {
-        //         if (response.data.status == 200) {
-        //             vm.assetRegistrations = response.data.data;
-        //             console.log(vm.assetRegistrations)
-        //         }
-        //     }, function () { alert('Bad Request!!!') })
-
-        // }
+        AssetRegistrationsSrvcs.list({ assetRegistrationCode: '', assetCode: $stateParams.asset_code }).then(function (response) {
+            if (response.data.status == 200) {
+                vm.assetRegistrations = response.data.data;
+                console.log(vm.assetRegistrations)
+            }
+        }, function () { alert('Bad Request!!!') })
 
         JobOrdersSrvcs.jobOrders({ joCode: '', joStatus: '', assetCode: $stateParams.assetCode }).then(function (response) {
             if (response.data.status == 200) {
@@ -365,8 +374,7 @@
         }
 
         vm.addAssetEventBtn = function (data) {
-            data['asset_tag'] = vm.tag;
-            data['asset_code'] = vm.tag;
+            data['asset_code'] = $stateParams.assetCode;
             console.log(data)
             AssetsSrvcs.saveAssetEvent(data).then(function (response) {
                 if (response.data.status == 200) {
@@ -383,26 +391,33 @@
 
         vm.addAssetRegistrationBtn = function (data) {
 
+            data['asset_code'] = $stateParams.assetCode;
             console.log(data)
+            AssetRegistrationsSrvcs.save(data).then(function (response) {
+                if (response.data.status == 200) {
+                    alert(response.data.message);
+                    $state.go('asset-more-details', { assetCode:$stateParams.assetCode});
 
-            // data['asset_tag'] = vm.tag;
-            // data['asset_code'] = vm.tag;
-            // console.log(data)
-            // AssetsSrvcs.saveAssetEvent(data).then(function (response) {
-            //     if (response.data.status == 200) {
-            //         alert(response.data.message);
-            //         vm.ok()
-            //         // $state.go('asset-list-equipments');
-            //     }
-            //     else {
-            //         alert(response.data.message);
-            //     }
-            //     console.log(response.data);
-            // });
+                    vm.registrationDetails = { 
+                        assetRegistrationCode: '',
+                        assetCode: $stateParams.asset_code
+                    }
+
+                    AssetRegistrationsSrvcs.list(vm.registrationDetails).then(function (response) {
+                        if (response.data.status == 200) {
+                            vm.assetRegistrations = response.data.data;
+                            console.log(vm.assetRegistrations)
+                        }
+                    }, function () { alert('Bad Request!!!') })
+
+                    vm.ok()
+                }
+                else {
+                    alert(response.data.message);
+                }
+                console.log(response.data);
+            });
         }
-
-
-
 
         vm.routeTo = function (route) {
             $window.location.href = route;
@@ -445,6 +460,8 @@
     AssetRegistrationAddModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'AssetsSrvcs', 'WarrantiesSrvcs', 'formData', '$window'];
     function AssetRegistrationAddModalInstanceCtrl($stateParams, $uibModalInstance, AssetsSrvcs, WarrantiesSrvcs, formData, $window) {
         var vm = this;
+
+        alert($stateParams.assetCode)
         console.log(vm.formData = formData.asset)
         vm.updateAsset = function (data) {
             console.log(data)

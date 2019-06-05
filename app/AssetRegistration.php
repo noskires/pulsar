@@ -11,6 +11,6 @@ class AssetRegistration extends Model implements AudtitableContract
 {
     use Auditable;
 
-    protected $primaryKey = 'asset_rgstn_code';
+    protected $primaryKey = 'asset_reg_code';
     protected $table = "asset_registrations";
 }

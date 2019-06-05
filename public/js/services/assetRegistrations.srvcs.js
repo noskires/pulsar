@@ -7,11 +7,11 @@
     AssetRegistrationsSrvcs.$inject = ['$http'];
     function AssetRegistrationsSrvcs($http) {
         return {
-            funds: function (data) {
+            list: function (data) {
                 return $http({
                     method: 'GET',
                     data: data,
-                    url: '/api/v1/asset-registrations?registrationCode=' + data.registrationCode,
+                    url: '/api/v1/asset-registrations?assetRegistrationCode='+data.assetRegistrationCode+'&assetCode'+data.assetCode,
                     headers: { 'Content-Type': 'application/json' }
                 })
             },

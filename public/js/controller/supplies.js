@@ -5,8 +5,8 @@
         .controller('SuppliesCtrl', SuppliesCtrl)
         .controller('SuppliesModalInstanceCtrl', SuppliesModalInstanceCtrl)
 
-        SuppliesCtrl.$inject = ['$stateParams', 'SuppliesSrvcs', 'SupplyCategoriesSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function SuppliesCtrl($stateParams, SuppliesSrvcs, SupplyCategoriesSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        SuppliesCtrl.$inject = ['$state', '$stateParams', 'SuppliesSrvcs', 'SupplyCategoriesSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function SuppliesCtrl($state, $stateParams, SuppliesSrvcs, SupplyCategoriesSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -98,7 +98,8 @@
                 SuppliesSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        vm.routeTo('supply/new');
+                        // $state.go('list-supply')
+                        vm.routeTo('supply/list');
                     }
                     else {
                         alert(response.data.message);

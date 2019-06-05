@@ -215,13 +215,17 @@
                 templateUrl: 'asset.more.details.view4',
             })
 
-            .state('asset-registration', {
+            .state('asset-registration-edit', {
                 url: '/asset/more-details/:assetCode/registration/:assetRegistrationCode',
-                controller: 'AssetMoreDetailsCtrl as amdc',
+                controller: 'AssetRegistrationCtrl as amdc',
                 templateUrl: 'asset.more.details.view',
             })
 
-            //11-18-2018
+            .state('asset-registration-create', {
+                url: '/asset/more-details/:assetCode/registration/new',
+                controller: 'AssetRegistrationCtrl as amdc',
+                templateUrl: 'asset.more.details.view',
+            })
 
             .state('asset-category-create', {
                 url: '/asset-category/:assetCategoryRequest',

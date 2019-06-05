@@ -123,4 +123,5 @@
 <script src="{{URL::to('js/controller/roles.js')}}"></script> 
 <script src="{{URL::to('js/controller/users.js')}}"></script> 
 <script src="{{URL::to('js/controller/resetPassword.js')}}"></script> 
+<script src="{{URL::to('js/controller/assetRegistrations.js')}}"></script> 
 @yield('additionalScripts')

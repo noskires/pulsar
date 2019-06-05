@@ -23,28 +23,13 @@ class AssetRegistrationsController extends Controller {
 	public function assetRgstns(Request $request){
 
 		$data = array(
-			'assetRgstnCode'=>$request->input('assetRgstnCode'),
+			'assetRegistrationCode'=>$request->input('assetRegistrationCode'),
 		);
 
 		$assetRgstn = DB::table('asset_registrations as asset_registration');
-                    // ->select(
-                    //   'i.insurance_id',
-                    //   'i.insurance_code',
-                    //   'i.insurance_co',
-                    //   'i.description',
-                    //   'i.policy_number',
-                    //   'i.insurance_coverage',
-                    //   DB::raw('DATE_FORMAT(i.date_issued, "%m/%d/%Y") as date_issued'),
-                    //   DB::raw('DATE_FORMAT(i.expiration_date, "%m/%d/%Y") as expiration_date'),
-                    //   'i.applicable_premium',
-                    //   'i.insurance_agent',
-                    //   'i.email',
-                    //   'i.mobile_number', 
-                    //   'i.telephone_number'
-                    // );
 
-		if ($data['assetRgstnCode']){
-			$assetRgstn = $assetRgstn->where('asset_rgstn_code', $data['assetRgstnCode']);
+		if ($data['assetRegistrationCode']){
+			$assetRgstn = $assetRgstn->where('asset_reg_code', $data['assetRegistrationCode']);
 		}
 
 		$assetRgstn = $assetRgstn->get();
@@ -62,25 +47,20 @@ class AssetRegistrationsController extends Controller {
 
 		$transaction = DB::transaction(function($data) use($data){
 		try{
-				$insurance = new Insurance;
+				$assetRgstn = new AssetRegistration;
 
-			    $insuranceCode = (str_pad(($insurance->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+			  $assetRegCode = (str_pad(($assetRgstn->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
 			    ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
-				$insurance->insurance_code = "INSU-".date('YmdHis', strtotime(Carbon::now('Asia/Manila'))).'-'.$insuranceCode;
-				$insurance->insurance_co = $data['insurance_co'];
-				$insurance->description = $data['description'];
-				$insurance->policy_number = $data['policy_number'];
-				$insurance->insurance_coverage = $data['insurance_coverage'];
-				$insurance->date_issued = date('Y-m-d', strtotime($data['date_issued'])); 
-				$insurance->expiration_date = date('Y-m-d', strtotime($data['expiration_date']));
-				$insurance->applicable_premium = $data['applicable_premium'];
-				$insurance->insurance_agent = $data['insurance_agent'];
-				$insurance->email = $data['email'];
-				$insurance->mobile_number = $data['mobile_number'];
-				$insurance->telephone_number = $data['telephone_number'];
-				$insurance->changed_by = Auth::user()->email;
-				$insurance->save();
+				$assetRgstn->asset_reg_code = "ASSET-REG-".date('YmdHis', strtotime(Carbon::now('Asia/Manila'))).'-'.$assetRegCode;
+				$assetRgstn->renewal_date = date('Y-m-d', strtotime($data['renewal_date']));
+				$assetRgstn->renewal_status = $data['renewal_status'];
+				$assetRgstn->asset_code = $data['asset_code'];
+				// $assetRgstn->OR_number = $data['or_number'];
+				// $assetRgstn->OR_date = $data['or_date'];
+				// $assetRgstn->MV_file_number = $data['mv_file_number'];
+				$assetRgstn->changed_by = Auth::user()->email;
+				$assetRgstn->save();
 
 				return response()->json([
 				    'status' => 200,
@@ -108,28 +88,22 @@ class AssetRegistrationsController extends Controller {
 		$transaction = DB::transaction(function($data) use($data){
 		try{
 
-
-				$bank = Insurance::where('insurance_code', $data['insurance_code'])->first();
-	            $bank->insurance_co 		= $data['insurance_co'];
-	            $bank->description 			= $data['description'];
-	            $bank->policy_number 		= $data['policy_number'];
-	            $bank->date_issued 			= date('Y-m-d', strtotime($data['date_issued']));
-	            $bank->insurance_coverage 	= $data['insurance_coverage'];
-	            $bank->expiration_date 		= date('Y-m-d', strtotime($data['expiration_date']));
-	            $bank->applicable_premium 	= $data['applicable_premium'];
-	            $bank->insurance_agent 		= $data['insurance_agent'];
-	            $bank->email 				= $data['email'];
-	            $bank->mobile_number 		= $data['mobile_number'];
-	            $bank->telephone_number 	= $data['telephone_number'];
-	            $bank->changed_by 			= Auth::user()->email;
-	            $bank->timestamps 			= true;
-	            $bank->save();
+				$registration = AssetRegistration::where("asset_reg_code", $data["asset_reg_code"])->first();
+				$registration->renewal_date 		= date('Y-m-d', strtotime($data['renewal_date']));
+				$registration->renewal_status 	= $data['renewal_status'];
+				$registration->asset_code 			= $data['asset_code'];
+				$registration->OR_number 				= $data['OR_number'];
+				$registration->OR_date 					= date('Y-m-d', strtotime($data['OR_date']));
+				$registration->MV_file_number 	= $data['MV_file_number'];
+				$registration->changed_by 			= Auth::user()->email;
+				$registration->save();
 
 				return response()->json([
 					'status' => 200,
 					'data' => 'null',
 					'message' => 'Successfully saved.'
 				]);
+
 			}
 			catch (\Exception $e)
 			{
@@ -144,105 +118,6 @@ class AssetRegistrationsController extends Controller {
 		return $transaction;
 	}
 
-	public function insuranceItems(Request $request){
-
-	    $data = array(
-	      'insuranceCode'=>$request->input('insuranceCode'),
-	      'insuranceItemCode'=>$request->input('insuranceItemCode'),
-	      'assetCode'=>$request->input('assetCode'),
-	      'insuranceItemStatus'=>$request->input('insuranceItemStatus'),
-	    );
-
-	    $insuranceItems = DB::table('assets as a')
-	              ->select(
-	                'a.asset_code',
-	                'a.code',
-	                'a.name',
-	                'a.model',
-	                'a.brand',
-	                'a.category',
-	                'ii.insurance_item_code',
-	                'i.insurance_code',
-	                'i.insurance_co',
-	                'i.description',
-	                'i.insurance_agent',
-	                DB::raw('DATE_FORMAT(i.date_issued, "%m/%d/%Y") as date_issued'),
-                    DB::raw('DATE_FORMAT(i.expiration_date, "%m/%d/%Y") as expiration_date'),
-	                'i.insurance_coverage'
-	              )
-	            ->leftjoin('insurance_items as ii','ii.asset_code','=','a.asset_code')
-	            ->leftjoin('insurance as i','i.insurance_code','=','ii.insurance_code');
-
-	    if ($data['insuranceCode']){
-	      $insuranceItems = $insuranceItems->where('ii.insurance_code', $data['insuranceCode']);
-	    }
-
-	    if ($data['insuranceItemCode']){
-	      $insuranceItems = $insuranceItems->where('ii.insurance_item_code', $data['insuranceItemCode']);
-	    }
-
-	    if ($data['assetCode']){
-	      $insuranceItems = $insuranceItems->where('ii.asset_code', $data['assetCode']);
-	    }
-
-	    if ($data['insuranceItemStatus']==1){
-	      $insuranceItems = $insuranceItems->whereNotNull('ii.insurance_item_code');
-	    }
-
-	    if ($data['insuranceItemStatus']==2){
-	      $insuranceItems = $insuranceItems->whereNull('ii.insurance_item_code');
-	    }
-
-	    $insuranceItems = $insuranceItems->get();
-
-	    return response()-> json([
-	      'status'=>200,
-	      'data'=>$insuranceItems,
-	      'message'=>''
-	    ]);
-
-	}
-
-	public function save_insurance_items(Request $request){
-
-	    $data = Input::post();
-
-	    $transaction = DB::transaction(function($data) use($data){
-	    try{
-
-	        // for($i = 0; $i < count($data); $i++) {
-			$insurance            = new InsuranceItem;
-
-			$insuranceItemCode = (str_pad(($insurance->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-			->get()->count() + 1), 4, "0", STR_PAD_LEFT));
-			$insurance->insurance_item_code = "INSUITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$insuranceItemCode;
-			$insurance->insurance_code = $data['insurance_code'];
-			$insurance->asset_code     = $data['asset_code'];
-			$insurance->changed_by = Auth::user()->email;
-        	$insurance->timestamps = true;
-			$insurance->save(); // fixed typo
-
-	        // }
-
-	        return response()->json([
-	            'status' => 200,
-	            'data' => 'null',
-	            'message' => 'Successfully saved.'
-	        ]);
-
-	      }
-	      catch (\Exception $e) 
-	      {
-	          return response()->json([
-	            'status' => 500,
-	            'data' => 'null',
-	            'message' => 'Error, please try again!'
-	        ]);
-	      }
-	    });
-
-   	 	return $transaction;
-  	}
 
   	public function remove_insurance_items(Request $request){
 
