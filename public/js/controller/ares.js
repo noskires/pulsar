@@ -254,6 +254,5 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             };
-
         }
 })();
