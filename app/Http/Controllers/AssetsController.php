@@ -340,7 +340,7 @@ class AssetsController extends Controller {
           $assetEvent = new AssetEvent;
           $assetEvent->asset_event_code = 1111;
           $assetEvent->event_date = "2018-01-01";
-          $assetEvent->asset_tag = $data['tag'];
+          // $assetEvent->asset_tag = $data['tag'];
           $assetEvent->status = "Assigned";
           $assetEvent->remarks = "Assigned";
           $assetEvent->save();
@@ -426,7 +426,6 @@ class AssetsController extends Controller {
         $data['status']         = $request->input('status');
         $data['event_date']     = date('Y-m-d', strtotime($request->input('event_date')));
         $data['remarks']        = $request->input('remarks');
-        $data['asset_tag']      = $request->input('asset_tag');
         $data['asset_code']     = $request->input('asset_code');
        
         $transaction = DB::transaction(function($data) use($data){
@@ -435,7 +434,7 @@ class AssetsController extends Controller {
               $assetEvent = new AssetEvent;
               $assetEvent->asset_event_code = "AEVNT-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')));
               $assetEvent->status           = $data['status'];
-              $assetEvent->asset_tag        = $data['asset_tag'];
+              $assetEvent->asset_code        = $data['asset_code'];
               $assetEvent->event_date       = date('Y-m-d', strtotime($data['event_date']));
               $assetEvent->remarks          = $data['remarks'];
               $assetEvent->changed_by       = Auth::user()->email;

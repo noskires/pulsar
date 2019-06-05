@@ -47,7 +47,6 @@
 
             if($stateParams.assetCategoryRequest == "new")
             {
-
                 var modalInstance = $uibModal.open({
                     controller:'AssetCategoryModalInstanceCtrl',
                     templateUrl:'assetCategoryNew.modal',
