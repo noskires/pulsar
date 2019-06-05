@@ -23,6 +23,7 @@
                 {'name': "Insurance", 'status': ""},
                 {'name': "Documents", 'status': ""}
             ]
+            
             console.log(vm.attribute_tabs)
   
             if ($stateParams.assetCode) {
