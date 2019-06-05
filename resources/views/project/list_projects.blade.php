@@ -304,11 +304,11 @@ $('.select2').select2();
                       </tr>
                       <tr>
                         <td>Department</td>
-                        <td>Pulsar Construction</td>
+                        <td><%vm.formData.department_name%></td>
                       </tr>
                       <tr>
                         <td>Division</td>
-                        <td>Construction</td>
+                        <td><%vm.formData.division_name%></td>
                       </tr>
                       <tr>
                         <td>Date Assigned</td>

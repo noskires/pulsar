@@ -32,7 +32,7 @@
               <div class="col-sm-3">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="datepicker2" required="" ng-model="rac.risDetails.date_needed" datepicker autocomplete="off" readonly="">
+              <input type="text" class="form-control pull-right" id="datepicker2" required="" ng-model="rac.risDetails.date_needed" datepicker2 autocomplete="off" readonly="">
             </div></div>
             </div>
             <!-- <div class="form-group col-sm-12">

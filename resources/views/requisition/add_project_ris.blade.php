@@ -27,7 +27,7 @@
               <div class="col-sm-9"><input type="text" class="form-control" id="controlnumber" placeholder="RS-03102018-1" disabled></div>
             </div> -->
             <div class="form-group">
-              <label class="col-sm-3 control-label">Request Date</label>
+              <label class="col-sm-3 control-label">Request Date 1</label>
               <div class="col-sm-9">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
