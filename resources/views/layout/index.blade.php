@@ -325,6 +325,11 @@
   @include('auth.passwords.reset2')
 </script>
 
+<!-- Employee Profile -->
+<script type="text/ng-template" id="employee.profile">
+  @include('employee.profile')
+</script>
+
 <!-- Shared Modal -->
 
 <script type="text/ng-template" id="shared.modal">

@@ -715,6 +715,11 @@
                 controller: 'ResetPasswordCtrl as rp',
                 templateUrl: 'auth.passwords.reset2'
             })
+            .state('employee-profile', {
+                url: '/profile',
+                controller: 'EmployeeProfileCtrl as ep',
+                templateUrl: 'employee.profile',
+            })
 
         $urlRouterProvider.otherwise('/index');
 
