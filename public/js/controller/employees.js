@@ -231,6 +231,10 @@
 
     function EmployeeProfileCtrl($state, $scope, UsersSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal) {
         const vm = this;
+        vm.tabs = {
+            employee_info: true,
+            setting: false
+        }
 
         vm.getUser = function () {
             return new Promise(resolve => {
@@ -269,7 +273,15 @@
                 });
             });
         };
+
         vm.init();
+
+        vm.tabSelect = (tabCode) => {
+            for (const tab in vm.tabs) {
+                vm.tabs[tab] = false;
+            }
+            vm.tabs[tabCode] = true;
+        };
     }
 
 

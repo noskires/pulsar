@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-users"> </span> Profile</h1>
-    <p>Manage employee access accounts.</p>
+    <p>Viewing of personal information & account setting.</p>
   <ol class="breadcrumb">
     <li><a href="../../index.html"><i class="fa fa-th"></i> Dashboard</a></li>
   </ol>
@@ -14,13 +14,13 @@
         <!-- Profile Image -->
         <div class="box box-primary">
         <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="assets/dist/img/dumptruck.jpg" style="width:70%;" alt="User profile picture">
+            <img class="profile-user-img img-responsive img-circle" src="assets/dist/img/user2-160x160.jpg" style="width:70%;" alt="User profile picture">
             <br>
             <h3 class="profile-username text-center" ng-bind="ep.employee.employee_name"></h3>
             <p class="text-muted text-center"><%ep.employee.employee_code%> | <%ep.employee.role_name%></p>
             <p class="text-muted text-center"><%ep.employee.position_text%></p>
             <br>
-            <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button>
+            <!-- <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button> -->
         </div>
         <!-- /.box-body -->
         </div>
@@ -31,11 +31,11 @@
     <div class="col-md-9">
         <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#activity" data-toggle="tab">Employee Information</a></li>
-            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            <li class="active"><a href="" data-toggle="tab" ng-click="ep.tabSelect('employee_info')">Employee Information</a></li>
+            <li><a href="" data-toggle="tab" ng-click="ep.tabSelect('setting')">Settings</a></li>
         </ul>
         <div class="tab-content">
-            <div class="active tab-pane" id="activity">
+            <div class="tab-pane" ng-class="{'active': ep.tabs.employee_info}">
                 <form class="form-horizontal">
                     <div class="box-body">
                         <div class="form-group col-sm-12">
@@ -178,61 +178,60 @@
             </div>
             <!-- /.tab-pane -->
 
-            <div class="tab-pane" id="settings">
-            <br>
-            <form class="form-horizontal">
-                <div class="form-group">
-                <label class="col-sm-2 control-label"><h4>Upload Profile Picture</h4></label>
-                </div>
-                <div class="form-group">
-                <label for="picture" class="col-sm-2 control-label">Select Picture</label>
+            <div class="tab-pane" ng-class="{'active': ep.tabs.setting}">
+                <br>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label"><h4>Upload Profile Picture</h4></label>
+                    </div>
+                    <div class="form-group">
+                    <label for="picture" class="col-sm-2 control-label">Select Picture</label>
 
-                <div class="col-sm-10">
-                    <input id="picture" type="file" name="pic" accept="image/*">
-                </div>
-                </div>
-                <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Uplaod</button>
-                </div>
-                </div>
+                    <div class="col-sm-10">
+                        <input id="picture" type="file" name="pic" accept="image/*">
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Uplaod</button>
+                    </div>
+                    </div>
 
-                <div class="form-group col-sm-12">
-                <hr style="border-color:#e1e1e1;border-width:1px 0;">
-                </div>
+                    <div class="form-group col-sm-12">
+                    <hr style="border-color:#e1e1e1;border-width:1px 0;">
+                    </div>
 
-                <div class="form-group">
-                <label class="col-sm-2 control-label"><h4>Change Password</h4></label>
-                </div>
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label"><h4>Change Password</h4></label>
+                    </div>
 
-                <div class="form-group">
-                <label for="inputPword" class="col-sm-2 control-label">Current Password</label>
+                    <div class="form-group">
+                    <label for="inputPword" class="col-sm-2 control-label">Current Password</label>
 
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputPword" placeholder="Input current password">
-                </div>
-                </div>
-                <div class="form-group">
-                <label for="inputPword2" class="col-sm-2 control-label">New Password</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="inputPword" placeholder="Input current password">
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label for="inputPword2" class="col-sm-2 control-label">New Password</label>
 
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputPword2" placeholder="Input new password">
-                </div>
-                </div>
-                <div class="form-group">
-                <label for="inputPword3" class="col-sm-2 control-label">Confirm New Password</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="inputPword2" placeholder="Input new password">
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label for="inputPword3" class="col-sm-2 control-label">Confirm New Password</label>
 
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputPword3" placeholder="Confirm new password">
-                </div>
-                </div>
-                <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Change Password</button>
-                </div>
-                </div>
-            </form>
-            
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="inputPword3" placeholder="Confirm new password">
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                    </div>
+                </form>
             </div>
             <!-- /.tab-pane -->
         </div>

@@ -716,7 +716,7 @@
                 templateUrl: 'auth.passwords.reset2'
             })
             .state('employee-profile', {
-                url: '/profile/:employeeCode',
+                url: '/profile',
                 controller: 'EmployeeProfileCtrl as ep',
                 templateUrl: 'employee.profile',
             })
