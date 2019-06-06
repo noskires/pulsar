@@ -47,16 +47,16 @@
                             <div class="col-sm-4"><input type="text" class="form-control" ng-model="ep.employee.employee_name" disabled></div>
                             <label for="dv-payee-type" class="col-sm-2 control-label">Gender</label>
                         <div class="radio col-sm-4">
-                            <label><input type="radio" name="optionsRadios" id="optionsRadios1" value="supplier" checked>Male</label>
+                            <label><input type="radio" name="optionsRadios" id="optionsRadios1" value="Male" ng-checked="ep.employee.gender === 'Male'">Male</label>
                             &nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" name="optionsRadios" id="optionsRadios2" value="bank">Female</label>
+                            <label><input type="radio" name="optionsRadios" id="optionsRadios2" value="Female" ng-checked="ep.employee.gender === 'Female'">Female</label>
                         </div>
                         </div>
                         <div class="form-group col-sm-12">
                             <label for="controlnumber" class="col-sm-2 control-label">Last Name</label>
                             <div class="col-sm-4"><input type="text" class="form-control" id="emp_lname" ng-model="ep.employee.lname" disabled></div>
                             <label for="controlnumber" class="col-sm-2 control-label">Suffix</label>
-                            <div class="col-sm-2"><input type="text" class="form-control" id="emp_sfx"></div>
+                            <div class="col-sm-2"><input type="text" class="form-control" id="emp_sfx" disabled></div>
                         </div>
                         <div class="form-group col-sm-12">
                             <label for="controlnumber" class="col-sm-2 control-label">First Name</label>
