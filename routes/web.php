@@ -132,6 +132,8 @@ Route::group(['middleware' => 'checkModules:MODULE-003'], function () {
     Route::get('/employee/new','EmployeesController@index');
 });
 
+Route::get('/profile/{employeeCode}','EmployeesController@index');
+
 Route::post('/api/v1/employees/save','EmployeesController@save');
 Route::post('/api/v1/employee/update','EmployeesController@update');
 Route::get('/api/v1/employees','EmployeesController@employees');
