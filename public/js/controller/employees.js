@@ -264,6 +264,16 @@
             });
         };
 
+        vm.resetPassword = function (data) {
+            return new Promise(resolve => {
+                UsersSrvcs.resetPassword(data).then(function (response) {
+                    resolve(response.data);
+                }, function () {
+                    alert('Bad Request!!!')
+                })
+            });
+        };
+
         vm.init = () => {
             vm.getUser().then(async (user) => {
                 const data = await vm.getEmployee(user[0].employee_code);
@@ -281,6 +291,21 @@
                 vm.tabs[tab] = false;
             }
             vm.tabs[tabCode] = true;
+        };
+
+        vm.changePassword = async function (data) {
+            const response = await vm.resetPassword(data);
+            $scope.$apply(() => {
+                vm.resetResponse = {
+                    ...response,
+                    hasError: (response.status) ? response.status != 200 : false
+                };
+                if (!vm.resetResponse.hasError) {
+                    alert(vm.response.message);
+                    $window.location.href = '/logout';
+                }
+            });
+
         };
     }
 
