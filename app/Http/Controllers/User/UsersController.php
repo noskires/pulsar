@@ -170,7 +170,7 @@ class UsersController extends Controller {
     }
 
     $transaction = DB::transaction(function($data) use($data){
-      $user = User::where('employee_code', $data['employee_code'])->first();
+      $user = User::where('employee_code', Auth::user()->employee_code)->first();
       $user->password = bcrypt($data['password']);
       $user->auto_generated = false;
       $user->timestamps = true;

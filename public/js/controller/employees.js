@@ -300,12 +300,11 @@
                     ...response,
                     hasError: (response.status) ? response.status != 200 : false
                 };
-                if (!vm.resetResponse.hasError) {
-                    alert(vm.response.message);
-                    $window.location.href = '/logout';
-                }
             });
-
+            if (!vm.resetResponse.hasError) {
+                alert(vm.resetResponse.message);
+                $window.location.href = '/logout';
+            }
         };
     }
 
