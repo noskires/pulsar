@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/supplies?supplyCode='+data.supplyCode+'&quantityStatus='+data.quantityStatus+'&supplyCategory='+data.supplyCategory+'&isRepair='+data.isRepair,
+                        url: '/api/v1/supplies?supplyCode='+data.supplyCode+'&quantityStatus='+data.quantityStatus+'&supplyCategory='+data.supplyCategory+'&isRepair='+data.isRepair+'&reOrderLevelOutofSupply='+data.reOrderLevelOutofSupply+'&supplyCategoryCode='+data.supplyCategoryCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

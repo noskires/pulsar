@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="{{URL::to('bower_components/baguettebox.js/dist/baguetteBox.css')}}"> 
 <link rel="stylesheet" href="{{URL::to('bower_components/baguettebox.js/dist/gallery-clean.css')}}"> 
 
+<link rel="stylesheet" href="{{URL::to('bower_components/angular-ui-select/dist/select.css')}}"> 
+
 <!-- <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"> -->
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

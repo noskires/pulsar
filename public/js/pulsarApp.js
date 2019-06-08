@@ -2,10 +2,45 @@
     'use strict';
     angular
         // .module('pulsarApp',[])
-        .module('pulsarApp', ['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber', 'ui.mask', 'ui.utils.masks', 'checklist-model', 'ngFileUpload'])
+
+        .module('pulsarApp', ['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber', 'ui.mask', 'ui.utils.masks', 'checklist-model', 'ngFileUpload', 'ui.select'])
+
         .controller('MainCtrl', MainCtrl)
         .config(Config)
         // .directive('myDate', dateInput)
+
+        .filter('propsFilter', function() {
+            return function(items, props) {
+              var out = [];
+          
+              if (angular.isArray(items)) {
+                var keys = Object.keys(props);
+          
+                items.forEach(function(item) {
+                  var itemMatches = false;
+          
+                  for (var i = 0; i < keys.length; i++) {
+                    var prop = keys[i];
+                    var text = props[prop].toLowerCase();
+                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                      itemMatches = true;
+                      break;
+                    }
+                  }
+          
+                  if (itemMatches) {
+                    out.push(item);
+                  }
+                });
+              } else {
+                // Let the output be the input untouched
+                out = items;
+              }
+          
+              return out;
+            };
+          })
+
         .directive("datepicker", function () {
             return {
                 restrict: "A",
@@ -83,7 +118,7 @@
 
                 function isValidDay(day) {
                     return day > 0 && day < 32;
-                }
+                } 
 
                 function isValidYear(year) {
                     return year > (today.getFullYear() - 115) && year < (today.getFullYear() + 115);

@@ -1,6 +1,5 @@
 <?php
-namespace App\Http\Controllers\Supply
-;
+namespace App\Http\Controllers\Supply;
 use Illuminate\Http\Request;
 
 use DB;
@@ -113,7 +112,6 @@ class SupplyReportController extends Controller {
 					)
 				)
 				->join('requisition_slips_items as ris','ris.requisition_slip_code','=','rs.requisition_slip_code')
-				// ->leftjoin('assets as a','a.tag','=','jo.asset_tag')
 				->where('ris.supply_code', $supplyCode);
 		return $data;
 	}

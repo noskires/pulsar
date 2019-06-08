@@ -15,7 +15,7 @@
                 vm.supplyCode = $stateParams.supplyCode;
                 // alert(vm.supplyCode);
 
-                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode, supplyCategory:'', quantityStatus:null, isRepair:2}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode, supplyCategory:'', quantityStatus:null, isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.supply = response.data.data[0];
@@ -45,7 +45,7 @@
                 vm.supplyCode = $stateParams.supplyCode2;
                 // alert(vm.supplyCode);
 
-                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode, supplyCategory:'', quantityStatus:null, isRepair:2}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:vm.supplyCode, supplyCategory:'', quantityStatus:null, isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.supply = response.data.data[0];
@@ -78,7 +78,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', quantityStatus:null, isRepair: 2}).then (function (response) {
+            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', quantityStatus:null, isRepair: 2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
@@ -108,9 +108,33 @@
                 });
             };
 
+            vm.filterSupply = function(data){
+                
+                console.log(data)
+
+                vm.supplyDetails = {
+                    supplyCode: '',
+                    quantityStatus: '',
+                    supplyCategory: '',
+                    isRepair: 3,
+                    reOrderLevelOutofSupply:data.reOrderLevelOutofSupply,
+                    supplyCategoryCode: data.supplyCategory 
+                }
+
+                SuppliesSrvcs.supplies(vm.supplyDetails).then(function(response){
+                    console.log(response.data);
+                    if (response.data.status == 200) {
+                        vm.supplies = response.data.data;
+                    }
+                    else {
+                        alert(response.data.message);
+                    }
+                });
+            }
+
             vm.routeTo = function(route){
                 $window.location.href = route;
-            }; 
+            };
         }
 
         SuppliesModalInstanceCtrl.$inject = ['$state', '$uibModalInstance', 'formData', 'ReceiptSrvcs', 'SuppliesSrvcs', 'SupplyCategoriesSrvcs', 'StockUnitsSrvcs'];
