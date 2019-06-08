@@ -3,7 +3,7 @@
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="<%mc.users[0].profile_photo || 'uploads/profile_photo/default-logo.jpg'%>" class="img-circle" alt="User Image" style="width: 45px;height: 45px;">
+      <img src="<%mc.users[0].profile_photo || 'uploads/profile_photo/default-logo.jpg'%>" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
       <p>{{Auth::user()->name}}</p>
