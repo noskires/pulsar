@@ -1,4 +1,30 @@
 <!-- Content Header (Page header) -->
+<style>
+        body {
+            padding: 15px;
+        }
+
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+          background: #fff;
+          position: relative;
+          z-index: 1;
+        }
+        .alert-info.positioned {
+          margin-top: 1em;
+          position: relative;
+          z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+        }
+    </style>
+
 <section class="content-header">
   <h1><span class="fa fa-bus"> </span> List of Requisitions</h1>
   <ol class="breadcrumb">
@@ -21,6 +47,17 @@
             <form class="form-horizontal" id="">
               <div class="box-body">
                 <div class="form-group col-sm-12">
+                <!-- Sample : 
+                
+                <ui-select ng-model="roc.risDetails.requesting_employee1" theme="select2" class="form-control" title="Choose an employee">
+                  <ui-select-match placeholder="Select or search a person in the list..."><%$employee.employee_name%></ui-select-match>
+                  <ui-select-choices repeat="employee in roc.employees">
+                    <div ng-bind-html="employee.employee_name"></div>
+                  </ui-select-choices>
+                </ui-select>
+             -->
+           
+
                   <label class="col-sm-2 control-label">Request Date</label>
                   <div class="col-sm-4">
                     <div class="input-group date">
@@ -31,7 +68,7 @@
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
                   <div class="col-sm-4">
                     <select class="form-control select2" style="width: 100%;" ng-model="roc.risDetails.request_type" required="">
-                      <option value="">--Select Request Type--</option>
+                      <option ng-selected="true" value="">--SELECT REQUEST TYPE--</option> 
                       <option value="Office">Office</option>
                       <option value="Project">Project</option>
                     </select>
@@ -50,11 +87,11 @@
                   <div class="col-sm-4">
 
                   <select class="form-control select2" style="width: 100%;"  ng-model="roc.risDetails.reference_code" required="">
-                    <option value="">--Select--</option>
+                    <option value="">--SELECT REFERENCE--</option>
                     <option ng-if="roc.risDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in roc.organizations"><%organization.org_name%></option>
                     <option ng-if="roc.risDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in roc.projects"><%project.code%> - <%project.name%></option>
                   </select>
-
+ 
                   </div>
                 </div>
 
@@ -63,13 +100,12 @@
                   <div class="col-sm-4"><input type="text" class="form-control" ng-model="roc.risDetails.old_reference"></div>
                   <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
                   <div class="col-sm-4">
-                  <select class="form-control select2" style="width: 100%;" ng-model="roc.risDetails.requesting_employee">
-                    <option value="" selected disabled hidden>Select Employee</option>
-                    <option value="<%employee.employee_code%>" ng-repeat="employee in roc.employees"><%employee.employee_name%></option>
+                  <select class="form-control select2" id="employeeSelect" style="width: 100%;" ng-model="roc.risDetails.requesting_employee">
+                    <option value="" selected disabled hidden> --SELECT EMPLOYEE--</option>
+                    <option value="<%employee.employee_code%>" ng-if="true" ng-repeat="employee in roc.employees"><%employee.employee_name%></option>
                   </select>
                   </div>
                 </div>
-
 
                 <div class="form-group col-sm-12"> 
                   <label for="" class="col-sm-2 control-label"></label>
@@ -83,11 +119,7 @@
                   </div>
                 </div>
 
-                
-
               </div>
-
-              
 
               <!-- /.box-body -->
               <div class="box-footer">

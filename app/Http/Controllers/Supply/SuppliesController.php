@@ -22,9 +22,25 @@ class SuppliesController extends Controller {
       'quantityStatus'=>$request->input('quantityStatus'),
       'supplyCategory'=>$request->input('supplyCategory'),
       'isRepair'=>$request->input('isRepair'),
+      'reOrderLevelOutofSupply'=>$request->input('reOrderLevelOutofSupply'),
+      'supplyCategoryCode'=>$request->input('supplyCategoryCode')
+
     );
 
-  	$supplies = DB::table('supplies as s')
+    if($data['reOrderLevelOutofSupply']==2){
+      $data['quantityStatus'] = 2;
+    }
+
+    $supplies = DB::table('supplies as s')
+            ->select(
+              '*',
+              DB::raw('CASE 
+                WHEN s.quantity <= s.re_order_level
+                  THEN "below"
+                ELSE "" 
+                END AS re_order_level_status'
+              )
+            )
             ->leftjoin('stock_units as su','su.stock_unit_code','=','s.stock_unit')
             ->leftjoin('supply_categories as sc','sc.supply_category_code','=','s.category_code'); 
 
@@ -37,6 +53,12 @@ class SuppliesController extends Controller {
     // elseif ($data['supplyCategory'] == "Asset"){
     //   $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
     // }
+
+    if ($data['supplyCategoryCode']){
+      $supplies = $supplies->where('s.category_code',  $data['supplyCategoryCode']);
+    }
+
+    // $supplies = $supplies->where('s.category_code', 'SUP-CTGY20181118095113');
 
     if ($data['isRepair'] == 1){
       $supplies = $supplies->where('sc.supply_category_name', 'like', '%Repair%');
@@ -56,12 +78,31 @@ class SuppliesController extends Controller {
       $supplies = $supplies->where('quantity', '>', 0);
     }
 
+    if ($data['quantityStatus'] == 2){
+      $supplies = $supplies->where('quantity', '<=', 0);
+    }
+
+    if ($data['reOrderLevelOutofSupply'] == 1){
+
+      $supplies = $supplies->where(DB::raw('CASE 
+              WHEN s.quantity <= s.re_order_level
+                THEN "below"
+              ELSE "" 
+              END'),  
+                  'below'
+                ); 
+    }
+
+
+    $others = $supplies;
+
     $supplies = $supplies->get();
 
     return response()-> json([
         'status'=>200,
         'data'=>$supplies,
-        'message'=>''
+        'message'=>'',
+        'others'=>$others
     ]);
   }
 

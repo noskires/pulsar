@@ -97,30 +97,20 @@
 
                     <label class="col-sm-1 control-label">Supply Category</label>
                     <div class="col-sm-4">
-                    <select class="form-control select2" style="width: 100%;" required="">
-                      <option selected="selected" value="1">ALL</option>
-                      <option value="2">CONSTRUCTION SUPPLY</option>
-                      <option value="3">IT SUPPLIES</option>
-                      <option value="4">REGULAR OFFICE SUPPLY</option>
-                      <option value="5">REPAIRS &amp; MAINTENANCE-COMMUNICATION EQUIPMENT</option>
-                      <option value="6">REPAIRS &amp; MAINTENANCE-FURNITURE AND FIXTURES</option>
-                      <option value="7">REPAIRS &amp; MAINTENANCE-IT EQUIPMENT &amp; SOFTWARE</option>
-                      <option value="8">REPAIRS &amp; MAINTENANCE-BUILDING LEASEHOLD IMPROVEMENTS</option>
-                      <option value="9">REPAIRS &amp; MAINTENANCE-BUILDING CONSTRUCTION</option>
-                      <option value="10">REPAIRS &amp; MAINTENANCE-OFFICE EQUIPMENT</option>
-                      <option value="11">REPAIRS &amp; MAINTENANCE-CONSTRUCTION EQUIPMENT</option>
-                      <option value="12">REPAIRS &amp; MAINTENANCE-OFFICE EQUIPMENT</option>
-                      <option value="13">REPAIRS &amp; MAINTENANCE-MOTOR VEHICLE</option>
+                    
+                    <select class="form-control select2" style="width: 100%;"  ng-model="supplyFilterDetails.supplyCategory">
+                      <option selected="selected" value="">- - SELECT SUPPLY CATEGORY - -</option>
+                      <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in sc.supplyCategories"><%supplyCategory.supply_category_name%></option>
                     </select>
                   </div>
 
                   <div class="col-sm-3">
-                  <label><input type="radio" name="r1" class="minimal" value="1"> &nbsp; Reached Re-order Level</label> &nbsp;&nbsp;&nbsp;
-                  <label><input type="radio" name="r1" class="minimal" value="2"> &nbsp; Out of Supply</label>
+                  <label><input type="radio" name="r1"  ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-value="'1'"> &nbsp; Reached Re-order Level</label> &nbsp;&nbsp;&nbsp;
+                  <label><input type="radio" name="r1"  ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-value="'2'"> &nbsp; Out of Supply</label>
                   </div>
 
                   <div class="col-sm-1">
-                  <button class="btn btn-large btn-success">FILTER DISPLAY</button>
+                  <button class="btn btn-large btn-success" ng-click="sc.filterSupply(supplyFilterDetails)">FILTER DISPLAY</button>
                   </div>
 
                   </div>

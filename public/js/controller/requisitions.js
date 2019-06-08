@@ -15,6 +15,8 @@
 
             // alert($stateParams.requisitionSlipCode)
 
+            
+
             if($stateParams.requisitionSlipCode)
             {
                 vm.requisitionSlipCode = $stateParams.requisitionSlipCode;
@@ -197,6 +199,17 @@
             var vm = this;
             var data = {};
 
+
+            vm.itemArray = [
+                {id: 1, name: 'first'},
+                {id: 2, name: 'second'},
+                {id: 3, name: 'third'},
+                {id: 4, name: 'fourth'},
+                {id: 5, name: 'fifth'},
+            ];
+        
+            vm.selected = { value: vm.itemArray[0] };
+
             if($stateParams.requisitionSlipCode)
             {
                 vm.requisitionSlipCode = $stateParams.requisitionSlipCode;
@@ -303,10 +316,14 @@
                                     'reference_code':'',
                                     'date_requested':'',
                                     'date_needed':'',
-                                    'request_type':false,
-                                    'requesting_employee':false,
+                                    'request_type':"Office",
+                                    // 'requesting_employee':false,
                                     'old_reference':''
                                 };
+
+                                // alert($('#requestType').select2("val"));
+                                // $('#requestType').val("Office");
+                                // $('#employeeSelect').select2("val", "");
                             }
                         }, function (){ alert('Bad Request!!!') })
                                     // vm.routeTo('requisition2/list');
@@ -338,6 +355,7 @@
                 vm.isRepair = 0;
             }
 
+
             vm.personalDetails = [
             {
                 'requisition_slip_code':vm.formData.requisition_slip_code,
@@ -358,7 +376,8 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:1, isRepair: vm.isRepair}).then (function (response) {
+            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:1, isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+                console.log(response.data)
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
@@ -391,7 +410,7 @@
 
             vm.selectSupply = function(index, supplyCode){
                 // alert(supplyCode)
-                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:1, isRepair: vm.isRepair}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:1, isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receiptItemSupply = response.data.data[0];
