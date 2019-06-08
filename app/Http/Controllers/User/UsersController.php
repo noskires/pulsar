@@ -27,6 +27,7 @@ class UsersController extends Controller {
   	$list = DB::table('users as user')
             ->select(
               'employee.employee_code',
+              'employee.profile_photo',
               'user.is_active',
               'user.auto_generated',
               'user.password_generated',

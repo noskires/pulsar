@@ -10,6 +10,7 @@
 <script src="{{URL::to('bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- Angularjs -->
 <script src="{{URL::to('bower_components/angular/angular.min.js')}}"></script>
+
 <!-- Router -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-ui-router/release/angular-ui-router.min.js')}}"></script>
 <!-- Sanitize -->
@@ -34,7 +35,7 @@
 
 <script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>  
 <!-- <script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>   -->
-
+<script src="{{URL::to('bower_components/ng-file-upload/ng-file-upload.min.js')}}"></script>
 <script src="{{URL::to('bower_components/baguettebox.js/dist/baguetteBox.min.js')}}"></script>  
 <script type="text/javascript">
   baguetteBox.run('.gallery', {

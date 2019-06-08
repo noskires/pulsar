@@ -10,7 +10,7 @@
   <base href="/">
 </head>
 <body class="hold-transition skin-blue fixed sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" ng-controller="MainCtrl as mc" ng-cloak>
   <!-- Header -->
   @include('layout.header')
   <!-- Header -->

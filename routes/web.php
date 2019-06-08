@@ -138,7 +138,7 @@ Route::post('/api/v1/employees/save','EmployeesController@save');
 Route::post('/api/v1/employee/update','EmployeesController@update');
 Route::get('/api/v1/employees','EmployeesController@employees');
 Route::get('/api/v1/employees2','EmployeesController@employees2');
-
+Route::post('/api/v1/profile/upload-profile-photo/{employeeCode}','EmployeesController@uploadProfilePhoto');
 
 /*
 |--------------------------------------------------------------------------

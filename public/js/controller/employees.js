@@ -227,9 +227,9 @@
         };
     }
 
-    EmployeeProfileCtrl.$inject = ['$state', '$scope', 'UsersSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', '$window', '$uibModal'];
+    EmployeeProfileCtrl.$inject = ['$state', '$scope', 'UsersSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', '$window', '$uibModal', 'Upload'];
 
-    function EmployeeProfileCtrl($state, $scope, UsersSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal) {
+    function EmployeeProfileCtrl($state, $scope, UsersSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal, Upload) {
         const vm = this;
         vm.tabs = {
             employee_info: true,
@@ -281,6 +281,30 @@
                 vm.tabs[tab] = false;
             }
             vm.tabs[tabCode] = true;
+        };
+
+        vm.changePassword = async function (data) {
+            const response = await vm.resetPassword(data);
+            $scope.$apply(() => {
+                vm.resetResponse = {
+                    ...response,
+                    hasError: (response.status) ? response.status != 200 : false
+                };
+            });
+            if (!vm.resetResponse.hasError) {
+                alert(vm.resetResponse.message);
+                $window.location.href = '/logout';
+            }
+        };
+
+        vm.uploadProfile = (data) => {
+            Upload.upload({
+                url: '/api/v1/profile/upload-profile-photo/121',
+                data,
+            }).then(e => {
+                console.log(e);
+                alert(e.data.message);
+            });
         };
     }
 
