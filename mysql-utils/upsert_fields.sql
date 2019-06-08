@@ -10,3 +10,6 @@ CALL UpsertFields ('requisition_slips', 'withdrawal_remarks', 'text DEFAULT NULL
 
 -- Asset Events Table
 CALL UpsertFields ('asset_events', 'asset_code', 'varchar(30)');
+
+-- Employees table
+CALL UpsertFields ('employees', 'profile_photo', 'VARCHAR(60)');

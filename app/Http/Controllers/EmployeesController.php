@@ -41,7 +41,8 @@ class EmployeesController extends Controller {
                       'e.unit AS unit_code',
                       'unit.org_name AS unit',
                       'e.organizational_unit AS organizational_unit_code',
-                      'org_unit.org_name AS organizational_unit_name'
+                      'org_unit.org_name AS organizational_unit_name',
+                      'e.profile_photo'
                     )
                     ->leftjoin('positions as p','p.position_code','=','e.position_code')
                     ->leftjoin('organizations as dep','dep.org_code','=','e.department')
@@ -95,7 +96,8 @@ class EmployeesController extends Controller {
                       'e.unit AS unit_code',
                       'unit.org_name AS unit',
                       'e.organizational_unit AS organizational_unit_code',
-                      'org_unit.org_name AS organizational_unit_name'
+                      'org_unit.org_name AS organizational_unit_name',
+                      'e.profile_photo'
                     )
                     ->leftjoin('positions as p','p.position_code','=','e.position_code')
                     ->leftjoin('organizations as dep','dep.org_code','=','e.department')
@@ -260,5 +262,23 @@ class EmployeesController extends Controller {
     });
 
     return $transaction;
+  }
+
+  public function uploadProfilePhoto(Request $request) {
+    $request->validate([
+      'profile_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+    $path = 'uploads/profile_photo';
+    $imageName = Auth::User()->employee_code.'.'.$request->profile_photo->getClientOriginalExtension();
+    $request->profile_photo->move(public_path($path), $imageName);
+    $employee = Employee::where('employee_code', Auth::User()->employee_code)->first();
+    $employee->profile_photo = $path.'/'.$imageName;
+    $employee->save();
+    
+    return response()->json([
+      'status' => 200,
+      'data' => null,
+      'message' => 'Successfully saved.'
+    ]);
   }
 }
