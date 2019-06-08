@@ -2,7 +2,9 @@
     'use strict';
     angular
         // .module('pulsarApp',[])
+
         .module('pulsarApp', ['ui.router', 'ngSanitize', 'ui.bootstrap', 'datatables', 'datatables.tabletools', 'datatables.buttons', 'datatables.bootstrap', 'dynamicNumber', 'ui.mask', 'ui.utils.masks', 'checklist-model', 'ngFileUpload', 'ui.select'])
+
         .controller('MainCtrl', MainCtrl)
         .config(Config)
         // .directive('myDate', dateInput)

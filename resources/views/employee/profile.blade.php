@@ -8,13 +8,13 @@
 </section>
 
 <!-- Main content -->
-<section class="content" ng-controller="EmployeeProfileCtrl as ep">
+<section class="content" ng-controller="EmployeeProfileCtrl as ep" ng-cloak>
     <div class="row">
     <div class="col-md-3">
         <!-- Profile Image -->
         <div class="box box-primary">
         <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="assets/dist/img/user2-160x160.jpg" style="width:70%;" alt="User profile picture">
+            <img class="profile-user-img img-responsive img-circle" src="<%ep.employee.profile_photo || 'uploads/profile_photo/default-logo.jpg'%>" style="width:70%;" alt="User profile picture">
             <br>
             <h3 class="profile-username text-center" ng-bind="ep.employee.employee_name"></h3>
             <p class="text-muted text-center"><%ep.employee.employee_code%> | <%ep.employee.role_name%></p>
@@ -188,12 +188,13 @@
                     <label for="picture" class="col-sm-2 control-label">Select Picture</label>
 
                     <div class="col-sm-10">
-                        <input id="picture" type="file" name="pic" accept="image/*">
+                        <input id="picture" type="file" ngf-select ng-model="ep.uploadForm.profile_photo" name="file" accept="image/*" ngf-max-size="2MB" required
+                            ngf-model-invalid="errorFile">
                     </div>
                     </div>
                     <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Uplaod</button>
+                        <button type="submit" class="btn btn-primary" ng-click="ep.uploadProfile(ep.uploadForm)">Uplaod</button>
                     </div>
                     </div>
 
