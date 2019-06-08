@@ -264,6 +264,16 @@
             });
         };
 
+        vm.resetPassword = function (data) {
+            return new Promise(resolve => {
+                UsersSrvcs.resetPassword(data).then(function (response) {
+                    resolve(response.data);
+                }, function () {
+                    alert('Bad Request!!!')
+                })
+            });
+        };
+
         vm.init = () => {
             vm.getUser().then(async (user) => {
                 const data = await vm.getEmployee(user[0].employee_code);

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Hash;
 
 use Auth;
 use DB;
@@ -170,7 +171,7 @@ class UsersController extends Controller {
     }
 
     $transaction = DB::transaction(function($data) use($data){
-      $user = User::where('employee_code', $data['employee_code'])->first();
+      $user = User::where('employee_code', Auth::user()->employee_code)->first();
       $user->password = bcrypt($data['password']);
       $user->auto_generated = false;
       $user->timestamps = true;
@@ -202,28 +203,35 @@ class UsersController extends Controller {
 
   function checkPasswordErrors($data) {
     $errors = array();
+    if ($data['password_current']) {
+      $user = User::where('employee_code', Auth::User()->employee_code)->first();
+      if (!Hash::check($data['password_current'], $user->password)) {
+        $errors[] = 'Current password is invalid.';
+      }
+    }
+
     if ($data['password'] !== $data['password_confirmation']) {
       $errors[] = 'Password must be match.';
     }
     if (strlen($data['password']) < 8 || strlen($data['password']) > 16) {
       $errors[] = "Password should be min 8 characters and max 16 characters";
-  }
-  if (!preg_match("/\d/", $data['password'])) {
-      $errors[] = "Password should contain at least one digit";
-  }
-  if (!preg_match("/[A-Z]/", $data['password'])) {
-      $errors[] = "Password should contain at least one Capital Letter";
-  }
-  if (!preg_match("/[a-z]/", $data['password'])) {
-      $errors[] = "Password should contain at least one small Letter";
-  }
-  if (!preg_match("/\W/", $data['password'])) {
-      $errors[] = "Password should contain at least one special character";
-  }
-  if (preg_match("/\s/", $data['password'])) {
-      $errors[] = "Password should not contain any white space";
-  }
-    return $errors;
+    }
+    if (!preg_match("/\d/", $data['password'])) {
+        $errors[] = "Password should contain at least one digit";
+    }
+    if (!preg_match("/[A-Z]/", $data['password'])) {
+        $errors[] = "Password should contain at least one Capital Letter";
+    }
+    if (!preg_match("/[a-z]/", $data['password'])) {
+        $errors[] = "Password should contain at least one small Letter";
+    }
+    if (!preg_match("/\W/", $data['password'])) {
+        $errors[] = "Password should contain at least one special character";
+    }
+    if (preg_match("/\s/", $data['password'])) {
+        $errors[] = "Password should not contain any white space";
+    }
+      return $errors;
 
-  }
+    }
 }

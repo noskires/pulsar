@@ -206,30 +206,32 @@
                     <label class="col-sm-2 control-label"><h4>Change Password</h4></label>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group"  ng-class="{'has-error': ep.resetResponse.hasError}">
                     <label for="inputPword" class="col-sm-2 control-label">Current Password</label>
 
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputPword" placeholder="Input current password">
+                    <div class="col-sm-6">
+                        <input  type="password" class="form-control" id="inputPword" placeholder="Input current password" ng-model="ep.resetForm.password_current">
                     </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"  ng-class="{'has-error': ep.resetResponse.hasError}">
                     <label for="inputPword2" class="col-sm-2 control-label">New Password</label>
 
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputPword2" placeholder="Input new password">
+                    <div class="col-sm-6">
+                        <input  type="password" class="form-control" id="inputPword2" placeholder="Input new password" ng-model="ep.resetForm.password">
                     </div>
                     </div>
-                    <div class="form-group">
-                    <label for="inputPword3" class="col-sm-2 control-label">Confirm New Password</label>
-
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputPword3" placeholder="Confirm new password">
-                    </div>
+                    <div class="form-group"  ng-class="{'has-error': ep.resetResponse.hasError}">
+                        <label for="inputPword3" class="col-sm-2 control-label">Confirm New Password</label>
+                        <div class="col-sm-6">
+                            <input  type="password" class="form-control" id="inputPword3" placeholder="Confirm new password" ng-model="ep.resetForm.password_confirmation">
+                            <span class="help-block" ng-repeat="error in ep.resetResponse.data" ng-if="ep.resetResponse.hasError">
+                                <strong><% error %></strong>
+                            </span>
+                        </div>
                     </div>
                     <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Change Password</button>
+                        <button type="submit" class="btn btn-primary" ng-click="ep.changePassword(ep.resetForm)">Change Password</button>
                     </div>
                     </div>
                 </form>
