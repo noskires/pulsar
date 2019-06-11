@@ -168,8 +168,11 @@
   <br>
   <div class="box box-primary">
     <div class="box-body">
-    <button export-to-csv data="ec.employees" filename="'Employee Masterfile'">Download</button>
-
+    <div class="row">
+      <button class="btn btn-primary btn-flat pull-right" export-to-xlsx data="ec.employees" filename="'Employee Masterfile'">
+          <span class="glyphicon glyphicon glyphicon-download-alt"></span> Export
+      </button>
+    </div>
       <table datatable="ng" class="table table-bordered table-hover" width="100%">
         <thead>
         <tr>

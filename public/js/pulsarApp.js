@@ -95,7 +95,7 @@
             }
         })
 
-        .directive('exportToCsv', function () {
+        .directive('exportToXlsx', function () {
             return {
                 restrict: 'A',
                 scope: {
@@ -108,7 +108,7 @@
                     }
                     var el = element[0];
                     element.bind('click', function (e) {
-                        alasql('SELECT * INTO XLSX("pulsar_export.xlsx",{headers:true}) FROM ?', [$scope.data]);
+                        alasql(`SELECT * INTO XLSX("${$scope.filename}",{headers:true}) FROM ?`, [$scope.data]);
                         /** 
                         console.log($scope.data);
                         const nextTargetEl = e.target.nextElementSibling;
