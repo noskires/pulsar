@@ -108,6 +108,8 @@
                     }
                     var el = element[0];
                     element.bind('click', function (e) {
+                        alasql('SELECT * INTO XLSX("pulsar_export.xlsx",{headers:true}) FROM ?', [$scope.data]);
+                        /** 
                         console.log($scope.data);
                         const nextTargetEl = e.target.nextElementSibling;
                         const table = nextTargetEl.querySelector('table');
@@ -142,6 +144,7 @@
                         }).appendTo('body')
                         a[0].click()
                         a.remove();
+                        */
                     });
                 }
             }
