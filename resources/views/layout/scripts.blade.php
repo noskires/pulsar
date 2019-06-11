@@ -40,6 +40,8 @@
 <!-- <script src="{{URL::to('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>   -->
 <script src="{{URL::to('bower_components/ng-file-upload/ng-file-upload.min.js')}}"></script>
 <script src="{{URL::to('bower_components/baguettebox.js/dist/baguetteBox.min.js')}}"></script>  
+<script src="{{URL::to('bower_components/alasql/dist/alasql.min.js')}}"></script>  
+<script src="{{URL::to('bower_components/js-xlsx/dist/xlsx.full.min.js')}}"></script>  
 <script type="text/javascript">
   baguetteBox.run('.gallery', {
 

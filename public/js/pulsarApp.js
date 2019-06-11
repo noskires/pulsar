@@ -9,37 +9,37 @@
         .config(Config)
         // .directive('myDate', dateInput)
 
-        .filter('propsFilter', function() {
-            return function(items, props) {
-              var out = [];
-          
-              if (angular.isArray(items)) {
-                var keys = Object.keys(props);
-          
-                items.forEach(function(item) {
-                  var itemMatches = false;
-          
-                  for (var i = 0; i < keys.length; i++) {
-                    var prop = keys[i];
-                    var text = props[prop].toLowerCase();
-                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-                      itemMatches = true;
-                      break;
-                    }
-                  }
-          
-                  if (itemMatches) {
-                    out.push(item);
-                  }
-                });
-              } else {
-                // Let the output be the input untouched
-                out = items;
-              }
-          
-              return out;
+        .filter('propsFilter', function () {
+            return function (items, props) {
+                var out = [];
+
+                if (angular.isArray(items)) {
+                    var keys = Object.keys(props);
+
+                    items.forEach(function (item) {
+                        var itemMatches = false;
+
+                        for (var i = 0; i < keys.length; i++) {
+                            var prop = keys[i];
+                            var text = props[prop].toLowerCase();
+                            if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                                itemMatches = true;
+                                break;
+                            }
+                        }
+
+                        if (itemMatches) {
+                            out.push(item);
+                        }
+                    });
+                } else {
+                    // Let the output be the input untouched
+                    out = items;
+                }
+
+                return out;
             };
-          })
+        })
 
         .directive("datepicker", function () {
             return {
@@ -93,6 +93,61 @@
                     controller.$formatters.shift();
                 }
             }
+        })
+
+        .directive('exportToXlsx', function () {
+            return {
+                restrict: 'A',
+                scope: {
+                    data: '=',
+                    filename: '=',
+                },
+                link: function ($scope, element, attrs) {
+                    function stringify(str) {
+                        return '"' + str.replace(/^\s\s*/, '').replace(/\s*\s$/, '').replace(/"/g, '""') + '"';
+                    }
+                    var el = element[0];
+                    element.bind('click', function (e) {
+                        alasql(`SELECT * INTO XLSX("${$scope.filename}",{headers:true}) FROM ?`, [$scope.data]);
+                        /** 
+                        console.log($scope.data);
+                        const nextTargetEl = e.target.nextElementSibling;
+                        const table = nextTargetEl.querySelector('table');
+                        var csvString = '';
+                        for (var i = 3; i < table.rows.length; i++) {
+                            var rowData = table.rows[i].cells;
+                            for (var j = 0; j < rowData.length; j++) {
+                                if (rowData[j].innerHTML.indexOf('<a href') > -1) {
+                                    var ele = angular.element(rowData[j]);
+                                    for (var k = 0; k < ele[0].childNodes.length; k++) {
+                                        if (ele[0].childNodes[k].tagName == 'A') {
+                                            csvString = csvString + stringify(ele[0].childNodes[k].innerText) + ",";
+                                        }
+                                    }
+                                } else if (rowData[j].innerHTML.indexOf('<em') > -1 || rowData[j].innerHTML.indexOf('<strong>') > -1) {
+                                    var ele = angular.element(rowData[j]);
+                                    csvString = csvString + stringify(ele[0].textContent) + ",";
+                                } else {
+                                    csvString = csvString + stringify(rowData[j].innerHTML) + ",";
+                                }
+                            }
+                            csvString = csvString.substring(0, csvString.length - 1);
+                            csvString = csvString + "\n";
+                        }
+                        console.log(csvString);
+                        csvString = csvString.substring(0, csvString.length - 1);
+                        // alert(csvString);
+                        var a = $('<a/>', {
+                            style: 'display:none',
+                            href: 'data:application/csv;base64,' + btoa(csvString),
+                            download: `${$scope.filename}.csv`
+                        }).appendTo('body')
+                        a[0].click()
+                        a.remove();
+                        */
+                    });
+                }
+            }
         });
 
 
@@ -118,7 +173,7 @@
 
                 function isValidDay(day) {
                     return day > 0 && day < 32;
-                } 
+                }
 
                 function isValidYear(year) {
                     return year > (today.getFullYear() - 115) && year < (today.getFullYear() + 115);
