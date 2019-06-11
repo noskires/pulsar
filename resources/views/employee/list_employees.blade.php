@@ -22,7 +22,7 @@
       <button type="button" class="btn btn-primary" ng-click="ec.addNewPosition()"> 
         <span class="glyphicon glyphicon-plus"></span> New Position
       </button>
-      <br>
+        <br>
 
 <!-- NEW EMPLOYEE -->
       <div id="create-voucher" class="collapse"><br>
@@ -168,6 +168,8 @@
   <br>
   <div class="box box-primary">
     <div class="box-body">
+    <button export-to-csv data="ec.employees" filename="'Employee Masterfile'">Download</button>
+
       <table datatable="ng" class="table table-bordered table-hover" width="100%">
         <thead>
         <tr>
