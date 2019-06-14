@@ -16,7 +16,7 @@
                                 '&referenceCode='+data.referenceCode+
                                 '&dateFrom='+data.dateFrom+
                                 '&dateTo='+data.dateTo+
-                                '&status='+data.status,
+                                '&poStatus='+data.poStatus,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },

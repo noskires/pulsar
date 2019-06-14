@@ -207,8 +207,18 @@
                     console.log(vm.voucherItems)
                 }
             }, function (){ alert('Bad Request!!!') })
-
-            ReceiptSrvcs.receipts({receiptCode:'', payeeType:vm.formData.payee_type, payee:vm.formData.payee, voucherCode:vm.formData.voucher_code}).then (function (response) {
+ 
+            vm.receiptDetails = {
+                receiptCode:'', 
+                receiptDate:'', 
+                payeeType:vm.formData.payee_type, 
+                payee:vm.formData.payee, 
+                voucherCode:'', 
+                voucherStatus:2, 
+                poCode:'', 
+                poStatus:''
+            }
+            ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.receipts = response.data.data;
@@ -257,7 +267,17 @@
                             }
                         }, function (){ alert('Bad Request!!!') })
 
-                        ReceiptSrvcs.receipts({receiptCode:'', payeeType:vm.formData.payee_type, payee:vm.formData.payee, voucherCode:vm.formData.voucher_code}).then (function (response) {
+                        vm.receiptDetails = {
+                            receiptCode:'', 
+                            receiptDate:'', 
+                            payeeType:vm.formData.payee_type, 
+                            payee:vm.formData.payee, 
+                            voucherCode:'', 
+                            voucherStatus:2, 
+                            poCode:'', 
+                            poStatus:''
+                        }
+                        ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.receipts = response.data.data;
@@ -297,7 +317,17 @@
                             }
                         }, function (){ alert('Bad Request!!!') })
 
-                        ReceiptSrvcs.receipts({receiptCode:'', payeeType:vm.formData.payee_type, payee:vm.formData.payee, voucherCode:vm.formData.voucher_code}).then (function (response) {
+                        vm.receiptDetails = {
+                            receiptCode:'', 
+                            receiptDate:'', 
+                            payeeType:vm.formData.payee_type, 
+                            payee:vm.formData.payee, 
+                            voucherCode:'', 
+                            voucherStatus:2, 
+                            poCode:'', 
+                            poStatus:''
+                        }
+                        ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.receipts = response.data.data;

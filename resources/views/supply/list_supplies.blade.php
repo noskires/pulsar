@@ -98,7 +98,7 @@
                     <label class="col-sm-1 control-label">Supply Category</label>
                     <div class="col-sm-4">
                     
-                    <select class="form-control select2" style="width: 100%;"  ng-model="supplyFilterDetails.supplyCategory">
+                    <select class="form-control select2" style="width: 100%;"  ng-model="supplyFilterDetails.supplyCategory" ng-init="supplyFilterDetails.supplyCategory=''">
                       <option selected="selected" value="">- - SELECT SUPPLY CATEGORY - -</option>
                       <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in sc.supplyCategories"><%supplyCategory.supply_category_name%></option>
                     </select>
@@ -106,15 +106,13 @@
 
                   <div class="col-sm-3">
 
-                  <select class="form-control select2" style="width: 100%;" ng-model="supplyFilterDetails.reOrderLevelOutofSupply">
+                  <select class="form-control select2" style="width: 100%;" ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-init="supplyFilterDetails.reOrderLevelOutofSupply=''">
                     <option value="">-- SUPPLIES STATUS -- </option>
                     <option value="3">All</option>
                     <option value="1">Reached Re-order Level</option>
                     <option value="2">Out of Supply</option>
                   </select>
 
-                  <!-- <label><input type="radio" name="r1"  ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-value="'1'"> &nbsp; Reached Re-order Level</label> &nbsp;&nbsp;&nbsp;
-                  <label><input type="radio" name="r1"  ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-value="'2'"> &nbsp; Out of Supply</label> -->
                   </div>
 
                   <div class="col-sm-1">

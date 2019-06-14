@@ -23,7 +23,7 @@ class PurchaseOrdersController extends Controller {
 			'poCode'=>$request->input('poCode'),
 			'referenceCode'=>$request->input('referenceCode'),
 			'supplierCode'=>$request->input('supplierCode'),
-			'status'=>$request->input('status'),
+			'poStatus'=>$request->input('poStatus'),
 			'dateFrom'=>$request->input('dateFrom'),
 			'dateTo'=>$request->input('dateTo')
 			// 'dateFrom'=>date('Y-m-d', strtotime($request->input('dateFrom'))),
@@ -81,9 +81,11 @@ class PurchaseOrdersController extends Controller {
 			$pos = $pos->where('po.supplier_code', $data['supplierCode']);
 		}
 
-		if($data['status']){
+		
 
-			if ($data['status'] == 1){
+		if($data['poStatus']){
+
+			if ($data['poStatus'] == 1){
 	      		$pos = $pos->where(DB::raw('CASE 
 	                      	WHEN po.date_received IS NULL 
 	                      		OR po.received_by IS NULL 
@@ -94,7 +96,7 @@ class PurchaseOrdersController extends Controller {
 								"CLOSED" 
 							END'),  'CLOSED'); 
 	      	}
-	      	elseif($data['status'] == 2){
+	      	elseif($data['poStatus'] == 2){
 	      		$pos = $pos->where(DB::raw('CASE 
 	                      	WHEN po.date_received IS NULL 
 	                      		OR po.received_by IS NULL 
@@ -117,6 +119,7 @@ class PurchaseOrdersController extends Controller {
 	    		));
 	    }
 
+		$debugQuery = $pos;
 		$pos = $pos->get();
 
 		foreach ($pos as $key => $po) {
@@ -182,7 +185,8 @@ class PurchaseOrdersController extends Controller {
 		return response()-> json([
 			'status'=>200,
 			'data'=>$pos,
-			'message'=>''
+			'message'=>'',
+			'debugQuery'=>$debugQuery
 		]);
 	}
 

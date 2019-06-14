@@ -88,12 +88,12 @@ class JobOrdersController extends Controller {
       $job_orders = $job_orders->where('job_order_code', $data['joCode']);
     }
 
-    if ($data['joStatus']==1){
-      $job_orders = $job_orders->whereNull('jo.date_completed');
-    }
-
     if($data['date_started']){
       $job_orders = $job_orders->whereDate('jo.date_started', date('Y-m-d', strtotime($data['date_started'])));
+    }
+
+    if ($data['joStatus']==1){
+      $job_orders = $job_orders->whereNull('jo.date_completed');
     }
 
     if($data['joStatus']==2){

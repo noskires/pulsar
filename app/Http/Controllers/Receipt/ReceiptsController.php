@@ -24,10 +24,12 @@ class ReceiptsController extends Controller {
       'receiptCode'=>$request->input('receiptCode'),
       'payeeType'=>$request->input('payeeType'),
       'payee'=>$request->input('payee'),
-      // 'showBy'=>$request->input('showBy')
-      'voucherCode'=>$request->input('voucherCode')
+      'receiptDate'=>$request->input('receiptDate'),
+      'voucherCode'=>$request->input('voucherCode'),
+      'voucherStatus'=>$request->input('voucherStatus'),
+      'poCode'=>$request->input('poCode'),
+      'poStatus'=>$request->input('poStatus')
     );
-
 
   	$receipts = DB::table('receipts as r')
               ->select(
@@ -35,7 +37,6 @@ class ReceiptsController extends Controller {
                 'r.purchase_order_code',
                 'r.receipt_type',
                 'r.receipt_number',
-                // 'r.amount', 
                 'r.receipt_date',
                 'r.payee_type',
                 'r.payee',
@@ -43,7 +44,6 @@ class ReceiptsController extends Controller {
                 'rt.receipt_type_name',
                 'vi.voucher_code',
                 DB::raw("COALESCE(SUM(receipt_item.receipt_item_total), 0) as total_receipt_item_Cost")
-                 
               )
               ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
               ->leftjoin('receipt_items as receipt_item','r.receipt_code','=','receipt_item.receipt_code')
@@ -65,10 +65,33 @@ class ReceiptsController extends Controller {
     //   $receipts = $receipts->whereNull('vi.voucher_code');
     // }
 
-    if ($data['voucherCode']){
+    if($data['receiptDate']){
+      $receipts = $receipts->whereDate('r.receipt_date', date('Y-m-d', strtotime($data['receiptDate'])));
+    }
+
+    // if ($data['voucherCode']){
+    //   $receipts = $receipts->where('vi.voucher_code', $data['voucherCode']);
+    // }
+
+    if ($data['voucherStatus']=='1'){
+      $receipts = $receipts->whereNotNull('vi.voucher_code');
+    }
+
+    if ($data['voucherStatus']=='2'){
       $receipts = $receipts->whereNull('vi.voucher_code');
     }
 
+    if ($data['poStatus']){
+      $receipts = $receipts->where('r.purchase_order_code', $data['poStatus']);
+    }
+
+    if ($data['poStatus']==1){
+      $receipts = $receipts->whereNotNull('r.purchase_order_code');
+    }
+
+    if ($data['poStatus']==2){
+      $receipts = $receipts->whereNull('r.purchase_order_code');
+    }
 
     $receipts = $receipts->groupBy(
                 'r.receipt_code', 
@@ -82,6 +105,8 @@ class ReceiptsController extends Controller {
                 'rt.receipt_type_name',
                 'vi.voucher_code'
               );
+
+    $debugQuery = $receipts;
 
     $receipts = $receipts->get();
 
@@ -141,7 +166,8 @@ class ReceiptsController extends Controller {
     return response()-> json([
       'status'=>200,
       'data'=>$receipts,
-      'message'=>''
+      'message'=>'',
+      'debugQuery'=>$debugQuery
     ]);
   }
 

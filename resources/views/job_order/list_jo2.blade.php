@@ -95,7 +95,8 @@
                   <div class="input-group date">
                   <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                   <input type="text" class="form-control pull-right" datepicker2 id="daterange-filter" ng-model="filter.date_started" ng-init="filter.date_started=''" readonly autocomplete="off">
-                  </div></div>
+                  </div>
+                  </div>
 
                   <label for="requestpurpose" class="col-sm-1 control-label">Repair of</label>
                   <div class="col-sm-4">

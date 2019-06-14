@@ -41,8 +41,8 @@
         <div class="form-group col-sm-12">
           <label for="payeetype" class="col-sm-2 control-label">Payee Type</label>
           <div class="radio col-sm-4">
-            <select class="form-control select2" style="width: 100%;" required="" ng-model="rc.receiptDetails.payeeType" ng-change="rc.selectPayeeType(rc.receiptDetails.payeeType);rc.selectPayee(rc.receiptDetails.payeeType, rc.receiptDetails.payee)" ng-init="rc.receiptDetails.payeeType=rc.payeeType">
-              <option selected="selected" value="0">- - SELECT TYPE - -</option>
+            <select class="form-control select2" style="width: 100%;" required="" ng-model="rc.receiptDetails.payeeType" ng-change="rc.selectPayeeType(rc.receiptDetails.payeeType);rc.selectPayee(rc.receiptDetails.payeeType, rc.receiptDetails.payee)" ng-init="rc.receiptDetails.payeeType='SUPPLIER'">
+              <option selected="selected" value="">- - SELECT PAYEE TYPE - -</option>
               <option value="EMPLOYEE">EMPLOYEE</option>
               <option value="SUPPLIER">SUPPLIER</option>
               <option value="BANK">BANK</option>
@@ -125,34 +125,35 @@
           <div class="box-body">
             <div class="form-group col-sm-12">
 
+              <label class="col-sm-1 control-label">Date Receipt</label>
               <div class="col-sm-2">
-                <div class="input-group">
-                  <button type="button" class="btn btn-primary pull-right" id="rcpt-date-filter">
-                    <span>
-                      <i class="fa fa-calendar"></i> Select Receipt Date
-                    </span>
-                    <i class="fa fa-caret-down"></i>
-                  </button>
-                </div>
+              <div class="input-group date">
+              <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+              <input type="text" class="form-control pull-right" datepicker2 id="daterange-filter" ng-model="filter.date_receipt" ng-init="filter.date_receipt=''" autocomplete="off">
+              </div>
               </div>
 
               <label class="col-sm-1 control-label">Payee Type:</label>
               <div class="col-sm-2">
-                <select class="form-control" required="" style="width: 100%;">
-                <option selected="selected" value="1">Supplier</option>
-                <option value="2">Employee</option>
-                <option value="3">Bank</option>
+                <select class="form-control" style="width: 100%;" ng-model="filter.payee_type" ng-init="filter.payee_type=''">
+                <option selected="selected" value="">-- SELECT PAYEE TYPE -- </option>
+                <option selected="selected" value="SUPPLIER">Supplier</option>
+                <option value="EMPLOYEE">Employee</option>
+                <option value="BANK">Bank</option>
                 </select>
               </div>
 
               <label class="col-sm-1 control-label">With Voucher:</label>
               <div class="col-sm-2">
-              <label><input type="radio" name="r1" class="minimal" value="1" checked=""> &nbsp; Yes</label> &nbsp;&nbsp;&nbsp;
-              <label><input type="radio" name="r1" class="minimal" value="2"> &nbsp; No</label> &nbsp;&nbsp;&nbsp;
+                <select class="form-control" style="width: 100%;" ng-model="filter.voucher_status" ng-init="filter.voucher_status=''">
+                <option selected="selected" value="">-- All -- </option>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+                </select>
               </div>
 
             <div class="col-sm-1">
-            <button class="btn btn-large btn-success"><span class="glyphicon glyphicon-filter"></span>FILTER DISPLAY</button>
+            <button class="btn btn-large btn-success" ng-click="rc.filterReceipt(filter)"><span class="glyphicon glyphicon-filter"></span>FILTER DISPLAY</button>
             </div>
 
             </div>

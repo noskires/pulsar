@@ -73,8 +73,7 @@
         function RequisitionAssetCtrl($state, $stateParams, RequisitionsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-
-            JobOrdersSrvcs.jobOrders({joCode:$stateParams.jobOrderCode, jobStatus:'', assetTag:''}).then (function (response) {
+            JobOrdersSrvcs.jobOrders({joCode:$stateParams.jobOrderCode, joStatus:'', date_started:'', assetCode:'', assetCategory:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.jobOrders = response.data.data[0];
