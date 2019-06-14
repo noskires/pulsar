@@ -67,8 +67,8 @@
 
                 JobOrdersSrvcs.save2(data).then(function(response){
                     if (response.data.status == 200) {
-
-                        JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetCode:''}).then (function (response) {
+                        
+                        JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, date_started:'', assetCode:'', assetCategory:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.jobOrders = response.data.data;
@@ -129,7 +129,7 @@
             }
 
             if($stateParams.joCode){
-                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode,joStatus:'', assetCode:''}).then (function (response) {
+                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode, joStatus:'', date_started:'', assetCode:'', assetCategory:''}).then (function (response) {
 
                     if(response.data.status == 200)
                     {
@@ -156,7 +156,7 @@
             }
 
             if($stateParams.joCode2){
-                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode2,joStatus:'', assetCode:''}).then (function (response) {
+                JobOrdersSrvcs.jobOrders({joCode:$stateParams.joCode2, joStatus:'', date_started:'', assetCode:'', assetCategory:''}).then (function (response) {
 
                     if(response.data.status == 200)
                     {

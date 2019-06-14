@@ -31,7 +31,18 @@
                 vm.receiptCode = $stateParams.receiptCode;
                 // alert(vm.receiptCode);
 
-                ReceiptSrvcs.receipts({receiptCode:vm.receiptCode, payeeType:'', payee:'', voucherCode:''}).then (function (response) {
+                vm.receiptDetails = {
+                    receiptCode:vm.receiptCode, 
+                    receiptDate:'', 
+                    payeeType:'', 
+                    payee:'', 
+                    voucherCode:'', 
+                    voucherStatus:'', 
+                    poCode:'', 
+                    poStatus:''
+                }
+
+                ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receipt = response.data.data[0];
@@ -76,7 +87,18 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            ReceiptSrvcs.receipts({receiptCode:'', payeeType:'', payee:'', voucherCode:''}).then (function (response) {
+            vm.receiptDetails = {
+                receiptCode:'', 
+                receiptDate:'', 
+                payeeType:'', 
+                payee:'', 
+                voucherCode:'', 
+                voucherStatus:'', 
+                poCode:'', 
+                poStatus:''
+            }
+
+            ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.receipts = response.data.data;
@@ -92,14 +114,24 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            
-
             vm.newReceipt = function(data){
                 console.log(data);
                 ReceiptSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        ReceiptSrvcs.receipts({receiptCode:'', payeeType:'', payee:'', voucherCode:''}).then (function (response) {
+
+                        vm.receiptDetails = {
+                            receiptCode:'', 
+                            receiptDate:'', 
+                            payeeType:'', 
+                            payee:'', 
+                            voucherCode:'', 
+                            voucherStatus:'', 
+                            poCode:'', 
+                            poStatus:''
+                        }
+
+                        ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.receipts = response.data.data;
@@ -167,7 +199,17 @@
 
             vm.selectPayee = function(payeeType, supplierCode){
                 // alert(payee)
-                PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:supplierCode, status:2, dateFrom:'', dateTo:''}).then (function (response) { //get all open po status
+
+                vm.purchaseDetails = {
+                    poCode:'', 
+                    referenceCode:'', 
+                    supplierCode:supplierCode, 
+                    poStatus:2, 
+                    dateFrom:'', 
+                    dateTo:''
+                }
+
+                PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) { //get all open po status
                     if(response.data.status == 200)
                     {
                         vm.pos = response.data.data;
@@ -191,6 +233,29 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 
+
+            vm.filterReceipt = function(data){
+                console.table(data)
+
+                vm.receiptDetails = {
+                    receiptCode:'', 
+                    receiptDate:data.date_receipt, 
+                    payeeType:data.payee_type, 
+                    payee:'', 
+                    voucherCode:'', 
+                    voucherStatus:data.voucher_status, 
+                    poCode:'', 
+                    poStatus:''
+                }
+
+                ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.receipts = response.data.data;
+                        console.log(vm.receipts)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
         }
 
         ReceiptsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];

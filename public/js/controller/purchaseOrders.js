@@ -16,7 +16,7 @@
             {
                 vm.poCode = $stateParams.poCode; 
 
-                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', status:2, dateFrom: '', dateTo:''}).then (function (response) {
+                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', poStatus:2, dateFrom: '', dateTo:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.po = response.data.data[0];
@@ -41,8 +41,6 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-
-
             SuppliersSrvcs.suppliers({supplierCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -51,13 +49,22 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:3, dateFrom: '', dateTo:''}).then (function (response) {
-                    if(response.data.status == 200)
-                    {
-                        vm.pos = response.data.data;
-                        console.log(vm.pos)
-                    }
-                }, function (){ alert('Bad Request!!!') })
+
+            vm.purchaseDetails = {
+                poCode:'', 
+                referenceCode:'', 
+                supplierCode:'', 
+                poStatus:3, 
+                dateFrom: '', 
+                dateTo:''
+            }
+            PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.pos = response.data.data;
+                    console.log(vm.pos)
+                }
+            }, function (){ alert('Bad Request!!!') })
 
             // PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
             //     if(response.data.status == 200)
@@ -102,7 +109,15 @@
             vm.selectPurchaseOrders = function(referenceCode){
                 // alert(referenceCode)
 
-                PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:referenceCode, supplierCode:'', status:2, dateFrom: '', dateTo:''}).then (function (response) {
+                vm.purchaseDetails = {
+                    poCode:'', 
+                    referenceCode:referenceCode, 
+                    supplierCode:'', 
+                    poStatus:2, 
+                    dateFrom: '', 
+                    dateTo:''
+                }
+                PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.pos = response.data.data;
@@ -117,7 +132,16 @@
                 PurchaseOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:2, dateFrom: '', dateTo:''}).then (function (response) {
+
+                        vm.purchaseDetails = {
+                            poCode:'', 
+                            referenceCode:'', 
+                            supplierCode:'', 
+                            poStatus:2, 
+                            dateFrom: '', 
+                            dateTo:''
+                        }
+                        PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.pos = response.data.data;
@@ -137,7 +161,16 @@
                 PurchaseOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
-                        PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
+
+                        vm.purchaseDetails = {
+                            poCode:'', 
+                            referenceCode:referenceCode, 
+                            supplierCode:'', 
+                            poStatus:3, 
+                            dateFrom: '', 
+                            dateTo:''
+                        }
+                        PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.pos = response.data.data;
@@ -172,8 +205,19 @@
             };
 
             vm.filterPoBtn = function(data){
-                console.log(data)
-                PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:data.supplier_code, status:data.status, dateFrom: data.dateFrom, dateTo:data.dateTo}).then (function (response) {
+                console.table(data)
+
+                vm.purchaseDetails = {
+                    poCode:'', 
+                    referenceCode:'', 
+                    supplierCode:data.supplier_code, 
+                    poStatus:data.poStatus, 
+                    dateFrom:data.dateFrom, 
+                    dateTo:data.dateTo
+                }
+
+                // PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:data.supplier_code, poStatus:data.status, dateFrom: data.dateFrom, dateTo:data.dateTo}).then (function (response) {
+                PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.pos = response.data.data;
@@ -239,7 +283,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', quantityStatus:0, isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', poStatus:0, isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
@@ -287,7 +331,7 @@
 
             vm.selectSupply = function(index, supplyCode){
 
-                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:'', quantityStatus:'', isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:'', poStatus:'', isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receiptItemSupply = response.data.data[0];

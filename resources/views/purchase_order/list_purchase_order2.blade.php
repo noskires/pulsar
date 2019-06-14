@@ -118,7 +118,7 @@
                       <label class="control-label">From</label>
                         <div class="input-group date">
                           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateFrom" datepicker autocomplete="off" readonly="">
+                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateFrom" datepicker autocomplete="off" ng-init="poc.poFilterDetails.dateFrom=''">
                         </div>
                       </div>
 
@@ -126,13 +126,13 @@
                       <label class="control-label">TO</label>
                         <div class="input-group date">
                           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateTo" datepicker autocomplete="off" readonly="">
+                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateTo" datepicker autocomplete="off" ng-init="poc.poFilterDetails.dateTo=''">
                         </div>
                       </div>
 
                       <div class="col-sm-3">
                         <label class="control-label">Supplier</label>
-                        <select class="form-control select2" style="width: 100%;" ng-model="poc.poFilterDetails.supplier_code">
+                        <select class="form-control select2" style="width: 100%;" ng-model="poc.poFilterDetails.supplier_code" ng-init="poc.poFilterDetails.supplier_code=''">
                           <option selected="selected" value="">- - SELECT SUPPLIER - -</option>
                           <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
                         </select>
@@ -141,7 +141,7 @@
 
                       <div class="col-sm-3">
                       <label for="assetname" class="control-label">PO Status</label>
-                      <select class="form-control select2" style="width: 100%;" required="" ng-model="poc.poFilterDetails.status">
+                      <select class="form-control select2" style="width: 100%;" ng-model="poc.poFilterDetails.poStatus" ng-init="poc.poFilterDetails.poStatus=''">
                           <option value="">- - SELECT STATUS - -</option>
                           <option value=3>ALL</option>
                           <option value=2>OPEN</option>
