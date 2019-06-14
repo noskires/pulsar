@@ -94,25 +94,32 @@
                   <div class="col-sm-2">
                   <div class="input-group date">
                   <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" id="daterange-filter">
+                  <input type="text" class="form-control pull-right" datepicker2 id="daterange-filter" ng-model="filter.date_started" ng-init="filter.date_started=''" readonly autocomplete="off">
                   </div></div>
 
                   <label for="requestpurpose" class="col-sm-1 control-label">Repair of</label>
                   <div class="col-sm-4">
-                  <select class="form-control select2" style="width: 100%;" required="">
-                  <option selected="selected" value="1">All Asset Category</option>
-                  <option value="3">Communication Equipment</option>
-                  <option value="4">Construction Equipment</option>
-                  </select></div>
+
+                  <select class="form-control select2" style="width: 100%;" ng-model="filter.asset_category" ng-init="filter.asset_category=''">
+                    <option selected="selected" value="">- - SELECT CATEGORY - -</option>
+                    <option ng-value="assetCategory.asset_category_code" ng-repeat="assetCategory in joc.assetCategories"><%assetCategory.asset_category_name%></option>
+                  </select>
+                  </div>
 
                   <label for="assetname" class="col-sm-1 control-label">Job Order Status</label>
                   <div class="col-sm-2">
-                  <label class="checkbox-inline"><input type="checkbox" value="">On-going</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Finished</label>
+
+                  <select class="form-control select2" style="width: 100%;" ng-model="filter.job_order_status" ng-init="filter.job_order_status='1'">
+                    <option value="">Job Order Status</option>
+                    <option value="3">All</option>
+                    <option value="1">On-going</option>
+                    <option value="2">Finished</option>
+                  </select>
+
                   </div>
 
                   <div class="col-sm-1">
-                  <button class="btn btn-large btn-success">FILTER DISPLAY</button>
+                  <button class="btn btn-large btn-success" ng-click="joc.filterJo(filter)">FILTER DISPLAY</button>
                   </div>
 
                 </div>

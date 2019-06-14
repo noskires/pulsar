@@ -23,7 +23,9 @@ class JobOrdersController extends Controller {
     $data = array(
       'joCode'=>$request->input('joCode'),
       'joStatus'=>$request->input('joStatus'),
+      'date_started'=>$request->input('date_started'),
       'assetCode'=>$request->input('assetCode'),
+      'assetCategory'=>$request->input('assetCategory'),
     );
 
     $job_orders = DB::table('job_orders as jo')
@@ -56,6 +58,7 @@ class JobOrdersController extends Controller {
           'a.asset_code', 
           'a.code', 
           'a.name',
+          'a.category',
           'org.org_name as organizational_unit_name',
           'org.barangay as barangay',
           'm.municipality_code as municipality_code',
@@ -69,13 +72,17 @@ class JobOrdersController extends Controller {
           'e.employee_code as requested_by',
           DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as employee_name')
         )
+
+      
       ->leftjoin('assets as a','a.asset_code','=','jo.asset_code')
       ->leftjoin('ares as are','are.are_code','=','a.are_code')
       ->leftjoin('employees as e','e.employee_code','=','jo.employee_code')
       ->leftjoin('organizations as org','org.org_code','=','jo.organizational_unit')
       ->leftjoin('municipalities as m','m.municipality_code','=','jo.municipality_code')
       ->leftjoin('provinces as p','p.province_code','=','m.province_code')
-      ->leftjoin('regions as r','r.region_code','=','p.region_code');
+      ->leftjoin('regions as r','r.region_code','=','p.region_code')
+      
+      ;
 
     if ($data['joCode']){
       $job_orders = $job_orders->where('job_order_code', $data['joCode']);
@@ -85,16 +92,34 @@ class JobOrdersController extends Controller {
       $job_orders = $job_orders->whereNull('jo.date_completed');
     }
 
-    if ($data['assetCode']){
+    if($data['date_started']){
+      $job_orders = $job_orders->whereDate('jo.date_started', date('Y-m-d', strtotime($data['date_started'])));
+    }
+
+    if($data['joStatus']==2){
+      $job_orders = $job_orders->whereNotNull('jo.date_completed');
+    }
+
+    if($data['assetCode']){
       $job_orders = $job_orders->where('a.asset_code', $data['assetCode']);
     }
+
+    if ($data['assetCategory']){
+      $job_orders = $job_orders->where('a.category', $data['assetCategory']);
+    }
+
+
+
+    $debugQuery = $job_orders;
 
     $job_orders = $job_orders->get();
 
     return response()-> json([
       'status'=>200,
       'data'=>$job_orders,
-      'message'=>''
+      'message'=>'',
+      // 'date_started'=>'',
+      'debug'=>$debugQuery
     ])->setEncodingOptions(JSON_NUMERIC_CHECK);
 
   }

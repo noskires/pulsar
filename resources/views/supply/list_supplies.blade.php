@@ -105,8 +105,16 @@
                   </div>
 
                   <div class="col-sm-3">
-                  <label><input type="radio" name="r1"  ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-value="'1'"> &nbsp; Reached Re-order Level</label> &nbsp;&nbsp;&nbsp;
-                  <label><input type="radio" name="r1"  ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-value="'2'"> &nbsp; Out of Supply</label>
+
+                  <select class="form-control select2" style="width: 100%;" ng-model="supplyFilterDetails.reOrderLevelOutofSupply">
+                    <option value="">-- SUPPLIES STATUS -- </option>
+                    <option value="3">All</option>
+                    <option value="1">Reached Re-order Level</option>
+                    <option value="2">Out of Supply</option>
+                  </select>
+
+                  <!-- <label><input type="radio" name="r1"  ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-value="'1'"> &nbsp; Reached Re-order Level</label> &nbsp;&nbsp;&nbsp;
+                  <label><input type="radio" name="r1"  ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-value="'2'"> &nbsp; Out of Supply</label> -->
                   </div>
 
                   <div class="col-sm-1">

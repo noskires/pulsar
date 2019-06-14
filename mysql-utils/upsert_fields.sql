@@ -13,3 +13,9 @@ CALL UpsertFields ('asset_events', 'asset_code', 'varchar(30)');
 
 -- Employees table
 CALL UpsertFields ('employees', 'profile_photo', 'VARCHAR(60)');
+
+-- Vouchers table
+CALL UpsertFields ('vouchers', 'fund_item_code', 'varchar(39)');
+
+-- Funds table
+CALL UpsertFields ('funds', 'fund_year', 'int(4)');

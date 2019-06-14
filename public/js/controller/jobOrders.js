@@ -14,7 +14,7 @@
             // alert($stateParams.assetTag);
             // alert($stateParams.joCode)
             
-            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, assetCode:''}).then (function (response) {
+            JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, date_started:'', assetCode:'', assetCategory:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.jobOrders = response.data.data;
@@ -29,9 +29,6 @@
                     console.log(vm.employees)
                 }
             }, function (){ alert('Bad Request!!!') })
-
-            
-
 
             AssetCategoriesSrvcs.AssetCategories({assetCategoryCode:''}).then (function (response) {
                 if(response.data.status == 200)
@@ -85,6 +82,18 @@
                         console.log(response.data);
                     }
                 }, function (){ console.log(response.data); alert('Bad Request!!!') });
+            }
+
+            vm.filterJo = function(data){
+                console.table(data) 
+
+                JobOrdersSrvcs.jobOrders({joCode:'', joStatus:data.job_order_status, date_started:data.date_started, assetCode:'', assetCategory:data.asset_category}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.jobOrders = response.data.data;
+                        console.log(vm.jobOrders)
+                    }
+                }, function (){ alert('Bad Request!!!') })
             }
 
             if($stateParams.assetCode!=null)
