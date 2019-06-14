@@ -149,12 +149,13 @@
                   <div class="box-body">
                     <div class="form-group col-sm-12">
 
-                      <label class="col-sm-1 control-label">Date</label>
+                      <label class="col-sm-1 control-label">Date Requested</label>
                       <div class="col-sm-2">
-                      <div class="input-group date">
-                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                      <input type="text" class="form-control pull-right" id="daterange-filter">
-                      </div></div>
+                        <div class="input-group date">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" class="form-control pull-right" datepicker2 id="daterange-filter" ng-model="filter.dateRequested" ng-init="filter.dateRequested=''" autocomplete="off">
+                        </div>
+                      </div>
 
                       <!-- <label for="requestpurpose" class="col-sm-1 control-label">Repair of</label>
                       <div class="col-sm-4">
@@ -163,13 +164,27 @@
                       <option value="3">Communication Equipment</option>
                       <option value="4">Construction Equipment</option>
                       </select></div> -->
+                      <label for="assetname" class="col-sm-2 control-label">Request Type</label>
+                      <div class="col-sm-2">
+                        <select class="form-control" style="width: 100%;" ng-model="filter.requestType" ng-init="filter.requestType=''">
+                        <option selected="selected" value="">-- SELECT REQUEST TYPE -- </option>
+                        <option selected="selected" value="">ALL</option>
+                        <option value="Office">Office</option>
+                        <option value="Project">Project</option>
+                        </select>
+                      </div>
 
                       <label for="assetname" class="col-sm-2 control-label">Requisition Status</label>
-                      <div class="col-sm-1">
-                      <label class="checkbox-inline"><input type="checkbox" value="">Closed</label>
+                      <div class="col-sm-2">
+                        <select class="form-control" style="width: 100%;" ng-model="filter.requisitionStatus" ng-init="filter.requisitionStatus=''">
+                        <option selected="selected" value="">-- SELECT STATUS -- </option>
+                        <option selected="selected" value="">ALL</option>
+                        <option value="1">OPEN</option>
+                        <option value="2">CLOSED</option>
+                        </select>
                       </div>
                       <div class="col-sm-1">
-                      <button class="btn btn-large btn-success">FILTER DISPLAY</button>
+                      <button class="btn btn-large btn-success" ng-click="roc.filterRis(filter)">FILTER DISPLAY</button>
                       </div>
                     </div>
                   </div>

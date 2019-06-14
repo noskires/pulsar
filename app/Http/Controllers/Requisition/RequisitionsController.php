@@ -25,6 +25,9 @@ class RequisitionsController extends Controller {
 
     $data = array(
       'requisitionCode'=>$request->input('requisitionCode'),
+      'requisitionStatus'=>$request->input('requisitionStatus'),
+      'dateRequested'=>$request->input('dateRequested'),
+      'requestType'=>$request->input('requestType'),
     );
 
     $requisitions = DB::table('requisition_slips as rs')
@@ -96,24 +99,66 @@ class RequisitionsController extends Controller {
               (SELECT assets.name FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
             END as asset_name'
         )
-
       )
     ->leftjoin('employees as receivedEmployee','receivedEmployee.employee_code','=','rs.received_by')
     ->leftjoin('employees as inspectedEmployee','inspectedEmployee.employee_code','=','rs.inspected_by');
 
     if ($data['requisitionCode']){
-      $requisitions = $requisitions->where('requisition_slip_code', $data['requisitionCode']);
+      $requisitions = $requisitions->where('rs.requisition_slip_code', $data['requisitionCode']);
     }
 
+    if ($data['requestType']){
+      $requisitions = $requisitions->where('rs.request_type', $data['requestType']);
+    }
+
+    if($data['dateRequested']){
+      $requisitions = $requisitions->whereDate('rs.date_requested', date('Y-m-d', strtotime($data['dateRequested'])));
+    }
+
+    if ($data['requisitionStatus'] == 1){
+
+      $requisitions = $requisitions->where(DB::raw('CASE 
+            WHEN rs.date_received IS NULL 
+              OR rs.received_by IS NULL 
+              OR rs.received_by = "1970-01-01" 
+              OR rs.date_inspected IS NULL 
+              OR rs.inspected_by IS NULL 
+            THEN "OPEN"
+          ELSE 
+            "CLOSED" 
+          END'),  
+        'OPEN'
+      ); 
+    }
+
+    if ($data['requisitionStatus'] == 2){
+
+      $requisitions = $requisitions->where(DB::raw('CASE 
+            WHEN rs.date_received IS NULL 
+              OR rs.received_by IS NULL 
+              OR rs.received_by = "1970-01-01" 
+              OR rs.date_inspected IS NULL 
+              OR rs.inspected_by IS NULL 
+            THEN "OPEN"
+          ELSE 
+            "CLOSED" 
+          END'), 
+        'CLOSED'
+      );
+
+    }
+    
+    $debugQuery = $requisitions;
     $requisitions = $requisitions->orderBy('rs.created_at');
     $requisitions = $requisitions->get();
 
     return response()-> json([
       'status'=>200,
       'data'=>$requisitions,
-      'message'=>''
+      'message'=>'',
+      'debugQuery'=>$debugQuery
     ])->setEncodingOptions(JSON_NUMERIC_CHECK);
-
+    
   }
 
   public function requisitionSlipItems(Request $request){
@@ -124,7 +169,6 @@ class RequisitionsController extends Controller {
       'supplyCode'=>$request->input('supplyCode'),
     );
 
-    // return $data['requisitionCode'];
     $requisitionSlipItems = DB::table('requisition_slips_items as rsi')
            ->select(
                 'rsi.requisition_slip_code', 

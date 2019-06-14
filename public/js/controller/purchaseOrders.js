@@ -98,7 +98,13 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            RequisitionsSrvcs.requisitions({requisitionCode:''}).then (function (response) {
+            vm.risDetails = {
+                requisitionCode:'',
+                requisitionStatus:'',
+                dateRequested:'',
+                requestType:''
+            }
+            RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.requisitions = response.data.data;
