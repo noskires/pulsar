@@ -13,16 +13,20 @@
             var vm = this;
             var data = {};
 
-            // alert($stateParams.requisitionSlipCode)
-
-            
-
             if($stateParams.requisitionSlipCode)
             {
                 vm.requisitionSlipCode = $stateParams.requisitionSlipCode;
                 // alert(vm.receiptCode);
 
-                RequisitionsSrvcs.requisitions({requisitionCode:$stateParams.requisitionSlipCode}).then (function (response) {
+                
+                vm.risDetails = {
+                    requisitionCode:$stateParams.requisitionSlipCode,
+                    requisitionStatus:'',
+                    dateRequested:'',
+                    requestType:''
+                }
+                
+                RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.requisition = response.data.data[0];
@@ -47,7 +51,13 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            RequisitionsSrvcs.requisitions({requisitionCode:''}).then (function (response) {
+            vm.risDetails = {
+                requisitionCode:'',
+                requisitionStatus:'',
+                dateRequested:'',
+                requestType:''
+            }
+            RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.requisitions = response.data.data;
@@ -197,7 +207,7 @@
         function RequisitionOfficetCtrl($state, $stateParams, RequisitionsSrvcs, ProjectsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-
+            
 
             vm.itemArray = [
                 {id: 1, name: 'first'},
@@ -214,7 +224,14 @@
                 vm.requisitionSlipCode = $stateParams.requisitionSlipCode;
                 // alert(vm.receiptCode);
 
-                RequisitionsSrvcs.requisitions({requisitionCode:$stateParams.requisitionSlipCode}).then (function (response) {
+                vm.risDetails = {
+                    requisitionCode:$stateParams.requisitionSlipCode,
+                    requisitionStatus:'',
+                    dateRequested:'',
+                    requestType:''
+                }
+                
+                RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.requisition = response.data.data[0];
@@ -272,7 +289,13 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            RequisitionsSrvcs.requisitions({requisitionCode:''}).then (function (response) {
+            vm.risDetails = {
+                requisitionCode:'',
+                requisitionStatus:'',
+                dateRequested:'',
+                requestType:''
+            }
+            RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.requisitions = response.data.data;
@@ -305,7 +328,14 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
 
-                        RequisitionsSrvcs.requisitions({requisitionCode:''}).then (function (response) {
+                        vm.risDetails = {
+                            requisitionCode:'',
+                            requisitionStatus:'',
+                            dateRequested:'',
+                            requestType:''
+                        }
+
+                        RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.requisitions = response.data.data;
@@ -334,6 +364,26 @@
                     console.log(response.data);
                 });
             };
+
+            vm.filterRis = function(data){
+                console.table(data)
+
+                vm.risDetails = {
+                    requisitionCode:'',
+                    requisitionStatus:data.requisitionStatus,
+                    dateRequested:data.dateRequested,
+                    requestType:data.requestType
+                }
+
+                RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.requisitions = response.data.data;
+                        console.log(vm.requisitions)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+                
+            }
 
             vm.routeTo = function(route){
                 $window.location.href = route;

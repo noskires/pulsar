@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/requisitions?requisitionCode='+data.requisitionCode,
+                        url: '/api/v1/requisitions?requisitionCode='+data.requisitionCode+'&requisitionStatus='+data.requisitionStatus+'&dateRequested='+data.dateRequested+'&requestType='+data.requestType,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
