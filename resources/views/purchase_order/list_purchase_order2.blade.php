@@ -177,7 +177,8 @@
     <div class="col-md-12"> 
       <div class="box box-primary">
         <div class="box-body">
-          <table datatable="ng" class="table table-bordered table-hover" width="100%">
+          <div export-to-xlsx data="poc.pos" bind-to-table="'tb-purchase-order'" filename="'Purchase Orders'"></div>
+          <table datatable="ng" class="table table-bordered table-hover" name="tb-purchase-order" width="100%">
             <thead>
             <tr>
               <th>PO Number</th>

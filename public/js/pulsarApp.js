@@ -98,54 +98,62 @@
         .directive('exportToXlsx', function () {
             return {
                 restrict: 'A',
+                template: `
+                <div class="row form-group">
+                    <div class="btn-group">
+                    <button type="button" id="export" class="btn btn-success btn-flat"><span class="glyphicon glyphicon glyphicon-download-alt"></span> Export (ALL)</button>
+                    <button type="button" class="btn btn-success dropdown-toggle btn-flat" data-toggle="dropdown" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" id="exportAll">All</a></li>
+                        <li><a href="#" id="exportFiltered">On the current table only</a></li>
+                    </ul>
+                    </div>
+                </div>
+                `,
                 scope: {
                     data: '=',
                     filename: '=',
+                    bindToTable: '=',
                 },
                 link: function ($scope, element, attrs) {
                     function stringify(str) {
                         return '"' + str.replace(/^\s\s*/, '').replace(/\s*\s$/, '').replace(/"/g, '""') + '"';
                     }
-                    var el = element[0];
-                    element.bind('click', function (e) {
+
+                    const exportAllEL = element[0].querySelector('#exportAll'),
+                        exportFilteredEl = element[0].querySelector('#exportFiltered'),
+                        exporEl = element[0].querySelector('#export');
+                    exportAllEL.addEventListener('click', exportAll);
+                    exporEl.addEventListener('click', exportAll);
+                    exportFilteredEl.addEventListener('click', exportFiltered);
+
+                    function exportAll() {
                         alasql(`SELECT * INTO XLSX("${$scope.filename}",{headers:true}) FROM ?`, [$scope.data]);
-                        /** 
-                        console.log($scope.data);
-                        const nextTargetEl = e.target.nextElementSibling;
-                        const table = nextTargetEl.querySelector('table');
-                        var csvString = '';
-                        for (var i = 3; i < table.rows.length; i++) {
-                            var rowData = table.rows[i].cells;
-                            for (var j = 0; j < rowData.length; j++) {
-                                if (rowData[j].innerHTML.indexOf('<a href') > -1) {
-                                    var ele = angular.element(rowData[j]);
-                                    for (var k = 0; k < ele[0].childNodes.length; k++) {
-                                        if (ele[0].childNodes[k].tagName == 'A') {
-                                            csvString = csvString + stringify(ele[0].childNodes[k].innerText) + ",";
-                                        }
-                                    }
-                                } else if (rowData[j].innerHTML.indexOf('<em') > -1 || rowData[j].innerHTML.indexOf('<strong>') > -1) {
-                                    var ele = angular.element(rowData[j]);
-                                    csvString = csvString + stringify(ele[0].textContent) + ",";
-                                } else {
-                                    csvString = csvString + stringify(rowData[j].innerHTML) + ",";
-                                }
-                            }
-                            csvString = csvString.substring(0, csvString.length - 1);
-                            csvString = csvString + "\n";
+                    }
+
+                    function exportFiltered(e) {
+                        const tableEl = document.querySelector(`table[name="${$scope.bindToTable}"]`),
+                            headerEL = tableEl.querySelector("tr"),
+                            tbodyEl = tableEl.querySelector('tbody'),
+                            headers = [];
+                        let dataTable = [];
+
+                        for (const [i, rowHeader] of headerEL.querySelectorAll('th').entries()) {
+                            headers.push(rowHeader.innerText);
                         }
-                        console.log(csvString);
-                        csvString = csvString.substring(0, csvString.length - 1);
-                        // alert(csvString);
-                        var a = $('<a/>', {
-                            style: 'display:none',
-                            href: 'data:application/csv;base64,' + btoa(csvString),
-                            download: `${$scope.filename}.csv`
-                        }).appendTo('body')
-                        a[0].click()
-                        a.remove();
-                        */
-                    });
+                        for (const rowBody of tbodyEl.querySelectorAll('tr')) {
+                            const row = {};
+                            headers.forEach((headerName, iHeader) => {
+                                const tdEl = rowBody.querySelectorAll('td')[iHeader]
+                                row[[headerName]] = tdEl.textContent;
+                            });
+                            dataTable.push(row);
+                        }
+                        alasql(`SELECT * INTO XLSX("${$scope.filename}",{headers:true}) FROM ?`, [dataTable]);
+                    }
                 }
             }
         });

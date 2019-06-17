@@ -11,7 +11,8 @@
 <section class="content">
   <div class="box">
     <div class="box-body">
-      <table datatable="ng" class="table table-bordered table-hover" width="100%">
+      <div export-to-xlsx data="rc.requisitions" bind-to-table="'tb-requisitions-1'" filename="'List of Requisitions'"></div>
+      <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-1" width="100%">
         <thead>
         <tr>
           <th>Control No.</th>

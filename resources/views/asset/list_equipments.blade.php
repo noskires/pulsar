@@ -131,7 +131,8 @@
 <!-- /// ASSETS TABLE -->  
       <div class="box box-primary">
             <div class="box-body">
-            <table datatable="ng" class="table table-bordered table-hover" width="100%">
+            <div export-to-xlsx data="ac.assets" bind-to-table="'tb-assets'" filename="'Equipments'"></div>
+            <table datatable="ng" class="table table-bordered table-hover" name="tb-assets" width="100%">
               <thead>
               <tr> 
                 <th>Asset Code</th>

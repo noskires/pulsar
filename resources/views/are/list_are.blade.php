@@ -56,7 +56,8 @@
     <div class="col-md-12"> 
       <div class="box box-primary">
         <div class="box-body">
-          <table datatable="ng" class="table table-bordered table-hover" width="100%">
+          <div export-to-xlsx data="ac.ares" bind-to-table="'tb-are'" filename="'Acknowledgment Receipt of Equipment (ARE)'"></div>
+          <table datatable="ng" class="table table-bordered table-hover" name="tb-are" width="100%">
             <thead>
             <tr>
               <th>ARE Number</th>

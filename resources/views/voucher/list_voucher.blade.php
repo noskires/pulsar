@@ -186,7 +186,8 @@
 
   <div class="box box-primary">
         <div class="box-body">
-          <table id="vouchers" datatable="ng" class="table table-bordered table-hover" width="100%">
+          <div export-to-xlsx data="vc.vouchers" bind-to-table="'tb-vouchers'" filename="' List of Disbursement Vouchers'"></div>
+          <table id="vouchers" datatable="ng" class="table table-bordered table-hover" name="tb-vouchers" width="100%">
             <thead>
             <tr>
               <th>Control No.</th> 

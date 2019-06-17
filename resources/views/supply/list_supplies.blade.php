@@ -131,7 +131,8 @@
 <!-- LIST OF SUPPLIES -->
     <div class="box">
           <div class="box-body">
-          <table datatable="ng"  class="table table-bordered table-hover" width="100%">
+          <div export-to-xlsx data="sc.supplies" bind-to-table="'tb-supplies'" filename="'Supplies'"></div>
+          <table datatable="ng"  class="table table-bordered table-hover" name="tb-supplies" width="100%">
         <thead>
         <tr>
           <th>Control Number</th>

@@ -145,7 +145,8 @@
 <!-- LIST OF JO -->      
   <div class="box">
   <div class="box-body">
-    <table datatable="ng" class="table table-bordered table-hover" width="100%">
+    <div export-to-xlsx data="joc.jobOrders" bind-to-table="'tb-job-orders-2'" filename="'Job Orders'"></div>
+    <table datatable="ng" class="table table-bordered table-hover" name="tb-job-orders-2" width="100%">
     <thead>
     <tr>
       <th>Control No.</th>
