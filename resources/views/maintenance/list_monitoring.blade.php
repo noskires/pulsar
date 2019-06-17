@@ -11,7 +11,8 @@
 <section class="content">
   <div class="box box-primary">
         <div class="box-body">
-          <table datatable="ng" class="table table-bordered table-hover" width="100%">
+          <div export-to-xlsx data="lmc.assetsMonitoring" bind-to-table="'tb-maintenance-monitoring'" filename="'Maintenance Monitoring'"></div>
+          <table datatable="ng" class="table table-bordered table-hover" name='tb-maintenance-monitoring' width="100%">
             <thead>
             <tr>
               <th>Asset Code</th>

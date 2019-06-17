@@ -191,7 +191,8 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <table datatable="ng" class="table table-bordered table-hover" width="100%">
+          <div export-to-xlsx data="pc.projects" bind-to-table="'tb-projects2'" filename="'List of Projects'"></div>
+          <table datatable="ng" class="table table-bordered table-hover" name="tb-projects2" width="100%">
             <thead>
             <tr>
               <th>Control No.</th>

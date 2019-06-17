@@ -31,7 +31,8 @@
       </div> -->
       <div class="box box-primary">
             <div class="box-body">
-              <table datatable="ng" class="table table-bordered table-hover" width="100%">
+              <div export-to-xlsx data="loc.operations" bind-to-table="'tb-operating'" filename="'List of Operating Records'"></div>
+              <table datatable="ng" class="table table-bordered table-hover" name="tb-operating" width="100%">
                 <thead>
                 <tr>
                   <th>Control Number</th>

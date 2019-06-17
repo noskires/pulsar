@@ -108,7 +108,7 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#" id="exportAll">All</a></li>
-                        <li><a href="#" id="exportFiltered">On current table</a></li>
+                        <li><a href="#" id="exportFiltered">On the current table only</a></li>
                     </ul>
                     </div>
                 </div>

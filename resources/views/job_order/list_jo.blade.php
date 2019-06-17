@@ -11,7 +11,8 @@
 <section class="content">
   <div class="box">
     <div class="box-body">
-      <table datatable="ng" class="table table-bordered table-hover" width="100%">
+      <div export-to-xlsx data="joc.jobOrders" bind-to-table="'tb-job-orders'" filename="'Job Orders'"></div>
+      <table datatable="ng" class="table table-bordered table-hover" name="tb-job-orders" width="100%">
         <thead>
         <tr>
           <th>Control No.</th>
