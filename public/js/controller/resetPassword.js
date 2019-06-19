@@ -42,7 +42,9 @@
         });
 
         vm.submit = async function (data) {
-            const response = await vm.resetPassword(data);
+            const dataCopy = angular.copy(data);
+            dataCopy.password_current = data.password_generated;
+            const response = await vm.resetPassword(dataCopy);
             vm.response = {
                 ...response,
                 hasError: (response.status) ? response.status != 200 : false
