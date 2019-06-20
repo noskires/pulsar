@@ -19,20 +19,24 @@ class LoginController extends Controller {
   }
   public function login(Request $request){
     $user = User::where('email', $request->email)->first();
-    $role = Role::where('role_code', $user->role_code)->first();
+    $role = null;
 
-    if (!$role->is_active || !$user->is_active) {
+    if ($user) {
+      $role = Role::where('role_code', $user->role_code)->first();
+    }
+
+    if ($role && (!$role->is_active || !$user->is_active)) {
       return redirect('login')->with('status', 'Login failed; Account is disabled.');
     } else if(Auth::attempt([
       'email'=>$request->email,
       'password'=>$request->password
       ]))
-    {
-      if ($user->auto_generated) {
-        return redirect('reset-password');
+      {
+        if ($user->auto_generated) {
+          return redirect('reset-password');
+        }
+        return redirect('index');
       }
-      return redirect('index');
-    }
     else
     {
       // return redirect()->route('login');
