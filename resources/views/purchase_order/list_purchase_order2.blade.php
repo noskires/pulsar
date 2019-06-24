@@ -278,7 +278,7 @@ $('.select2').select2();
           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">
-                <div class="panel-body" ng-if="!vm.formData.status" >
+                <div class="panel-body" ng-if="vm.formData.po_status=='OPEN'" >
                   <form ng-submit="vm.addNew()" >
                     <table class="table table-striped table-bordered" class="tbl_rs_supply">
                       <thead>
