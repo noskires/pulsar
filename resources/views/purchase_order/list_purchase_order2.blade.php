@@ -394,7 +394,7 @@ $('.select2').select2();
                       </div>
                           <div class="form-group" >
                             <div class="form-group">
-                              <input type="button" ng-if="!vm.formData.status" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.updatePo(vm.formData)">
+                              <input type="button" ng-if="vm.formData.po_status=='OPEN'"  class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.updatePo(vm.formData)">
                             </div>
                           </div>
                   </form>
