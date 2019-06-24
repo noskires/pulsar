@@ -14,9 +14,10 @@
 
             if($stateParams.poCode)
             {
-                vm.poCode = $stateParams.poCode; 
 
-                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', poStatus:2, dateFrom: '', dateTo:''}).then (function (response) {
+                vm.poCode = $stateParams.poCode; 
+                // alert(vm.poCode)
+                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', poStatus:'', dateFrom: '', dateTo:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.po = response.data.data[0];
