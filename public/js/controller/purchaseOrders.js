@@ -136,6 +136,7 @@
 
             vm.newPoBtn = function(data){
                 console.log(data)
+                
                 PurchaseOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
@@ -165,13 +166,14 @@
 
             vm.newPoBtn2 = function(data){
                 console.log(data)
+                alert('asdf')
                 PurchaseOrdersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
 
                         vm.purchaseDetails = {
                             poCode:'', 
-                            referenceCode:referenceCode, 
+                            referenceCode:'', 
                             supplierCode:'', 
                             poStatus:3, 
                             dateFrom: '', 
