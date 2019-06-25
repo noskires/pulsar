@@ -334,11 +334,10 @@ $('.select2').select2();
       </form>
         <br>
         </div>
-
         
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-info"><li class="fa fa-print"></li> Print</button>
+          <a type="button" class="btn btn-info" ng-click="vm.printVoucherDetails(vm.formData.voucher_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
           <button type="button" class="btn btn-primary" ng-click="vm.updateVoucher(vm.formData)">Save changes</button>
         </div>
       </div>

@@ -312,6 +312,7 @@ Route::group(['middleware' => 'checkModules:MODULE-010'], function () {
     Route::get('/voucher/new','Voucher\VouchersController@index');
     Route::get('/voucher/list','Voucher\VouchersController@index');
     Route::get('/voucher/list/{voucherCode}','Voucher\VouchersController@index');
+    Route::get('/voucher/report/{voucherCode}', 'Voucher\VoucherReportController@export');
 });
 /*
 |--------------------------------------------------------------------------

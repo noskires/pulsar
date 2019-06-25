@@ -1,6 +1,5 @@
 <?php
-namespace App\Http\Controllers\Requisition
-;
+namespace App\Http\Controllers\Requisition;
 use Illuminate\Http\Request;
 
 use DB;
