@@ -278,7 +278,7 @@ $('.select2').select2();
           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">
-                <div class="panel-body" ng-if="vm.formData.po_status=='OPEN'" >
+                <div class="panel-body" ng-if="vm.formData.po_status=='OPEN'">
                   <form ng-submit="vm.addNew()" >
                     <table class="table table-striped table-bordered" class="tbl_rs_supply">
                       <thead>
@@ -330,7 +330,7 @@ $('.select2').select2();
                           <th width="25%">Description</th>
                           <th width="9%">Stock Unit</th>
                           <th width="9%">Quantity</th>
-                          <th ng-if="!vm.formData.status"></th>
+                          <th ng-if="vm.formData.po_status=='OPEN'"></th>
                         </tr> 
                       </thead>
                       <tbody>
@@ -339,7 +339,7 @@ $('.select2').select2();
                           <td><%poItem.item_description%></td>
                           <td><%poItem.item_stock_unit%></td>
                           <td align="right"><%poItem.item_quantity%></td> 
-                          <td ng-if="!vm.formData.status">
+                          <td ng-if="vm.formData.po_status=='OPEN'">
                             <a href="#" ng-click="vm.removePoItem(poItem.po_item_code)"><code class="text-red">REMOVE</code></a>
                           </td>
                         </tr>
@@ -360,7 +360,7 @@ $('.select2').select2();
                       <div class="form-group col-sm-12">
                         <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
                         <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.status">   
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.po_status=='CLOSED'">   
                               <option value="">- - SELECT EMPLOYEE - -</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <%employee.employee_name%>
@@ -369,7 +369,7 @@ $('.select2').select2();
                         </div>
                         <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
                         <div class="col-sm-4">
-                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.status">   
+                          <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.po_status=='CLOSED'">   
                               <option value="">- - SELECT EMPLOYEE - </option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <%employee.employee_name%>
