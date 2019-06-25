@@ -23,7 +23,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" ng-model="rp.form.password" required>
+                                <input id="password" type="password" class="form-control" name="password" ng-model="rp.form.password"  ng-change="rp.clearErrors()" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -35,7 +35,7 @@
                         <div class="form-group"  ng-class="{'has-error': rp.response.hasError}">
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" ng-model="rp.form.password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" ng-model="rp.form.password_confirmation" ng-change="rp.clearErrors()" required>
                                 <span class="help-block" ng-repeat="error in rp.response.data" ng-if="rp.response.hasError">
                                     <strong><% error %></strong>
                                 </span>

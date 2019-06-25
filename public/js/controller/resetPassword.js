@@ -45,15 +45,21 @@
             const dataCopy = angular.copy(data);
             dataCopy.password_current = data.password_generated;
             const response = await vm.resetPassword(dataCopy);
-            vm.response = {
-                ...response,
-                hasError: (response.status) ? response.status != 200 : false
-            };
+            $scope.$apply(() => {
+                vm.response = {
+                    ...response,
+                    hasError: (response.status) ? response.status != 200 : false
+                };
+            });
             if (!vm.response.hasError) {
                 alert(vm.response.message);
                 $window.location.href = '/logout';
             }
         };
+
+        vm.clearErrors = function () {
+            vm.response = {};
+        }
     }
 
     AreModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'AresSrvcs', 'AssetsSrvcs', 'InsuranceSrvcs', 'BanksSrvcs', 'formData', 'ReceiptSrvcs'];
