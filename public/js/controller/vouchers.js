@@ -345,6 +345,10 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             };
+
+            vm.printVoucherDetails = function(tag){
+                vm.url = 'voucher/report/'+tag;
+            }
         }
 
 })();

@@ -219,7 +219,7 @@
           <ul class="treeview-menu" >
             <li ng-if="checkModuleAccess('MODULE-015')"><a href="#" ui-sref="list-banks"><i class="fa fa-bank"></i>Bank</a></li>
             <li ng-if="checkModuleAccess('MODULE-016')"><a href="#" ui-sref="list-insurance"><i class="fa fa-shield"></i>Insurance</a></li>
-            <li ng-if="checkModuleAccess('MODULE-017')"><a href="#"><i class="fa fa-money"></i>Funding</a></li>
+            <!-- <li ng-if="checkModuleAccess('MODULE-017')"><a href="#"><i class="fa fa-money"></i>Funding</a></li> -->
             <li ng-if="checkModuleAccess('--')"><a href="#"><i class="fa fa-user"></i>Users</a></li>
             <li ng-if="checkModuleAccess('--')"><a href="#"><i class="fa fa-users"></i>User's Group</a></li>
             <li ng-if="checkModuleAccess('--')"><a href="pages/advanced/offices.html"><i class="fa fa-building"></i>Offices</a></li>
