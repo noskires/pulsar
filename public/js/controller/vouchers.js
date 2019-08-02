@@ -164,10 +164,13 @@
 
             vm.newVoucher = function(data){
                 console.log(data);
+                
                 VouchersSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
                         // vm.routeTo('voucher/list');
+
+                        vm.voucherDetails = '';
                         VouchersSrvcs.vouchers({voucherCode:''}).then (function (response) {
                             if(response.data.status == 200)
                             {

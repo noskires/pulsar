@@ -19,3 +19,5 @@ CALL UpsertFields ('vouchers', 'fund_item_code', 'varchar(39)');
 
 -- Funds table
 CALL UpsertFields ('funds', 'fund_year', 'int(4)');
+
+CALL UpsertFields ('purchase_orders', 'po_code', 'DROP PRIMARY KEY');
