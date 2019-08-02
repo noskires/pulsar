@@ -83,8 +83,6 @@ class PurchaseOrdersController extends Controller {
 			$pos = $pos->where('po.supplier_code', $data['supplierCode']);
 		}
 
-		
-
 		if($data['poStatus']){
 
 			if ($data['poStatus'] == 1){
@@ -121,6 +119,7 @@ class PurchaseOrdersController extends Controller {
 	    		));
 	    }
 
+		$pos = $pos->where('po.record_status', 1);
 		$debugQuery = $pos;
 		$pos = $pos->get();
 
@@ -209,6 +208,7 @@ class PurchaseOrdersController extends Controller {
 				$po->requisition_slip_code = $data['requisition_slip_code'];
 				$po->old_reference 		= $data['old_reference'];
 				$po->employee_code 		= $data['requesting_employee'];
+				$po->record_status 		= 1;
 				$po->changed_by 		= Auth::user()->email;
 				$po->save();
 
@@ -308,6 +308,51 @@ class PurchaseOrdersController extends Controller {
 			// 		'message' => 'Error, please try again!'
 			// 	]);
 			// }
+		});
+
+		return $transaction;
+	}
+
+	public function update_record_status(Request $request){
+
+		$data = Input::post();
+
+		$transaction = DB::transaction(function($data) use($data){
+		try{
+
+				$poi_count = DB::table('purchase_order_items AS poi')->where('poi.po_code', $data['po_code'])
+					->get()->count();
+
+				if($poi_count==0){
+
+					$po = PurchaseOrder::where('po_code', $data['po_code'])->first();
+					$po->record_status        	= 0;
+					$po->changed_by       		= Auth::user()->email;
+					$po->save();
+
+					return response()->json([
+						'status' => 200,
+						'data' => 'null',
+						'message' => 'Successfully deleted.'
+					]);
+
+				}
+				else{
+					return response()->json([
+						'status' => 200,
+						'data' => 'null',
+						'message' => 'Your attempt to delete this '. $data['po_code'].' could not be completed because there are items associated on this record.'
+					]);
+				}
+			}
+			catch (\Exception $e)
+			{
+				return response()->json([
+					'status' => 500,
+					'data' => 'null',
+					'message' => 'Error, please try again!'
+				]);
+			}
 		});
 
 		return $transaction;

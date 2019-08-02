@@ -5,6 +5,7 @@
         .controller('PurchaseOrdersCtrl', PurchaseOrdersCtrl)
         .controller('PurchaseOrdersModalInstanceCtrl', PurchaseOrdersModalInstanceCtrl)
         .controller('PurchaseOrderEditModalInstanceCtrl', PurchaseOrderEditModalInstanceCtrl)
+        .controller('PurchaseOrderDeleteModalInstanceCtrl', PurchaseOrderDeleteModalInstanceCtrl)
 
         PurchaseOrdersCtrl.$inject = ['$stateParams', '$state', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'RequisitionsSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
         function PurchaseOrdersCtrl($stateParams, $state, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, RequisitionsSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window, $uibModal){
@@ -71,6 +72,35 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+            if($stateParams.poCodeDelete)
+            {
+                vm.poCode = $stateParams.poCodeDelete; 
+                // alert(vm.poCode)
+                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', poStatus:'', dateFrom: '', dateTo:''}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.po = response.data.data[0];
+                        console.log(vm.po)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'PurchaseOrderDeleteModalInstanceCtrl',
+                            templateUrl:'po-delete.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                                formData: function () {
+                                    return {
+                                        title:'PO Controller',
+                                        message:response.data.message,
+                                        po: vm.po
+                                    };
+                                }
+                            },
+                            // size: 'sm'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
             SuppliersSrvcs.suppliers({supplierCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -88,6 +118,7 @@
                 dateFrom: '', 
                 dateTo:''
             }
+
             PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -507,6 +538,50 @@
                         alert(response.data.message);
                         
 
+                        vm.purchaseDetails = {
+                            poCode:'', 
+                            referenceCode:'', 
+                            supplierCode:'', 
+                            poStatus:3, 
+                            dateFrom: '', 
+                            dateTo:''
+                        }
+                        PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.pos = response.data.data;
+                                console.log(vm.pos)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        
+                        $state.go('list-po2');
+                        vm.ok();
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+        }
+
+        PurchaseOrderDeleteModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'PurchaseOrdersSrvcs', 'RequisitionsSrvcs', 'SuppliesSrvcs', 'SuppliersSrvcs', 'formData', 'ReceiptSrvcs'];
+        function PurchaseOrderDeleteModalInstanceCtrl ($state, $stateParams, $uibModalInstance, PurchaseOrdersSrvcs, RequisitionsSrvcs, SuppliesSrvcs, SuppliersSrvcs, formData, ReceiptSrvcs) {
+            // alert('insurance model')
+            var vm = this;
+            vm.formData = formData.po;
+            console.log(vm.formData.supplier_code) 
+
+            vm.poCode = $stateParams.poCodeDelete;
+
+            vm.ok = function(){
+                $uibModalInstance.close();
+            };
+
+            vm.deletePoBtn = function(po_code){
+
+                PurchaseOrdersSrvcs.update_record_status({po_code:po_code}).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        
                         vm.purchaseDetails = {
                             poCode:'', 
                             referenceCode:'', 

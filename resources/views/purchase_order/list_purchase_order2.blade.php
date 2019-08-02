@@ -207,7 +207,7 @@
               <td><%po.reference_id%></td>
               <td><%po.requesting_employee%></td>
               <td><%po.po_status%></td>
-              <td><a href="#" ui-sref="po-edit({poCodeEdit:po.po_code})"><b>Edit</b></a> | <a href="#" ui-sref="po-delete({poCodeDelete:po.po_code})"><b>Delete</b></a></td>
+              <td> <span ng-if="po.po_status!='CLOSED'"> <a href="#" ui-sref="po-edit({poCodeEdit:po.po_code})"><b>Edit</b></a> | <a  href="#" ui-sref="po-delete({poCodeDelete:po.po_code})"><b>Delete</b></a></span></td>
             </tr>
             </tbody>
           </table>
@@ -542,5 +542,25 @@ $('.select2').select2();
   });
   </script>
 
+</script>
+
+
+<script type="text/ng-template" id="po-delete.modal"> 
+  <div>
+    <div class="modal-dialog" style="width:100%;">
+      <div class="modal-header">
+        <button type="button" class="close" ui-sref="list-po2" ng-click="vm.ok()">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-file-o"></li> Purchase Order No: <b><%vm.formData.po_code%></b></h4>
+      </div>
+      <div class="modal-body">
+        <h4> Are you sure you want to delete this record ? </h4>
+        <br>
+
+        <button class="btn btn-warning pull-right" data-toggle="confirmation" ng-click="vm.deletePoBtn(vm.formData.po_code)">DELETE</button>
+
+      </div>
+    </div>
+  </div>
 </script>
 

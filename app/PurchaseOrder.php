@@ -11,6 +11,6 @@ class PurchaseOrder extends Model implements AudtitableContract
 {
     use Auditable;
 
-    protected $primaryKey = 'po_code';
+    protected $primaryKey = 'purchase_order_id';
     protected $table = "purchase_orders";
 }
