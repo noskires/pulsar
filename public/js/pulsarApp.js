@@ -471,6 +471,18 @@
                 templateUrl: 'ris2.list.view'
             })
 
+            .state('ris-edit', {
+                url: '/requisition2/edit/:requisitionSlipCodeEdit',
+                controller: 'RequisitionOfficetCtrl as roc',
+                templateUrl: 'ris2.list.view'
+            })
+
+            .state('ris-delete', {
+                url: '/requisition2/delete/:requisitionSlipCodeDelete',
+                controller: 'RequisitionOfficetCtrl as roc',
+                templateUrl: 'ris2.list.view'
+            })
+
             .state('list-employees', {
                 url: '/employee/list',
                 controller: 'EmployeesCtrl as ec',

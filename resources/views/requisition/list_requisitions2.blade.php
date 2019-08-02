@@ -47,17 +47,6 @@
             <form class="form-horizontal" id="">
               <div class="box-body">
                 <div class="form-group col-sm-12">
-                <!-- Sample : 
-                
-                <ui-select ng-model="roc.risDetails.requesting_employee1" theme="select2" class="form-control" title="Choose an employee">
-                  <ui-select-match placeholder="Select or search a person in the list..."><%$employee.employee_name%></ui-select-match>
-                  <ui-select-choices repeat="employee in roc.employees">
-                    <div ng-bind-html="employee.employee_name"></div>
-                  </ui-select-choices>
-                </ui-select>
-             -->
-           
-
                   <label class="col-sm-2 control-label">Request Date</label>
                   <div class="col-sm-4">
                     <div class="input-group date">
@@ -226,6 +215,7 @@
               <th>Inspected By</th>
               <th>Date Inspected</th> 
               <th>Status</th> 
+              <th></th> 
             </tr>
             </thead>
             <tbody>
@@ -244,6 +234,7 @@
               <td><%requisition.inspected_by_name%></td>  
               <td><%requisition.date_inspected%></td>  
               <td><%requisition.status%></td>  
+              <td> <span ng-if="requisition.status!='CLOSED'"> <a href="#" ui-sref="ris-edit({requisitionSlipCodeEdit:requisition.requisition_slip_code})"><b>Edit</b></a> | <a  href="#" ui-sref="ris-delete({requisitionSlipCodeDelete:requisition.requisition_slip_code})"><b>Delete</b></a></span></td>
             </tr> 
             
             </tbody>
@@ -461,4 +452,131 @@ $('.select2').select2();
   </script>
 </script>
 
+<script type="text/ng-template" id="ris-edit.modal"> 
+  <div>
+    <div class="modal-dialog" style="width:100%;">
+        <div class="modal-header">
+          <button type="button" class="close" ui-sref="list-requesition2" ng-click="vm.ok()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-file-o"></li> Requisition Control No: <b><%vm.formData.requisition_slip_code%></b></h4>
+        </div>
+        <div class="modal-body">
+ 
+        <form class="form-horizontal" id="">
+              <div class="box-body">
+                <div class="form-group col-sm-12">
+                  <label class="col-sm-2 control-label">Request Date</label>
+                  <div class="col-sm-4">
+                    <div class="input-group date">
+                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                    <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="vm.formData.date_requested" datepicker2 autocomplete="off" readonly="">
+                    </div>
+                  </div>
+                  <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
+                  <div class="col-sm-4">
+                    <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.request_type" required="">
+                      <option ng-selected="true" value="">--SELECT REQUEST TYPE--</option> 
+                      <option value="Office">Office</option>
+                      <option value="Project">Project</option>
+                    </select>
+                  </div>
+                </div>
 
+                <div class="form-group col-sm-12">
+                  <label class="col-sm-2 control-label">Date Needed</label>
+                  <div class="col-sm-4">
+                    <div class="input-group date">
+                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                    <input type="text" class="form-control pull-right" id="datepicker-dateneeded" ng-model="vm.formData.date_needed" datepicker2 autocomplete="off" readonly="">
+                    </div>
+                  </div>
+                  <label for="" class="col-sm-2 control-label">Reference Name</label>
+                  <div class="col-sm-4">
+
+                  <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.reference_code">
+                      <option value="">- - SELECT REFERENCE NAME - -</option>
+                      <option ng-if="vm.formData.request_type=='Office'" ng-value="organization.org_code" ng-repeat="organization in vm.organizations"><%organization.org_name%></option>
+                      <option ng-if="vm.formData.request_type=='Project'" ng-value="project.project_code" ng-repeat="project in vm.projects"><%project.name%></option>
+                    </select>
+ 
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="" class="col-sm-2 control-label">Reference</label>
+                  <div class="col-sm-4"><input type="text" class="form-control" ng-model="vm.formData.old_reference"></div>
+                  <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
+                  <div class="col-sm-4">
+                  
+                  <select class="form-control select2"  style="width: 100%;" ng-model="vm.formData.employee_code">
+                      <option value="">- - SELECT EMPLOYEE - -</option>
+                      <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
+                        <%employee.employee_name%>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12"> 
+                  <label for="" class="col-sm-2 control-label"></label>
+                  <div class="col-sm-4"> </div>
+
+                  <label for="rcpt-amount" class="col-sm-2 control-label">Remarks</label>
+                  <div class="col-sm-4">
+                    <div class="input-group date">
+                      <textarea class="col-sm-12 form-control" id="" rows="2" ng-model="vm.formData.remarks"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <div class="form-group col-sm-12">           
+                  <div class="col-sm-8"></div>
+                  <div class="col-sm-4">
+                  <button class="btn btn-large btn-primary pull-right" data-toggle="confirmation"
+                    data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+                    data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+                    data-title="Comfirmation" data-content="Are you sure?" ng-click="vm.updateRequisitionSlip(vm.formData)"> UPDATE
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  $(function () {
+
+    $('.select2').select2();
+
+  //   $('#datepicker').datepicker({
+  //    autoclose: true
+  //   })
+  });
+  </script>
+
+</script>
+
+<script type="text/ng-template" id="ris-delete.modal"> 
+  <div>
+    <div class="modal-dialog" style="width:100%;">
+      <div class="modal-header">
+          <button type="button" class="close" ui-sref="list-requesition2" ng-click="vm.ok()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-file-o"></li> Requisition Control No: <b><%vm.formData.requisition_slip_code%></b></h4>
+        </div>
+      <div class="modal-body">
+        <h4> Are you sure you want to delete this record ? </h4>
+        <br>
+
+        <button class="btn btn-warning pull-right" data-toggle="confirmation" ng-click="vm.deleteRequisitionSlip(vm.formData.requisition_slip_code)">DELETE</button>
+
+      </div>
+    </div>
+  </div>
+</script>

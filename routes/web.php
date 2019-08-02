@@ -249,6 +249,8 @@ Route::get('/requisition-issue-slip/new','Requisition\RequisitionsController@ind
 
 Route::get('/api/v1/requisitions','Requisition\RequisitionsController@requisitions');
 Route::post('/api/v1/requisitions/update','Requisition\RequisitionsController@update');
+Route::post('/api/v1/requisitions/update2','Requisition\RequisitionsController@update2');
+Route::post('/api/v1/requisitions/update_record_status','Requisition\RequisitionsController@update_record_status');
 
 Route::get('/requisition/report/{requisitionCode}', 'Requisition\RequisitionReportController@export');
 Route::get('/requisition/report2', 'Requisition\RequisitionReportController@export2');
@@ -259,6 +261,8 @@ Route::get('/requisition-issue-slip/office/new','Requisition\RequisitionsControl
 Route::group(['middleware' => 'checkModules:MODULE-006'], function () {
     Route::get('/requisition2/list','Requisition\RequisitionsController@index');
     Route::get('/requisition2/list/{requisitionCode}','Requisition\RequisitionsController@index');
+    Route::get('/requisition2/edit/{requisitionCode}','Requisition\RequisitionsController@index');
+    Route::get('/requisition2/delete/{requisitionCode}','Requisition\RequisitionsController@index');
 });
 /*
 |--------------------------------------------------------------------------
@@ -275,6 +279,7 @@ Route::get('/requisition-issue-slip/project/new/{jobOrderCode}','Requisition\Req
 
 Route::post('/api/v1/requisition-issue-slip/office/save','Requisition\RequisitionsController@save_office');
 Route::post('/api/v1/requisition-issue-slip/office/update','Requisition\RequisitionsController@update_office');
+Route::post('/api/v1/requisition-issue-slip/office/update2','Requisition\RequisitionsController@update2');
 /*
 |--------------------------------------------------------------------------
 | Receipts -- MODULE-012
