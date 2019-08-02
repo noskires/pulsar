@@ -40,6 +40,7 @@ class RequisitionsController extends Controller {
         'rs.reference_code',
         'rs.job_order_code',
         'rs.received_by',
+        
         DB::raw('CONCAT(trim(CONCAT(receivedEmployee.lname," ",COALESCE(receivedEmployee.affix,""))),", ", COALESCE(receivedEmployee.fname,"")," ", COALESCE(receivedEmployee.mname,"")) as received_by_name'),
         'rs.date_received',
         'rs.inspected_by',
@@ -48,6 +49,7 @@ class RequisitionsController extends Controller {
         'rs.withdrawal_remarks',
         'rs.old_reference',
         'rs.created_at',
+        'rs.requesting_employee as employee_code',
 
         DB::raw(
           'CASE 
@@ -149,6 +151,8 @@ class RequisitionsController extends Controller {
     }
     
     $debugQuery = $requisitions;
+
+    $requisitions = $requisitions->where('rs.record_status', 1);
     $requisitions = $requisitions->orderBy('rs.created_at');
     $requisitions = $requisitions->get();
 
@@ -413,6 +417,109 @@ class RequisitionsController extends Controller {
 
     return $transaction;
   }
+
+  public function update2(Request $request){
+    
+    $data = array();
+    
+    $data['requisition_slip_code']              = $request->input('requisition_slip_code');
+    $data['date_needed']          = date('Y-m-d', strtotime($request->input('date_needed')));
+    $data['date_requested']       = date('Y-m-d', strtotime($request->input('date_requested')));
+    $data['old_reference']        = $request->input('old_reference');
+    $data['request_type']         = $request->input('request_type');
+    $data['reference_code']       = $request->input('reference_code');
+    $data['requesting_employee']  = $request->input('employee_code');
+    $data['remarks']              = $request->input('remarks');
+
+    // return $data;
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+          if($data['date_needed']=='1970-01-01'){
+            $data['date_needed'] = null;
+          }
+
+          if($data['date_requested']=='1970-01-01'){
+            $data['date_requested'] = null;
+          }
+
+          $requisitionSlip = Requisition::where('requisition_slip_code', $data['requisition_slip_code'])->first();
+          $requisitionSlip->date_needed           = $data['date_needed'];
+          $requisitionSlip->date_requested        = $data['date_requested'];
+          $requisitionSlip->old_reference         = $data['old_reference'];
+          $requisitionSlip->request_type          = $data['request_type'];
+          $requisitionSlip->reference_code        = $data['reference_code'];
+          $requisitionSlip->requesting_employee   = $data['requesting_employee'];
+          $requisitionSlip->remarks               = $data['remarks'];
+          $requisitionSlip->changed_by            = Auth::user()->email;
+          $requisitionSlip->timestamps            = true;
+          $requisitionSlip->save();
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+  
+  public function update_record_status(Request $request){
+
+		$data = Input::post();
+
+		$transaction = DB::transaction(function($data) use($data){
+		// try{
+
+				$rsi_count = DB::table('requisition_slips_items AS rsi')->where('rsi.requisition_slip_code', $data['requisition_slip_code'])
+					->get()->count();
+
+				if($rsi_count==0){
+
+					$ris = Requisition::where('requisition_slip_code', $data['requisition_slip_code'])->first();
+					$ris->record_status        	= 0;
+					$ris->changed_by       		  = Auth::user()->email;
+					$ris->save();
+
+					return response()->json([
+						'status' => 200,
+						'data' => 'null',
+						'message' => 'Successfully deleted.'
+					]);
+
+				}
+				else{
+					return response()->json([
+						'status' => 200,
+						'data' => 'null',
+						'message' => 'Your attempt to delete this '. $data['requisition_slip_code'].' could not be completed because there are items associated on this record.'
+					]);
+				}
+			// }
+			// catch (\Exception $e)
+			// {
+			// 	return response()->json([
+			// 		'status' => 500,
+			// 		'data' => 'null',
+			// 		'message' => 'Error, please try again!'
+			// 	]);
+			// }
+		});
+
+		return $transaction;
+	}
 
   public function save_requisition_slip_items(Request $request){
     // return $request->all();

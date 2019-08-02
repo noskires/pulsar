@@ -79,6 +79,22 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                UpdateRequisition2: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/requisitions/update2',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                update_record_status: function(data) {
+                    return $http({ 
+                        method: 'POST',
+                        url: '/api/v1/requisitions/update_record_status',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
             };
         }
 })();

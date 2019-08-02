@@ -7,6 +7,8 @@
         .controller('RequisitionAssetCtrl', RequisitionAssetCtrl)
         .controller('RequisitionOfficetCtrl', RequisitionOfficetCtrl)
         .controller('RequisitionSlipModalInstanceCtrl', RequisitionSlipModalInstanceCtrl)
+        .controller('RequisitionSlipEditModalInstanceCtrl', RequisitionSlipEditModalInstanceCtrl)
+        .controller('RequisitionSlipDeleteModalInstanceCtrl', RequisitionSlipDeleteModalInstanceCtrl)
 
         RequisitionCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
         function RequisitionCtrl($stateParams, RequisitionsSrvcs, EmployeesSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
@@ -251,6 +253,82 @@
                               }
                             },
                             size: 'xlg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            if($stateParams.requisitionSlipCodeEdit)
+            {
+                vm.requisitionSlipCode = $stateParams.requisitionSlipCodeEdit;
+
+                // alert(vm.requisitionSlipCode);
+
+                vm.risDetails = {
+                    requisitionCode:vm.requisitionSlipCode,
+                    requisitionStatus:'',
+                    dateRequested:'',
+                    requestType:''
+                }
+                
+                RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.requisition = response.data.data[0];
+                        console.log(vm.requisition)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'RequisitionSlipEditModalInstanceCtrl',
+                            templateUrl:'ris-edit.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'RIS Controller',
+                                    message:response.data.message,
+                                    requisition: vm.requisition
+                                };
+                              }
+                            },
+                            size: 'lg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            if($stateParams.requisitionSlipCodeDelete)
+            {
+                vm.requisitionSlipCode = $stateParams.requisitionSlipCodeDelete;
+
+                // alert(vm.requisitionSlipCode);
+
+                vm.risDetails = {
+                    requisitionCode:vm.requisitionSlipCode,
+                    requisitionStatus:'',
+                    dateRequested:'',
+                    requestType:''
+                }
+                
+                RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.requisition = response.data.data[0];
+                        console.log(vm.requisition)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'RequisitionSlipDeleteModalInstanceCtrl',
+                            templateUrl:'ris-delete.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'RIS Controller',
+                                    message:response.data.message,
+                                    requisition: vm.requisition
+                                };
+                              }
+                            },
+                            size: 'lg'
                         });
                     }
                 }, function (){ alert('Bad Request!!!') })
@@ -593,5 +671,115 @@
                 vm.url = 'requisition/report/'+tag;
             }
         }
+
+        RequisitionSlipEditModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window'];
+        function RequisitionSlipEditModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window) {
+
+            var vm = this;
+            vm.formData = formData.requisition;
+            console.log(vm.formData)
+            // alert(vm.formData.asset_name)
+
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+
+            vm.updateRequisitionSlip = function(data){
+                console.log(data)
+
+                RequisitionsSrvcs.UpdateRequisition2(data).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        
+                        vm.risDetails = {
+                            requisitionCode:'',
+                            requisitionStatus:'',
+                            dateRequested:'',
+                            requestType:''
+                        }
+                        RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.requisitions = response.data.data;
+                                console.log(vm.requisitions)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        
+                        $state.go('list-requesition2');
+                        vm.ok();
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+        }
+
+        RequisitionSlipDeleteModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window'];
+        function RequisitionSlipDeleteModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window) {
+
+            var vm = this;
+            vm.formData = formData.requisition;
+            console.log(vm.formData)
+            // alert(vm.formData.asset_name)
+
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+
+            
+            vm.deleteRequisitionSlip = function(ris_code){
+
+                RequisitionsSrvcs.update_record_status({requisition_slip_code:ris_code}).then (function (response) {
+                        console.log(response.data)
+                        if(response.data.status == 200)
+                        {
+                            alert(response.data.message);
+                            
+                            vm.risDetails = {
+                                requisitionCode:'',
+                                requisitionStatus:'',
+                                dateRequested:'',
+                                requestType:''
+                            }
+                            RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
+                                if(response.data.status == 200)
+                                {
+                                    vm.requisitions = response.data.data;
+                                    console.log(vm.requisitions)
+                                }
+                            }, function (){ alert('Bad Request!!!') })
+                            
+                            $state.go('list-requesition2');
+                            vm.ok();
+                        }
+                    }, function (){ alert('Bad Request!!!') })
+                }
+            }
+        
 
 })();
