@@ -436,6 +436,9 @@ Route::group(['middleware' => 'checkModules:MODULE-007'], function () {
     Route::get('/purchase-orders-office/list','PurchaseOrdersController@index');
     Route::get('/purchase-order/list/{poCode}','PurchaseOrdersController@index');
     Route::get('/purchase-order2/list/{poCode}','PurchaseOrdersController@index');
+
+    Route::get('/purchase-order2/edit/{poCode}','PurchaseOrdersController@index');
+
     Route::get('/purchase-order/report/{poCode}', 'PurchaseOrderReportController@export');
     Route::get('/purchase-order-office/report', 'PurchaseOrderReportController@export_office');
 });
@@ -447,6 +450,7 @@ Route::group(['middleware' => 'checkModules:MODULE-007'], function () {
 
 Route::post('/api/v1/purchase-order/save','PurchaseOrdersController@save');
 Route::post('/api/v1/purchase-order/update', 'PurchaseOrdersController@update');
+Route::post('/api/v1/purchase-order/update2', 'PurchaseOrdersController@update2');
 Route::get('/api/v1/purchase-orders','PurchaseOrdersController@purchaseOrders');
 
 Route::post('/api/v1/purchase-order-items/save','PurchaseOrdersController@save_purchase_order_items');

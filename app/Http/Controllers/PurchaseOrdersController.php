@@ -44,6 +44,8 @@ class PurchaseOrdersController extends Controller {
 						'po.date_inspected',
 						'po.requisition_slip_code',
 						'po.old_reference',
+						'po.created_at',
+						DB::raw('DATE_FORMAT(po.created_at, "%Y-%m-%d") as date_requested'),
 						's.supplier_code',
 						's.supplier_name',
 						's.supplier_owner',
@@ -254,6 +256,43 @@ class PurchaseOrdersController extends Controller {
 				// 	'inspected_by' => $data['inspected_by'],
 				// 	'date_inspected' => ($data['date_inspected'])?date('Y-m-d', strtotime($data['date_inspected'])):null
 				// ]);
+
+				return response()->json([
+					'status' => 200,
+					'data' => 'null',
+					'message' => 'Successfully saved.'
+				]);
+			// }
+			// catch (\Exception $e)
+			// {
+			// 	return response()->json([
+			// 		'status' => 500,
+			// 		'data' => 'null',
+			// 		'message' => 'Error, please try again!'
+			// 	]);
+			// }
+		});
+
+		return $transaction;
+	}
+
+	public function update2(Request $request){
+
+		$data = Input::post();
+
+		$transaction = DB::transaction(function($data) use($data){
+		// try{
+
+				$po = PurchaseOrder::where('po_code', $data['po_code'])->first();
+				$po->request_type        	= $data['request_type'];
+				$po->reference_code         = $data['reference_code'];
+				$po->requisition_slip_code  = $data['requisition_slip_code'];
+				$po->supplier_code    		= $data['supplier_code'];
+				$po->employee_code    		= $data['employee_code'];
+				$po->old_reference    		= $data['old_reference'];
+				$po->changed_by       		= Auth::user()->email;
+				$po->timestamps       		= true;
+				$po->save();
 
 				return response()->json([
 					'status' => 200,

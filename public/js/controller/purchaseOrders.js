@@ -4,6 +4,7 @@
         .module('pulsarApp')
         .controller('PurchaseOrdersCtrl', PurchaseOrdersCtrl)
         .controller('PurchaseOrdersModalInstanceCtrl', PurchaseOrdersModalInstanceCtrl)
+        .controller('PurchaseOrderEditModalInstanceCtrl', PurchaseOrderEditModalInstanceCtrl)
 
         PurchaseOrdersCtrl.$inject = ['$stateParams', '$state', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'RequisitionsSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
         function PurchaseOrdersCtrl($stateParams, $state, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, RequisitionsSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window, $uibModal){
@@ -14,7 +15,6 @@
 
             if($stateParams.poCode)
             {
-
                 vm.poCode = $stateParams.poCode; 
                 // alert(vm.poCode)
                 PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', poStatus:'', dateFrom: '', dateTo:''}).then (function (response) {
@@ -26,6 +26,35 @@
                         var modalInstance = $uibModal.open({
                             controller:'PurchaseOrdersModalInstanceCtrl',
                             templateUrl:'poInfo.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                                formData: function () {
+                                    return {
+                                        title:'PO Controller',
+                                        message:response.data.message,
+                                        po: vm.po
+                                    };
+                                }
+                            },
+                            size: 'lg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            if($stateParams.poCodeEdit)
+            {
+                vm.poCode = $stateParams.poCodeEdit; 
+                // alert(vm.poCode)
+                PurchaseOrdersSrvcs.pos({poCode:vm.poCode, referenceCode:'', supplierCode:'', poStatus:'', dateFrom: '', dateTo:''}).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.po = response.data.data[0];
+                        console.log(vm.po)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'PurchaseOrderEditModalInstanceCtrl',
+                            templateUrl:'po-edit.modal',
                             controllerAs: 'vm',
                             resolve :{
                                 formData: function () {
@@ -67,14 +96,6 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            // PurchaseOrdersSrvcs.pos({poCode:'', referenceCode:'', supplierCode:'', status:0}).then (function (response) {
-            //     if(response.data.status == 200)
-            //     {
-            //         vm.pos = response.data.data;
-            //         console.log(vm.pos)
-            //     }
-            // }, function (){ alert('Bad Request!!!') })
-
             OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -114,7 +135,6 @@
             }, function (){ alert('Bad Request!!!') })
 
             vm.selectPurchaseOrders = function(referenceCode){
-                // alert(referenceCode)
 
                 vm.purchaseDetails = {
                     poCode:'', 
@@ -131,7 +151,6 @@
                         console.log(vm.pos)
                     }
                 }, function (){ alert('Bad Request!!!') })
-
             }
 
             vm.newPoBtn = function(data){
@@ -401,5 +420,113 @@
                 vm.url = 'purchase-order/report/'+tag;
             }
 
+        }
+
+        PurchaseOrderEditModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'PurchaseOrdersSrvcs', 'RequisitionsSrvcs', 'SuppliesSrvcs', 'SuppliersSrvcs', 'EmployeesSrvcs', 'AssetsSrvcs', 'InsuranceSrvcs', 'BanksSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', 'formData', 'ReceiptSrvcs'];
+        function PurchaseOrderEditModalInstanceCtrl ($state, $stateParams, $uibModalInstance, PurchaseOrdersSrvcs, RequisitionsSrvcs, SuppliesSrvcs, SuppliersSrvcs, EmployeesSrvcs, AssetsSrvcs, InsuranceSrvcs, BanksSrvcs, OrganizationsSrvcs, ProjectsSrvcs, formData, ReceiptSrvcs) {
+            // alert('insurance model')
+            var vm = this;
+            vm.formData = formData.po;
+            console.log(vm.formData.supplier_code) 
+
+            vm.poCode = $stateParams.poCodeEdit;
+
+            SuppliersSrvcs.suppliers({supplierCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.suppliers = response.data.data;
+                    console.log(vm.suppliers)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.purchaseDetails = {
+                poCode:'', 
+                referenceCode:'', 
+                supplierCode:'', 
+                poStatus:3, 
+                dateFrom: '', 
+                dateTo:''
+            }
+            PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.pos = response.data.data;
+                    console.log(vm.pos)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.risDetails = {
+                requisitionCode:'',
+                requisitionStatus:'',
+                dateRequested:'',
+                requestType:''
+            }
+            RequisitionsSrvcs.requisitions(vm.risDetails).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.requisitions = response.data.data;
+                    console.log(vm.requisitions)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.ok = function(){
+                $uibModalInstance.close();
+            };
+
+            vm.updatePoBtn = function(data){
+                // console.log(data)
+
+                PurchaseOrdersSrvcs.update2(data).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        
+
+                        vm.purchaseDetails = {
+                            poCode:'', 
+                            referenceCode:'', 
+                            supplierCode:'', 
+                            poStatus:3, 
+                            dateFrom: '', 
+                            dateTo:''
+                        }
+                        PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.pos = response.data.data;
+                                console.log(vm.pos)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        
+                        $state.go('list-po2');
+                        vm.ok();
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
         }
 })();

@@ -163,16 +163,12 @@ class VoucherReportController extends Controller {
           DB::raw("(SELECT COALESCE(SUM(receipt_items.receipt_item_quantity), 0) 
 					FROM receipts, receipt_items 
 					WHERE receipts.receipt_code = receipt_items.receipt_code 
-                    AND receipts.receipt_code = r.receipt_code 
-                    ) 
-                    AS total_item_quantity_receipt"),
+                    AND receipts.receipt_code = r.receipt_code) AS total_item_quantity_receipt"),
 
           DB::raw("(SELECT COALESCE(SUM(receipt_items.receipt_item_total), 0)
 					FROM receipts, receipt_items 
 					WHERE receipts.receipt_code = receipt_items.receipt_code 
-                    AND receipts.receipt_code = r.receipt_code 
-                    ) 
-					AS total_item_cost_receipt")
+                    AND receipts.receipt_code = r.receipt_code) AS total_item_cost_receipt")
         )
         ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')
         ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
