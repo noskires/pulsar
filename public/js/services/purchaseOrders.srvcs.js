@@ -36,6 +36,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                update2: function(data) {
+                    return $http({ 
+                        method: 'POST',
+                        url: '/api/v1/purchase-order/update2',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 poItems: function(data) {
                     return $http({
                         method: 'GET',

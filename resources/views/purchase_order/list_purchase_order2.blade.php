@@ -191,6 +191,7 @@
               <th>ID</th>
               <th>Requesting Employee</th>
               <th>Status</th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -206,6 +207,7 @@
               <td><%po.reference_id%></td>
               <td><%po.requesting_employee%></td>
               <td><%po.po_status%></td>
+              <td><a href="#" ui-sref="po-edit({poCodeEdit:po.po_code})"><b>Edit</b></a> | <a href="#" ui-sref="po-delete({poCodeDelete:po.po_code})"><b>Delete</b></a></td>
             </tr>
             </tbody>
           </table>
@@ -425,5 +427,120 @@ $('.select2').select2();
   //   })
   });
   </script>
+
+
+</script>
+
+<script type="text/ng-template" id="po-edit.modal"> 
+  <div>
+    <div class="modal-dialog" style="width:100%;">
+        <div class="modal-header">
+          <button type="button" class="close" ui-sref="list-po2" ng-click="vm.ok()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-file-o"></li> Purchase Order No: <b><%vm.formData.po_code%></b></h4>
+        </div>
+        <div class="modal-body">
+ 
+            <form class="form-horizontal" id="" name="form_po" ng-model="form_po">
+              <div class="box-body">
+                <div class="form-group col-sm-12">
+                  <!-- <label class="col-sm-2 control-label">Request Date</label>
+                  <div class="col-sm-4">
+                    <div class="input-group date">
+                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                    <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="vm.formData.date_requested" datepicker2 autocomplete="off" autocomplete="off" readonly="">
+                    </div>
+                  </div> -->
+                  <label for="assetname" class="col-sm-2 control-label">Reference</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control pull-right"  ng-model="vm.formData.old_reference">
+                  </div>
+
+                  <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
+                  <div class="col-sm-4">
+                    <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.request_type" required="">
+                      <option value="">- - SELECT REQUEST TYPE - -</option>
+                      <option value="Office">Office</option>
+                      <option value="Project">Project</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="" class="col-sm-2 control-label">Reference(RIS)</label>
+                  <div class="col-sm-4">
+                    <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.requisition_slip_code">
+                      <option value="">- - SELECT RIS - -</option>
+                      <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in vm.requisitions"> <%requisition.requisition_slip_code%></option>
+                    </select>
+                  </div>
+                  <label for="" class="col-sm-2 control-label">Reference Name</label>
+                  <div class="col-sm-4">
+                    <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.reference_code">
+                      <option value="">- - SELECT REFERENCE NAME - -</option>
+                      <option ng-if="vm.formData.request_type=='Office'" ng-value="organization.org_code" ng-repeat="organization in vm.organizations"><%organization.org_name%></option>
+                      <option ng-if="vm.formData.request_type=='Project'" ng-value="project.project_code" ng-repeat="project in vm.projects"><%project.name%></option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="assetname" class="col-sm-2 control-label">Supplier</label>
+                  <div class="col-sm-4">
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.supplier_code">
+                      <option selected="selected" value="">- - SELECT SUPPLIER - -</option>
+                      <option ng-value="supplier.supplier_code" ng-repeat="supplier in vm.suppliers"><%supplier.supplier_name%></option>
+                    </select>
+                  </div>
+                  <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
+                  <div class="col-sm-4">
+                    <select class="form-control select2"  style="width: 100%;" ng-model="vm.formData.employee_code">
+                      <option value="">- - SELECT EMPLOYEE - -</option>
+                      <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
+                        <%employee.employee_name%>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <!-- <label for="assetname" class="col-sm-2 control-label">Reference</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control pull-right"  ng-model="vm.formData.old_reference">
+                  </div> -->
+                </div>
+
+                <div class="form-group col-sm-12">
+                  
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <div class="form-group col-sm-12">           
+                  <div class="col-sm-8"></div>
+                  <div class="col-sm-4">
+                  <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
+                  data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+                  data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+                  data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="vm.updatePoBtn(vm.formData)">UPDATE</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  $(function () {
+
+    $('.select2').select2();
+
+  //   $('#datepicker').datepicker({
+  //    autoclose: true
+  //   })
+  });
+  </script>
+
 </script>
 

@@ -738,6 +738,17 @@
                 templateUrl: 'purchase.order2.list.view'
             })
 
+            .state('po-edit', {
+                url: '/purchase-order2/edit/:poCodeEdit',
+                controller: 'PurchaseOrdersCtrl as poc',
+                templateUrl: 'purchase.order2.list.view'
+            })
+            .state('po-delete', {
+                url: '/purchase-order2/delete/:poCodeDelete',
+                controller: 'PurchaseOrdersCtrl as poc',
+                templateUrl: 'purchase.order2.list.view'
+            })
+
             .state('list-utilization', {
                 url: '/utilization/list',
                 controller: 'UtilizationsCtrl as uc',
