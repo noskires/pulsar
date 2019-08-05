@@ -43,7 +43,7 @@
 
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.requisition_slip_code">
                       <option value="">- - SELECT RIS - -</option>
-                      <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.requisition_slip_code%></option>
+                      <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.old_reference%> : <%requisition.requisition_slip_code%></option>
                       
                     </select>
                   </div>
@@ -52,7 +52,7 @@
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.reference_code">
                       <option value="">- - SELECT REFERENCE NAME - -</option>
                       <option ng-if="poc.poDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in poc.organizations"><%organization.org_name%></option>
-                      <option ng-if="poc.poDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in poc.projects"><%project.name%></option>
+                      <option ng-if="poc.poDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in poc.projects"><%project.code%> - <%project.name%></option>
                     </select>
                   </div>
                 </div>
@@ -471,7 +471,7 @@ $('.select2').select2();
                   <div class="col-sm-4">
                     <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.requisition_slip_code">
                       <option value="">- - SELECT RIS - -</option>
-                      <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in vm.requisitions"> <%requisition.requisition_slip_code%></option>
+                      <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in vm.requisitions"><%requisition.old_reference%> : <%requisition.requisition_slip_code%></option>
                     </select>
                   </div>
                   <label for="" class="col-sm-2 control-label">Reference Name</label>
@@ -479,7 +479,7 @@ $('.select2').select2();
                     <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.reference_code">
                       <option value="">- - SELECT REFERENCE NAME - -</option>
                       <option ng-if="vm.formData.request_type=='Office'" ng-value="organization.org_code" ng-repeat="organization in vm.organizations"><%organization.org_name%></option>
-                      <option ng-if="vm.formData.request_type=='Project'" ng-value="project.project_code" ng-repeat="project in vm.projects"><%project.name%></option>
+                      <option ng-if="vm.formData.request_type=='Project'" ng-value="project.project_code" ng-repeat="project in vm.projects"><%project.code%> - <%project.name%></option>
                     </select>
                   </div>
                 </div>
@@ -541,7 +541,6 @@ $('.select2').select2();
   //   })
   });
   </script>
-
 </script>
 
 
@@ -556,9 +555,7 @@ $('.select2').select2();
       <div class="modal-body">
         <h4> Are you sure you want to delete this record ? </h4>
         <br>
-
         <button class="btn btn-warning pull-right" data-toggle="confirmation" ng-click="vm.deletePoBtn(vm.formData.po_code)">DELETE</button>
-
       </div>
     </div>
   </div>

@@ -523,6 +523,25 @@
             vm.withdrawal = function(data){
 
                 data['requisition_slip_code'] = $stateParams.requisitionSlipCode;
+                data['is_open'] = 0;
+                
+                RequisitionsSrvcs.UpdateRequisition(data).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        vm.ok();
+                        $state.go('list-requesition2');
+                    }
+                }, function (){ alert('Bad Request!!!') })
+                console.log(data)
+            }
+
+            vm.withdrawalOpen = function(data){
+                
+                data['requisition_slip_code'] = $stateParams.requisitionSlipCode;
+                data['is_open'] = 1;
+
                 RequisitionsSrvcs.UpdateRequisition(data).then (function (response) {
                     console.log(response.data)
                     if(response.data.status == 200)

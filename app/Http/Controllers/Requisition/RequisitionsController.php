@@ -49,15 +49,27 @@ class RequisitionsController extends Controller {
         'rs.withdrawal_remarks',
         'rs.old_reference',
         'rs.created_at',
+        'rs.is_open',
         'rs.requesting_employee as employee_code',
+
+        
+
+        // DB::raw(
+        //   'CASE 
+        //     WHEN rs.date_received IS NULL 
+        //       OR rs.received_by IS NULL 
+        //       OR rs.received_by = "1970-01-01" 
+        //       OR rs.date_inspected IS NULL 
+        //       OR rs.inspected_by IS NULL 
+        //     THEN "OPEN"
+        //   ELSE 
+        //     "CLOSED" 
+        //   END AS status'
+        // ),
 
         DB::raw(
           'CASE 
-            WHEN rs.date_received IS NULL 
-              OR rs.received_by IS NULL 
-              OR rs.received_by = "1970-01-01" 
-              OR rs.date_inspected IS NULL 
-              OR rs.inspected_by IS NULL 
+            WHEN rs.is_open = 1
             THEN "OPEN"
           ELSE 
             "CLOSED" 
@@ -73,18 +85,6 @@ class RequisitionsController extends Controller {
               "" 
           END as reference_name'
         ),
-        // DB::raw(
-        //   'CASE    
-        //     WHEN rs.job_order_code IS NOT NULL 
-        //       THEN (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
-        //     WHEN rs.request_type = "Office" 
-        //       THEN (SELECT organizations.org_code FROM organizations WHERE organizations.org_code=rs.reference_code)
-        //     WHEN rs.request_type = "Project" 
-        //       THEN (SELECT projects.code AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
-        //     WHEN rs.job_order_code IS NULL 
-        //       THEN null
-        //     END as reference_id'
-        // ),
         DB::raw(
           'CASE    
             WHEN rs.job_order_code IS NOT NULL 
@@ -120,33 +120,52 @@ class RequisitionsController extends Controller {
     if ($data['requisitionStatus'] == 1){
 
       $requisitions = $requisitions->where(DB::raw('CASE 
-            WHEN rs.date_received IS NULL 
-              OR rs.received_by IS NULL 
-              OR rs.received_by = "1970-01-01" 
-              OR rs.date_inspected IS NULL 
-              OR rs.inspected_by IS NULL 
-            THEN "OPEN"
-          ELSE 
-            "CLOSED" 
-          END'),  
-        'OPEN'
-      ); 
-    }
-
-    if ($data['requisitionStatus'] == 2){
-
-      $requisitions = $requisitions->where(DB::raw('CASE 
-            WHEN rs.date_received IS NULL 
-              OR rs.received_by IS NULL 
-              OR rs.received_by = "1970-01-01" 
-              OR rs.date_inspected IS NULL 
-              OR rs.inspected_by IS NULL 
+          WHEN rs.is_open = 1
             THEN "OPEN"
           ELSE 
             "CLOSED" 
           END'), 
         'CLOSED'
       );
+      
+      // $requisitions = $requisitions->where(DB::raw('CASE 
+      //       WHEN rs.date_received IS NULL 
+      //         OR rs.received_by IS NULL 
+      //         OR rs.received_by = "1970-01-01" 
+      //         OR rs.date_inspected IS NULL 
+      //         OR rs.inspected_by IS NULL 
+      //       THEN "OPEN"
+      //     ELSE 
+      //       "CLOSED" 
+      //     END'),  
+      //   'OPEN'
+      // ); 
+    }
+
+    if ($data['requisitionStatus'] == 2){
+
+
+      $requisitions = $requisitions->where(DB::raw('CASE 
+          WHEN rs.is_open = 1
+            THEN "OPEN"
+          ELSE 
+            "CLOSED" 
+          END'), 
+        'CLOSED'
+      );
+
+      // $requisitions = $requisitions->where(DB::raw('CASE 
+      //       WHEN rs.date_received IS NULL 
+      //         OR rs.received_by IS NULL 
+      //         OR rs.received_by = "1970-01-01" 
+      //         OR rs.date_inspected IS NULL 
+      //         OR rs.inspected_by IS NULL 
+      //       THEN "OPEN"
+      //     ELSE 
+      //       "CLOSED" 
+      //     END'), 
+      //   'CLOSED'
+      // );
 
     }
     
@@ -374,6 +393,7 @@ class RequisitionsController extends Controller {
     $data['inspected_by'] = $request->input('inspected_by');
     $data['date_inspected'] = date('Y-m-d', strtotime($request->input('date_inspected')));
     $data['withdrawal_remarks'] = $request->input('withdrawal_remarks');
+    $data['is_open'] = $request->input('is_open');
 
     // return $data;
 
@@ -394,6 +414,7 @@ class RequisitionsController extends Controller {
           $requisitionSlip->inspected_by       = $data['inspected_by'];
           $requisitionSlip->date_inspected     = $data['date_inspected'];
           $requisitionSlip->withdrawal_remarks = $data['withdrawal_remarks'];
+          $requisitionSlip->is_open            = $data['is_open'];
           $requisitionSlip->changed_by         = Auth::user()->email;
           $requisitionSlip->timestamps         = true;
           $requisitionSlip->save();
