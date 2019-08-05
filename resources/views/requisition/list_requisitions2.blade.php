@@ -393,7 +393,7 @@ $('.select2').select2();
                         <div class="col-sm-4">
                           <div class="input-group date">
                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                            <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received" datepicker2 autocomplete="off" readonly="">
+                            <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_received" datepicker2 autocomplete="off" readonly="" required>
                           </div>
                         </div>
 
@@ -401,7 +401,7 @@ $('.select2').select2();
                         <div class="col-sm-4">
                           <div class="input-group date">
                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                            <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected" datepicker autocomplete="off" readonly="">
+                            <input ng-disabled="vm.formData.status=='CLOSED'" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected" datepicker autocomplete="off" readonly="" required>
                           </div>
                         </div>
                       </div>
@@ -415,11 +415,21 @@ $('.select2').select2();
 
                         <div class="form-group" >
                           <div class="form-group">
-                            <input type="button" ng-if="vm.formData.status=='OPEN'" class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
+                            <input type="submit" ng-if="vm.formData.status=='OPEN'" class="btn btn-danger pull-left" value="Finalize" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
+                          </div>
+                        </div>
+
+                        <div class="form-group" >
+                          <div class="form-group">
+                            <input type="submit" ng-if="vm.formData.status=='CLOSED'" class="btn btn-danger pull-left" value="Re-open" style="margin-right: 30px;" ng-click="vm.withdrawalOpen(vm.formData)">
                           </div>
                         </div>
                       </div>
 
+                      <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
+                        <a type="button" class="btn btn-info" ng-click="vm.printRequisitionDetails(vm.formData.requisition_slip_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
+                      </div>
                   </form>
                 </div>
               </div>
@@ -427,11 +437,7 @@ $('.select2').select2();
           </div>
 
         </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
-          <a type="button" class="btn btn-info" ng-click="vm.printRequisitionDetails(vm.formData.requisition_slip_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
-          
-        </div>
+        
       </div>
       <!-- /.modal-content -->
     </div>
@@ -496,7 +502,7 @@ $('.select2').select2();
                   <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.reference_code">
                       <option value="">- - SELECT REFERENCE NAME - -</option>
                       <option ng-if="vm.formData.request_type=='Office'" ng-value="organization.org_code" ng-repeat="organization in vm.organizations"><%organization.org_name%></option>
-                      <option ng-if="vm.formData.request_type=='Project'" ng-value="project.project_code" ng-repeat="project in vm.projects"><%project.name%></option>
+                      <option ng-if="vm.formData.request_type=='Project'" ng-value="project.project_code" ng-repeat="project in vm.projects"><%project.code%> - <%project.name%></option>
                     </select>
  
                   </div>
