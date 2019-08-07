@@ -153,36 +153,8 @@
           </div>
         </div>
 
-  <div class="row">
-    <div class="col-sm-12">
-  <div class="box">
-    <!-- form start -->
-      <form role="form">
-        <div class="box-body">
-          <div class="form-group">
-            <div class="col-sm-3">
-            <select class="form-control select2" style="width: 100%;" required="">
-            <option selected="selected" value="0">Select Payee Type</option>
-            <option value="1">EMPLOYEE</option>
-            <option value="2">SUPPLIER</option>
-            <option value="3">BANK</option>
-            </select>
-            </div>
-            <div class="col-sm-3"> 
-            <button type="button" class="btn btn-default" id="daterange-btn">
-              <span><i class="fa fa-calendar"></i> Date range picker </span> <i class="fa fa-caret-down"></i>
-            </button>
-            </div>
-            <div class="col-sm-3"> 
-            <button type="button" class="btn btn-primary"><li class="fa fa-refresh"></li> Filter Display</button>
-            </div>  
-          </div>
-        </div>
-        <!-- /.box-body -->
-      </form>
-  </div>
 </div>
-</div>
+<br><br>
 
   <div class="box box-primary">
         <div class="box-body">
@@ -207,10 +179,22 @@
             <tr ng-repeat="voucher in vc.vouchers">
               <td><a href="#"  ui-sref="list-voucherCopy({voucherCode:voucher.voucher_code})" title="Click for details"><b><%voucher.voucher_code%></b></a></td> 
               <td><%voucher.payee_type%></td>
-              <td><%voucher.payee_text%></td>
-              <td><%voucher.cost_center_name%></td>
-              <td><%voucher.supply_category_name%></td>
-              <td><%voucher.description%></td>
+              <td title="<%voucher.payee_text%>"> 
+                <span ng-bind="voucher.payee_text | limitTo:12"></span> </span>
+                <span ng-if="voucher.payee_text.length > 12">...</span>
+              </td>
+              <td title="<%voucher.cost_center_name%>"> 
+                <span ng-bind="voucher.cost_center_name | limitTo:12"></span> </span>
+                <span ng-if="voucher.cost_center_name.length > 12">...</span>
+              </td>
+              <td title="<%voucher.supply_category_name%>"> 
+                <span ng-bind="voucher.supply_category_name | limitTo:12"></span> </span>
+                <span ng-if="voucher.supply_category_name.length > 12">...</span>
+              </td>
+              <td title="<%voucher.description%>"> 
+                <span ng-bind="voucher.description | limitTo:12"></span> </span>
+                <span ng-if="voucher.description.length > 12">...</span>
+              </td>
               <td><%voucher.check_number%></td>
               <td><%voucher.check_date%></td>
               <td><%voucher.bank_name%></td>
@@ -242,7 +226,7 @@ $('.select2').select2();
     <div class="modal-dialog" style="width:100%">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" ng-click="vm.ok()">
+          <button type="button" class="close" ui-sref="list-voucher" ng-click="vm.ok()">
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title"><li class="fa fa-credit-card"></li> DV No: <b><%vm.formData.voucher_code%></b>&nbsp;&nbsp;&nbsp;
             (<%vm.formData.payee_type%> : <%vm.formData.payee_text%>)</h4>
@@ -308,26 +292,39 @@ $('.select2').select2();
               </table>
         
         <p>Please provide check details to complete the voucher.</p>
+        
         <form class="form-horizontal" id="" ng-model="vm.formData">
-        <div class="form-group">
-          <div class="col-sm-4">
-          <div class="input-group checknum">
-          <span class="input-group-addon" style="font-size: 15px;">Check #</span>
-          <input type="number" class="form-control" id="rcpt-number" placeholder="" required="" ng-model="vm.formData.check_number">
-        </div></div>
-        <div class="col-sm-4">
-          <div class="input-group checkdate">
-          <span class="input-group-addon" style="font-size: 15px;">Check Date</span>
-          <input type="text" class="form-control pull-right" id="datepicker_check" ng-model="vm.formData.check_date">
-          </div>
+        <div class="row">
+
+            <label class="col-sm-3 control-label">Select Payment Type:</label>
+            <div class="col-sm-9">
+              <input type="radio" ng-model="vm.formData.payment_type" id="check" ng-value="'CHECK'" style="cursor:pointer;"> 
+                <label for="check" style="cursor:pointer;"> Check </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="radio" ng-model="vm.formData.payment_type" id="cash" ng-value="'CASH'" style="cursor:pointer;"> 
+                <label for="cash" style="cursor:pointer;"> Cash </label>  
+            </div>
         </div>
-        <div class="col-sm-4">
-          <div class="input-group checkbank">
-          <span class="input-group-addon" style="font-size: 15px;">Bank</span>
-          <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.bank_code">
-            <option selected="selected" value="">Select Bank</option>
-              <option value="<%bank.bank_code%>" ng-repeat="bank in vm.banks"> <%bank.bank_name%> </option>
-          </select>
+
+        <div class="form-group" ng-if="vm.formData.payment_type=='CHECK'">
+          <div class="col-sm-4">
+            <div class="input-group checknum">
+              <span class="input-group-addon" style="font-size: 15px;">Check #</span>
+              <input type="number" class="form-control" id="rcpt-number" placeholder="" required="" ng-model="vm.formData.check_number">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group checkdate">
+            <span class="input-group-addon" style="font-size: 15px;">Check Date</span>
+            <input type="text" class="form-control pull-right" id="datepicker_check" ng-model="vm.formData.check_date">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group checkbank">
+            <span class="input-group-addon" style="font-size: 15px;">Bank</span>
+            <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.bank_code">
+              <option selected="selected" value="">Select Bank</option>
+                <option value="<%bank.bank_code%>" ng-repeat="bank in vm.banks"> <%bank.bank_name%> </option>
+            </select>
           </div>
         </div>
         </div> 

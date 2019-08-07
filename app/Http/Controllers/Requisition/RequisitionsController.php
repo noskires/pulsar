@@ -125,7 +125,7 @@ class RequisitionsController extends Controller {
           ELSE 
             "CLOSED" 
           END'), 
-        'CLOSED'
+        'OPEN'
       );
       
       // $requisitions = $requisitions->where(DB::raw('CASE 

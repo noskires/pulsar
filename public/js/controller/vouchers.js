@@ -194,8 +194,8 @@
         }
 
 
-        VouchersModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs', 'VouchersSrvcs', 'BanksSrvcs', '$window'];
-        function VouchersModalInstanceCtrl ($uibModalInstance, formData, ReceiptSrvcs, VouchersSrvcs, BanksSrvcs, $window) {
+        VouchersModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'ReceiptSrvcs', 'VouchersSrvcs', 'BanksSrvcs', '$window'];
+        function VouchersModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, ReceiptSrvcs, VouchersSrvcs, BanksSrvcs, $window) {
 
             var vm = this;
             vm.formData = formData.voucher;
@@ -294,11 +294,14 @@
             vm.updateVoucher = function(data)
             {
                 data['voucherCode'] = vm.formData.voucher_code;
+                console.log(data)
                 VouchersSrvcs.update(data).then (function (response) {
                     if(response.data.status == 200)
                     {
                         alert(response.data.message);
-                        vm.routeTo('voucher/list');
+                        // vm.routeTo('voucher/list');
+                        $state.go('list-voucher');
+                        vm.ok();
                     }
                     console.log(response.data)
                 }, function (){ alert('Bad Request!!!') })

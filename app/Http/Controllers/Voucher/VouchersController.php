@@ -185,10 +185,11 @@ class VouchersController extends Controller {
 	public function update(Request $request){
 
     $data = array();
-    $data['voucherCode'] = $request->input('voucherCode');
-    $data['checkNumber'] = $request->input('check_number');
-    $data['checkDate'] = date('Y-m-d', strtotime($request->input('check_date')));
-    $data['bankCode'] = $request->input('bank_code');
+    $data['voucherCode']  = $request->input('voucherCode');
+    $data['checkNumber']  = $request->input('check_number');
+    $data['checkDate']    = date('Y-m-d', strtotime($request->input('check_date')));
+    $data['bankCode']     = $request->input('bank_code');
+    $data['payment_type'] = $request->input('payment_type');
 
     $transaction = DB::transaction(function($data) use($data){
     try{
@@ -208,12 +209,20 @@ class VouchersController extends Controller {
           $totalReceiptAmount = $voucher->total_amount;
 
           $voucher = Voucher::where('voucher_code', $data['voucherCode'])->first();
-          $voucher->check_number     = $data['checkNumber'];
-          $voucher->check_date       = $data['checkDate'];
-          $voucher->bank_code        = $data['bankCode'];
+
+          if($data['payment_type']=="CHECK"){
+            $voucher->check_number     = $data['checkNumber'];
+            $voucher->check_date       = $data['checkDate'];
+            $voucher->bank_code        = $data['bankCode'];
+          }else{
+            $voucher->check_number     = null;
+            $voucher->check_date       = null;
+            $voucher->bank_code        = null;
+          }
+          $voucher->payment_type     = $data['payment_type'];
           $voucher->amount           = $totalReceiptAmount;
           $voucher->changed_by       = Auth::user()->email;
-          $voucher->timestamps        = true;
+          $voucher->timestamps       = true;
           $voucher->save();
 
         return response()->json([
