@@ -171,11 +171,71 @@
                         // vm.routeTo('voucher/list');
 
                         vm.voucherDetails = '';
+                        vm.voucherDetails = {
+                            payee:'', 
+                            description:'', 
+                            fund_code:'', 
+                            cost_center_code: '', 
+                            supply_category_code: '', 
+                            payment_type: ''
+                        }
+
+
                         VouchersSrvcs.vouchers({voucherCode:''}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.vouchers = response.data.data;
                                 console.log(vm.vouchers)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                        SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
+                            if (response.data.status == 200) {
+                                vm.suppliers = response.data.data;
+                            }
+                            else {
+                                alert(response.data.message);
+                            }
+                            console.log(response.data);
+                        });
+            
+                        ParticularsSrvcs.particulars({particularCode:''}).then(function(response){
+                            if(response.data.status == 200)
+                            {
+                                vm.particulars = response.data.data;
+                                console.log(vm.particulars)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                        FundsSrvcs.funds({fundCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.funds = response.data.data;
+                                console.log(vm.funds)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                        SupplyCategoriesSrvcs.SupplyCategories({supplyCategoryCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.supplyCategories = response.data.data;
+                                console.log(vm.supplyCategories)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+            
+                        OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.organizations = response.data.data;
+                                console.log(vm.organizations)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+            
+                        ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.projects = response.data.data;
+                                console.log(vm.projects)
                             }
                         }, function (){ alert('Bad Request!!!') })
                         

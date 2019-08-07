@@ -222,6 +222,7 @@ class PurchaseOrdersController extends Controller {
 				$po->old_reference 		= $data['old_reference'];
 				$po->employee_code 		= $data['requesting_employee'];
 				$po->record_status 		= 1;
+				$po->is_open 		= 1;
 				$po->changed_by 		= Auth::user()->email;
 				$po->save();
 
