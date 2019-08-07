@@ -495,6 +495,7 @@ $('.select2').select2();
                   <div class="col-sm-4">
                     <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.requisition_slip_code">
                       <option value="">- - SELECT RIS - -</option>
+                      <option ng-if="vm.formData.status=='CLOSED'" value="<%vm.formData.requisition_slip_code%>"><%vm.formData.requisition_old_reference%> : <%vm.formData.requisition_slip_code%></option>
                       <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in vm.requisitions"><%requisition.old_reference%> : <%requisition.requisition_slip_code%></option>
                     </select>
                   </div>

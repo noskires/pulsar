@@ -153,7 +153,7 @@
 
             vm.risDetails = {
                 requisitionCode:'',
-                requisitionStatus:'',
+                requisitionStatus:'1',
                 dateRequested:'',
                 requestType:''
             }
@@ -531,7 +531,7 @@
 
             vm.risDetails = {
                 requisitionCode:'',
-                requisitionStatus:'',
+                requisitionStatus:'1',
                 dateRequested:'',
                 requestType:''
             }

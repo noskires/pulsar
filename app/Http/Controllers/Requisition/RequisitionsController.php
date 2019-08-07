@@ -360,6 +360,7 @@ class RequisitionsController extends Controller {
         $requisition->old_reference = $data['old_reference'];
         $requisition->remarks = $data['remarks'];
         $requisition->record_status = 1;
+        $requisition->is_open = 1;
         $requisition->changed_by = Auth::user()->email;
         $requisition->save();
 
