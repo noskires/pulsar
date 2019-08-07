@@ -200,12 +200,30 @@
               <td><%po.old_reference%></td>
               <td ng-if="po.requisition_old_reference!=null"><%po.requisition_old_reference%></td>
               <td ng-if="po.requisition_old_reference==null"><%po.requisition_slip_code%></td>
-              <td><%po.supplier_name%></td>
-              <td><%po.supplier_owner%></td>
-              <td><%po.address%></td>
-              <td><%po.reference_name%></td>
-              <td><%po.reference_id%></td>
-              <td><%po.requesting_employee%></td>
+              <td title="<%po.supplier_name%>">  
+                <span ng-bind="po.supplier_name | limitTo:8"></span> </span>
+                <span ng-if="po.supplier_name.length > 8">...</span>
+              </td>
+              <td title="<%po.supplier_owner%>"> 
+                <span ng-bind="po.supplier_owner | limitTo:8"></span> </span>
+                <span ng-if="po.supplier_owner.length > 8">...</span>
+              </td>
+              <td title="<%po.address%>"> 
+                <span ng-bind="po.address | limitTo:10"></span> </span>
+                <span ng-if="po.address.length > 10">...</span>
+              </td> 
+              <td title="<%po.reference_name%>"> 
+                <span ng-bind="po.reference_name | limitTo:10"></span> </span>
+                <span ng-if="po.reference_name.length > 10">...</span>
+              </td>  
+              <td title="<%po.reference_id%>"> 
+                <span ng-bind="po.reference_id | limitTo:10"></span> </span>
+                <span ng-if="po.reference_id.length > 10">...</span>
+              </td>
+              <td title="<%po.requesting_employee%>"> 
+                <span ng-bind="po.requesting_employee | limitTo:12"></span> </span>
+                <span ng-if="po.requesting_employee.length > 12">...</span>
+              </td>
               <td><%po.po_status%></td>
               <td> <span ng-if="po.po_status!='CLOSED'"> <a href="#" ui-sref="po-edit({poCodeEdit:po.po_code})"><b>Edit</b></a> | <a  href="#" ui-sref="po-delete({poCodeDelete:po.po_code})"><b>Delete</b></a></span></td>
             </tr>
@@ -394,11 +412,17 @@ $('.select2').select2();
                         <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected" datepicker autocomplete="off" readonly="">
                       </div></div>
                       </div>
-                          <div class="form-group" >
-                            <div class="form-group">
-                              <input type="button" ng-if="vm.formData.po_status=='OPEN'"  class="btn btn-info pull-right" value="Save Changes" style="margin-right: 30px;" ng-click="vm.updatePo(vm.formData)">
-                            </div>
+                        <div class="form-group" >
+                          <div class="form-group">
+                            <input type="button" ng-if="vm.formData.po_status=='OPEN'"  class="btn btn-danger pull-left" value="Save Changes" style="margin-right: 30px;" ng-click="vm.updatePo(vm.formData)">
                           </div>
+                        </div>
+
+                        <div class="form-group" >
+                          <div class="form-group">
+                            <input type="button" ng-if="vm.formData.po_status=='CLOSED'"  class="btn btn-danger pull-left" value="Re-open" style="margin-right: 30px;" ng-click="vm.updatePoOpen(vm.formData)">
+                          </div>
+                        </div>
                   </form>
                 </div>
               </div>

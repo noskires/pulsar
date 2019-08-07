@@ -205,8 +205,7 @@
               <th>Old Reference</th>
               <th>Date Requested</th>
               <th>Date Needed</th> 
-              <th>Request Type</th>
-              <!-- <th>Reference </th> -->
+              <th>Request Type</th> 
               <th>Reference</th>
               <th>ID</th>
               <th>Asset</th>
@@ -224,14 +223,25 @@
               <td><%requisition.old_reference%></td>
               <td><%requisition.date_requested%></td>
               <td><%requisition.date_needed%></td>  
-              <td><%requisition.request_type%></td>  
-              <!-- <td><%requisition.reference_code%></td>   -->
-              <td><%requisition.reference_name%></td>  
+              <td><%requisition.request_type%></td>    
+              <td title="<%requisition.reference_name%>"> 
+                <span ng-bind="requisition.reference_name | limitTo:12"></span> </span>
+                <span ng-if="requisition.reference_name.length > 12">...</span>
+              </td>
               <td><%requisition.reference_id%></td>  
-              <td><%requisition.asset_name%></td>  
-              <td><%requisition.received_by_name%></td>  
-              <td><%requisition.date_received%></td>  
-              <td><%requisition.inspected_by_name%></td>  
+              <td title="<%requisition.asset_name%>"> 
+                <span ng-bind="requisition.asset_name | limitTo:12"></span> </span>
+                <span ng-if="requisition.asset_name.length > 12">...</span>
+              </td>
+              <td title="<%requisition.received_by_name%>"> 
+                <span ng-bind="requisition.received_by_name | limitTo:12"></span> </span>
+                <span ng-if="requisition.received_by_name.length > 12">...</span>
+              </td>
+              <td><%requisition.date_received%></td>
+              <td title="<%requisition.inspected_by_name%>"> 
+                <span ng-bind="requisition.inspected_by_name | limitTo:12"></span> </span>
+                <span ng-if="requisition.inspected_by_name.length > 12">...</span>
+              </td>
               <td><%requisition.date_inspected%></td>  
               <td><%requisition.status%></td>  
               <td> <span ng-if="requisition.status!='CLOSED'"> <a href="#" ui-sref="ris-edit({requisitionSlipCodeEdit:requisition.requisition_slip_code})"><b>Edit</b></a> | <a  href="#" ui-sref="ris-delete({requisitionSlipCodeDelete:requisition.requisition_slip_code})"><b>Delete</b></a></span></td>

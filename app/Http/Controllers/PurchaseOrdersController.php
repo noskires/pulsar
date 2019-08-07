@@ -54,17 +54,24 @@ class PurchaseOrdersController extends Controller {
 						'e.employee_code',
                      	 DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee'),
                       	'requisition_slip.old_reference as requisition_old_reference',
-                      	DB::raw('CASE 
-	                      	WHEN po.date_received IS NULL 
-	                      		OR po.received_by IS NULL 
-	                      		OR po.received_by = "1970-01-01" 
-	                      		OR po.date_inspected IS NULL 
-	                      		OR po.inspected_by IS NULL 
-	                      	THEN "OPEN"
-							ELSE 
-								"CLOSED" 
-							END AS po_status'
-					  	)
+                      	// DB::raw('CASE 
+	                    //   	WHEN po.date_received IS NULL 
+	                    //   		OR po.received_by IS NULL 
+	                    //   		OR po.received_by = "1970-01-01" 
+	                    //   		OR po.date_inspected IS NULL 
+	                    //   		OR po.inspected_by IS NULL 
+	                    //   	THEN "OPEN"
+						// 	ELSE 
+						// 		"CLOSED" 
+						// 	END AS po_status'
+						// )
+						  
+						DB::raw('CASE 
+						  WHEN po.is_open = 1
+						  THEN "OPEN"
+						ELSE 
+						  "CLOSED" 
+						END AS po_status')
                     )
                     ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')
                     // ->leftjoin('receipts as r','r.purchase_order_code','=','po.po_code')
@@ -87,27 +94,33 @@ class PurchaseOrdersController extends Controller {
 
 			if ($data['poStatus'] == 1){
 	      		$pos = $pos->where(DB::raw('CASE 
-	                      	WHEN po.date_received IS NULL 
-	                      		OR po.received_by IS NULL 
-	                      		OR po.date_inspected IS NULL 
-	                      		OR po.inspected_by IS NULL 
-	                      	THEN "OPEN"
-							ELSE 
-								"CLOSED" 
-							END'),  'CLOSED'); 
+						  WHEN po.is_open = 1
+						  THEN "OPEN"
+						ELSE 
+						  "CLOSED" 
+						END'
+						),  'CLOSED'); 
+
+						
+					  	// 'CASE 
+	                    //   	WHEN po.date_received IS NULL 
+	                    //   		OR po.received_by IS NULL 
+	                    //   		OR po.date_inspected IS NULL 
+	                    //   		OR po.inspected_by IS NULL 
+	                    //   	THEN "OPEN"
+						// 	ELSE 
+						// 		"CLOSED" 
+						// 	END'
 	      	}
-	      	elseif($data['poStatus'] == 2){
-	      		$pos = $pos->where(DB::raw('CASE 
-	                      	WHEN po.date_received IS NULL 
-	                      		OR po.received_by IS NULL 
-	                      		OR po.date_inspected IS NULL 
-	                      		OR po.inspected_by IS NULL 
-	                      	THEN "OPEN"
-							ELSE 
-								"CLOSED" 
-							END'),  'OPEN');
-	      	}else{
-	      		//nothing here
+			  
+			  if($data['poStatus'] == 2){
+				$pos = $pos->where(DB::raw('CASE 
+						WHEN po.is_open = 1
+							THEN "OPEN"
+						ELSE 
+							"CLOSED" 
+						END'),  'OPEN'
+				); 
 	      	}
 
 	    }
@@ -238,24 +251,15 @@ class PurchaseOrdersController extends Controller {
 		$transaction = DB::transaction(function($data) use($data){
 		// try{
 
-				$employee = PurchaseOrder::where('po_code', $data['po_code'])->first();
-				$employee->received_by          = $data['received_by'];
-				$employee->date_received        = ($data['date_received'])?date('Y-m-d', strtotime($data['date_received'])):null;
-				$employee->inspected_by         = $data['inspected_by'];
-				$employee->date_inspected       = ($data['date_inspected'])?date('Y-m-d', strtotime($data['date_inspected'])):null;
-				$employee->changed_by       	= Auth::user()->email;
-				$employee->timestamps       	= true;
-				$employee->save();
-
-				// DB::table('purchase_orders')
-				// ->where('po_code', $data['po_code'])
-				// ->update([
-				// 	'supplier_code' => $data['supplier_code'],
-				// 	'received_by' => $data['received_by'],
-				// 	'date_received' => ($data['date_received'])?date('Y-m-d', strtotime($data['date_received'])):null,
-				// 	'inspected_by' => $data['inspected_by'],
-				// 	'date_inspected' => ($data['date_inspected'])?date('Y-m-d', strtotime($data['date_inspected'])):null
-				// ]);
+				$po = PurchaseOrder::where('po_code', $data['po_code'])->first();
+				$po->received_by          	= $data['received_by'];
+				$po->date_received        	= ($data['date_received'])?date('Y-m-d', strtotime($data['date_received'])):null;
+				$po->inspected_by         	= $data['inspected_by'];
+				$po->date_inspected       	= ($data['date_inspected'])?date('Y-m-d', strtotime($data['date_inspected'])):null;
+				$po->is_open 		      	= $data['is_open'];
+				$po->changed_by       		= Auth::user()->email;
+				$po->timestamps       		= true;
+				$po->save();
 
 				return response()->json([
 					'status' => 200,
@@ -401,8 +405,6 @@ class PurchaseOrdersController extends Controller {
 	    ])->setEncodingOptions(JSON_NUMERIC_CHECK);
 
 	}
-
-
 
 	public function save_purchase_order_items(Request $request){
     // return $request->all();

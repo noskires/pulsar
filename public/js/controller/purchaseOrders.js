@@ -410,6 +410,25 @@
             vm.updatePo = function(data){
 
                 data['po_code'] = vm.poCode;
+                data['is_open'] = 0;
+
+                PurchaseOrdersSrvcs.update(data).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        $state.go('list-po2');
+                        vm.ok();
+                    }
+                }, function (){ alert('Bad Request!!!') })
+                console.log(data)
+            }
+
+            vm.updatePoOpen = function(data){
+
+                data['po_code'] = vm.poCode;
+                data['is_open'] = 1;
+
                 PurchaseOrdersSrvcs.update(data).then (function (response) {
                     console.log(response.data)
                     if(response.data.status == 200)
