@@ -59,7 +59,7 @@
                   <select class="form-control select2" style="width: 100%;"  ng-model="rac.risDetails.reference_code" required="">
                     <option value="">- - SELECT - -</option>
                     <option ng-if="rac.risDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in rac.organizations"><%organization.org_name%></option>
-                    <option ng-if="rac.risDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in rac.projects"><%project.name%></option>
+                    <option ng-if="rac.risDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in rac.projects"><%project.code%> - <%project.name%></option>
                   </select>
               </div>
             </div>

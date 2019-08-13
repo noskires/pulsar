@@ -143,7 +143,7 @@ class VouchersController extends Controller {
 		$data['supply_category_code'] = $request->input('supply_category_code');
 
 		$transaction = DB::transaction(function($data) use($data){
-		try{
+		// try{
 
 				$voucher = new Voucher;
 
@@ -168,15 +168,15 @@ class VouchersController extends Controller {
 				    'message' => 'Successfully saved.'
 				]);
 
-			}
-			catch (\Exception $e) 
-			{
-			  	return response()->json([
-				    'status' => 500,
-				    'data' => 'null',
-				    'message' => 'Error, please try again!'
-				]);
-			}
+			// }
+			// catch (\Exception $e) 
+			// {
+			//   	return response()->json([
+			// 	    'status' => 500,
+			// 	    'data' => 'null',
+			// 	    'message' => 'Error, please try again!'
+			// 	]);
+			// }
 		});
 
 		return $transaction;
