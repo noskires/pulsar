@@ -261,6 +261,9 @@ class RequisitionsController extends Controller {
         $requisition->requesting_employee     = $data['requestingEmployee'];
         $requisition->job_order_code          = $data['jobOrderCode'];
         $requisition->old_reference           = $data['old_reference'];
+        $requisition->is_open                 = 1;
+        $requisition->record_status           = 1;
+
         $requisition->changed_by              = Auth::user()->email;
         $requisition->save();
 
