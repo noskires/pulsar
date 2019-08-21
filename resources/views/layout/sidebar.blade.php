@@ -36,7 +36,7 @@
       </a>
       <ul class="treeview-menu">
       <!--   <li><a href="#" ng-click="mc.routeTo('/maintenance/operation')"><i class="fa fa-circle-o"></i> Daily Operating Report</a></li> -->
-      <li><a href="#" ui-sref="operation-create"><i class="fa fa-circle-o"></i> Daily Operating Report</a></li>
+      <!-- <li><a href="#" ui-sref="operation-create"><i class="fa fa-circle-o"></i> Daily Operating Report</a></li> -->
       <li><a href="#" ui-sref="list-operating"><i class="fa fa-circle-o"></i> Operating Records</a></li>
       <li><a href="#" ui-sref="list-monitoring"><i class="fa fa-circle-o"></i> Maintenance Monitoring</a></li>
       <!-- <li><a href="#" ui-sref="list-jo"><i class="fa fa-list-ul"></i> List of J.O.</a></li> -->

@@ -62,8 +62,8 @@
             }; 
         }
         
-        ListOperatingCtrl.$inject = ['MaintenanceSrvcs', '$window'];
-        function ListOperatingCtrl(MaintenanceSrvcs, $window){
+        ListOperatingCtrl.$inject = ['$state', 'MaintenanceSrvcs', 'AssetsSrvcs', 'ProjectsSrvcs', '$window'];
+        function ListOperatingCtrl($state, MaintenanceSrvcs, AssetsSrvcs, ProjectsSrvcs, $window){
             var vm = this;
             var data = {};
             
@@ -78,6 +78,92 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 
+
+            vm.newOperation =  function(data){
+                console.log(data);
+                // alert(data.operatingTimeTo)
+                MaintenanceSrvcs.saveOperation(data).then(function(response){
+                    if (response.data.status == 200) {
+                        alert(response.data.message);
+                        // vm.routeTo('maintenance/new');
+
+                        vm.operationDetails = "";
+
+                        MaintenanceSrvcs.operations({operationCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            { 
+                                vm.operations = response.data.data;
+                                console.log(vm.operations)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+
+                        vm.assetsDetails = {
+                            assetCode:'', 
+                            name:'', 
+                            category:'CONE', 
+                            areCode:'', 
+                            status: ['Active'],
+                            isAll:1
+                        }
+            
+            
+                        AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.assets = response.data.data;
+                                console.log(vm.assets)
+                            }
+            
+                            console.log(response.data)
+                        }, function (){ alert('Bad Request!!!') })
+            
+                        ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.projects = response.data.data;
+                                console.log(vm.projects)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                        $state.go('list-operating');
+                    }
+                    else {
+                        alert(response.data.message);
+                        // vm.routeTo('asset/create');
+                    }
+                    console.log(response.data);
+                });
+            };
+
+            vm.assetsDetails = {
+                assetCode:'', 
+                name:'', 
+                category:'CONE', 
+                areCode:'', 
+                status: ['Active'],
+                isAll:1
+            }
+
+
+            AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.assets = response.data.data;
+                    console.log(vm.assets)
+                }
+
+                console.log(response.data)
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
         }
 
         ListMonitoringCtrl.$inject = ['MaintenanceSrvcs', '$window'];
