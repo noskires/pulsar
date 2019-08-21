@@ -48,6 +48,9 @@ Route::group(['middleware' => 'checkModules:MODULE-005'], function () {
     Route::get('','MaintenanceController@index');
     Route::get('/index','MaintenanceController@index');
     Route::get('/maintenance/new','MaintenanceController@index');
+
+    Route::get('/maintenance/new2','MaintenanceController@index');
+
     Route::get('/maintenance/operation','MaintenanceController@index');
     Route::get('/maintenance/list-operating','MaintenanceController@index');
     Route::get('/maintenance/list-monitoring','MaintenanceController@index');

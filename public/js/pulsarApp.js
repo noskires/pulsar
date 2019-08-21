@@ -276,9 +276,15 @@
                 templateUrl: 'operation.create.view'
             })
 
+            .state('operation-create2', {
+                url: '/maintenance/new2',
+                controller: 'OperationCtrl as oc',
+                templateUrl: 'operation.create.view'
+            })
+
             .state('list-operating', {
                 url: '/maintenance/list-operating',
-                controller: 'ListOperatingCtrl as loc',
+                controller: 'ListOperatingCtrl as oc',
                 templateUrl: 'list.operating.view'
             })
             .state('list-monitoring', {

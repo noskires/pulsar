@@ -29,8 +29,12 @@ class OperationsController extends Controller {
                 // 'o.asset_tag',
                 'o.project_code', 
                 'o.remarks', 
-                'o.operating_hours', 
-                'o.distance_travelled', 
+                // 'o.operating_hours', 
+                'o.operating_time_from', 
+                'o.operating_time_to', 
+                'o.distance_travelled_from', 
+                'o.distance_travelled_to', 
+                // 'o.distance_travelled', 
                 'o.diesel_consumption', 
                 'o.gas_consumption', 
                 'o.oil_consumption', 
@@ -113,8 +117,12 @@ class OperationsController extends Controller {
     $data['projectName']          = $request->input('projectName');
     $data['projectCode']          = $request->input('projectCode');
     $data['remarks']              = $request->input('remarks');
-    $data['operatingHours']       = $request->input('operatingHours');
-    $data['distanceTravelled']    = $request->input('distanceTravelled');
+    $data['operatingTimeFrom']    = $request->input('operatingTimeFrom');
+    $data['operatingTimeTo']      = $request->input('operatingTimeTo');
+    // $data['operatingHours']       = $request->input('operatingHours');
+    // $data['distanceTravelled']    = $request->input('distanceTravelled');
+    $data['distanceTravelledFrom']    = $request->input('distanceTravelledFrom');
+    $data['distanceTravelledTo']    = $request->input('distanceTravelledTo');
     $data['dieselConsumption']    = $request->input('dieselConsumption');
     $data['gasConsumption']       = $request->input('gasConsumption');
     $data['oilConsumption']       = $request->input('oilConsumption');
@@ -134,8 +142,12 @@ class OperationsController extends Controller {
         // $operation->asset_tag           = $data['assetTag']; 
         $operation->project_code        = $data['projectCode']; 
         $operation->remarks             = $data['remarks']; 
-        $operation->operating_hours     = $data['operatingHours']; 
-        $operation->distance_travelled  = $data['distanceTravelled']; 
+        // $operation->operating_hours     = $data['operatingHours']; 
+        $operation->operating_time_from     = $data['operatingTimeFrom']; 
+        $operation->operating_time_to     = $data['operatingTimeTo']; 
+        // $operation->distance_travelled  = $data['distanceTravelled']; 
+        $operation->distance_travelled_from  = $data['distanceTravelledFrom']; 
+        $operation->distance_travelled_to  = $data['distanceTravelledTo']; 
         $operation->diesel_consumption  = $data['dieselConsumption']; 
         $operation->gas_consumption     = $data['gasConsumption']; 
         $operation->oil_consumption     = $data['oilConsumption']; 
