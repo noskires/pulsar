@@ -359,15 +359,15 @@ $('.select2').select2();
                           <td align="right"><%requisitionSlipItem.item_quantity_requested%></td>
                           <td align="right"><%requisitionSlipItem.item_quantity%></td>
                           <td align="right"><%requisitionSlipItem.item_cost | number:2%></td>
-                          <td align="right"><%requisitionSlipItem.item_purpose%></td>
                           <td align="right" ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + requisitionSlipItem.item_total"><%requisitionSlipItem.item_total | number:2%></td>
+                          <td align="right"><%requisitionSlipItem.item_purpose%></td>
                           <td ng-if="vm.formData.status=='OPEN'">
                             <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->
                             <a href="#" data-toggle="modal"  ng-click="vm.removeRequisitionSlipItem(requisitionSlipItem.requisition_slip_item_code, requisitionSlipItem.item_quantity, requisitionSlipItem.supply_code)"><code class="text-red">REMOVE</code></a>
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="5" align="right"><b>GRAND TOTAL</b></td>
+                          <td colspan="6" align="right"><b>GRAND TOTAL</b></td>
                           <td colspan="1" align="right"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
                           <td ng-if="!vm.formData.status=='OPEN'"></td>
                         </tr>
