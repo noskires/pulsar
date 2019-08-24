@@ -43,6 +43,14 @@ class VouchersController extends Controller {
                       (SELECT CONCAT(name," (",code,")")  FROM projects WHERE project_code=v.cost_center_code)
                     END AS cost_center_name'
                   ),
+
+                  DB::raw("(SELECT COALESCE(SUM(receipt_items.receipt_item_total), 0) 
+                          FROM vouchers, voucher_items, receipt_items 
+                          WHERE vouchers.voucher_code = voucher_items.voucher_code 
+                          AND voucher_items.receipt_code = receipt_items.receipt_code 
+                          AND vouchers.voucher_code = v.voucher_code) AS total_receipt_item_Cost"),
+
+
                   'supply_category.supply_category_code',
 	                'supply_category.supply_category_name',
 	                DB::raw('DATE_FORMAT(v.check_date, "%M %d, %Y") as check_date'),
@@ -260,10 +268,26 @@ class VouchersController extends Controller {
                 'vi.voucher_item_code',
                 'r.receipt_number',
                 'r.receipt_date',
-                'rt.receipt_type_name'
+                'rt.receipt_type_name',
+                DB::raw("COALESCE(SUM(receipt_item.receipt_item_total), 0) as total_receipt_item_Cost")
               )
               ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')
-              ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
+              ->leftjoin('receipt_items as receipt_item','r.receipt_code','=','receipt_item.receipt_code')
+              ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
+              
+              ->groupBy(
+                'vi.voucher_code', 
+                'vi.voucher_item_code',
+                'rt.receipt_type_name',
+                'vi.receipt_code', 
+                'r.purchase_order_code',
+                'r.receipt_type',
+                'r.receipt_number',
+                'r.receipt_date',
+                'r.payee_type',
+                'r.payee',
+                'r.remarks'
+              );
 
 
     if ($data['voucherCode']){

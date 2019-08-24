@@ -167,6 +167,7 @@
               <th>Payee Name</th>
               <th>Cost Center Name</th>
               <th>Particulars</th>
+              <th>Amount</th>
               <th>Description/Remarks</th>
               <th>Check No</th>
               <th>Check Date</th>
@@ -191,11 +192,13 @@
                 <span ng-bind="voucher.supply_category_name | limitTo:12"></span> </span>
                 <span ng-if="voucher.supply_category_name.length > 12">...</span>
               </td>
+              <td align="right"><%voucher.total_receipt_item_Cost | number:2%></td>
               <td title="<%voucher.description%>"> 
                 <span ng-bind="voucher.description | limitTo:12"></span> </span>
                 <span ng-if="voucher.description.length > 12">...</span>
               </td>
               <td><%voucher.check_number%></td>
+              
               <td><%voucher.check_date%></td>
               <td><%voucher.bank_name%></td>
               <td><%voucher.payment_type%></td>
@@ -252,7 +255,7 @@ $('.select2').select2();
                   <td><%receipt.receipt_type_name%></td>
                   <td><%receipt.receipt_number%></td>
                   <td><%receipt.receipt_date%></td>
-                  <td align="right"><%receipt.amount | number:2%></td>
+                  <td align="right"><%receipt.total_receipt_item_Cost | number:2%></td>
                 </tr> 
                 </tbody>
               </table>
@@ -277,7 +280,7 @@ $('.select2').select2();
                   <td><%voucherItem.receipt_type_name%></td>
                   <td><%voucherItem.receipt_number%></td>
                   <td><%voucherItem.receipt_date%></td>
-                  <td align="right" ng-init="vm.voucherItemGrandTotal = vm.voucherItemGrandTotal + voucherItem.amount"><%voucherItem.amount | number:2%></td>
+                  <td align="right" ng-init="vm.voucherItemGrandTotal = vm.voucherItemGrandTotal + voucherItem.total_receipt_item_Cost"><%voucherItem.total_receipt_item_Cost | number:2%></td>
                   <td>
                     <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->
                     <a href="#" data-toggle="modal" ng-click="vm.removeVoucherItem(voucherItem.voucher_item_code)"><code class="text-red">REMOVE</code></a>
