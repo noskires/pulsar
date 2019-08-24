@@ -488,7 +488,7 @@
             vm.personalDetails = [
             {
                 'requisition_slip_code':vm.formData.requisition_slip_code,
-                'supply_name':'',
+                // 'supply_name':'',
                 'supply_desc':'',
                 'supply_qty':0,
                 'supply_qty_requested':0,
@@ -506,7 +506,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:1, isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:'', isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                 console.log(response.data)
                 if(response.data.status == 200)
                 {
@@ -559,7 +559,7 @@
 
             vm.selectSupply = function(index, supplyCode){
                 // alert(supplyCode)
-                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:1, isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+                SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:'', isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
                         vm.receiptItemSupply = response.data.data[0];

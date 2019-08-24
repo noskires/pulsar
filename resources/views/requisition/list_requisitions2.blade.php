@@ -465,15 +465,10 @@ $('.select2').select2();
 
   <script type="text/javascript">
   $(function () {
-
-  $('.select2').select2();
-
-  //   $('#datepicker').datepicker({
-  //    autoclose: true
-  //   })
-
+   $('.select2').select2();
   });
   </script>
+
 </script>
 
 <script type="text/ng-template" id="ris-edit.modal"> 
