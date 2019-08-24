@@ -82,6 +82,7 @@ class OperationsController extends Controller {
       $assets = DB::table('assets as a')
               ->select( 
                         'a.asset_code',
+                        'a.code',
                         'a.name as asset_name', 
                         DB::raw("COALESCE(SUM(o.operating_hours), 0) as total_operating_hours"),
                         DB::raw("COALESCE(SUM(o.distance_travelled), 0) as total_distance_travelled"),
@@ -91,7 +92,7 @@ class OperationsController extends Controller {
                         DB::raw("COALESCE(SUM(o.number_loads), 0) as total_number_loads")
                       )
             ->leftjoin('operations as o','o.asset_code','=','a.asset_code')
-            ->groupBy('a.asset_code', 'a.name')
+            ->groupBy('a.asset_code', 'a.code', 'a.name')
             ->leftjoin('projects as p','p.project_code','=','o.project_code')
             ->where('a.category', 'CONE');
 

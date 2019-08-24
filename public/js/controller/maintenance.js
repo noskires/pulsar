@@ -87,16 +87,19 @@
                         alert(response.data.message);
                         // vm.routeTo('maintenance/new');
 
-                        vm.operationDetails = "";
-
-                        MaintenanceSrvcs.operations({operationCode:''}).then (function (response) {
-                            if(response.data.status == 200)
-                            { 
-                                vm.operations = response.data.data;
-                                console.log(vm.operations)
-                            }
-                        }, function (){ alert('Bad Request!!!') })
-
+                        vm.operationDetails = {
+                            dieselConsumption:'',
+                            distanceTravelledFrom:'',
+                            distanceTravelledTo:'',
+                            gasConsumption:'',
+                            numberLoads:'',
+                            oilConsumption:'',
+                            operatingTimeFrom:'',
+                            operatingTimeTo:'',
+                            operationDate:'',
+                            projectCode:'',
+                            remarks:'',
+                        };
 
                         vm.assetsDetails = {
                             assetCode:'', 
@@ -123,6 +126,14 @@
                             {
                                 vm.projects = response.data.data;
                                 console.log(vm.projects)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+
+                        MaintenanceSrvcs.operations({operationCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            { 
+                                vm.operations = response.data.data;
+                                console.log(vm.operations)
                             }
                         }, function (){ alert('Bad Request!!!') })
 
