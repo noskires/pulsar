@@ -48,7 +48,8 @@
               <select class="select2 form-control" style="width: 100%;" required="" ng-model="oc.operationDetails.projectCode" ng-init="oc.operationDetails.projectCode=''">
               <option selected="selected" value="">- - SELECT PROJECT - -</option>
               <option value="<%project.project_code%>" ng-repeat="project in oc.projects"><%project.name +" : "+project.project_code%></option>
-              </select></div>
+              </select>
+              </div>
             </div>
             <div class="form-group col-sm-12">
               <label for="activity" class="col-sm-3 control-label">Activity/ Remarks</label>
