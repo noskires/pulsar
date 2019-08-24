@@ -203,6 +203,7 @@ class RequisitionsController extends Controller {
                 'rsi.item_quantity',
                 'rsi.item_cost',
                 'rsi.item_stock_unit',
+                'rsi.item_purpose]',
                 'rsi.item_total'
               )
 
