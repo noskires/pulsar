@@ -164,10 +164,12 @@ class RequisitionReportController extends Controller {
 			'rsi.requisition_slip_code',
 			'rsi.supply_code',
 			'rsi.item_description',
+			'rsi.item_quantity_requested',
 			'rsi.item_quantity',
 			'rsi.item_cost',
 			'rsi.item_stock_unit',
 			'rsi.item_total',
+			'rsi.item_purpose',
 			's.supply_name'
 		)
 		->leftjoin('supplies as s','s.supply_code','=','rsi.supply_code')

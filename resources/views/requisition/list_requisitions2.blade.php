@@ -292,9 +292,11 @@ $('.select2').select2();
                           <th width="25%">Description</th>
                           <th width="9%">In Stock</th>
                           <th width="9%">Stock Unit</th>
-                          <th width="9%">Quantity</th>
+                          <th width="9%">Qty Requested</th>
+                          <th width="9%">Qty Issued</th>
                           <th width="9%">Cost</th>
                           <th width="11%">Total</th>
+                          <th width="11%">Purpose</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -309,9 +311,11 @@ $('.select2').select2();
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_desc" disabled required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_quantity" disabled required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_unit" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_qty_requested" required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(parentIndex, personalDetail.supply_qty, personalDetail.supply_cost)" required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(parentIndex, personalDetail.supply_qty, personalDetail.supply_cost)" required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_total" ng-init="personalDetail.supply_total = vm.supply_qty[parentIndex]" required/></td>
+                          <td><input type="text" class="form-control" ng-model="personalDetail.item_purpose" required/></td>
                         </tr>
                       </tbody>
                     </table>
@@ -339,9 +343,11 @@ $('.select2').select2();
                           <th>Supply Name</th> 
                           <th width="25%">Description</th>
                           <th width="9%">Stock Unit</th>
-                          <th width="9%">Quantity</th>
+                          <th width="9%">Qty Requested</th>
+                          <th width="9%">Qty Issued</th>
                           <th width="9%">Cost</th>
                           <th width="7%">Total</th>
+                          <th width="7%">Purpose</th>
                           <th width="11%" ng-if="vm.formData.status=='OPEN'"></th>
                         </tr> 
                       </thead>
@@ -350,8 +356,10 @@ $('.select2').select2();
                           <td><%requisitionSlipItem.supply_name%> | <%vm.formData.status%></td>
                           <td><%requisitionSlipItem.item_description%></td>
                           <td><%requisitionSlipItem.item_stock_unit%></td>
+                          <td align="right"><%requisitionSlipItem.item_quantity_requested%></td>
                           <td align="right"><%requisitionSlipItem.item_quantity%></td>
                           <td align="right"><%requisitionSlipItem.item_cost | number:2%></td>
+                          <td align="right"><%requisitionSlipItem.item_purpose%></td>
                           <td align="right" ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + requisitionSlipItem.item_total"><%requisitionSlipItem.item_total | number:2%></td>
                           <td ng-if="vm.formData.status=='OPEN'">
                             <!-- <a href="#" data-toggle="modal" data-target="#modal-edit"><code class="text-green">EDIT</code></a> -->

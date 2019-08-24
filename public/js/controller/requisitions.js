@@ -489,6 +489,7 @@
                 'supply_name':'',
                 'supply_desc':'',
                 'supply_qty':0,
+                'supply_qty_requested':0,
                 'supply_cost':0,
                 'supply_unit':'',
                 'supply_reorderlvl':'',
