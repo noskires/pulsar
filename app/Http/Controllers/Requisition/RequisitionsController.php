@@ -199,6 +199,7 @@ class RequisitionsController extends Controller {
                 'rsi.supply_code',
                 's.supply_name',
                 'rsi.item_description', 
+                'rsi.item_quantity_requested',
                 'rsi.item_quantity',
                 'rsi.item_cost',
                 'rsi.item_stock_unit',
@@ -551,7 +552,7 @@ class RequisitionsController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         for($i = 0; $i < count($data); $i++) {
           $requisitionSlipItem            = new RequisitionSlipItem;
@@ -563,11 +564,14 @@ class RequisitionsController extends Controller {
 
           $requisitionSlipItem->requisition_slip_code     = $data[$i]['requisition_slip_code'];
           $requisitionSlipItem->supply_code               = $data[$i]['supply_name'];
-          $requisitionSlipItem->item_description          = $data[$i]['supply_desc'];
+          $requisitionSlipItem->item_description          = $data[$i]['supply_desc'];	
+          $requisitionSlipItem->item_quantity_requested   = $data[$i]['supply_qty_requested'];
           $requisitionSlipItem->item_quantity             = $data[$i]['supply_qty'];
           $requisitionSlipItem->item_cost                 = $data[$i]['supply_cost'];
           $requisitionSlipItem->item_stock_unit           = $data[$i]['supply_unit'];
           $requisitionSlipItem->item_total                = $data[$i]['supply_total'];
+          $requisitionSlipItem->item_purpose              = $data[$i]['item_purpose'];
+          $requisitionSlipItem->changed_by                = Auth::user()->email;
           $requisitionSlipItem->save(); // fixed typo
 
           $supply = Supply::where('supply_code', $data[$i]['supply_name'])->first();
@@ -584,15 +588,15 @@ class RequisitionsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

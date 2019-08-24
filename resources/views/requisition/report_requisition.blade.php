@@ -37,7 +37,11 @@
             <th align="left">Supply Name</th>
             <th align="left">Description</th>
             <th align="left">Stock Unit</th>
-            <th align="left">Quantity</th>
+            <th align="left">Qty Requested</th>
+            <th align="left">Qty Issued</th>
+            <th align="left">Price</th>
+            <th align="left">Total</th>
+            <th align="left">Purpose</th>
           </tr>
           </thead>
           <tbody style="font-size: 12px;">
@@ -46,7 +50,11 @@
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->supply_name}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_description}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_stock_unit}} </td>
+            <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_quantity_requested}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_quantity}} </td>
+            <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_cost}} </td>
+            <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_total}} </td>
+            <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_purpose}} </td>
           </tr>       
           @endforeach 
           @if(count($requisition_slip_items)==0)
