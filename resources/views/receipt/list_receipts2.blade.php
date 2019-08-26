@@ -245,8 +245,7 @@ $('.select2').select2();
                         </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="personalDetail in vm.personalDetails" >
-                          <!-- <td><input type="checkbox" ng-model="personalDetail.selected"/></td>  -->
+                        <!-- <tr ng-repeat="personalDetail in vm.personalDetails" >
                           <td>
                             <select class="form-control select2" style="width: 60%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
                               <option selected="selected" value="">- - SELECT SUPPLY - -</option>
@@ -260,13 +259,27 @@ $('.select2').select2();
 
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(parentIndex, personalDetail.supply_qty, personalDetail.supply_cost)" required/></td>
                           <td><input type="text" class="form-control" ng-model="personalDetail.supply_total" ng-init="personalDetail.supply_total = vm.supply_qty[parentIndex]" required/></td>
+                        </tr> -->
+                        <tr>
+                          <td>
+                            <select class="form-control select2" style="width: 60%;" required="" ng-model="vm.supplyDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(vm.supplyDetail.supply_name)">
+                              <option selected="selected" value="">- - SELECT SUPPLY - -</option>
+                              <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
+                            </select>
+                            <button type="button" class="btn btn-primary btn-xs fa fa-plus addsupplyname" ui-sref="supply-create" ng-click="vm.ok()"></button>
+                          </td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_desc" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_unit" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_total" required/></td>
                         </tr>
                       </tbody>
                     </table>
 
                     <div class="form-group">
                       <div class="form-group">
-                        <input type="button" class="btn btn-info pull-right" value="Submit Form" style="margin-right: 10px;" ng-click="vm.addReceiptItems(vm.personalDetails)">
+                        <input type="button" class="btn btn-info pull-right" value="Submit Form" style="margin-right: 10px;" ng-click="vm.addReceiptItems(vm.supplyDetail)">
                         <!-- <button ng-hide="!vm.personalDetails.length" type="button" class="btn btn-danger pull-left fa fa-trash-o" ng-click="vm.remove()"></button> -->
                         <!-- <button type="submit" class="pull-left btn btn-primary fa fa-plus addnew"></button> -->
                       </div>

@@ -364,14 +364,30 @@
                     if(response.data.status == 200)
                     {
                         alert(response.data.message);
-                        vm.personalDetails = [
-                        {
+                        // vm.personalDetails = [
+                        // {
+                        //     'po_code':vm.poCode,
+                        //     'supply_name':'',
+                        //     'supply_desc':'',
+                        //     'supply_qty':0,
+                        //     'supply_unit':'',
+                        // }];
+
+                        vm.supplyDetail = {
                             'po_code':vm.poCode,
                             'supply_name':'',
                             'supply_desc':'',
                             'supply_qty':0,
                             'supply_unit':'',
-                        }];
+                        };
+
+                        SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', poStatus:0, isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.supplies = response.data.data;
+                                console.log(vm.supplies)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
 
                         PurchaseOrdersSrvcs.poItems({poCode:vm.poCode, poItemCode:'', supplyCode:''}).then (function (response) {
                             if(response.data.status == 200)
@@ -381,28 +397,38 @@
                             }
                         }, function (){ alert('Bad Request!!!') })
 
+
+
                         // $state.go('list-po2');
                         // vm.ok();
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            vm.selectSupply = function(index, supplyCode){
+            vm.selectSupply = function(supplyCode){
 
                 SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:'', poStatus:'', isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
-                        vm.receiptItemSupply = response.data.data[0];
-                        console.log(vm.receiptItemSupply)
+                        vm.poItemSupply = response.data.data[0];
+                        console.log(vm.poItemSupply)
 
-                        angular.forEach(vm.personalDetails, function(v, k){
-                            if(index == k)
-                            {
-                                v.supply_desc = vm.receiptItemSupply.description; 
-                                v.supply_unit = vm.receiptItemSupply.stock_unit_name;
-                                v.supply_quantity = vm.receiptItemSupply.quantity;
-                            }
-                        })
+                        vm.supplyDetail = {
+                            'po_code':$stateParams.poCode,
+                            'supply_name':vm.poItemSupply.supply_code,
+                            'supply_desc':vm.poItemSupply.description,
+                            'supply_unit':vm.poItemSupply.stock_unit_name,
+                            'supply_quantity':vm.poItemSupply.quantity
+                        }
+
+                        // angular.forEach(vm.personalDetails, function(v, k){
+                        //     if(index == k)
+                        //     {
+                        //         v.supply_desc = vm.receiptItemSupply.description; 
+                        //         v.supply_unit = vm.receiptItemSupply.stock_unit_name;
+                        //         v.supply_quantity = vm.receiptItemSupply.quantity;
+                        //     }
+                        // })
                     }
                 }, function (){ alert('Bad Request!!!') })
             }

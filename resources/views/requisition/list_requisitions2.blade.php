@@ -325,26 +325,26 @@ $('.select2').select2();
                         <tr>
                           <!-- <td><input type="checkbox" ng-model="personalDetail.selected"/></td>  -->
                           <td>
-                            <select class="form-control select2" required ng-model="vm.personalDetail.supply_name" ng-change="vm.selectSupply2(vm.personalDetail.supply_name)">
+                            <select class="form-control select2" required ng-model="vm.supplyDetail.supply_name" ng-change="vm.selectSupply2(vm.supplyDetail.supply_name)">
                               <option value="">- - SELECT SUPPLY - -</option>
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
                           </td>
-                          <td><input type="text" class="form-control" ng-model="vm.personalDetail.supply_desc" disabled required/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.personalDetail.supply_quantity" disabled required/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.personalDetail.supply_unit" disabled required/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.personalDetail.supply_qty_requested" required/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.personalDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(vm.personalDetail.supply_qty, vm.personalDetail.supply_cost)" required/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.personalDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(vm.personalDetail.supply_qty, vm.personalDetail.supply_cost)" required/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.personalDetail.supply_total" required/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.personalDetail.item_purpose" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_desc" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_quantity" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_unit" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty_requested" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_total" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.item_purpose" required/></td>
                         </tr>
                       </tbody>
                     </table>
                     
                     <div class="form-group">
                       <div class="form-group">
-                        <input type="button" class="btn btn-info pull-right" value="Submit Form" style="margin-right: 10px;" ng-click="vm.addRequistionSlipItems(vm.personalDetail)">
+                        <input type="button" class="btn btn-info pull-right" value="Submit Form" style="margin-right: 10px;" ng-click="vm.addRequistionSlipItems(vm.supplyDetail)">
                         <!-- <button ng-hide="!vm.personalDetails.length" type="button" class="btn btn-danger pull-left fa fa-trash-o" ng-click="vm.remove()"></button> -->
                         <!-- <button type="submit" class="pull-left btn btn-primary fa fa-plus addnew"></button> -->
                     </div>

@@ -304,7 +304,31 @@ class ReceiptsController extends Controller {
     $transaction = DB::transaction(function($data) use($data){
     try{
 
-        for($i = 0; $i < count($data); $i++) {
+        // for($i = 0; $i < count($data); $i++) {
+        //   $c            = new ReceiptItem;
+
+        //   $receiptItemCode = (str_pad(($c->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+        //   ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+
+        //   $c->receipt_item_code = "RCPITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$receiptItemCode;
+
+        //   $c->receipt_code     = $data[$i]['receipt_code'];
+        //   $c->receipt_item_supply_code     = $data[$i]['supply_name'];
+        //   $c->receipt_item_description      = $data[$i]['supply_desc'];
+        //   $c->receipt_item_quantity = $data[$i]['supply_qty'];
+        //   $c->receipt_item_cost = $data[$i]['supply_cost'];
+        //   $c->receipt_item_stock_unit  = $data[$i]['supply_unit'];
+        //   $c->receipt_item_total  = $data[$i]['supply_total'];
+        //   $c->changed_by = Auth::user()->email;
+        //   $c->save(); // fixed typo
+
+        //   $supply = Supply::where('supply_code', $data[$i]['supply_name'])->first();
+        //   $supply->quantity         = $supply->quantity + $data[$i]['supply_qty'];
+        //   $supply->changed_by       = Auth::user()->email;
+        //   $supply->timestamps       = true;
+        //   $supply->save();
+        // }
+ 
           $c            = new ReceiptItem;
 
           $receiptItemCode = (str_pad(($c->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
@@ -312,22 +336,21 @@ class ReceiptsController extends Controller {
 
           $c->receipt_item_code = "RCPITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$receiptItemCode;
 
-          $c->receipt_code     = $data[$i]['receipt_code'];
-          $c->receipt_item_supply_code     = $data[$i]['supply_name'];
-          $c->receipt_item_description      = $data[$i]['supply_desc'];
-          $c->receipt_item_quantity = $data[$i]['supply_qty'];
-          $c->receipt_item_cost = $data[$i]['supply_cost'];
-          $c->receipt_item_stock_unit  = $data[$i]['supply_unit'];
-          $c->receipt_item_total  = $data[$i]['supply_total'];
-          $c->changed_by = Auth::user()->email;
+          $c->receipt_code                  = $data['receipt_code'];
+          $c->receipt_item_supply_code      = $data['supply_name'];
+          $c->receipt_item_description      = $data['supply_desc'];
+          $c->receipt_item_quantity         = $data['supply_qty'];
+          $c->receipt_item_cost             = $data['supply_cost'];
+          $c->receipt_item_stock_unit       = $data['supply_unit'];
+          $c->receipt_item_total            = $data['supply_total'];
+          $c->changed_by                    = Auth::user()->email;
           $c->save(); // fixed typo
 
-          $supply = Supply::where('supply_code', $data[$i]['supply_name'])->first();
-          $supply->quantity         = $supply->quantity + $data[$i]['supply_qty'];
+          $supply = Supply::where('supply_code', $data['supply_name'])->first();
+          $supply->quantity         = $supply->quantity + $data['supply_qty'];
           $supply->changed_by       = Auth::user()->email;
           $supply->timestamps       = true;
           $supply->save();
-        }
 
         return response()->json([
             'status' => 200,
