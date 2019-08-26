@@ -485,18 +485,25 @@
             }
 
 
-            vm.personalDetails = [
-            {
+            // vm.personalDetails = [
+            // {
+            //     'requisition_slip_code':vm.formData.requisition_slip_code,
+            //     // 'supply_name':'',
+            //     'supply_desc':'',
+            //     'supply_qty':0,
+            //     'supply_qty_requested':0,
+            //     'supply_cost':0,
+            //     'supply_unit':'',
+            //     'supply_reorderlvl':'',
+            //     'supply_total':''
+            // }];
+
+            vm.supplyDetail  = {
                 'requisition_slip_code':vm.formData.requisition_slip_code,
-                // 'supply_name':'',
                 'supply_desc':'',
-                'supply_qty':0,
-                'supply_qty_requested':0,
-                'supply_cost':0,
                 'supply_unit':'',
-                'supply_reorderlvl':'',
-                'supply_total':''
-            }];
+                'supply_quantity':0
+            }
 
             RequisitionsSrvcs.RequisitionSlipItems({requisitionCode:vm.formData.requisition_slip_code, requisitionSlipItemCode:'', supplyCode:''}).then (function (response) {
                 if(response.data.status == 200)
@@ -557,35 +564,64 @@
                 console.log(data)
             }
 
-            vm.selectSupply = function(index, supplyCode){
+            // vm.selectSupply = function(index, supplyCode){
+            //     // alert(supplyCode)
+            //     SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:'', isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+            //         if(response.data.status == 200)
+            //         {
+            //             vm.receiptItemSupply = response.data.data[0];
+            //             console.log(vm.receiptItemSupply)
+            //             console.log(response.data.data)
+
+            //             angular.forEach(vm.personalDetails, function(v, k){
+            //                 // alert(index)
+            //                 if(index == k)
+            //                 {
+            //                     v.supply_desc = vm.receiptItemSupply.description; 
+            //                     v.supply_unit = vm.receiptItemSupply.stock_unit_name;
+            //                     v.supply_quantity = vm.receiptItemSupply.quantity;
+            //                 }
+            //             })
+            //         }
+            //     }, function (){ alert('Bad Request!!!') })
+            // }
+
+            vm.selectSupply2 = function(supplyCode){
                 // alert(supplyCode)
+                
                 SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:vm.formData.request_type, quantityStatus:'', isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                     if(response.data.status == 200)
                     {
-                        vm.receiptItemSupply = response.data.data[0];
-                        console.log(vm.receiptItemSupply)
+                        vm.risItemSupply = response.data.data[0];
+                        console.log(vm.risItemSupply)
                         console.log(response.data.data)
 
-                        angular.forEach(vm.personalDetails, function(v, k){
-                            // alert(index)
-                            if(index == k)
-                            {
-                                v.supply_desc = vm.receiptItemSupply.description; 
-                                v.supply_unit = vm.receiptItemSupply.stock_unit_name;
-                                v.supply_quantity = vm.receiptItemSupply.quantity;
-                            }
-                        })
+                        vm.supplyDetail = {
+                            'requisition_slip_code':$stateParams.requisitionSlipCode,
+                            'supply_name':vm.risItemSupply.supply_code,
+                            'supply_desc':vm.risItemSupply.description,
+                            'supply_unit':vm.risItemSupply.stock_unit_name,
+                            'supply_quantity':vm.risItemSupply.quantity
+                        }
+
+                        console.log(vm.supplyDetail)
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            vm.computeTotalPerSupply = function(index, supply_qty, supply_cost){
-                angular.forEach(vm.personalDetails, function(v, k){
-                    if(index == k)
-                    {
-                        v.supply_total = supply_qty*supply_cost;
-                    }
-                })
+            // vm.computeTotalPerSupply = function(index, supply_qty, supply_cost){
+            //     angular.forEach(vm.personalDetails, function(v, k){
+            //         if(index == k)
+            //         {
+            //             v.supply_total = supply_qty*supply_cost;
+            //         }
+            //     })
+            // }
+
+            vm.computeTotalPerSupply = function(supply_qty, supply_cost){
+                
+                vm.supplyDetail.supply_total = supply_qty*supply_cost;
+                    
             }
 
             vm.addNew = function(){
@@ -643,26 +679,39 @@
                 angular.forEach(vm.personalDetails, function(personalDetail) {
                     personalDetail.selected = vm.selectedAll;
                 });
-            };   
+            }; 
 
             vm.addRequistionSlipItems = function(data){
                 // console.log(data)
+                // alert($stateParams.requisitionSlipCode)
+                // data['requisition_slip_code'] = $stateParams.requisitionSlipCode;
+
                 RequisitionsSrvcs.SaveRequisitionSlipItems(data).then (function (response) {
                     console.log(response.data)
                     if(response.data.status == 200)
                     {
                         alert(response.data.message);
-                        vm.personalDetails = [
-                        {
-                            'requisition_slip_code':vm.formData.requisition_slip_code,
+
+                        vm.supplyDetail = {
+                            'requisition_slip_code':$stateParams.requisitionSlipCode,
                             'supply_name':'',
                             'supply_desc':'',
-                            'supply_qty':'',
-                            'supply_unit':0,
+                            'supply_unit':'',
+                            'supply_quantity':'',
                             'supply_cost':0,
+                            'supply_unit':'',
                             'supply_reorderlvl':'',
                             'supply_total':''
-                        }];
+                        }
+
+                        SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:'', isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+                            console.log(response.data)
+                            if(response.data.status == 200)
+                            {
+                                vm.supplies = response.data.data;
+                                console.log(vm.supplies)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
 
                         vm.supplyGrandTotal = 0;
 
@@ -673,6 +722,19 @@
                                 console.log(vm.requisitionSlipItems)
                             }
                         }, function (){ alert('Bad Request!!!') })
+
+                        // vm.personalDetails = [
+                        //     {
+                        //         'requisition_slip_code':vm.formData.requisition_slip_code,
+                        //         // 'supply_name':'',
+                        //         'supply_desc':'',
+                        //         'supply_qty':0,
+                        //         'supply_qty_requested':0,
+                        //         'supply_cost':0,
+                        //         'supply_unit':'',
+                        //         'supply_reorderlvl':'',
+                        //         'supply_total':''
+                        //     }];
                     }
                 }, function (){ alert('Bad Request!!!') })
             }

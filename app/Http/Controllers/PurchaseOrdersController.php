@@ -414,22 +414,36 @@ class PurchaseOrdersController extends Controller {
     $transaction = DB::transaction(function($data) use($data){
     try{
 
-        for($i = 0; $i < count($data); $i++) {
           $purchaseOrderItem            = new PurchaseOrderItem;
-
           $purchaseOrderItemCode = (str_pad(($purchaseOrderItem->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
           ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
           $purchaseOrderItem->po_item_code 			= "POITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$purchaseOrderItemCode;
-          $purchaseOrderItem->po_code     			= $data[$i]['po_code'];
-          $purchaseOrderItem->supply_code     		= $data[$i]['supply_name'];
-          $purchaseOrderItem->item_description      = $data[$i]['supply_desc'];
-          $purchaseOrderItem->item_quantity 		= $data[$i]['supply_qty']; 
-          $purchaseOrderItem->item_stock_unit  		= $data[$i]['supply_unit']; 
+          $purchaseOrderItem->po_code     			= $data['po_code'];
+          $purchaseOrderItem->supply_code     		= $data['supply_name'];
+          $purchaseOrderItem->item_description      = $data['supply_desc'];
+          $purchaseOrderItem->item_quantity 		= $data['supply_qty']; 
+          $purchaseOrderItem->item_stock_unit  		= $data['supply_unit']; 
           $purchaseOrderItem->changed_by 			= Auth::user()->email;
           $purchaseOrderItem->save(); // fixed typo
 
-        }
+		
+		// for($i = 0; $i < count($data); $i++) {
+		// 	$purchaseOrderItem            = new PurchaseOrderItem;
+  
+		// 	$purchaseOrderItemCode = (str_pad(($purchaseOrderItem->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
+		// 	->get()->count() + 1), 4, "0", STR_PAD_LEFT));
+  
+		// 	$purchaseOrderItem->po_item_code 			= "POITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$purchaseOrderItemCode;
+		// 	$purchaseOrderItem->po_code     			= $data[$i]['po_code'];
+		// 	$purchaseOrderItem->supply_code     		= $data[$i]['supply_name'];
+		// 	$purchaseOrderItem->item_description      = $data[$i]['supply_desc'];
+		// 	$purchaseOrderItem->item_quantity 		= $data[$i]['supply_qty']; 
+		// 	$purchaseOrderItem->item_stock_unit  		= $data[$i]['supply_unit']; 
+		// 	$purchaseOrderItem->changed_by 			= Auth::user()->email;
+		// 	$purchaseOrderItem->save(); // fixed typo
+  
+		//   }
 
         return response()->json([
             'status' => 200,

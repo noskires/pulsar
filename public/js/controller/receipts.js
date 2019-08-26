@@ -258,8 +258,8 @@
             }
         }
 
-        ReceiptsModalInstanceCtrl.$inject = ['$uibModalInstance', 'formData', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
-        function ReceiptsModalInstanceCtrl ($uibModalInstance, formData, ReceiptSrvcs, SuppliesSrvcs, $window) {
+        ReceiptsModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'formData', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
+        function ReceiptsModalInstanceCtrl ($stateParams, $uibModalInstance, formData, ReceiptSrvcs, SuppliesSrvcs, $window) {
 
             var vm = this;
             vm.formData = formData.receipt;
@@ -292,7 +292,7 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            vm.selectSupply = function(index, supplyCode){
+            vm.selectSupply = function(supplyCode){
 
                 SuppliesSrvcs.supplies({supplyCode:supplyCode, supplyCategory:'', quantityStatus:null, isRepair: 2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                     if(response.data.status == 200)
@@ -300,29 +300,41 @@
                         vm.receiptItemSupply = response.data.data[0];
                         console.log(vm.receiptItemSupply)
 
-                        angular.forEach(vm.personalDetails, function(v, k){
-                            if(index == k)
-                            {
-                                v.supply_desc = vm.receiptItemSupply.description; 
-                                v.supply_unit = vm.receiptItemSupply.stock_unit_name;
-                            }
-                        })
+                        vm.supplyDetail = {
+                            'receipt_code':$stateParams.receiptCode,
+                            'supply_name':vm.receiptItemSupply.supply_code,
+                            'supply_desc':vm.receiptItemSupply.description,
+                            'supply_unit':vm.receiptItemSupply.stock_unit_name,
+                            'supply_quantity':vm.receiptItemSupply.quantity
+                        }
+
+                        // angular.forEach(vm.personalDetails, function(v, k){
+                        //     if(index == k)
+                        //     {
+                        //         v.supply_desc = vm.receiptItemSupply.description; 
+                        //         v.supply_unit = vm.receiptItemSupply.stock_unit_name;
+                        //     }
+                        // })
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
 
-            vm.computeTotalPerSupply = function(index, supply_qty, supply_cost){
-                angular.forEach(vm.personalDetails, function(v, k){
-                    if(index == k)
-                    {
-                        v.supply_total = supply_qty*supply_cost;
-                    }
-                })
+            vm.computeTotalPerSupply = function(supply_qty, supply_cost){
+
+                
+                vm.supplyDetail.supply_total = supply_qty*supply_cost;
+                
+                // angular.forEach(vm.personalDetails, function(v, k){
+                //     if(index == k)
+                //     {
+                //         v.supply_total = supply_qty*supply_cost;
+                //     }
+                // })
             }
 
             vm.addNew = function(){
                 vm.personalDetails.push({ 
-                'receipt_code':vm.formData.receipt_code,
+                'receipt_code':$stateParams.receiptCode,
                 'supply_name':"",
                 'supply_desc':"",
                 'supply_qty':0,
@@ -372,22 +384,41 @@
             };   
 
             vm.addReceiptItems = function(data){
-
+alert('asdf')
                 ReceiptSrvcs.saveReceiptItems(data).then (function (response) {
                     if(response.data.status == 200)
                     {
                         alert(response.data.message);
-                        vm.personalDetails = [
-                        {
-                            'receipt_code':vm.formData.receipt_code,
+                        // vm.personalDetails = [
+                        // {
+                        //     'receipt_code':vm.formData.receipt_code,
+                        //     'supply_name':'',
+                        //     'supply_desc':'',
+                        //     'supply_qty':'',
+                        //     'supply_unit':0,
+                        //     'supply_cost':0,
+                        //     'supply_reorderlvl':'',
+                        //     'supply_total':''
+                        // }];
+
+                        vm.supplyDetail = {
+                            'receipt_code':$stateParams.receiptCode,
                             'supply_name':'',
                             'supply_desc':'',
-                            'supply_qty':'',
-                            'supply_unit':0,
+                            'supply_qty':0,
+                            'supply_unit':'',
                             'supply_cost':0,
                             'supply_reorderlvl':'',
                             'supply_total':''
-                        }];
+                        };
+
+                        SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', poStatus:0, isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.supplies = response.data.data;
+                                console.log(vm.supplies)
+                            }
+                        });
 
                         vm.supplyGrandTotal = 0;
 
