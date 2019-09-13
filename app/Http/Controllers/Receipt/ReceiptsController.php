@@ -43,12 +43,21 @@ class ReceiptsController extends Controller {
                 'r.remarks',
                 'rt.receipt_type_name',
                 'vi.voucher_code',
-                DB::raw("COALESCE(SUM(receipt_item.receipt_item_total), 0) as total_receipt_item_Cost")
+                DB::raw("(SELECT CAST(COALESCE(SUM(receipt_items.receipt_item_total), 0) AS INT) 
+                  FROM receipts, receipt_items 
+                  WHERE receipts.receipt_code = receipt_items.receipt_code 
+                  AND receipts.receipt_code = r.receipt_code
+                  AND receipt_items.is_returned = 0
+                  )
+                  AS total_receipt_item_Cost")
+                // DB::raw("COALESCE(SUM(receipt_item.receipt_item_total), 0) as total_receipt_item_Cost")
               )
               ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
               ->leftjoin('receipt_items as receipt_item','r.receipt_code','=','receipt_item.receipt_code')
               ->leftjoin('voucher_items as vi','vi.receipt_code','=','r.receipt_code');
 
+              // $receipts = $receipts->where('receipt_item.is_returned', 0);
+    
     if ($data['receiptCode']){
       $receipts = $receipts->where('r.receipt_code', $data['receiptCode']);
     }
@@ -255,6 +264,7 @@ class ReceiptsController extends Controller {
       'receiptCode'=>$request->input('receiptCode'),
       'receiptItemCode'=>$request->input('receiptItemCode'),
       'receiptItemSupplyCode'=>$request->input('receiptItemSupplyCode'),
+      'isReturned'=>$request->input('isReturned'),
     );
 
     $receiptItems = DB::table('receipt_items as ri')
@@ -288,6 +298,10 @@ class ReceiptsController extends Controller {
       $receiptItems = $receiptItems->where('ri.receipt_item_supply_code', $data['receiptItemSupplyCode']);
     }
 
+ 
+      $receiptItems = $receiptItems->where('ri.is_returned', $data['isReturned']);
+ 
+
     $receiptItems = $receiptItems->get();
 
     return response()-> json([
@@ -302,32 +316,8 @@ class ReceiptsController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
-        // for($i = 0; $i < count($data); $i++) {
-        //   $c            = new ReceiptItem;
-
-        //   $receiptItemCode = (str_pad(($c->where('created_at', 'like', '%'.Carbon::now('Asia/Manila')->toDateString().'%')
-        //   ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
-
-        //   $c->receipt_item_code = "RCPITM-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$receiptItemCode;
-
-        //   $c->receipt_code     = $data[$i]['receipt_code'];
-        //   $c->receipt_item_supply_code     = $data[$i]['supply_name'];
-        //   $c->receipt_item_description      = $data[$i]['supply_desc'];
-        //   $c->receipt_item_quantity = $data[$i]['supply_qty'];
-        //   $c->receipt_item_cost = $data[$i]['supply_cost'];
-        //   $c->receipt_item_stock_unit  = $data[$i]['supply_unit'];
-        //   $c->receipt_item_total  = $data[$i]['supply_total'];
-        //   $c->changed_by = Auth::user()->email;
-        //   $c->save(); // fixed typo
-
-        //   $supply = Supply::where('supply_code', $data[$i]['supply_name'])->first();
-        //   $supply->quantity         = $supply->quantity + $data[$i]['supply_qty'];
-        //   $supply->changed_by       = Auth::user()->email;
-        //   $supply->timestamps       = true;
-        //   $supply->save();
-        // }
  
           $c            = new ReceiptItem;
 
@@ -343,6 +333,7 @@ class ReceiptsController extends Controller {
           $c->receipt_item_cost             = $data['supply_cost'];
           $c->receipt_item_stock_unit       = $data['supply_unit'];
           $c->receipt_item_total            = $data['supply_total'];
+          $c->is_returned                   = 0;
           $c->changed_by                    = Auth::user()->email;
           $c->save(); // fixed typo
 
@@ -358,15 +349,15 @@ class ReceiptsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;
@@ -408,6 +399,85 @@ class ReceiptsController extends Controller {
             'message' => 'Error, please try again!'
         ]);
       }
+    });
+
+    return $transaction;
+  }
+
+  public function return_receipt_items(Request $request){
+
+    // $data = Input::post();
+    $data = array(
+      'receiptItemCode'=>$request->input('receiptItemCode'),
+      'receiptItemQuantity'=>$request->input('receiptItemQuantity'),
+      'supplyCode'=>$request->input('supplyCode'),
+    );
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+
+        $supply = Supply::where('supply_code', $data['supplyCode'])->first();
+        $supply->quantity         = $supply->quantity - $data['receiptItemQuantity'];
+        $supply->changed_by       = Auth::user()->email;
+        $supply->timestamps       = true;
+        $supply->save();
+
+        $receiptItem = ReceiptItem::where('receipt_item_code', $data['receiptItemCode'])->first();
+        $receiptItem->is_returned      = 1;
+        $receiptItem->changed_by       = Auth::user()->email;
+        $receiptItem->timestamps       = true;
+        $receiptItem->save();
+        
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
+
+  public function delete_returned_receipt_items(Request $request){
+
+    // $data = Input::post();
+    $data = array(
+      'receiptItemCode'=>$request->input('receiptItemCode'),
+      'receiptItemQuantity'=>$request->input('receiptItemQuantity'),
+      'supplyCode'=>$request->input('supplyCode'),
+    );
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+      ReceiptItem::where('receipt_item_code', $data['receiptItemCode'])->firstOrFail()->delete();
+        
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

@@ -78,7 +78,7 @@
                     <select class="form-control select2" style="width: 100%;" ng-model="vc.voucherDetails.cost_center_code" required="">
                       <option value="" disabled="">- - Select Cost Center - -</option>
                       <option value="<%organization.org_code%>" ng-repeat="organization in vc.organizations"><%organization.org_name%></option>
-                      <option value="<%project.project_code%>" ng-repeat="project in vc.projects"> <%project.cost%> - <%project.name%></option>
+                      <option value="<%project.project_code%>" ng-repeat="project in vc.projects"> <%project.code%> - <%project.name%></option>
                     </select>
                   </div>
                 </div>
@@ -93,7 +93,7 @@
                   </div>
                 </div>
 
-                 <div class="form-group col-sm-12">
+                 <!-- <div class="form-group col-sm-12">
                   <label for="dv-particulars" class="col-sm-3 control-label">Payment Type</label>
                   <div class="col-sm-9">
                     <select class="form-control select2" style="width: 100%;" required="" ng-model="vc.voucherDetails.payment_type" ng-init="parentIndex = $index">
@@ -102,7 +102,7 @@
                       <option value="CASH">Cash</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="form-group col-sm-12">           
                   <div class="col-sm-8"></div>
@@ -167,12 +167,13 @@
               <th>Payee Name</th>
               <th>Cost Center Name</th>
               <th>Particulars</th>
-              <th>Amount</th>
+              
               <th>Description/Remarks</th>
               <th>Check No</th>
               <th>Check Date</th>
               <th>Bank</th>
               <th>Payment Type</th>
+              <th>Amount</th>
               <!-- <th>Amount</th> -->
             </tr>
             </thead>
@@ -192,7 +193,7 @@
                 <span ng-bind="voucher.supply_category_name | limitTo:12"></span> </span>
                 <span ng-if="voucher.supply_category_name.length > 12">...</span>
               </td>
-              <td align="right"><%voucher.total_receipt_item_Cost | number:2%></td>
+              
               <td title="<%voucher.description%>"> 
                 <span ng-bind="voucher.description | limitTo:12"></span> </span>
                 <span ng-if="voucher.description.length > 12">...</span>
@@ -202,6 +203,7 @@
               <td><%voucher.check_date%></td>
               <td><%voucher.bank_name%></td>
               <td><%voucher.payment_type%></td>
+              <td align="right"><%voucher.total_receipt_item_Cost | number:2%></td>
               <!-- <td align="right"><%voucher.amount | number:2%></td> -->
             </tr>
 
@@ -318,7 +320,7 @@ $('.select2').select2();
           <div class="col-sm-4">
             <div class="input-group checkdate">
             <span class="input-group-addon" style="font-size: 15px;">Check Date</span>
-            <input type="text" class="form-control pull-right" id="datepicker_check" ng-model="vm.formData.check_date">
+            <input type="text" class="form-control pull-right" id="datepicker_check" ng-model="vm.formData.check_date" datepicker2>
             </div>
           </div>
           <div class="col-sm-4">

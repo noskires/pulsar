@@ -292,7 +292,7 @@ $('.select2').select2();
                       <thead>
                         <tr>
                           <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th>  -->
-                          <th>Supply Name</th>
+                          <th width="20%">Supply Name</th>
                           <th width="25%">Description</th>
                           <th width="9%">In Stock</th>
                           <th width="9%">Stock Unit</th>
@@ -360,7 +360,9 @@ $('.select2').select2();
               <div class="panel panel-default">
                 <div class="panel-body">
                   <form>
-                    <table class="table table-bordered" class="tbl_list_rcpt">
+
+                  Grand Total : <%vm.supplyGrandTotal%>
+                  <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-2" width="100%">
                       <thead>
                         <tr>
                           <th>Supply Name</th> 
@@ -389,11 +391,11 @@ $('.select2').select2();
                             <a href="#" data-toggle="modal"  ng-click="vm.removeRequisitionSlipItem(requisitionSlipItem.requisition_slip_item_code, requisitionSlipItem.item_quantity, requisitionSlipItem.supply_code)"><code class="text-red">REMOVE</code></a>
                           </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                           <td colspan="6" align="right"><b>GRAND TOTAL</b></td>
                           <td colspan="1" align="right"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
                           <td ng-if="!vm.formData.status=='OPEN'"></td>
-                        </tr>
+                        </tr> -->
                       </tbody>
                     </table>
                   </form>

@@ -264,6 +264,7 @@
             var vm = this;
             vm.formData = formData.receipt;
             console.log(vm.formData)
+            
             vm.personalDetails = [
             {
                 'receipt_code':vm.formData.receipt_code,
@@ -276,11 +277,19 @@
                 'supply_total':''
             }];
 
-            ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:''}).then (function (response) {
+            ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:'0'}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.receiptItems = response.data.data;
                     console.log(vm.receiptItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:'1'}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.returneReceiptItems = response.data.data;
+                    console.log(vm.returneReceiptItems)
                 }
             }, function (){ alert('Bad Request!!!') })
 
@@ -362,16 +371,77 @@
                 ReceiptSrvcs.deleteReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode}).then (function (response) {
                     console.log(response.data.data)
                     alert(response.data.message)
-                    ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:''}).then (function (response) {
+                    ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:0}).then (function (response) {
                         if(response.data.status == 200)
                         {
                             vm.receiptItems = response.data.data;
                             console.log(vm.receiptItems)
                         }
                     }, function (){ alert('Bad Request!!!') })
+
+                    vm.supplyGrandTotalReturned = 0;
+                    ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:1}).then (function (response) {
+                        if(response.data.status == 200)
+                        {
+                            vm.returneReceiptItems = response.data.data;
+                            console.log(vm.returneReceiptItems)
+                        }
+                    }, function (){ alert('Bad Request!!!') })
                 }, function (){ alert('Bad Request!!!') })
             };
 
+            vm.returnSupplyBtn = function(receiptItemCode, receiptItemQuantity, supplyCode){
+                
+                vm.supplyGrandTotal = 0;
+                ReceiptSrvcs.returnReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode}).then (function (response) {
+                    console.log(response.data.data)
+                    alert(response.data.message)
+                    ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:0}).then (function (response) {
+                        if(response.data.status == 200)
+                        {
+                            vm.receiptItems = response.data.data;
+                            console.log(vm.receiptItems)
+                        }
+                    }, function (){ alert('Bad Request!!!') })
+
+                    vm.supplyGrandTotalReturned = 0;
+                    ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:1}).then (function (response) {
+                        if(response.data.status == 200)
+                        {
+                            vm.returneReceiptItems = response.data.data;
+                            console.log(vm.returneReceiptItems)
+                        }
+                    }, function (){ alert('Bad Request!!!') })
+
+                }, function (){ alert('Bad Request!!!') })
+            };
+
+            vm.removeReturnedSupplyBtn = function(receiptItemCode, receiptItemQuantity, supplyCode){
+                
+                vm.supplyGrandTotal = 0;
+                ReceiptSrvcs.deleteReturnedReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode}).then (function (response) {
+                    console.log(response.data.data)
+                    alert(response.data.message)
+                    ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:0}).then (function (response) {
+                        if(response.data.status == 200)
+                        {
+                            vm.receiptItems = response.data.data;
+                            console.log(vm.receiptItems)
+                        }
+                    }, function (){ alert('Bad Request!!!') })
+
+                    vm.supplyGrandTotalReturned = 0;
+                    ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:1}).then (function (response) {
+                        if(response.data.status == 200)
+                        {
+                            vm.returneReceiptItems = response.data.data;
+                            console.log(vm.returneReceiptItems)
+                        }
+                    }, function (){ alert('Bad Request!!!') })
+
+                }, function (){ alert('Bad Request!!!') })
+            };
+            
             vm.checkAll = function () {
                 if (!vm.selectedAll) {
                     vm.selectedAll = true;
@@ -384,10 +454,11 @@
             };   
 
             vm.addReceiptItems = function(data){
-alert('asdf')
+                console.log(data)
                 ReceiptSrvcs.saveReceiptItems(data).then (function (response) {
                     if(response.data.status == 200)
                     {
+                        
                         alert(response.data.message);
                         // vm.personalDetails = [
                         // {
@@ -422,7 +493,7 @@ alert('asdf')
 
                         vm.supplyGrandTotal = 0;
 
-                        ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:''}).then (function (response) {
+                        ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:'0'}).then (function (response) {
                             if(response.data.status == 200)
                             {
                                 vm.receiptItems = response.data.data;

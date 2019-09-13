@@ -245,21 +245,6 @@ $('.select2').select2();
                         </tr>
                       </thead>
                       <tbody>
-                        <!-- <tr ng-repeat="personalDetail in vm.personalDetails" >
-                          <td>
-                            <select class="form-control select2" style="width: 60%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
-                              <option selected="selected" value="">- - SELECT SUPPLY - -</option>
-                              <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
-                            </select>
-                            <button type="button" class="btn btn-primary btn-xs fa fa-plus addsupplyname" ui-sref="supply-create" ng-click="vm.ok()"></button>
-                          </td>
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_desc" disabled required/></td>
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_unit" disabled required/></td>
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(parentIndex, personalDetail.supply_qty, personalDetail.supply_cost)" required/></td>
-
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(parentIndex, personalDetail.supply_qty, personalDetail.supply_cost)" required/></td>
-                          <td><input type="text" class="form-control" ng-model="personalDetail.supply_total" ng-init="personalDetail.supply_total = vm.supply_qty[parentIndex]" required/></td>
-                        </tr> -->
                         <tr>
                           <td>
                             <select class="form-control select2" style="width: 60%;" required="" ng-model="vm.supplyDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(vm.supplyDetail.supply_name)">
@@ -291,6 +276,7 @@ $('.select2').select2();
             </div>
           </div>
 
+          Delivered Items
           <div class="row">
             <div class="col-md-12">
               <div class="panel panel-default">
@@ -317,12 +303,56 @@ $('.select2').select2();
                           <td align="right"><%receiptItem.receipt_item_cost | number:2%></td>
                           <td align="right" ng-init="vm.supplyGrandTotal = vm.supplyGrandTotal + receiptItem.receipt_item_total"><%receiptItem.receipt_item_total | number:2%></td>
                           <td ng-if="!vm.formData.voucher_code">
-                            <a href="#" ng-click="vm.removeSupplyBtn(receiptItem.receipt_item_code, receiptItem.receipt_item_quantity, receiptItem.receipt_item_supply_code)"><code class="text-red">REMOVE</code></a>
+                            <a href="#" ng-click="vm.removeSupplyBtn(receiptItem.receipt_item_code, receiptItem.receipt_item_quantity, receiptItem.receipt_item_supply_code)"><code class="text-red">REMOVE</code></a> | 
+                            <a href="#" ng-click="vm.returnSupplyBtn(receiptItem.receipt_item_code, receiptItem.receipt_item_quantity, receiptItem.receipt_item_supply_code)"><code class="text-red">RETURN ITEM</code></a>
                           </td>
                         </tr>
                         <tr>
                           <td colspan="5" align="right"><b>GRAND TOTAL</b></td>
-                          <td colspan="1"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
+                          <td colspan="1" align="right"><b>₱<%vm.supplyGrandTotal | number:2%></b></td>
+                          <td ng-if="!vm.formData.voucher_code"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          Returned Items:
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <form>
+                    <table class="table table-bordered" class="tbl_list_rcpt">
+                      <thead>
+                        <tr> 
+                          <th>Supply Name</th>
+                          <th width="25%">Description</th>
+                          <th width="9%">Stock Unit</th>
+                          <th width="9%">Quantity</th>
+                          <th width="9%">Cost</th>
+                          <th width="7%">Total</th>
+                          <th ng-if="!vm.formData.voucher_code" width="11%"> </th>
+                        </tr> 
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="receiptItem in vm.returneReceiptItems"> 
+                          <td><%receiptItem.supply_name%></td>
+                          <td><%receiptItem.receipt_item_description%></td>
+                          <td><%receiptItem.receipt_item_stock_unit%></td>
+                          <td><%receiptItem.receipt_item_quantity%></td>
+                          <td align="right"><%receiptItem.receipt_item_cost | number:2%></td>
+                          <td align="right" ng-init="vm.supplyGrandTotalReturned = vm.supplyGrandTotalReturned + receiptItem.receipt_item_total"><%receiptItem.receipt_item_total | number:2%></td>
+                          <td ng-if="!vm.formData.voucher_code">
+                            <a href="#" ng-click="vm.removeReturnedSupplyBtn(receiptItem.receipt_item_code, receiptItem.receipt_item_quantity, receiptItem.receipt_item_supply_code)"><code class="text-red">REMOVE</code></a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="5" align="right"><b>GRAND TOTAL</b></td>
+                          <td colspan="1" align="right"><b>₱<%vm.supplyGrandTotalReturned | number:2%></b></td>
                           <td ng-if="!vm.formData.voucher_code"></td>
                         </tr>
                       </tbody>

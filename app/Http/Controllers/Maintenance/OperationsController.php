@@ -174,4 +174,60 @@ class OperationsController extends Controller {
 
     return $transaction;
   }
+
+public function update(Request $request){
+  
+    $data = array();
+    $data['operationDate']            = date('Y-m-d', strtotime($request->input('operation_date')));
+    $data['operationCode']                = $request->input('operation_code');
+    $data['assetCode']                = $request->input('asset_code');
+    $data['projectCode']              = $request->input('project_code');
+    $data['remarks']                  = $request->input('remarks');
+    $data['operatingTimeFrom']        = $request->input('operating_time_from');
+    $data['operatingTimeTo']          = $request->input('operating_time_to');
+    $data['distanceTravelledFrom']    = $request->input('distance_travelled_from');
+    $data['distanceTravelledTo']      = $request->input('distance_travelled_to');
+    $data['dieselConsumption']        = $request->input('diesel_consumption');
+    $data['gasConsumption']           = $request->input('gas_consumption');
+    $data['oilConsumption']           = $request->input('oil_consumption');
+    $data['numberLoads']              = $request->input('number_loads');
+
+    $transaction = DB::transaction(function($data) use($data){
+    // try{
+
+        $operation = Operation::where('operation_code', $data['operationCode'])->first();
+        $operation->operation_date            = $data['operationDate']; 
+        $operation->asset_code                = $data['assetCode']; 
+        $operation->project_code              = $data['projectCode']; 
+        $operation->remarks                   = $data['remarks']; 
+        $operation->operating_time_from       = $data['operatingTimeFrom']; 
+        $operation->operating_time_to         = $data['operatingTimeTo']; 
+        $operation->distance_travelled_from   = $data['distanceTravelledFrom']; 
+        $operation->distance_travelled_to     = $data['distanceTravelledTo']; 
+        $operation->diesel_consumption        = $data['dieselConsumption']; 
+        $operation->gas_consumption           = $data['gasConsumption']; 
+        $operation->oil_consumption           = $data['oilConsumption']; 
+        $operation->number_loads              = $data['numberLoads']; 
+        $operation->changed_by                = Auth::user()->email;
+        $operation->save();
+
+        return response()->json([
+            'status' => 200,
+            'data' => 'null',
+            'message' => 'Successfully saved.'
+        ]);
+
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
+    });
+
+    return $transaction;
+  }
 }

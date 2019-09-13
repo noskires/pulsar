@@ -5,12 +5,14 @@
         .controller('OperationCtrl', OperationCtrl)
         .controller('ListOperatingCtrl', ListOperatingCtrl)
         .controller('ListMonitoringCtrl', ListMonitoringCtrl)
+        .controller('OperationEditModalInstanceCtrl', OperationEditModalInstanceCtrl)
         
-        OperationCtrl.$inject = ['$state', 'MaintenanceSrvcs', 'AssetsSrvcs', 'ProjectsSrvcs', '$window'];
-        function OperationCtrl($state, MaintenanceSrvcs, AssetsSrvcs, ProjectsSrvcs, $window){
+        OperationCtrl.$inject = ['$stateParams', '$state', 'MaintenanceSrvcs', 'AssetsSrvcs', 'ProjectsSrvcs', '$window'];
+        function OperationCtrl($stateParams, $state, MaintenanceSrvcs, AssetsSrvcs, ProjectsSrvcs, $window){
  
             var vm = this;
             var data = {};
+ 
 
             // alert('this is main controller')
             
@@ -60,10 +62,12 @@
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 
+
+            
         }
         
-        ListOperatingCtrl.$inject = ['$state', 'MaintenanceSrvcs', 'AssetsSrvcs', 'ProjectsSrvcs', '$window'];
-        function ListOperatingCtrl($state, MaintenanceSrvcs, AssetsSrvcs, ProjectsSrvcs, $window){
+        ListOperatingCtrl.$inject = ['$stateParams', '$state', 'MaintenanceSrvcs', 'AssetsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
+        function ListOperatingCtrl($stateParams, $state, MaintenanceSrvcs, AssetsSrvcs, ProjectsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
             
@@ -147,6 +151,42 @@
                 });
             };
 
+            if($stateParams.operationCodeEdit)
+            {
+
+                vm.operationCode = $stateParams.operationCodeEdit;
+
+                // alert(vm.requisitionSlipCode);
+
+                vm.opeartionDetails = {
+                    operationCode:vm.operationCode
+                }
+                
+                MaintenanceSrvcs.operations(vm.opeartionDetails).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.opeartion = response.data.data[0];
+                        console.log(vm.opeartion)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'OperationEditModalInstanceCtrl',
+                            templateUrl:'operation-edit.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'Operation Controller',
+                                    message:response.data.message,
+                                    requisition: vm.opeartion
+                                };
+                              }
+                            },
+                            size: 'lg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
             vm.assetsDetails = {
                 assetCode:'', 
                 name:'', 
@@ -175,6 +215,80 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+        }
+
+        OperationEditModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'MaintenanceSrvcs', 'AssetsSrvcs', 'ProjectsSrvcs', '$window'];
+        function OperationEditModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, MaintenanceSrvcs, AssetsSrvcs, ProjectsSrvcs, $window) {
+
+            var vm = this;
+            vm.formData = formData.requisition;
+            console.log(vm.formData)
+            // alert(vm.formData.asset_name)
+
+            // OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.organizations = response.data.data;
+            //         console.log(vm.organizations)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.assetsDetails = {
+                assetCode:'', 
+                name:'', 
+                category:'CONE', 
+                areCode:'', 
+                status: ['Active'],
+                isAll:1
+            }
+
+            AssetsSrvcs.assets(vm.assetsDetails).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.assets = response.data.data;
+                    console.log(vm.assets)
+                }
+
+                console.log(response.data)
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+
+            vm.updateOperation = function(data){
+                console.log(data)
+
+                MaintenanceSrvcs.update(data).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                        
+                        vm.operationDetails = {
+                            operationCode:''
+                        }
+                        MaintenanceSrvcs.operations(vm.operationDetails).then (function (response) {
+                            if(response.data.status == 200)
+                            {
+                                vm.operations = response.data.data;
+                                console.log(vm.operations)
+                            }
+                        }, function (){ alert('Bad Request!!!') })
+                        
+                        $state.go('list-operating');
+                        vm.ok();
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
         }
 
         ListMonitoringCtrl.$inject = ['MaintenanceSrvcs', '$window'];

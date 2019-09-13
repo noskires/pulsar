@@ -266,7 +266,7 @@
                   <td align="right"><%operation.gas_consumption | number:2%></td>
                   <td align="right"><%operation.oil_consumption | number:2%></td>
                   <td align="right"><%operation.number_loads | number:2%></td>
-                  <td align="center"> <a href="#"> Edit </a> | <a href="#"> Delete </a> </td>
+                  <td align="center"> <a href="#" ui-sref="operation-edit({operationCodeEdit:operation.operation_code})"><b>Edit</b></a> </td>
                 </tr>
                 </tbody>
               </table>
@@ -285,3 +285,130 @@ $(function () {
 //   })
 });
 </script>
+
+<script type="text/ng-template" id="operation-edit.modal"> 
+  <div>
+    <div class="modal-dialog" style="width:100%;">
+        <div class="modal-header">
+          <button type="button" class="close" ui-sref="list-operating" ng-click="vm.ok()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-file-o"></li> Opeartion Code : <b><%vm.formData.operation_code%></b></h4>
+        </div>
+        <div class="modal-body">
+ 
+        <form id="from-unit" class="form-horizontal" role="form">
+              <div class="box-body">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Select Date</label>
+                  <div class="col-sm-9">
+                  <div class="input-group date">
+                  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="text" class="form-control pull-right" id="datepicker-addoperating" datepicker ng-model="vm.formData.operation_date" autocomplete="off" readonly="readonly">
+                </div></div>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label class="col-sm-3 control-label">Equipment Name</label>
+                  <div class="col-sm-9">
+
+                  <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.asset_code" ng-init="oc.operationDetails.assetCode=''">
+                    <option selected="selected" value="">- - SELECT EQUIPMENT - -</option>
+                    <option ng-value="asset.asset_code" ng-repeat="asset in vm.assets"><%asset.name + " : " + asset.code%></option> 
+                  </select>
+
+                  </div>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label class="col-sm-3 control-label">Project Name</label>
+                  <div class="col-sm-9">
+
+                  <select class="select2 form-control" style="width: 100%;" required="" ng-model="vm.formData.project_code">
+                    <option selected="selected" value="">- - SELECT PROJECT - -</option>
+                    <option value="<%project.project_code%>" ng-repeat="project in vm.projects"><%project.code +" - "+project.name%></option>
+                  </select>
+                  
+                  </div>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label for="activity" class="col-sm-3 control-label">Activity/ Remarks</label>
+                  <div class="col-sm-9"><textarea class="col-sm-9 form-control" id="dv-desc" rows="2" ng-model="vm.formData.remarks"></textarea></div>
+                </div>
+
+                <div class="row">
+                <div class="col-sm-3 bootstrap-timepicker">
+                  <div class="form-group col-sm-12">
+                    &nbsp;
+                  </div>
+                </div>
+                <div class="col-sm-4 bootstrap-timepicker">
+                  <div class="form-group col-sm-12">
+                    <label>Operating Time</label>
+                    <div class="input-group">
+                      <div class="input-group-addon" >From</div>
+                      <input type="text" class="form-control" ng-model="vm.formData.operating_time_from">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 bootstrap-timepicker">
+                  <div class="form-group col-sm-12">
+                    <label>Operating Time</label>
+                    <div class="input-group">
+                      <div class="input-group-addon" >To</div>
+                      <input type="text" class="form-control" ng-model="vm.formData.operating_time_to">
+                    </div>
+                  </div>
+                </div>
+              </div>                
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group col-sm-12">
+                    &nbsp;
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group col-sm-12">
+                    <label>Distance Travelled</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">From</div>
+                      <input type="number" class="form-control" ng-model="vm.formData.distance_travelled_from">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group col-sm-12">
+                    <label>Distance Travelled</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">To</div>
+                      <input type="number" class="form-control" ng-model="vm.formData.distance_travelled_to">
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <div class="form-group col-sm-12">
+                  <label for="gas" class="col-sm-3 control-label">Diesel Consumption</label>
+                  <div class="col-sm-3"><input type="text" class="form-control" id="gas" placeholder="" required="" ng-model="vm.formData.diesel_consumption" awnum="price"></div>
+                  <label for="gas" class="col-sm-3 control-label">Gas Consumption</label>
+                  <div class="col-sm-3"><input type="text" class="form-control" id="gas" placeholder="" required="" ng-model="vm.formData.gas_consumption" awnum="price"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                  <label for="oil" class="col-sm-3 control-label">Oil Consumption</label>
+                  <div class="col-sm-3"><input type="text" class="form-control" id="oil" placeholder="" required="" ng-model="vm.formData.oil_consumption" awnum="price"></div>
+                  <label for="oil" class="col-sm-3 control-label">Number of Loads</label>
+                  <div class="col-sm-3"><input type="text" class="form-control" id="oil" placeholder="For Dump Truck only" ng-model="vm.formData.number_loads" awnum="price"></div>
+                </div>
+              </div>  
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <div class="form-group col-sm-12">           
+                  <div class="col-sm-8"></div>
+                  <div class="col-sm-4">
+                  <button class="btn btn-large btn-primary btn-block" data-toggle="confirmation"
+                  data-btn-ok-label="Save" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+                  data-btn-cancel-label="Cancel" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+                  data-title="Confirm data entry." data-content="Are you sure?" ng-click="vm.updateOperation(vm.formData)"> UPDATE
+                  </button></div></div>
+              </div>
+            </form>
+          </div> 
+    </div>
+  </div>

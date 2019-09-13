@@ -142,7 +142,7 @@
                             <select class="form-control select2" style="width: 100%;" ng-model="fundDetail.cost_center_code" required="">
                               <option value="">- - Select Cost Center - -</option>
                               <option value="<%organization.org_code%>" ng-repeat="organization in vm.organizations"><%organization.org_name%></option>
-                              <option value="<%project.project_code%>" ng-repeat="project in vm.projects"> <%project.cost%> - <%project.name%></option>
+                              <option value="<%project.project_code%>" ng-repeat="project in vm.projects"> <%project.code%> - <%project.name%></option>
                             </select>
                           </td>
                           <td>
