@@ -43,7 +43,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/receipt-items?receiptCode='+data.receiptCode+'&receiptItemCode='+data.receiptItemCode+'&receiptItemSupplyCode='+data.receiptItemSupplyCode,
+                        url: '/api/v1/receipt-items?receiptCode='+data.receiptCode+'&receiptItemCode='+data.receiptItemCode+'&receiptItemSupplyCode='+data.receiptItemSupplyCode+'&isReturned='+data.isReturned,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
@@ -59,6 +59,23 @@
                     return $http({
                         method: 'POST',
                         url: '/api/v1/receipt-items/delete',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+
+                returnReceiptItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/receipt-items/return-receipt',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
+                deleteReturnedReceiptItems: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: '/api/v1/receipt-items/delete-return-receipt',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })

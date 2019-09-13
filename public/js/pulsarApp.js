@@ -287,6 +287,11 @@
                 controller: 'ListOperatingCtrl as oc',
                 templateUrl: 'list.operating.view'
             })
+            .state('operation-edit', {
+                url: '/maintenance/list-operating/:operationCodeEdit',
+                controller: 'ListOperatingCtrl as oc',
+                templateUrl: 'list.operating.view'
+            })
             .state('list-monitoring', {
                 url: '/maintenance/list-monitoring',
                 controller: 'ListMonitoringCtrl as lmc',

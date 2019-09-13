@@ -215,11 +215,11 @@ $(function () {
       <div class="tab-pane active" id="tab_1-1">
       <!--  ROW TOP  -->
         <div class="row">
-        <div class="col-sm-3"> 
+        <!-- <div class="col-sm-3"> 
           <div class="pull-left image">
           <img src="assets/dist/img/dumptruck.jpg" height="250" width="330" class="img-square">
           </div>
-        </div>
+        </div> -->
         <form class="form-horizontal" id="">
         <div class="col-sm-9"> 
           <div class="box-body">

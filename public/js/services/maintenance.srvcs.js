@@ -23,7 +23,7 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
-                updateOperation: function(data) {
+                update: function(data) {
                     return $http({
                         method: 'POST',
                         url: '/api/v1/operation/update',

@@ -53,6 +53,7 @@ Route::group(['middleware' => 'checkModules:MODULE-005'], function () {
 
     Route::get('/maintenance/operation','MaintenanceController@index');
     Route::get('/maintenance/list-operating','MaintenanceController@index');
+    Route::get('/maintenance/list-operating/{opeartionCode}','MaintenanceController@index');
     Route::get('/maintenance/list-monitoring','MaintenanceController@index');
 });
 /*
@@ -65,6 +66,7 @@ Route::post('/api/v1/operation/save','Maintenance\OperationsController@save');
 Route::post('/api/v1/operation/update','Maintenance\OperationsController@update');
 
 Route::get('/api/v1/operations','Maintenance\OperationsController@operations');
+Route::get('/api/v1/operation/update','Maintenance\OperationsController@update');
 Route::get('/api/v1/operations/assets-monitoring','Maintenance\OperationsController@assets_monitoring');
 
 /*
@@ -310,6 +312,8 @@ Route::get('/api/v1/receipt-types','Receipt\ReceiptsController@receipt_types');
 
 Route::post('/api/v1/receipt-items/save','Receipt\ReceiptsController@save_receipt_items');
 Route::post('/api/v1/receipt-items/delete','Receipt\ReceiptsController@delete_receipt_items');
+Route::post('/api/v1/receipt-items/return-receipt','Receipt\ReceiptsController@return_receipt_items');
+Route::post('/api/v1/receipt-items/delete-return-receipt','Receipt\ReceiptsController@delete_returned_receipt_items');
 
 /*
 |--------------------------------------------------------------------------
