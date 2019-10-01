@@ -290,6 +290,7 @@ class ReceiptsController extends Controller {
             ->leftjoin('receipts as r','r.receipt_code','=','ri.receipt_code')
             ->leftjoin('suppliers as supplier','supplier.supplier_code','=','r.payee')
             ->leftjoin('purchase_orders as purchase_order','purchase_order.po_code','=','r.purchase_order_code')
+            // ->leftjoin('purchase_orders as purchase_order','purchase_order.po_code','=','r.purchase_order_code')
             ->leftjoin('supplies as s','s.supply_code','=','ri.receipt_item_supply_code')
             ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
 

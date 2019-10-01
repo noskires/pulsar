@@ -95,6 +95,15 @@
                 });
             }
 
+            FundsSrvcs.fundItems({fundCode:'', fundItemCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.fundItems = response.data.data;
+                    vm.totalFundItems = response.data.totalFundItems;
+                    console.log(vm.fundItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
             vm.routeTo = function(route){
                 $window.location.href = route;
             }; 

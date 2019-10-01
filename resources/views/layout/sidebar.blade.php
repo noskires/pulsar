@@ -54,8 +54,10 @@
         </span>
       </a>
       <ul class="treeview-menu" ng-if="checkModuleAccess('MODULE-011')">
+        <li><a href="#" ui-sref=""><i class="fa fa-circle-o text-yellow" ></i> Preventive Maintenance </a></li>
         <li><a href="#" ui-sref="list-returned-items"><i class="fa fa-circle-o text-yellow" ></i> Returned Items </a></li>
         <li><a href="#" ui-sref="list-insurance-for-renewal"><i class="fa fa-circle-o text-red"></i> Insurance </a></li>
+        <li><a href="#" ui-sref="list-funds-budget-status"><i class="fa fa-circle-o text-red"></i> Budget Status </a></li>
       </ul>
     </li>
    <!--  <li>
