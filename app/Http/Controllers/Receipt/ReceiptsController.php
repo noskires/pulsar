@@ -278,10 +278,18 @@ class ReceiptsController extends Controller {
                 'ri.receipt_item_cost',
                 'ri.receipt_item_stock_unit',
                 'ri.receipt_item_total',
+                'ri.is_returned',
+                'r.receipt_number',
+                'r.purchase_order_code',
                 'r.receipt_type',
+                'r.payee',
+                'purchase_order.old_reference',
+                'supplier.supplier_name',
                 'rt.receipt_type_name'
               )
             ->leftjoin('receipts as r','r.receipt_code','=','ri.receipt_code')
+            ->leftjoin('suppliers as supplier','supplier.supplier_code','=','r.payee')
+            ->leftjoin('purchase_orders as purchase_order','purchase_order.po_code','=','r.purchase_order_code')
             ->leftjoin('supplies as s','s.supply_code','=','ri.receipt_item_supply_code')
             ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type');
 
@@ -299,7 +307,7 @@ class ReceiptsController extends Controller {
     }
 
  
-      $receiptItems = $receiptItems->where('ri.is_returned', $data['isReturned']);
+    $receiptItems = $receiptItems->where('ri.is_returned', $data['isReturned']);
  
 
     $receiptItems = $receiptItems->get();

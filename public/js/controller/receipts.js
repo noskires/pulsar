@@ -256,6 +256,15 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
+
+
+            ReceiptSrvcs.receiptItems({receiptCode:'', receiptItemCode:'', receiptItemSupplyCode:'',isReturned:'1'}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.returneReceiptItems = response.data.data;
+                    console.log(vm.returneReceiptItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
         }
 
         ReceiptsModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'formData', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];

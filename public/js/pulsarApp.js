@@ -511,6 +511,9 @@
                 controller: 'ReceiptsCtrl as rc',
                 templateUrl: 'receipt.list.view'
             })
+
+            
+
             .state('list-receiptCopy', {
                 url: '/receipt/list/:receiptCode',
                 controller: 'ReceiptsCtrl as rc',
@@ -528,7 +531,21 @@
                 controller: 'ReceiptsCtrl as rc',
                 templateUrl: 'receipt2.list.view'
             })
+            
+            // alerts
+            .state('list-returned-items', {
+                url: '/receipt/returned-items',
+                controller: 'ReceiptsCtrl as rc',
+                templateUrl: 'alert.returned.items.view'
+            })
 
+            .state('list-insurance-for-renewal', {
+                url: '/insurance/for-renewal',
+                controller: 'InsuranceCtrl as ic',
+                templateUrl: 'alert.insurance.due.view'
+            })
+
+            // supplies
             .state('supply-create', {
                 url: '/supply/new',
                 controller: 'SuppliesCtrl as sc',
@@ -716,6 +733,12 @@
             })
             .state('list-insuranceCopy', {
                 url: '/insurance/list/:insuranceCode',
+                controller: 'InsuranceCtrl as ic',
+                templateUrl: 'insurance.list.view'
+            })
+
+            .state('insurance-edit', {
+                url: '/insurance/edit/:insuranceCodeEdit',
                 controller: 'InsuranceCtrl as ic',
                 templateUrl: 'insurance.list.view'
             })

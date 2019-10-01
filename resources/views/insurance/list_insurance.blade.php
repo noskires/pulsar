@@ -44,14 +44,14 @@
               <div class="col-sm-4">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="insu_dateissue" ng-model="ic.insuranceDetails.date_issued">
+              <input type="text" class="form-control pull-right" id="insu_dateissue" datepicker2 ng-model="ic.insuranceDetails.date_issued">
             </div></div>
 
               <label class="col-sm-2 control-label">Expiration Date</label>
               <div class="col-sm-4">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-              <input type="text" class="form-control pull-right" id="insu_dateexpire" ng-model="ic.insuranceDetails.expiration_date">
+              <input type="text" class="form-control pull-right" id="insu_dateexpire"  datepicker2 ng-model="ic.insuranceDetails.expiration_date">
             </div></div>
             </div>
             <div class="form-group col-sm-12">
@@ -113,6 +113,7 @@
               <th>Insurance Coverage</th>
               <th>Date Issued</th>
               <th>Expiration Date</th>
+              <th>Expires In (days)</th>
             </tr>
             </thead>
             <tbody>
@@ -123,6 +124,7 @@
               <td><%insurance.insurance_coverage%></td>
               <td><%insurance.date_issued%></td>
               <td><%insurance.expiration_date%></td>
+              <td><%insurance.expires_in%></td>
             </tr>
             </tbody>
           </table>
@@ -239,14 +241,14 @@
                               <div class="col-sm-4">
                               <div class="input-group date">
                               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                              <input type="text" class="form-control pull-right" id="insu_dateissue" ng-model="vm.formData.date_issued">
+                              <input type="text" class="form-control pull-right" id="insu_dateissue" datepicker2 ng-model="vm.formData.date_issued">
                             </div></div>
 
                               <label class="col-sm-2 control-label">Expiration Date</label>
                               <div class="col-sm-4">
                               <div class="input-group date">
                               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                              <input type="text" class="form-control pull-right" id="insu_dateexpire" ng-model="vm.formData.expiration_date">
+                              <input type="text" class="form-control pull-right" id="insu_dateexpire" datepicker2 ng-model="vm.formData.expiration_date">
                             </div></div>
                             </div>
                             <div class="form-group col-sm-12">
@@ -292,3 +294,4 @@
 </div>
 <!-- /.modal-dialog -->
 </script>
+

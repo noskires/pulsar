@@ -205,6 +205,16 @@
   @include('receipt.list_receipts2')
 </script>
 
+<!-- Alerts -->
+<script type="text/ng-template" id="alert.returned.items.view">
+  @include('alert.list_returned_items')
+</script>
+
+<script type="text/ng-template" id="alert.insurance.due.view">
+  @include('alert.list_insurance_due')
+</script>
+
+
 <!-- Supplies -->
 
 <script type="text/ng-template" id="supply.create.view">

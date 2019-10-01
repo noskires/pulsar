@@ -25,7 +25,7 @@ class InsuranceController extends Controller {
 			'insuranceCode'=>$request->input('insuranceCode'),
 		);
 
-		$banks = DB::table('insurance as i')
+		$insurance = DB::table('insurance as i')
                     ->select(
                       'i.insurance_id',
                       'i.insurance_code',
@@ -39,18 +39,19 @@ class InsuranceController extends Controller {
                       'i.insurance_agent',
                       'i.email',
                       'i.mobile_number', 
-                      'i.telephone_number'
+					  'i.telephone_number',
+					  DB::raw('DATEDIFF(expiration_date, NOW()) as expires_in')
                     );
 
 		if ($data['insuranceCode']){
-			$banks = $banks->where('insurance_code', $data['insuranceCode']);
+			$insurance = $insurance->where('insurance_code', $data['insuranceCode']);
 		}
 
-		$banks = $banks->get();
+		$insurance = $insurance->get();
 
 		return response()-> json([
 			'status'=>200,
-			'data'=>$banks,
+			'data'=>$insurance,
 			'message'=>''
 		]);
 	}

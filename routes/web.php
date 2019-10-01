@@ -293,6 +293,7 @@ Route::post('/api/v1/requisition-issue-slip/office/update2','Requisition\Requisi
 Route::group(['middleware' => 'checkModules:MODULE-012'], function () {
     Route::get('/receipt/new','Receipt\ReceiptsController@index');
     Route::get('/receipt/list','Receipt\ReceiptsController@index');
+    Route::get('/receipt/returned-items','Receipt\ReceiptsController@index');
     Route::get('/receipt2/list','Receipt\ReceiptsController@index');
     Route::get('/receipt/list/{receiptCode}','Receipt\ReceiptsController@index');
     Route::get('/receipt2/list/{receiptCode}','Receipt\ReceiptsController@index');
@@ -392,6 +393,8 @@ Route::get('/api/v1/banks','Bank\BanksController@banks');
 Route::group(['middleware' => 'checkModules:MODULE-016'], function () {
     Route::get('/insurance/new','Insurance\InsuranceController@index');
     Route::get('/insurance/list','Insurance\InsuranceController@index');
+    Route::get('/insurance/edit/{insuranceCode}','Insurance\InsuranceController@index');
+    Route::get('/insurance/for-renewal','Insurance\InsuranceController@index');
     Route::get('/insurance/list/{insuranceCode}','Insurance\InsuranceController@index');
 });
 /*
