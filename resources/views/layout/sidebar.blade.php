@@ -49,14 +49,13 @@
         <i class="fa fa-exclamation-triangle"></i> <span>Alerts</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
-          <small class="label pull-right bg-yellow">12</small>
-          <small class="label pull-right bg-red">15</small>
+          <!-- <small class="label pull-right bg-yellow">12</small>
+          <small class="label pull-right bg-red">15</small> -->
         </span>
       </a>
       <ul class="treeview-menu" ng-if="checkModuleAccess('MODULE-011')">
-       <!--  <li><a href="#"><i class="fa fa-circle-o text-red"></i> Due for Maintenance</a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-green"></i> On-going Maintenance</a></li> -->
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Supply Levels</a></li>
+        <li><a href="#" ui-sref="list-returned-items"><i class="fa fa-circle-o text-yellow" ></i> Returned Items </a></li>
+        <li><a href="#" ui-sref="list-insurance-for-renewal"><i class="fa fa-circle-o text-red"></i> Insurance </a></li>
       </ul>
     </li>
    <!--  <li>

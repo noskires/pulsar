@@ -10,6 +10,7 @@
             var vm = this;
             var data = {};
             // alert($stateParams.insuranceCode)
+            
             if($stateParams.insuranceCode)
             {
                 vm.insuranceCode = $stateParams.insuranceCode;
@@ -43,7 +44,7 @@
                 if(response.data.status == 200)
                 {
                     vm.insurance = response.data.data;
-                    console.log(vm.banks)
+                    console.log(vm.insurance)
                 }
             }, function (){ alert('Bad Request!!!') })
 
