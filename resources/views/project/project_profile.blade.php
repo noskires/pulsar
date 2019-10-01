@@ -421,15 +421,23 @@
         <div class="form-group col-sm-12">
         </div>
  
-        <div class="form-group col-sm-12"">
+        <div class="form-group col-sm-12">
           <label for="projectid" class="col-sm-2 control-label">Project ID</label>
           <div class="col-sm-6"><input type="text" class="form-control" id="projectid" placeholder="" ng-model="vm.formData.code" required=""></div>
         </div>
-        <div class="form-group col-sm-12"">
+        <div class="form-group col-sm-12">
           <label for="projectname" class="col-sm-2 control-label">Project Name</label>
           <div class="col-sm-10"><input type="text" class="form-control" id="projectname" placeholder="" ng-model="vm.formData.name" required=""></div>
         </div>
-        <div class="form-group col-sm-12"">
+        <div class="form-group col-sm-12">
+              <label class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-10">
+                <div class="input-group date">
+                  <textarea class="col-sm-12 form-control" id="" rows="2" ng-model="vm.formData.description"></textarea>
+                </div>
+              </div>
+            </div>
+        <div class="form-group col-sm-12">
           <label for="projectname" class="col-sm-2 control-label">Client</label>
           <div class="col-sm-10">
           <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.client_code"> 
@@ -438,7 +446,7 @@
           </select>
           </div>
         </div>
-        <div class="form-group col-sm-12"">
+        <div class="form-group col-sm-12">
           <label for="projectcost" class="col-sm-2 control-label">Project Cost</label>
           <div class="col-sm-4"><input type="number" class="form-control" id="projectcost" placeholder="" ng-model="vm.formData.cost" required=""></div>
         </div>

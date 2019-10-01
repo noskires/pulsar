@@ -142,6 +142,7 @@ class FundsController extends Controller {
                 'fi.fund_item_amount',
                 'fi.cost_center_code',
                 'f.fund_name',
+                'f.fund_year',
                 'supply_category.supply_category_name',
                 'v.voucher_code',
                 DB::raw('CASE 

@@ -214,6 +214,10 @@
   @include('alert.list_insurance_due')
 </script>
 
+<script type="text/ng-template" id="alert.budget_status.view">
+  @include('alert.budget_status')
+</script>
+
 
 <!-- Supplies -->
 

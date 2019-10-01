@@ -545,6 +545,13 @@
                 templateUrl: 'alert.insurance.due.view'
             })
 
+            .state('list-funds-budget-status', {
+                url: '/funds/budget-status',
+                controller: 'FundsCtrl as fc',
+                templateUrl: 'alert.budget_status.view'
+            })
+
+            
             // supplies
             .state('supply-create', {
                 url: '/supply/new',
@@ -736,6 +743,8 @@
                 controller: 'InsuranceCtrl as ic',
                 templateUrl: 'insurance.list.view'
             })
+
+            
 
             .state('insurance-edit', {
                 url: '/insurance/edit/:insuranceCodeEdit',
