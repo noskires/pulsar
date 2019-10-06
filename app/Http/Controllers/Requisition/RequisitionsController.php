@@ -40,7 +40,6 @@ class RequisitionsController extends Controller {
         'rs.reference_code',
         'rs.job_order_code',
         'rs.received_by',
-        
         DB::raw('CONCAT(trim(CONCAT(receivedEmployee.lname," ",COALESCE(receivedEmployee.affix,""))),", ", COALESCE(receivedEmployee.fname,"")," ", COALESCE(receivedEmployee.mname,"")) as received_by_name'),
         'rs.date_received',
         'rs.inspected_by',
@@ -52,21 +51,6 @@ class RequisitionsController extends Controller {
         'rs.is_open',
         'rs.requesting_employee as employee_code',
 
-        
-
-        // DB::raw(
-        //   'CASE 
-        //     WHEN rs.date_received IS NULL 
-        //       OR rs.received_by IS NULL 
-        //       OR rs.received_by = "1970-01-01" 
-        //       OR rs.date_inspected IS NULL 
-        //       OR rs.inspected_by IS NULL 
-        //     THEN "OPEN"
-        //   ELSE 
-        //     "CLOSED" 
-        //   END AS status'
-        // ),
-
         DB::raw(
           'CASE 
             WHEN rs.is_open = 1
@@ -75,6 +59,7 @@ class RequisitionsController extends Controller {
             "CLOSED" 
           END AS status'
         ),
+
         DB::raw(
           'CASE 
             WHEN rs.request_type = "Office" 
@@ -86,13 +71,23 @@ class RequisitionsController extends Controller {
           END as reference_name'
         ),
         DB::raw(
-          'CASE    
-            WHEN rs.job_order_code IS NOT NULL 
-              THEN (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
-            WHEN rs.job_order_code IS NULL 
-              THEN null
-            END as reference_id'
+          'CASE 
+            WHEN rs.request_type = "Office" 
+              THEN (SELECT organizations.org_name FROM organizations WHERE organizations.org_code=rs.reference_code)
+            WHEN rs.request_type = "Project" 
+              THEN (SELECT CONCAT(projects.code,"-",projects.name) AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
+          ELSE 
+              "" 
+          END as reference_name'
         ),
+        // DB::raw(
+        //   'CASE    
+        //     WHEN rs.job_order_code IS NOT NULL 
+        //       THEN (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+        //     WHEN rs.job_order_code IS NULL 
+        //       THEN null
+        //     END as reference_id'
+        // ),
         DB::raw(
           'CASE 
             WHEN rs.job_order_code IS NULL 
