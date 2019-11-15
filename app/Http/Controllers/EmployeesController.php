@@ -42,7 +42,13 @@ class EmployeesController extends Controller {
                       'unit.org_name AS unit',
                       'e.organizational_unit AS organizational_unit_code',
                       'org_unit.org_name AS organizational_unit_name',
-                      'e.profile_photo'
+                      'e.profile_photo',
+                      'e.tin',
+                      'e.sss_number',
+                      'e.philhealth_number',
+                      'e.pagibig_number',
+                      'e.date_hired',
+                      'e.address'
                     )
                     ->leftjoin('positions as p','p.position_code','=','e.position_code')
                     ->leftjoin('organizations as dep','dep.org_code','=','e.department')
