@@ -1,5 +1,8 @@
 <?php
 
+use App\User;
+use Illuminate\Notifications\Messages\NexmoMessage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +19,23 @@
 | Custom Login
 |--------------------------------------------------------------------------
 */
+
+
+
+Route::get('/sms','SmsNotificationController@not');
+
+Route::get('/sms2','SmsNotificationController@not2');
+
+// Route::get('/sms', function(){
+//     Nexmo::message()->send([
+//         'to'=>'+639988964947',
+//         'from'=>'+639054153810',
+//         'text'=>'Message from sample'
+//     ]);
+// });
+
+
+
 
 Auth::routes();
 Route::post('/auth', ['uses'=>'LoginController@login', 'as'=>'auth']);
