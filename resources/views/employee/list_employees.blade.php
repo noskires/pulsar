@@ -322,7 +322,7 @@
 
                       <div class="form-group col-sm-12">
                         <label class="col-sm-3 control-label">Date Hired</label>
-                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.date_hired"></div>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.date_hired" datepicker autocomplete="off"></div>
                       </div>
 
                       <div class="form-group col-sm-12">
