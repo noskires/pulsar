@@ -142,27 +142,49 @@ class FundsController extends Controller {
                 'fi.fund_item_amount',
                 'fi.cost_center_code',
                 'f.fund_name',
-                'f.fund_year',
+                // 'f.fund_year',
                 'supply_category.supply_category_name',
-                'v.voucher_code',
+                // 'v.voucher_code',
                 DB::raw('CASE 
 					WHEN (SELECT count(org_code) FROM organizations WHERE org_code=fi.cost_center_code) = 1 
 						THEN (SELECT org_name FROM organizations WHERE org_code=fi.cost_center_code)
 					ELSE 
 						(SELECT CONCAT(name," (",code,")")  FROM projects WHERE project_code=fi.cost_center_code)
 					END AS cost_center_name'
-			   	)
-              )
-            ->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
+			  	),
+			  	DB::raw("(SELECT COALESCE(SUM(receipt_items.receipt_item_total), 0) 
+                          FROM vouchers, voucher_items, receipt_items 
+						  WHERE 
+						  vouchers.voucher_code = voucher_items.voucher_code 
+                          AND voucher_items.receipt_code = receipt_items.receipt_code 
+						  AND vouchers.cost_center_code = fi.cost_center_code
+						 
+						  ) AS total_receipt_item_Cost")
+			  )
+			//   AND vouchers.cost_center_code = fi.cost_center_code
+			// AND vouchers.voucher_code = v.voucher_code
+			->leftjoin('funds as f','f.fund_code','=','fi.fund_code')
+			->leftjoin('vouchers as v','v.cost_center_code', 'fi.cost_center_code')
             ->leftjoin('supply_categories as supply_category','supply_category.supply_category_code','=','fi.supply_category_code')
-            ->leftjoin('vouchers as v','v.fund_item_code','=','fi.fund_item_code');
+			
+			->groupBy(
+                'fi.fund_code', 
+                'fi.fund_item_code',
+                'fi.supply_category_code',
+                'fi.fund_item_amount',
+                'fi.cost_center_code',
+                'f.fund_name',
+                'supply_category.supply_category_name'
+              );
 
+
+		// $fundItems = $fundItems->where('v.cost_center_code', 'fi.cost_center_code');
 		
-
-		if($data['filterFundItem']==0)
+		if($data['filterFundItem']==1)
         { 
             $fundItems = $fundItems->whereNull('v.voucher_code');
-        }
+		}
+		
 
         if ($data['fundCode']){
 			$fundItems = $fundItems->where('fi.fund_code', $data['fundCode']);

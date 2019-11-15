@@ -21,6 +21,7 @@
                 <th>Particular</th>
                 <th>Allocation</th>
                 <th>Utilization</th>
+                <th>Variance</th>
                 <th>%</th>
             </tr>
             </thead>
@@ -31,8 +32,9 @@
               <td><%fund.cost_center_name%></td>
               <td><%fund.supply_category_name%></td>
               <td align="right"><%fund.fund_item_amount |number:2%></td>
-              <td></td>
-              <td></td>
+              <td align="right"><%fund.total_receipt_item_Cost |number:2%></td>
+              <td align="right"><%fund.fund_item_amount-fund.total_receipt_item_Cost |number:2%></td>
+              <td align="right"><%(fund.total_receipt_item_Cost/fund.fund_item_amount)*100 |number:2%>%</td>
             </tr>
             </tbody>
           </table>
