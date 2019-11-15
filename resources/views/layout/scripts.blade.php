@@ -23,7 +23,7 @@
 <script type="text/javascript" src="{{URL::to('bower_components/angular-dynamic-number/release/dynamic-number.min.js')}}"></script>
 
 <!-- Checklist-model -->
-<script typasset/list-equipmentse="text/javascript" src="{{URL::to('bower_components/checklist-model/checklist-model.js')}}"></script>
+<script type="text/javascript" src="{{URL::to('bower_components/checklist-model/checklist-model.js')}}"></script>
 
 <!-- angular-datatables -->
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/angular-datatables.min.js')}}"></script>
@@ -31,7 +31,7 @@
 <script type="text/javascript" src="{{URL::to('bower_components/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.min.js')}}"></script>
 
 <!-- angular-ui-select-->
-<script type="text/javascript" src="{{URL::to('bower_components/angular-ui-select/dist/select.js')}}"></script>
+<!-- <script type="text/javascript" src="{{URL::to('bower_components/angular-ui-select/dist/select.js')}}"></script> -->
 
 <!-- <script src="{{URL::to('bower_components/datatables.net/js/buttons.html5.min.js')}}"></script> 
 <script src="{{URL::to('bower_components/datatables.net/js/buttons.print.min.js')}}"></script>  -->
