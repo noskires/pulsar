@@ -97,7 +97,14 @@ class EmployeesController extends Controller {
                       'unit.org_name AS unit',
                       'e.organizational_unit AS organizational_unit_code',
                       'org_unit.org_name AS organizational_unit_name',
-                      'e.profile_photo'
+                      'e.profile_photo',
+                      'e.tin',
+                      'e.sss_number',
+                      'e.philhealth_number',
+                      'e.pagibig_number',
+                      'e.date_hired',
+                      'e.address'
+
                     )
                     ->leftjoin('positions as p','p.position_code','=','e.position_code')
                     ->leftjoin('organizations as dep','dep.org_code','=','e.department')
@@ -129,19 +136,24 @@ class EmployeesController extends Controller {
     public function save(Request $request){
       // return $request->all();
       $data = array();
-      $data['emp_id']     = $request->input('emp_id');
-      $data['lname']      = $request->input('lname');
-      $data['suffix']     = $request->input('suffix');
-      $data['fname']      = $request->input('fname');
-      $data['mname']      = $request->input('mname');
-      $data['gender']     = $request->input('gender');
-      $data['birthdate']  = date('Y-m-d', strtotime($request->input('bday')));
-      $data['position_code'] = $request->input('position_code');
-      $data['email']      = $request->input('email');
-      $data['phone_no']   = $request->input('phone_no');
-      $data['department'] = $request->input('department');
-      $data['division']   = $request->input('division');
-      $data['unit']       = $request->input('unit');
+      $data['emp_id']           = $request->input('emp_id');
+      $data['lname']            = $request->input('lname');
+      $data['suffix']           = $request->input('suffix');
+      $data['fname']            = $request->input('fname');
+      $data['mname']            = $request->input('mname');
+      $data['gender']           = $request->input('gender');
+      $data['birthdate']        = date('Y-m-d', strtotime($request->input('bday')));
+      $data['position_code']    = $request->input('position_code');
+      $data['email']            = $request->input('email');
+      $data['phone_no']         = $request->input('phone_no');
+      $data['department']       = $request->input('department');
+      $data['division']         = $request->input('division');
+      $data['date_hired']       = date('Y-m-d', strtotime($request->input('date_hired')));
+      $data['tin']              = $request->input('tin');
+      $data['sss_number']       = $request->input('sss_number');
+      $data['philhealth_number']= $request->input('philhealth_number');
+      $data['pagibig_number']   = $request->input('pagibig_number');
+      $data['address']   = $request->input('address');
 
       // return $request->all();
 
@@ -154,7 +166,7 @@ class EmployeesController extends Controller {
       }
       
       $transaction = DB::transaction(function($data) use($data){
-      try{
+      // try{
 
           $employee = new Employee;
 
@@ -174,6 +186,12 @@ class EmployeesController extends Controller {
           $employee->department     = $data['department'];
           $employee->division       = $data['division'];
           $employee->unit           = $data['unit'];
+          $employee->date_hired     = $data['date_hired'];
+          $employee->tin            = $data['tin'];
+          $employee->sss_number     = $data['sss_number'];
+          $employee->philhealth_number = $data['philhealth_number'];
+          $employee->pagibig_number    = $data['pagibig_number'];
+          $employee->address    = $data['address'];
           $employee->organizational_unit = $data['organizational_unit'];
           $employee->changed_by     = Auth::user()->email;
           $employee->save();
@@ -184,15 +202,15 @@ class EmployeesController extends Controller {
               'message' => 'Successfully saved.'
           ]);
 
-        }
-        catch (\Exception $e) 
-        {
-            return response()->json([
-              'status' => 500,
-              'data' => 'null',
-              'message' => 'Error, please try again!'
-          ]);
-        }
+        // }
+        // catch (\Exception $e) 
+        // {
+        //     return response()->json([
+        //       'status' => 500,
+        //       'data' => 'null',
+        //       'message' => 'Error, please try again!'
+        //   ]);
+        // }
       });
       return $transaction;
   }
@@ -214,6 +232,13 @@ class EmployeesController extends Controller {
     $data['department'] = $request->input('department_code');
     $data['division'] = $request->input('division_code');
     $data['unit'] = $request->input('unit_code');
+
+    $data['date_hired']       = date('Y-m-d', strtotime($request->input('date_hired')));
+    $data['tin']              = $request->input('tin');
+    $data['sss_number']       = $request->input('sss_number');
+    $data['philhealth_number']= $request->input('philhealth_number');
+    $data['pagibig_number']   = $request->input('pagibig_number');
+    $data['address']   = $request->input('address');
 
     if($data['unit'] != ""){
       $data['organizational_unit'] = $data['unit'];
@@ -239,7 +264,16 @@ class EmployeesController extends Controller {
           $employee->department       = $data['department'];
           $employee->division         = $data['division'];
           $employee->unit             = $data['unit'];
-          $employee->organizational_unit     = $data['organizational_unit'];
+
+          $employee->date_hired     = $data['date_hired'];
+          $employee->tin            = $data['tin'];
+          $employee->sss_number     = $data['sss_number'];
+          $employee->philhealth_number = $data['philhealth_number'];
+          $employee->pagibig_number    = $data['pagibig_number'];
+          $employee->address    = $data['address'];
+
+          $employee->organizational_unit = $data['organizational_unit'];
+
           $employee->changed_by       = Auth::user()->email;
           $employee->timestamps       = true;
           $employee->save();
