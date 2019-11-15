@@ -41,8 +41,11 @@ class ReceiptsController extends Controller {
                 'r.payee_type',
                 'r.payee',
                 'r.remarks',
+                'r.receiving_receipt_date',
                 'rt.receipt_type_name',
                 'vi.voucher_code',
+                'purchase_order.old_reference as old_reference_po',
+                'requisition_slip.old_reference as old_reference_rs',
                 DB::raw("(SELECT CAST(COALESCE(SUM(receipt_items.receipt_item_total), 0) AS INT) 
                   FROM receipts, receipt_items 
                   WHERE receipts.receipt_code = receipt_items.receipt_code 
@@ -54,6 +57,8 @@ class ReceiptsController extends Controller {
               )
               ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
               ->leftjoin('receipt_items as receipt_item','r.receipt_code','=','receipt_item.receipt_code')
+              ->leftjoin('purchase_orders as purchase_order','purchase_order.po_code','=','r.purchase_order_code')
+              ->leftjoin('requisition_slips as requisition_slip','requisition_slip.requisition_slip_code','=','purchase_order.requisition_slip_code')
               ->leftjoin('voucher_items as vi','vi.receipt_code','=','r.receipt_code');
 
               // $receipts = $receipts->where('receipt_item.is_returned', 0);
@@ -111,8 +116,11 @@ class ReceiptsController extends Controller {
                 'r.payee_type',
                 'r.payee',
                 'r.remarks',
+                'r.receiving_receipt_date',
                 'rt.receipt_type_name',
-                'vi.voucher_code'
+                'vi.voucher_code',
+                'purchase_order.old_reference',
+                'requisition_slip.old_reference'
               );
 
     $debugQuery = $receipts;
@@ -214,13 +222,14 @@ class ReceiptsController extends Controller {
     $data['remarks'] = $request->input('remarks');
     $data['payeeType'] = $request->input('payeeType');
     $data['payee'] = $request->input('payee');
+    $data['receivingReceiptDate'] = $request->input('receivingReceiptDate');
 
     if($data['payeeType']!="SUPPLIER"){
       $data['purchaseOrderCode'] = null;
     }
 
     $transaction = DB::transaction(function($data) use($data){
-    try{
+    // try{
 
         $receipt = new Receipt;
 
@@ -228,11 +237,12 @@ class ReceiptsController extends Controller {
         ->get()->count() + 1), 4, "0", STR_PAD_LEFT));
 
         $receipt->receipt_code = "RCP-".date('YmdHis', strtotime(Carbon::now('Asia/Manila')))."-".$receiptCode;
-        $receipt->receipt_date = $data['receiptDate'];
+        $receipt->receipt_date = date('Y-m-d', strtotime($data['receiptDate']));
         $receipt->purchase_order_code = $data['purchaseOrderCode'];
         $receipt->receipt_number = $data['receiptNumber'];
         $receipt->receipt_type = $data['receiptType'];
         $receipt->remarks = $data['remarks'];
+        $receipt->receiving_receipt_date = date('Y-m-d', strtotime($data['receivingReceiptDate']));
         $receipt->payee_type = $data['payeeType'];
         $receipt->payee = $data['payee'];
         $receipt->changed_by = Auth::user()->email;
@@ -244,15 +254,15 @@ class ReceiptsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      }
-      catch (\Exception $e) 
-      {
-          return response()->json([
-            'status' => 500,
-            'data' => 'null',
-            'message' => 'Error, please try again!'
-        ]);
-      }
+      // }
+      // catch (\Exception $e) 
+      // {
+      //     return response()->json([
+      //       'status' => 500,
+      //       'data' => 'null',
+      //       'message' => 'Error, please try again!'
+      //   ]);
+      // }
     });
 
     return $transaction;

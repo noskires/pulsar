@@ -60,6 +60,17 @@ class RequisitionsController extends Controller {
           END AS status'
         ),
 
+        // DB::raw(
+        //   'CASE 
+        //     WHEN rs.request_type = "Office" 
+        //       THEN (SELECT organizations.org_name FROM organizations WHERE organizations.org_code=rs.reference_code)
+        //     WHEN rs.request_type = "Project" 
+        //       THEN (SELECT CONCAT(projects.code,"-",projects.name) AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
+        //   ELSE 
+        //       "" 
+        //   END as department'
+        // ),
+
         DB::raw(
           'CASE 
             WHEN rs.request_type = "Office" 

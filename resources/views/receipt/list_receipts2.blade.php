@@ -87,13 +87,28 @@
               <option ng-value="po.po_code" ng-repeat="po in rc.pos"> <%po.po_code%> </option>
             </select> 
           </div>
-          <label for="rcpt-amount" class="col-sm-2 control-label">Remarks</label>
+          <label for="rcpt-amount" class="col-sm-2 control-label">Receiving Receipt</label>
           <div class="col-sm-4">
             <div class="input-group date">
-              <textarea class="form-control" id="rcpt-remarks" ng-model="rc.receiptDetails.remarks"></textarea>
+            <input type="text" class="form-control"  id="rcpt-remarks" ng-model="rc.receiptDetails.remarks"/>
             </div>
           </div>
         </div>
+
+        <div class="form-group col-sm-12">
+          <label class="col-sm-2 control-label"></label>
+          <div class="col-sm-4">
+            
+          </div>
+          <label class="col-sm-2 control-label">Receiving Receipt Date</label>
+          <div class="col-sm-4">
+            <div class="input-group date">
+            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+              <input type="text" class="form-control pull-right" required="" ng-model="rc.receiptDetails.receivingReceiptDate" datepicker autocomplete="off" readonly="">
+            </div>
+          </div>
+        </div>
+        
 
 
 
@@ -178,8 +193,11 @@
         <th>Payee Type</th>
         <th>Payee Name</th>
         <th>PO</th>
+        <th>RS</th>
         <th>Voucher</th>
         <th>Amount</th>
+        <th>Receiving Receipt No</th>
+        <th>Receiving Receipt Date</th>
       </tr>
       </thead>
       <tbody>
@@ -190,9 +208,12 @@
         <td><%receipt.receipt_date%></td>
         <td><%receipt.payee_type%></td>
         <td><%receipt.payee_text%></td>
-        <td><%receipt.purchase_order_code%></td>
+        <td><%receipt.old_reference_po%></td>
+        <td><%receipt.old_reference_rs%></td>
         <td><%receipt.voucher_code%></td>
         <td align="right"><%receipt.total_receipt_item_Cost | number:2%></td>
+        <td><%receipt.remarks%></td>
+        <td><%receipt.receiving_receipt_date%></td>
       </tr> 
       </tbody>
     </table>
