@@ -194,10 +194,10 @@
         <th>Payee Name</th>
         <th>PO</th>
         <th>RS</th>
-        <th>Voucher</th>
-        <th>Amount</th>
         <th>Receiving Receipt No</th>
         <th>Receiving Receipt Date</th>
+        <th>Voucher</th>
+        <th>Amount</th>
       </tr>
       </thead>
       <tbody>
@@ -210,10 +210,10 @@
         <td><%receipt.payee_text%></td>
         <td><%receipt.old_reference_po%></td>
         <td><%receipt.old_reference_rs%></td>
-        <td><%receipt.voucher_code%></td>
-        <td align="right"><%receipt.total_receipt_item_Cost | number:2%></td>
         <td><%receipt.remarks%></td>
         <td><%receipt.receiving_receipt_date%></td>
+        <td><%receipt.voucher_code%></td>
+        <td align="right"><%receipt.total_receipt_item_Cost | number:2%></td>
       </tr> 
       </tbody>
     </table>

@@ -320,6 +320,36 @@
                         </select></div>
                       </div>
 
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">Date Hired</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.date_hired"></div>
+                      </div>
+
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">TIN</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.tin"></div>
+                      </div>
+                      
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">SSS</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.sss_number"></div>
+                      </div>
+
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">Philhealth</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.philhealth_number"></div>
+                      </div>
+
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">PagIbig Number</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.pagibig_number"></div>
+                      </div>
+
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.address"></div>
+                      </div>
+
                     </div>
                     <!-- /.box-body -->
                   </form>
