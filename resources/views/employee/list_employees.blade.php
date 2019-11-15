@@ -183,7 +183,11 @@
             <th>Phone No.</th>
             <th>Department</th>
             <th>Division</th>
-            <th>Unit</th>
+            <th>TIN</th>
+            <th>SSS</th>
+            <th>Philhealth</th>
+            <th>Pag-ibig</th>
+            <!-- <th>Unit</th> -->
           </tr>
           </thead>
           <tbody>
@@ -199,7 +203,11 @@
             <td><%employee.phone_number%></td>
             <td><%employee.department%></td>
             <td><%employee.division%></td>
-            <td><%employee.unit%></td>
+            <td><%employee.tin%></td>
+            <td><%employee.sss_number%></td>
+            <td><%employee.philhealth_number%></td>
+            <td><%employee.pagibig_number%></td>
+            <!-- <td><%employee.unit%></td> -->
           </tr>
           </tbody>
         </table>
