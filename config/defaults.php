@@ -3,7 +3,7 @@
 return [
 
     'default' => [
-        'is_local' => '1',
+        'is_local' => '0',
     ],
 
 ];
