@@ -1,26 +1,26 @@
 <!-- Bootstrap 3.3.7 --> 
-<link rel="stylesheet" href="{{URL::to('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="{{URL::to('bower_components/font-awesome/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/font-awesome/css/font-awesome.min.css')}}">
 <!-- Ionicons -->
-<link rel="stylesheet" href="{{URL::to('bower_components/Ionicons/css/ionicons.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/Ionicons/css/ionicons.min.css')}}">
 <!-- jvectormap -->
-<link rel="stylesheet" href="{{URL::to('bower_components/jvectormap/jquery-jvectormap.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/jvectormap/jquery-jvectormap.css')}}">
 <!-- style --> 
-<link rel="stylesheet" href="{{URL::to('assets/dist/css/style.min.css')}}">
-<link rel="stylesheet" href="{{URL::to('assets/dist/css/skin-blue.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/assets/dist/css/style.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/assets/dist/css/skin-blue.min.css')}}">
 
-<link rel="stylesheet" href="{{URL::to('bower_components/angular-auto-complete/angular-auto-complete.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/angular-auto-complete/angular-auto-complete.css')}}">
 
-<link rel="stylesheet" href="{{URL::to('bower_components/datatables.net/css/buttons.dataTables.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/datatables.net/css/buttons.dataTables.min.css')}}">
 
 <!-- simpleLightbox -->
-<link rel="stylesheet" href="{{URL::to('bower_components/simpleLightbox-master/dist/simpleLightbox.min.css')}}"> 
+<link rel="stylesheet" href="{{URL::to('public/bower_components/simpleLightbox-master/dist/simpleLightbox.min.css')}}"> 
 
-<link rel="stylesheet" href="{{URL::to('bower_components/baguettebox.js/dist/baguetteBox.css')}}"> 
-<link rel="stylesheet" href="{{URL::to('bower_components/baguettebox.js/dist/gallery-clean.css')}}"> 
+<link rel="stylesheet" href="{{URL::to('public/bower_components/baguettebox.js/dist/baguetteBox.css')}}"> 
+<link rel="stylesheet" href="{{URL::to('public/bower_components/baguettebox.js/dist/gallery-clean.css')}}"> 
 
-<link rel="stylesheet" href="{{URL::to('bower_components/angular-ui-select/dist/select.css')}}"> 
+<link rel="stylesheet" href="{{URL::to('public/bower_components/angular-ui-select/dist/select.css')}}"> 
 
 <!-- <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"> -->
 

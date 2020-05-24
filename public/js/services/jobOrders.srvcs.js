@@ -11,14 +11,14 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/job-orders?joCode='+data.joCode+'&joStatus='+data.joStatus+'&date_started='+data.date_started+'&assetCode='+data.assetCode+'&assetCategory='+data.assetCategory,
+                        url: 'api/v1/job-orders?joCode='+data.joCode+'&joStatus='+data.joStatus+'&date_started='+data.date_started+'&assetCode='+data.assetCode+'&assetCategory='+data.assetCategory,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
                 save: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/job-order/save',
+                        url: 'api/v1/job-order/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -26,7 +26,7 @@
                 save2: function(data) { // for manual entry of jo
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/job-order2/save',
+                        url: 'api/v1/job-order2/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -34,7 +34,7 @@
                 update: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/job-order/update',
+                        url: 'api/v1/job-order/update',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -42,7 +42,7 @@
                 // modal: function(data) {
                 //     return $http({
                 //         method: 'POST',
-                //         url: '/api/v1/job-order/save',
+                //         url: 'api/v1/job-order/save',
                 //         data: data,
                 //         headers: {'Content-Type': 'application/json'}
                 //     })

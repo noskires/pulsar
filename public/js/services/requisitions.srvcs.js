@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/requisitions?requisitionCode='+data.requisitionCode+'&requisitionStatus='+data.requisitionStatus+'&dateRequested='+data.dateRequested+'&requestType='+data.requestType,
+                        url: 'api/v1/requisitions?requisitionCode='+data.requisitionCode+'&requisitionStatus='+data.requisitionStatus+'&dateRequested='+data.dateRequested+'&requestType='+data.requestType,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
@@ -19,14 +19,14 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/requisition-slip-items?requisitionCode='+data.requisitionCode+'&requisitionSlipItemCode='+data.requisitionSlipItemCode+'&supplyCode='+data.supplyCode,
+                        url: 'api/v1/requisition-slip-items?requisitionCode='+data.requisitionCode+'&requisitionSlipItemCode='+data.requisitionSlipItemCode+'&supplyCode='+data.supplyCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
                 jobOrders: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/requisition-issue-slip/save',
+                        url: 'api/v1/requisition-issue-slip/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -34,7 +34,7 @@
                 saveAsset: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/requisition-issue-slip/asset/save',
+                        url: 'api/v1/requisition-issue-slip/asset/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -42,7 +42,7 @@
                 saveProject: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/requisition-issue-slip/project/save',
+                        url: 'api/v1/requisition-issue-slip/project/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -50,7 +50,7 @@
                 saveOffice: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/requisition-issue-slip/office/save',
+                        url: 'api/v1/requisition-issue-slip/office/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -58,7 +58,7 @@
                 SaveRequisitionSlipItems: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/requisition-slip-items/save',
+                        url: 'api/v1/requisition-slip-items/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -66,7 +66,7 @@
                 DeleteRequisitionSlipItems: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/requisition-slip-items/delete',
+                        url: 'api/v1/requisition-slip-items/delete',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -74,7 +74,7 @@
                 UpdateRequisition: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/requisitions/update',
+                        url: 'api/v1/requisitions/update',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -82,7 +82,7 @@
                 UpdateRequisition2: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/requisitions/update2',
+                        url: 'api/v1/requisitions/update2',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -90,7 +90,7 @@
                 update_record_status: function(data) {
                     return $http({ 
                         method: 'POST',
-                        url: '/api/v1/requisitions/update_record_status',
+                        url: 'api/v1/requisitions/update_record_status',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })

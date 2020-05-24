@@ -184,14 +184,14 @@
                 <!-- Custom Tabs (Pulled to the right) -->
                 <div class="nav-tabs-custom">
                   <ul class="nav nav-tabs pull-right">
-                    <li class="active"><a href="#tab_1-1" data-toggle="tab">Asset Details</a></li>
-                    <li class="pull-left header">Dump Truck</li>
+                    <li class="active"><a href="#tab_1-1" data-toggle="tab">Asset Details1</a></li>
+                    <li class="pull-left header">Dump Truck1</li>
                   </ul>
                   <div class="tab-content">
                     <div class="tab-pane active" id="tab_1-1">
                       <div class="row">
                         <div class="col-sm-6"><br>
-                          <img src="../../dist/img/dumptruck3_1024x768.jpg" style="width:100%;height:100%;">
+                          <img src="public/../../dist/img/dumptruck3_1024x768.jpg" style="width:100%;height:100%;">
                         </div>
                         <div class="col-sm-6">
                           <b>Category:</b> Construction Equipment<br><br>
@@ -238,7 +238,7 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag: <b>CONE-04082017-MX2</b></h4>
+                <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag2: <b>CONE-04082017-MX2</b></h4>
               </div>
               <div class="modal-body">
                 <!-- Custom Tabs (Pulled to the right) -->
@@ -326,8 +326,8 @@
             <div class="tab-pane active" id="tab_1-1">
               <div class="row">
                 <div class="col-sm-6"><br>
-                  <img src="uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==0">
-                  <img src="uploads/<%vm.assetPhoto[0].asset_photo_name%>" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==1">
+                  <img src="public/uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==0">
+                  <img src="public/uploads/<%vm.assetPhoto[0].asset_photo_name%>" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==1">
                 </div>
 
                 <div style="font-size: 14px;">

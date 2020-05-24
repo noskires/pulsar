@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/assets?assetCode='+data.assetCode+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&status='+data.status+'&isAll='+data.isAll+'&withActiveAre='+data.withActiveAre,
+                        url: 'api/v1/assets?assetCode='+data.assetCode+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&status='+data.status+'&isAll='+data.isAll+'&withActiveAre='+data.withActiveAre,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
@@ -19,7 +19,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/assetEvents?assetCode='+data.assetCode+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&isAll='+data.isAll+'&assetEventCode='+data.assetEventCode,
+                        url: 'api/v1/assetEvents?assetCode='+data.assetCode+'&name='+data.name+'&category='+data.category+'&areCode='+data.areCode+'&isAll='+data.isAll+'&assetEventCode='+data.assetEventCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
@@ -27,7 +27,7 @@
                 //     return $http({
                 //         method: 'GET',
                 //         data: data,
-                //         url: '/api/v1/assets/asset-categories?assetCategory='+data.assetCategory,
+                //         url: 'api/v1/assets/asset-categories?assetCategory='+data.assetCategory,
                 //         headers: {'Content-Type': 'application/json'}
                 //     })
                 // },
@@ -35,7 +35,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/assets/methods',
+                        url: 'api/v1/assets/methods',
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
@@ -43,14 +43,14 @@
                     return $http({
                         method: 'POST',
                         data: data,
-                        url: '/api/v1/assets/asset-tag',
+                        url: 'api/v1/assets/asset-tag',
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
                 save: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/assets/save',
+                        url: 'api/v1/assets/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -58,7 +58,7 @@
                 saveAssetEvent: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/assets/saveAssetEvent',
+                        url: 'api/v1/assets/saveAssetEvent',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -66,7 +66,7 @@
                 update: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/assets/update',
+                        url: 'api/v1/assets/update',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -74,7 +74,7 @@
                 updateAsset: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/assets/update-asset',
+                        url: 'api/v1/assets/update-asset',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -82,7 +82,7 @@
                 exportAssets: function(data) {
                     return $http({
                         method: 'GET',
-                        url: '/api/v1/export-assets',
+                        url: 'api/v1/export-assets',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -90,7 +90,7 @@
                 // getTag: function(data) {
                 //     return $http({
                 //         method: 'POST',
-                //         url: '/api/v1/assets/save',
+                //         url: 'api/v1/assets/save',
                 //         data: data,
                 //         headers: {'Content-Type': 'application/json'}
                 //     })

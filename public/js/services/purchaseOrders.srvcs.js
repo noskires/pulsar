@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/purchase-orders?poCode='+data.poCode+
+                        url: 'api/v1/purchase-orders?poCode='+data.poCode+
                                 '&supplierCode='+data.supplierCode+
                                 '&referenceCode='+data.referenceCode+
                                 '&dateFrom='+data.dateFrom+
@@ -23,7 +23,7 @@
                 save: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/purchase-order/save',
+                        url: 'api/v1/purchase-order/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -31,7 +31,7 @@
                 update: function(data) {
                     return $http({ 
                         method: 'POST',
-                        url: '/api/v1/purchase-order/update',
+                        url: 'api/v1/purchase-order/update',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -39,7 +39,7 @@
                 update2: function(data) {
                     return $http({ 
                         method: 'POST',
-                        url: '/api/v1/purchase-order/update2',
+                        url: 'api/v1/purchase-order/update2',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -47,7 +47,7 @@
                 update_record_status: function(data) {
                     return $http({ 
                         method: 'POST',
-                        url: '/api/v1/purchase-order/update_record_status',
+                        url: 'api/v1/purchase-order/update_record_status',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -56,14 +56,14 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/purchase-order-items?poCode='+data.poCode+'&poItemCode='+data.poItemCode,
+                        url: 'api/v1/purchase-order-items?poCode='+data.poCode+'&poItemCode='+data.poItemCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
                 savePoItems: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/purchase-order-items/save',
+                        url: 'api/v1/purchase-order-items/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -71,7 +71,7 @@
                 removePoItems: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/purchase-order-items/remove',
+                        url: 'api/v1/purchase-order-items/remove',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })

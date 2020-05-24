@@ -7,7 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   @include('layout.styles')
-  <base href="/">
+  <base href="/pulsar-master/">
 </head>
 <body class="hold-transition skin-blue fixed sidebar-mini">
 <div class="wrapper" ng-controller="MainCtrl as mc" ng-cloak>

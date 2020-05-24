@@ -1,21 +1,21 @@
 @extends('layout.master')
 
 @section('additionalStyles')
-<!-- <link rel="stylesheet" href="{{URL::to('bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}">
+<!-- <link rel="stylesheet" href="{{URL::to('public/bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}">
 <!-- datatables -->
-<!-- <link rel="stylesheet" href="{{URL::to('bower_components/datatables.net/css/buttons.dataTables.min.css')}}"> -->
+<!-- <link rel="stylesheet" href="{{URL::to('public/bower_components/datatables.net/css/buttons.dataTables.min.css')}}"> -->
 <!-- daterange picker -->
-<link rel="stylesheet" href="{{URL::to('bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
 <!-- bootstrap datepicker -->
-<link rel="stylesheet" href="{{URL::to('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
 <!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="{{URL::to('assets/plugins/iCheck/all.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/assets/plugins/iCheck/all.css')}}">
 <!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="{{URL::to('bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
 <!-- Bootstrap time Picker -->
-<link rel="stylesheet" href="{{URL::to('assets/plugins/timepicker/bootstrap-timepicker.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/assets/plugins/timepicker/bootstrap-timepicker.min.css')}}">
 <!-- Select2 -->
-<link rel="stylesheet" href="{{URL::to('bower_components/select2/dist/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('public/bower_components/select2/dist/css/select2.min.css')}}">
 
 <style>
 
@@ -53,7 +53,7 @@
     width:1200px;
   }
 
-  @font-face {font-family: Source Sans Pro; src: url(/assets/dist/fonts/SourceSansPro-Regular.ttf);}
+  @font-face {font-family: Source Sans Pro; src: url(/public/assets/dist/fonts/SourceSansPro-Regular.ttf);}
 
   /*Gallery*/
   .imageGallery1 {
@@ -356,37 +356,37 @@
 
 @section('additionalScripts')
 <!-- Confirmation -->
-<script src="{{URL::to('bower_components/Bootstrap-Confirmation-master/bootstrap-confirmation.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/Bootstrap-Confirmation-master/bootstrap-confirmation.js')}}"></script> 
 <!-- Select2 -->
-<script src="{{URL::to('bower_components/select2/dist/js/select2.full.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/select2/dist/js/select2.full.min.js')}}"></script> 
 <!-- InputMask -->
-<script src="{{URL::to('assets/plugins/input-mask/jquery.inputmask.js')}}"></script>
-<script src="{{URL::to('assets/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
-<script src="{{URL::to('assets/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
+<script src="{{URL::to('public/assets/plugins/input-mask/jquery.inputmask.js')}}"></script>
+<script src="{{URL::to('public/assets/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+<script src="{{URL::to('public/assets/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
 <!-- date-range-picker -->
-<script src="{{URL::to('bower_components/moment/min/moment.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/moment/min/moment.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script> 
 <!-- bootstrap datepicker -->
-<script src="{{URL::to('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{URL::to('public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <!-- bootstrap color picker -->
-<script src="{{URL::to('bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>    
+<script src="{{URL::to('public/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>    
 <!-- bootstrap time picker -->
-<script src="{{URL::to('assets/plugins/timepicker/bootstrap-timepicker.min.js')}}"></script> 
+<script src="{{URL::to('public/assets/plugins/timepicker/bootstrap-timepicker.min.js')}}"></script> 
 <!-- iCheck 1.0.1 -->
-<script src="{{URL::to('assets/plugins/iCheck/icheck.min.js')}}"></script> 
+<script src="{{URL::to('public/assets/plugins/iCheck/icheck.min.js')}}"></script> 
 <!-- DataTables -->
-<script src="{{URL::to('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/dataTables.buttons.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/jszip.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/pdfmake.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/vfs_fonts.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/dataTables.buttons.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/jszip.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/pdfmake.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/vfs_fonts.js')}}"></script> 
 
-<script src="{{URL::to('bower_components/datatables.net/js/dataTables.colReorder.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/buttons.colVis.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/dataTables.select.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/dataTables.checkboxes.min.js')}}"></script> 
-<script src="{{URL::to('bower_components/datatables.net/js/dataTables.fixedColumns.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/dataTables.colReorder.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/buttons.colVis.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/dataTables.select.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/dataTables.checkboxes.min.js')}}"></script> 
+<script src="{{URL::to('public/bower_components/datatables.net/js/dataTables.fixedColumns.min.js')}}"></script> 
 
 
 

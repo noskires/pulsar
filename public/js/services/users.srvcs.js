@@ -12,7 +12,7 @@
                 return $http({
                     method: 'GET',
                     data: data,
-                    url: '/api/v1/users?userCode=' + data.userCode + '&isSelfOnly=' + data.isSelfOnly,
+                    url: 'api/v1/users?userCode=' + data.userCode + '&isSelfOnly=' + data.isSelfOnly,
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -21,7 +21,7 @@
             save: function (data) {
                 return $http({
                     method: 'POST',
-                    url: '/api/v1/user/save',
+                    url: 'api/v1/user/save',
                     data: data,
                     headers: {
                         'Content-Type': 'application/json'
@@ -31,7 +31,7 @@
             update: function (data) {
                 return $http({
                     method: 'POST',
-                    url: '/api/v1/user/update',
+                    url: 'api/v1/user/update',
                     data: data,
                     headers: {
                         'Content-Type': 'application/json'
@@ -41,7 +41,7 @@
             generatePassword: function (data) {
                 return $http({
                     method: 'POST',
-                    url: '/api/v1/user/generate-password',
+                    url: 'api/v1/user/generate-password',
                     data: data,
                     headers: {
                         'Content-Type': 'application/json'
@@ -51,7 +51,7 @@
             resetPassword: function (data) {
                 return $http({
                     method: 'POST',
-                    url: '/api/v1/user/reset-password',
+                    url: 'api/v1/user/reset-password',
                     data: data,
                     headers: {
                         'Content-Type': 'application/json'
