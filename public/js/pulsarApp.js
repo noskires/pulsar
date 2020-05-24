@@ -890,7 +890,6 @@
     }
 
     MainCtrl.$inject = ['$window', '$http', 'UsersSrvcs', '$scope'];
-
     function MainCtrl($window, $http, UsersSrvcs, $scope) {
         var vm = this;
         vm.routeTo = function (route) {

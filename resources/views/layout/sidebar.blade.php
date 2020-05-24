@@ -3,7 +3,7 @@
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="<%mc.users[0].profile_photo || 'uploads/profile_photo/default-logo.jpg'%>" class="img-circle" alt="User Image">
+      <img src="public/<%mc.users[0].profile_photo || 'uploads/profile_photo/default-logo.jpg'%>" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
       <p>{{Auth::user()->name}}</p>
@@ -226,6 +226,7 @@
             <li ng-if="checkModuleAccess('--')"><a href="pages/advanced/offices.html"><i class="fa fa-building"></i>Offices</a></li>
             <li ng-if="checkModuleAccess('MODULE-018')"><a href="#" ui-sref="list-client"><i class="fa fa-building"></i>Clients</a></li>
             <li ng-if="checkModuleAccess('MODULE-019')"><a href="#" ui-sref="list-fund"><i class="fa fa-building"></i>Funds</a></li>
+            <li ng-if="checkModuleAccess('MODULE-019')"><a href="#" ui-sref="list-subcon"><i class="fa fa-building"></i>Sub Con</a></li>
           </ul>
         </li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help/Support</span></a></li>

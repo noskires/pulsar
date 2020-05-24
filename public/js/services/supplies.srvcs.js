@@ -11,14 +11,14 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/supplies?supplyCode='+data.supplyCode+'&quantityStatus='+data.quantityStatus+'&supplyCategory='+data.supplyCategory+'&isRepair='+data.isRepair+'&reOrderLevelOutofSupply='+data.reOrderLevelOutofSupply+'&supplyCategoryCode='+data.supplyCategoryCode,
+                        url: 'api/v1/supplies?supplyCode='+data.supplyCode+'&quantityStatus='+data.quantityStatus+'&supplyCategory='+data.supplyCategory+'&isRepair='+data.isRepair+'&reOrderLevelOutofSupply='+data.reOrderLevelOutofSupply+'&supplyCategoryCode='+data.supplyCategoryCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
                 save: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/supply/save',
+                        url: 'api/v1/supply/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -26,7 +26,7 @@
                 update: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/supply/update',
+                        url: 'api/v1/supply/update',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })

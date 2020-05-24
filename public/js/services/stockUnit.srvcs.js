@@ -11,7 +11,7 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/stock-units?stockUnitCode='+data.stockUnitCode,
+                        url: 'api/v1/stock-units?stockUnitCode='+data.stockUnitCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 }

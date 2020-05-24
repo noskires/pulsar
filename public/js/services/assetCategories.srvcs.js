@@ -11,14 +11,14 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: '/api/v1/asset-categories?assetCategoryCode='+data.assetCategoryCode,
+                        url: 'api/v1/asset-categories?assetCategoryCode='+data.assetCategoryCode,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
                 save: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/asset-category/save',
+                        url: 'api/v1/asset-category/save',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -26,7 +26,7 @@
                 update: function(data) {
                     return $http({
                         method: 'POST',
-                        url: '/api/v1/asset-category/update',
+                        url: 'api/v1/asset-category/update',
                         data: data,
                         headers: {'Content-Type': 'application/json'}
                     })

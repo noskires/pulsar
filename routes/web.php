@@ -1,7 +1,7 @@
 <?php
 
-use App\User;
-use Illuminate\Notifications\Messages\NexmoMessage;
+// use App\User;
+// use Illuminate\Notifications\Messages\NexmoMessage;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,7 @@ Route::post('/auth', ['uses'=>'LoginController@login', 'as'=>'auth']);
 Route::get('/info','LoginController@phpinfo');
 
 Route::group(['middleware'=>'auth'], function(){
+    
 Route::get('/logout','LoginController@logout');
 Route::get('/reset-password','ResetPasswordController@index');
 
@@ -645,6 +646,34 @@ Route::post('/api/v1/fund-item/update','Fund\FundsController@update_fund_item');
 Route::post('/api/v1/fund-item/remove','Fund\FundsController@remove_fund_item');
 Route::get('/api/v1/fund-items','Fund\FundsController@fundItems');
 Route::get('/api/v2/fund-items','Fund\FundsController@fundItems');
+
+
+/*
+|--------------------------------------------------------------------------
+| SubCon
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/subcon/new','Subcon\SubConsController@index');
+Route::get('/subcon/list','Subcon\SubConsController@index');
+Route::get('/subcon/list/{subconCode}','Subcon\SubConsController@index');
+Route::get('/subcon/edit/{subconCode}','Subcon\SubConsController@index');
+
+/*
+|--------------------------------------------------------------------------
+| SubCon Apis
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/api/v1/Subcon/save','Subcon\SubConsController@save');
+Route::post('/api/v1/Subcon/update','Subcon\SubConsController@update');
+Route::get('/api/v1/Subcons','Subcon\SubConsController@subcons');
+
+Route::post('/api/v1/Subcon-item/save','Subcon\SubConsController@save');
+Route::post('/api/v1/Subcon-item/update','Subcon\SubConsController@updae');
+Route::post('/api/v1/Subcon-item/remove','Subcon\SubConsController@remove');
+Route::get('/api/v1/Subcon-items','Subcon\SubConsController@fundItems');
+Route::get('/api/v2/Subcon-items','Subcon\SubConsController@fundItems');
 
 /*
 |--------------------------------------------------------------------------
