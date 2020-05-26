@@ -112,7 +112,7 @@ class RequisitionsController extends Controller {
             WHEN rs.job_order_code IS NULL 
               THEN null
             ELSE 
-              (SELECT assets.asset_code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+              (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
             END as asset_code'
         )
       )
