@@ -228,9 +228,10 @@
                 <span ng-bind="requisition.reference_name | limitTo:12"></span> </span>
                 <span ng-if="requisition.reference_name.length > 12">...</span>
               </td>
-              <td><%requisition.reference_id%></td>  
-              <td title="<%requisition.asset_name+' '+'('+requisition.asset_code+')'%>"> 
-                <span ng-bind="requisition.asset_name+' '+ '('+requisition.asset_code+')' | limitTo:12"></span> </span>
+              <td><%requisition.asset_code%></td>  
+              <!-- <td><%requisition.reference_code%></td>   -->
+              <td title="<%requisition.asset_name%>"> 
+                <span ng-bind="requisition.asset_name | limitTo:12"></span> </span>
                 <span ng-if="requisition.asset_name.length > 12">...</span>
               </td>
               <td title="<%requisition.received_by_name%>"> 
