@@ -106,6 +106,14 @@ class RequisitionsController extends Controller {
             ELSE 
               (SELECT assets.name FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
             END as asset_name'
+        ),
+        DB::raw(
+          'CASE 
+            WHEN rs.job_order_code IS NULL 
+              THEN null
+            ELSE 
+              (SELECT assets.asset_code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+            END as asset_code'
         )
       )
     ->leftjoin('employees as receivedEmployee','receivedEmployee.employee_code','=','rs.received_by')
