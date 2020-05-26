@@ -46,7 +46,7 @@ class ReceiptsController extends Controller {
                 'vi.voucher_code',
                 'purchase_order.old_reference as old_reference_po',
                 'requisition_slip.old_reference as old_reference_rs',
-                DB::raw("(SELECT CAST(COALESCE(SUM(receipt_items.receipt_item_total), 0) AS INT) 
+                DB::raw("(SELECT COALESCE(SUM(receipt_items.receipt_item_total), 0) 
                   FROM receipts, receipt_items 
                   WHERE receipts.receipt_code = receipt_items.receipt_code 
                   AND receipts.receipt_code = r.receipt_code
