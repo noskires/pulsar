@@ -85,6 +85,7 @@
         function RequisitionAssetCtrl($state, $stateParams, RequisitionsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
+            
             JobOrdersSrvcs.jobOrders({joCode:$stateParams.jobOrderCode, joStatus:'', date_started:'', assetCode:'', assetCategory:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -174,6 +175,7 @@
             var vm = this;
             var data = {};
 
+            alert('asdf')
             ProjectsSrvcs.projects({projectCode:$stateParams.projectCode}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -209,7 +211,7 @@
         function RequisitionOfficetCtrl($state, $stateParams, RequisitionsSrvcs, ProjectsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-            
+            alert('asdf')
 
             vm.itemArray = [
                 {id: 1, name: 'first'},
