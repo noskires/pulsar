@@ -9,6 +9,7 @@
         .controller('RequisitionSlipModalInstanceCtrl', RequisitionSlipModalInstanceCtrl)
         .controller('RequisitionSlipEditModalInstanceCtrl', RequisitionSlipEditModalInstanceCtrl)
         .controller('RequisitionSlipDeleteModalInstanceCtrl', RequisitionSlipDeleteModalInstanceCtrl)
+        .controller('RequisitionSlipItemStatusModalInstanceCtrl', RequisitionSlipItemStatusModalInstanceCtrl)
 
         RequisitionCtrl.$inject = ['$stateParams', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
         function RequisitionCtrl($stateParams, RequisitionsSrvcs, EmployeesSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
@@ -85,7 +86,6 @@
         function RequisitionAssetCtrl($state, $stateParams, RequisitionsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-            
             JobOrdersSrvcs.jobOrders({joCode:$stateParams.jobOrderCode, joStatus:'', date_started:'', assetCode:'', assetCategory:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -175,7 +175,6 @@
             var vm = this;
             var data = {};
 
-            alert('asdf')
             ProjectsSrvcs.projects({projectCode:$stateParams.projectCode}).then (function (response) {
                 if(response.data.status == 200)
                 {
@@ -211,7 +210,7 @@
         function RequisitionOfficetCtrl($state, $stateParams, RequisitionsSrvcs, ProjectsSrvcs, EmployeesSrvcs, OrganizationsSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-            alert('asdf')
+            
 
             vm.itemArray = [
                 {id: 1, name: 'first'},
@@ -473,7 +472,7 @@
         RequisitionSlipModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
         function RequisitionSlipModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, $window) {
 
-            // alert('asdf')
+            
 
             var vm = this;
             vm.formData = formData.requisition;
@@ -865,7 +864,24 @@
                         }
                     }, function (){ alert('Bad Request!!!') })
                 }
-            }
+        }
+
+        RequisitionSlipItemStatusModalInstanceCtrl.$inject = ['$state', '$stateParams', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window'];
+        function RequisitionSlipItemStatusModalInstanceCtrl ($state, $stateParams, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window) {
+
+            var vm = this;
+            
+ 
+
+            RequisitionsSrvcs.RequisitionSlipItems({requisitionCode:'', requisitionSlipItemCode:'', supplyCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.requisitionSlipItems = response.data.data;
+                    console.log(vm.requisitionSlipItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
+            
+        }
         
 
 })();

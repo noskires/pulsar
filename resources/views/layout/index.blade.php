@@ -190,6 +190,10 @@
   @include('requisition.list_requisitions2')
 </script>
 
+<script type="text/ng-template" id="ris.ris_status_report.view">
+  @include('requisition.ris_status_report')
+</script>
+
 
 <!-- Receipts -->
 

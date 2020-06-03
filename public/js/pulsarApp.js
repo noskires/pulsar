@@ -494,6 +494,12 @@
                 templateUrl: 'ris2.list.view'
             })
 
+            .state('ris-status-report', {
+                url: '/requisition2/ris-status-report',
+                controller: 'RequisitionSlipItemStatusModalInstanceCtrl as roc',
+                templateUrl: 'ris.ris_status_report.view'
+            })
+
             .state('list-employees', {
                 url: '/employee/list',
                 controller: 'EmployeesCtrl as ec',
