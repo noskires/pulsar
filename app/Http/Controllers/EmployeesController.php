@@ -154,12 +154,13 @@ class EmployeesController extends Controller {
       $data['phone_no']         = $request->input('phone_no');
       $data['department']       = $request->input('department');
       $data['division']         = $request->input('division');
+      $data['unit']         = $request->input('unit');
       $data['date_hired']       = date('Y-m-d', strtotime($request->input('date_hired')));
       $data['tin']              = $request->input('tin');
       $data['sss_number']       = $request->input('sss_number');
       $data['philhealth_number']= $request->input('philhealth_number');
       $data['pagibig_number']   = $request->input('pagibig_number');
-      $data['address']   = $request->input('address');
+      $data['address']          = $request->input('address');
 
       // return $request->all();
 

@@ -210,6 +210,10 @@ class RequisitionsController extends Controller {
            ->select(
                 'rsi.requisition_slip_code', 
                 'rsi.requisition_slip_item_code',
+                'rs.old_reference',
+                'rs.date_requested',
+                'rs.requesting_employee',
+                DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee_name'),
                 'rsi.supply_code',
                 's.supply_name',
                 'rsi.item_description', 
@@ -218,22 +222,50 @@ class RequisitionsController extends Controller {
                 'rsi.item_cost',
                 'rsi.item_stock_unit',
                 'rsi.item_purpose',
-                'rsi.item_total'
+                'rsi.item_total',
+                DB::raw(
+                  'CASE 
+                    WHEN rs.request_type = "Office" 
+                      THEN (SELECT organizations.org_name FROM organizations WHERE organizations.org_code=rs.reference_code)
+                    WHEN rs.request_type = "Project" 
+                      THEN (SELECT CONCAT(projects.code,"-",projects.name) AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
+                  ELSE 
+                      "" 
+                  END as reference_name'
+                ),
+                DB::raw(
+                  'CASE 
+                    WHEN rs.job_order_code IS NULL 
+                      THEN null
+                    ELSE 
+                      (SELECT assets.name FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+                    END as asset_name'
+                ), 
+                DB::raw(
+                  'CASE 
+                    WHEN rs.job_order_code IS NULL 
+                      THEN null
+                    ELSE 
+                      (SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+                    END as asset_code'
+                )
               )
 
-    ->leftjoin('supplies as s','s.supply_code','=','rsi.supply_code');
+    ->leftjoin('supplies as s','s.supply_code','=','rsi.supply_code')
+    ->leftjoin('requisition_slips as rs','rs.requisition_slip_code','=','rsi.requisition_slip_code')
+    ->leftjoin('employees as e','e.employee_code','=','rs.requesting_employee');
 
 
     if ($data['requisitionCode']){
-      $requisitionSlipItems = $requisitionSlipItems->where('requisition_slip_code', $data['requisitionCode']);
+      $requisitionSlipItems = $requisitionSlipItems->where('rsi.requisition_slip_code', $data['requisitionCode']);
     }
 
     if ($data['requisitionSlipItemCode']){
-      $requisitionSlipItems = $requisitionSlipItems->where('requisition_slip_item_code', $data['requisitionSlipItemCode']);
+      $requisitionSlipItems = $requisitionSlipItems->where('rsi.requisition_slip_item_code', $data['requisitionSlipItemCode']);
     }
 
     if ($data['supplyCode']){
-      $requisitionSlipItems = $requisitionSlipItems->where('supply_code', $data['supplyCode']);
+      $requisitionSlipItems = $requisitionSlipItems->where('s.supply_code', $data['supplyCode']);
     }
 
     $requisitionSlipItems = $requisitionSlipItems->get();

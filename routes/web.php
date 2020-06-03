@@ -282,7 +282,7 @@ Route::get('/requisition/report/{requisitionCode}', 'Requisition\RequisitionRepo
 Route::get('/requisition/report2', 'Requisition\RequisitionReportController@export2');
 
 Route::get('/requisition-issue-slip/office/new','Requisition\RequisitionsController@index');
-
+Route::get('/requisition2/ris-status-report','Requisition\RequisitionsController@index');
 
 Route::group(['middleware' => 'checkModules:MODULE-006'], function () {
     Route::get('/requisition2/list','Requisition\RequisitionsController@index');

@@ -184,11 +184,14 @@
         <li ng-if="checkModuleAccess('MODULE-011')"><a href="#"><i class="fa fa-paperclip"></i>Supplies Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-008')"><a href="#"><i class="fa fa-paperclip"></i>J.O. Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-006')"><a href="#"><i class="fa fa-paperclip"></i>R.S. Reports</a></li>
+        <li ng-if="checkModuleAccess('MODULE-006')"><a href="#" ui-sref="ris-status-report"><i class="fa fa-paperclip"></i>RIS Status Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-007')"><a href="#"><i class="fa fa-paperclip"></i>P.O. Reports</a></li>
+        
         <li ng-if="checkModuleAccess('---')"><a href="#"><i class="fa fa-paperclip"></i>Project Reports</a></li>
         <li ng-if="checkModuleAccess('---')"><a href="#"><i class="fa fa-paperclip"></i>Status Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-007')"><a href="#" ui-sref="list-po-office"><i class="fa fa-paperclip"></i>Purchase Order Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-009')"><a href="#" ui-sref="list-utilization-office"><i class="fa fa-paperclip"></i>Utilization Reports</a></li>
+       
         <li ng-if="checkModuleAccess('---')"><a href="#"><i class="fa fa-paperclip"></i>Other Reports</a></li>
       </ul>
     </li>
