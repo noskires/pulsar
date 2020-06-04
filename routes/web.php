@@ -472,12 +472,17 @@ Route::group(['middleware' => 'checkModules:MODULE-007'], function () {
     Route::get('/purchase-orders-office/list','PurchaseOrdersController@index');
     Route::get('/purchase-order/list/{poCode}','PurchaseOrdersController@index');
     Route::get('/purchase-order2/list/{poCode}','PurchaseOrdersController@index');
+    Route::get('/purchase-order2/po-status-report','PurchaseOrdersController@index');
 
     Route::get('/purchase-order2/edit/{poCode}','PurchaseOrdersController@index');
-    Route::get('/purchase-order2/delete/{poCode}','PurchaseOrdersController@index');
+    Route::get('/purchase-order2/delete/{poCode}','PurchaseOrdersController@index'); 
 
     Route::get('/purchase-order/report/{poCode}', 'PurchaseOrderReportController@export');
     Route::get('/purchase-order-office/report', 'PurchaseOrderReportController@export_office');
+    
+
+
+    
 });
 /*
 |--------------------------------------------------------------------------
@@ -495,6 +500,7 @@ Route::post('/api/v1/purchase-order-items/save','PurchaseOrdersController@save_p
 Route::post('/api/v1/purchase-order-items/update','PurchaseOrdersController@update_purchase_order_items');
 Route::post('/api/v1/purchase-order-items/remove','PurchaseOrdersController@remove_po_items');
 Route::get('/api/v1/purchase-order-items','PurchaseOrdersController@purchaseOrderItems');
+Route::get('/api/v2/purchase-order-items','PurchaseOrdersController@purchaseOrderItems2');
 
 
 /*

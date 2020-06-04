@@ -810,6 +810,12 @@
                 templateUrl: 'purchase.order2.list.view'
             })
 
+            .state('po-status-report', {
+                url: '/purchase-order2/po-status-report',
+                controller: 'PurchaseItemStatusModalInstanceCtrl as poc',
+                templateUrl: 'po.po_status_report.view'
+            })
+
             .state('list-utilization', {
                 url: '/utilization/list',
                 controller: 'UtilizationsCtrl as uc',

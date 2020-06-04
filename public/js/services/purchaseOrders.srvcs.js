@@ -60,6 +60,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                poItems2: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: 'api/v2/purchase-order-items',
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 savePoItems: function(data) {
                     return $http({
                         method: 'POST',

@@ -6,6 +6,8 @@
         .controller('PurchaseOrdersModalInstanceCtrl', PurchaseOrdersModalInstanceCtrl)
         .controller('PurchaseOrderEditModalInstanceCtrl', PurchaseOrderEditModalInstanceCtrl)
         .controller('PurchaseOrderDeleteModalInstanceCtrl', PurchaseOrderDeleteModalInstanceCtrl)
+        .controller('PurchaseItemStatusModalInstanceCtrl', PurchaseItemStatusModalInstanceCtrl)
+        
 
         PurchaseOrdersCtrl.$inject = ['$stateParams', '$state', 'PurchaseOrdersSrvcs', 'AresSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'RequisitionsSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'AssetsSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window', '$uibModal'];
         function PurchaseOrdersCtrl($stateParams, $state, PurchaseOrdersSrvcs, AresSrvcs, EmployeesSrvcs, SuppliersSrvcs, RequisitionsSrvcs, ReceiptSrvcs, StockUnitsSrvcs, AssetsSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window, $uibModal){
@@ -648,5 +650,20 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
+        }
+
+        PurchaseItemStatusModalInstanceCtrl.$inject = ['$state', '$stateParams', 'PurchaseOrdersSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window'];
+        function PurchaseItemStatusModalInstanceCtrl ($state, $stateParams, PurchaseOrdersSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window) {
+
+            var vm = this;
+ 
+            PurchaseOrdersSrvcs.poItems2().then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.poItems = response.data.data;
+                    console.log(vm.poItems)
+                }
+            }, function (){ alert('Bad Request!!!') })
+            
         }
 })();
