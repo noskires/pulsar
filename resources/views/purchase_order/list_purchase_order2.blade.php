@@ -20,13 +20,22 @@
             <form class="form-horizontal" id="" name="form_po" ng-model="form_po">
               <div class="box-body">
                 <div class="form-group col-sm-12">
-                  <label class="col-sm-2 control-label">Request Date</label>
+                <label for="" class="col-sm-2 control-label">Reference(RIS)</label>
+                  <div class="col-sm-4">
+
+                    <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.requisition_slip_code">
+                      <option value="">- - SELECT RIS - -</option>
+                      <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.old_reference%> : <%requisition.requisition_slip_code%></option>
+                      
+                    </select>
+                  </div>
+                  <!-- <label class="col-sm-2 control-label">Request Date</label>
                   <div class="col-sm-4">
                     <div class="input-group date">
                     <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                     <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="poc.poDetails.date_requested" datepicker autocomplete="off" readonly="">
                     </div>
-                  </div>
+                  </div> -->
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
                   <div class="col-sm-4">
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.request_type" required="">
@@ -38,13 +47,11 @@
                 </div>
 
                 <div class="form-group col-sm-12">
-                  <label for="" class="col-sm-2 control-label">Reference(RIS)</label>
+                <label for="assetname" class="col-sm-2 control-label">Supplier</label>
                   <div class="col-sm-4">
-
-                    <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.requisition_slip_code">
-                      <option value="">- - SELECT RIS - -</option>
-                      <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.old_reference%> : <%requisition.requisition_slip_code%></option>
-                      
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="poc.poDetails.supplier_code">
+                      <option selected="selected" value="">- - SELECT SUPPLIER - -</option>
+                      <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
                     </select>
                   </div>
                   <label for="" class="col-sm-2 control-label">Reference Name</label>
@@ -58,13 +65,7 @@
                 </div>
 
                 <div class="form-group col-sm-12">
-                  <label for="assetname" class="col-sm-2 control-label">Supplier</label>
-                  <div class="col-sm-4">
-                    <select class="form-control select2" style="width: 100%;" required="" ng-model="poc.poDetails.supplier_code">
-                      <option selected="selected" value="">- - SELECT SUPPLIER - -</option>
-                      <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
-                    </select>
-                  </div>
+                  
                   <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
                   <div class="col-sm-4">
                     <select class="form-control select2"  style="width: 100%;" ng-model="poc.poDetails.requesting_employee">
@@ -74,18 +75,13 @@
                       </option>
                     </select>
                   </div>
-                </div>
 
-                <div class="form-group col-sm-12">
                   <label for="assetname" class="col-sm-2 control-label">Reference</label>
                   <div class="col-sm-4">
                     <input type="text" class="form-control pull-right"  ng-model="poc.poDetails.old_reference">
                   </div>
                 </div>
-
-                <div class="form-group col-sm-12">
-                  
-                </div>
+ 
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
