@@ -451,7 +451,7 @@ $('.select2').select2();
                       </div>
 
                       <div class="form-group col-sm-12">
-                        <label class="col-sm-2 control-label">Remarks</label>
+                        <label class="col-sm-2 control-label">Internal/External Delivery Receipt</label>
                           <div class="col-sm-10">
                              <textarea class="form-control pull-right" id="" ng-model="vm.formData.withdrawal_remarks"></textarea>
                           </div>

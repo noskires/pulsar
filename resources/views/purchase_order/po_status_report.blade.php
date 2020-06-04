@@ -40,7 +40,7 @@
 <!-- LIST RS -->
       <div class="box">
         <div class="box-body">
-          <div export-to-xlsx data="roc.requisitionSlipItems" bind-to-table="'tb-requisitions-2'" filename="'List of Requisition Items'"></div>
+          <div export-to-xlsx data="roc.poItems" bind-to-table="'tb-requisitions-2'" filename="'List of PO Items'"></div>
           <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-2" width="100%">
             <thead>
             <tr>
