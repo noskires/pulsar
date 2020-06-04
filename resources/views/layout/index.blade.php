@@ -299,6 +299,10 @@
   @include('purchase_order.list_purchase_order_office')
 </script>
 
+<script type="text/ng-template" id="po.po_status_report.view">
+  @include('purchase_order.po_status_report')
+</script>
+
 
 <!-- Utilization -->
  

@@ -257,7 +257,6 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
-
             ReceiptSrvcs.receiptItems({receiptCode:'', receiptItemCode:'', receiptItemSupplyCode:'',isReturned:'1'}).then (function (response) {
                 if(response.data.status == 200)
                 {

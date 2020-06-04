@@ -407,6 +407,90 @@ class PurchaseOrdersController extends Controller {
 
 	}
 
+	public function purchaseOrderItems2(Request $request){
+
+	    $data = array(
+	      'poCode'=>$request->input('poCode'),
+	      'poItemCode'=>$request->input('poItemCode'),
+	      'supplyCode'=>$request->input('supplyCode'),
+	    );
+
+	    // return $data['requisitionCode'];
+	    $poItems = DB::table('purchase_order_items as poi')
+	           ->select(
+	                'poi.po_code', 
+	                'po.old_reference', 
+	                'poi.po_item_code',
+	                'poi.supply_code',
+	                's.supply_name',
+	                'poi.item_description', 
+	                'poi.item_quantity',
+					'poi.item_stock_unit',
+					'po.request_type',
+					'po.requisition_slip_code',
+					'po.created_at as date_requested',
+					DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee_name'),
+					DB::raw('(SELECT COALESCE(sum(receipt_items.receipt_item_quantity),0) AS receipt_item_quantity FROM receipts, receipt_items 
+						WHERE receipts.receipt_code=receipt_items.receipt_code 
+						AND receipts.purchase_order_code = poi.po_code 
+						AND receipt_items.receipt_item_supply_code = poi.supply_code 
+						AND receipt_items.receipt_item_stock_unit = poi.item_stock_unit 
+						AND receipt_items.is_returned = 0 
+						) as receipt_item_quantity'
+					),
+					DB::raw(
+						'CASE 
+							WHEN po.request_type = "Office" 
+							THEN (SELECT organizations.org_name FROM organizations WHERE organizations.org_code=po.reference_code)
+							WHEN po.request_type = "Project" 
+							THEN (SELECT CONCAT(projects.code,"-",projects.name) AS reference_name FROM projects WHERE projects.project_code=po.reference_code) 
+						ELSE 
+							"" 
+						END as reference_name'
+					), 
+					DB::raw(
+						'(SELECT assets.name FROM job_orders, assets, requisition_slips 
+							WHERE assets.asset_code=job_orders.asset_code 
+							AND job_orders.job_order_code = requisition_slips.job_order_code 
+							AND requisition_slips.requisition_slip_code = po.requisition_slip_code 
+						) as asset_name' 
+					),
+					  DB::raw(
+						'(SELECT assets.code FROM job_orders, assets, requisition_slips 
+							WHERE assets.asset_code=job_orders.asset_code 
+							AND job_orders.job_order_code = requisition_slips.job_order_code 
+							AND requisition_slips.requisition_slip_code = po.requisition_slip_code 
+						) as asset_code' 
+					  )
+
+	              )
+
+	    ->leftjoin('supplies as s','s.supply_code','=','poi.supply_code')
+		->leftjoin('purchase_orders as po','po.po_code','=','poi.po_code')
+		->leftjoin('employees as e','e.employee_code','=','po.employee_code');
+
+	    if ($data['poCode']){
+	      $poItems = $poItems->where('poi.po_code', $data['poCode']);
+	    }
+
+	    if ($data['poItemCode']){
+	      $poItems = $poItems->where('poi.po_item_code', $data['poItemCode']);
+	    }
+
+	    if ($data['supplyCode']){
+	      $poItems = $poItems->where('poi.supply_code', $data['supplyCode']);
+	    }
+
+	    $poItems = $poItems->get();
+
+	    return response()-> json([
+	      'status'=>200,
+	      'data'=>$poItems,
+	      'message'=>''
+	    ])->setEncodingOptions(JSON_NUMERIC_CHECK);
+
+	}
+
 	public function save_purchase_order_items(Request $request){
     // return $request->all();
     $data = Input::post();
