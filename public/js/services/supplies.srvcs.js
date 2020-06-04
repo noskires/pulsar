@@ -15,6 +15,15 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+
+                supplies2: function(data) {
+                    return $http({
+                        method: 'GET',
+                        data: data,
+                        url: 'api/v2/supplies',
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 save: function(data) {
                     return $http({
                         method: 'POST',

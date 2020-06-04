@@ -4,6 +4,7 @@
         .module('pulsarApp')
         .controller('SuppliesCtrl', SuppliesCtrl)
         .controller('SuppliesModalInstanceCtrl', SuppliesModalInstanceCtrl)
+        .controller('SuppliesStatusCtrl', SuppliesStatusCtrl)
 
         SuppliesCtrl.$inject = ['$state', '$stateParams', 'SuppliesSrvcs', 'SupplyCategoriesSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
         function SuppliesCtrl($state, $stateParams, SuppliesSrvcs, SupplyCategoriesSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
@@ -196,5 +197,23 @@
             vm.printSupplyDetails = function(tag){
                 vm.url = 'supply/report/'+tag;
             }
+        }
+
+        SuppliesStatusCtrl.$inject = ['$state', '$stateParams', 'SuppliesSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window'];
+        function SuppliesStatusCtrl ($state, $stateParams, SuppliesSrvcs, EmployeesSrvcs, ReceiptSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window) {
+
+            var vm = this;
+
+   
+
+            SuppliesSrvcs.supplies2().then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.supplies = response.data.data;
+                    console.log(vm.supplies)
+                }
+            }, function (){ alert('Bad Request!!!') })
+ 
+            
         }
 })();

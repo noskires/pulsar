@@ -574,6 +574,13 @@
                 controller: 'SuppliesCtrl as sc',
                 templateUrl: 'supply.list.view'
             })
+
+            .state('supply-budget-status', {
+                url: '/supply/list-status',
+                controller: 'SuppliesStatusCtrl as sc',
+                templateUrl: 'supply.supply_status.view'
+            })
+
             .state('edit-supply', {
                 url: '/supply/edit/:supplyCode2',
                 controller: 'SuppliesCtrl as sc',
