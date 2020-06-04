@@ -106,6 +106,54 @@ class SuppliesController extends Controller {
     ]);
   }
 
+  public function supplies2(Request $request){
+
+    $data = array(
+      'supplyCode'=>$request->input('supplyCode'),
+      'quantityStatus'=>$request->input('quantityStatus'),
+      'supplyCategory'=>$request->input('supplyCategory'),
+      'isRepair'=>$request->input('isRepair'),
+      'reOrderLevelOutofSupply'=>$request->input('reOrderLevelOutofSupply'),
+      'supplyCategoryCode'=>$request->input('supplyCategoryCode')
+
+    );
+
+ 
+
+    $supplies = DB::table('supplies as s')
+            ->select(
+              '*',
+              DB::raw('CASE 
+                WHEN s.quantity <= s.re_order_level
+                  THEN "below"
+                ELSE "" 
+                END AS re_order_level_status'
+              )
+            )
+            ->leftjoin('stock_units as su','su.stock_unit_code','=','s.stock_unit')
+            ->leftjoin('supply_categories as sc','sc.supply_category_code','=','s.category_code'); 
+
+
+      $supplies = $supplies->where(DB::raw('CASE 
+          WHEN s.quantity <= s.re_order_level
+            THEN "below"
+          ELSE "" 
+          END'),  
+              'below'
+            ); 
+ 
+    $others = $supplies;
+
+    $supplies = $supplies->get();
+
+    return response()-> json([
+        'status'=>200,
+        'data'=>$supplies,
+        'message'=>'',
+        'others'=>$others
+    ]);
+  }
+
   public function save(Request $request){
 
     $data = array();
