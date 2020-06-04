@@ -186,7 +186,7 @@
         <li ng-if="checkModuleAccess('MODULE-006')"><a href="#"><i class="fa fa-paperclip"></i>R.S. Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-006')"><a href="#" ui-sref="ris-status-report"><i class="fa fa-paperclip"></i>RIS Status Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-007')"><a href="#"><i class="fa fa-paperclip"></i>P.O. Reports</a></li>
-        
+        <li ng-if="checkModuleAccess('MODULE-007')"><a href="#" ui-sref="po-status-report"><i class="fa fa-paperclip"></i>PO Status Reports</a></li>
         <li ng-if="checkModuleAccess('---')"><a href="#"><i class="fa fa-paperclip"></i>Project Reports</a></li>
         <li ng-if="checkModuleAccess('---')"><a href="#"><i class="fa fa-paperclip"></i>Status Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-007')"><a href="#" ui-sref="list-po-office"><i class="fa fa-paperclip"></i>Purchase Order Reports</a></li>
