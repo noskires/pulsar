@@ -325,7 +325,7 @@
             }
         }, function () { alert('Bad Request!!!') })
 
-        JobOrdersSrvcs.jobOrders({ joCode: '', joStatus: '', assetCode: $stateParams.assetCode }).then(function (response) {
+        JobOrdersSrvcs.jobOrders({ joCode: '', joStatus: '', assetCode: $stateParams.asset_code }).then(function (response) {
             if (response.data.status == 200) {
                 vm.jobOrders = response.data.data;
                 console.log(vm.jobOrders)

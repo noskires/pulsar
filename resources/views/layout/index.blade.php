@@ -204,6 +204,10 @@
   @include('requisition.list_requisitions2')
 </script>
 
+<script type="text/ng-template" id="ris.ris_status_report.view">
+  @include('requisition.ris_status_report')
+</script>
+
 
 <!-- Receipts -->
 
@@ -241,6 +245,10 @@
 
 <script type="text/ng-template" id="supply.list.view">
   @include('supply.list_supplies')
+</script>
+
+<script type="text/ng-template" id="supply.supply_status.view">
+  @include('supply.supply_status')
 </script>
 
 <script type="text/ng-template" id="supply.category.list.view">
@@ -307,6 +315,10 @@
 
 <script type="text/ng-template" id="purchase.order.list.office.view">
   @include('purchase_order.list_purchase_order_office')
+</script>
+
+<script type="text/ng-template" id="po.po_status_report.view">
+  @include('purchase_order.po_status_report')
 </script>
 
 
