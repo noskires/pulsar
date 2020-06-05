@@ -39,6 +39,14 @@
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
+                delete: function(data) {
+                    return $http({
+                        method: 'POST',
+                        url: 'api/v1/receipt/delete',
+                        data: data,
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                },
                 receiptItems: function(data) {
                     return $http({
                         method: 'GET',
