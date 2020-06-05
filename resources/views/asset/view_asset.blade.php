@@ -55,7 +55,7 @@
       <div class="nav-tabs-custom">
 
         <ul class="nav nav-tabs pull-right tab-head">
-          <li><a href="#tab_8-8" data-toggle="tab">Documents</a></li>
+          <!-- <li><a href="#tab_8-8" data-toggle="tab">Documents</a></li> -->
           <li><a href="#tab_7-7" data-toggle="tab">Insurances</a></li>
           <li><a href="#tab-registration-details" data-toggle="tab">Registration Details</a></li>
           <li><a href="#tab_3-3" data-toggle="tab">Events</a></li>

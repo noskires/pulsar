@@ -13,52 +13,50 @@
     <!-- title row -->
     <div class="row">
       <div class="col-xs-12" style="font-size: 11px;">
-        <p> <span style="font-size:12px;font-weight:bold;">PULSAR CONSTRUCTION<br></span> Dodan, Penablanca 3502, Philippines</p>
+        <p> <span style="font-size:12px;font-weight:bold;">PULSAR CONSTRUCTION<br></span> Tel No.: 844-1234 | Camasi, Penablanca 3502, Philippines</p>
       </div>
       <!-- /.col -->
     </div>
     <div class="row">
       <div class="col-md-6" style="border-bottom: 2px solid black;">
         <h2 class="page-header"><i class="fa fa-tags"></i> <img src="assets/dist/img/clipboard.png" style="margin-bottom:-4px;width:30px;">&nbsp;STOCK CARD<br></h2>
-       
-       <!-- Supply Name -->
-        <span style="font-size:14px;letter-spacing:1px;">
-          <strong>{{$supply->supply_name}}</strong>
-        </span>
-        <!-- end::Supply Name -->
-
-        <!-- <div style="position: absolute;top:1%;right:0;"> <img src="assets/dist/img/qrcode.png" style='width:100px;'> </div> -->
+        <div style="position: absolute;top:1%;right:0;"> <img src="assets/dist/img/qrcode.png" style='width:100px;'> </div>
       </div>
     </div>
 <br>    
-    <div class="row" style="font-size:11.5px;">
+    <div class="row">
       <div class="col-md-12">
-        <table width="100%" style="border-collapse:collapse;">
+          <table border="0" width="100%" style="font-size:16px;">
           <tr>
-            <td align="left" style="width:17%; border-bottom:1px solid black;">Supply Name:</td>
-            <td align="left" style="border-bottom:1px solid black;" colspan="3">{{$supply->supply_name}}</td>
+            <td align="left" width="20%" style="font-weight: bold;">Supply Name:</td>
+            <td align="left">{{$supply->supply_name}}</td>
+          </tr>          
+          <tr>
+            <td align="left" width="20%" style="font-weight: bold;">Supply Category:</td>
+            <td align="left">{{$supply->category_code}}</td>
           </tr>
           <tr>
-            <td align="left" style="width:17%; border-bottom:1px solid black;">Supply Category:</td>
-            <td align="left" style="border-bottom:1px solid black;">{{$supply->category_code}}</td>
-            <td align="left" style="width:17%; border-bottom:1px solid black;">Supply Unit:</td>
-            <td align="left" style="border-bottom:1px solid black;">{{$supply->stock_unit}}</td>
+            <td align="left" width="20%" style="font-weight: bold;">Supply Unit:</td>
+            <td align="left">{{$supply->stock_unit}}</td>
           </tr>
           <tr>
-            <td align="left" style="width:17%; border-bottom:1px solid black;">Re-order Level:</td>
-            <td align="left" style="border-bottom:1px solid black;">{{$supply->re_order_level}}</td>
-            <td align="left" style="width:17%; border-bottom:1px solid black;">Supply Quantity:</td>
-            <td align="left" style="border-bottom:1px solid black;">{{$supply->quantity}}</td>
+            <td align="left" width="20%" style="font-weight: bold;">Re-order Level:</td>
+            <td align="left">{{$supply->re_order_level}}</td>
           </tr>
-        </table> 
-      </div>      
+          <tr><td colspan="4">&nbsp;</td></tr>
+          <tr>
+            <td align="left" width="20%" style="font-weight: bold;">Supply Quantity:</td>
+            <td align="left">{{$supply->quantity}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
-<br><br>
+<br>
 
 <!-- STOCK CARD -->    
-    <div class="row" style="font-size: 11.5px;">
+    <div class="row">
       <div class="col-md-12">
-          <table width="100%" border="1" style="border-collapse: collapse;">
+          <table border="1" width="100%" style="font-size:13px;border-spacing:0px;">
           <thead>
           <tr>
             <th align="left">Date</th>
@@ -95,13 +93,9 @@
 <br>
 </section>
 </div>
-<br><br>
-
-<!-- footer -->
-<div class="footer">
-  <span style="font-size:7px; letter-spacing:4px;"><center>END OF STOCK CARD</center></span>
+<div style="text-align:center;">
+  <span style="font-size: 10px;">*** END OF STOCK CARD ***</span><br>
+  <span style="font-size: 9.5px;">ASSETERIK&copy; V.1.0 &nbsp;&nbsp; Developed by Bizlogiks Information Technology Systems (BITS) &nbsp;&nbsp; www.bizlogiks.ph</span>
 </div>
-<!-- end::footer -->
-
 </body>
 </html>

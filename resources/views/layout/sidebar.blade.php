@@ -230,7 +230,7 @@
             <li ng-if="checkModuleAccess('--')"><a href="pages/advanced/offices.html"><i class="fa fa-building"></i>Offices</a></li>
             <li ng-if="checkModuleAccess('MODULE-018')"><a href="#" ui-sref="list-client"><i class="fa fa-building"></i>Clients</a></li>
             <li ng-if="checkModuleAccess('MODULE-019')"><a href="#" ui-sref="list-fund"><i class="fa fa-building"></i>Funds</a></li>
-            <li ng-if="checkModuleAccess('MODULE-019')"><a href="#" ui-sref="list-subcon"><i class="fa fa-building"></i>Sub Con</a></li>
+            <!-- <li ng-if="checkModuleAccess('MODULE-019')"><a href="#" ui-sref="list-subcon"><i class="fa fa-building"></i>Sub Con</a></li> -->
           </ul>
         </li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help/Support</span></a></li>
