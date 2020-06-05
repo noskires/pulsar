@@ -66,6 +66,8 @@ class PurchaseOrderReportController extends Controller {
 		$data = DB::table('purchase_orders AS po')
 				->select(
                   'po.po_code',
+                  'po.old_reference',
+                  'po.requisition_slip_code',
                   'po.request_type',
                   'po.reference_code',
                   's.supplier_code',
@@ -77,13 +79,16 @@ class PurchaseOrderReportController extends Controller {
                   'po.date_received',
                   'po.inspected_by',
                   'po.date_inspected',
+                  'po.created_at',
                   	DB::raw('CONCAT(trim(CONCAT(recby.lname," ",COALESCE(recby.affix,""))),", ", COALESCE(recby.fname,"")," ", COALESCE(recby.mname,"")) as received_by_name'),
 					DB::raw('CONCAT(trim(CONCAT(insby.lname," ",COALESCE(insby.affix,""))),", ", COALESCE(insby.fname,"")," ", COALESCE(insby.mname,"")) as inspected_by_name'),
+					DB::raw('CONCAT(trim(CONCAT(reqEmp.lname," ",COALESCE(reqEmp.affix,""))),", ", COALESCE(reqEmp.fname,"")," ", COALESCE(reqEmp.mname,"")) as requesting_employee_name'),
 					'recbypos.position_text as received_by_position',
 					'insbypos.position_text as inspected_by_position'
                 )
                 ->leftjoin('employees as recby','recby.employee_code','=','po.received_by')
 				->leftjoin('employees as insby','insby.employee_code','=','po.inspected_by')
+				->leftjoin('employees as reqEmp','reqEmp.employee_code','=','po.employee_code')
 				->leftjoin('positions as recbypos','recbypos.position_code','=','recby.position_code')
 				->leftjoin('positions as insbypos','insbypos.position_code','=','insby.position_code')
                 ->leftjoin('suppliers as s','s.supplier_code','=','po.supplier_code')

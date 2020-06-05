@@ -8,12 +8,11 @@
     <div class="pull-left info">
       <p>{{Auth::user()->name}}</p>
       <p></p>
-      <a href="#"><i class="fa fa-circle text-success"></i> ID: {{Auth::user()->employee_code}} </a> <!-- FORSCRIPTING::Place user type here -->
+      <a href="#"><i class="fa fa-circle text-success"></i> Administrator</a>
     </div>
   </div>
   <!-- search form -->
-  
-<!--   <form action="#" method="get" class="sidebar-form">
+  <form action="#" method="get" class="sidebar-form">
     <div class="input-group">
       <input type="text" name="q" class="form-control" placeholder="Search...">
       <span class="input-group-btn">
@@ -22,7 +21,7 @@
             </button>
           </span>
     </div>
-  </form> -->
+  </form>
   <!-- /.search form -->
   <!-- sidebar menu -->
   <ul class="sidebar-menu" data-widget="tree">
@@ -193,6 +192,7 @@
         <li ng-if="checkModuleAccess('---')"><a href="#"><i class="fa fa-paperclip"></i>Status Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-007')"><a href="#" ui-sref="list-po-office"><i class="fa fa-paperclip"></i>Purchase Order Reports</a></li>
         <li ng-if="checkModuleAccess('MODULE-009')"><a href="#" ui-sref="list-utilization-office"><i class="fa fa-paperclip"></i>Utilization Reports</a></li>
+       
         <li ng-if="checkModuleAccess('---')"><a href="#"><i class="fa fa-paperclip"></i>Other Reports</a></li>
       </ul>
     </li>

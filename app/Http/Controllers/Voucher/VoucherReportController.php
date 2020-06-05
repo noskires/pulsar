@@ -51,6 +51,7 @@ class VoucherReportController extends Controller {
                     'v.amount',
                     'v.check_number',
                     'v.cost_center_code',
+                    'v.created_at',
                 DB::raw('CASE 
                     WHEN (SELECT count(org_code) FROM organizations WHERE org_code=v.cost_center_code) = 1 
                     THEN (SELECT org_name FROM organizations WHERE org_code=v.cost_center_code)

@@ -37,8 +37,9 @@
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
-    <!-- Application Version Here --><div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div><!-- /.Application Version -->
-    <strong>Pulsar Construction &nbsp;</strong> Copyright &copy;2020. All rights reserved.
+    <div class="pull-right hidden-xs"><b>Version</b> 1.0</div>
+    <strong>Copyright &copy; <a target="_blank" href="http://bizlogiks.ph/">Bizlogiks-Business Solutions</a>.</strong> All rights
+    reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
