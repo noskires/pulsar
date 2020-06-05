@@ -31,6 +31,8 @@ class PdfController extends Controller {
     $data['events']           = $this->events($assetCode);
     $data['insurance']        = $this->insurance($assetCode);
 
+    // return $data;
+
     $pdf = PDF::loadView('asset.report1',  $data);
     return $pdf->stream('asset.report1.pdf');
    }

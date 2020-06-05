@@ -4,49 +4,33 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Pulsar Construction</title>
+  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>
 <body onload="window.print();" style="font-family: Helvetica;">
 <div class="wrapper">
   <!-- Main content -->
   <section class="invoice">
-    <!-- Header -->
-    <div class="row">
-      <div class="col-xs-12" style="font-size: 11px;">
-        <p> <span style="font-size:12px;font-weight:bold;">PULSAR CONSTRUCTION<br></span> Dodan, Penablanca 3502, Philippines</p>
-      </div>
-    </div>
+    <!-- title row -->
     <div class="row">
       <div class="col-xs-12" style="border-bottom: 2px solid black;">
-        <h2 class="page-header"><i class="fa fa-tags"></i> 
-          <img src="assets/dist/img/tags.png" style="margin-bottom:-4px;width:30px;">&nbsp;ASSET PROFILE<br>
+        <h2 class="page-header">
+          <i class="fa fa-tags"></i> ASSET PROFILE<br>
+          <span style="font-size: 15px;font-weight: bold;">Asset Tag: {{$asset->tag}}</span>
         </h2>
-
-        <!-- Control Number -->
-        <span style="font-size:14px;letter-spacing:1px;"><strong>Asset Tag: {{$asset->tag}}</strong> &nbsp; </span>
-        <!-- end::Control Number -->
-
-        <!-- Date Acquired -->
-        <div style="font-size:14px;letter-spacing:1px;position: absolute;top:13.25%;right:0;"> 
-          Acquired: {{$asset->date_acquired}}
-        </div>
-        <!-- end::Date Acquired -->
-
-        <!-- <div style="position: absolute;top:1%;right:0;"> <img src="assets/dist/img/qrcode.png" style='width:80px;'> </div> -->
       </div>
+      <!-- /.col -->
     </div>
-    <!-- end::Header -->
 <br>
-
 <!-- ASSET DETAILS -->
-    <div class="row" style="border-bottom: 1px solid black;font-size:11.5px;">
+    <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4> <b>ASSET DETAILS</b> </h4>
           <div>
           	<table width="100%" >
           		<tr>
           			<td width="70%">
-          				<table width="100%">
+          				<table width="100%" style="font-size:12px;">
 			              <tr>
 			                <td width="30%">Category:</td>
 			                <td>{{$asset->category}}</td>
@@ -108,18 +92,18 @@
 			                <td>{{$asset->status}}</td>
 			              </tr>
 			            </table>
-			         </td>
-	               <td align="center">
+			        </td>
+	                <td align="center">
                     @if($asset_photo)
-                    <img src="../uploads/{{$asset_photo->asset_photo_name}}" style='width:190px;'> <br>
-                    <!-- <img src="../uploads/ASSET-20190209102014-000007-APC-20200606041131.png" style='width:190px;'> <br> -->
+                    <img src="uploads/{{$asset_photo->asset_photo_name}}" style='width:190px;'> <br>
                     @else
-	                	<img src="uploads/no-image.png" style='width:190px;opacity:0.3;'> <br>
+	                	<img src="uploads/no-image.png" style='width:190px;'> <br>
                     @endif
-	                	<!-- <img src="assets/dist/img/qrcode.png" style='width:150px;'> -->
+	                	<img src="assets/dist/img/qrcode.png" style='width:150px;'>
 	            	</td>
           		</tr>
           	</table>
+            
             <br>
           </div>
       </div>
@@ -127,10 +111,10 @@
 <br>
 
 <!-- MONITORING -->    
-    <div class="row" style="border-bottom: 1px solid black;font-size: 11.5px;">
+    <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>CURRENT OPERATING RECORD</b></h4>
-          <table border="0" width="100%">
+          <table border="0" width="100%" style="font-size:12px;">
             @if($asset_monitoring)
             <tr>
               <td style="border-top: 1px solid #e1e1e1;">Operating Hours</td>
@@ -152,19 +136,19 @@
             </tr>
             @else
             <tr>
-              <td style="border-top: 1px solid #e1e1e1;" colspan="4" align="center"><br> NO RECORDS</td>
+              <td style="border-top: 1px solid #e1e1e1;" colspan=4>No Records</td>
             </tr>
             @endif
-          </table> 
+          </table> <br>
       </div>
     </div> 
 <br>
 
 <!-- INSURANCE -->    
-    <div class="row" style="border-bottom: 1px solid black;font-size:11.5px;">
+    <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>INSURANCE</b></h4> 
-          <table border="0" width="100%">
+          <table border="0" width="100%" style="font-size:12px;">
           <thead>
           <tr>
             <th align="left">Insurance Co.</th>
@@ -186,20 +170,20 @@
           @endforeach
           @if(count($insurance)==0)
            <tr>
-            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="5"><br> NO RECORDS </td>
+            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="5"> NO RECORDS </td>
           </tr>
           @endif
           </tbody>
-        </table>
+        </table> <br>
       </div>
     </div>
-<br>
+<br><br><br><br><br>
 
 <!-- MAINTENANCE HISTORY -->    
-    <div class="row" style="border-bottom: 1px solid black;font-size:11.5px;">
+    <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>MAINTENANCE HISTORY</b></h4> 
-        <table border="0" width="100%">
+        <table border="0" width="100%" style="font-size:12px;">
           <thead>
           <tr align="left">
             <th>Control#</th>
@@ -229,20 +213,20 @@
           @endforeach
           @if(count($jos)==0)
           <tr>
-            <td style="border-top: 1px solid #e1e1e1;" colspan="7" align="center"><br> NO RECORDS </td>
+            <td style="border-top: 1px solid #e1e1e1;" colspan="7" align="center"> NO RECORDS </td>
           </tr>
           @endif
           </tbody>
-        </table>
+        </table> <br>
       </div>
     </div>
 <br>
 
 <!-- EVENTS -->    
-    <div class="row" style="border-bottom: 1px solid black;font-size:12px;">
+    <div class="row" style="border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>EVENTS</b></h4> 
-        <table width="100%">
+        <table width="100%" style="font-size:12px;">
           <thead>
           <tr align="left">
             <th>Status</th>
@@ -260,22 +244,22 @@
            @endforeach
 	       @if(count($events)==0)
 	       <tr>
-            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="3"><br> NO RECORDS </td>
+            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="3"> NO RECORDS </td>
           </tr>
           @endif
           </tbody>
         </table> 
-      </div>
+      </div> <br>
     </div>
+<br>
+
+<center>* * * END OF ASSET PROFILE * * *</center>  
+    <!-- /.row -->
   </section>
+  <!-- /.content -->
 </div>
-<br><br>
+<div class="divFooter"> <center> PULSAR &nbsp; ASSETERIK&copy; V.1.0 &nbsp; www.bizlogiks.ph </center> </div>
 
-<!-- footer -->
-<div class="footer">
-  <span style="font-size:7px; letter-spacing:4px;"><center>END OF ASSET PROFILE</center></span>
-</div>
-<!-- end::footer -->
-
+<!-- ./wrapper -->
 </body>
 </html>

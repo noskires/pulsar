@@ -61,7 +61,7 @@
       <div class="modal-header">
         <button type="button" class="close" ng-click="vm.ok()">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag1: <b><%vm.formData.asset.tag%></b></h4>
+        <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag: <b><%vm.formData.asset.tag%></b></h4>
       </div>
       <div class="modal-body">
         <!-- Custom Tabs (Pulled to the right) -->

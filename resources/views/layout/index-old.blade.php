@@ -77,20 +77,6 @@
       box-shadow: 0 0 4px -1px #000;
       border:5px solid green;
   }
-
-  /*Datatable Search on Topmost Left Side*/
-  .dataTables_wrapper .dataTables_length {
-  float: left;
-  }
-  .dataTables_wrapper .dataTables_filter {
-  float: right;
-  text-align: right;
-  }
-
-  table th {
-    font-size: 11.7px;
-    font-weight: 500;
-  }
   
 </style>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -204,6 +190,10 @@
   @include('requisition.list_requisitions2')
 </script>
 
+<script type="text/ng-template" id="ris.ris_status_report.view">
+  @include('requisition.ris_status_report')
+</script>
+
 
 <!-- Receipts -->
 
@@ -241,6 +231,10 @@
 
 <script type="text/ng-template" id="supply.list.view">
   @include('supply.list_supplies')
+</script>
+
+<script type="text/ng-template" id="supply.supply_status.view">
+  @include('supply.supply_status')
 </script>
 
 <script type="text/ng-template" id="supply.category.list.view">
@@ -307,6 +301,10 @@
 
 <script type="text/ng-template" id="purchase.order.list.office.view">
   @include('purchase_order.list_purchase_order_office')
+</script>
+
+<script type="text/ng-template" id="po.po_status_report.view">
+  @include('purchase_order.po_status_report')
 </script>
 
 

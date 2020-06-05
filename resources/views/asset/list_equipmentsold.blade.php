@@ -313,7 +313,7 @@
       <div class="modal-header">
         <button type="button" class="close" ng-click="vm.ok()">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag: <b><%vm.formData.asset.asset_code%> <b></h4>
+        <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag: <b><%vm.formData.asset.tag%></b></h4>
       </div>
       <div class="modal-body">
         <!-- Custom Tabs (Pulled to the right) -->
@@ -326,11 +326,11 @@
             <div class="tab-pane active" id="tab_1-1">
               <div class="row">
                 <div class="col-sm-6"><br>
-                  <img src="uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==0">
-                  <img src="uploads/<%vm.assetPhoto[0].asset_photo_name%>" style="width:100%;height:110%;padding-right:0px;" ng-if="vm.assetPhoto.length==1">
+                  <img src="public/uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==0">
+                  <img src="public/uploads/<%vm.assetPhoto[0].asset_photo_name%>" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==1">
                 </div>
 
-                <div class="col-sm-6">
+                <div style="font-size: 14px;">
                 <b>Category:</b> <%vm.formData.asset.asset_name%><br>
                 <b>ID:</b> <%vm.formData.asset.code%><br>
                 <b>Model:</b> <%vm.formData.asset.model%><br>
@@ -352,7 +352,7 @@
           <!-- /.tab-content -->
         </div>
         <button type="button" class="btn btn-primary pull-right" ui-sref="asset-more-details({assetCode:vm.formData.asset.asset_code})" ng-click="vm.ok()">
-          <li class="fa fa-navicon "></li> More Details </button>
+          <li class="fa fa-navicon "></li> More Details 1</button>
         <a class="btn btn-info pull-right" style="margin-right: 7px;" ng-click="vm.printAssetDetails(vm.formData.asset.asset_code)" target="_blank" ng-href="<%vm.url%>"  style="margin-right: 7px;"><li class="fa fa-print"></li> Print
         </a>
 
@@ -366,5 +366,7 @@
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog --> 
+
+<!-- asdf -->
  
 </script>
