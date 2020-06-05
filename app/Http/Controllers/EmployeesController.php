@@ -69,6 +69,7 @@ class EmployeesController extends Controller {
         return response()-> json([
             'status'=>200,
             'data'=>$employees,
+            // 'count'=>$employees->count(),
             'message'=>''
         ]);
     }
@@ -135,6 +136,7 @@ class EmployeesController extends Controller {
         return response()-> json([
             'status'=>200,
             'data'=>$employees,
+            'count'=>$employees->count(),
             'message'=>''
         ]);
     }

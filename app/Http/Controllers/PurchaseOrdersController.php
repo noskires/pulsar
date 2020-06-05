@@ -199,6 +199,7 @@ class PurchaseOrdersController extends Controller {
 		return response()-> json([
 			'status'=>200,
 			'data'=>$pos,
+			'count'=>$pos->count(),
 			'message'=>'',
 			'debugQuery'=>$debugQuery
 		]);

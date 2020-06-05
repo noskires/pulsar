@@ -130,4 +130,5 @@
 <script src="{{URL::to('public/js/controller/users.js')}}"></script> 
 <script src="{{URL::to('public/js/controller/resetPassword.js')}}"></script> 
 <script src="{{URL::to('public/js/controller/assetRegistrations.js')}}"></script> 
+<script src="{{URL::to('public/js/controller/dashboard.js')}}"></script> 
 @yield('additionalScripts')

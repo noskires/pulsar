@@ -248,7 +248,7 @@
             url: '/index',
             // controller: 'OperationCtrl as oc',
             templateUrl: 'main.view',
-            // controller: 'MainCtrl as mc',
+            controller: 'DashboardCtrl as dashboardCtrlr',
         };
 
         dynamicNumberStrategyProvider.addStrategy('price', {

@@ -87,7 +87,7 @@
           <tr>
             <td style="border-top: 1px solid #e1e1e1;"> {{$voucher_item->purchase_order_code}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$voucher_item->receipt_number}} </td>
-            <td>#############</td>
+            <td> {{$voucher_item->payment_type}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{number_format($voucher_item->total_item_cost_receipt,2)}} </td>
           </tr>       
           @endforeach

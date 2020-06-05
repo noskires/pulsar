@@ -198,7 +198,7 @@
         <th>Receiving Receipt Date</th>
         <th>Voucher</th>
         <th>Amount</th>
-        <th>Options</th>
+        <!-- <th>Options</th> -->
       </tr>
       </thead>
       <tbody>
@@ -215,7 +215,7 @@
         <td><%receipt.receiving_receipt_date%></td>
         <td><%receipt.voucher_code%></td>
         <td align="right"><%receipt.total_receipt_item_Cost | number:2%></td>
-        <td> <span ng-if="!receipt.voucher_code"><a href="#" ui-sref="receipt-edit({receiptCodeEdit:receipt.receipt_code})"><b>Edit</b></a> | <a  href="#" ui-sref="receipt-delete({receiptCodeDelete:receipt.receipt_code})"><b>Delete</b></a></span></td>
+        <!-- <td> <span ng-if="!receipt.voucher_code"><a href="#" ui-sref="receipt-edit({receiptCodeEdit:receipt.receipt_code})"><b>Edit</b></a> | <a  href="#" ui-sref="receipt-delete({receiptCodeDelete:receipt.receipt_code})"><b>Delete</b></a></span></td> -->
       </tr> 
       </tbody>
     </table>
