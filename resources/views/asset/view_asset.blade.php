@@ -18,7 +18,6 @@
           <h3 class="box-title"><b> <%amdc.asset.name%>: <%amdc.asset.asset_code%></b></h3>
         </div>
         <!-- /.box-header -->
-        uploads/<%amdc.assetPhoto[0].asset_photo_name%>
         <div class="box-body">
           <div class="col-md-5"><br>
             <img src="uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==0">
