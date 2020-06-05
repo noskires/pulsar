@@ -44,6 +44,7 @@ class RequisitionReportController extends Controller {
 			'rs.remarks',
 			'rs.request_type',
 			'rs.reference_code',
+			'rs.remarks',
 			'rs.received_by',
 			DB::raw('CONCAT(trim(CONCAT(recby.lname," ",COALESCE(recby.affix,""))),", ", COALESCE(recby.fname,"")," ", COALESCE(recby.mname,"")) as received_by_name'),
 			'rs.date_received',
@@ -51,10 +52,38 @@ class RequisitionReportController extends Controller {
 			DB::raw('CONCAT(trim(CONCAT(insby.lname," ",COALESCE(insby.affix,""))),", ", COALESCE(insby.fname,"")," ", COALESCE(insby.mname,"")) as inspected_by_name'),
 			'rs.date_inspected',
 			'recbypos.position_text as received_by_position',
-			'insbypos.position_text as inspected_by_position'
+			'insbypos.position_text as inspected_by_position',
+			DB::raw(
+				'CASE 
+				  WHEN rs.request_type = "Office" 
+					THEN (SELECT organizations.org_name FROM organizations WHERE organizations.org_code=rs.reference_code)
+				  WHEN rs.request_type = "Project" 
+					THEN (SELECT CONCAT(projects.code,"-",projects.name) AS reference_name FROM projects WHERE projects.project_code=rs.reference_code) 
+				ELSE 
+					"" 
+				END as reference_name'
+			),
+			DB::raw(
+				'CASE 
+				  WHEN rs.job_order_code IS NULL 
+					THEN null
+				  ELSE 
+					(SELECT assets.name FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+				  END as asset_name'
+			),
+			  DB::raw(
+				'CASE 
+				  WHEN rs.job_order_code IS NULL 
+					THEN null
+				  ELSE 
+					(SELECT assets.code FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = rs.job_order_code)
+				  END as asset_code'
+			  ),
+			  DB::raw('CONCAT(trim(CONCAT(reqEmp.lname," ",COALESCE(reqEmp.affix,""))),", ", COALESCE(reqEmp.fname,"")," ", COALESCE(reqEmp.mname,"")) as requesting_employee_name')
 		)
 		->leftjoin('employees as recby','recby.employee_code','=','rs.received_by')
 		->leftjoin('employees as insby','insby.employee_code','=','rs.inspected_by')
+		->leftjoin('employees as reqEmp','reqEmp.employee_code','=','rs.requesting_employee')
 		->leftjoin('positions as recbypos','recbypos.position_code','=','recby.position_code')
 		->leftjoin('positions as insbypos','insbypos.position_code','=','insby.position_code')
 		// ->leftjoin('job_orders as jo','insbypos.position_code','=','insby.position_code')
