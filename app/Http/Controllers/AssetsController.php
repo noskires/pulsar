@@ -193,6 +193,7 @@ class AssetsController extends Controller {
             'status'=>200,
             'data'=>$asset,
             'data2'=>$data,
+            'count'=>$asset->count(),
             'message'=> ''
         ]);
     }

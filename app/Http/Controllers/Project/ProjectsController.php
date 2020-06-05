@@ -65,6 +65,7 @@ class ProjectsController extends Controller {
     return response()-> json([
       'status'=>200,
       'data'=>$projects,
+      'count'=>$projects->count(),
       'message'=>''
     ]);
   }

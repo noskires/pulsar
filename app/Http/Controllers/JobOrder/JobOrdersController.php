@@ -117,6 +117,7 @@ class JobOrdersController extends Controller {
     return response()-> json([
       'status'=>200,
       'data'=>$job_orders,
+      'count'=>$job_orders->count(),
       'message'=>'',
       // 'date_started'=>'',
       'debug'=>$debugQuery

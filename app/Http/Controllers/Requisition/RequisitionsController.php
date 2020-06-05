@@ -192,6 +192,7 @@ class RequisitionsController extends Controller {
     return response()-> json([
       'status'=>200,
       'data'=>$requisitions,
+      'count'=>$requisitions->count(),
       'message'=>'',
       'debugQuery'=>$debugQuery
     ])->setEncodingOptions(JSON_NUMERIC_CHECK);

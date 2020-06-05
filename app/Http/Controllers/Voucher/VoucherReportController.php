@@ -156,6 +156,7 @@ class VoucherReportController extends Controller {
           'vi.receipt_code', 
           'vi.voucher_code', 
           'vi.voucher_item_code',
+          'v.payment_type',
           'r.receipt_number',
           'r.receipt_date',
           'r.receipt_code',
@@ -171,6 +172,7 @@ class VoucherReportController extends Controller {
 					WHERE receipts.receipt_code = receipt_items.receipt_code 
                     AND receipts.receipt_code = r.receipt_code) AS total_item_cost_receipt")
         )
+        ->leftjoin('vouchers as v','v.voucher_code','=','vi.voucher_code')
         ->leftjoin('receipts as r','r.receipt_code','=','vi.receipt_code')
         ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
         ->where('vi.voucher_code', $voucherCode)->get();

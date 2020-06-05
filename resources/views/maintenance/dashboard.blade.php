@@ -14,7 +14,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>1234</h3>
+            <h3><%dashboardCtrlr.employee | number:0%></h3>
             <p>Pulsar Construction Employees</p>
           </div>
           <div class="icon">
@@ -27,7 +27,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="small-box bg-primary">
           <div class="inner">
-            <h3>1234</h3>
+            <h3><%dashboardCtrlr.asset | number:0%></h3>
             <p>Construction Equipments</p>
           </div>
           <div class="icon">
@@ -40,7 +40,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="small-box bg-green">
           <div class="inner">
-            <h3>1234</h3>
+            <h3><%dashboardCtrlr.project | number:0%></h3>
             <p>Construction Projects</p>
           </div>
           <div class="icon">
@@ -53,7 +53,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3>1234</h3>
+            <h3><%dashboardCtrlr.jobOrder | number:0%></h3>
             <p>Open Job Orders</p>
           </div>
           <div class="icon">
@@ -66,7 +66,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>1234</h3>
+            <h3><%dashboardCtrlr.requisition | number:0%></h3>
             <p>Open Requisition Slips</p>
           </div>
           <div class="icon">
@@ -79,7 +79,7 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="small-box bg-red">
           <div class="inner">
-            <h3>1234</h3>
+            <h3><%dashboardCtrlr.pos | number:0%></h3>
             <p>Open Purchase Orders</p>
           </div>
           <div class="icon">
