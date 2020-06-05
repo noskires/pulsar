@@ -326,7 +326,7 @@
             <div class="tab-pane active" id="tab_1-1">
               <div class="row">
                 <div class="col-sm-6"><br>
-                  <img src="uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==0">
+                  <img src="public/uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="vm.assetPhoto.length==0">
                   <img src="uploads/<%vm.assetPhoto[0].asset_photo_name%>" style="width:100%;height:110%;padding-right:0px;" ng-if="vm.assetPhoto.length==1">
                 </div>
 

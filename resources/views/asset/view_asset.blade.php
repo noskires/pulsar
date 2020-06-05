@@ -20,7 +20,7 @@
         <!-- /.box-header -->
         <div class="box-body">
           <div class="col-md-5"><br>
-            <img src="uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==0">
+            <img src="public/uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==0">
             <img src="uploads/<%amdc.assetPhoto[0].asset_photo_name%>" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==1">
           </div>
           <!-- ////// BASIC DETAILS -->
