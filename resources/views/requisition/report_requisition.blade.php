@@ -64,6 +64,12 @@
             <td align="left" style="border-bottom:1px solid black;"> {{$requisition_slip->asset_name}} </td>
             <td align="left" style="width:22%; border-bottom:1px solid black;">Asset ID:</td>
             <td align="left" style="border-bottom:1px solid black;"> {{$requisition_slip->asset_code}} </td>
+          </tr>  
+          <tr>
+            <td align="left" style="width:32%; border-bottom:1px solid black;">Internal/External Delivery Receipt:</td>
+            <td align="left" style="border-bottom:1px solid black;"> {{$requisition_slip->withdrawal_remarks}} </td>
+            <td align="left" style="width:22%; border-bottom:1px solid black;"></td>
+            <td align="left" style="border-bottom:1px solid black;"></td>
           </tr>         
         </table> 
       </div>

@@ -15,14 +15,14 @@
     <div class="col-md-9">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><b> <%amdc.asset.name%>: <%amdc.asset.asset_code%></b></h3>
+          <h3 class="box-title"><b> <%amdc.asset.name%>: <%amdc.asset.tag%></b></h3>
         </div>
         <!-- /.box-header -->
-        uploads/<%amdc.assetPhoto[0].asset_photo_name%>
         <div class="box-body">
-          <div class="col-md-5"><br>
-            <img src="uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==0">
-            <img src="uploads/<%amdc.assetPhoto[0].asset_photo_name%>" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==1">
+          <div class="col-md-5"><br> 
+          <%amdc.assetPhoto[0].asset_photo_name%>
+            <img src="public/uploads/no-image.png" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==0">
+            <img src="public/uploads/<%amdc.assetPhoto[0].asset_photo_name%>" style="width:100%;height:100%;padding-right:0px;" ng-if="amdc.assetPhoto.length==1">
           </div>
           <!-- ////// BASIC DETAILS -->
           <div class="col-md-7"> 
@@ -238,18 +238,13 @@
               <h3 class="box-title"><b>Actions</b></h3>
             </div> 
         <div class="box-body">
-          <a class="btn btn-app" data-toggle="modal" ng-click="amdc.editAsset()" style="width: 40%;">
+          <a class="btn btn-app" data-toggle="modal" ng-click="amdc.editAsset()">
             <i class="fa fa-edit"></i> Edit
           </a>
-          <a class="btn btn-app" data-toggle="modal" data-target="#modal-image" style="width: 40%;"> 
+          <a class="btn btn-app" data-toggle="modal" data-target="#modal-image"> 
             <i class="fa fa-image"></i> Photo
           </a>            
-          <a ng-click="amdc.printAssetDetails(amdc.tag)" target="_blank" ng-href="<%amdc.url%>"  class="btn btn-app" style="width: 40%;">
-            <i class="fa fa-print"></i> Print Data
-          </a>
-          <a href="#"  class="btn btn-app" data-toggle="modal" data-target="#modal-actions" style="width: 40%;">
-            <i class="fa fa-compass"></i> Other Actions
-          </a>
+
           
           <!-- <a class="btn btn-app" ui-sref="jo-create({assetTag:amdc.tag})" ng-if="amdc.asset.employee_name && amdc.asset.status=='ACTIVE' || 
 
@@ -280,6 +275,12 @@
           <a class="btn btn-app" ng-click="amdc.messageAlert('STATUS: ')" ng-if="amdc.asset.status=='LOST'">
             <i class="fa fa-wrench"></i> Repair
           </a> -->
+          <a ng-click="amdc.printAssetDetails(amdc.tag)" target="_blank" ng-href="<%amdc.url%>"  class="btn btn-app">
+            <i class="fa fa-print"></i> Print
+          </a>
+          <a href="#"  class="btn btn-app" data-toggle="modal" data-target="#modal-actions">
+            <i class="fa fa-compass"></i> Other Actions
+          </a>
         </div>
       </div>
 

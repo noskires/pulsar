@@ -44,7 +44,7 @@ class RequisitionReportController extends Controller {
 			'rs.remarks',
 			'rs.request_type',
 			'rs.reference_code',
-			'rs.remarks',
+			'rs.withdrawal_remarks',
 			'rs.received_by',
 			DB::raw('CONCAT(trim(CONCAT(recby.lname," ",COALESCE(recby.affix,""))),", ", COALESCE(recby.fname,"")," ", COALESCE(recby.mname,"")) as received_by_name'),
 			'rs.date_received',
