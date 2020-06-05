@@ -128,7 +128,7 @@ class JobOrderReportController extends Controller {
 		)
 		->leftjoin('asset_categories as sc','sc.asset_category_code','=','a.category')
 		->leftjoin('ares as are','are.are_code','=','a.are_code')
-		->leftjoin('Employees as e','e.employee_code','=','are.employee_code')
+		->leftjoin('employees as e','e.employee_code','=','are.employee_code')
 		->leftjoin('organizations as org','org.org_code','=','e.organizational_unit')
 		->leftjoin('municipalities as m','m.municipality_code','=','org.municipality_code')
 		->leftjoin('provinces as p','p.province_code','=','m.province_code')
