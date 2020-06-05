@@ -44,7 +44,7 @@
           <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-2" width="100%">
             <thead>
             <tr>
-              <th>Control No. (RIS)</th>
+              <th>Control No. (PO)</th>
               <th>Old Reference</th>
               <th>Supply Name</th>
               <th>Description</th> 
