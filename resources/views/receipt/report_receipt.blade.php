@@ -55,7 +55,15 @@
             <td align="left">{{$receipt_items_total}}</td>
             <td align="left" style="font-weight: bold;">Voucher Number:</td>
             <td align="left">{{$receipt->voucher_code}}</td>
-          </tr>         
+          </tr>  
+          <tr>
+            <td align="left" style="font-weight: bold;">Receiving Receipt:</td>
+            <td align="left">{{$receipt->remarks}}</td>
+            <td align="left" style="font-weight: bold;">Receiving Date:</td>
+            <td align="left">{{$receipt->receiving_receipt_date}}</td>
+          </tr>  
+       
+        
         </table> <br>
 
         <h4><b>RECEIPT DETAILS</b></h4> 

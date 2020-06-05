@@ -512,13 +512,23 @@
                 templateUrl: 'receipt.create.view'
             })
 
+            .state('receipt-edit', {
+                url: '/receipt2/edit/:receiptCodeEdit',
+                controller: 'ReceiptsCtrl as rc',
+                templateUrl: 'receipt.list.view'
+            })
+
+            .state('receipt-delete', {
+                url: '/receipt2/delete/:receiptCodeDelete',
+                controller: 'ReceiptsCtrl as rc',
+                templateUrl: 'receipt.list.view'
+            })
+
             .state('list-receipt', {
                 url: '/receipt/list',
                 controller: 'ReceiptsCtrl as rc',
                 templateUrl: 'receipt.list.view'
             })
-
-            
 
             .state('list-receiptCopy', {
                 url: '/receipt/list/:receiptCode',

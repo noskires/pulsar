@@ -43,7 +43,8 @@ class ReceiptReportController extends Controller {
                 'r.receipt_date',
                 'r.payee_type',
                 'r.payee',
-                'r.remarks',
+				'r.remarks',
+				'r.receiving_receipt_date',
                 'rt.receipt_type_name',
                 'vi.voucher_code'
               )

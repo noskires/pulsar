@@ -5,6 +5,8 @@
         .controller('ReceiptsCtrl', ReceiptsCtrl)
         // .controller('ReceiptItemsCtrl', ReceiptItemsCtrl)
         .controller('ReceiptsModalInstanceCtrl', ReceiptsModalInstanceCtrl)
+        .controller('ReceiptEditModalInstanceCtrl', ReceiptEditModalInstanceCtrl)
+        .controller('ReceiptDeleteModalInstanceCtrl', ReceiptDeleteModalInstanceCtrl)
 
         ReceiptsCtrl.$inject = ['$state', '$stateParams', 'ReceiptSrvcs', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'SuppliersSrvcs', 'BanksSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', 'PurchaseOrdersSrvcs', '$window', '$uibModal'];
         function ReceiptsCtrl($state, $stateParams, ReceiptSrvcs, RequisitionsSrvcs, EmployeesSrvcs, SuppliersSrvcs, BanksSrvcs, AssetsSrvcs, JobOrdersSrvcs, PurchaseOrdersSrvcs, $window, $uibModal){
@@ -87,6 +89,91 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+
+            if($stateParams.receiptCodeEdit)
+            {
+                vm.receiptCode = $stateParams.receiptCodeEdit;
+
+       
+
+                vm.receiptDetails = {
+                    receiptCode:vm.receiptCode, 
+                    receiptDate:'', 
+                    payeeType:'', 
+                    payee:'', 
+                    voucherCode:'', 
+                    voucherStatus:'', 
+                    poCode:'', 
+                    poStatus:''
+                }
+    
+                ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.receipt = response.data.data[0];
+                        console.log(vm.receipt)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'ReceiptEditModalInstanceCtrl',
+                            templateUrl:'receipt-edit.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'Receipt Controller',
+                                    message:response.data.message,
+                                    receipt: vm.receipt
+                                };
+                              }
+                            },
+                            size: 'lg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            if($stateParams.receiptCodeDelete)
+            {
+                vm.receiptCode = $stateParams.receiptCodeDelete;
+
+           
+
+                vm.receiptDetails = {
+                    receiptCode:vm.receiptCode, 
+                    receiptDate:'', 
+                    payeeType:'', 
+                    payee:'', 
+                    voucherCode:'', 
+                    voucherStatus:'', 
+                    poCode:'', 
+                    poStatus:''
+                }
+    
+                ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
+                    if(response.data.status == 200)
+                    {
+                        vm.receipt = response.data.data[0];
+                        console.log(vm.receipt)
+
+                        var modalInstance = $uibModal.open({
+                            controller:'ReceiptDeleteModalInstanceCtrl',
+                            templateUrl:'receipt-delete.modal',
+                            controllerAs: 'vm',
+                            resolve :{
+                              formData: function () {
+                                return {
+                                    title:'RIS Controller',
+                                    message:response.data.message,
+                                    receipt: vm.receipt
+                                };
+                              }
+                            },
+                            size: 'lg'
+                        });
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
             vm.receiptDetails = {
                 receiptCode:'', 
                 receiptDate:'', 
@@ -115,30 +202,32 @@
             }, function (){ alert('Bad Request!!!') })
 
             vm.newReceipt = function(data){
+
                 console.log(data);
                 ReceiptSrvcs.save(data).then(function(response){
                     if (response.data.status == 200) {
                         alert(response.data.message);
 
-                        vm.receiptDetails = {
-                            receiptCode:'', 
-                            receiptDate:'', 
-                            payeeType:'', 
-                            payee:'', 
-                            voucherCode:'', 
-                            voucherStatus:'', 
-                            poCode:'', 
-                            poStatus:''
-                        }
+                        // vm.receiptDetails = {
+                        //     receiptCode:'', 
+                        //     receiptDate:'', 
+                        //     payeeType:'', 
+                        //     payee:'', 
+                        //     voucherCode:'', 
+                        //     voucherStatus:'', 
+                        //     poCode:'', 
+                        //     poStatus:''
+                        // }
 
-                        ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
-                            if(response.data.status == 200)
-                            {
-                                vm.receipts = response.data.data;
-                                console.log(vm.receipts)
-                            }
-                        }, function (){ alert('Bad Request!!!') })
-                        $state.go('list-receipt2');
+                        // ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
+                        //     if(response.data.status == 200)
+                        //     {
+                        //         vm.receipts = response.data.data;
+                        //         console.log(vm.receipts)
+                        //     }
+                        // }, function (){ alert('Bad Request!!!') })
+                        $state.reload();
+                        // $state.go('list-receipt2');
                     }
                     else {
                         alert(response.data.message);
@@ -146,8 +235,6 @@
                     console.log(response.data);
                 });
             };
-
-            
 
             vm.selectPayeeType = function(payeeType){
                 // alert(payeeType)
@@ -527,6 +614,205 @@
             vm.printReceiptDetails = function(tag){
                 vm.url = 'receipt/report/'+tag;
             }
+        }
+
+        ReceiptEditModalInstanceCtrl.$inject = ['$state', '$stateParams', 'SuppliersSrvcs', 'PurchaseOrdersSrvcs', 'BanksSrvcs', '$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window'];
+        function ReceiptEditModalInstanceCtrl ($state, $stateParams, SuppliersSrvcs, PurchaseOrdersSrvcs, BanksSrvcs, $uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window) {
+
+            var vm = this;
+            vm.formData = formData.receipt;
+            console.log(vm.formData)
+
+            OrganizationsSrvcs.organizations({orgCode:'', nextOrgCode:'', orgType:'', startDate:'', endDate:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.organizations = response.data.data;
+                    console.log(vm.organizations)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.projects = response.data.data;
+                    console.log(vm.projects)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            EmployeesSrvcs.employees({jobType:''}).then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.employees = response.data.data;
+                    console.log(vm.employees)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
+                if (response.data.status == 200) {
+                    vm.suppliers = response.data.data;
+                }
+                else {
+                    alert(response.data.message);
+                }
+                console.log(response.data);
+            });
+
+            ReceiptSrvcs.receiptTypes().then (function (response) {
+                if(response.data.status == 200)
+                {
+                    vm.receiptTypes = response.data.data;
+                    console.log(vm.receiptTypes)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.selectPayeeType = function(payeeType){
+                // alert(payeeType)
+                // console.log(data);
+                vm.payeeType = payeeType;
+
+                if(payeeType=="EMPLOYEE")
+                {          
+                    EmployeesSrvcs.employees({jobType:''}).then(function(response){
+                        if (response.data.status == 200) {
+                            vm.employees = response.data.data;
+                        }
+                        else {
+                            alert(response.data.message);
+                        }
+                        console.log(response.data);
+                    });
+                }
+                else if(payeeType=="SUPPLIER")
+                {
+                    SuppliersSrvcs.suppliers({supplierCode:''}).then(function(response){
+                        if (response.data.status == 200) {
+                            vm.suppliers = response.data.data;
+                        }
+                        else {
+                            alert(response.data.message);
+                        }
+                        console.log(response.data);
+                    });
+                }
+                else if(payeeType=="BANK")
+                {
+                    BanksSrvcs.banks({bankCode:''}).then(function(response){
+                        if (response.data.status == 200) {
+                            vm.banks = response.data.data;
+                        }
+                        else {
+                            alert(response.data.message);
+                        }
+                        console.log(response.data);
+                    });
+                }
+                else
+                {
+                    alert("Please select Payee Type!")
+                }
+
+            };
+
+
+            vm.purchaseDetails = {
+                poCode:'', 
+                referenceCode:'', 
+                supplierCode:vm.formData.payee, 
+                poStatus:2, 
+                dateFrom:'', 
+                dateTo:'' 
+            }
+
+            PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) { //get all open po status
+                if(response.data.status == 200)
+                {
+                    vm.pos = response.data.data;
+                    console.log(vm.pos)
+                }
+            }, function (){ alert('Bad Request!!!') })
+
+            vm.selectPayee = function(payeeType, supplierCode){
+                // alert(payee)
+
+                alert(supplierCode)
+
+                vm.purchaseDetails = {
+                    poCode:'', 
+                    referenceCode:'', 
+                    supplierCode:supplierCode, 
+                    poStatus:2, 
+                    dateFrom:'', 
+                    dateTo:''
+                }
+
+                PurchaseOrdersSrvcs.pos(vm.purchaseDetails).then (function (response) { //get all open po status
+                    if(response.data.status == 200)
+                    {
+                        vm.pos = response.data.data;
+                        console.log(vm.pos)
+                    }
+                }, function (){ alert('Bad Request!!!') })
+
+
+                if(payeeType == "SUPPLIER")
+                {
+            
+                    vm.supplierStatus = true;
+                    
+                }
+                else{
+                    vm.supplierStatus = false;
+
+                }
+            }
+
+            vm.updateReceipt = function(data){
+                console.log(data)
+
+                ReceiptSrvcs.update(data).then (function (response) {
+                    console.log(response.data)
+                    if(response.data.status == 200)
+                    {
+                        alert(response.data.message);
+                    
+                        $state.go('list-receipt2');
+                        vm.ok();
+                    }
+                }, function (){ alert('Bad Request!!!') })
+            }
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+        }
+
+        ReceiptDeleteModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', 'OrganizationsSrvcs', 'ProjectsSrvcs', '$window'];
+        function ReceiptDeleteModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window) {
+
+            var vm = this;
+            vm.formData = formData.receipt;
+            console.log(vm.formData)
+            // alert(vm.formData.asset_name)
+
+
+            vm.ok = function() {
+                $uibModalInstance.close();
+            };
+
+            
+            vm.deleteReceipt = function(receipt_code){
+
+                ReceiptSrvcs.delete({receipt_code:receipt_code}).then (function (response) {
+                        console.log(response.data)
+                        if(response.data.status == 200)
+                        {
+                            alert(response.data.message);
+                            
+                            $state.go('list-receipt2');
+                            vm.ok();
+                        }
+                    }, function (){ alert('Bad Request!!!') })
+                }
         }
 })();
 

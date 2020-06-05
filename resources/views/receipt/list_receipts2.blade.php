@@ -198,6 +198,7 @@
         <th>Receiving Receipt Date</th>
         <th>Voucher</th>
         <th>Amount</th>
+        <th>Options</th>
       </tr>
       </thead>
       <tbody>
@@ -214,6 +215,7 @@
         <td><%receipt.receiving_receipt_date%></td>
         <td><%receipt.voucher_code%></td>
         <td align="right"><%receipt.total_receipt_item_Cost | number:2%></td>
+        <td> <span ng-if="!receipt.voucher_code"><a href="#" ui-sref="receipt-edit({receiptCodeEdit:receipt.receipt_code})"><b>Edit</b></a> | <a  href="#" ui-sref="receipt-delete({receiptCodeDelete:receipt.receipt_code})"><b>Delete</b></a></span></td>
       </tr> 
       </tbody>
     </table>
@@ -459,4 +461,151 @@ $('.select2').select2();
   //   })
   });
   </script>
+</script>
+
+
+<script type="text/ng-template" id="receipt-edit.modal"> 
+  <div>
+    <div class="modal-dialog" style="width:100%;">
+        <div class="modal-header">
+          <button type="button" class="close" ui-sref="list-receipt2" ng-click="vm.ok()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-file-o"></li> Receipt Code: <b><%vm.formData.receipt_code%></b></h4>
+        </div>
+        <div class="modal-body">
+ 
+        <form class="form-horizontal" id="">
+          <div class="box-body">
+
+            <div class="form-group col-sm-12">
+              <label for="controlnumber" class="col-sm-2 control-label">Control Number</label>
+              <div class="col-sm-4"><input type="text" class="form-control" id="controlnumber" placeholder="SUP-03102018-1" disabled></div>
+              <label class="col-sm-2 control-label">Receipt Number*</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="reoderlevel" required="" ng-model="vm.formData.receipt_number">
+              </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label for="payeetype" class="col-sm-2 control-label">Payee Type</label>
+              <div class="radio col-sm-4">
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.payee_type" ng-change="vm.selectPayeeType(vm.formData.payee_type);vm.selectPayee(vm.formData.payee_type, vm.formData.payee_type)" ng-init="vm.formData.payee_type='SUPPLIER'">
+                  <option selected="selected" value="">- - SELECT PAYEE TYPE - -</option>
+                  <option value="EMPLOYEE">EMPLOYEE</option>
+                  <option value="SUPPLIER">SUPPLIER</option>
+                  <option value="BANK">BANK</option>
+                </select>
+              </div>
+              <label class="col-sm-2 control-label">Receipt Date</label>
+              <div class="col-sm-4">
+                <div class="input-group date">
+                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="text" class="form-control pull-right" required="" ng-model="vm.formData.receipt_date" datepicker autocomplete="off" readonly="">
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label class="col-sm-2 control-label">Payee Name</label>
+              <div class="col-sm-4">
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.payee" ng-change="vm.selectPayee(vm.formData.payee_type, vm.formData.payee)">
+                  <option value="">- - SELECT PAYEE - -</option>
+                  <option ng-if="vm.formData.payee_type=='EMPLOYEE'" value="<%employee.employee_code%>" ng-repeat="employee in vm.employees"> <%employee.fname+' '+employee.mname+' '+employee.lname%> </option>
+
+                  <option ng-if="vm.formData.payee_type=='SUPPLIER'" value="<%supplier.supplier_code%>" ng-repeat="supplier in vm.suppliers"> <%supplier.supplier_name%> </option>
+
+                  <option ng-if="vm.formData.payee_type=='BANK'" value="<%bank.bank_code%>" ng-repeat="bank in vm.banks"> <%bank.bank_name%> </option>
+                </select> 
+              </div>
+              <label class="col-sm-2 control-label">Receipt Type</label>
+              <div class="col-sm-4">
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.receipt_type">
+                  <option selected="selected" value="">- - SELECT TYPE - -</option>
+                  <option ng-value="receiptType.receipt_type_code" ng-repeat="receiptType in vm.receiptTypes"><%receiptType.receipt_type_name +" ("+ receiptType.receipt_type_code+")"%> </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label class="col-sm-2 control-label">Purchase Order* </label>
+              <div class="col-sm-4">
+                <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.purchase_order_code">
+                  <option value="">- - SELECT PO - -</option>
+                  <option ng-value="po.po_code" ng-repeat="po in vm.pos"> <%po.po_code%> </option>
+                </select>
+              </div>
+              <label for="rcpt-amount" class="col-sm-2 control-label">Receiving Receipt</label>
+              <div class="col-sm-4">
+                <div class="input-group date">
+                <input type="text" class="form-control"  id="rcpt-remarks" ng-model="vm.formData.remarks"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label class="col-sm-2 control-label"></label>
+              <div class="col-sm-4">
+                
+              </div>
+              <label class="col-sm-2 control-label">Receiving Receipt Date</label>
+              <div class="col-sm-4">
+                <div class="input-group date">
+                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                  <input type="text" class="form-control pull-right" required="" ng-model="vm.formData.receiving_receipt_date" datepicker autocomplete="off" readonly="">
+                </div>
+              </div>
+            </div>
+            
+
+
+
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <div class="form-group col-sm-12">           
+              <div class="col-sm-8"></div>
+              <div class="col-sm-4">
+              <button class="btn btn-large btn-success pull-right" data-toggle="confirmation"
+              data-btn-ok-label="Yes" data-btn-ok-icon="fa fa-check" data-btn-ok-class="btn-success"
+              data-btn-cancel-label="No" data-btn-cancel-icon="fa fa-times" data-btn-cancel-class="btn-danger"
+              data-title="Confirm data entry." data-content="Are you sure?" style="width: 40%;margin-left: 5%;" ng-click="vm.updateReceipt(vm.formData)">CONFIRMATION</button>
+              </div>
+            </div>
+          </div>
+        </form>
+          </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  $(function () {
+
+    $('.select2').select2();
+
+  //   $('#datepicker').datepicker({
+  //    autoclose: true
+  //   })
+  });
+  </script>
+
+</script>
+
+<script type="text/ng-template" id="receipt-delete.modal"> 
+  <div>
+    <div class="modal-dialog" style="width:100%;">
+      <div class="modal-header">
+          <button type="button" class="close" ui-sref="list-receipt2" ng-click="vm.ok()">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><li class="fa fa-file-o"></li> Receipt Code: <b><%vm.formData.receipt_code%></b></h4>
+        </div>
+      <div class="modal-body">
+        <h4> Are you sure you want to delete this record ? </h4>
+        <br>
+
+        <button class="btn btn-warning pull-right" data-toggle="confirmation" ng-click="vm.deleteReceipt(vm.formData.receipt_code)">DELETE</button>
+
+      </div>
+    </div>
+  </div>
 </script>

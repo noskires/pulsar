@@ -318,6 +318,8 @@ Route::group(['middleware' => 'checkModules:MODULE-012'], function () {
     Route::get('/receipt2/list','Receipt\ReceiptsController@index');
     Route::get('/receipt/list/{receiptCode}','Receipt\ReceiptsController@index');
     Route::get('/receipt2/list/{receiptCode}','Receipt\ReceiptsController@index');
+    Route::get('/receipt2/edit/{receiptCode}','Receipt\ReceiptsController@index');
+    Route::get('/receipt2/delete/{receiptCode}','Receipt\ReceiptsController@index');
     Route::get('/receipt/report/{receiptCode}', 'Receipt\ReceiptReportController@export');
 });
 /*
@@ -327,6 +329,8 @@ Route::group(['middleware' => 'checkModules:MODULE-012'], function () {
 */
 
 Route::post('/api/v1/receipt/save','Receipt\ReceiptsController@save');
+Route::post('/api/v1/receipt/update','Receipt\ReceiptsController@update');
+Route::post('/api/v1/receipt/delete','Receipt\ReceiptsController@delete');
 Route::get('/api/v1/receipts','Receipt\ReceiptsController@receipts');
 
 Route::get('/api/v1/receipt-items','Receipt\ReceiptsController@receiptItems');

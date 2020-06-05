@@ -12,12 +12,12 @@
 <!-- Main content -->
 
 <section class="content">
-  <div class="col-md-9"> 
+  <div class="col-md-12"> 
     <h4><b>Suppliers</b> &nbsp; 
     <button type="button" class="btn btn-primary pull-right" ui-sref="supplier-create({supplierRequest:'new'})"> <li class="fa fa-plus"></li> </button></h4> 
-    <div class="box box-primary">
+    <div class="box">
       <div class="box-body">
-        <table id="suppliers" class="table table-bordered table-hover" width="100%">
+        <table datatable="ng"  id="suppliers" class="table table-bordered table-hover" width="100%">
           <thead>
           <tr>
             <th>Supplier Code</th>
