@@ -370,6 +370,12 @@
   @include('employee.profile')
 </script>
 
+<!-- UELA Modal -->
+
+<script type="text/ng-template" id="uela.view">
+  @include('uela.uela')
+</script>
+
 <!-- Shared Modal -->
 
 <script type="text/ng-template" id="shared.modal">

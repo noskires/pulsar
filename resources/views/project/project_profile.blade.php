@@ -24,14 +24,14 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-              <img src="assets/dist/img/construction-buntun1.jpg" style="width:100%;height:100%;">
+              <img src="public/assets/dist/img/construction-buntun1.jpg" style="width:100%;height:100%;">
               <div class="carousel-caption d-none d-md-block">
                 <h3>Buntun Phase 3</h3>
                 <p>04/06/2018</p>
               </div>
             </div>
             <div class="item">
-              <img src="assets/dist/img/construction-buntun2.jpg" style="width:100%;height:100%;">
+              <img src="public/assets/dist/img/construction-buntun2.jpg" style="width:100%;height:100%;">
               <div class="carousel-caption d-none d-md-block">
                 <h3>Buntun Phase 2</h3>
                 <p>02/02/2018</p>
@@ -116,14 +116,13 @@
 </div>    
 </div>    
 <!-- ////// START ACTIVITIES TAB -->
-  <div class="nav-tabs-custom">
+  <!-- <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right tab-head">
       <li><a href="#tab_2-2" data-toggle="tab">Logs</a></li>
       <li class="active"><a href="#tab_3-3" data-toggle="tab">Project Activities</a></li>
       <li class="pull-left header"><h4><i class="fa fa-map-o"></i> Activities</li></h4>
     </ul>
     <div class="tab-content">
-      <!-- /.tab-pane -->
       <div class="tab-pane" id="tab_2-2">
         <h4><b>Project Logs</b></h4>
         <table class="table" width="100%">
@@ -150,7 +149,6 @@
         </tbody>
       </table>
       </div>
-      <!-- /.tab-pane -->
       <div class="tab-pane active" id="tab_3-3">
         <h4><b>Project Activities</b><button type="button" class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#modal-depreciation">
         <li class="fa fa-plus"></li> Manage</button></h4> 
@@ -175,12 +173,11 @@
         </tbody>
       </table>
       </div>
-      <!-- /.tab-pane -->        
     </div>
-  </div>
+  </div> -->
 <!-- ////// END ACTIVITIES TAB -->
 <!-- ////// START ASSET ATTACHMENTS -->
-  <div class="nav-tabs-custom">
+  <!-- <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right tab-head">
       <li class="active"><a href="#tab_8-8" data-toggle="tab">Documents</a></li>
       <li class="pull-left header"><h4><i class="fa fa-file-pdf-o"></i> Attachments</li></h4>
@@ -229,11 +226,10 @@
         </tbody>
       </table>
     </div>
-    <!-- /.tab-content -->
-  </div>
+  </div> -->
 <!-- ////// END ASSET ATTACHMENTS -->
 <!-- ////// START REQUISITIONS -->
-  <div class="nav-tabs-custom">
+  <!-- <div class="nav-tabs-custom">
     <ul class="nav nav-tabs pull-right tab-head">
       <li class="active"><a href="#tab_8-8" data-toggle="tab">Documents</a></li>
       <li class="pull-left header"><h4><i class="fa fa-file-text-o"></i> Requisitions</li></h4>
@@ -243,7 +239,7 @@
     <button class="btn btn-default btn-sm">Collapse All</button>
     <input class="input-sm pull-right" type="text" placeholder="Filter" />
     <tree-grid tree-data="tree_data" tree-control="my_tree" col-defs="col_defs" expand-on="expanding_property" on-select="my_tree_handler(branch)" expand-level="1" icon-leaf= "glyphicon glyphicon-globe"></tree-grid>
-</div>
+</div> -->
     </div>
     <!-- /.tab-content -->
   </div>
@@ -304,9 +300,7 @@
       </div>
     </form>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 <!-- MODAL-INSURANCE HERE HERE -->

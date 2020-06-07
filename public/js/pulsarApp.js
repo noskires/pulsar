@@ -914,6 +914,13 @@
                 templateUrl: 'employee.profile',
             })
 
+            // UELA
+            .state('uela', {
+                url: '/uela',
+                // controller: 'EulaCtrl as up',
+                templateUrl: 'uela.view',
+            })
+
         $urlRouterProvider.otherwise('/index');
 
     }

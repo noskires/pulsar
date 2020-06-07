@@ -233,6 +233,7 @@
             <!-- <li ng-if="checkModuleAccess('MODULE-019')"><a href="#" ui-sref="list-subcon"><i class="fa fa-building"></i>Sub Con</a></li> -->
           </ul>
         </li>
+    <li><a href="#" ui-sref="uela"><i class="fa fa-question-circle"></i> <span>UELA</span></a></li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help/Support</span></a></li>
   </ul>
 </section>
