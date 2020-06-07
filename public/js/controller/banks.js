@@ -5,8 +5,8 @@
         .controller('BanksCtrl', BanksCtrl)
         .controller('BanksModalInstanceCtrl', BanksModalInstanceCtrl)
 
-        BanksCtrl.$inject = ['$stateParams', 'BanksSrvcs', 'SuppliesSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function BanksCtrl($stateParams, BanksSrvcs, SuppliesSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        BanksCtrl.$inject = ['$state', '$stateParams', 'BanksSrvcs', 'SuppliesSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
+        function BanksCtrl($state, $stateParams, BanksSrvcs, SuppliesSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
 
@@ -52,6 +52,7 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
                         // vm.routeTo('bank/list');
+                        $state.reload();
                         vm.ok();
                     }
                     else {
@@ -74,8 +75,8 @@
             }; 
         }
 
-        BanksModalInstanceCtrl.$inject = ['$stateParams', '$uibModalInstance', 'BanksSrvcs', 'formData', 'ReceiptSrvcs'];
-        function BanksModalInstanceCtrl ($stateParams, $uibModalInstance, BanksSrvcs, formData, ReceiptSrvcs) {
+        BanksModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'BanksSrvcs', 'formData', 'ReceiptSrvcs', '$window'];
+        function BanksModalInstanceCtrl ($state, $stateParams, $uibModalInstance, BanksSrvcs, formData, ReceiptSrvcs, $window) {
 
             var vm = this;
             vm.formData = formData.bank; 
@@ -85,6 +86,8 @@
                     if(response.data.status == 200)
                     {
                         alert(response.data.message);
+                        // $state.reload();
+                        vm.routeTo('bank/list');
                     }
                     vm.ok();
                 }, function (){ alert('Bad Request!!!') })
