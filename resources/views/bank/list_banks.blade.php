@@ -24,17 +24,17 @@
               </div><!-- form group -->
                 <div class="form-group col-sm-12">
                   <hr style="border-color:#e1e1e1;border-width:1px 0;">
-                  <h4>Bank Address:</h4><br>
+                  <!-- <h4>Bank Address:</h4><br> -->
                 </div>
                 <div class="form-group col-sm-12">
-                  <label class="col-sm-1 control-label">Branch</label>
-                  <div class="col-sm-4">
+                  <label class="col-sm-2 control-label">Business Address</label>
+                  <div class="col-sm-10">
                   <input type="text" class="form-control" id="bank-branch" style="width: 100%;" required="" ng-model="bc.bankDetails.branch">
                   </div>
-                  <label for="zipcode" class="col-sm-1 control-label">St/Bldg/Unit</label>
-                  <div class="col-sm-3"><input type="text" class="form-control" id="bank-street" style="width: 100%;" required=""></div>
+                  <!-- <label for="zipcode" class="col-sm-1 control-label">St/Bldg/Unit</label>
+                  <div class="col-sm-3"><input type="text" class="form-control" id="bank-street" style="width: 100%;" required=""></div> -->
                 </div>
-                <div class="form-group col-sm-12">
+                <!-- <div class="form-group col-sm-12">
                   <label class="col-sm-1 control-label">Region</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="">
@@ -76,7 +76,7 @@
                   <option value="3">Pallua</option>
                   </select>
                   </div>
-                </div>
+                </div> -->
                 <br>
                 <div class="form-group col-sm-12">
                   <hr style="border-color:#e1e1e1;border-width:1px 0;">
@@ -126,8 +126,8 @@
             <thead>
             <tr>
               <th>Name of Bank</th>
-              <th>Branch</th>
-              <th>Address</th>
+              <th>Business Address</th>
+              <!-- <th>Address</th> -->
               <th>Manager</th>
               <th>Mobile No.</th>
               <th>Telephone No.</th>
@@ -138,7 +138,7 @@
             <tr ng-repeat="bank in bc.banks">
               <td><a href="#" ui-sref="list-banksCopy({bankCode:bank.bank_code})"><b><%bank.bank_name%></b></a></td>
               <td><%bank.branch%></td>
-              <td> </td>
+              <!-- <td> </td> -->
               <td><%bank.manager%></td>
               <td><%bank.mobile_number%></td>
               <td><%bank.telephone_number%></td>
@@ -184,7 +184,7 @@ $('.select2').select2();
                       </div>
                     </div>
                     <div class="form-group col-sm-12">
-                      <label class="col-sm-2 control-label">Branch</label>
+                      <label class="col-sm-2 control-label">Business Address</label>
                       <div class="col-sm-10">
                          <input type="text" class="form-control" id="" required="" ng-model="vm.formData.branch">
                       </div>
@@ -195,7 +195,7 @@ $('.select2').select2();
                       <!-- <label class="col-sm-2 control-label"></label>
                       <div class="col-sm-9 text-blue"><h4><i class="fa fa-address-book-o"></i><b> Address</b></h4></div> -->
                     </div>
-                    <div class="form-group col-sm-12">
+                    <!-- <div class="form-group col-sm-12">
                       <label class="col-sm-2 control-label">Region</label>
                       <div class="col-sm-4">
                       <select class="form-control select2" style="width: 100%;" required="">
@@ -230,8 +230,8 @@ $('.select2').select2();
                       </div>
                       <label for="zipcode" class="col-sm-2 control-label">Zip Code</label>
                       <div class="col-sm-2"><input type="text" class="form-control" id="" placeholder="" disabled required=""></div>
-                    </div>
-                    <div class="form-group col-sm-12">
+                    </div> -->
+                    <!-- <div class="form-group col-sm-12">
                       <label class="col-sm-2 control-label">Barangay</label>
                       <div class="col-sm-4">
                       <select class="form-control select2" style="width: 100%;" required="">
@@ -242,7 +242,7 @@ $('.select2').select2();
                       </div>
                       <label for="zipcode" class="col-sm-2 control-label">Street/Bldg/Unit</label>
                       <div class="col-sm-4"><input type="text" class="form-control" id="" placeholder=""></div>
-                    </div>
+                    </div> -->
                    <br>
                     <div class="form-group col-sm-12">
                       <hr style="border-color:#e1e1e1;border-width:1px 0;">
