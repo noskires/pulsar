@@ -208,9 +208,9 @@ $('.select2').select2();
               <!-- /.tab-content -->
             </div>
             <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
-            <!-- <button type="submit" class="btn btn-primary pull-right" formtarget="_blank" ui-sref="project-profile({projectCode:vm.formData.project_code})" ng-click="vm.ok()">
+            <button type="submit" class="btn btn-primary pull-right" formtarget="_blank" ui-sref="project-profile({projectCode:vm.formData.project_code})" ng-click="vm.ok()">
               <li class="fa fa-navicon "></li> More Details</button>
-            <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button> -->
+            <!-- <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button> -->
             <!-- nav-tabs-custom -->
           </div>
           <div class="modal-footer">

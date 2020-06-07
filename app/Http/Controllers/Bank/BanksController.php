@@ -31,7 +31,7 @@ class BanksController extends Controller {
 
 		$banks = $banks->get();
 
-		return response()-> json([
+		return response()->json([
 			'status'=>200,
 			'data'=>$banks,
 			'message'=>''

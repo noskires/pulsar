@@ -831,4 +831,7 @@ Route::get('/api/v1/positions','Employee\PositionsController@positions');
 Route::get('/export-employees','ExportController@exportEmployees')->name('exports.employees');
 Route::get('/api/v1/export-assets','ExportController@exportAssets')->name('exports.assets');
 
+// Route::view('/uela', '');
+
+Route::get('uela', 'MaintenanceController@index');
 });

@@ -73,7 +73,7 @@
           <label class="col-sm-2 control-label">Receipt Type</label>
           <div class="col-sm-4">
             <select class="form-control select2" style="width: 100%;" required="" ng-model="rc.receiptDetails.receiptType">
-              <option selected="selected" value="">- - SELCT TYPE - -</option>
+              <option selected="selected" value="">- - SELECT TYPE - -</option>
               <option ng-value="receiptType.receipt_type_code" ng-repeat="receiptType in rc.receiptTypes"><%receiptType.receipt_type_name +" ("+ receiptType.receipt_type_code+")"%> </option>
             </select>
           </div>
