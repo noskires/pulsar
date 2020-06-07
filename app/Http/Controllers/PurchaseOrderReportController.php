@@ -103,7 +103,7 @@ class PurchaseOrderReportController extends Controller {
 					
 					if($organization)
 					{
-						$data->requesting_office = $organization->org_name;
+						$data->requesting_office = $organization->org_name; 
 					}
 					else
 					{
@@ -118,6 +118,7 @@ class PurchaseOrderReportController extends Controller {
 					if($project)
 					{
 						$data->requesting_office = $project->name;
+						$data->reference_code = $project->code;
 					}
 					else
 					{
