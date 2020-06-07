@@ -80,7 +80,7 @@
                   <div class="col-sm-4">
                     <div class="input-group date">
                       <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                      <input type="text" class="form-control pull-right" id="datepicker-warranty" ng-model="ac.assetsDetails.warrantyDate">
+                      <input type="text" class="form-control pull-right" id="datepicker-warranty" datepicker2 ng-model="ac.assetsDetails.warrantyDate">
                     </div>
                   </div>
                 </div>
@@ -367,4 +367,15 @@
   </div>
   <!-- /.modal-dialog --> 
  
+</script>
+
+<script type="text/javascript">
+$(function () {
+
+  $('.select2').select2();
+
+//   $('#datepicker').datepicker({
+//    autoclose: true
+//   })
+});
 </script>

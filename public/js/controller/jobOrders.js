@@ -73,6 +73,7 @@
                             {
                                 vm.jobOrders = response.data.data;
                                 console.log(vm.jobOrders)
+                                $state.reload();
                             }
                         }, function (){ alert('Bad Request!!!') })
                         alert(response.data.message);

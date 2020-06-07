@@ -58,6 +58,7 @@
           <div class="box-body" style="font-size: 14px;">
             <b>Control No.: </b><%projectProfileCtrl.project.project_code%><br>
             <b>Project ID: </b><%projectProfileCtrl.project.code%><br>
+            <b>Project Name: </b><%projectProfileCtrl.project.name%><br>
             <b>Project Cost: </b><%projectProfileCtrl.project.cost%><br>
             <b>Region: </b></b><%projectProfileCtrl.project.region_text_long%><br>
             <b>Province: </b><%projectProfileCtrl.project.province_text%><br>

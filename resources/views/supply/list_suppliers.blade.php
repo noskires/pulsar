@@ -71,11 +71,11 @@
                 <div class="col-sm-8">
                   <div class="input-group date">
                   <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" id="datepicker-dti-exp" required="" ng-model="vm.supplierDetails.dti_expiry_date">
+                  <input type="text" class="form-control pull-right" id="datepicker-dti-exp" required="" datepicker2 ng-model="vm.supplierDetails.dti_expiry_date">
                   </div><br> 
                 </div>
                 <label class="col-sm-4 control-label">Business Permit No</label>
-                <div class="col-sm-8"><input type="text" class="form-control" required="" ng-model="vm.supplierDetails.business_permit_no"><br></div>
+                <div class="col-sm-8"><input type="text" class="form-control" required=""  datepicker2 ng-model="vm.supplierDetails.business_permit_no"><br></div>
                 <label class="col-sm-4 control-label" style="padding-top: 0px;">Business Permit Expiration Date</label>
                 <div class="col-sm-8">
                   <div class="input-group date">
