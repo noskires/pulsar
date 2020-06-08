@@ -25,22 +25,17 @@
         }
     </style>
 
-<!-- Page Loader -->
-<div id="loader" ng-if="roc.loader_status"></div>
-
 <section class="content-header">
-  <h1><span class="fa fa-file-text"> </span> List of Requisitions</h1>
-  <p>To allow users to select supplies for the maintenance of the equipment, the Requisition and Issue Slip (RIS) must be created and connected in the JO. <br>
-  The category of the supplies for the maintenance of the equipment must have a keyword “repairs” or “maintenance” </p>
+  <h1><span class="fa fa-bus"> </span> List of Requisitions</h1>
   <ol class="breadcrumb">
-    <li><a href=""><i class="fa fa-th"></i> Dashboard</a></li>
+    <li><a href="../../index.html"><i class="fa fa-th"></i> Dashboard</a></li>
     <li class="active">Maintenance</li>
   </ol>
 </section>
 
 <!-- Main content -->
 
-<section class="content" id="load_div" ng-if="!roc.loader_status">
+<section class="content">
 
 <div class="row">
 

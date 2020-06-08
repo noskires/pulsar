@@ -1,3 +1,6 @@
+<!-- Page Loader -->
+<div id="loader" ng-if="ec.loader_status"></div>
+
   <!--Content Header (Page header) -->
   <section class="content-header">
   <h1><span class="fa fa-user"> </span> Manage Employees</h1>
@@ -9,7 +12,7 @@
 
   <!-- Main content -->
     
-  <section class="content">
+  <section class="content" id="load_div" ng-if="!ec.loader_status">
     <div class="row">
       <div id="button-top" class="col-md-9"> 
   <!-- BUTTONS -->

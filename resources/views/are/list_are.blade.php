@@ -1,3 +1,7 @@
+
+<!-- Page Loader -->
+<div id="loader" ng-if="ac.loader_status"></div>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-file-text"> </span> Acknowledgment Receipt of Equipment (ARE)</h1><br>
@@ -10,7 +14,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" id="load_div" ng-if="!ac.loader_status">
  
 
   <div class="row">

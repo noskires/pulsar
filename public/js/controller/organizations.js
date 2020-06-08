@@ -307,10 +307,12 @@
         }, function () { alert('Bad Request!!!') })
 
         //organiations
+        vm.loader_status = true;
         OrganizationsSrvcs.departments({ orgCode: '', nextOrgCode: '', orgType: 'Department', startDate: '', endDate: '' }).then(function (response) {
             if (response.data.status == 200) {
                 vm.orgDepartments = response.data.data;
                 console.log(vm.orgDepartments)
+                vm.loader_status = false;
             }
         }, function () { alert('Bad Request!!!') })
 

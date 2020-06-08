@@ -68,11 +68,14 @@
             withActiveAre: 2 // 2 means shall all records 
         }
 
+        vm.loader_status = true;
+
         AssetsSrvcs.assets(vm.assetsDetails).then(function (response) {
             if (response.data.status == 200) {
                 vm.assets = response.data.data;
                 console.log(vm.assets)
                 console.log(response.data)
+                vm.loader_status = false;
             }
         }, function () { alert('Bad Request!!!') })
 

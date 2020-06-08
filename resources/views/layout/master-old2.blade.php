@@ -14,6 +14,7 @@
   <base href="/">
   @endif
 
+
   <style type="text/css">
   /*Page Loader Style*/
 	/* Center the loader */
@@ -94,7 +95,7 @@
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
-    <!-- Application Version Here --><div class="pull-right hidden-xs"><b>Version</b> 1.1.0</div><!-- /.Application Version -->
+    <!-- Application Version Here --><div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div><!-- /.Application Version -->
     <strong>Pulsar Construction &nbsp;</strong> Copyright &copy;2020. All rights reserved.
   </footer>
 </div>
@@ -104,3 +105,4 @@
 
 </body>
 </html>
+

@@ -1,12 +1,9 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-key"> </span> Access Rights</h1>
-    <p>Manage rights for user accounts grouping. <br>
-      <b>Note:</b> The administrator can now globally deactivate all users via Group Roles (Access Rights) especially during audit and inspection. <br>
-      If the account of the user has been deactivated via Group Roles (Access Rights) and the user has requested for activation, the administrator must reset the password upon activation of the account.
-    </p>
+    <p>Manage rights for user accounts grouping.</p>
   <ol class="breadcrumb">
-    <li><a href=""><i class="fa fa-th"></i> Dashboard</a></li>
+    <li><a href="../../index.html"><i class="fa fa-th"></i> Dashboard</a></li>
   </ol>
 </section>
 

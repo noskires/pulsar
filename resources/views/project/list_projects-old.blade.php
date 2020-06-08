@@ -1,6 +1,3 @@
-<!-- Page Loader -->
-<div id="loader" ng-if="pc.loader_status"></div>
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-cube"> </span> List of Projects</h1>
@@ -11,7 +8,7 @@
   </ol>
 </section>
 
-<section class="content"  id="load_div" ng-if="!pc.loader_status">
+<section class="content">
    <div class="row">
 
 <!-- FILTER SLIDE -->

@@ -40,7 +40,7 @@
             const data = await vm.getUser();
             $scope.$apply(() => vm.form = data[0]);
         });
-
+        
         vm.submit = async function (data) {
             const dataCopy = angular.copy(data);
             dataCopy.password_current = data.password_generated;
@@ -53,7 +53,7 @@
             });
             if (!vm.response.hasError) {
                 alert(vm.response.message);
-                $window.location.href = '/logout';
+                $window.location.href = 'logout';
             }
         };
 

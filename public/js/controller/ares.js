@@ -50,11 +50,13 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            vm.loader_status = true;
             AresSrvcs.ares({areCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.ares = response.data.data;
                     console.log(vm.ares)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 

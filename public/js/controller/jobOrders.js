@@ -13,12 +13,13 @@
 
             // alert($stateParams.assetTag);
             // alert($stateParams.joCode)
-            
+            vm.loader_status = true;
             JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, date_started:'', assetCode:'', assetCategory:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.jobOrders = response.data.data;
                     console.log(vm.jobOrders)
+                    vm.loader_status = false; 
                 }
             }, function (){ alert('Bad Request!!!') })
 

@@ -20,7 +20,7 @@
           <div class="icon">
             <i class="ion ion-person-stalker"></i>
           </div>
-          <a href="" ui-sref="list-employees" class="small-box-footer">Employee Manager <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pages/employees/employee-manager.html" class="small-box-footer">Employee Manager <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -33,7 +33,7 @@
           <div class="icon">
             <i class="ion ion-pricetags"></i>
           </div>
-          <a href="" ui-sref="asset-list-equipments" class="small-box-footer">View Assets <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pages/asset/list-equipments.html" class="small-box-footer">View Assets <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -46,7 +46,7 @@
           <div class="icon">
             <i class="ion ion-cube"></i>
           </div>
-          <a href="" ui-sref="list-projects" class="small-box-footer">View Projects <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pages/project/list-projects.html" class="small-box-footer">View Projects <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -59,7 +59,7 @@
           <div class="icon">
             <i class="ion ion-folder"></i>
           </div>
-          <a href="" ui-sref="list-jo2" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pages/job-order/list-jo.html" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -72,7 +72,7 @@
           <div class="icon">
             <i class="ion ion-clipboard"></i>
           </div>
-          <a href="" ui-sref="list-requesition2" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pages/requisition/list-rs.html" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -85,7 +85,7 @@
           <div class="icon">
             <i class="ion ion-bag"></i>
           </div>
-          <a href="" ui-sref="list-po2" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pages/purchase-order/po.html" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
     </div>
@@ -101,69 +101,11 @@
         <div class="box-body table-wrapper-scroll-y my-custom-scrollbar"
           style="position:relative; height:383px; overflow:auto;">
           <table class="table table-bordered" style="font-size: 1.4rem;">
-            <tr style="background: #f1f1f1;">
+            <tr>
               <th style="width: 7%;">Version</th>
               <th style="width: 10%;">Date</th>
               <th style="width: 83%;">Updates/Features</th>
             </tr>
-          <!-- VERSION 1.1.0 -->  
-            <tr>
-              <td>1.1.0</td>
-              <td>06/09/2020</td>
-              <td>
-                <ul>
-                <li>Password Resetting of User
-                  <ul>
-                    <li>Upon resetting of password, the user must log-in and must change the password immediately</li>
-                    <li>The administrator can now globally deactivate all users via Group Roles (Access Rights) especially during audit and inspection</li>
-                    <li>If the account of the user has been deactivated via Group Roles (Access Rights) and the user has requested for activation, the administrator must reset the password upon activation of the account</li>
-                  </ul>
-                </li>
-                <li>Returned Items in the Receipt
-                  <ul>
-                    <li>The user is allowed to return the items to the supplier in the receipt (delivery). If the items have been delivered, the user must click the “remove” link to exclude the items in the list of returned items and immediately add the received items from the supplier. </li>
-                  </ul>
-                </li>
-                <li>Closing of RIS
-                  <ul>
-                    <li>To close the RIS, the user must provide all the details under “Withdrawal Information” and click the “Finalize” button. Once the RIS has been closed, the user is no allowed anymore to insert additional items.</li>
-                  </ul>
-                </li>
-                <li>Closing of PO
-                  <ul>
-                    <li>To close the PO, the user must provide all the details under “Delivery Information” and click the “Finalize” button. Once the PO has been closed, the user is not allowed anymore to insert additional items and the particular PO will not be available anymore in the dropdown list of PO under the receipt (delivery) module</li>
-                  </ul>
-                </li>
-                <li>Closing of Receipt
-                  <ul>
-                    <li>To close the Receipt, the user must include the receipt item in the voucher module. Once the receipt has been selected and included in the voucher, the user is not allowed anymore to insert additional items under the receipt.</li>
-                  </ul>
-                </li>
-                <li>Splitting of RIS Containing Items with Different Supply Category
-                  <ul>
-                    <li>The user is not allowed to request for Repairs and Maintenance (R&M) supplies without the Job Order. If the R&M supplies are requested in the RIS along with non-R&M supplies, the user must split the RIS. To split the RIS in the system, the user must create two (2) Reference numbers with extension names. (Example: RS06072020-1, RS06072020-2)</li>
-                  </ul>
-                </li>
-                <li>RIS for Repairs and Maintenance Supply
-                  <ul>
-                    <li>The RIS containing Asset ID and Asset Name is intended for Repairs and Maintenance supply for asset. Under this RIS, the user is not allowed to insert non-Repairs and Maintenance supply</li>
-                  </ul>
-                </li>
-                <li>Create Multiple PO using One (1) RIS
-                  <ul>
-                    <li>The user is allowed to create multiple PO transactions using one (1) RIS if the particular RIS is still “Open</li>
-                    <li></li>
-                  </ul>
-                </li>
-                <li>Create Multiple Receipt using One (1) PO
-                  <ul>
-                    <li>The user is allowed to create multiple Receipt transactions using one (1) PO if the particular PO is still “Open</li>
-                  </ul>
-                </li>
-              </ul>
-              </td>
-            </tr>
-          <!-- VERSION 1.0.0 -->
             <tr>
               <td>1.0.0</td>
               <td>06/06/2020</td>

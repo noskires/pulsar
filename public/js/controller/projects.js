@@ -55,11 +55,14 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+            vm.loader_status = true;
+
             ProjectsSrvcs.projects({projectCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.projects = response.data.data;
                     console.log(vm.projects)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 

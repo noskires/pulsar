@@ -1,3 +1,5 @@
+
+
 <section class="content-header">
   <h1>End User License Agreement</h1>
   <ol class="breadcrumb">
@@ -134,3 +136,18 @@
         </div>
   <!-- End::Left -->
 </section>
+
+<!-- Loader Script -->
+<!-- <script>
+	var myVar;
+
+	function myFunction() {
+	  myVar = setTimeout(showPage, 2000);
+	}
+
+	function showPage() {
+	  document.getElementById("loader").style.display = "none";
+	  document.getElementById("load_div").style.display = "block";
+	}
+	</script> -->
+	<!-- end::Loader Script -->

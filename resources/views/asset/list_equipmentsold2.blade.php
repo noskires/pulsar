@@ -12,17 +12,16 @@
 </section>
 
 <!-- Main content -->
-<section class="content" id="load_div" ng-if="!ac.loader_status">
+<section class="content"  id="load_div" ng-if="!ac.loader_status">
       <div class="row">
         <div id="button-top" class="col-md-12"> 
 <!-- BUTTONS -->
           <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#addoperating">
               <span class="glyphicon glyphicon-plus"></span> Add New Equipment
           </button> &nbsp; 
-          <!-- <button class="btn btn-primary" data-toggle="collapse" data-target="#filter" data-parent="#btn-top">
+          <button class="btn btn-primary" data-toggle="collapse" data-target="#filter" data-parent="#btn-top">
               <span class="glyphicon glyphicon-filter"></span> Filter
-          </button> --> 
-          <br>
+          </button> <br>
 
 <!-- ADD ASSET SLIDE -->
           <div id="addoperating" class="collapse"><br>
@@ -383,3 +382,17 @@ $(function () {
 //   })
 });
 </script>
+
+
+<script>
+	var myVar;
+
+	function myFunction() {
+	  myVar = setTimeout(showPage, 2000);
+	}
+
+	function showPage() {
+	  document.getElementById("loader").style.display = "none";
+	  document.getElementById("load_div").style.display = "block";
+	}
+	</script>
