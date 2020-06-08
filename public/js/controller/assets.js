@@ -260,6 +260,8 @@
                         controller: 'AssetsEditModalInstanceCtrl',
                         templateUrl: 'assetEditTpl.modal',
                         controllerAs: 'vm',
+                        backdrop: 'static',
+                        keyboard: false,
                         resolve: {
                             formData: function () {
                                 return {
@@ -363,6 +365,8 @@
                 controller: 'AssetsWarrantyModalInstanceCtrl',
                 templateUrl: 'assetAddWarranty.modal',
                 controllerAs: 'vm',
+                backdrop: 'static',
+                keyboard: false,
                 resolve: {
                     formData: function () {
                         return {

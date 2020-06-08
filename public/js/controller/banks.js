@@ -24,6 +24,8 @@
                             controller:'BanksModalInstanceCtrl',
                             templateUrl:'bankInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                                 formData: function () {
                                     return {

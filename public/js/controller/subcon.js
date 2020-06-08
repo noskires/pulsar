@@ -32,6 +32,8 @@
                             controller:'FundItemsModalInstanceCtrl',
                             templateUrl:'fundInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -61,6 +63,8 @@
                             controller:'FundsModalInstanceCtrl',
                             templateUrl:'fundEdit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -82,6 +86,8 @@
                     controller:'FundsModalInstanceCtrl',
                     templateUrl:'fundNew.modal',
                     controllerAs: 'vm',
+                    backdrop: 'static',
+                    keyboard: false,
                     resolve :{
                         formData: function () {
                             return {

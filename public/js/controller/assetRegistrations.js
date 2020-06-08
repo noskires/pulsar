@@ -113,6 +113,8 @@
                             controller:'AssetRegistrationModalInstanceCtrl',
                             templateUrl:'asset.registration.modal.edit',
                             controllerAs: 'amdc',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                                 datum: function () {
                                     return {

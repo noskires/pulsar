@@ -46,6 +46,8 @@
                         controller: 'RolesModalInstanceCtrl',
                         templateUrl: 'role.edit.modal',
                         controllerAs: 'vm',
+                        backdrop: 'static',
+                        keyboard: false,
                         resolve: {
                             Datum: function () {
                                 return {

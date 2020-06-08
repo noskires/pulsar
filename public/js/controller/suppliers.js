@@ -32,6 +32,8 @@
                             controller:'SuppliersCtrlModalInstanceCtrl',
                             templateUrl:'supplierEdit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -53,6 +55,8 @@
                     controller:'SuppliersCtrlModalInstanceCtrl',
                     templateUrl:'supplierNew.modal',
                     controllerAs: 'vm',
+                    backdrop: 'static',
+                    keyboard: false,
                     resolve :{
                         formData: function () {
                             return {

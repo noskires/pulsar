@@ -25,6 +25,8 @@
                             controller:'InsuranceModalInstanceCtrl',
                             templateUrl:'insuranceInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                                 formData: function () {
                                     return {

@@ -30,6 +30,8 @@
                             controller:'PurchaseOrdersModalInstanceCtrl',
                             templateUrl:'poInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                                 formData: function () {
                                     return {
@@ -59,6 +61,8 @@
                             controller:'PurchaseOrderEditModalInstanceCtrl',
                             templateUrl:'po-edit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                                 formData: function () {
                                     return {
@@ -88,6 +92,8 @@
                             controller:'PurchaseOrderDeleteModalInstanceCtrl',
                             templateUrl:'po-delete.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                                 formData: function () {
                                     return {

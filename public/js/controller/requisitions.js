@@ -39,6 +39,8 @@
                             controller:'RequisitionSlipModalInstanceCtrl',
                             templateUrl:'requisitionSlipInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -244,6 +246,8 @@
                             controller:'RequisitionSlipModalInstanceCtrl',
                             templateUrl:'requisitionSlipInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -282,6 +286,8 @@
                             controller:'RequisitionSlipEditModalInstanceCtrl',
                             templateUrl:'ris-edit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -320,6 +326,8 @@
                             controller:'RequisitionSlipDeleteModalInstanceCtrl',
                             templateUrl:'ris-delete.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {

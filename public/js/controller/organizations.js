@@ -266,6 +266,8 @@
                         controller: 'OrgUnitModalInstanceCtrl',
                         templateUrl: 'edit.department.modal',
                         controllerAs: 'vm',
+                        backdrop: 'static',
+                        keyboard: false,
                         resolve: {
                             Datum: function () {
                                 return {
