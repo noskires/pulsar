@@ -53,6 +53,8 @@
                     controller:'EmployeesModalInstanceCtrl1',
                     templateUrl:'employeeNewTpl.modal',
                     controllerAs: 'dtc',
+                    backdrop: 'static',
+                    keyboard: false,
                     resolve :{
                       formData: function () {
                         return {
@@ -77,6 +79,8 @@
                             controller:'EmployeesModalInstanceCtrl1',
                             templateUrl:'employeeEditTpl.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {

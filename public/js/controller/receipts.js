@@ -56,6 +56,8 @@
                                 controller:'ReceiptsModalInstanceCtrl',
                                 templateUrl:'receiptInfo2.modal',
                                 controllerAs: 'vm',
+                                backdrop: 'static',
+                                keyboard: false,
                                 resolve :{
                                   formData: function () {
                                     return {
@@ -73,6 +75,8 @@
                                 controller:'ReceiptsModalInstanceCtrl',
                                 templateUrl:'receiptInfo.modal',
                                 controllerAs: 'vm',
+                                backdrop: 'static',
+                                keyboard: false,
                                 resolve :{
                                   formData: function () {
                                     return {
@@ -117,6 +121,8 @@
                             controller:'ReceiptEditModalInstanceCtrl',
                             templateUrl:'receipt-edit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -159,6 +165,8 @@
                             controller:'ReceiptDeleteModalInstanceCtrl',
                             templateUrl:'receipt-delete.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {

@@ -39,6 +39,8 @@
                             controller:'ProjectsModalInstanceCtrl',
                             templateUrl:'projectInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -229,6 +231,8 @@
                             controller:'ProjectProfileEditCtrl',
                             templateUrl:'project.edit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {

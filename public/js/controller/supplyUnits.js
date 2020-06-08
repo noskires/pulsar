@@ -31,6 +31,8 @@
                             controller:'SupplyUnitModalInstanceCtrl',
                             templateUrl:'supplyUnitEdit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -52,6 +54,8 @@
                     controller:'SupplyUnitModalInstanceCtrl',
                     templateUrl:'supplyUnitNew.modal',
                     controllerAs: 'vm',
+                    backdrop: 'static',
+                    keyboard: false,
                     resolve :{
                         formData: function () {
                             return {

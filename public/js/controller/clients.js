@@ -31,6 +31,8 @@
                             controller:'ClientsModalInstanceCtrl',
                             templateUrl:'ClientEdit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -52,6 +54,8 @@
                     controller:'ClientsModalInstanceCtrl',
                     templateUrl:'clientNew.modal',
                     controllerAs: 'vm',
+                    backdrop: 'static',
+                    keyboard: false,
                     resolve :{
                         formData: function () {
                             return {

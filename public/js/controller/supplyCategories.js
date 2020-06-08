@@ -31,6 +31,8 @@
                             controller:'SupplyCategoryModalInstanceCtrl',
                             templateUrl:'supplyCategoryEdit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -52,6 +54,8 @@
                     controller:'SupplyCategoryModalInstanceCtrl',
                     templateUrl:'supplyCategoryNew.modal',
                     controllerAs: 'vm',
+                    backdrop: 'static',
+                    keyboard: false,
                     resolve :{
                         formData: function () {
                             return {

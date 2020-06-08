@@ -25,6 +25,8 @@
                             controller:'VouchersModalInstanceCtrl',
                             templateUrl:'voucherInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {

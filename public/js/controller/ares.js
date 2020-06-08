@@ -25,6 +25,8 @@
                             controller:'AreModalInstanceCtrl',
                             templateUrl:'areInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                                 formData: function () {
                                     return {

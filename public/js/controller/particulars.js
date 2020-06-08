@@ -31,6 +31,8 @@
                             controller:'ParticularsModalInstanceCtrl',
                             templateUrl:'ParticularEdit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -52,6 +54,8 @@
                     controller:'ParticularsModalInstanceCtrl',
                     templateUrl:'particularNew.modal',
                     controllerAs: 'vm',
+                    backdrop: 'static',
+                    keyboard: false,
                     resolve :{
                         formData: function () {
                             return {

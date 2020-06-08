@@ -87,6 +87,8 @@
                         controller: 'UsersModalInstanceCtrl',
                         templateUrl: 'Edit.modal',
                         controllerAs: 'vm',
+                        backdrop: 'static',
+                        keyboard: false,
                         resolve: {
                             Datum: function () {
                                 return {

@@ -141,6 +141,8 @@
                             controller:'JobOrderModalInstanceCtrl',
                             templateUrl:'jobOrderInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -168,6 +170,8 @@
                             controller:'JobOrderModalInstanceCtrl',
                             templateUrl:'jobOrderInfo2.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {

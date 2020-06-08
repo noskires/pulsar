@@ -26,6 +26,8 @@
                             controller:'SuppliesModalInstanceCtrl',
                             templateUrl:'supplyInfo.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -56,6 +58,8 @@
                             controller:'SuppliesModalInstanceCtrl',
                             templateUrl:'supplyEdit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {

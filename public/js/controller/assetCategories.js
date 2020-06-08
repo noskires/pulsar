@@ -31,6 +31,8 @@
                             controller:'AssetCategoryModalInstanceCtrl',
                             templateUrl:'assetCategoryEdit.modal',
                             controllerAs: 'vm',
+                            backdrop: 'static',
+                            keyboard: false,
                             resolve :{
                               formData: function () {
                                 return {
@@ -51,6 +53,8 @@
                     controller:'AssetCategoryModalInstanceCtrl',
                     templateUrl:'assetCategoryNew.modal',
                     controllerAs: 'vm',
+                    backdrop: 'static',
+                    keyboard: false,
                     resolve :{
                         formData: function () {
                             return {
