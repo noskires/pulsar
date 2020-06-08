@@ -1,3 +1,6 @@
+<!-- Page Loader -->
+<div id="loader" ng-if="sc.loader_status"></div>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1><span class="fa fa-briefcase"> </span> Supplies</h1>
@@ -10,7 +13,7 @@
   </section>
 
   <!-- Main content -->
-  <section class="content">
+  <section class="content" id="load_div" ng-if="!sc.loader_status">
   <!-- BUTTONS -->
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#create-jo">
       <span class="glyphicon glyphicon-plus"></span> Create New Supply Name

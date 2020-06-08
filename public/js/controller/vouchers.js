@@ -61,11 +61,13 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            vm.loader_status = true;
             VouchersSrvcs.vouchers({voucherCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.vouchers = response.data.data;
                     console.log(vm.vouchers)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 

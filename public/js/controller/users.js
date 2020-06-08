@@ -148,7 +148,7 @@
         }
 
         vm.resetPassword = async function (user) {
-            if (!confirm("Do you want to reset the password of the that employe?")) return;
+            if (!confirm("Do you want to reset the password of this employe?")) return;
             await vm.getGeneratedPassword(user);
             vm.refreshDisplay();
 

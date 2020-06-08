@@ -56,6 +56,8 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+            vm.loader_status = true;
+
             vm.risDetails = {
                 requisitionCode:'',
                 requisitionStatus:'',
@@ -66,7 +68,8 @@
                 if(response.data.status == 200)
                 {
                     vm.requisitions = response.data.data;
-                    console.log(vm.requisitions)
+                    // console.log(vm.requisitions)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 
@@ -376,6 +379,8 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            vm.loader_status = true;
+
             vm.risDetails = {
                 requisitionCode:'',
                 requisitionStatus:'',
@@ -387,6 +392,7 @@
                 {
                     vm.requisitions = response.data.data;
                     console.log(vm.requisitions)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 

@@ -193,11 +193,13 @@
                 poStatus:''
             }
 
+            vm.loader_status = true;
             ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.receipts = response.data.data;
                     console.log(vm.receipts)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 

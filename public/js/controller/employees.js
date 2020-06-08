@@ -19,12 +19,14 @@
             'gender': 'Male'
         };
 
+        vm.loader_status = true;
         EmployeesSrvcs.employees({
             jobType: ''
         }).then(function (response) {
             if (response.data.status == 200) {
                 vm.employees = response.data.data;
                 console.log(vm.employees)
+                vm.loader_status = false;
             }
         }, function () {
             alert('Bad Request!!!')

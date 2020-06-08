@@ -78,8 +78,10 @@ class UsersController extends Controller {
           $user->employee_code  = $data['employee_code'];
           $user->email          = $data['employee_code'];
           $user->role_code      = $data['role_code'];
-          $user->password       = bcrypt($this->getRandomPassword());
           $user->password_generated = $this->getRandomPassword();
+          $user->password       = bcrypt($user->password_generated);
+          // $user->password       = bcrypt($this->getRandomPassword());
+          
           $user->auto_generated = true;
           // $user->description    = $data['description'];
           // $user->changed_by     = Auth::user()->email;

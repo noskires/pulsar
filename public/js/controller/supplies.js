@@ -83,11 +83,13 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
+            vm.loader_status = true;
             SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', quantityStatus:null, isRepair: 2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
                     console.log(vm.supplies)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 

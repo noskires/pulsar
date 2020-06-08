@@ -55,8 +55,8 @@
         </span>
       </a>
       <ul class="treeview-menu" ng-if="checkModuleAccess('MODULE-011')">
-        <!-- <li><a href="#" ui-sref=""><i class="fa fa-circle-o text-red" ></i> Preventive Maintenance </a></li> -->
-        <li><a href="#" ui-sref="list-returned-items"><i class="fa fa-circle-o text-red" ></i> Returned Items </a></li>
+        <!-- <li><a href="#" ui-sref=""><i class="fa fa-circle-o text-yellow" ></i> Preventive Maintenance </a></li> -->
+        <li><a href="#" ui-sref="list-returned-items"><i class="fa fa-circle-o text-yellow" ></i> Returned Items </a></li>
         <li><a href="#" ui-sref="list-insurance-for-renewal"><i class="fa fa-circle-o text-red"></i> Insurance </a></li>
         <!-- <li><a href="#" ui-sref="list-funds-budget-status"><i class="fa fa-circle-o text-red"></i> Budget Status </a></li> -->
         <li><a href="#" ui-sref="supply-budget-status"><i class="fa fa-circle-o text-red"></i> Supply Status </a></li>
@@ -197,12 +197,7 @@
       </ul>
     </li>
     <li class="treeview">
-      <a href="#">
-        <i class="fa fa-wrench"></i> <span>Setup</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-      </a>
+      <a href="#"><i class="fa fa-wrench"></i> <span>Setup</span></a>
       <ul class="treeview-menu">
         <li>
             <a href="#" ui-sref="list-asset-categories" ng-if="checkModuleAccess('MODULE-001')"><i class="fa fa-list-ul"></i>Asset Category</a>
@@ -238,7 +233,7 @@
             <!-- <li ng-if="checkModuleAccess('MODULE-019')"><a href="#" ui-sref="list-subcon"><i class="fa fa-building"></i>Sub Con</a></li> -->
           </ul>
         </li>
-    <li><a href="#" ui-sref="uela"><i class="fa fa-info"></i> <span>EULA</span></a></li>
+    <li><a href="#" ui-sref="uela"><i class="fa fa-question-circle"></i> <span>UELA</span></a></li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help/Support</span></a></li>
   </ul>
 </section>

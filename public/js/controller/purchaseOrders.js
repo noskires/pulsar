@@ -117,7 +117,8 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-
+            vm.loader_status = true;
+            
             vm.purchaseDetails = {
                 poCode:'', 
                 referenceCode:'', 
@@ -132,6 +133,7 @@
                 {
                     vm.pos = response.data.data;
                     console.log(vm.pos)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 

@@ -24,17 +24,17 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active">
-              <img src="public/assets/dist/img/construction-buntun1.jpg" style="width:100%;height:410px;">
+              <img src="public/assets/dist/img/construction-buntun1.jpg" style="width:100%;height:100%;">
               <div class="carousel-caption d-none d-md-block">
-                <h3><%projectProfileCtrl.project.name%></h3>
-                <p><%projectProfileCtrl.project.date_started%></p>
+                <h3>Buntun Phase 3</h3>
+                <p>04/06/2018</p>
               </div>
             </div>
             <div class="item">
-              <img src="public/assets/dist/img/construction-buntun2.jpg" style="width:100%;height:410px;">
+              <img src="public/assets/dist/img/construction-buntun2.jpg" style="width:100%;height:100%;">
               <div class="carousel-caption d-none d-md-block">
-                <h3><%projectProfileCtrl.project.name%></h3>
-                <p><%projectProfileCtrl.project.date_started%></p>
+                <h3>Buntun Phase 2</h3>
+                <p>02/02/2018</p>
               </div>
             </div>
           </div>
@@ -81,28 +81,28 @@
       <div class="col-md-3">
         <div class="box-body">
           <br><br>
+          <a class="btn btn-app">
+            <i class="fa fa-map-o"></i> Activities
+          </a> 
+          <a class="btn btn-app">
+            <i class="fa fa-file-text-o"></i> Request
+          </a> 
+          <a class="btn btn-app">
+            <i class="fa fa-file-pdf-o"></i> Documents
+          </a> 
+          <a class="btn btn-app">
+            <i class="fa fa-image"></i> Photo
+          </a>
+          <a class="btn btn-app">
+            <i class="fa fa-user"></i> Employees
+          </a>
           <a class="btn btn-app" ui-sref="project-profile-copy({projectCode:projectProfileCtrl.project.project_code, actionType:'edit'})">
             <i class="fa fa-edit"></i> Edit
           </a>
-          <a class="btn btn-app disabled">
-            <i class="fa fa-map-o"></i> Activities
-          </a> 
-          <a class="btn btn-app disabled">
-            <i class="fa fa-file-text-o"></i> Request
-          </a> 
-          <a class="btn btn-app disabled">
-            <i class="fa fa-file-pdf-o"></i> Documents
-          </a> 
-          <a class="btn btn-app disabled">
-            <i class="fa fa-image"></i> Photo
-          </a>
-          <a class="btn btn-app disabled">
-            <i class="fa fa-user"></i> Employees
-          </a>
-          <a class="btn btn-app disabled">
+          <a class="btn btn-app">
             <i class="fa fa-external-link"></i> Assign
           </a>              
-          <a href="javascript: window.open('pdfproject.pdf');"  class="btn btn-app disabled">
+          <a href="javascript: window.open('pdfproject.pdf');"  class="btn btn-app">
             <i class="fa fa-print"></i> Print
           </a>
         </div> 
@@ -253,13 +253,128 @@
 
 <!-- ////// ATTRIBUTES MODALS HERE -->
 <!-- ////// MODAL-WARRANTY HERE HERE -->
-
+<div class="modal fade" id="modal-depreciation">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-plus"></li> Manage Asset Depreciation</h4>
+      </div>
+    <form class="form-horizontal" id="">
+      <div class="modal-body"><br>
+        <div class="form-group">
+          <label for="platenumber" class="col-sm-3 control-label">Depreciable Cost</label>
+          <div class="col-sm-8">
+          <div class="input-group date">
+          <span class="input-group-addon" style="font-size: 20px;">₱</span>
+          <input type="text" class="form-control" id="depreciablecost" placeholder="sales tax, freight, installation" required="">
+        </div></div>
+        </div>
+        <div class="form-group">
+          <label for="platenumber" class="col-sm-3 control-label">Salvage Value</label>
+          <div class="col-sm-8">
+          <div class="input-group date">
+          <span class="input-group-addon" style="font-size: 20px;">₱</span>
+          <input type="text" class="form-control" id="salvagevalue" placeholder="" required="">
+        </div></div>
+        </div>
+        <div class="form-group">
+          <label for="enginenumber" class="col-sm-3 control-label">Asset Life</label>
+          <div class="col-sm-8"><input type="text" class="form-control" id="assetlife" placeholder="In Months" required=""></div>
+        </div>
+        <div class="form-group">
+          <label for="enginenumber" class="col-sm-3 control-label">Method</label>
+          <div class="col-sm-8">
+          <select class="form-control select2" style="width: 100%;" required="">
+          <option selected="selected" value="1">Straight Line</option>
+          <option value="2">Double Declining Balance</option>
+          <option value="3">150% Declining Balance</option>
+          <option value="3">Sum of the Year's Digits</option>
+          </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
 <!-- /.modal -->
 <!-- MODAL-INSURANCE HERE HERE -->
-
+<div class="modal fade" id="modal-insurance">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-link"></li> Link an Insurance</h4>
+      </div>
+      <form class="form-horizontal" id="">
+      <div class="modal-body">
+      <p>Select an insurance from the list below. <br>To define a new insurance go to Advanced > Insurance.</p><br> 
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Insurance</label>
+          <div class="col-sm-8">
+          <select class="form-control select2" style="width: 100%;" required="">
+          <option selected="selected" value="0">- - - nothing selected - - -</option>
+          <option value="1">Insurance 1</option>
+          <option value="2">Insurance 2</option>
+          <option value="3">Insurance 3</option>
+          </select>
+          </div>              
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Link Insurance</button>
+      </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 <!-- /.modal -->      
 <!-- MODAL-DOCS HERE HERE -->
-
+<div class="modal fade" id="modal-docs">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><li class="fa fa-upload"></li> Upload new Document</h4>
+      </div>
+      <form class="form-horizontal" id="">
+      <div class="modal-body"><br>
+        <div class="form-group">
+          <label for="assetimg" class="col-sm-3 control-label">Upload Image</label>
+          <div class="col-sm-8">
+          <div class="input-group">
+          <label class="input-group-btn">
+            <span class="btn btn-default">Browse&hellip; <input type="file" style="display: none;"></span>
+          </label>
+          <input type="text" class="form-control" id="asset_doc" readonly required="">
+        </div> </div>               
+        </div>
+        <div class="form-group">
+          <label for="controlnumber" class="col-sm-3 control-label">Description </label>
+          <div class="col-sm-8"><input type="text" class="form-control" id="asset_docdesc" required=""></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 <!-- /.modal -->
 
 </section>
@@ -268,7 +383,7 @@
 <script type="text/ng-template" id="project.edit.modal">
 <!-- MODAL-EDIT HERE HERE -->
 <div>
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ui-sref="project-profile({projectCode:vm.formData.project_code})" ng-click="vm.ok()">
@@ -303,7 +418,7 @@
  
         <div class="form-group col-sm-12">
           <label for="projectid" class="col-sm-2 control-label">Project ID</label>
-          <div class="col-sm-4"><input type="text" class="form-control" id="projectid" placeholder="" ng-model="vm.formData.code" required=""></div>
+          <div class="col-sm-6"><input type="text" class="form-control" id="projectid" placeholder="" ng-model="vm.formData.code" required=""></div>
         </div>
         <div class="form-group col-sm-12">
           <label for="projectname" class="col-sm-2 control-label">Project Name</label>
@@ -313,7 +428,7 @@
               <label class="col-sm-2 control-label">Description</label>
               <div class="col-sm-10">
                 <div class="input-group date">
-                  <textarea class="col-sm-12 form-control" id="" rows="2" cols="100" ng-model="vm.formData.description"></textarea>
+                  <textarea class="col-sm-12 form-control" id="" rows="2" ng-model="vm.formData.description"></textarea>
                 </div>
               </div>
             </div>

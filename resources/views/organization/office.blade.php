@@ -1,3 +1,6 @@
+<!-- Page Loader -->
+<div id="loader" ng-if="oc.loader_status"></div>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-building"> </span> Office Locations</h1>
@@ -10,7 +13,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" id="load_div" ng-if="!oc.loader_status">
   <div class="row">
     <div class="col-md-12"> 
       <div id="add-department" class="collapse department">
