@@ -32,7 +32,7 @@ class LoginController extends Controller {
       'password'=>$request->password
       ]))
       {
-        if ($user->auto_generated) {
+        if($user->auto_generated==1) {
           return redirect('reset-password');
         }
         return redirect('index');
