@@ -25,7 +25,7 @@
         }
     </style>
 
-  <!-- Page Loader -->
+<!-- Page Loader -->
 <div id="loader" ng-if="roc.loader_status"></div>
 
 <section class="content-header">
@@ -274,8 +274,8 @@ $('.select2').select2();
 
       <!-- MODAL POPUP -->
 <script type="text/ng-template" id="requisitionSlipInfo.modal">
-  <div class="" style="">
-    <div class="modal-dialog" style="overflow-x: auto;width: 1300px;">
+  <div>
+    <div class="modal-dialog" style="width:100%;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" ui-sref="list-requesition2" ng-click="vm.ok()">
@@ -299,14 +299,14 @@ $('.select2').select2();
                         <tr>
                           <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th>  -->
                           <th width="20%">Supply Name</th>
-                          <th width="19%">Description</th>
-                          <th width="8%">In Stock</th>
-                          <th width="7%">Stock Unit</th>
-                          <th width="8%">Qty Requested</th>
-                          <th width="8%">Qty Issued</th>
-                          <th width="8%">Cost</th>
-                          <th width="8%">Total</th>
-                          <th width="14%">Purpose</th>
+                          <th width="25%">Description</th>
+                          <th width="9%">In Stock</th>
+                          <th width="9%">Stock Unit</th>
+                          <th width="9%">Qty Requested</th>
+                          <th width="9%">Qty Issued</th>
+                          <th width="9%">Cost</th>
+                          <th width="11%">Total</th>
+                          <th width="11%">Purpose</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -336,14 +336,14 @@ $('.select2').select2();
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
                           </td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_desc" disabled required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_quantity" disabled required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_unit" disabled required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty_requested" required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_total" required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.item_purpose" required style="font-size:11.5px;"/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_desc" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_quantity" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_unit" disabled required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty_requested" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_total" required/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.item_purpose" required/></td>
                         </tr>
                       </tbody>
                     </table>
@@ -368,18 +368,18 @@ $('.select2').select2();
                   <form>
 
                   Grand Total : <%vm.supplyGrandTotal%>
-                  <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-2" width="100%" style="font-size:11.5px;">
+                  <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-2" width="100%">
                       <thead>
                         <tr>
-                          <th width="13%">Supply Name</th> 
-                          <th width="12%">Description</th>
+                          <th>Supply Name</th> 
+                          <th width="25%">Description</th>
                           <th width="9%">Stock Unit</th>
-                          <th width="8%">Qty Requested</th>
-                          <th width="8%">Qty Issued</th>
-                          <th width="8%">Cost</th>
+                          <th width="9%">Qty Requested</th>
+                          <th width="9%">Qty Issued</th>
+                          <th width="9%">Cost</th>
                           <th width="7%">Total</th>
-                          <th width="13%">Purpose</th>
-                          <th width="3%" ng-if="vm.formData.status=='OPEN'"></th>
+                          <th width="7%">Purpose</th>
+                          <th width="11%" ng-if="vm.formData.status=='OPEN'"></th>
                         </tr> 
                       </thead>
                       <tbody>
@@ -457,21 +457,27 @@ $('.select2').select2();
 
                       <div class="form-group col-sm-12">
                         <label class="col-sm-2 control-label">Internal/External Delivery Receipt</label>
-                          <div class="col-sm-4">
+                          <div class="col-sm-10">
                              <textarea class="form-control pull-right" id="" ng-model="vm.formData.withdrawal_remarks"></textarea>
                           </div>
                       </div>
 
+                        <div class="form-group" >
+                          <div class="form-group">
+                            <input type="submit" ng-if="vm.formData.status=='OPEN'" class="btn btn-danger pull-left" value="Finalize" style="margin-right: 30px;" ng-click="vm.withdrawal(vm.formData)">
+                          </div>
+                        </div>
+
+                        <div class="form-group" >
+                          <div class="form-group">
+                            <input type="submit" ng-if="vm.formData.status=='CLOSED'" class="btn btn-danger pull-left" value="Re-open" style="margin-right: 30px;" ng-click="vm.withdrawalOpen(vm.formData)">
+                          </div>
+                        </div>
                       </div>
 
                       <div class="modal-footer">
                         <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
-                        <input type="submit" ng-if="vm.formData.status=='CLOSED'" class="btn btn-warning" value="✎ Re-open Requisition Form" style="margin-right: 5px;" ng-click="vm.withdrawalOpen(vm.formData)">
-                        <input type="submit" ng-if="vm.formData.status=='OPEN'" class="btn btn-success" value="✔ Finalize Requisition Form" style="margin-right: 5px;" 
-                        ng-click="vm.withdrawal(vm.formData)">
-                        <a type="button" class="btn btn-info" ng-click="vm.printRequisitionDetails(vm.formData.requisition_slip_code)" target="_blank" ng-href="<%vm.url%>">
-                          <li class="fa fa-print"></li> Print
-                        </a>
+                        <a type="button" class="btn btn-info" ng-click="vm.printRequisitionDetails(vm.formData.requisition_slip_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
                       </div>
                   </form>
                 </div>
