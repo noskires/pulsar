@@ -64,7 +64,7 @@
           </tr>
           <tr>
             <td align="left" style="width:22%; border-bottom:1px solid black;">Purchase Order Number:</td>
-            <td align="left" style="border-bottom:1px solid black;">{{$receipt->purchase_order_code}}</td>
+            <td align="left" style="border-bottom:1px solid black;">{{$receipt->po_code}} ( {{$receipt->old_reference}} )</td>
             <td align="left" style="width:22%; border-bottom:1px solid black;">Receipt Date:</td>
             <td align="left" style="border-bottom:1px solid black;">{{$receipt->receipt_date}}</td>
           </tr>

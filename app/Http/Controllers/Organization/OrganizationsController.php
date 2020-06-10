@@ -44,17 +44,19 @@ class OrganizationsController extends Controller {
       $organizations = $organizations->where('org_type', $data['orgType']);
     }
 
-    
-
     $organizations = $organizations->get();
 
-    
+    // return response()-> json([
+    //     'status'=>200,
+    //     'data'=>$organizations,
+    //     'message'=>''
+    // ]);
 
-    return response()-> json([
+    return response()->json([
         'status'=>200,
         'data'=>$organizations,
         'message'=>''
-    ]);
+    ],200,[], JSON_NUMERIC_CHECK);
   }
 
   public function save(Request $request){

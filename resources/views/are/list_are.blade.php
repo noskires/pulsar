@@ -14,7 +14,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content" id="load_div" ng-if="!ac.loader_status">
+<section class="content" id="load_div">
  
 
   <div class="row">

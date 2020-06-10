@@ -46,12 +46,14 @@ class ReceiptReportController extends Controller {
 				'r.remarks',
 				'r.receiving_receipt_date',
                 'rt.receipt_type_name',
-                'vi.voucher_code'
+				'vi.voucher_code',
+				'po.old_reference',
+				'po.po_code'
               )
                ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
                ->leftjoin('voucher_items as vi','vi.receipt_code','=','r.receipt_code')
+               ->leftjoin('purchase_orders as po','po.po_code','=','r.purchase_order_code')
                ->where('r.receipt_code', $receiptCode)->first();
-
 
 				if($data->payee_type=="EMPLOYEE")
 				{

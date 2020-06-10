@@ -51,12 +51,10 @@
             <td align="left" style="border-bottom:1px solid black;">{{$voucher->contact_no}}</td>
           </tr>
           <tr>
-            <td align="left" style="width:20%; border-bottom:1px solid black;">Particulars:</td>
-            <td align="left" style="border-bottom:1px solid black;" colspan="3">{{$voucher->supply_category_name}}</td>
-          </tr>
-          <tr>
-            <td align="left" style="width:20%; border-bottom:1px solid black;">Description/Remarks:</td>
-            <td align="left" style="border-bottom:1px solid black;" colspan="3">{{$voucher->description}}</td>
+            <td align="left" style="border-bottom:1px solid black;">Description/Remarks:</td>
+            <td align="left" style="border-bottom:1px solid black;">{{$voucher->description}}</td>
+            <td align="left" style="border-bottom:1px solid black;">Particulars:</td>
+            <td align="left" style="border-bottom:1px solid black;">{{$voucher->supply_category_name}}</td>
           </tr>
           <tr>
             <td align="left" style="border-bottom:1px solid black;">Payment Type:</td>

@@ -12,7 +12,7 @@
 
   <!-- Main content -->
     
-  <section class="content" id="load_div" ng-if="!ec.loader_status">
+  <section class="content" id="load_div">
     <div class="row">
       <div id="button-top" class="col-md-9"> 
   <!-- BUTTONS -->

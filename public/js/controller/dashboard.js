@@ -4,10 +4,18 @@
         .module('pulsarApp')
         .controller('DashboardCtrl', DashboardCtrl)
 
-        DashboardCtrl.$inject = ['$stateParams', 'EmployeesSrvcs', 'SuppliesSrvcs', 'PurchaseOrdersSrvcs', 'ProjectsSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal'];
-        function DashboardCtrl($stateParams, EmployeesSrvcs, SuppliesSrvcs, PurchaseOrdersSrvcs, ProjectsSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal){
+        DashboardCtrl.$inject = ['$stateParams', 'EmployeesSrvcs', 'SuppliesSrvcs', 'PurchaseOrdersSrvcs', 'ProjectsSrvcs', 'ReceiptSrvcs', 'StockUnitsSrvcs', 'RequisitionsSrvcs', 'AssetsSrvcs', 'JobOrdersSrvcs', '$window', '$uibModal', '$timeout'];
+        function DashboardCtrl($stateParams, EmployeesSrvcs, SuppliesSrvcs, PurchaseOrdersSrvcs, ProjectsSrvcs, ReceiptSrvcs, StockUnitsSrvcs, RequisitionsSrvcs, AssetsSrvcs, JobOrdersSrvcs, $window, $uibModal, $timeout){
             var vm = this;
             var data = {};
+
+            vm.loader_status = true;
+
+            $timeout(
+                function(){ vm.loader_status =false; }
+            , 2500);
+
+
             // alert('dashboard')
             // SuppliesSrvcs.supplies({bankCode:''}).then (function (response) {
             //     if(response.data.status == 200)
