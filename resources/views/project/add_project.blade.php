@@ -220,10 +220,10 @@
               <td ng-bind="project.zip_code"></td>
               <td ng-bind="project.municipality_text"></td>
               <td ng-bind="project.zip_code"></td>
-              <td ng-bind="project.date_started"</td>
-              <td ng-bind="project.date_completed"</td>
-              <td ng-bind="project.employee_name"</td>
-              <td ng-bind="project.date_assigned"</td>
+              <td ng-bind="project.date_started"></td>
+              <td ng-bind="project.date_completed"></td>
+              <td ng-bind="project.employee_name"></td>
+              <td ng-bind="project.date_assigned"></td>
             </tr>
             </tbody>
           </table>
@@ -239,10 +239,6 @@
 $(function () {
 
 $('.select2').select2();
-
-//   $('#datepicker').datepicker({
-//    autoclose: true
-//   })
 
 });
 </script>

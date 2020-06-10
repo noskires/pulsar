@@ -10,29 +10,41 @@
 <div class="wrapper">
   <!-- Main content -->
   <section class="invoice">
-    <!-- title row -->
+    <!-- Header -->
     <div class="row">
       <div class="col-xs-12" style="font-size: 11px;">
-        <p> <span style="font-size:12px;font-weight:bold;">PULSAR CONSTRUCTION<br></span> Tel No.: 844-1234 | Camasi, Penablanca 3502, Philippines</p>
+        <p> <span style="font-size:12px;font-weight:bold;">PULSAR CONSTRUCTION<br></span> Dodan, Penablanca 3502, Philippines</p>
       </div>
-      <!-- /.col -->
     </div>
     <div class="row">
       <div class="col-xs-12" style="border-bottom: 2px solid black;">
-        <h2 class="page-header"><i class="fa fa-tags"></i> <img src="assets/dist/img/folder-o.png" style="margin-bottom:-4px;width:30px;">&nbsp;JOB ORDER INFORMATION<br></h2>
-        <span style="font-size:16px;letter-spacing:1px;"><strong>Control Number: {{$job_order->job_order_code}}</strong> &nbsp; Date: {{$job_order->job_order_date}}</span>
-        <div style="position: absolute;top:1%;right:0;"> <img src="assets/dist/img/qrcode.png" style='width:100px;'> </div>
+        <h2 class="page-header"><i class="fa fa-tags"></i> 
+          <img src="assets/dist/img/folder-o.png" style="margin-bottom:-4px;width:30px;">&nbsp;JOB ORDER INFORMATION<br>
+        </h2>
+
+        <!-- Control Number -->
+        <span style="font-size:14px;letter-spacing:1px;">
+          <strong>Control #: {{$job_order->job_order_code}}</strong>
+        </span>
+        <!-- end::Control Number -->
+        <!-- Date -->
+        <div style="font-size:14px;letter-spacing:1px;position: absolute;top:13.25%;right:0;"> 
+          Date: {{$job_order->job_order_date}}
+        </div>
+        <!-- end::Date -->
+
+        <!-- <div style="position: absolute;top:1%;right:0;"> <img src="assets/dist/img/qrcode.png" style='width:100px;'> </div> -->
       </div>
-      <!-- /.col -->
     </div>
+    <!-- end::Header -->
 
 <!-- ASSET DETAILS -->
-    <div class="row" style="border-bottom: 1px solid black;">
+    <div class="row" style="font-size:11.5px;">
       <div class="col-md-12">
         <h4> <b>ASSET DETAILS</b> </h4> 
-          <table border="0" width="100%" style="font-size:13px;line-height:10px;">
+          <table border="0" width="100%" style="line-height:12px;">
             <tr>
-              <th width="20%"></th>
+              <th width="13%"></th>
               <th width="45%"></th>
               <th width="35%" rowspan="16" valign="top">
                 <!-- <img src="../../dist/img/dumptruck_1024x768.jpg" width="260px"> <br> -->
@@ -44,7 +56,7 @@
               </th>
             </tr>
             <tr>
-              <td width="20%">Category:</td>
+              <td>Category:</td>
                 <td>{{$asset->category}}</td>
              </tr>
               <tr>
@@ -90,11 +102,12 @@
           </table> 
       </div>
     </div>
-<!-- JOB ORDER DETAILS -->    
-    <div class="row" style="border-bottom: 1px solid black;">
+
+    <!-- JOB ORDER DETAILS -->    
+    <div class="row" style="font-size:11.5px;border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>JOB ORDER DETAILS</b></h4> 
-          <table border="0" width="100%" style="font-size:13px;">
+          <table border="1" width="100%" style="border-collapse: collapse;">
           <thead>
           <tr>
             <th align="left">Date Started</th>
@@ -111,14 +124,16 @@
             <td style="border-top: 1px solid #e1e1e1;"> {{$job_order->accepted_by_name}} </td>
           </tr>
           </tbody>
-        </table> <br>
+        </table> 
       </div>
     </div>
+    <!-- end::JOB ORDER DETAILS --> 
+<br>    
     <!-- REQUISITION AND ISSUE SLIP -->    
-    <div class="row" style="border-bottom: 1px solid black;">
+    <div class="row" style="font-size:11.5px;border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>REQUISITION AND ISSUE SLIP</b></h4> 
-          <table border="0" width="100%" style="font-size:13px;">
+          <table border="1" width="100%" style="border-collapse: collapse;">
           <thead>
           <tr>
             <th align="left">Requisition No.</th>
@@ -132,7 +147,7 @@
           </thead>
           <tbody>
           @foreach($requisition_slips as $requisition_slip)
-          <tr style="font-size: 12px !important;">
+          <tr>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->requisition_slip_code}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->date_requested}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip->date_needed}} </td>
@@ -151,11 +166,13 @@
         </table>
       </div>
     </div>
-<!-- SUPPLIES AND SERVICES USED -->    
-    <div class="row" style="border-bottom: 1px solid black;">
+    <!-- end::REQUISITION AND ISSUE SLIP --> 
+<br>
+    <!-- SUPPLIES AND SERVICES USED -->    
+    <div class="row" style="font-size:11.5px;border-bottom: 1px solid black;">
       <div class="col-md-12">
         <h4><b>SUPPLIES AND SERVICES USED</b></h4> 
-          <table border="0" width="100%" style="font-size:13px;">
+          <table border="1" width="100%" style="border-collapse: collapse;">
           <thead>
           <tr>
             <th align="left">Supply Name</th>
@@ -165,7 +182,6 @@
           </tr>
           </thead>
           <tbody>
-          
 
           @if(count($requisition_slip_items)>0)
           @foreach($requisition_slip_items[0] as $requisition_slip_item)
@@ -178,28 +194,30 @@
           @endforeach
           @else
           <tr>
-            <td style="border-top: 1px solid #e1e1e1;" style="border-top: 1px solid #e1e1e1;" align="center" colspan="5"> NO RECORDS </td>
+            <td align="center" colspan="5"> NO RECORDS </td>
           </tr>
           @endif
           </tbody>
-        </table> <br>
+        </table>
       </div>
     </div>
+    <!-- end::SUPPLIES AND SERVICES USED -->
 <br>
-
-<!-- SIGNATORIES -->    
-    <div class="row">
+<div class="col-md-12" style="border-bottom: 2px dotted gray;"> </div>
+<br>
+    <!-- SIGNATORIES -->    
+    <div class="row" style="font-size:11.5px;">
       <div class="col-md-12">
-          <table border="0" width="100%" style="font-size:13px;">
+          <table border="0" width="100%" style="border-collapse: collapse;">
           <thead>
           <tr>
-            <th align="left">Requested by:</th>
+            <th align="left" width="15%">Requested by:</th>
             <th align="left">{{$job_order->requested_by_name}}</th>
-            <th align="left">Approved by:</th>
+            <th align="left" width="15%">Approved by:</th>
             <th align="left">{{$job_order->inspected_by_name}} </th>
           </tr>
           </thead>
-          <tbody style="font-size:11px;">
+          <tbody style="font-size:11px;font-style: italic;">
             <tr>
               <td></td>
               <td> {{$job_order->received_by_position}} </td>
@@ -207,15 +225,19 @@
               <td> {{$job_order->inspected_by_position}}</td>
             </tr>
           </tbody>
-        </table> <br>
+        </table>
       </div>
     </div>
-<br>
+    <!-- end::SIGNATORIES -->  
 </section>
 </div>
-<div style="text-align:center;">
-  <span style="font-size: 10px;">*** END OF JOB ORDER INFORMATION ***</span><br>
-  <span style="font-size: 9.5px;">ASSETERIK&copy; V.1.0 &nbsp;&nbsp; Developed by Bizlogiks Information Technology Systems (BITS) &nbsp;&nbsp; www.bizlogiks.ph</span>
+<br><br>
+
+<!-- footer -->
+<div class="footer">
+  <span style="font-size:7px; letter-spacing:4px;"><center>END OF JOB ORDER</center></span>
 </div>
+<!-- end::footer -->
+
 </body>
 </html>

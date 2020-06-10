@@ -31,11 +31,13 @@ class BanksController extends Controller {
 
 		$banks = $banks->get();
 
+	
+
 		return response()->json([
-			'status'=>200,
-			'data'=>$banks,
-			'message'=>''
-		]);
+            'status'=>200,
+            'data'=>$banks,
+            'message'=>''
+        ],200,[], JSON_NUMERIC_CHECK);
 	}
 
 	public function save(Request $request){
@@ -113,6 +115,7 @@ class BanksController extends Controller {
 					'data' => 'null',
 					'message' => 'Error, please try again!'
 				]);
+				
 			}
 		});
 

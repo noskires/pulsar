@@ -16,7 +16,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content" id="load_div" ng-if="!joc.loader_status">
+<section class="content" id="load_div">
   <div class="row">
     <!-- NEW JOB ORDER POPUP -->
     <div class="col-md-12"> 
@@ -32,7 +32,7 @@
               <div class="col-sm-4">
             
                 <select class="form-control select2" style="width: 100%;" required="" ng-model="jo.details.category" ng-change="joc.selectCategory(jo.details.category)">
-                  <option selected="selected" value="">- - SELECT CATEGORY - -</option>
+                  <option selected="selected" value="">SELECT CATEGORY</option>
                   <option ng-value="assetCategory.asset_category_code" ng-repeat="assetCategory in joc.assetCategories"><%assetCategory.asset_category_name%></option>
                 </select>
 
@@ -44,14 +44,14 @@
               <div class="col-sm-4">
                 <div class="input-group date">
                 <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                <input type="text" class="form-control pull-right" required="" ng-model="jo.details.orderDate" datepicker autocomplete="off" readonly="">
+                <input type="text" class="form-control pull-right" required="" ng-model="jo.details.orderDate" datepicker2 autocomplete="off" readonly="">
                 </div>
               </div>
               <label for="assetname" class="col-sm-2 control-label">Asset Name</label>
               <div class="col-sm-4">
 
               <select class="form-control select2" style="width: 100%;" required="" ng-model="jo.details.assetCode">
-                <option selected="selected" value="">- - SELECT EQUIPMENT - -</option>
+                <option selected="selected" value="">SELECT EQUIPMENT</option>
                 <option ng-value="asset.asset_code" ng-repeat="asset in joc.assets"><%asset.name + " : " + asset.code%></option> 
               </select>
 
@@ -59,12 +59,12 @@
             </div>
 
             <div class="form-group col-sm-12">
-              <label for="assettag" class="col-sm-2 control-label">Reference</label>
+              <label for="assettag" class="col-sm-2 control-label">Old Reference</label>
               <div class="col-sm-4"><input type="text" class="form-control" ng-model="jo.details.reference" required="" ></div>
               <label for="assettag" class="col-sm-2 control-label">Requesting Employee</label>
               <div class="col-sm-4">
                 <select class="form-control select2" style="width: 100%;" ng-model="jo.details.employee_code" required="" >
-                  <option value="" selected disabled hidden>- - SELECT EMPLOYEE - -</option>
+                  <option value="" selected disabled hidden>SELECT EMPLOYEE</option>
                   <option value="<%employee.employee_code%>" ng-repeat="employee in joc.employees"><%employee.employee_name%></option>
                 </select>
               </div>
@@ -110,16 +110,16 @@
                   <div class="col-sm-4">
 
                   <select class="form-control select2" style="width: 100%;" ng-model="filter.asset_category" ng-init="filter.asset_category=''">
-                    <option selected="selected" value="">- - SELECT CATEGORY - -</option>
+                    <option selected="selected" value="">SELECT CATEGORY</option>
                     <option ng-value="assetCategory.asset_category_code" ng-repeat="assetCategory in joc.assetCategories"><%assetCategory.asset_category_name%></option>
                   </select>
                   </div>
 
-                  <label for="assetname" class="col-sm-1 control-label">Job Order Status</label>
+                  <label for="assetname" class="col-sm-1 control-label">Status</label>
                   <div class="col-sm-2">
 
                   <select class="form-control select2" style="width: 100%;" ng-model="filter.job_order_status" ng-init="filter.job_order_status='1'">
-                    <option value="">Job Order Status</option>
+                    <option value="">SELECT STATUS</option>
                     <option value="3">All</option>
                     <option value="1">On-going</option>
                     <option value="2">Finished</option>
@@ -128,7 +128,7 @@
                   </div>
 
                   <div class="col-sm-1">
-                  <button class="btn btn-large btn-success" ng-click="joc.filterJo(filter)">FILTER DISPLAY</button>
+                  <button class="btn btn-large btn-success" ng-click="joc.filterJo(filter)"><span class="glyphicon glyphicon-filter"></span> Filter Display</button>
                   </div>
 
                 </div>
@@ -165,7 +165,7 @@
       <th>Requesting Employee</th>
       <th>Organizational Unit</th>
       <th>Date Started</th>
-      <th>Reference</th>
+      <th>Old Reference</th>
     </tr>
     </thead>
     <tbody>
@@ -354,7 +354,7 @@ $(function () {
           <label class="col-sm-12 control-label">Inspected by</label>
           <div class="col-sm-12">
             <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.inspected_by" >
-              <option value="">- - SELECT EMPLOYEE - -</option>
+              <option value="">SELECT EMPLOYEE</option>
               <option ng-value=employee.employee_code ng-repeat="employee in vm.employees"><%employee.employee_name%></option>
             </select>
           </div>
@@ -377,7 +377,7 @@ $(function () {
           <label class="col-sm-12 control-label">Tested by</label>
           <div class="col-sm-12">
             <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.tested_by">
-              <option value="">- - SELECT EMPLOYEE - -</option>
+              <option value="">SELECT EMPLOYEE</option>
               <option ng-value=employee.employee_code ng-repeat="employee in vm.employees"><%employee.employee_name%></option>
             </select>
           </div>
@@ -386,7 +386,7 @@ $(function () {
           <label class="col-sm-12 control-label">Accepted by</label>
           <div class="col-sm-12">
             <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.accepted_by">
-              <option value="">- - SELECT EMPLOYEE - -</option>
+              <option value="">SELECT EMPLOYEE</option>
               <option ng-value=employee.employee_code ng-repeat="employee in vm.employees"><%employee.employee_name%></option>
             </select>
           </div>

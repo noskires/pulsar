@@ -189,13 +189,20 @@ class RequisitionsController extends Controller {
     $requisitions = $requisitions->orderBy('rs.created_at');
     $requisitions = $requisitions->get();
 
-    return response()-> json([
+    // return response()-> json([
+    //   'status'=>200,
+    //   'data'=>$requisitions,
+    //   'count'=>$requisitions->count(),
+    //   'message'=>'',
+    //   'debugQuery'=>$debugQuery
+    // ])->setEncodingOptions(JSON_NUMERIC_CHECK);
+
+    return response()->json([
       'status'=>200,
       'data'=>$requisitions,
       'count'=>$requisitions->count(),
       'message'=>'',
-      'debugQuery'=>$debugQuery
-    ])->setEncodingOptions(JSON_NUMERIC_CHECK);
+    ],200,[], JSON_NUMERIC_CHECK);
     
   }
 

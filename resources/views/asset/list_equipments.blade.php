@@ -12,7 +12,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content" id="load_div" ng-if="!ac.loader_status">
+<section class="content" id="load_div">
       <div class="row">
         <div id="button-top" class="col-md-12"> 
 <!-- BUTTONS -->
@@ -235,79 +235,17 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-<!-- MODAL HERE HERE 2 -->
-        <div class="modal fade" id="modal-default2">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><li class="fa fa-tags"></li> Asset Tag2: <b>CONE-04082017-MX2</b></h4>
-              </div>
-              <div class="modal-body">
-                <!-- Custom Tabs (Pulled to the right) -->
-                <div class="nav-tabs-custom">
-                  <ul class="nav nav-tabs pull-right">
-                    <li class="active"><a href="#tab_1-1" data-toggle="tab">Asset Details</a></li>
-                    <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        Options <span class="caret"></span>
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Assign</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lease</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Donate</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sell</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Dispose</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lost / Missing</a></li>
-                        <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><b>Create Job Order</b></a></li>
-                      </ul>
-                    </li>
-                    <li class="pull-left header">Transit Mixer</li>
-                  </ul>
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1-1">
-                      <div class="row">
-                        <div class="col-sm-6"><br>
-                          <img src="../../dist/img/mixer_1024x768.jpg" style="width:100%;height:100%;">
-                        </div>
-                        <div class="col-sm-6">
-                          <b>Category:</b> Construction Equipment<br>
-                          <b>ID:</b> MX2<br>
-                          <b>Model:</b> CXZ19J-4445460<br>
-                          <b>Make/Brand:</b> MAN<br>
-                          <b>Date Acquired:</b> 4/8/2017<br>
-                          <b>Acquisition Cost:</b> ₱3,300,000.00<br>
-                          <b>Plate No.:</b> FGR-123<br>
-                          <b>Engine No:</b> 10PC1-970126 <br>
-                          <b>Location:</b> Tuguegarao City, Cagayan<br>
-                          <b>Assigned to:</b> <a href="#">Jaime Beljica</a><br>
-                          <b>Status:</b> <small class="label bg-green">Active</small><br><br>
-                        </div>
-                      </div>        
-                    </div>
-                    <!-- /.tab-pane -->
-                  </div>
-                  <!-- /.tab-content -->
-                </div>
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary pull-right" onclick="window.location='view-asset.html'">
-                  <li class="fa fa-navicon "></li> More Details</button>
-                <button type="button" class="btn btn-info pull-right" style="margin-right: 7px;"><li class="fa fa-print"></li> Print</button>
-                <!-- nav-tabs-custom -->
-              </div>
-              <div class="modal-footer">
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->        
+    
 
     </section>
+
+    <script type="text/javascript">
+$(function () {
+
+  $('.select2').select2();
+  // 123
+});
+</script>
 
 <script type="text/ng-template" id="assetInfo.modal">
 <!-- MODAL HERE HERE -->
@@ -373,13 +311,3 @@
  
 </script>
 
-<script type="text/javascript">
-$(function () {
-
-  $('.select2').select2();
-
-//   $('#datepicker').datepicker({
-//    autoclose: true
-//   })
-});
-</script>

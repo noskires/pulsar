@@ -13,7 +13,7 @@
   </section>
 
   <!-- Main content -->
-  <section class="content" id="load_div" ng-if="!sc.loader_status">
+  <section class="content" id="load_div">
   <!-- BUTTONS -->
     <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#create-jo">
       <span class="glyphicon glyphicon-plus"></span> Create New Supply Name
@@ -172,11 +172,7 @@
 <script type="text/javascript">
 $(function () {
 
-$('.select2').select2();
-
-//   $('#datepicker').datepicker({
-//    autoclose: true
-//   })
+  $('.select2').select2();
 
 });
 </script>

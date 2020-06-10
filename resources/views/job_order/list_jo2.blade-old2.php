@@ -1,14 +1,22 @@
+
+<!-- Page Loader -->
+<div id="loader" ng-if="joc.loader_status"></div>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-folder-open"> </span> List of Job Orders</h1>
+  <p>Allows the user to create job order for the “Active” equipment <br>
+    Job Order must be created in order to make a Requisition and Issue Slip (RIS) for repairs and maintenance supplies. <br>
+    To close the JO, the user must manually input the date conducted and date of completion, conducted by, approved by, approved date, accepted by and date accepted. Once the JO has been closed, the user is no longer allowed to make a RIS for the particular JO.
+  </p>
   <ol class="breadcrumb">
-    <li><a href="../../index.html"><i class="fa fa-th"></i> Dashboard</a></li>
+    <li><a href=""><i class="fa fa-th"></i> Dashboard</a></li>
     <li class="active">Job Order</li>
   </ol>
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" id="load_div">
   <div class="row">
     <!-- NEW JOB ORDER POPUP -->
     <div class="col-md-12"> 
@@ -220,7 +228,7 @@ $(function () {
           <img src="assets/dist/img/dumptruck.jpg" height="250" width="330" class="img-square">
           </div>
         </div> -->
-        <form class="form-horizontal">
+        <form class="form-horizontal" id="">
         <div class="col-sm-9"> 
           <div class="box-body">
           <div class="form-group">

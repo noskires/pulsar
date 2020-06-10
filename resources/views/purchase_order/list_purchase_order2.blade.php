@@ -12,7 +12,7 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" id="load_div" ng-if="!poc.loader_status">
+    <section class="content" id="load_div">
 
        <div class="row">
 
@@ -28,7 +28,7 @@
                   <div class="col-sm-4">
 
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.requisition_slip_code">
-                      <option value="">- - SELECT RIS - -</option>
+                      <option value="">SELECT RIS</option>
                       <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in poc.requisitions"> <%requisition.old_reference%> : <%requisition.requisition_slip_code%></option>
                       
                     </select>
@@ -43,7 +43,7 @@
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
                   <div class="col-sm-4">
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.request_type" required="">
-                      <option value="">- - SELECT REQUEST TYPE - -</option>
+                      <option value="">SELECT REQUEST TYPE</option>
                       <option value="Office">Office</option>
                       <option value="Project">Project</option>
                     </select>
@@ -54,14 +54,14 @@
                 <label for="assetname" class="col-sm-2 control-label">Supplier</label>
                   <div class="col-sm-4">
                     <select class="form-control select2" style="width: 100%;" required="" ng-model="poc.poDetails.supplier_code">
-                      <option selected="selected" value="">- - SELECT SUPPLIER - -</option>
+                      <option selected="selected" value="">SELECT SUPPLIER</option>
                       <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
                     </select>
                   </div>
                   <label for="" class="col-sm-2 control-label">Reference Name</label>
                   <div class="col-sm-4">
                     <select style="width: 100%;" class="form-control select2" ng-model="poc.poDetails.reference_code">
-                      <option value="">- - SELECT REFERENCE NAME - -</option>
+                      <option value="">SELECT REFERENCE NAME</option>
                       <option ng-if="poc.poDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in poc.organizations"><%organization.org_name%></option>
                       <option ng-if="poc.poDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in poc.projects"><%project.code%> - <%project.name%></option>
                     </select>
@@ -73,14 +73,14 @@
                   <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
                   <div class="col-sm-4">
                     <select class="form-control select2"  style="width: 100%;" ng-model="poc.poDetails.requesting_employee">
-                      <option value="">- - SELECT EMPLOYEE - -</option>
+                      <option value="">SELECT EMPLOYEE</option>
                       <option value="<%employee.employee_code%>" ng-repeat="employee in poc.employees">
                         <%employee.employee_name%>
                       </option>
                     </select>
                   </div>
 
-                  <label for="assetname" class="col-sm-2 control-label">Reference</label>
+                  <label for="assetname" class="col-sm-2 control-label">Old Reference</label>
                   <div class="col-sm-4">
                     <input type="text" class="form-control pull-right"  ng-model="poc.poDetails.old_reference">
                   </div>
@@ -118,22 +118,22 @@
                       <label class="control-label">From</label>
                         <div class="input-group date">
                           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateFrom" datepicker autocomplete="off" ng-init="poc.poFilterDetails.dateFrom=''">
+                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateFrom" datepicker2 autocomplete="off" ng-init="poc.poFilterDetails.dateFrom=''">
                         </div>
                       </div>
 
                       <div class="col-sm-2">
-                      <label class="control-label">TO</label>
+                      <label class="control-label">To</label>
                         <div class="input-group date">
                           <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateTo" datepicker autocomplete="off" ng-init="poc.poFilterDetails.dateTo=''">
+                          <input type="text" class="form-control pull-right" id="daterange-filter" ng-model="poc.poFilterDetails.dateTo" datepicker2 autocomplete="off" ng-init="poc.poFilterDetails.dateTo=''">
                         </div>
                       </div>
 
                       <div class="col-sm-3">
                         <label class="control-label">Supplier</label>
                         <select class="form-control select2" style="width: 100%;" ng-model="poc.poFilterDetails.supplier_code" ng-init="poc.poFilterDetails.supplier_code=''">
-                          <option selected="selected" value="">- - SELECT SUPPLIER - -</option>
+                          <option selected="selected" value="">SELECT SUPPLIER</option>
                           <option ng-value="supplier.supplier_code" ng-repeat="supplier in poc.suppliers"><%supplier.supplier_name%></option>
                         </select>
                       </div>
@@ -142,7 +142,7 @@
                       <div class="col-sm-3">
                       <label for="assetname" class="control-label">PO Status</label>
                       <select class="form-control select2" style="width: 100%;" ng-model="poc.poFilterDetails.poStatus" ng-init="poc.poFilterDetails.poStatus=''">
-                          <option value="">- - SELECT STATUS - -</option>
+                          <option value="">SELECT STATUS</option>
                           <option value=3>ALL</option>
                           <option value=2>OPEN</option>
                           <option value=1>CLOSED</option>
@@ -151,7 +151,7 @@
 
                       <div class="col-sm-1">
                       <br>
-                      <button class="btn btn-large btn-success" ng-click="poc.filterPoBtn(poc.poFilterDetails)">FILTER DISPLAY</button>
+                      <button class="btn btn-large btn-success" ng-click="poc.filterPoBtn(poc.poFilterDetails)"><span class="glyphicon glyphicon-filter"></span> Filter Display</button>
                       </div>
                     </div>
                   </div>
@@ -224,7 +224,7 @@
                 <span ng-bind="po.requesting_employee | limitTo:12"></span> </span>
                 <span ng-if="po.requesting_employee.length > 12">...</span>
               </td>
-              <td><%po.po_status%></td>
+              <td><code class="text-primary"><%po.po_status%></code></td>
               <td> <span ng-if="po.po_status!='CLOSED'"> <a href="#" ui-sref="po-edit({poCodeEdit:po.po_code})"><b>Edit</b></a> | <a  href="#" ui-sref="po-delete({poCodeDelete:po.po_code})"><b>Delete</b></a></span></td>
             </tr>
             </tbody>
@@ -486,7 +486,7 @@ $('.select2').select2();
                     <input type="text" class="form-control pull-right" id="datepicker-rsdate" ng-model="vm.formData.date_requested" datepicker2 autocomplete="off" autocomplete="off" readonly="">
                     </div>
                   </div> -->
-                  <label for="assetname" class="col-sm-2 control-label">Reference</label>
+                  <label for="assetname" class="col-sm-2 control-label">Old Reference</label>
                   <div class="col-sm-4">
                     <input type="text" class="form-control pull-right"  ng-model="vm.formData.old_reference">
                   </div>
@@ -506,7 +506,7 @@ $('.select2').select2();
                   <div class="col-sm-4">
                     <select style="width: 100%;" class="form-control select2" ng-model="vm.formData.requisition_slip_code">
                       <option value="">- - SELECT RIS - -</option>
-                      <option ng-if="vm.formData.status=='CLOSED'" value="<%vm.formData.requisition_slip_code%>"><%vm.formData.requisition_old_reference%> : <%vm.formData.requisition_slip_code%></option>
+                      <option  value="<%vm.formData.requisition_slip_code%>"><%vm.formData.requisition_old_reference%> : <%vm.formData.requisition_slip_code%></option>
                       <option value="<%requisition.requisition_slip_code%>" ng-repeat="requisition in vm.requisitions"><%requisition.old_reference%> : <%requisition.requisition_slip_code%></option>
                     </select>
                   </div>

@@ -34,17 +34,17 @@
   The category of the supplies for the maintenance of the equipment must have a keyword “repairs” or “maintenance” </p>
   <ol class="breadcrumb">
     <li><a href=""><i class="fa fa-th"></i> Dashboard</a></li>
-    <li class="active">Maintenance</li>
+    <li class="active">Requisition</li>
   </ol>
 </section>
 
 <!-- Main content -->
 
-<section class="content" id="load_div" ng-if="!roc.loader_status">
+<section class="content" id="load_div">
 
 <div class="row">
 
-<!-- NEW JOB ORDER SLIDE -->
+<!-- NEW REQUISITION SLIDE -->
         <div class="col-md-12"> 
           <div id="create-rs" class="collapse rs">
             <div class="panel panel-default">
@@ -62,7 +62,7 @@
                   <label for="requestpurpose" class="col-sm-2 control-label">Request Type</label>
                   <div class="col-sm-4">
                     <select class="form-control select2" style="width: 100%;" ng-model="roc.risDetails.request_type" required="">
-                      <option ng-selected="true" value="">--SELECT REQUEST TYPE--</option> 
+                      <option ng-selected="true" value="">SELECT REQUEST TYPE</option> 
                       <option value="Office">Office</option>
                       <option value="Project">Project</option>
                     </select>
@@ -81,7 +81,7 @@
                   <div class="col-sm-4">
 
                   <select class="form-control select2" style="width: 100%;"  ng-model="roc.risDetails.reference_code" required="">
-                    <option value="">--SELECT REFERENCE--</option>
+                    <option value="">SELECT REFERENCE</option>
                     <option ng-if="roc.risDetails.request_type=='Office'" value="<%organization.org_code%>" ng-repeat="organization in roc.organizations"><%organization.org_name%></option>
                     <option ng-if="roc.risDetails.request_type=='Project'" value="<%project.project_code%>" ng-repeat="project in roc.projects"><%project.code%> - <%project.name%></option>
                   </select>
@@ -90,12 +90,12 @@
                 </div>
 
                 <div class="form-group col-sm-12">
-                  <label for="" class="col-sm-2 control-label">Reference</label>
+                  <label for="" class="col-sm-2 control-label">Old Reference</label>
                   <div class="col-sm-4"><input type="text" class="form-control" ng-model="roc.risDetails.old_reference"></div>
                   <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" id="employeeSelect" style="width: 100%;" ng-model="roc.risDetails.requesting_employee">
-                    <option value="" selected disabled hidden> --SELECT EMPLOYEE--</option>
+                    <option value="" selected disabled hidden>SELECT EMPLOYEE</option>
                     <option value="<%employee.employee_code%>" ng-if="true" ng-repeat="employee in roc.employees"><%employee.employee_name%></option>
                   </select>
                   </div>
@@ -143,7 +143,7 @@
                   <div class="box-body">
                     <div class="form-group col-sm-12">
 
-                      <label class="col-sm-1 control-label">Date Requested</label>
+                      <label class="col-sm-2 control-label">Request Date</label>
                       <div class="col-sm-2">
                         <div class="input-group date">
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
@@ -161,24 +161,24 @@
                       <label for="assetname" class="col-sm-2 control-label">Request Type</label>
                       <div class="col-sm-2">
                         <select class="form-control" style="width: 100%;" ng-model="filter.requestType" ng-init="filter.requestType=''">
-                        <option selected="selected" value="">-- SELECT REQUEST TYPE -- </option>
+                        <option selected="selected" value="">SELECT REQUEST TYPE</option>
                         <option selected="selected" value="">ALL</option>
                         <option value="Office">Office</option>
                         <option value="Project">Project</option>
                         </select>
                       </div>
 
-                      <label for="assetname" class="col-sm-2 control-label">Requisition Status</label>
+                      <label for="assetname" class="col-sm-1 control-label">Status</label>
                       <div class="col-sm-2">
                         <select class="form-control" style="width: 100%;" ng-model="filter.requisitionStatus" ng-init="filter.requisitionStatus=''">
-                        <option selected="selected" value="">-- SELECT STATUS -- </option>
+                        <option selected="selected" value="">SELECT STATUS</option>
                         <option selected="selected" value="">ALL</option>
                         <option value="1">OPEN</option>
                         <option value="2">CLOSED</option>
                         </select>
                       </div>
                       <div class="col-sm-1">
-                      <button class="btn btn-large btn-success" ng-click="roc.filterRis(filter)">FILTER DISPLAY</button>
+                      <button class="btn btn-large btn-success" ng-click="roc.filterRis(filter)"><span class="glyphicon glyphicon-filter"></span> Filter Display</button>
                       </div>
                     </div>
                   </div>
@@ -249,7 +249,7 @@
                 <span ng-if="requisition.inspected_by_name.length > 12">...</span>
               </td>
               <td><%requisition.date_inspected%></td>  
-              <td><%requisition.status%></td>  
+              <td><code class="text-primary"><%requisition.status%></code></td>  
               <td> <span ng-if="requisition.status!='CLOSED'"> <a href="#" ui-sref="ris-edit({requisitionSlipCodeEdit:requisition.requisition_slip_code})"><b>Edit</b></a> | <a  href="#" ui-sref="ris-delete({requisitionSlipCodeDelete:requisition.requisition_slip_code})"><b>Delete</b></a></span></td>
             </tr> 
             
@@ -284,9 +284,6 @@ $('.select2').select2();
         </div>
         <div class="modal-body">
           <p>Add requested supply items to specific Requisition Slip</p>
-
-          
-
 
           <!-- Custom Tabs (Pulled to the right) -->
           <div class="row">
@@ -367,7 +364,7 @@ $('.select2').select2();
                 <div class="panel-body">
                   <form>
 
-                  Grand Total : <%vm.supplyGrandTotal%>
+                  <!-- Grand Total : <%vm.supplyGrandTotal%> -->
                   <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-2" width="100%" style="font-size:11.5px;">
                       <thead>
                         <tr>
@@ -498,7 +495,7 @@ $('.select2').select2();
 
 <script type="text/ng-template" id="ris-edit.modal"> 
   <div>
-    <div class="modal-dialog" style="width:100%;">
+    <div class="modal-dialog modal-lg" style="width:100%;">
         <div class="modal-header">
           <button type="button" class="close" ui-sref="list-requesition2" ng-click="vm.ok()">
             <span aria-hidden="true">&times;</span></button>
@@ -547,7 +544,7 @@ $('.select2').select2();
                 </div>
 
                 <div class="form-group col-sm-12">
-                  <label for="" class="col-sm-2 control-label">Reference</label>
+                  <label for="" class="col-sm-2 control-label">Old Reference</label>
                   <div class="col-sm-4"><input type="text" class="form-control" ng-model="vm.formData.old_reference"></div>
                   <label for="assetname" class="col-sm-2 control-label">Requesting Employee</label>
                   <div class="col-sm-4">

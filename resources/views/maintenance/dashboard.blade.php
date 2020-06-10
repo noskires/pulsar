@@ -1,3 +1,8 @@
+
+<!-- Page Loader -->
+<div id="loader" ng-if="dashboardCtrlr.loader_status"></div>
+
+
 <section class="content-header">
   <h1>Dashboard</h1>
   <ol class="breadcrumb">
@@ -6,7 +11,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" id="load_div" ng-if="!dashboardCtrlr.loader_status">
 <br>
   <!-- Left -->
   <div class="col-md-5">

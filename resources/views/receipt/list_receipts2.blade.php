@@ -14,7 +14,7 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" id="load_div" ng-if="!rc.loader_status">
+    <section class="content" id="load_div">
     <!-- BUTTONS -->
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#create-jo">
         <span class="glyphicon glyphicon-plus"></span> Add Receipt
@@ -230,13 +230,7 @@
 
 <script type="text/javascript">
 $(function () {
-
 $('.select2').select2();
-
-//   $('#datepicker').datepicker({
-//    autoclose: true
-//   })
-
 });
 </script>
 
@@ -407,12 +401,7 @@ $('.select2').select2();
 
    <script type="text/javascript">
   $(function () {
-
     $('.select2').select2();
-
-  //   $('#datepicker').datepicker({
-  //    autoclose: true
-  //   })
   });
   </script>
 </script>
@@ -457,14 +446,10 @@ $('.select2').select2();
 
  <script type="text/javascript">
   $(function () {
-
     $('.select2').select2();
-
-  //   $('#datepicker').datepicker({
-  //    autoclose: true
-  //   })
   });
   </script>
+  
 </script>
 
 
@@ -584,12 +569,7 @@ $('.select2').select2();
 
   <script type="text/javascript">
   $(function () {
-
     $('.select2').select2();
-
-  //   $('#datepicker').datepicker({
-  //    autoclose: true
-  //   })
   });
   </script>
 

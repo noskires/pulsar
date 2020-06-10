@@ -13,7 +13,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content" id="load_div" ng-if="!oc.loader_status">
+<section class="content" id="load_div">
   <div class="row">
     <div class="col-md-12"> 
       <div id="add-department" class="collapse department">
@@ -33,14 +33,14 @@
                   <label class="col-sm-1 control-label">Region</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.officeDetails.region" ng-change="oc.selectRegion(oc.officeDetails.region)">
-                    <option selected="selected" value="0">- - - Select Region - - -</option>
+                    <option selected="selected" value="">- - - Select Region - - -</option>
                     <option value="<%region.region_code%>" ng-repeat="region in oc.regions"><% region.region_text_short%></option>
                   </select>
                   </div>
                   <label class="col-sm-1 control-label">Province</label>
                   <div class="col-sm-3">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.officeDetails.province" ng-change="oc.selectProvince(oc.officeDetails.province)">
-                    <option selected="selected" value="0">- - - Select Province - - -</option>
+                    <option selected="selected" value="">- - - Select Province - - -</option>
                     <option value="<%province.province_code%>" ng-repeat="province in oc.provinces"><% province.province_text%></option>
                   </select>
                   </div>
@@ -50,7 +50,7 @@
                   <label class="col-sm-1 control-label">Municipality</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.officeDetails.municipality">
-                    <option selected="selected" value="0">- - - Select Municipality - - -</option>
+                    <option selected="selected" value="">- - - Select Municipality - - -</option>
                     <option value="<%municipality.municipality_code%>" ng-repeat="municipality in oc.municipalities"><% municipality.municipality_text%></option>
                   </select>
                   </div>
@@ -85,7 +85,7 @@
                 <div class="col-sm-4">
                 <label style="margin-right:15px;" for="dept-name">Department Name:</label>
                 <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.divisionDetails.departmentCode">
-                  <option selected="selected" value="0">- - - Select Department - - -</option>
+                  <option selected="selected" value="">- - - Select Department - - -</option>
                   <option value="<%department.org_code%>" ng-repeat="department in oc.orgDepartments"><% department.department_name%></option>
                 </select>
                 </div>
@@ -102,14 +102,14 @@
                   <label class="col-sm-1 control-label">Region</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.divisionDetails.region" ng-change="oc.selectRegion(oc.divisionDetails.region)">
-                    <option selected="selected" value="0">- - - Select Region - - -</option>
+                    <option selected="selected" value="">- - - Select Region - - -</option>
                     <option value="<%region.region_code%>" ng-repeat="region in oc.regions"><% region.region_text_short%></option>
                   </select>
                   </div>
                   <label class="col-sm-1 control-label">Province</label>
                   <div class="col-sm-3">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.divisionDetails.province" ng-change="oc.selectProvince(oc.divisionDetails.province)">
-                    <option selected="selected" value="0">- - - Select Province - - -</option>
+                    <option selected="selected" value="">- - - Select Province - - -</option>
                     <option value="<%province.province_code%>" ng-repeat="province in oc.provinces"><% province.province_text%></option>
                   </select>
                   </div>
@@ -119,7 +119,7 @@
                   <label class="col-sm-1 control-label">Municipality</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.divisionDetails.municipality">
-                    <option selected="selected" value="0">- - - Select Municipality - - -</option>
+                    <option selected="selected" value="">- - - Select Municipality - - -</option>
                     <option value="<%municipality.municipality_code%>" ng-repeat="municipality in oc.municipalities"><% municipality.municipality_text%></option>
                   </select>
                   </div>
@@ -155,7 +155,7 @@
                 <label style="margin-right:15px;" for="dept-name">Department Name:</label>
                 
                 <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.departmentCode" ng-change="oc.selectDepartment(oc.unitDetails.departmentCode)">
-                  <option selected="selected" value="0">- - - Select Department - - -</option>
+                  <option selected="selected" value="">- - - Select Department - - -</option>
                   <option value="<%department.org_code%>" ng-repeat="department in oc.orgDepartments" ><% department.department_name%></option>
                 </select>
                 </div>
@@ -163,7 +163,7 @@
                 <label style="margin-right:15px;" for="division-name">Division Name:</label> <br>
                 
                 <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.divisionCode" ng-change="oc.selectDivision(oc.unitDetails.divisionCode)">
-                  <option selected="selected" value="0">- - - Select Division - - -</option>
+                  <option selected="selected" value="">- - - Select Division - - -</option>
                   <option value="<%division.org_code%>" ng-repeat="division in oc.divisions"><% division.division_name%></option>
                 </select>
                 </div>
@@ -180,14 +180,14 @@
                   <label class="col-sm-1 control-label">Region</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.region" ng-change="oc.selectRegion(oc.unitDetails.region)">
-                    <option selected="selected" value="0">- - - Select Region - - -</option>
+                    <option selected="selected" value="">- - - Select Region - - -</option>
                     <option value="<%region.region_code%>" ng-repeat="region in oc.regions"><% region.region_text_short%></option>
                   </select>
                   </div>
                   <label class="col-sm-1 control-label">Province</label>
                   <div class="col-sm-3">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.province" ng-change="oc.selectProvince(oc.unitDetails.province)">
-                    <option selected="selected" value="0">- - - Select Province - - -</option>
+                    <option selected="selected" value="">- - - Select Province - - -</option>
                     <option value="<%province.province_code%>" ng-repeat="province in oc.provinces"><% province.province_text%></option>
                   </select>
                   </div>
@@ -197,7 +197,7 @@
                   <label class="col-sm-1 control-label">Municipality</label>
                   <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.unitDetails.municipality">
-                    <option selected="selected" value="0">- - - Select Municipality - - -</option>
+                    <option selected="selected" value="">- - - Select Municipality - - -</option>
                     <option value="<%municipality.municipality_code%>" ng-repeat="municipality in oc.municipalities"><% municipality.municipality_text%></option>
                   </select>
                   </div>
