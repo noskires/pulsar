@@ -211,11 +211,12 @@
             var vm = this;
 
    
-
+            vm.loader_status = true;
             SuppliesSrvcs.supplies2().then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
+                    vm.loader_status = false;
                     console.log(vm.supplies)
                 }
             }, function (){ alert('Bad Request!!!') })

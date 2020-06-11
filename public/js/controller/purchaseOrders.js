@@ -664,11 +664,13 @@
         function PurchaseItemStatusModalInstanceCtrl ($state, $stateParams, PurchaseOrdersSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, OrganizationsSrvcs, ProjectsSrvcs, $window) {
 
             var vm = this;
- 
+            
+            vm.loader_status = true;
             PurchaseOrdersSrvcs.poItems2().then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.poItems = response.data.data;
+                    vm.loader_status = false;
                     console.log(vm.poItems)
                 }
             }, function (){ alert('Bad Request!!!') })

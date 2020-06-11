@@ -1,3 +1,7 @@
+
+<!-- Page Loader -->
+<div id="loader" ng-if="ic.loader_status"></div>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-cogs"> </span> Insurance for renewal </h1>

@@ -45,10 +45,12 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+            vm.loader_status = true;
             UtilizationsSrvcs.utilizations({utilizationCode:'', status:0}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.utilizations = response.data.data;
+                    vm.loader_status = false;
                     console.log(vm.utilizations)
                 }
             }, function (){ alert('Bad Request!!!') })

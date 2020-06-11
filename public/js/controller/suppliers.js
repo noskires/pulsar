@@ -9,11 +9,13 @@
         function SuppliersCtrl($stateParams, SuppliersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-
+            
+            vm.loader_status = true;
             SuppliersSrvcs.suppliers({supplierCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.suppliers = response.data.data;
+                    vm.loader_status = false;
                     console.log(vm.suppliers)
                 }
             }, function (){ alert('Bad Request!!!') })

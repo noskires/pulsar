@@ -24,6 +24,8 @@
           z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
         }
     </style>
+<!-- Page Loader -->
+<div id="loader" ng-if="roc.loader_status"></div>
 
 <section class="content-header">
   <h1><span class="fa fa-bus"> </span> Requisition Status</h1>

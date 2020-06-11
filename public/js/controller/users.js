@@ -5,10 +5,17 @@
         .controller('UsersCtrl', UsersCtrl)
         .controller('UsersModalInstanceCtrl', UsersModalInstanceCtrl)
 
-    UsersCtrl.$inject = ['$stateParams', '$state', 'UsersSrvcs', 'EmployeesSrvcs', 'RolesSrvcs', 'RoleItemsSrvcs', 'ParticularsSrvcs', '$window', '$uibModal', '$scope'];
+    UsersCtrl.$inject = ['$stateParams', '$state', 'UsersSrvcs', 'EmployeesSrvcs', 'RolesSrvcs', 'RoleItemsSrvcs', 'ParticularsSrvcs', '$window', '$uibModal', '$scope', '$timeout'];
 
-    function UsersCtrl($stateParams, $state, UsersSrvcs, EmployeesSrvcs, RolesSrvcs, RoleItemsSrvcs, ParticularsSrvcs, $window, $uibModal, $scope) {
+    function UsersCtrl($stateParams, $state, UsersSrvcs, EmployeesSrvcs, RolesSrvcs, RoleItemsSrvcs, ParticularsSrvcs, $window, $uibModal, $scope, $timeout) {
         var vm = this;
+
+        vm.loader_status = true;
+
+        $timeout(
+            function(){ vm.loader_status =false; }
+        , 2500);
+
         vm.getUsers = function () {
             return new Promise(resolve => {
                 UsersSrvcs.list({
