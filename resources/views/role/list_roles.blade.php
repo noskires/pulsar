@@ -1,3 +1,6 @@
+<!-- Page Loader -->
+<div id="loader" ng-if="rc.loader_status"></div>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1><span class="fa fa-key"> </span> Access Rights</h1>

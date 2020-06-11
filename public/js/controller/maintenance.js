@@ -12,8 +12,10 @@
  
             var vm = this;
             var data = {};
- 
 
+           
+ 
+            vm.loader_status = true;
             // alert('this is main controller')
             
             vm.newOperation =  function(data){
@@ -71,11 +73,14 @@
             var vm = this;
             var data = {};
             
+            
+            vm.loader_status = true;
             MaintenanceSrvcs.operations({operationCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 { 
                     vm.operations = response.data.data;
                     console.log(vm.operations)
+                    vm.loader_status = false;
                 }
             }, function (){ alert('Bad Request!!!') })
 
@@ -297,11 +302,14 @@
         function ListMonitoringCtrl(MaintenanceSrvcs, $window){
             var vm = this;
             var data = {};
+            vm.loader_status = true;
+            
             
             MaintenanceSrvcs.assetsMonitoring({assetCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.assetsMonitoring = response.data.data;
+                    vm.loader_status = false;
                     console.log(vm.assetsMonitoring)
                 }
             }, function (){ alert('Bad Request!!!') })

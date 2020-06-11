@@ -1,4 +1,5 @@
-
+<!-- Page Loader -->
+<div id="loader" ng-if="amdc.loader_status"></div>
 
 <!-- Content Header (Page header) -->
 

@@ -1,3 +1,6 @@
+<!-- Page Loader -->
+<div id="loader" ng-if="projectProfileCtrl.loader_status"></div>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
 <h1><span class="fa fa-cube"> </span> Project Profile</h1>

@@ -886,11 +886,12 @@
             var vm = this;
             
  
-
+            vm.loader_status = true;
             RequisitionsSrvcs.RequisitionSlipItems({requisitionCode:'', requisitionSlipItemCode:'', supplyCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.requisitionSlipItems = response.data.data;
+                    vm.loader_status = false;
                     console.log(vm.requisitionSlipItems)
                 }
             }, function (){ alert('Bad Request!!!') })

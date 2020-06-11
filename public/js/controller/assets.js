@@ -224,8 +224,8 @@
         };
     }
 
-    AssetMoreDetailsCtrl.$inject = ['$state', '$stateParams', 'AssetsSrvcs', 'AssetPhotosSrvcs', 'MaintenanceSrvcs', 'WarrantiesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'InsuranceSrvcs', 'JobOrdersSrvcs', 'AssetRegistrationsSrvcs', '$window', '$uibModal'];
-    function AssetMoreDetailsCtrl($state, $stateParams, AssetsSrvcs, AssetPhotosSrvcs, MaintenanceSrvcs, WarrantiesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, InsuranceSrvcs, JobOrdersSrvcs, AssetRegistrationsSrvcs, $window, $uibModal) {
+    AssetMoreDetailsCtrl.$inject = ['$state', '$stateParams', 'AssetsSrvcs', 'AssetPhotosSrvcs', 'MaintenanceSrvcs', 'WarrantiesSrvcs', 'EmployeesSrvcs', 'OrganizationsSrvcs', 'AddressesSrvcs', 'ProjectsSrvcs', 'InsuranceSrvcs', 'JobOrdersSrvcs', 'AssetRegistrationsSrvcs', '$window', '$uibModal', '$timeout'];
+    function AssetMoreDetailsCtrl($state, $stateParams, AssetsSrvcs, AssetPhotosSrvcs, MaintenanceSrvcs, WarrantiesSrvcs, EmployeesSrvcs, OrganizationsSrvcs, AddressesSrvcs, ProjectsSrvcs, InsuranceSrvcs, JobOrdersSrvcs, AssetRegistrationsSrvcs, $window, $uibModal, $timeout) {
         var vm = this;
         var data = {};
 
@@ -236,6 +236,12 @@
             {name: "Insurance", status: ""},
             {name: "Documents", status: ""}
         ]
+
+        vm.loader_status = true;
+
+            $timeout(
+                function(){ vm.loader_status =false; }
+            , 2500);
         
         console.log(vm.attribute_tabs)
 

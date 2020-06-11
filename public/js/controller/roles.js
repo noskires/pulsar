@@ -5,10 +5,16 @@
         .controller('RolesCtrl', RolesCtrl)
         .controller('RolesModalInstanceCtrl', RolesModalInstanceCtrl)
 
-    RolesCtrl.$inject = ['$stateParams', '$state', 'RolesSrvcs', 'RoleItemsSrvcs', 'ParticularsSrvcs', '$window', '$uibModal', '$scope'];
+    RolesCtrl.$inject = ['$stateParams', '$state', 'RolesSrvcs', 'RoleItemsSrvcs', 'ParticularsSrvcs', '$window', '$uibModal', '$scope', '$timeout'];
 
-    function RolesCtrl($stateParams, $state, RolesSrvcs, RoleItemsSrvcs, ParticularsSrvcs, $window, $uibModal, $scope) {
+    function RolesCtrl($stateParams, $state, RolesSrvcs, RoleItemsSrvcs, ParticularsSrvcs, $window, $uibModal, $scope, $timeout) {
         var vm = this;
+
+        vm.loader_status = true;
+
+        $timeout(
+            function(){ vm.loader_status =false; }
+        , 2500);
 
         vm.getRoles = () => {
             return new Promise(resolve => {

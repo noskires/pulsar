@@ -354,10 +354,12 @@
                 }, function (){ alert('Bad Request!!!') })
             }
 
+            vm.loader_returned_items_status = true;
             ReceiptSrvcs.receiptItems({receiptCode:'', receiptItemCode:'', receiptItemSupplyCode:'',isReturned:'1'}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.returneReceiptItems = response.data.data;
+                    vm.loader_returned_items_status = false;
                     console.log(vm.returneReceiptItems)
                 }
             }, function (){ alert('Bad Request!!!') })

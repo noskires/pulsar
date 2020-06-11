@@ -25,6 +25,9 @@
         }
     </style>
 
+<!-- Page Loader -->
+<div id="loader" ng-if="poc.loader_status"></div>
+
 <section class="content-header">
   <h1><span class="fa fa-bus"> </span> Purchase Orders Status</h1>
   <ol class="breadcrumb">

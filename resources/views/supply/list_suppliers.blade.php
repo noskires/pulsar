@@ -1,3 +1,7 @@
+
+<!-- Page Loader -->
+<div id="loader" ng-if="sc.loader_status"></div>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
 <h1><span class="fa fa-cog"> </span> Setup</h1>

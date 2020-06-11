@@ -1,3 +1,6 @@
+<!-- Page Loader -->
+<div id="loader" ng-if="oc.loader_status"></div>
+
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1><span class="fa fa-cogs"> </span> List of Operating Records</h1>

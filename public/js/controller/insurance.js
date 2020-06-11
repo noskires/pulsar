@@ -41,11 +41,13 @@
                     }
                 }, function (){ alert('Bad Request!!!') })
             }
-
+            
+            vm.loader_status = true;
             InsuranceSrvcs.insurance({insuranceCode:''}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.insurance = response.data.data;
+                    vm.loader_status = false;
                     console.log(vm.insurance)
                 }
             }, function (){ alert('Bad Request!!!') })
@@ -61,7 +63,7 @@
                             if(response.data.status == 200)
                             {
                                 vm.insurance = response.data.data;
-                                console.log(vm.banks)
+                                console.log(vm.insurance)
                             }
                         }, function (){ alert('Bad Request!!!') })
                         vm.ok();

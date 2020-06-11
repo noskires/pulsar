@@ -210,11 +210,12 @@
             var data = {};
 
             // alert($stateParams.projectCode)
-
+            vm.loader_status = true;
             ProjectsSrvcs.projects({projectCode:$stateParams.projectCode}).then (function (response) {
                 if(response.data.status == 200)
                 {
                     vm.project = response.data.data[0];
+                    vm.loader_status = false;
                     console.log(vm.project)
                 }
             }, function (){ alert('Bad Request!!!') })

@@ -25,6 +25,10 @@
         }
     </style>
 
+
+<!-- Page Loader -->
+<div id="loader" ng-if="sc.loader_status"></div>
+
 <section class="content-header">
   <h1><span class="fa fa-bus"> </span> Supply Status</h1>
   <ol class="breadcrumb">
