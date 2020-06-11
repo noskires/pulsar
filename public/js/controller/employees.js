@@ -458,7 +458,8 @@
                     }).then(function (response) {
                         if (response.data.status == 200) {
                             vm.employees = response.data.data;
-                            console.log(vm.employees)
+                            // console.log(vm.employees)
+                            $state.reload();
                             vm.close();
                         }
                     }, function () {

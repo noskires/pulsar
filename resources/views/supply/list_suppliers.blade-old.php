@@ -3,7 +3,7 @@
 <h1><span class="fa fa-cog"> </span> Setup</h1>
 <p>Browse and modify selection fields</p>
 <ol class="breadcrumb">
-<li><a href=""><i class="fa fa-th"></i> Dashboard</a></li>
+<li><a href="../../index.html"><i class="fa fa-th"></i> Dashboard</a></li>
 <li><i class="fa fa-cloud"></i> Advanced</li>
 <li class="active">Supplier</li>
 </ol>
@@ -14,7 +14,7 @@
 <section class="content">
   <div class="col-md-12"> 
     <h4><b>Suppliers</b> &nbsp; 
-    <button type="button" class="btn btn-primary pull-right" ui-sref="supplier-create({supplierRequest:'new'})"> <li class="fa fa-plus"></li> Add Supplier </button></h4> 
+    <button type="button" class="btn btn-primary pull-right" ui-sref="supplier-create({supplierRequest:'new'})"> <li class="fa fa-plus"></li> </button></h4> 
     <div class="box">
       <div class="box-body">
         <table datatable="ng"  id="suppliers" class="table table-bordered table-hover" width="100%">
@@ -75,12 +75,12 @@
                   </div><br> 
                 </div>
                 <label class="col-sm-4 control-label">Business Permit No</label>
-                <div class="col-sm-8"><input type="text" class="form-control" required="" ng-model="vm.supplierDetails.business_permit_no"><br></div>
+                <div class="col-sm-8"><input type="text" class="form-control" required=""  datepicker2 ng-model="vm.supplierDetails.business_permit_no"><br></div>
                 <label class="col-sm-4 control-label" style="padding-top: 0px;">Business Permit Expiration Date</label>
                 <div class="col-sm-8">
                   <div class="input-group date">
                   <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" id="datepicker-business-exp" datepicker2 required="" ng-model="vm.supplierDetails.business_permit_expiry_date">
+                  <input type="text" class="form-control pull-right" id="datepicker-business-exp" required="" ng-model="vm.supplierDetails.business_permit_expiry_date">
                   </div><br> 
                 </div>                      
                 <label class="col-sm-4 control-label">BIR No</label>
@@ -124,7 +124,7 @@
                 <div class="col-sm-8">
                   <div class="input-group date">
                   <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" id="edit-dti-exp" datepicker2 required="" ng-model="vm.formData.dti_expiry_date">
+                  <input type="text" class="form-control pull-right" id="edit-dti-exp" required="" ng-model="vm.formData.dti_expiry_date">
                   </div><br> 
                 </div>
                 <label class="col-sm-4 control-label">Business Permit No</label>
@@ -133,7 +133,7 @@
                 <div class="col-sm-8">
                   <div class="input-group date">
                   <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                  <input type="text" class="form-control pull-right" id="edit-business-exp" datepicker2 required="" ng-model="vm.formData.business_permit_expiry_date">
+                  <input type="text" class="form-control pull-right" id="edit-business-exp" required="" ng-model="vm.formData.business_permit_expiry_date">
                   </div><br> 
                 </div>                      
                 <label class="col-sm-4 control-label">BIR No</label>
