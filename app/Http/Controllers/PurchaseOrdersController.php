@@ -54,6 +54,7 @@ class PurchaseOrdersController extends Controller {
 						'e.employee_code',
                      	 DB::raw('CONCAT(trim(CONCAT(e.lname," ",COALESCE(e.affix,""))),", ", COALESCE(e.fname,"")," ", COALESCE(e.mname,"")) as requesting_employee'),
                       	'requisition_slip.old_reference as requisition_old_reference',
+                      	'requisition_slip.job_order_code',
                       	// DB::raw('CASE 
 	                    //   	WHEN po.date_received IS NULL 
 	                    //   		OR po.received_by IS NULL 
@@ -65,6 +66,15 @@ class PurchaseOrdersController extends Controller {
 						// 		"CLOSED" 
 						// 	END AS po_status'
 						// )
+
+						DB::raw(
+							'CASE 
+							  WHEN requisition_slip.job_order_code IS NULL 
+								THEN null
+							  ELSE 
+								(SELECT assets.name FROM job_orders, assets WHERE assets.asset_code=job_orders.asset_code AND job_orders.job_order_code = requisition_slip.job_order_code)
+							  END as asset_name'
+						  ),
 						  
 						DB::raw('CASE 
 						  WHEN po.is_open = 1

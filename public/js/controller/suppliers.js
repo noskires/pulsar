@@ -9,7 +9,7 @@
         function SuppliersCtrl($stateParams, SuppliersSrvcs, $window, $uibModal){
             var vm = this;
             var data = {};
-            
+
             vm.loader_status = true;
             SuppliersSrvcs.suppliers({supplierCode:''}).then (function (response) {
                 if(response.data.status == 200)
@@ -23,8 +23,6 @@
             if($stateParams.supplierCode)
             {
                 vm.supplierCode = $stateParams.supplierCode;
- 
-
                 SuppliersSrvcs.suppliers({supplierCode:vm.supplierCode}).then (function (response) {
                     if(response.data.status == 200)
                     {
@@ -93,7 +91,7 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
 
-                        $state.go('list-suppliers', { supplierCode:''});
+                        // $state.go('list-suppliers', { supplierCode:''});
                         vm.ok();
                     }
                     else {
@@ -110,7 +108,7 @@
                     if (response.data.status == 200) {
                         alert(response.data.message);
 
-                        $state.go('list-suppliers', { supplierCode:''});
+                        // $state.go('list-suppliers', { supplierCode:''});
                         vm.ok();
                     }
                     else {
@@ -122,6 +120,7 @@
 
             vm.ok = function() {
                 $uibModalInstance.close();
+                $state.go('list-suppliers', { supplierCode:''});
             };
             
             vm.routeTo = function(route){

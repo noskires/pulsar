@@ -334,6 +334,12 @@
 
             vm.poCode = $stateParams.poCode;
 
+            if(vm.formData.asset_name!=null){
+                vm.isRepair = 1;
+            }else{
+                vm.isRepair = 0;
+            }
+
              vm.personalDetails = [
             {
                 'po_code':vm.poCode,
@@ -351,7 +357,16 @@
                 }
             }, function (){ alert('Bad Request!!!') })
 
-            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', poStatus:0, isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+            // SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:'', poStatus:0, isRepair:2, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+            //     if(response.data.status == 200)
+            //     {
+            //         vm.supplies = response.data.data;
+            //         console.log(vm.supplies)
+            //     }
+            // }, function (){ alert('Bad Request!!!') })
+
+            SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:'', isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
+                console.log(response.data)
                 if(response.data.status == 200)
                 {
                     vm.supplies = response.data.data;
