@@ -329,19 +329,27 @@
             }, function () { alert('Bad Request!!!') })
         }
 
-        AssetRegistrationsSrvcs.list({ assetRegistrationCode: '', assetCode: $stateParams.asset_code }).then(function (response) {
+        AssetRegistrationsSrvcs.list({ assetRegistrationCode: '', assetCode: $stateParams.assetCode }).then(function (response) {
             if (response.data.status == 200) {
                 vm.assetRegistrations = response.data.data;
                 console.log(vm.assetRegistrations)
             }
         }, function () { alert('Bad Request!!!') })
 
-        JobOrdersSrvcs.jobOrders({ joCode: '', joStatus: '', assetCode: $stateParams.asset_code }).then(function (response) {
-            if (response.data.status == 200) {
+        // JobOrdersSrvcs.jobOrders({ joCode: '', joStatus: 1, date_started:'', assetCode: $stateParams.assetCode , assetCategory:'' }).then(function (response) {
+        //     // JobOrdersSrvcs.jobOrders({ joCode: '', joStatus: '', assetCode: $stateParams.asset_code }).then(function (response) {
+        //     if (response.data.status == 200) {
+        //         vm.jobOrders = response.data.data;
+        //         console.log(vm.jobOrders)
+        //     }
+        // }, function () { alert('Bad Request!!!') }) 
+        JobOrdersSrvcs.jobOrders({joCode:'', joStatus:1, date_started:'', assetCode:$stateParams.assetCode, assetCategory:''}).then (function (response) {
+            if(response.data.status == 200)
+            {
                 vm.jobOrders = response.data.data;
                 console.log(vm.jobOrders)
             }
-        }, function () { alert('Bad Request!!!') })
+        }, function (){ alert('Bad Request!!!') })
 
         InsuranceSrvcs.insuranceItems({ insuranceCode: '', insuranceItemCode: '', assetCode: $stateParams.assetCode, insuranceItemStatus: 1 }).then(function (response) {
             if (response.data.status == 200) {

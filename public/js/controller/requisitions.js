@@ -216,7 +216,8 @@
             var vm = this;
             var data = {};
             
-
+           
+       
             vm.itemArray = [
                 {id: 1, name: 'first'},
                 {id: 2, name: 'second'},
@@ -486,7 +487,7 @@
         RequisitionSlipModalInstanceCtrl.$inject = ['$state', '$stateParams', '$uibModalInstance', 'formData', 'RequisitionsSrvcs', 'EmployeesSrvcs', 'ReceiptSrvcs', 'SuppliesSrvcs', '$window'];
         function RequisitionSlipModalInstanceCtrl ($state, $stateParams, $uibModalInstance, formData, RequisitionsSrvcs, EmployeesSrvcs, ReceiptSrvcs, SuppliesSrvcs, $window) {
 
-            
+ 
 
             var vm = this;
             vm.formData = formData.requisition;
@@ -527,6 +528,8 @@
                     console.log(vm.requisitionSlipItems)
                 }
             }, function (){ alert('Bad Request!!!') })
+
+            // alert(vm.isRepair)
 
             SuppliesSrvcs.supplies({supplyCode:'', supplyCategory:vm.formData.request_type, quantityStatus:'', isRepair: vm.isRepair, reOrderLevelOutofSupply:3, supplyCategoryCode:''}).then (function (response) {
                 console.log(response.data)
