@@ -9,7 +9,7 @@
   @include('layout.styles')
 
   @if(Config::get('defaults.default.is_local')==1)
-  <base href="/asseterik-live/">
+  <base href="/pulsar-master/">
   @else
   <base href="/">
   @endif
@@ -95,9 +95,7 @@
 
   <footer class="main-footer">
     <!-- Application Version Here --><div class="pull-right hidden-xs"><b>Version</b> 1.1.0</div><!-- /.Application Version -->
-    Copyright &copy;2020 Bizlogiks.ph. All rights reserved.
-    <code class="pull-right text-black">Software Licence #: BZLGS-2020-01010000 (Pulsar Construction)</code> 
-    <!-- HexBinary"P"=01010000 -->
+    <strong>Pulsar Construction &nbsp;</strong> Copyright &copy;2020. All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

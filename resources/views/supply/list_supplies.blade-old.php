@@ -34,7 +34,7 @@
                 <label for="requestpurpose" class="col-sm-2 control-label">Supply Category*</label>
                 <div class="col-sm-4">
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="sc.supplyDetails.category">
-                    <option selected="selected" value="">SELECT SUPPLY CATEGORY</option>
+                    <option selected="selected" value="">- - SELECT SUPPLY CATEGORY - -</option>
                     <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in sc.supplyCategories"><%supplyCategory.supply_category_name%></option>
                   </select>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="col-sm-2">
                 
                 <select class="form-control select2" style="width: 100%;" required="" ng-model="sc.supplyDetails.stockUnit">
-                <option selected="selected" value="">SELECT STOCK UNIT</option>
+                <option selected="selected" value="">- - SELECT STOCK UNIT - -</option>
                   <option ng-value="stockUnit.stock_unit_code" ng-repeat="stockUnit in sc.stockUnits"><%stockUnit.stock_unit_name%></option>
                 </select>
                 </div>
@@ -59,7 +59,7 @@
               <div class="form-group col-sm-12">
                 <label for="supplydescription" class="col-sm-2 control-label">Description</label>
                 <div class="col-sm-4"><textarea class="form-control" id="supplydescription" rows="1" ng-model="sc.supplyDetails.description"></textarea></div>
-                <!-- <label for="supplyimg" class="col-sm-2 control-label">Upload Image</label>
+                <label for="supplyimg" class="col-sm-2 control-label">Upload Image</label>
                 <div class="col-sm-4">
                   <div class="input-group">
                     <label class="input-group-btn">
@@ -67,7 +67,7 @@
                     </label>
                     <input type="text" class="form-control" id="supplyimg" readonly>
                   </div>
-                </div> -->
+                </div>
               </div>
 
             </div>
@@ -98,25 +98,28 @@
                 <div class="box-body">
                   <div class="form-group col-sm-12">
 
-                    <label class="col-sm-1 control-label">Category</label>
+                    <label class="col-sm-1 control-label">Supply Category</label>
                     <div class="col-sm-4">
-                      <select class="form-control select2" style="width: 100%;"  ng-model="supplyFilterDetails.supplyCategory" ng-init="supplyFilterDetails.supplyCategory=''">
-                        <option selected="selected" value="">SUPPLY CATEGORY</option>
-                        <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in sc.supplyCategories"><%supplyCategory.supply_category_name%></option>
-                      </select>
-                    </div>
+                    
+                    <select class="form-control select2" style="width: 100%;"  ng-model="supplyFilterDetails.supplyCategory" ng-init="supplyFilterDetails.supplyCategory=''">
+                      <option selected="selected" value="">- - SELECT SUPPLY CATEGORY - -</option>
+                      <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in sc.supplyCategories"><%supplyCategory.supply_category_name%></option>
+                    </select>
+                  </div>
 
                   <div class="col-sm-3">
+
                   <select class="form-control select2" style="width: 100%;" ng-model="supplyFilterDetails.reOrderLevelOutofSupply" ng-init="supplyFilterDetails.reOrderLevelOutofSupply=''">
-                    <option value="">SUPPLY STATUS</option>
+                    <option value="">-- SUPPLIES STATUS -- </option>
                     <option value="3">All</option>
                     <option value="1">Reached Re-order Level</option>
                     <option value="2">Out of Supply</option>
                   </select>
+
                   </div>
 
                   <div class="col-sm-1">
-                    <button class="btn btn-large btn-success" ng-click="sc.filterSupply(supplyFilterDetails)"><span class="glyphicon glyphicon-filter"></span> Filter Display</button>
+                  <button class="btn btn-large btn-success" ng-click="sc.filterSupply(supplyFilterDetails)">FILTER DISPLAY</button>
                   </div>
 
                   </div>
@@ -169,11 +172,7 @@
 <script type="text/javascript">
 $(function () {
 
-$('.select2').select2();
-
-//   $('#datepicker').datepicker({
-//    autoclose: true
-//   })
+  $('.select2').select2();
 
 });
 </script>
@@ -240,7 +239,7 @@ $('.select2').select2();
   <div class="modal-dialog modal-lg" style="width: 1200px;">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.ok()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title"><li class="fa fa-briefcase"></li> Supply ID: <b><%vm.formData.supply_code%></b></h4>
       </div>
@@ -255,16 +254,16 @@ $('.select2').select2();
                   <label for="requestpurpose" class="col-sm-2 control-label">Supply Category*</label>
                   <div class="col-sm-4">
                     <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.category_code">
-                      <option selected="selected" value="0">SUPPLY CATEGORY</option>
+                      <option selected="selected" value="0">- - select supply category - -</option>
                       <option ng-value="supplyCategory.supply_category_code" ng-repeat="supplyCategory in vm.supplyCategories"><%supplyCategory.supply_category_name%></option>
                     </select>
                   </div>
 
                   <label class="col-sm-2 control-label">Supply Unit*</label>
-                  <div class="col-sm-4">
+                  <div class="col-sm-2">
 
                     <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.stock_unit_code">
-                      <option selected="selected" value="0">STOCK UNIT</option>
+                      <option selected="selected" value="0">- - select stock unit - -</option>
                       <option ng-value="stockUnit.stock_unit_code" ng-repeat="stockUnit in vm.stockUnits"><%stockUnit.stock_unit_name%></option>
                     </select>
 
