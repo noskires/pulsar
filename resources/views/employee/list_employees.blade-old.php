@@ -4,7 +4,6 @@
   <!--Content Header (Page header) -->
   <section class="content-header">
   <h1><span class="fa fa-user"> </span> Manage Employees</h1>
-  <p>Click Employee User ID to view more employee information.</p>
   <ol class="breadcrumb">
     <li><a href=""><i class="fa fa-th"></i> Dashboard</a></li>
     <li class="active">Employee Manager</li>
@@ -120,7 +119,7 @@
                 </div>
                 <label class="col-sm-2 control-label">Unit</label>
                 <div class="col-sm-4">
-                    <select class="form-control select2" style="width: 100%;" ng-model="ec.employeeDetails.unit">
+                    <select class="form-control select2" style="width: 100%;" required="" ng-model="ec.employeeDetails.unit">
                       <option selected="selected" value="">SELECT UNIT</option>
                       <option ng-value="unit.org_code" ng-repeat="unit in ec.units"><%unit.unit_name%></option>
                     </select>
@@ -224,12 +223,6 @@
     </div>
   </section>
 
-  <!-- Datepicker position -->
-  <script type="text/javascript"> 
-    $('#datepicker-bday').datepicker({
-    orientation: 'auto bottom'
-    });
-  </script>
 
   <script type="text/javascript">
   $(function () {
@@ -318,11 +311,6 @@
                       </div>
 
                       <div class="form-group col-sm-12">
-                        <label class="col-sm-3 control-label">Address</label>
-                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.address"></div>
-                      </div>                      
-
-                      <div class="form-group col-sm-12">
                         <label class="col-sm-3 control-label">Department</label>
                         <div class="col-sm-9">
                         <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.department_code" ng-change="vm.selectDepartment(vm.formData.department_code)">
@@ -375,6 +363,11 @@
                       <div class="form-group col-sm-12">
                         <label class="col-sm-3 control-label">PagIbig Number</label>
                         <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.pagibig_number"></div>
+                      </div>
+
+                      <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">Address</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="emp_sfx" ng-model="vm.formData.address"></div>
                       </div>
 
                     </div>
