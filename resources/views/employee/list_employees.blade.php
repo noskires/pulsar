@@ -88,6 +88,30 @@
               </div>
 
               <div class="form-group col-sm-12">
+                <label for="controlnumber" class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-4"><input type="text" class="form-control" ng-model="ec.employeeDetails.address"  tabindex="4"></div>
+
+                <label for="controlnumber" class="col-sm-2 control-label">Date Hired</label>
+                <div class="col-sm-4"><input type="text" class="form-control" ng-model="ec.employeeDetails.date_hired" datepicker tabindex="8"></div>
+              </div>
+
+              <div class="form-group col-sm-12">
+                <label for="controlnumber" class="col-sm-2 control-label">TIN</label>
+                <div class="col-sm-4"><input type="text" class="form-control" ng-model="ec.employeeDetails.tin" tabindex="4"></div>
+
+                <label for="controlnumber" class="col-sm-2 control-label">SSS</label>
+                <div class="col-sm-4"><input type="text" class="form-control" ng-model="ec.employeeDetails.sss_number" tabindex="8"></div>
+              </div>
+
+              <div class="form-group col-sm-12">
+                <label for="controlnumber" class="col-sm-2 control-label">Philhealth</label>
+                <div class="col-sm-4"><input type="text" class="form-control" ng-model="ec.employeeDetails.philhealth_number" tabindex="4"></div>
+
+                <label for="controlnumber" class="col-sm-2 control-label">Pag Ibig Number</label>
+                <div class="col-sm-4"><input type="text" class="form-control" ng-model="ec.employeeDetails.pagibig_number" tabindex="8"></div>
+              </div>
+
+              <div class="form-group col-sm-12">
                 <hr style="border-color:#e1e1e1;border-width:1px 0;">
                 <!-- <label class="col-sm-2 control-label"></label>
                 <div class="col-sm-10 text-blue"><h4><i class="fa fa-clone"></i><b> Assignment</b></h4></div> -->

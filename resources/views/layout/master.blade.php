@@ -9,7 +9,7 @@
   @include('layout.styles')
 
   @if(Config::get('defaults.default.is_local')==1)
-  <base href="/asseterik-live/">
+  <base href="/pulsar-master/">
   @else
   <base href="/">
   @endif
