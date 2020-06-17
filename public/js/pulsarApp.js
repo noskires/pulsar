@@ -59,6 +59,7 @@
                         // format: "mm/dd/yyyy",
                         immediateUpdates: true,
                         todayBtn: true,
+                        orientation: 'auto bottom'
                         // todayHighlight: true
                     })
                     // .datepicker("setDate", "0");
@@ -77,7 +78,8 @@
                         ngModelCtrl.$setViewValue(event.date);
                     }
                     elem.datepicker({
-                        autoclose: true
+                        autoclose: true,
+                        orientation: 'auto bottom'
                     });
                 }
             };
