@@ -3,7 +3,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <h1><span class="fa fa-users"> </span> User Accounts</h1>
+  <h1><span class="fa fa-users"> </span> User Accounts 1</h1>
     <p>
       <b>Note:</b> Upon resetting a password, the user must log-in using the generated reset code and then will be required to nominate a new password. <br>
     </p>

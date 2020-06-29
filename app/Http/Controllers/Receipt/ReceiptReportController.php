@@ -48,11 +48,17 @@ class ReceiptReportController extends Controller {
                 'rt.receipt_type_name',
 				'vi.voucher_code',
 				'po.old_reference',
-				'po.po_code'
+				'po.po_code',
+				'po.date_received',
+				'po.date_inspected',
+				DB::raw('CONCAT(trim(CONCAT(reqby.lname," ",COALESCE(reqby.affix,""))),", ", COALESCE(reqby.fname,"")," ", COALESCE(reqby.mname,"")) as requested_by_name'),
+				DB::raw('CONCAT(trim(CONCAT(insby.lname," ",COALESCE(insby.affix,""))),", ", COALESCE(insby.fname,"")," ", COALESCE(insby.mname,"")) as inspected_by_name')
               )
                ->leftjoin('receipt_types as rt','rt.receipt_type_code','=','r.receipt_type')
                ->leftjoin('voucher_items as vi','vi.receipt_code','=','r.receipt_code')
                ->leftjoin('purchase_orders as po','po.po_code','=','r.purchase_order_code')
+			   ->leftjoin('employees as reqby','reqby.employee_code','=','po.received_by')
+			   ->leftjoin('employees as insby','insby.employee_code','=','po.inspected_by')
                ->where('r.receipt_code', $receiptCode)->first();
 
 				if($data->payee_type=="EMPLOYEE")

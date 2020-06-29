@@ -214,9 +214,13 @@ $(function () {
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs pull-right">
       <li class="active"><a href="#tab_1-1" data-toggle="tab">Job Order Details</a></li>
-      <li class="active"><a role="menuitem" tabindex="-1" href="#" ui-sref="requesition-asset-create2({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()">Create R.S.</a></li>
+      <li class="active">
+        <a role="menuitem" tabindex="-1" href="#" style="background-color: #00a65a !important; cursor: pointer; font-weight: 500; color: white;"
+        ui-sref="requesition-asset-create2({jobOrderCode:vm.formData.jobOrder.job_order_code})" ng-click="vm.ok()">
+        <i class="fa fa-file-text" aria-hidden="true"></i> &nbsp; Create Requisition </a>
+      </li>
 
-      <li class="pull-left header"><h4><%vm.formData.jobOrder.name%> : <b><%vm.formData.jobOrder.code%></b></h4></li>
+      <li class="pull-left header"><h4><%vm.formData.jobOrder.name%>: <b><%vm.formData.jobOrder.code%></b></h4></li>
       </ul>
       <br>
       <div class="tab-content">
@@ -229,7 +233,7 @@ $(function () {
           </div>
         </div> -->
         <form class="form-horizontal" id="">
-        <div class="col-sm-9"> 
+        <div class="col-sm-12"> 
           <div class="box-body">
           <div class="form-group">
             <label for="jodate" class="col-sm-3 control-label">Job Order Date</label>
@@ -258,12 +262,13 @@ $(function () {
           </div>
           <div class="form-group">
             <label for="particulars" class="col-sm-3 control-label">Particulars</label>
-          <div class="col-sm-9"><textarea class="form-control name="particulars" rows="2"  ng-model="vm.formData.jobOrder.particulars"></textarea></div>
+          <div class="col-sm-9"><textarea class="form-control name="particulars" rows="1"  ng-model="vm.formData.jobOrder.particulars"></textarea></div>
           </div>
           </div>
         </div>
         </div>
       <!--  END ROW TOP  -->
+      <br>
       <!--  ROW BOT  -->
         <div class="row">     
       <!--  STARTED  --> 
@@ -293,7 +298,7 @@ $(function () {
           <label class="col-sm-12 control-label">Conducted by</label>
           <div class="col-sm-12">
               <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.conducted_by">
-                <option value="">- - SELECT EMPLOYEE - -</option>
+                <option value="">SELECT EMPLOYEE</option>
                 <option ng-value=employee.employee_code ng-repeat="employee in vm.employees"><%employee.employee_name%></option>
               </select>
           </div>
@@ -308,7 +313,7 @@ $(function () {
           <label for="assessedby" class="col-sm-12 control-label">Assessed by</label>
           <div class="col-sm-12">
               <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.assessed_by">
-                <option value="">- - SELECT EMPLOYEE - -</option>
+                <option value="">SELECT EMPLOYEE</option>
                 <option ng-value=employee.employee_code ng-repeat="employee in vm.employees"><%employee.employee_name%></option>
               </select>
           </div>
@@ -331,7 +336,7 @@ $(function () {
           <label class="col-sm-12 control-label">Approved by</label>
           <div class="col-sm-12">
             <select class="form-control select2" style="width: 100%;" ng-model="vm.formData.jobOrder.approved_by">
-              <option value="">- - SELECT EMPLOYEE - -</option>
+              <option value="">SELECT EMPLOYEE</option>
               <option ng-value=employee.employee_code ng-repeat="employee in vm.employees"><%employee.employee_name%></option>
             </select>
           </div>

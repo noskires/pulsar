@@ -250,7 +250,10 @@
               </td>
               <td><%requisition.date_inspected%></td>  
               <td><code class="text-primary"><%requisition.status%></code></td>  
-              <td> <span ng-if="requisition.status!='CLOSED'"> <a href="#" ui-sref="ris-edit({requisitionSlipCodeEdit:requisition.requisition_slip_code})"><b>Edit</b></a> | <a  href="#" ui-sref="ris-delete({requisitionSlipCodeDelete:requisition.requisition_slip_code})"><b>Delete</b></a></span></td>
+              <td> <span ng-if="requisition.status!='CLOSED'"> <a href="#" ui-sref="ris-edit({requisitionSlipCodeEdit:requisition.requisition_slip_code})">
+                <i class="fa fa-pencil-square-o text-success" aria-hidden="true"></i></a> | 
+                <a  href="#" ui-sref="ris-delete({requisitionSlipCodeDelete:requisition.requisition_slip_code})">
+                <i class="fa fa-trash text-danger" aria-hidden="true"></i></a></span></td>
             </tr> 
             
             </tbody>
@@ -333,14 +336,14 @@ $('.select2').select2();
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
                           </td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_desc" disabled required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_quantity" disabled required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_unit" disabled required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty_requested" required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_total" required style="font-size:11.5px;"/></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.item_purpose" required style="font-size:11.5px;"/></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_desc" disabled required /></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_quantity" disabled required /></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_unit" disabled required /></td>
+                          <td><input type="number" class="form-control" ng-model="vm.supplyDetail.supply_qty_requested" required /></td>
+                          <td><input type="number" class="form-control" ng-model="vm.supplyDetail.supply_qty" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required /></td>
+                          <td><input type="number" class="form-control" ng-model="vm.supplyDetail.supply_cost" ng-keyup="vm.computeTotalPerSupply(vm.supplyDetail.supply_qty, vm.supplyDetail.supply_cost)" required /></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_total" disabled required /></td>
+                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.item_purpose" required /></td>
                         </tr>
                       </tbody>
                     </table>
@@ -365,7 +368,7 @@ $('.select2').select2();
                   <form>
 
                   <!-- Grand Total : <%vm.supplyGrandTotal%> -->
-                  <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-2" width="100%" style="font-size:11.5px;">
+                  <table datatable="ng" class="table table-bordered table-hover" name="tb-requisitions-2" width="100%">
                       <thead>
                         <tr>
                           <th width="13%">Supply Name</th> 
@@ -412,7 +415,7 @@ $('.select2').select2();
               <div class="panel panel-default">
                 <div class="panel-body">
                   <form ng-model="vm.formData">
-                      <h4><b>**Withdrawal Information</b></h4><br>
+                      <h4><b>Withdrawal Information</b></h4><br>
                       <div class="form-group col-sm-12">
                         <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
                         <div class="col-sm-4">
@@ -453,7 +456,7 @@ $('.select2').select2();
                       </div>
 
                       <div class="form-group col-sm-12">
-                        <label class="col-sm-2 control-label">Internal/External Delivery Receipt</label>
+                        <label class="col-sm-2 control-label">Internal/ External Delivery Receipt</label>
                           <div class="col-sm-4">
                              <textarea class="form-control pull-right" id="" ng-model="vm.formData.withdrawal_remarks"></textarea>
                           </div>
@@ -604,20 +607,17 @@ $('.select2').select2();
 </script>
 
 <script type="text/ng-template" id="ris-delete.modal"> 
-  <div>
-    <div class="modal-dialog" style="width:100%;">
+    <div class="modal-dialog modal-sm" style="width:100%;">
       <div class="modal-header">
           <button type="button" class="close" ui-sref="list-requesition2" ng-click="vm.ok()">
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title"><li class="fa fa-file-o"></li> Requisition Control No: <b><%vm.formData.requisition_slip_code%></b></h4>
         </div>
       <div class="modal-body">
-        <h4> Are you sure you want to delete this record ? </h4>
-        <br>
-
-        <button class="btn btn-warning pull-right" data-toggle="confirmation" ng-click="vm.deleteRequisitionSlip(vm.formData.requisition_slip_code)">DELETE</button>
-
+        <h4> Are you sure you want to delete this Requisition? </h4>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger pull-right" data-toggle="confirmation" ng-click="vm.deleteRequisitionSlip(vm.formData.requisition_slip_code)">DELETE RECORD</button>
       </div>
     </div>
-  </div>
 </script>

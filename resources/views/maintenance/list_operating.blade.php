@@ -22,8 +22,7 @@
           </button> &nbsp; 
           <button class="btn btn-primary" data-toggle="collapse" data-target="#filter" data-parent="#btn-top">
               <span class="glyphicon glyphicon-filter"></span> Filter
-          </button> <br> 
-
+          </button> 
 <!-- ADD OPERATING RECORD SLIDE -->
           <div id="addoperating" class="collapse"><br>
           <!-- general form elements -->
@@ -45,7 +44,7 @@
                   <div class="col-sm-9">
 
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="oc.operationDetails.assetCode" ng-init="oc.operationDetails.assetCode=''">
-                    <option selected="selected" value="">- - SELECT EQUIPMENT - -</option>
+                    <option selected="selected" value="">SELECT EQUIPMENT</option>
                     <option ng-value="asset.asset_code" ng-repeat="asset in oc.assets"><%asset.name + " : " + asset.code%></option> 
                   </select>
 
@@ -56,7 +55,7 @@
                   <div class="col-sm-9">
 
                   <select class="select2 form-control" style="width: 100%;" required="" ng-model="oc.operationDetails.projectCode" ng-init="oc.operationDetails.projectCode=''">
-                    <option selected="selected" value="">- - SELECT PROJECT - -</option>
+                    <option selected="selected" value="">SELECT PROJECT</option>
                     <option value="<%project.project_code%>" ng-repeat="project in oc.projects"><%project.code +" - "+project.name%></option>
                   </select>
                   
@@ -269,7 +268,7 @@
                   <td align="right"><%operation.gas_consumption | number:2%></td>
                   <td align="right"><%operation.oil_consumption | number:2%></td>
                   <td align="right"><%operation.number_loads | number:2%></td>
-                  <td align="center"> <a href="#" ui-sref="operation-edit({operationCodeEdit:operation.operation_code})"><b>Edit</b></a> </td>
+                  <td align="center"> <a href="#" ui-sref="operation-edit({operationCodeEdit:operation.operation_code})"><code class="bg-success text-black">EDIT</code></a> </td>
                 </tr>
                 </tbody>
               </table>
@@ -314,7 +313,7 @@ $(function () {
                   <div class="col-sm-9">
 
                   <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.formData.asset_code" ng-init="oc.operationDetails.assetCode=''">
-                    <option selected="selected" value="">- - SELECT EQUIPMENT - -</option>
+                    <option selected="selected" value="">SELECT EQUIPMENT</option>
                     <option ng-value="asset.asset_code" ng-repeat="asset in vm.assets"><%asset.name + " : " + asset.code%></option> 
                   </select>
 
@@ -325,7 +324,7 @@ $(function () {
                   <div class="col-sm-9">
 
                   <select class="select2 form-control" style="width: 100%;" required="" ng-model="vm.formData.project_code">
-                    <option selected="selected" value="">- - SELECT PROJECT - -</option>
+                    <option selected="selected" value="">SELECT PROJECT</option>
                     <option value="<%project.project_code%>" ng-repeat="project in vm.projects"><%project.code +" - "+project.name%></option>
                   </select>
                   

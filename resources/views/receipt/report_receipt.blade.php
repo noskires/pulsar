@@ -117,6 +117,36 @@
       </div>
     </div>
 <!-- end::RECEIPT DETAILS -->    
+<br>
+<div class="col-md-12" style="border-bottom: 2px dotted gray;"> </div>   
+
+<!-- DELIVERY DETAILS -->    
+    <div class="row" style="font-size:11.5px;">
+      <div class="col-md-12">
+        <h4><b>DELIVERY INFORMATION</b></h4>
+          <table width="100%">
+          <tr>
+            <td align="left" width="15%" style="font-weight: bold;">Received by:</td>
+            <td align="left"> {{$receipt->requested_by_name}} </td>
+            <td align="left" width="15%" style="font-weight: bold;">Inspected by:</td>
+            <td align="left"> {{$receipt->inspected_by_name}} </td>
+          </tr>
+          <tr style="font-size:11px;">
+            <td></td>
+            <td style="font-style: italic;"> </td>
+            <td></td>
+            <td style="font-style: italic;"> </td>
+          </tr>
+          <tr>
+            <td align="left" width="15%" style="font-weight: bold;">Date Received:</td>
+            <td align="left"> {{$receipt->date_received}} </td>
+            <td align="left" width="15%" style="font-weight: bold;">Date Inspected:</td>
+            <td align="left"> {{$receipt->date_inspected}} </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+<!-- end::DELIVERY DETAILS -->   
 </section>
 </div>
 <br><br>

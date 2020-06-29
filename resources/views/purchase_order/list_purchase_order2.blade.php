@@ -225,7 +225,10 @@
                 <span ng-if="po.requesting_employee.length > 12">...</span>
               </td>
               <td><code class="text-primary"><%po.po_status%></code></td>
-              <td> <span ng-if="po.po_status!='CLOSED'"> <a href="#" ui-sref="po-edit({poCodeEdit:po.po_code})"><b>Edit</b></a> | <a  href="#" ui-sref="po-delete({poCodeDelete:po.po_code})"><b>Delete</b></a></span></td>
+              <td> <span ng-if="po.po_status!='CLOSED'"> 
+                <a href="#" ui-sref="po-edit({poCodeEdit:po.po_code})"><i class="fa fa-pencil-square-o text-success" aria-hidden="true"></i></a> | 
+                <a  href="#" ui-sref="po-delete({poCodeDelete:po.po_code})"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></span>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -285,7 +288,7 @@ $('.select2').select2();
 <!-- MODAL CONTENTS -->
 <script type="text/ng-template" id="poInfo.modal"> 
   <div>
-    <div class="modal-dialog" style="width:100%;">
+    <div class="modal-dialog" style="width:110rem;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" ui-sref="list-po2" ng-click="vm.ok()">
@@ -305,16 +308,16 @@ $('.select2').select2();
                         <tr>
                           <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th>  -->
                           <th>Supply Name</th>
-                          <th width="25%">Description</th> 
-                          <th width="9%">Stock Unit</th>
-                          <th width="9%">Quantity</th>
+                          <th width="30%">Description</th> 
+                          <th width="15%">Stock Unit</th>
+                          <th width="15%">Quantity</th>
                         </tr>
                       </thead>
                       <tbody>
                         <!-- <tr ng-repeat="personalDetail in vm.personalDetails" >
                           <td>
                             <select class="form-control select2" style="width: 100%;" required="" ng-model="personalDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(parentIndex, personalDetail.supply_name)">
-                              <option value="">- - SELECT SUPPLY - -</option>
+                              <option value="">SELECT SUPPLY</option>
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
                           </td>
@@ -326,13 +329,13 @@ $('.select2').select2();
                         <tr>
                           <td>
                             <select class="form-control select2" style="width: 100%;" required="" ng-model="vm.supplyDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(vm.supplyDetail.supply_name)">
-                              <option value="">- - SELECT SUPPLY - -</option>
+                              <option value="">SELECT SUPPLY</option>
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
                           </td>
                           <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_desc" disabled required/></td>
                           <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_unit" disabled required="" /></td>
-                          <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_qty"  required/></td>
+                          <td><input type="number" class="form-control" ng-model="vm.supplyDetail.supply_qty"  required/></td>
                         </tr>
                       </tbody>
                     </table>
@@ -387,12 +390,12 @@ $('.select2').select2();
               <div class="panel panel-default">
                 <div class="panel-body">
                   <form ng-model="vm.formData">
-                      <h4><b>**Delivery Information</b></h4><br>
+                      <h4><b>Delivery Information</b></h4><br>
                       <div class="form-group col-sm-12">
                         <label for="controlnumber" class="col-sm-2 control-label">Received By</label>
                         <div class="col-sm-4">
                           <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.received_by" ng-disabled="vm.formData.po_status=='CLOSED'">   
-                              <option value="">- - SELECT EMPLOYEE - -</option>
+                              <option value="">SELECT EMPLOYEE</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <%employee.employee_name%>
                               </option>
@@ -401,7 +404,7 @@ $('.select2').select2();
                         <label for="controlnumber" class="col-sm-2 control-label">Inspected by</label>
                         <div class="col-sm-4">
                           <select class="form-control select2" style="width:100%;" required ng-model="vm.formData.inspected_by" ng-disabled="vm.formData.po_status=='CLOSED'">   
-                              <option value="">- - SELECT EMPLOYEE - </option>
+                              <option value="">SELECT EMPLOYEE</option>
                               <option ng-value="employee.employee_code" ng-repeat="employee in vm.employees">
                                 <%employee.employee_name%>
                               </option>
@@ -423,17 +426,6 @@ $('.select2').select2();
                         <input ng-disabled="vm.formData.status" type="text" class="form-control pull-right" id="" ng-model="vm.formData.date_inspected" datepicker autocomplete="off" readonly="">
                       </div></div>
                       </div>
-                        <div class="form-group" >
-                          <div class="form-group">
-                            <input type="button" ng-if="vm.formData.po_status=='OPEN'"  class="btn btn-danger pull-left" value="Save Changes" style="margin-right: 30px;" ng-click="vm.updatePo(vm.formData)">
-                          </div>
-                        </div>
-
-                        <div class="form-group" >
-                          <div class="form-group">
-                            <input type="button" ng-if="vm.formData.po_status=='CLOSED'"  class="btn btn-danger pull-left" value="Re-open" style="margin-right: 30px;" ng-click="vm.updatePoOpen(vm.formData)">
-                          </div>
-                        </div>
                   </form>
                 </div>
               </div>
@@ -443,6 +435,8 @@ $('.select2').select2();
         </div>
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
+          <input type="button" ng-if="vm.formData.po_status=='OPEN'"  class="btn btn-success" value="✔ Finalise Purchase Order" style="margin-right: 5px;" ng-click="vm.updatePo(vm.formData)">
+          <input type="button" ng-if="vm.formData.po_status=='CLOSED'"  class="btn btn-warning" value="✎ Re-open Purchase Order" style="margin-right: 5px;" ng-click="vm.updatePoOpen(vm.formData)">
           <a type="button" class="btn btn-info" ng-click="vm.printPurchaseOrderDetails(vm.formData.po_code)" target="_blank" ng-href="<%vm.url%>"><li class="fa fa-print"></li> Print</a>
           
         </div>
@@ -589,9 +583,10 @@ $('.select2').select2();
         <h4 class="modal-title"><li class="fa fa-file-o"></li> Purchase Order No: <b><%vm.formData.po_code%></b></h4>
       </div>
       <div class="modal-body">
-        <h4> Are you sure you want to delete this record ? </h4>
-        <br>
-        <button class="btn btn-warning pull-right" data-toggle="confirmation" ng-click="vm.deletePoBtn(vm.formData.po_code)">DELETE</button>
+        <h4> Are you sure you want to delete this Purchase Order? </h4>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger pull-right" data-toggle="confirmation" ng-click="vm.deletePoBtn(vm.formData.po_code)">DELETE RECORD</button>
       </div>
     </div>
   </div>
