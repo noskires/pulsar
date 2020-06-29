@@ -103,11 +103,11 @@
       </div>
     </div>
 <!-- end::PURCHASE ORDER DETAILS --> 
-<br>
-<div class="col-md-12" style="border-bottom: 2px dotted gray;"> </div>   
+<!-- <br>
+<div class="col-md-12" style="border-bottom: 2px dotted gray;"> </div>   --> 
 
 <!-- DELIVERY DETAILS -->    
-    <div class="row" style="font-size:11.5px;">
+<!--     <div class="row" style="font-size:11.5px;">
       <div class="col-md-12">
         <h4><b>DELIVERY INFORMATION</b></h4>
           <table width="100%">
@@ -131,7 +131,7 @@
           </tr>
         </table>
       </div>
-    </div>
+    </div> -->
 <!-- end::DELIVERY DETAILS -->      
 </section>
 </div>

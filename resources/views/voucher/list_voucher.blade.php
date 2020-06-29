@@ -236,7 +236,7 @@ $('.select2').select2();
 
 <script type="text/ng-template" id="voucherInfo.modal">
   <div>
-    <div class="modal-dialog" style="width:100%">
+    <div class="modal-dialog" style="overflow:auto; width:1100px;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" ui-sref="list-voucher" ng-click="vm.ok()">

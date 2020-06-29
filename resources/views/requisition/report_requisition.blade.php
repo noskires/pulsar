@@ -84,8 +84,8 @@
             <th align="left">Stock Unit</th>
             <th align="left">Qty Requested</th>
             <th align="left">Qty Issued</th>
-            <th align="left">Price</th>
-            <th align="left">Total</th>
+            <!-- <th align="left">Price</th> -->
+            <!-- <th align="left">Total</th> -->
             <th align="left">Purpose</th>
           </tr>
           </thead>
@@ -97,8 +97,8 @@
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_stock_unit}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_quantity_requested}} </td>
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_quantity}} </td>
-            <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_cost}} </td>
-            <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_total}} </td>
+            <!-- <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_cost}} </td> -->
+            <!-- <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_total}} </td> -->
             <td style="border-top: 1px solid #e1e1e1;"> {{$requisition_slip_item->item_purpose}} </td>
           </tr>       
           @endforeach 

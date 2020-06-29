@@ -142,7 +142,7 @@
           <th>Supply Unit</th>
           <th>Re-order Level</th>
           <th>Supply Qty</th>
-          <th>Options</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -154,7 +154,8 @@
           <td><%supply.stock_unit_name%></td> 
           <td><%supply.re_order_level%></td> 
           <td><%supply.quantity%></td> 
-          <td><a href="#" ui-sref="edit-supply({supplyCode2:supply.supply_code})"><code class="text-white bg-blue">EDIT</code></a></td> 
+          <td><a href="#" ui-sref="edit-supply({supplyCode2:supply.supply_code})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+</a></td> 
         </tr>
         </tbody>
       </table>

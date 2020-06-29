@@ -64,10 +64,24 @@
 	  to{ bottom:0; opacity:1 }
 	}
 
-	/* #load_div {
-	  display: none;
-	} */
-  /*end Page loader style*/
+	/*Datatable Override Design*/
+	th.dow, th.datepicker-switch, th.prev, th.next { background-color: gray !important; }
+	.datepicker td, .datepicker th {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+	}
+	.dataTable tbody tr:hover { background-color: #ffa;	}
+	.dataTable tbody tr:hover > .sorting_1 { background-color: #ffa; }
+	.dataTable tbody tr .sorting_1 { background-color: #e3e3e3; }	
+
+
+	/*Global Table Override Design*/
+	tr td { padding: 0.75px !important; text-align: left !important;}
+	th {cursor: pointer !important; vertical-align: middle !important;}
+
+
+
   </style>
 
 </head>
@@ -94,9 +108,9 @@
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
-    <!-- Application Version Here --><div class="pull-right hidden-xs"><b>Version</b> 1.1.0</div><!-- /.Application Version -->
+    <!-- Application Version Here --><div class="pull-right hidden-xs"><b>Version</b> 1.2.0</div><!-- /.Application Version -->
     Copyright &copy;2020 Bizlogiks.ph. All rights reserved.
-    <code class="pull-right text-black">Software Licence #: BZLGS-2020-01010000 (Pulsar Construction)</code> 
+    <code class="pull-right text-black">Software License #: BZLGS-2020-01010000 (Pulsar Construction)</code> 
     <!-- HexBinary"P"=01010000 -->
   </footer>
 </div>
