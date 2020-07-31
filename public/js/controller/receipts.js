@@ -480,7 +480,7 @@
             vm.removeSupplyBtn = function(receiptItemCode, receiptItemQuantity, supplyCode){
                 
                 vm.supplyGrandTotal = 0;
-                ReceiptSrvcs.deleteReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode}).then (function (response) {
+                ReceiptSrvcs.deleteReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode, is_warehouse:vm.formData.is_warehouse}).then (function (response) {
                     console.log(response.data.data)
                     alert(response.data.message)
                     ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:0}).then (function (response) {
@@ -505,7 +505,7 @@
             vm.returnSupplyBtn = function(receiptItemCode, receiptItemQuantity, supplyCode){
                 
                 vm.supplyGrandTotal = 0;
-                ReceiptSrvcs.returnReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode}).then (function (response) {
+                ReceiptSrvcs.returnReceiptItems({receiptItemCode:receiptItemCode, receiptItemQuantity:receiptItemQuantity, supplyCode:supplyCode, is_warehouse:vm.formData.is_warehouse}).then (function (response) {
                     console.log(response.data.data)
                     alert(response.data.message)
                     ReceiptSrvcs.receiptItems({receiptCode:vm.formData.receipt_code, receiptItemCode:'', receiptItemSupplyCode:'',isReturned:0}).then (function (response) {
