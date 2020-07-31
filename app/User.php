@@ -41,7 +41,7 @@ class User extends Authenticatable implements AudtitableContract
     public function smshere()
     {
         $user = new User();
-        $user->phone_number= '+639988964947';   // Don't forget specify country code.
+        $user->phone_number= '+11111111111';   // Don't forget specify country code.
         $user->notify(new SMSNotification());
     }
 

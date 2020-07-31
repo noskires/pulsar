@@ -28,7 +28,8 @@ class ReceiptsController extends Controller {
       'voucherCode'=>$request->input('voucherCode'),
       'voucherStatus'=>$request->input('voucherStatus'),
       'poCode'=>$request->input('poCode'),
-      'poStatus'=>$request->input('poStatus')
+      'poStatus'=>$request->input('poStatus'),
+      'isWarehouse'=>$request->input('isWarehouse')
     );
 
   	$receipts = DB::table('receipts as r')
@@ -40,6 +41,7 @@ class ReceiptsController extends Controller {
                 'r.receipt_date',
                 'r.payee_type',
                 'r.payee',
+                'r.is_warehouse',
                 'r.remarks',
                 'r.receiving_receipt_date',
                 'rt.receipt_type_name',
@@ -107,6 +109,10 @@ class ReceiptsController extends Controller {
       $receipts = $receipts->whereNull('r.purchase_order_code');
     }
 
+    if ($data['isWarehouse']){
+      $receipts = $receipts->where('r.is_warehouse', $data['isWarehouse']);
+    }
+
     $receipts = $receipts->groupBy(
                 'r.receipt_code', 
                 'r.purchase_order_code',
@@ -114,6 +120,7 @@ class ReceiptsController extends Controller {
                 'r.receipt_number',
                 'r.receipt_date',
                 'r.payee_type',
+                'r.is_warehouse',
                 'r.payee',
                 'r.remarks',
                 'r.receiving_receipt_date',
@@ -223,7 +230,10 @@ class ReceiptsController extends Controller {
     $data['payeeType'] = $request->input('payeeType');
     $data['payee'] = $request->input('payee');
     $data['receivingReceiptDate'] = $request->input('receivingReceiptDate');
+    $data['isWarehouse'] = $request->input('isWarehouse');
 
+
+    
     if($data['payeeType']!="SUPPLIER"){
       $data['purchaseOrderCode'] = null;
     }
@@ -245,6 +255,7 @@ class ReceiptsController extends Controller {
         $receipt->receiving_receipt_date = date('Y-m-d', strtotime($data['receivingReceiptDate']));
         $receipt->payee_type = $data['payeeType'];
         $receipt->payee = $data['payee'];
+        $receipt->is_warehouse = $data['isWarehouse'];
         $receipt->changed_by = Auth::user()->email;
         $receipt->save();
 
@@ -279,6 +290,7 @@ class ReceiptsController extends Controller {
     $data['receiptType'] = $request->input('receipt_type');
     $data['remarks'] = $request->input('remarks');
     $data['payeeType'] = $request->input('payee_type');
+    $data['isWarehouse'] = $request->input('is_warehouse');
     $data['payee'] = $request->input('payee');
     $data['receivingReceiptDate'] = $request->input('receiving_receipt_date');
     $data['receiptCode'] = $request->input('receipt_code');
@@ -304,6 +316,7 @@ class ReceiptsController extends Controller {
         $receipt->remarks = $data['remarks'];
         $receipt->receiving_receipt_date = date('Y-m-d', strtotime($data['receivingReceiptDate']));
         $receipt->payee_type = $data['payeeType'];
+        $receipt->is_warehouse = $data['isWarehouse'];
         $receipt->payee = $data['payee'];
         $receipt->changed_by = Auth::user()->email;
         $receipt->save();
@@ -463,12 +476,15 @@ class ReceiptsController extends Controller {
           $c->changed_by                    = Auth::user()->email;
           $c->save(); // fixed typo
 
-          $supply = Supply::where('supply_code', $data['supply_name'])->first();
-          $supply->quantity         = $supply->quantity + $data['supply_qty'];
-          $supply->changed_by       = Auth::user()->email;
-          $supply->timestamps       = true;
-          $supply->save();
+          if($data['is_warehouse']=="Yes"){
 
+            $supply = Supply::where('supply_code', $data['supply_name'])->first();
+            $supply->quantity         = $supply->quantity + $data['supply_qty'];
+            $supply->changed_by       = Auth::user()->email;
+            $supply->timestamps       = true;
+            $supply->save();
+          }
+          
         return response()->json([
             'status' => 200,
             'data' => 'null',
