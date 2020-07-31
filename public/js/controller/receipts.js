@@ -41,7 +41,8 @@
                     voucherCode:'', 
                     voucherStatus:'', 
                     poCode:'', 
-                    poStatus:''
+                    poStatus:'',
+                    isWarehouse:'',
                 }
 
                 ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
@@ -108,7 +109,8 @@
                     voucherCode:'', 
                     voucherStatus:'', 
                     poCode:'', 
-                    poStatus:''
+                    poStatus:'',
+                    isWarehouse:''
                 }
     
                 ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
@@ -152,7 +154,8 @@
                     voucherCode:'', 
                     voucherStatus:'', 
                     poCode:'', 
-                    poStatus:''
+                    poStatus:'',
+                    isWarehouse:''
                 }
     
                 ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
@@ -190,7 +193,8 @@
                 voucherCode:'', 
                 voucherStatus:'', 
                 poCode:'', 
-                poStatus:''
+                poStatus:'',
+                isWarehouse:''
             }
 
             vm.loader_status = true;
@@ -342,7 +346,8 @@
                     voucherCode:'', 
                     voucherStatus:data.voucher_status, 
                     poCode:'', 
-                    poStatus:''
+                    poStatus:'',
+                    isWarehouse:data.is_warehouse
                 }
 
                 ReceiptSrvcs.receipts(vm.receiptDetails).then (function (response) {
@@ -562,6 +567,7 @@
 
             vm.addReceiptItems = function(data){
                 console.log(data)
+                data['is_warehouse'] = vm.formData.is_warehouse;
                 ReceiptSrvcs.saveReceiptItems(data).then (function (response) {
                     if(response.data.status == 200)
                     {

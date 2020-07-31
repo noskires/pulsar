@@ -102,18 +102,7 @@
         <div class="form-group col-sm-12">
           <label class="col-sm-2 control-label"></label>
           <div class="col-sm-4">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Yes" ng-model="rc.receiptDetails.isWarehouse" checked>
-              <label class="form-check-label" for="exampleRadios1">
-                Warehouse Items
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="No" ng-model="rc.receiptDetails.isWarehouse">
-              <label class="form-check-label" for="exampleRadios2">
-                Non-Warehouse Items
-              </label>
-            </div>
+            
           </div>
           <label class="col-sm-2 control-label">Receiving Receipt Date</label>
           <div class="col-sm-4">
@@ -153,9 +142,9 @@
       <div class="panel-body">
         <form class="form-horizontal" id="">
           <div class="box-body">
-            <div class="form-group col-md-12">
+            <div class="form-group col-sm-12">
 
-              <label class="col-sm-1 control-label">Receipt Date</label>
+              <label class="col-sm-1 control-label">Date Receipt</label>
               <div class="col-sm-2">
               <div class="input-group date">
               <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
@@ -163,37 +152,29 @@
               </div>
               </div>
 
-              <label class="col-sm-1 control-label">Payee Type</label>
+              <label class="col-sm-1 control-label">Payee Type:</label>
               <div class="col-sm-2">
                 <select class="form-control" style="width: 100%;" ng-model="filter.payee_type" ng-init="filter.payee_type=''">
-                <option selected="selected" value="">SELECT PAYEE TYPE</option>
+                <option selected="selected" value="">-- SELECT PAYEE TYPE -- </option>
                 <option selected="selected" value="SUPPLIER">Supplier</option>
                 <option value="EMPLOYEE">Employee</option>
                 <option value="BANK">Bank</option>
                 </select>
               </div>
 
-              <label class="col-sm-1 control-label">With Voucher</label>
-              <div class="col-sm-1">
+              <label class="col-sm-1 control-label">With Voucher:</label>
+              <div class="col-sm-2">
                 <select class="form-control" style="width: 100%;" ng-model="filter.voucher_status" ng-init="filter.voucher_status=''">
-                <option selected="selected" value="">All</option>
+                <option selected="selected" value="">-- All -- </option>
                 <option value="1">Yes</option>
                 <option value="2">No</option>
                 </select>
               </div>
 
-              <label class="col-sm-1 control-label">Warehouse Items</label>
-              <div class="col-sm-1">
-                <select class="form-control" style="width: 100%;" ng-model="filter.is_warehouse">
-                <option selected="selected" value="">All</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-                </select>
-              </div>
-
             <div class="col-sm-1">
-            <button class="btn btn-large btn-success" ng-click="rc.filterReceipt(filter)"><span class="glyphicon glyphicon-filter"></span> FILTER DISPLAY</button>
+            <button class="btn btn-large btn-success" ng-click="rc.filterReceipt(filter)"><span class="glyphicon glyphicon-filter"></span>FILTER DISPLAY</button>
             </div>
+
             </div>
           </div>
         </form>
@@ -221,7 +202,6 @@
         <th>Receiving Receipt Date</th>
         <th>Voucher</th>
         <th>Amount</th>
-        <th>Warehouse Item</th>
         <!-- <th>Options</th> -->
       </tr>
       </thead>
@@ -238,8 +218,7 @@
         <td><%receipt.remarks%></td>
         <td><%receipt.receiving_receipt_date%></td>
         <td><%receipt.voucher_code%></td>
-        <td><%receipt.total_receipt_item_Cost | number:2%></td>
-        <td><center><%receipt.is_warehouse%></center></td>
+        <td align="right"><%receipt.total_receipt_item_Cost | number:2%></td>
         <!-- <td> <span ng-if="!receipt.voucher_code"><a href="#" ui-sref="receipt-edit({receiptCodeEdit:receipt.receipt_code})"><b>Edit</b></a> | <a  href="#" ui-sref="receipt-delete({receiptCodeDelete:receipt.receipt_code})"><b>Delete</b></a></span></td> -->
       </tr> 
       </tbody>
@@ -259,7 +238,7 @@ $('.select2').select2();
 
 <script type="text/ng-template" id="receiptInfo.modal">
   <div>
-    <div class="modal-dialog" style="width:110%;">
+    <div class="modal-dialog" style="width:100%;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" ui-sref="list-receipt2" ng-click="vm.ok()">
@@ -278,8 +257,8 @@ $('.select2').select2();
                       <thead>
                         <tr>
                           <!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="vm.checkAll()" /></th>  -->
-                          <th width="35%">Supply Name</th>
-                          <th width="27%">Description</th>
+                          <th>Supply Name</th>
+                          <th width="25%">Description</th>
                           <th width="9%">Stock Unit</th>
                           <th width="9%">Quantity</th>
                           <th width="9%">Cost</th>
@@ -289,11 +268,11 @@ $('.select2').select2();
                       <tbody>
                         <tr>
                           <td>
-                            <select class="form-control select2" required="" ng-model="vm.supplyDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(vm.supplyDetail.supply_name)">
+                            <select class="form-control select2" style="width: 60%;" required="" ng-model="vm.supplyDetail.supply_name" ng-init="parentIndex = $index" ng-change="vm.selectSupply(vm.supplyDetail.supply_name)">
                               <option selected="selected" value="">SELECT SUPPLY</option>
                               <option ng-value="supply.supply_code" ng-repeat="supply in vm.supplies"><%supply.supply_name%></option>
                             </select>
-                            <button class="btn btn-primary btn-xs addsupplyname" ui-sref="supply-create" ng-click="vm.ok()"><i class="fa fa-plus"></i> Add New Supply Name</button>
+                            <button type="button" class="btn btn-primary btn-xs fa fa-plus addsupplyname" ui-sref="supply-create" ng-click="vm.ok()"></button>
                           </td>
                           <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_desc" disabled required/></td>
                           <td><input type="text" class="form-control" ng-model="vm.supplyDetail.supply_unit" disabled required/></td>

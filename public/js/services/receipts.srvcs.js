@@ -11,7 +11,15 @@
                     return $http({
                         method: 'GET',
                         data: data,
-                        url: 'api/v1/receipts?receiptCode='+data.receiptCode+'&receiptDate='+data.receiptDate+'&payeeType='+data.payeeType+'&payee='+data.payee+'&voucherCode='+data.voucherCode+'&voucherStatus='+data.voucherStatus+'&poCode='+data.poCode+'&poStatus='+data.poStatus,
+                        url: 'api/v1/receipts?receiptCode='+data.receiptCode
+                        +'&receiptDate='+data.receiptDate
+                        +'&payeeType='+data.payeeType
+                        +'&payee='+data.payee
+                        +'&voucherCode='+data.voucherCode
+                        +'&voucherStatus='+data.voucherStatus
+                        +'&poCode='+data.poCode
+                        +'&poStatus='+data.poStatus
+                        +'&isWarehouse='+data.isWarehouse,
                         headers: {'Content-Type': 'application/json'}
                     })
                 },
