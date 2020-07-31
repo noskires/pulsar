@@ -239,7 +239,7 @@ class ReceiptsController extends Controller {
     }
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
         $receipt = new Receipt;
 
@@ -265,15 +265,15 @@ class ReceiptsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -349,7 +349,7 @@ class ReceiptsController extends Controller {
     );
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
       
 
 
@@ -374,15 +374,15 @@ class ReceiptsController extends Controller {
 					]);
 				}
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -455,7 +455,7 @@ class ReceiptsController extends Controller {
     $data = Input::post();
 
     $transaction = DB::transaction(function($data) use($data){
-    // try{
+    try{
 
  
           $c            = new ReceiptItem;
@@ -491,15 +491,15 @@ class ReceiptsController extends Controller {
             'message' => 'Successfully saved.'
         ]);
 
-      // }
-      // catch (\Exception $e) 
-      // {
-      //     return response()->json([
-      //       'status' => 500,
-      //       'data' => 'null',
-      //       'message' => 'Error, please try again!'
-      //   ]);
-      // }
+      }
+      catch (\Exception $e) 
+      {
+          return response()->json([
+            'status' => 500,
+            'data' => 'null',
+            'message' => 'Error, please try again!'
+        ]);
+      }
     });
 
     return $transaction;
@@ -512,16 +512,20 @@ class ReceiptsController extends Controller {
       'receiptItemCode'=>$request->input('receiptItemCode'),
       'receiptItemQuantity'=>$request->input('receiptItemQuantity'),
       'supplyCode'=>$request->input('supplyCode'),
+      'is_warehouse'=>$request->input('is_warehouse'),
     );
 
     $transaction = DB::transaction(function($data) use($data){
     try{
+
+      if($data['is_warehouse']=="Yes"){
 
         $supply = Supply::where('supply_code', $data['supplyCode'])->first();
         $supply->quantity         = $supply->quantity - $data['receiptItemQuantity'];
         $supply->changed_by       = Auth::user()->email;
         $supply->timestamps       = true;
         $supply->save();
+      }
 
         ReceiptItem::where('receipt_item_code', $data['receiptItemCode'])->firstOrFail()->delete();
         
@@ -552,18 +556,19 @@ class ReceiptsController extends Controller {
       'receiptItemCode'=>$request->input('receiptItemCode'),
       'receiptItemQuantity'=>$request->input('receiptItemQuantity'),
       'supplyCode'=>$request->input('supplyCode'),
+      'is_warehouse'=>$request->input('is_warehouse'),
     );
 
     $transaction = DB::transaction(function($data) use($data){
     // try{
 
-
+      if($data['is_warehouse']=="Yes"){
         $supply = Supply::where('supply_code', $data['supplyCode'])->first();
         $supply->quantity         = $supply->quantity - $data['receiptItemQuantity'];
         $supply->changed_by       = Auth::user()->email;
         $supply->timestamps       = true;
         $supply->save();
-
+      }
         $receiptItem = ReceiptItem::where('receipt_item_code', $data['receiptItemCode'])->first();
         $receiptItem->is_returned      = 1;
         $receiptItem->changed_by       = Auth::user()->email;

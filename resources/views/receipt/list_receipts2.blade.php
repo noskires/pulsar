@@ -103,7 +103,7 @@
           <label class="col-sm-2 control-label"></label>
           <div class="col-sm-4">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Yes" ng-model="rc.receiptDetails.isWarehouse" checked>
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Yes" ng-model="rc.receiptDetails.isWarehouse" ng-init="rc.receiptDetails.isWarehouse='Yes'" checked>
               <label class="form-check-label" for="exampleRadios1">
                 Warehouse Items
               </label>
